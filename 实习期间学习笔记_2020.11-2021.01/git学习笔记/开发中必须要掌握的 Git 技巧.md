@@ -301,7 +301,7 @@ tag其实就是一个让人容易记住的有意义的名字，它跟某个commi
 - git push -u origin <其他分支> 把其他分支提交到远程仓库
 - git status查看当前仓库的状态
 - git diff 查看文件修改的具体内容
-- git log 显示从最近到最远的提交历史
+- git log 显示从最近到最远的提交历史  git log --pretty=oneline(更简洁的方式显示)
 - git clone + 仓库地址下载克隆文件
 - git reset --hard + 版本号 回溯版本，版本号在commit的时候与master跟随在一起
 - git reflog 显示命令历史

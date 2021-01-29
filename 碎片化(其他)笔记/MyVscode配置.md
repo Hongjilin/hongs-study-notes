@@ -171,9 +171,8 @@ File >> Preferences >> Keyboard Shprtcuts >>右上角+ 代码模式>>复制以�
 
 ## 三、格式化修改缩进2(4)格无效解决
 
->① .editorconfig中将indent_size修改成4(2)
->
->② .prettierrc中添加 `"tabWidth":4(2)`
+>1. 打开文件——》首选——》设置
+>2. 输入搜索 tabsize  改为2
 >
 >③ 如果仍然没有效果 在首选项->设置=>工作区设置=>搜索(Detect Indentation)  -->将勾选去掉
 

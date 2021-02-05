@@ -176,3 +176,24 @@ File >> Preferences >> Keyboard Shprtcuts >>右上角+ 代码模式>>复制以�
 >③ 如果仍然没有效果 在首选项->设置=>工作区设置=>搜索(Detect Indentation)  -->将勾选去掉
 
 ###### 
+
+## 四、vscode终端使用命令时报错：因为在此系统上禁止运行脚本。有关详细信息..
+
+>原因：百度后得知，无法运行脚本，应该是不被信任。
+>执行命令:
+>
+>```csharp
+>get-ExecutionPolicy
+>```
+>
+>结果是Restricted，意思就是受限制的，说明确实是因为不被信任的缘故
+
+解决：
+
+>执行命令:
+>
+>```csharp
+>set-ExecutionPolicy RemoteSigned
+>```
+>
+>结果是RemoteSigned，意思就是远程签名，说明已经取得信任。

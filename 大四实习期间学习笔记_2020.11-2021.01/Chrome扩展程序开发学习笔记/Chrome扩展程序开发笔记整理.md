@@ -2,7 +2,7 @@
 
 # 一、资料
 
-[1.非官方中文文档](http://www.kkh86.com/it/chrome-extension-doc/extensions/getstarted.html)
+[1.非官方中文文档(防止被和谐,不上全部)](kkh86.com/it/chrome-extension-doc/extensions/getstarted.html)
 
 [2.官方文档(英文)](https://developer.chrome.com/docs/extensions/mv2/getstarted/)
 

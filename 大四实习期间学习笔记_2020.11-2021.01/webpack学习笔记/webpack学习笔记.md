@@ -81,7 +81,9 @@
 >
 >   做的都是一样的,环境是生产环境
 
-## 三、webpack.config.js基本配置
+# 二、webpack.config.js基本配置
+
+## 1、开发环境配置部分
 
 ### Ⅰ-通用配置
 
@@ -303,6 +305,203 @@ module.exports = {
   }
 };
 ```
+
+### Ⅶ-开发环境配置
+
+```js
+const { resolve} = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'build')
+  },
+  
+  module: {
+    rules: [{
+        //1.1 处理less资源
+        test: /\.less$/,
+        use: [ 'style-loader','css-loader', 'less-loader' ]
+      },
+      {
+        //1.2 处理css资源
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        //2.1 处理图片资源
+        test: /\.(jpg|png|gif)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8 * 1024,
+          //压缩后的文件名   压缩后保留后缀名
+          name: '[hash:10].[ext]',
+          //关闭es6模块化
+          esModule: false,
+          //在built文件中输入位置,这里是放在build中的imgs文件夹中
+          outputPath: 'imgs'
+        }
+      },
+      {
+        //2.2 处理html中的图片资源
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
+      {
+        //处理其他资源 先排除以下几个
+        exclude: /\.(html|js|css|less|jpg|png|gif)/,
+        loader: 'file-loader',
+        options: { name: '[hash:10].[ext]', outputPath: 'media' }
+      }
+    ]
+  },
+  plugins: [
+    //插件的配置
+    new HtmlWebpackPlugin({//打包HTML文件
+      template: './src/index.html'
+    })
+  ],
+  //指定开发模式
+  mode: 'development',
+  //热更新配置
+  devServer: {
+    contentBase: resolve(__dirname, 'build'),
+    compress: true,
+    port: 3000,
+    open: true
+  }
+
+}
+```
+
+
+
+## 2、生产环境配置部分
+
+### Ⅰ-提取css成单独文件
+
+>1、抽出成css文件: `防止闪屏现象`
+>
+>​			因为之前是压缩到js中,当页面加载完后用js进行渲染,当性能不够好时可能出现闪屏现象
+>
+>​			抽出成css后用link引入,就不会出现这个现象
+>
+>2、需要下载依赖:`npm i mini-css-extract-plugin`
+>
+>3、使用` mini-css-extract-plugin`插件,然后用使用这个插件的`loader`取代`style-loader`
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {resolve}=require('path');
+//下载依赖mini-css-extract-plugin
+//将css提取为单独插件
+const MiniCssExtractPlugin=require('mini-css-extract-plugin')
+module.exports={
+  entry:'./src/js/index.js',
+  output:{
+    filename:'js/built.js',
+    path:resolve(__dirname,'build')
+  },
+  module:{
+    rules:[{
+        test:/\.css$/,
+        use:[
+        //创建style标签 'style-loader',
+        //使用这个插件的loader取代style-loader 作用:提取js中的css成单独文件
+         MiniCssExtractPlugin.loader,
+          //将css文件整合到js文件中
+          'css-loader']
+  }]},
+  mode:'development',
+  plugins:[
+    new HtmlWebpackPlugin({ template:'./src/index.html' }),
+    //对输出的文件进行重命名
+    new MiniCssExtractPlugin({ filename:'css/built.css'})
+  ]
+}
+```
+
+### Ⅱ-css兼容性处理
+
+>1、需要依赖postcss-->`postcss-loader`和 `postcss-preset-env`
+>
+>2、需要修改package.json文件
+>
+>3、需要设置`nodejs的环境变量`
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const {
+  resolve
+} = require('path')
+//设置nodejs环境变量
+process.env.NODE_ENV='development'
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'build')
+  },
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader',
+        {
+          // 1、使用loader的默认配置写法  --> 'postcss-loader'
+          // 2、修改loader的配置写法 
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: () => [
+              //postcss的插件
+              require('postcss-preset-env')()
+            ]
+          }
+        }
+      ]
+    }]
+  },
+  mode: 'development',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/built.css'
+    })
+  ]
+}
+```
+
+> `默认是生产环境`,所以使用开发环境的时候需要设置nodejs环境
+
+```json
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+```
+
+
+
+
+
+
+
+
+
+
 
 
 

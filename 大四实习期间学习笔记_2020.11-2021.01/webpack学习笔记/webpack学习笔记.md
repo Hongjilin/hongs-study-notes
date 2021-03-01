@@ -493,19 +493,149 @@ module.exports = {
   },
 ```
 
+### Ⅲ-css压缩
 
+>1、压缩通常用的插件`plugins`,而兼容性处理之类的都使用`loader`来做
+>
+>2、下载依赖:`optimize-css-assets-webpack-plugin`
 
+```js
+ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+ // 压缩css
+  plugins: [
+     // 压缩css
+     new OptimizeCssAssetsWebpackPlugin()
+  ]
+```
 
+### Ⅳ-js代码检查 _`eslint`
 
+>1、语法检查依赖 `eslint-loader`和`eslint`
+>
+>2、airbnb规则依赖:`eslint-config-airbnb-base`和 `eslint-plugin-import`
+>
+>3、 `注意`：只检查自己写的源代码，第三方的库是不用检查的
+>
+>4、设置`package.json`中eslintConfig
+>
+>5、当某些地方代码只是测试使用,不想被eslint检测 :下一行eslint所有规则都失效（下一行不进行eslint检查）
+>
+>​	使用注释`//eslint-disable-next-line`
 
+> webpack.config.js配置
 
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+  entry: './src/js/index.js',
+  output: { },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // 自动修复eslint的错误
+          fix: true
+        }
+      }
+    ]
+  },
+  plugins: [ ],
+  mode: 'development'
+};
+```
 
+>package.json配置
 
+```json
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+      "browser": true
+    }
+  },
+```
 
+> 当你想在文件中`跳过检测`时 :下一行eslint所有规则都失效（下一行不进行eslint检查）
 
+```js
+// eslint-disable-next-line
+console.log(add(2, 5));
+```
 
+### Ⅴ-js兼容性处理_`babel`
 
+>js兼容性处理的三种方式:
+>
+> 1、基本js兼容性处理 -->`@babel/preset-env`
+>
+>   问题:只能转换基本语法,比如promise等高级语法不能转换
+>
+> 2、全部js兼容性处理 -->`@babel/polyfill ` 
+>
+>   使用: js代码中直接导入:`import '@babel/polyfill';`
+>
+>   问题: 我只要解决部分的兼容性问题,但是将所有兼容性代码全部引入,体积太大了
+>
+> 3、需要做兼容性处理的就做:按需加载:`core-js`
+>
+>依赖四个下载:`babel-loader`、 `@babel/core`、 `@babel/polyfill` 、`core-js`
 
+```js
+const {
+  resolve
+} = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'build')
+  },
+  module:{
+    rules:[
+      {
+        test:/\.js$/,
+        exclude:/node_modules/,
+        loader:'babel-loader',
+        options:{
+          //预设,存放的是数组,而不是对象,所以里面第一层是[]而不是{}
+         presets:[[
+           //预设用什么模板
+          '@babel/preset-env',
+          {
+            //使用内置对象:按需加载
+            useBuiltIns:'usage',
+            //指定core-js版本
+            corejs:{
+              version:3
+            },
+            //指定兼容性做到哪个版本浏览器 
+            targets:{
+              chrome:'60',
+              firefox:'60',
+              ie:'9',
+              safari:'10',
+              edge:'17'
+            }
+          }
+         ]]
+        }
+      }
+    ]
+  },
+  plugins:[
+    new HtmlWebpackPlugin({
+      template:'./src/index.html'
+    })
+  ],
+  mode:'development'
+}
+```
 
 
 

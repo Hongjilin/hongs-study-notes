@@ -1,10 +1,10 @@
 # Webpack
 
->本笔记为 观看[尚硅谷的webpack5入门到精通](https://www.bilibili.com/video/BV1e7411j7T5?p=7&spm_id_from=pageDriver) 教学视频整理而成
+>本笔记为 观看 `尚硅谷的webpack5` 教学视频整理而成
 >
->仅为本人洪方便学习记录
+>仅为本人洪jl方便学习记录	
 >
->​			 
+>​										  记录时间:2月4~5号  3月1~`至今` 		 
 
 # 一、Webpack简介
 
@@ -73,15 +73,45 @@
 >
 >2. 运行指令
 >
->   a)开发环境指令:`webpack ./src/index.js -o ./build/built.js --mode=development`
+>  a)开发环境指令:`webpack ./src/index.js -o ./build/built.js --mode=development`
 >
->   webpack就会以`./src/index.js`为入口文件开始打包,打包后输出到`./build/built.js`整体打包环境,是开发环境
+>  webpack就会以`./src/index.js`为入口文件开始打包,打包后输出到`./build/built.js`整体打包环境,是开发环境
 >
->   b)生产环境指令:`webpack ./src/index.js -o ./build/built.js --mode=production`
+>  b)生产环境指令:`webpack ./src/index.js -o ./build/built.js --mode=production`
 >
->   做的都是一样的,环境是生产环境
+>  做的都是一样的,环境是生产环境
+>
+>  c)当配置文件写好后,可以直接使用`webpack`指令进行打包
 
-# 二、webpack.config.js基本配置
+# 二、Webpack.config.js基本配置学习
+
+> 1、module:moudle对应loader（加载器 ）的配置，主要对指定类型的文件进行操作
+>
+>​     `举例`：js类型的文件和css文件需要不同的loader来处理。最常用的加载器是eslint-loader和babel-loader。
+>
+> 2、Plugin: plugins用于扩展webpack的功能，相比着loader更加灵活，不用指定文件类型
+>
+>​	 `举例`:html-webpack-plugin、commonChunkPlugin和ExtractTextPlugin
+>
+> 3、Output: 指定输出编译后代码的位置。 
+>
+>​	 `注意`：即使指定了多个入口点（entry points），Ouput配置项也只能设置一个。
+>
+> 4、mode:指定模式:`开发模式(development)` 和`生产模式(production)`
+>
+>​     `注意`:生产模式`默认会压缩js文件`
+>
+> 5、loader:当引用多个loader时,使用`use["loader名1","loader名2"]`形式引入,单个时使用`loader:'loader名'`形式
+
+> 注意:
+>
+>  1、`loader`的配置:rules执行顺序是从`下往上,从右往左`执行
+>
+>  2、对于rules中的loader，webpack还定义了一个属性 enforce，可取值有 `pre`（为pre loader）、`post`（为post loader），如果没有值则 
+>
+> 为（normal loader）。**所以loader在webpack中有4种:normal，inline，pre，post**。
+
+
 
 ## 1、开发环境配置部分
 
@@ -456,7 +486,7 @@ module.exports = {
           options: {
             ident: 'postcss',
             plugins: () => [
-              //postcss的插件
+              //使用postcss的插件进行兼容性处理
               require('postcss-preset-env')()
             ]
           }
@@ -636,6 +666,468 @@ module.exports = {
   mode:'development'
 }
 ```
+
+### Ⅵ-Js与HTML压缩
+
+>1、在生产环境下,会自动进行`Js代码压缩`
+>
+>2、HTML压缩需要在`HtmlWebpackPlugin`插件的配置中编写要求,如下面代码的`去除空格与注释`
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      minify:{
+        //移除空格
+        collapseWhitespace:true,
+        //移除注释
+        removeComments:true
+      }
+    })
+  ],
+  // 生产环境下会自动压缩js代码
+  mode: 'production'
+};
+```
+
+### Ⅶ-生产环境配置
+
+> 完整配置文件以及相应注解
+>
+> `注意`:
+>
+>  1、正常来讲,一个文件只能被一个loader处理.但当一个文件要被多个loader处理,那么一定要指定loader执行的先后顺序:
+>        *    如:先执行eslint 再执行babel 
+>               *    -->因为babel会将es6的语法转为低阶语法如(let->var),如果先转babel的话eslint就会报错
+
+```json
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //引入html打包插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //引入css提取打包插件
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') //引入css压缩插件
+const { resolve } = require('path'); //引入路径插件
+//复用loader配置  这里因为css与less配置大部分相同,所以抽出
+const commonCssLoader = [
+  MiniCssExtractPlugin.loader, //使用这个插件的loader取代style-loader 作用:提取css为单独的文件
+  'css-loader',
+  {
+    loader: 'postcss-loader', //还需要在packahe.json中定义browserslist
+    options: {
+      ident: 'postcss',
+      plugins: () => [require('postcss-preset-env')] //使用postcss插件进行兼容性处理
+    }
+  }
+]
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'built')
+  },
+  /*一、引用 */
+  module: {
+    rules: [
+      /**1、css与less规则配置 提取单独文件与css兼容性处理 */
+      {
+        test: /\.css$/,
+        use: [...commonCssLoader]
+      },
+      {
+        test: /\.less$/,
+        use: [...commonCssLoader, 'less-loader']
+      },
+      /**2、js处理规则配置 
+       *    正常来讲,一个文件只能被一个loader处理.但当一个文件要被多个loader处理,那么一定要指定loader执行的先后顺序:
+       *    如:先执行eslint 再执行babel 
+       *    -->因为babel会将es6的语法转为低阶语法如(let->var),如果先转babel的话eslint就会报错
+       */
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, //使用eslint不检查依赖库里面的js
+        enforce: "pre", //下面的babel处理js的loader应该在eslint检查后再执行,设置优先执行当前loader
+        loader: 'eslint-loader',
+        options: {
+          fix: true // 自动修复eslint的错误,比如补全分号
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, //使用babel不转换依赖库里面的js
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            [ //注意 这里两个[]
+              '@babel/preset-env', //预设指定用的什么babel模板
+              {
+                useBuiltIns: 'usage', //使用内置对象:按需加载
+                corejs: { //指定core-js版本
+                  version: 3
+                },
+                targets: { //指定babel转换js兼容性做到哪个版本浏览器兼容
+                  chrome: '60',
+                  firefox: '60',
+                  ie: '9'
+                }
+              }
+            ]
+          ]
+        }
+      },
+      /**3、图片压缩*/
+      {
+        //图片打包,但是默认处理不了html中的图片,需要另外配置一个loader处理
+        test: /\.(jpg|png|gif)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 8 * 1024, //当图片
+          name: '[hash:10].[ext]', //限制打包后的哈希文件名长度,保留后缀名
+          outputPath: 'imgs', //执行打包后放在哪个位置
+          //url-loader默认使用的是es6的模块化解析,而html-loader引入图片是commonjs
+          //所以需要关闭`url-loader`的es6模块化解析,使用commonjs模块化解析
+          esModule: false
+        }
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader' //需要使用html插件
+      },
+      /**4、 其他资源打包 */
+      {
+        exclude: /\.(js|css|less|scss|html|jpg|png|gif)$/, //先排除自己配置过的文件
+        loader: 'file-loader',
+        options: {
+          outputPath: 'media', //执行打包后放在哪个位置
+          name: '[hash:10].[ext]' //限制打包后的哈希文件名长度,保留后缀名
+        }
+      }
+    ]
+  },
+  //插件
+  plugins: [
+    //1、html打包插件,在html打包图片,以及打包html文件时候用到
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      minify: { //指定`minify`该属性后,将会根据里面配置进行html文件压缩
+        collapseWhitespace: true, //去除文件中的空格
+        removeComments: true //去除文件中的注释
+      }
+    }),
+    //2、css提取打包插件
+    new MiniCssExtractPlugin({
+      filename: 'css/built.css' //指定提取打包后的css文件位置与名字
+    }),
+    //3、css压缩插件  默认配置即可达到正常的打包要求
+    new OptimizeCssAssetsWebpackPlugin()
+  ],
+  //指定模式为生产模式
+  mode: 'production' //指定为生产模式后,js将会默认压缩
+}
+```
+
+> package.json
+
+```json
+{
+  "name": "webpack_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "add-asset-html-webpack-plugin": "^3.1.3",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.6.4",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-import": "^2.20.1",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "style-loader": "^1.1.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "thread-loader": "^2.1.3",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.10.3",
+    "workbox-webpack-plugin": "^5.0.0"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+      "browser": true
+    }
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}
+
+```
+
+
+
+# 三、Webpack优化
+
+### Ⅰ- HMR优化
+
+> `HMR`: hot module replacement` 热模块替换`/模块热替换
+>
+> 作用:一个模块发生变化,指挥重新打包这一个模块(而不是打包所有模块)  极大的提升构建速度,主要是在`开发模式中使用`,方便调试
+>
+>1、样式文件:可以使用HMR功能:因为`style-loader`内部实现了
+>
+>2、js文件:默认不能使用HMR功能 
+>     使用方法-->需要`修改js代码`,添加支持HMR功能的代码
+>     注意:HMR功能对js的处理,只能处理`非入口js文件`的其他文件
+>
+>3、html文件:默认不能使用HMR功能,同事会导致问题:html文件不能热更新了
+>     解决:`修改entry入口`,将html文件引入(不用做HMR功能,毕竟现在流行单页面应用)
+
+```js
+  const {resolve}=require('path');
+  const HtmlWebpackPlugin=require('html-webpack-plugin');
+
+  module.exports={
+    entry:['./src/js/index.js','./src/index.html'],
+    output:{
+      filename:'js/built.js',
+      path:resolve(__dirname,'build')
+    },
+    module:{
+      rules:[
+        {
+          test:/\.less$/,
+          //此处开发环境使用的是style-loader,因为它自己实现了HMR功能
+          use:['style-loader','css-loader','less-loader']
+        },
+        {
+          test:/\.css$/,
+          use:['style-loader','css-loader']
+        },
+        {//处理图片资源
+          test:/\.(jpg|png|gif)$/,
+          loader:'url-loader',
+          options:{
+            limit:8*1024,
+            name:'[hash:10].[ext]',
+            //关闭es6模块
+            esModule:false,
+            outputPath:'imgs'
+          }
+        },
+        {//处理html中的img资源
+          test:/\.html$/,
+          loader:'html-loader'
+        },
+        {//处理其他资源
+          exclude:/\.(html|js|css|less|jpg|png|gif)$/,
+          loader:'file-loader',
+          options:{
+            name:'[hash:10].[ext]',
+            outputPath:'media'
+          }
+        }
+      ]
+    },
+    plugins:[
+      new HtmlWebpackPlugin({
+        template:'./src/index.html'
+      })
+    ],
+    mode:'development',
+    devServer:{
+      contentBase:resolve(__dirname,'build'),//项目构建后路径
+      compress:true, //启动gzip压缩
+      port:3000,
+      open:true,//自动打开浏览器
+      hot:true//开启HMR功能,注意:当修改了webpack功能,新配置想要生效,必须重新启动webpack服务
+    }
+  }
+```
+
+> js进行HMR优化,在入口文件写下监听代码
+>
+> 注意:你要监听进行`热模块替换`,前提是你这个js要`在入口文件中导入`,然后入口文件中才能监听得到变化
+
+```js
+import print from './print';
+import test from './test';
+if (module.hot) {
+  // 一旦 module.hot 为true，说明开启了HMR功能。 --> 让HMR功能代码生效
+  module.hot.accept(['./print.js','./test.js'], function() {//只有一个js文件需要监听打包就直接输入url字符串,不用数组
+    // 方法会监听 print.js 文件的变化，一旦发生变化，其他模块不会重新打包构建。
+    // 会执行后面的回调函数
+      console.log("前提是你要在入口文件上导入,才能监听得到变化")
+  });
+}
+```
+
+### Ⅱ- source-map 优化
+
+>1、`source-map`: 一种 提供源代码到构建后代码映射 技术 （如果构建后代码出错了，通过映射可以追踪源代码错误）分为`内联`与`外部`:
+>
+>2、内联和外部的区别：1. 外部生成了文件，内联没有 2. 内联构建速度更快
+>
+>3、不同环境选择:
+>
+> `开发环境`：考虑 速度快，调试更友好
+>    ① 速度快(eval>inline>cheap>...):  eval-cheap-souce-map > eval-source-map
+>
+>​    ② 调试更友好: souce-map > cheap-module-souce-map > cheap-souce-map
+>
+>​    ③ 最优选--> `eval-source-map`  > eval-cheap-module-souce-map
+>
+> `生产环境`:考虑 源代码要不要隐藏? 调试要不要更友好
+>
+>​	 ① 内联会让代码体积变大，所以在生产环境不用内联
+>
+>​     ② 考虑隐藏:nosources-source-map 全部隐藏 >hidden-source-map 只隐藏源代码，会提示构建后代码错误信息
+>
+>​     ③ 综合考虑:source-map `or` cheap-module-souce-map
+
+```js
+module.exports = {
+  entry: [],
+  output: { },
+  module: { rules: [] },
+  plugins: [],
+  mode: 'development',
+  devServer: {},
+   //选定映射模式
+  devtool: 'eval-source-map'
+};
+```
+
+>`不同映射模式的区别`:感觉记住结论就好了,真的需要的时候再来翻阅
+>
+>[inline-|hidden-|eval-] [nosources-] [cheap-[module-]]source-map
+>
+>​	1、source-map：外部
+>​      错误代码准确信息 和 源代码的错误位置
+>​    2、inline-source-map：内联
+>​      只生成一个内联source-map
+>​      错误代码准确信息 和 源代码的错误位置
+>​    3、hidden-source-map：外部
+>​      错误代码错误原因，但是没有错误位置
+>​      不能追踪源代码错误，只能提示到构建后代码的错误位置
+>​    4、eval-source-map：内联
+>​      每一个文件都生成对应的source-map，都在eval
+>​      错误代码准确信息 和 源代码的错误位置
+>​    5、nosources-source-map：外部
+>​      错误代码准确信息, 但是没有任何源代码信息
+>​    6、cheap-source-map：外部
+>​      错误代码准确信息 和 源代码的错误位置 
+>​      只能精确的行
+>​    7、cheap-module-source-map：外部
+>​      错误代码准确信息 和 源代码的错误位置 
+>​      module会将loader的source map加入
+
+### Ⅲ- oneOf
+
+>正常来说,一个文件会被所有的loader过滤处理一遍,如果我有100个loader配置,那么我一个文件就要被100个loader匹配,而使用`oneOf`后,而如果放在`oneOf`中的loader规则有一个匹配到了,`oneOf`中的其他规则就不会再对这文件进行匹配
+>
+>`注意`:oneOf中不能有两个loader规则配置处理同一种文件,否则只能生效一个 例如:对于js进行eslint检测后再进行babel转换
+>
+>​	解决:将eslint抽出到外部,然后优先执行,这样在外部检测完后`oneOf`内部配置就会再进行检测匹配
+
+```js
+module.exports = {
+  entry: './src/js/index.js',
+  output: {},
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/, enforce: 'pre', loader: 'eslint-loader',
+      },
+      {
+        // 以下loader只会匹配一个
+        // 注意：不能有两个配置处理同一种类型文件
+        oneOf: [
+          {
+            test: /\.css$/,
+            use: [...commonCssLoader]
+          },
+          {
+            test: /\.less$/,
+            use: [...commonCssLoader, 'less-loader']
+          },
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    useBuiltIns: 'usage',
+                    corejs: {version: 3},
+                    targets: {
+                      chrome: '60',
+                      firefox: '50'
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+     
+        ]
+      }
+    ]
+  },
+  plugins: [],
+  mode: 'production'
+};
+```
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,12 @@
-# Webpack
+# #说明
 
 >本笔记为 观看 `尚硅谷的webpack5` 教学视频整理而成
 >
 >仅为本人洪jl方便学习记录	
 >
->​										  记录时间:2月4~5号  3月1~`至今` 		 
+>说明:本知识点配置代码多,为了节约空间,后面的`配置部分`的配置代码,默认是基于上一个代码增加修改(`优化`部分基于`生产或者开发环境配置`代码进行优化),只写出新增或者修改部分(最后会在每部分最后一章写出完整配置在`代码),如有其他情况将在其代码示例或其上方注释指出
+>
+>​									                    	  记录时间:2月4 ~ 5号 、3月1 ~ `至今` 		 
 
 # 一、Webpack简介
 
@@ -85,21 +87,23 @@
 
 # 二、Webpack.config.js基本配置学习
 
+> 详细参数部分见下面内容的`webpack配置详解`
+>
 > 1、module:moudle对应loader（加载器 ）的配置，主要对指定类型的文件进行操作
 >
->​     `举例`：js类型的文件和css文件需要不同的loader来处理。最常用的加载器是eslint-loader和babel-loader。
+> ​     `举例`：js类型的文件和css文件需要不同的loader来处理。最常用的加载器是eslint-loader和babel-loader。
 >
 > 2、Plugin: plugins用于扩展webpack的功能，相比着loader更加灵活，不用指定文件类型
 >
->​	 `举例`:html-webpack-plugin、commonChunkPlugin和ExtractTextPlugin
+> ​	 `举例`:html-webpack-plugin、commonChunkPlugin和ExtractTextPlugin
 >
 > 3、Output: 指定输出编译后代码的位置。 
 >
->​	 `注意`：即使指定了多个入口点（entry points），Ouput配置项也只能设置一个。
+> ​	 `注意`：即使指定了多个入口点（entry points），Ouput配置项也只能设置一个。
 >
 > 4、mode:指定模式:`开发模式(development)` 和`生产模式(production)`
 >
->​     `注意`:生产模式`默认会压缩js文件`
+> ​     `注意`:生产模式`默认会压缩js文件`
 >
 > 5、loader:当引用多个loader时,使用`use["loader名1","loader名2"]`形式引入,单个时使用`loader:'loader名'`形式
 
@@ -895,11 +899,11 @@ module.exports = {
   "eslintConfig": {
     "extends": "airbnb-base",
     "env": {
-      "browser": true
+      "browser": true //支持浏览器端的bian'l,比如 window 
     }
   },
   "sideEffects": [
-    "*.css"
+    "*.css" //这是在优化部分的树摇配置
   ]
 }
 
@@ -915,14 +919,16 @@ module.exports = {
 >
 > 作用:一个模块发生变化,指挥重新打包这一个模块(而不是打包所有模块)  极大的提升构建速度,主要是在`开发模式中使用`,方便调试
 >
->1、样式文件:可以使用HMR功能:因为`style-loader`内部实现了
+> 1、样式文件:可以使用HMR功能:因为`style-loader`内部实现了
 >
->2、js文件:默认不能使用HMR功能 
->     使用方法-->需要`修改js代码`,添加支持HMR功能的代码
->     注意:HMR功能对js的处理,只能处理`非入口js文件`的其他文件
+> 2、js文件:默认不能使用HMR功能 
+>  使用方法-->需要`修改js代码`,添加支持HMR功能的代码
+>  注意:HMR功能对js的处理,只能处理`非入口js文件`的其他文件
 >
->3、html文件:默认不能使用HMR功能,同事会导致问题:html文件不能热更新了
->     解决:`修改entry入口`,将html文件引入(不用做HMR功能,毕竟现在流行单页面应用)
+> 3、html文件:默认不能使用HMR功能,同事会导致问题:html文件不能热更新了
+>  解决:`修改entry入口`,将html文件引入(不用做HMR功能,毕竟现在流行单页面应用)
+>
+> 基于前面的`开发环境配置部分`代码进行优化
 
 ```js
   const {resolve}=require('path');
@@ -1123,15 +1129,567 @@ module.exports = {
 };
 ```
 
+### Ⅳ-缓存
+
+>缓存需要在`server环境`中才有效果 
+>
+>1、babel缓存:
+>
+>  在`babel`的loader选项部分添加 `cacheDirectory: true` -->让第二次打包构建速度更快
+>
+>2、文件资源缓存:
+>
+>  文件资源当你文件名不变时会默认读取本地缓存,所以当你修改某个文件内容后,并不能实时更新到线上项目中,所以解决方法是在每次webpack构建时生成一个唯一的hash值加在文件名中,每次修改便改动文件名,达到更新效果.而不同的hash也有不同效果,其中需要选用`contenthash`
+>
+>  ① hash:每次webpack构建时会生成一个唯一的hash值
+>
+>​	问题:因为js和css同时使用`同一个hash值`,如果重新打包,会导致所有缓存失效(即使你只改动了一个文件)
+>
+>  ② chunkhash:根据chunk生成的hash值,如果打包来源于同一个chunk,那么hash值就一样
+>
+>​    问题:js和css的hash值还是一样, 因为css时在js中被引入的,所以属于同一个chunk
+>
+>  ③ `contenthash`:根据文件的内容生成hash值,不同的文件hash一定不一样
+>
+>​	-->让代码上线运行缓存更好使用(当你线上项目出现紧急BUG时,可以更快的修改)		  
+
+```js
+const { resolve } = require('path');
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+      //使用contenthash哈希值
+    filename: 'js/built.[contenthash:10].js',
+    path: resolve(__dirname, 'build')
+  },
+  module: {
+    rules: [
+      {
+        oneOf: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env',
+                 { useBuiltIns: 'usage', corejs: { version: 3 }, targets: {chrome: '60',firefox: '50'}} ]
+              ],
+              // 开启babel缓存
+              // 第二次构建时，会读取之前的缓存
+              cacheDirectory: true
+            }
+          },
+          
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [   new MiniCssExtractPlugin({ filename: 'css/built.[contenthash:10].css' }), ],
+  mode: 'production',
+  devtool: 'source-map'
+};
+```
+
+> server.js代码
+
+```js
+/*
+  服务器代码
+  启动服务器指令：npm i nodemon -g
+   `` nodemon server.js`   or   `node server.js`
+  访问服务器地址：
+    http://localhost:3000
+*/
+const express = require('express');
+const app = express();
+// express.static向外暴露静态资源
+// maxAge 资源缓存的最大时间，单位ms
+app.use(express.static('build', { maxAge: 1000 * 3600 }));
+app.listen(3000);
+```
+
+### Ⅴ-tree shaking 树摇
+
+> 1、`tree shaking`：去除无用代码 
+>
+>  前提：1. 必须使用ES6模块化 2. 开启production环境
+>
+>  作用: 减少代码体积
+
+>   2、在package.json中配置 
+>
+>    "sideEffects": false 所有代码都没有副作用（都可以进行tree shaking）
+>
+> ​    问题：可能会把css / @babel/polyfill （副作用）文件干掉
+>
+>    解决:"sideEffects": ["*.css", "*.less"]
+
+```json
+"sideEffects": [
+    "*.css" 
+  ]
+```
+
+### Ⅵ-code split 代码分割
+
+>1、多入口与单入口文件打包 (通常不使用这个方法,一般使用2、3的方法)
+>
+>  ① 多入口：有一个入口，最终输出就有一个bundle
+>
+>  ② `[name]`：取文件名
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  // 单入口
+  // entry: './src/js/index.js',
+  entry: {
+    // 多入口：有一个入口，最终输出就有一个bundle
+    index: './src/js/index.js',
+    test: './src/js/test.js'
+  },
+  output: {
+    // [name]：取文件名
+    filename: 'js/[name].[contenthash:10].js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      }
+    })
+  ],
+  mode: 'production'
+};
+
+```
+
+>2、`optimization: {splitChunks: {chunks: 'all'}}`配置 
+>
+>  ① 可以将node_modules中代码单独打包一个chunk最终输出
+>  ② 自动分析多入口chunk中，有没有公共的文件。如果有会打包成单独一个chunk(多入口文件)
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  // 单入口
+  // entry: './src/js/index.js',
+  entry: {
+    index: './src/js/index.js',
+    test: './src/js/test.js'
+  },
+  output: {
+    // [name]：取文件名
+    filename: 'js/[name].[contenthash:10].js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      }
+    })
+  ],
+  /*
+    1. 可以将node_modules中代码单独打包一个chunk最终输出
+    2. 自动分析多入口chunk中，有没有公共的文件。如果有会打包成单独一个chunk
+  */
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+  mode: 'production'
+};
+
+```
+
+>3、单入口文件,且想打包特定js文件为单独文件,在`2`的配置基础上再写js代码(入口改为单入口)
+>
+> ` 通过js代码`，让某个文件被单独打包成一个chunk,该代码写在入口js文件中
+> `import动态导入语法`：能将某个文件单独打包
+> `通过注释`,可以让js生成的打包文件带上这个名字
+
+```js
+//通过注释,可以让js生成的打包文件带上这个名字
+import(/* webpackChunkName: 'test' */'./test')
+  .then(({ mul, count }) => {
+    // 文件加载成功~
+    // eslint-disable-next-line
+    console.log(mul(2, 5));
+  })
+  .catch(() => {
+    // eslint-disable-next-line
+    console.log('文件加载失败~');
+  });
+
+// eslint-disable-next-line
+console.log(sum(1, 2, 3, 4));
+
+```
+
+### Ⅶ- 懒加载 (lazy loading) 和预加载
+
+>应用场景:当我们模块很多时,导入的js太多,或者说有的js只有使用的时候才有用,而我一开始便加载,就可能造成一些不必要的性能浪费
+>
+> 1、懒加载:当文件需要使用时才加载
+>
+>​    `可能的问题`:当用户第一次使用时,如果js文件过大,可能造成加载时间过长(有延迟),但是第二次就不会了,因为懒加载第二次是从缓存中读取文件
+>
+> 2、预加载 prefetch:等其他资源加载完毕,浏览器空闲了,再偷偷加载
+>
+>​    正常加载可以认为时并行加载(同一时间加载多个文件,但是同一时间有上限)
+>
+>​	就例如下面例子,有预加载的代码运行效果,是页面刷新后,但是还未进行使用时,该文件其实已经加载好了
+>
+>`注意`:预加载虽然性能很不错,但是需要浏览器版本较高,兼容性较差,`慎用预加载`
+
+```js
+console.log('index.js文件被加载了~');
+// import { mul } from './test';
+//懒加载
+document.getElementById('btn').onclick = function() {
+    //懒加载其实也是需要前面Ⅵ代码分割功能,将我的需要加载的文件打包成单独文件
+  import(/* webpackChunkName: 'test'*/'./test').then(({ mul }) => {
+    console.log(mul(4, 5));
+  });
+};
+//预加载
+//在注释参数上添加 webpackPrefetch: true 
+  import(/* webpackChunkName: 'test', webpackPrefetch: true */'./test').then(({ mul }) => {
+    console.log(mul(4, 5));
+  });
+```
+
+### Ⅷ- PWA  (离线访问)
+
+>PWA: 渐进式网络开发应用程序(离线可访问) workbox -->下载依赖: `workbox-webpack-plugin`
+>
+>1、在配置中使用该插件 :① 帮助serviceworker快速启动 ② 删除旧的 serviceworker
+>
+>2、在入口文件js中添加代码
+>
+>3、eslint不认识 window、navigator全局变量
+>
+>   解决：需要修改package.json中eslintConfig配置
+>
+>4、代码必须运行在服务器上才有效果 
+>
+>  ① node.js
+>
+>  ② `npm i serve -g` -->`serve -s build` 启动服务器，将build目录下所有资源作为静态资源暴露出去
+
+> webpack.config.js新增配置
+
+```js
+ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+plugins: [
+    new WorkboxWebpackPlugin.GenerateSW({
+      /*生成一个 serviceworker 配置文件~*/
+      //1. 帮助serviceworker快速启动
+      clientsClaim: true,
+      //2. 删除旧的 serviceworker
+      skipWaiting: true
+    })
+  ],
+```
+
+>入口文件js -->index.js
+
+```js
+// 注册serviceWorker
+// 处理兼容性问题
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then(() => {
+        console.log('sw注册成功了~');
+      })
+      .catch(() => {
+        console.log('sw注册失败了~');
+      });
+  });
+}
+```
+
+> package.json新增配置
+
+```json
+ "eslintConfig": {
+    "extends": "airbnb-base",
+    "env": {
+      "browser": true //开启为eslint支持浏览器端的bian'l,比如 window 
+    }
+  },
+```
+
+### Ⅸ-多线程打包
+
+> 1、下载`thread-loader`依赖
+>
+> 2、使用`loader: 'thread-loader'`开启多线程打包 
+>
+> 注意点:进程启动大约为600ms,进程通信也有开销,只有工作消耗时间较长,才需要多进程打包 比如:`babel`转换可以使用多线程
+
+```js
+const { resolve } = require('path');
+module.exports = {
+  module: {
+    rules: [
+        oneOf: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: [
+              /* 
+                开启多进程打包。 
+                进程启动大概为600ms，进程通信也有开销。
+                只有工作消耗时间比较长，才需要多进程打包
+              */
+              {
+                loader: 'thread-loader',
+                options: {
+                  workers: 2 //设置 进程2个
+                }
+              },
+              {
+                loader: 'babel-loader',
+                options: {
+                  presets: [
+                    [
+                      '@babel/preset-env',
+                      {
+                        useBuiltIns: 'usage',
+                        corejs: { version: 3 },
+                        targets: {
+                          chrome: '60',
+                          firefox: '50'
+                        }
+                      }
+                    ]
+                  ],
+                  // 开启babel缓存
+                  // 第二次构建时，会读取之前的缓存
+                  cacheDirectory: true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+};
+```
+
+### Ⅹ-externals
+
+> 当你使用外部引入代码时:如`CDN引入`,不想他将我引入的模块也打包,就需要添加这个配置
+>
+> 即:声明哪些库是不进行打包的
+>
+>  -->`externals`: {}
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {
+    filename: 'js/built.js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  ],
+  mode: 'production',
+  externals: {
+    // 拒绝jQuery被打包进来
+    jquery: 'jQuery'
+  }
+};
+```
+
+### Ⅺ-dll
+
+>使用dll技术，对某些库（`第三方库`：jquery、react、vue...）`进行单独打包`
+>
+> 作用:如果不是cdn引入,而是使用第三方库,想要打包后暴露出去,使用该方法
+>
+>1、首先你需要写一个新的配置文件,因为使用`dll`技术,所以命名为webpack.dll.js
+>
+>   当你运行 webpack 时，默认查找 webpack.config.js 配置文件  需求：需要`先运行 webpack.dll.js` 文件
+>
+> -->` webpack --config webpack.dll.js`  在这个文件中进行对某些库的单独打包
+>
+>2、在webpack.config.js中,需要告诉webpack哪些库不需要再次打包(即在dll.js中打包后生成的文件)
+>
+>3、这里需要使用到`add-asset-html-webpack-plugin`与`webpack`插件
+>
+>4、运行`webpack.dll.js`对第三方库进行单独打包后,除非你要加新的库,不然不用再重新打包这个,直接`webpack`打包其他的即可
+
+> webpack.dll.js配置文件
+
+```js
+const { resolve } = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+  entry: {
+    // 最终打包生成的[name] --> jquery
+    // ['jquery'] --> 要打包的库是jquery
+    jquery: ['jquery'],
+   //  react:['react','react-dom' ]
+  },
+  output: {
+    filename: '[name].js',
+    path: resolve(__dirname, 'dll'),
+    library: '[name]_[hash]' // 打包的库里面向外暴露出去的内容叫什么名字
+  },
+  plugins: [
+    // 打包生成一个 manifest.json --> 提供和jquery映射
+    new webpack.DllPlugin({
+      name: '[name]_[hash]', // 映射库的暴露的内容名称
+      path: resolve(__dirname, 'dll/manifest.json') // 输出文件路径
+    })
+  ],
+  mode: 'production'
+};
+```
+
+> webpack.config.js配置文件
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'built.js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+    // 告诉webpack哪些库不参与打包，同时使用时的名称也得变~
+    new webpack.DllReferencePlugin({
+      manifest: resolve(__dirname, 'dll/manifest.json')
+    }),
+    // 将某个文件打包输出去，并在html中自动引入该资源
+    new AddAssetHtmlWebpackPlugin({
+      filepath: resolve(__dirname, 'dll/jquery.js')
+    })
+  ],
+  mode: 'production'
+};
+```
+
+### XII-性能优化总结
+
+>1、**# webpack性能优化**
+>
+>​	① 开发环境性能优化
+>
+>​	② 生产环境性能优化
+>
+>2、**# 开发环境性能优化**
+>
+>​	① 优化打包构建速度:HMR	
+>
+>​	② 优化代码调试:source-map
+>
+>3、**# 生产环境性能优化**
+>
+>​	① 优化打包构建速度
+>
+>​		Ⅰ- oneOf
+>
+> 	   Ⅱ- babel缓存
+>
+>​	    Ⅲ- 多进程打包
+>
+> 	   Ⅳ- externals
+>
+> 	   Ⅴ- dll   这个技术加上代码拆分code split可以做出更加细度化拆分
+>
+>​	② 优化代码运行的性能
+>
+>​		Ⅰ- 缓存(hash-chunkhash-contenthash)
+>
+>​		Ⅱ- tree shaking
+>
+>​		Ⅲ-code split
+>
+>​		Ⅳ- 懒加载/预加载
+>
+>​		Ⅴ- pwa
 
 
 
+## 四、Webpack配置详解
 
+### Ⅰ- entry
 
+>entry:`入口起点`,有三种形式写法
+>
+>1、`string` --> './src/index.js'
+>
+>​	单入口:打包形成一个chunk(模块),输出一个bundle(包)文件
+>
+>​	此时默认的chunk名称是main
+>
+>2、`array` --> ['./src/index.js','./src/add.js']
+>
+>​	多入口:所有入口文件最终只会形成一个chunk,输出出去只有一个bundle文件(类似将add.js打包进index.js中)
+>
+>​	-->通常只有在`HMR功能中使用`, 让html热更新生效使用
+>
+>3、`object` --> {index:'./src/index.js',add:'./src/add.js'}
+>
+>​	多入口:有几个入口文件就形成几个chunk,输出几个bundle文件
+>
+>​	此时chunk名称是 key
 
+> 4、特殊用法(混合使用)  
+>
+> ​	通常在`dll`优化功能中使用
 
+```js
 
+module.exports = {
+  entry: {
+      // 所有入口文件最终只会形成一个chunk, 输出出去只有一个bundle文件。
+    index: ['./src/index.js', './src/count.js'], 
+       // 形成一个chunk，输出一个bundle文件。
+    add: './src/add.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'development'
+};
 
+```
 
-
-
+### Ⅱ-output

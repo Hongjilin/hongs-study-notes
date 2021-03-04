@@ -1,12 +1,16 @@
 # #说明
 
->本笔记为 观看 `尚硅谷的webpack5` 教学视频整理而成
+>本笔记为 观看 `尚硅谷的webpack系列` 教学视频整理而成
 >
 >仅为本人洪jl方便学习记录	
 >
->说明:本知识点配置代码多,为了节约空间,后面的`配置部分`的配置代码,默认是基于上一个代码增加修改(`优化`部分基于`生产或者开发环境配置`代码进行优化),只写出新增或者修改部分(最后会在每部分最后一章写出完整配置在`代码),如有其他情况将在其代码示例或其上方注释指出
+>说明:
 >
->​									                    	  记录时间:2月4 ~ 5号 、3月1 ~ `至今` 		 
+>​	个人认为虽然这个视频打着从 入门到精通 的口号,但是学下来感觉是刚入门webpack,只会简单使用webpack罢了,所以这部分我归类于`webpack的基础学习`. 真要精通,需要看官网以及其他学习资源,再多动手才行.所以接下去我将直接进入`webpack高级进阶阶段`学习,介于本笔记已经内容过长,将新开高阶笔记
+>
+>​	本知识点配置代码多,为了节约空间,后面的`配置部分`的配置代码,默认是基于上一个代码增加修改(`优化`部分基于`生产或者开发环境配置`代码进行优化),只写出新增或者修改部分(最后会在每部分最后一章写出完整配置在`代码),如有其他情况将在其代码示例或其上方注释指出
+>
+>​									                    				  记录时间:2月4 ~ 5号 、3月1 ~ 4号截止		 
 
 # 一、Webpack简介
 
@@ -47,9 +51,9 @@
 
 
 
-## 二、Webpack初体验
+### 3、Webpack初体验
 
-### 1、安装与使用
+#### Ⅰ、安装与使用
 
 >1. 先安装全局webpack包(也可以不安装)
 >
@@ -69,7 +73,7 @@
 >  npm i webpack webpack-cli -D
 >  ```
 
-### 2、编译打包应用
+#### Ⅱ、编译打包应用
 
 >1. 创建相关文件夹与文件(build与src文件加与index.js)
 >
@@ -85,7 +89,388 @@
 >
 >  c)当配置文件写好后,可以直接使用`webpack`指令进行打包
 
-# 二、Webpack.config.js基本配置学习
+------
+
+
+
+------
+
+
+
+# 二、Webpack配置详解
+
+> 1、在学习过程中这部分本是最后学习的,但本人认为可先放前面,先了解后再去使用.
+>
+> ​	建议:`二`--> `三` --> `四` --> `二`  顺序翻阅,先粗略过一遍`二`,有不懂的留着疑惑看二、三,最后再回头看这里
+>
+> 2、webpack配置实际是创建一个对象,所以里面的属性并没有执行顺序,即使你将`entry`写在`output`下面都可以执行,因为到时候执行的时候是webpack通过调用对象属性进行实现顺序的
+
+### Ⅰ- entry
+
+>entry:`入口起点`,有三种形式写法
+>
+>1、`string` --> './src/index.js'
+>
+>​	单入口:打包形成一个chunk(模块),输出一个bundle(包)文件
+>
+>​	此时默认的chunk名称是main
+>
+>2、`array` --> ['./src/index.js','./src/add.js']
+>
+>​	多入口:所有入口文件最终只会形成一个chunk,输出出去只有一个bundle文件(类似将add.js打包进index.js中)
+>
+>​	-->通常只有在`HMR功能中使用`, 让html热更新生效使用
+>
+>3、`object` --> {index:'./src/index.js',add:'./src/add.js'}
+>
+>​	多入口:有几个入口文件就形成几个chunk,输出几个bundle文件
+>
+>​	此时chunk名称是 key
+
+> 4、特殊用法(混合使用)  
+>
+> ​	通常在`dll`优化功能中使用
+
+```js
+module.exports = {
+  entry: {
+      // 所有入口文件最终只会形成一个chunk, 输出出去只有一个bundle文件。
+    index: ['./src/index.js', './src/count.js'], 
+       // 形成一个chunk，输出一个bundle文件。
+    add: './src/add.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: resolve(__dirname, 'build')
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'development'
+};
+
+```
+
+### Ⅱ- output
+
+>使用entry为`单入口`为例讲解
+>
+>1、`filename`:文件名称（指定名称+目录）
+>
+>2、`chunkFilename`:非入口chunk的名称,如未指定这项,在入口文件中导入的js打包也会用上`filename`的文件名称进行命名,但是名字与入口文件冲突,就会使用0~∞数字命名,不容易区分
+>
+>3、`path`:输出文件目录(将来所有资源输出的公共目录)
+>
+>4、`publicPath`:所有资源引入公共路径的前缀 -- 'img/a.jpg'-->'/img/a.jpg'  这个适合`生产环境使用`
+>
+>​	这两者变化区别:前者是将`imgs`目录跟在当前目录路径后面,后者是将imgs跟在服务器地址后面
+>
+>5、`library:'[name]'`  //整个库向外暴露的变量名 实际上使用`var声明`
+>
+>6、`libraryTarget`:将变量名添加到哪个对象上
+>
+>​	a) libraryTarget: 'window' 适合浏览器端
+>
+>​	b) libraryTarget: 'global' 适合node
+>
+>​	c) libraryTarget: 'commonjs' 使用commonjs方式进行模块导出
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    // 文件名称（指定名称+目录）
+    filename: 'js/[name].js',
+    // 输出文件目录（将来所有资源输出的公共目录）
+    path: resolve(__dirname, 'build'),
+    // 所有资源引入公共路径前缀 --> 'imgs/a.jpg' --> '/imgs/a.jpg' 适合生产环境使用, 
+     // 这两者地址区别:前者是将imgs目录跟在当前目录后面 ,后者是将imgs跟在服务器地址后面
+    publicPath: '/',
+    chunkFilename: 'js/[name]_chunk.js', // 非入口chunk的名称
+    // library: '[name]', // 整个库向外暴露的变量名  定义为var
+    // libraryTarget: 'window' // 变量名添加到哪个上 browser(适用浏览器端)
+    // libraryTarget: 'global' // 变量名添加到哪个上 node(适用node服务端)
+    // libraryTarget: 'commonjs' //使用commonjs的方式模块导出
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'development'
+};
+
+```
+
+### Ⅲ- module
+
+>1、`test`:文件名匹配规则,后面参数是一个正则
+>
+>2、`exclude`:排除匹配某个目录下的内容 -->  exclude: /node_modules/ ->排除node_modules下的文件
+>
+>3、`include`:只检查 某个目录下的文件 --> include: resolve(__dirname, 'src') ->只检查 src 下的js文件
+>
+>4、`loader`与`use`:单个loader使用`loader`,多个loader用`use`
+>
+>5、`enforce`:指定该配置的执行顺序:  enforce:'`pre`'(优先执行) > 默认 > enforce:'`post`'(延后执行)
+>
+>6、`options`:指定这个loader的配置选项
+>
+>7、` oneOf: []`:里面的配置只会生效一次,即里面有100个配置,当我一个文件进入这里检测,可能第10个配置匹配到了就生效,然后该文件就不会进行下面90次匹配,如果是不放` oneOf`里面的配置,就会完全执行100次匹配,性能优化使用
+>
+>​	该部分知识在`优化`部分:当你使用enlint与babel两种配置进行对于js文件的匹配的情景下会使用
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'js/[name].js',
+    path: resolve(__dirname, 'build')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        // 排除node_modules下的js文件
+        exclude: /node_modules/,
+        // 只检查 src 下的js文件
+        include: resolve(__dirname, 'src'),
+        // 单个loader用loader
+        loader: 'eslint-loader',
+        // 多个loader用use
+        //use: ['style-loader', 'css-loader']
+        // 优先执行
+        enforce: 'pre',
+        // 延后执行
+        // enforce: 'post',
+        //指定这个loader的配置选项
+        options: {}
+      },
+      {
+        // 以下配置只会生效一个
+        oneOf: []
+      }
+    ]
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'development'
+};
+```
+
+### Ⅳ- resolve
+
+>该resolve`并不是path`的relove,而是配置中的resolve配置项:`解析模块的规则`
+>
+>1、`alias`:配置解析模块路径别名: 优点简写路径 缺点路径没有提示
+>
+>2、`extensions`:配置省略文件路径的后缀名
+>
+>3、`modules`:告诉webpack解析模块是去哪个目录 -->如果不指定会webpack会一层一层往外找,造成不必要的性能浪费
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/js/index.js',
+  output: {},
+  module: {
+    rules: [ ]
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'development',
+  // 解析模块的规则
+  resolve: {
+    // 配置解析模块路径别名: 优点简写路径 缺点路径没有提示
+    alias: {
+      $css: resolve(__dirname, 'src/css')
+    },
+    // 配置省略文件路径的后缀名
+    extensions: ['.js', '.json', '.jsx', '.css'],
+    // 告诉 webpack 解析模块是去找哪个目录
+    modules: [resolve(__dirname, '../../node_modules'), 'node_modules']
+  }
+};
+```
+
+> 配置后js引用示例代码
+
+```js
+import '$css/index';
+```
+
+### Ⅴ- devServer
+
+>这部分配置很多,只抽出我觉得比较重要的部分
+>
+>1、`proxy`:服务器代理 -->解决开发环境跨域问题
+>
+>​	① target: 一旦devserver服务器接收到`/接口名/xxx`,就会把请求转发到`target`后面的参数url服务器上
+>
+>​	② pathRewrite:发送请求时,请求路径重写 --> 如:将/api/xxx ->/xxx(去掉前面的/api)
+>
+>2、`contentBase`:指定运行代码的目录
+>
+>3、`hot`:开启`HMR模块热替换`,这是优化部分功能
+>
+>4、`overlay`:当设置为`false`时,如果代码错误,不要进行全屏提示
+>
+>5、`watchContentBase`:当设置为`true`时,监听contentBase目录下的所有文件 一旦文件变化就会reload
+>
+>6、`watchOptions`:内部设置监听的忽略文件,通常与`5`搭配使用
+>
+>7、`compress`:是否开启`gzip`压缩
+
+```js
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  devServer: {
+    // 运行代码的目录
+    contentBase: resolve(__dirname, 'build'),
+    // 监视 contentBase 目录下的所有文件，一旦文件变化就会 reload
+    watchContentBase: true,
+    watchOptions: {
+      // 忽略文件
+      ignored: /node_modules/
+    },
+    // 启动gzip压缩
+    compress: true,
+    // 端口号
+    port: 5000,
+    // 域名
+    host: 'localhost',
+    // 自动打开浏览器
+    open: true,
+    // 开启HMR功能
+    hot: true,
+    // 不要显示启动服务器日志信息
+    clientLogLevel: 'none',
+    // 除了一些基本启动信息以外，其他内容都不要显示
+    quiet: true,
+    // 如果出错了，不要全屏提示~
+    overlay: false,
+    // 服务器代理 --> 解决开发环境跨域问题
+    proxy: {
+      // 一旦devServer(5000)服务器接受到 /api/xxx 的请求，就会把请求转发到另外一个服务器(3000)
+      '/api': {
+        target: 'http://localhost:3000',
+        // 发送请求时，请求路径重写：将 /api/xxx --> /xxx （去掉/api）
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  }
+};
+```
+
+### Ⅵ- optimization
+
+>主要用于优化部分的`code split` -->代码分割,这个需要先看优化部分的代码分割后再翻阅
+>
+>1、`splitChunks`:开启代码分割
+>
+>2、`runtimeChunk`:将当前模块的记录其他模块的hash单独打包为一个文件 runtime
+>
+>​	解决的问题:当你修改a文件后,因为你使用的是`contenthash`作为文件名,它根据内容会生成不同的哈希值,所以你a文件文件名将会变化.而如果你在b文件中导入a文件,b文件就会因为a文件的文件名变化导致b文件自己内容也跟着变化(即使你对b文件无任何修改),导致b文件也会`重新打包,缓存失效`
+>
+>​	解决原理:将当前模块的记录其他模块的hash单独打包为一个文件
+>
+>3、`terser-webpack-plugin`:当你的webpack版本在4.26以上,它使用的是`terser`的库进行压缩,要使用的时候需要`下载依赖`,且如果要优化压缩速度,需要修改里面配置,否则会使用默认配置
+
+```js
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+module.exports = {
+    entry: './src/js/index.js',
+  output: {
+    filename: 'js/[name].[contenthash:10].js',
+    path: resolve(__dirname, 'build'),
+    chunkFilename: 'js/[name].[contenthash:10]_chunk.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  },
+  plugins: [new HtmlWebpackPlugin()],
+  mode: 'production',
+  resolve: {
+    alias: {
+      $css: resolve(__dirname, 'src/css')
+    },
+    extensions: ['.js', '.json', '.jsx', '.css'],
+    modules: [resolve(__dirname, '../../node_modules'), 'node_modules']
+  },
+    
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+        
+      // 下面的是默认值，当你启用上面哪个`all`后,可以不写、一般也不进行修改
+    ---------------------------------------------------------------------------    
+       minSize: 30 * 1024, // 分割的chunk最小为30kb
+      maxSize: 0, // 最大没有限制
+      minChunks: 1, // 要提取的chunk最少被引用1次,如果少于1次,就不提取了
+      maxAsyncRequests: 5, // 按需加载时并行加载的文件的最大数量
+      maxInitialRequests: 3, // 入口js文件最大并行请求数量
+      automaticNameDelimiter: '~', // 名称连接符
+      name: true, // 可以使用命名规则
+      cacheGroups: {
+        // 分割chunk的组
+        // node_modules文件会被打包到 vendors 组的chunk中。--> vendors~xxx.js
+        // 满足上面的公共规则，如：大小超过30kb，至少被引用一次。
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          // 优先级
+          priority: -10
+        },
+        default: {
+          // 要提取的chunk最少被引用2次
+          minChunks: 2,
+          // 优先级
+          priority: -20,
+          // 如果当前要打包的模块，和之前已经被提取的模块是同一个，就会复用，而不是重新打包模块
+          reuseExistingChunk: true
+        } 
+  --------------------------------------------------------------------------------------------    
+      }
+    },
+    // 将当前模块的记录其他模块的hash单独打包为一个文件 runtime
+    // 解决：修改a文件导致b文件的contenthash变化
+    runtimeChunk: {
+      name: entrypoint => `runtime-${entrypoint.name}`
+    },
+    minimizer: [
+      // 配置生产环境的压缩方案：js和css
+      new TerserWebpackPlugin({
+        // 开启缓存
+        cache: true,
+        // 开启多进程打包
+        parallel: true,
+        // 启动source-map
+        sourceMap: true
+      })
+    ]
+  }
+};
+```
+
+
+
+------
+
+
+
+------
+
+
+
+# 三、Webpack.config.js基本配置学习
 
 > 详细参数部分见下面内容的`webpack配置详解`
 >
@@ -464,6 +849,8 @@ module.exports={
 >2、需要修改package.json文件
 >
 >3、需要设置`nodejs的环境变量`
+>
+>4、此处有可能出现问题,问题记载于`下方问题解决部分`
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -493,6 +880,8 @@ module.exports = {
               //使用postcss的插件进行兼容性处理
               require('postcss-preset-env')()
             ]
+           //如果没效果用下面的   postcssOptions: {  plugins: [【'postcss-preset-env',{}】] }
+           //如果{}中不需要再传入options,可以这样 plugins: 【'postcss-preset-env'】 
           }
         }
       ]
@@ -583,6 +972,8 @@ module.exports = {
 ```
 
 >package.json配置
+>
+>`airbnb`是相对热门的模板
 
 ```json
   "eslintConfig": {
@@ -614,7 +1005,7 @@ console.log(add(2, 5));
 >
 >   问题: 我只要解决部分的兼容性问题,但是将所有兼容性代码全部引入,体积太大了
 >
-> 3、需要做兼容性处理的就做:按需加载:`core-js`
+> 3、需要做兼容性处理的就做:按需加载:`core-js`  --------> `最为推荐`
 >
 >依赖四个下载:`babel-loader`、 `@babel/core`、 `@babel/polyfill` 、`core-js`
 
@@ -909,9 +1300,15 @@ module.exports = {
 
 ```
 
+------
 
 
-# 三、Webpack优化
+
+------
+
+
+
+# 四、Webpack优化
 
 ### Ⅰ- HMR优化
 
@@ -1214,7 +1611,7 @@ app.listen(3000);
 
 > 1、`tree shaking`：去除无用代码 
 >
->  前提：1. 必须使用ES6模块化 2. 开启production环境
+>  前提：1. 必须使用ES6模块化 2. 开启production环境 3.webpack4中,对于嵌套的代码,无法去除 
 >
 >  作用: 减少代码体积
 
@@ -1308,7 +1705,12 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'all'
-    }
+    },
+   // 将当前模块的记录其他模块的hash单独打包为一个文件 runtime
+    // 解决：修改a文件导致b文件的contenthash变化
+     runtimeChunk: {
+      name: entrypoint => `runtime-${entrypoint.name}`
+    },
   },
   mode: 'production'
 };
@@ -1317,9 +1719,11 @@ module.exports = {
 
 >3、单入口文件,且想打包特定js文件为单独文件,在`2`的配置基础上再写js代码(入口改为单入口)
 >
-> ` 通过js代码`，让某个文件被单独打包成一个chunk,该代码写在入口js文件中
-> `import动态导入语法`：能将某个文件单独打包
-> `通过注释`,可以让js生成的打包文件带上这个名字
+>` 通过js代码`，让某个文件被单独打包成一个chunk,该代码写在入口js文件中
+>`import动态导入语法`：能将某个文件单独打包
+>`通过注释`,可以让js生成的打包文件带上这个名字,
+>
+> 	在`webpack5`中的`开发模式中可以不用注释加名字`,内部有 chunk 命名规则，不再是以 id(0, 1, 2)命名了,当然生产模式还是有必要的
 
 ```js
 //通过注释,可以让js生成的打包文件带上这个名字
@@ -1628,7 +2032,7 @@ module.exports = {
 >​	    Ⅲ- 多进程打包
 >
 > 	   Ⅳ- externals
->
+>				
 > 	   Ⅴ- dll   这个技术加上代码拆分code split可以做出更加细度化拆分
 >
 >​	② 优化代码运行的性能
@@ -1643,53 +2047,210 @@ module.exports = {
 >
 >​		Ⅴ- pwa
 
+------
 
 
-## 四、Webpack配置详解
 
-### Ⅰ- entry
+------
 
->entry:`入口起点`,有三种形式写法
->
->1、`string` --> './src/index.js'
->
->​	单入口:打包形成一个chunk(模块),输出一个bundle(包)文件
->
->​	此时默认的chunk名称是main
->
->2、`array` --> ['./src/index.js','./src/add.js']
->
->​	多入口:所有入口文件最终只会形成一个chunk,输出出去只有一个bundle文件(类似将add.js打包进index.js中)
->
->​	-->通常只有在`HMR功能中使用`, 让html热更新生效使用
->
->3、`object` --> {index:'./src/index.js',add:'./src/add.js'}
->
->​	多入口:有几个入口文件就形成几个chunk,输出几个bundle文件
->
->​	此时chunk名称是 key
 
-> 4、特殊用法(混合使用)  
+
+# 五、Webpack5的介绍与预学习
+
+>此版本重点关注以下内容:
 >
-> ​	通常在`dll`优化功能中使用
+>- 通过持久缓存提高构建性能.
+>- 使用更好的算法和默认值来改善长期缓存.
+>- 通过更好的树摇和代码生成来改善捆绑包大小.
+>- 清除处于怪异状态的内部结构，同时在 v4 中实现功能而不引入任何重大更改.
+>- 通过引入重大更改来为将来的功能做准备，以使我们能够尽可能长时间地使用 v5.
 
-```js
+### Ⅰ-下载
 
-module.exports = {
-  entry: {
-      // 所有入口文件最终只会形成一个chunk, 输出出去只有一个bundle文件。
-    index: ['./src/index.js', './src/count.js'], 
-       // 形成一个chunk，输出一个bundle文件。
-    add: './src/add.js'
-  },
-  output: {
-    filename: '[name].js',
-    path: resolve(__dirname, 'build')
-  },
-  plugins: [new HtmlWebpackPlugin()],
-  mode: 'development'
-};
+> `npm i webpack@next webpack-cli -D`
+
+### Ⅱ-自动删除 Node.js Polyfills
+
+>早期，webpack 的目标是允许在浏览器中运行大多数 node.js 模块，但是模块格局发生了变化，许多模块用途现在主要是为前端目的而编写的。webpack <= 4 附带了许多 node.js 核心模块的 polyfill，一旦模块使用任何核心模块（即 crypto 模块），这些模块就会自动应用。
+>
+>尽管这使使用为 node.js 编写的模块变得容易，但它会将这些巨大的 polyfill 添加到包中。在许多情况下，这些 polyfill 是不必要的。
+>
+>webpack 5 会自动停止填充这些核心模块，并专注于与前端兼容的模块。
+>
+>迁移：
+>
+>- 尽可能尝试使用与前端兼容的模块。
+>- 可以为 node.js 核心模块手动添加一个 polyfill。错误消息将提示如何实现该目标。
+
+### Ⅲ-Chunk 和模块 ID
+
+> 添加了用于长期缓存的新算法。在生产模式下默认情况下启用这些功能。
 
 ```
+chunkIds: "deterministic", moduleIds: "deterministic"
+```
 
-### Ⅱ-output
+### Ⅳ-Chunk ID
+
+> 你可以不用使用 `import(/* webpackChunkName: "name" */ "module")` 在开发环境来为 chunk 命名，生产环境还是有必要的
+>
+> webpack 内部有 chunk 命名规则，不再是以 id(0, 1, 2)命名了
+>
+> 这部分在`import动态导入语法`中会用到,如代码分割与懒加载
+
+### Ⅴ-Tree Shaking 树摇优化
+
+> 1、webpack 现在`能够处理对嵌套模块`的 tree shaking
+>
+> 在生产环境中, inner 模块暴露的 `b` 会被删除,原本的webpack4无法判断中间这个被引用的内容是否有所被引用,无法删除
+
+```js
+// inner.js
+export const a = 1;
+export const b = 2;
+
+// module.js
+import * as inner from './inner';
+export { inner };
+
+// user.js
+import * as module from './module';
+console.log(module.inner.a);
+```
+
+> 2、webpack 现在能够判断多个模块之前的关系
+
+```js
+import { something } from './something';
+
+function usingSomething() {
+  return something;
+}
+
+export function test() {
+  return usingSomething();
+}
+```
+
+当设置了`"sideEffects": false`时，一旦发现`test`方法没有使用，不但删除`test`，还会删除`"./something"`
+
+> 3、webpack 现在能处理对 Commonjs 的 tree shaking
+
+### Ⅵ-Output
+
+webpack 4 默认只能输出 ES5 代码
+
+webpack 5 开始新增一个属性 output.ecmaVersion, 可以生成 ES5 和 ES6 / ES2015 代码.
+
+如：`output.ecmaVersion: 2015`
+
+### Ⅶ-SplitChunk
+
+> 之前webpack4只能指定最小文件大小,现在能对不同文件进行最小大小判断
+>
+> 此属性在代码分割的`optimization`配置中
+
+```js
+// webpack4
+minSize: 30000;
+// webpack5
+minSize: {
+  javascript: 30000,
+  style: 50000,
+}
+```
+
+### Ⅷ-Caching
+
+```js
+// 配置缓存
+cache: {
+  // 磁盘存储
+  type: "filesystem",
+  buildDependencies: {
+    // 当配置修改时，缓存失效
+    config: [__filename]
+  }
+}
+```
+
+缓存将存储到 `node_modules/.cache/webpack`
+
+### Ⅸ-监视输出文件
+
+之前 webpack 总是在第一次构建时输出全部文件，但是监视重新构建时会只更新修改的文件。
+
+此次更新在第一次构建时会找到输出文件看是否有变化，从而决定要不要输出全部文件。
+
+### Ⅹ-默认值
+
+> webpack5将部分配置赋予默认值,当你使用如下配置,在webpack5中可以不进行代码编写
+
+- `entry: "./src/index.js`
+- `output.path: path.resolve(__dirname, "dist")`
+- `output.filename: "[name].js"`
+
+[更多内容](https://github.com/webpack/changelog-v5)
+
+------
+
+
+
+------
+
+
+
+# ###、出现的问题与解决
+
+### Ⅰ-如果开启了 eslint 再进行懒加载会报错 无法再非顶层使用import
+
+>解决：
+> 1、新建 .eslintrc 文件
+>
+> 2、配置
+>
+>```js
+>{
+>"parser": "babel-eslint",
+>"parserOptions": {
+>  "sourceType": "module",
+>  "allowImportExportEverywhere": true
+>}
+>}
+>```
+
+### Ⅱ-css兼容性配置没效果
+
+>可能是版本问题,`换个写法`试试
+
+> 问题代码
+
+```js
+ use: [MiniCssExtractPlugin.loader, 'css-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            ident: 'postcss',
+            plugins: () => [
+              require('postcss-preset-env')()
+            ]
+          }
+        }
+    ]   
+```
+
+> 解决代码
+>
+> 如果{}不需要继续传入options，可以直接这样`plugins: ['postcss-preset-env']` 效果同上
+
+```js
+{
+  loader: 'postcss-loader',
+  options: {
+    postcssOptions: {
+      plugins: [['postcss-preset-env', {}]]
+    }
+  }
+}
+```
+

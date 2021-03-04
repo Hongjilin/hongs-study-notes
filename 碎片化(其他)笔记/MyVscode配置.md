@@ -166,7 +166,11 @@ File >> Preferences >> Keyboard Shprtcuts >>右上角+ 代码模式>>复制以�
 
 
 
+##### (14) Markdown Shortcuts
 
+> vscode`预览md`文件插件
+>
+> 安装完毕，重启VSCode，然后打开.md文件。Ctrl + Shift + V，即可预览。然后双击相应位置即可修改对应内容
 
 ## 三、格式化修改缩进2(4)格无效解决
 

@@ -137,4 +137,324 @@ checkBrowsers(paths.appPath, isInteractive)
 
 >用来定义开发环境与生产环境的配置
 >
+>部分代码与注释
+
+```js
+// 是否生成map文件
+// cross-env修改
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
+// 是否内联runtime文件
+const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== "false";
+// 最小转化base64的图片大小
+const imageInlineSizeLimit = parseInt(	process.env.IMAGE_INLINE_SIZE_LIMIT || "10000");
+// 样式文件正则
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const sassRegex = /\.(scss|sass)$/;
+// 生成最终webpack开发或生产环境配置的函数
+module.exports = function (webpackEnv) {
+    // 获取环境变量的方法
+	// 加载.env文件的环境变量，REACT_APP_开头
+	const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+    	// 获取处理样式文件loader的函数
+	const getStyleLoaders = (cssOptions, preProcessor) => {}
+   // webpack配置对象
+	return {
+		mode: isEnvProduction ? "production" : isEnvDevelopment && "development",
+		// 如果该变量为true(生产环境),则代码出错终止打包
+		bail: isEnvProduction,
+		devtool: isEnvProduction? shouldUseSourceMap? "source-map" // 生产环境
+				: false: isEnvDevelopment && "cheap-module-source-map", // 开发环境
+    }
+    // 添加 /* filename */ 注释到输出的文件中
+	pathinfo: isEnvDevelopment,
+    // 默认 / ，可以通过package.json.homepage.
+	publicPath: paths.publicUrlOrPath,
+         // 启用压缩
+    optimization: {
+		minimize: isEnvProduction,
+		minimizer: [new TerserPlugin({})]// 压缩js
+       }
+    
+	// 是否内联runtime文件：少发一个请求
+	isEnvProduction &&
+		shouldInlineRuntimeChunk &&
+		new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
+	// 解析index.html中 &PULBLIC_URL%
+	new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
+	// 给ModuleNotFound更好提示
+	new ModuleNotFoundPlugin(paths.appPath),
+	// 定义环境变量
+	new webpack.DefinePlugin(env.stringified),
+	// 开发环境下：HMR功能
+	isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
+	// 文件路径：严格区分大小写
+	isEnvDevelopment && new CaseSensitivePathsPlugin(),
+	// 监视node_modules，一旦发生变化可以重启dev server
+	// See https://github.com/facebook/create-react-app/issues/186
+	isEnvDevelopment &&
+		new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+		// 提取css成单独文件
+	isEnvProduction &&
+		new MiniCssExtractPlugin({})
+
+}
+```
+
+
+
+
+
+# 二、Vue中的配置分析
+
+>将基于脚手架4.x版本的vue2.x配置进行分析,大致内容与react无太大区别
 >
+>1、卸载老版本vuecli（1.x， 2.x）:`npm uninstall vue-cli -g`或者`yarn global remove vue-cli`
+>
+>2、安装最新的vuecli:`npm install -g @vue/cli`
+>
+>3、`vue create project-name`,选择创建vue2.x,vue2与3版本的weback配置差不多
+>
+>4、vue并没有提供将webpack配置直接暴露出来的命令,但是提供了另外一种方法让我们能审查vue里面的配置,通过指令将单独的配置单独打包成单独的文件
+>
+>​	Ⅰ-`vue inspect --mode=development > webpack.dev.js` :将webpack的开发环境单独打包
+>
+>​	Ⅱ-`vue inspect --mode=production > webpack.prod.js` :将webpack的生产环境单独打包
+>
+>​	Ⅲ-生成后的文件会报错,想要取消报错,在最前面用`module.exports=`将其暴露出去,就不会报错了
+
+
+
+
+
+# 三、loader
+
+### Ⅰ-编写一个简单的loader
+
+>loader本质上是一种函数,此处创建一个js编写loader
+
+```js
+//loader1.js
+module.exports = function (content, map, meta) {
+  console.log(content,"------------------------------------");
+  return content
+}
+```
+
+> 1、如不配置loader解析规则,默认路径是`node_modules`,所以平时使用`style-loader`等都不用加路径
+>
+> webpack.config.js
+
+```js
+const path = require('path');
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'loader1',//当配置了liader解析规则后写法
+        // loader:path.resolve(__dirname,'loaders','loader1') //不写resolveLoader配置的写法
+      }
+    ]
+  },
+  // 配置loader解析规则,默认路径是`node_modules`
+  resolveLoader: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'loaders')
+    ]
+  }
+}
+```
+
+### Ⅱ-loader的执行顺序
+
+>1、loader是从上往下编译,编译结束后运行的顺序是`从下往上,从右往左 `执行
+>
+>2、当你有写loader想要先行运行的话,可以加在`pitch`方法上,这样在编译时就会调用,且`从上往下`执行
+
+```js
+module.exports = function (content, map, meta) {
+  console.log(111111,"------------------------------------");
+  return content
+}
+module.exports.pitch = function () {//编译时从上往下调用
+  console.log('pitch 111');
+}
+```
+
+### Ⅲ-同步&异步loader
+
+> 1、`this.callback()`:同步的方法  -->可以替代`return`
+
+```js
+module.exports = function (content, map, meta) {
+  console.log(111111,"------------------------------------");
+  this.callback(null, content, map, meta);
+	//是否有错误,需要传递的内容(处理后的内容) ,可选参数,可选参数
+}
+```
+
+> 2、`this.async()`:异步的方法
+>
+> ​	使用`this.async()`方法会使整个loader停住,只有当你再次调用`callback`方法才会继续执行,整体性能会好过同步,`推荐使用`
+
+```js
+// 异步loader
+module.exports = function (content, map, meta) {
+  console.log(222);
+  const callback = this.async();
+  setTimeout(() => {
+    callback(null, content);
+  }, 1000)
+}
+
+```
+
+### Ⅳ-获取&校验loader的options
+
+> 1、需要下载依赖:`npm i loader-utils -D`
+>
+> 2、需要下载依赖:`schema-utils`
+
+```js
+//webpack.config.js传入
+{	loader: 'loader3',
+    options: {
+        name: 'jack',
+        age: 18 //当校验文件追加属性调为false,将会报错
+    }
+}
+------------------------------------------------------------------------------------
+//loader3.js
+// loader本质上是一个函数
+const { getOptions } = require('loader-utils');
+const { validate } = require('schema-utils');
+const schema = require('./schema');
+module.exports = function (content, map, meta) {
+  // 获取options
+  const options = getOptions(this);
+  console.log(333, options);
+  // 校验options是否合法
+  validate(schema, options, {
+    name: 'loader3'
+  })
+  return content;
+}
+```
+
+> 校验文件:定义校验规则
+
+```json
+{
+  "type": "object",//指定options的类型
+  "properties": { //定义options里面有什么属性
+    "name": {	//定义有name类型
+      "type": "string",	
+      "description": "名称～"	//定义描述,可以随便写
+    }
+  },
+  "additionalProperties": false //代表是否可以运行追加其他属性
+}
+```
+
+### Ⅴ-自定义babel-loader
+
+> webpack.config.js配置
+
+```js
+module.exports = {
+  module: {
+    rules: [{
+      test: /\.js$/,
+      loader:'babelLoader',
+      options:{ presets:['@babel/preset-env'] }
+    }]
+  },
+  // 配置loader解析规则,默认路径是`node_modules`
+  resolveLoader: {  modules: [ 'node_modules',path.resolve(__dirname, 'loaders')]}
+}
+```
+
+> babelLoader.js  -->中间大写是防止与自带的babelloader冲突
+
+```js
+const { getOptions } = require('loader-utils');
+const { validate } = require('schema-utils');
+const babel = require('@babel/core');
+const util = require('util');
+const babelSchema = require('./babelSchema.json');
+//babel.transfrom用来编译代码的方法,是一个普通异步方法
+//util.promisify会将普通异步方法转换成基于promise的异步方法
+const transform=util.promisify(babel.transform)
+
+module.exports = function (content, map, meta) {
+  //获取loader的options配置
+  const options = getOptions(this) || {};
+  //校验babel的options的配置
+  validate(babelSchema,options,{
+    name:'Babel Loader'
+  })
+  //创建异步
+  const callback=this.async();
+  //使用babel编译代码
+  transform(content,options)
+  .then(({code,map})=>callback(null,code,map,meta))
+  .catch((e)=>callback(e))
+}
+```
+
+> 校验文件:babelSchema.json
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "presets": {
+      "type": "array"
+    }
+  },
+  "addtionalProperties": true
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

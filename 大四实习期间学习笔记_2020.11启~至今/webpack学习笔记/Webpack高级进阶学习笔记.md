@@ -2,6 +2,8 @@
 
 >这部分笔记是观看`尚硅谷webpack5高级进阶`进行记录
 >
+>本人目前还是学生,并无很多项目构建经验,所以此部分目前为初步了解学习阶段,待之后有项目经验后会再回来补足笔记
+>
 >应是webpack基础学习的进阶,分析react与vue脚手架中wenpack的配置
 >
 >​																		起始时间:2020_3/4晚
@@ -360,6 +362,8 @@ module.exports = function (content, map, meta) {
 
 ### Ⅴ-自定义babel-loader
 
+> 自定义babel-loader,并不是工作中的babel配置
+
 > webpack.config.js配置
 
 ```js
@@ -418,15 +422,161 @@ module.exports = function (content, map, meta) {
 }
 ```
 
+# 四、plugins
 
+### Ⅰ-tabaple介绍与使用
 
+> 安装tapable：npm install tapable -D
+>
+> 初始化hooks容器 2.1 同步hooks，任务会依次执行:SyncHook、SyncBailHook 2.2 异步hooks，异步并行：AsyncParallelHook，异步串行：AsyncSeriesHook
+>
+> 往hooks容器中注册事件/添加回调函数
+>
+> 触发hooks
+>
+> 启动文件：node tapable.test.js
 
+```js
+const { SyncHook, SyncBailHook, AsyncParallelHook, AsyncSeriesHook } = require('tapable');
+class Lesson {
+  constructor() {
+    // 初始化hooks容器
+    this.hooks = {
+      // 同步hooks，任务回依次执行
+      // go: new SyncHook(['address'])
+      // SyncBailHook：一旦有返回值就会退出～
+      go: new SyncBailHook(['address']),
 
+      // 异步hooks
+      // AsyncParallelHook：异步并行
+      // leave: new AsyncParallelHook(['name', 'age']),
+      // AsyncSeriesHook: 异步串行
+      leave: new AsyncSeriesHook(['name', 'age'])
+    }
+  }
+  tap() {
+    // 往hooks容器中注册事件/添加回调函数
+    this.hooks.go.tap('class0318', (address) => {
+      console.log('class0318', address);
+      return 111;
+    })
+    this.hooks.go.tap('class0410', (address) => {
+      console.log('class0410', address);
+    })
 
+    this.hooks.leave.tapAsync('class0510', (name, age, cb) => {
+      setTimeout(() => {
+        console.log('class0510', name, age);
+        cb();
+      }, 2000)
+    })
 
+    this.hooks.leave.tapPromise('class0610', (name, age) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('class0610', name, age);
+          resolve();
+        }, 1000)
+      })
+    })
+  }
+  start() {
+    // 触发hooks
+    this.hooks.go.call('c318');
+    this.hooks.leave.callAsync('jack', 18, function () {
+      // 代表所有leave容器中的函数触发完了，才触发
+      console.log('end~~~');
+    });
+  }
+}
+const l = new Lesson();
+l.tap();
+l.start();
+```
 
+### Ⅱ- compiler钩子
 
+>工作方式：异步串行执行，因此下面代码输出顺序如下： 1.1 emit.tap 111 1.2 1秒后输出 emit.tapAsync 111 1.3 1秒后输出 emit.tapPromise 111 1.4 afterEmit.tap 111 1.5 done.tap 111
+>
+>tapAsync和tapPromise表示异步
 
+```js
+class Plugin1 {
+  apply(complier) {
+
+    complier.hooks.emit.tap('Plugin1', (compilation) => {
+      console.log('emit.tap 111');
+    })
+
+    complier.hooks.emit.tapAsync('Plugin1', (compilation, cb) => {
+      setTimeout(() => {
+        console.log('emit.tapAsync 111');
+        cb();
+      }, 1000)
+    })
+
+    complier.hooks.emit.tapPromise('Plugin1', (compilation) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('emit.tapPromise 111');
+          resolve();
+        }, 1000)
+      })
+    })
+
+    complier.hooks.afterEmit.tap('Plugin1', (compilation) => {
+      console.log('afterEmit.tap 111');
+    })
+
+    complier.hooks.done.tap('Plugin1', (stats) => {
+      console.log('done.tap 111');
+    })
+
+  }
+}
+
+module.exports = Plugin1;
+```
+
+>此部分剩余部分,暂时跳过,并无太多实践,以后再来补足
+>
+>
+
+# 五、自定义webpack
+
+### Ⅰ-webpack执行流程
+
+>1、初始化 Compiler：webpack(config) 得到 Compiler 对象
+>
+>2、开始编译：调用 Compiler 对象 run 方法开始执行编译
+>
+>3、确定入口：根据配置中的 entry 找出所有的入口文件。
+>
+>4、编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行编译，再找出该模块依赖的模块，递归直到所有模块被加载进来
+>
+>5、完成模块编译： 在经过第 4 步使用 Loader 编译完所有模块后，得到了每个模块被编译后的最终内容以及它们之间的依赖关系。
+>
+>6、输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表。（注意：这步是可以修改输出内容的最后机会）
+>
+>7、输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+
+### Ⅱ-准备工作
+
+>1、创建文件夹myWebpack
+>
+>2、创建src-->(add.js / count.js / index.js)，写入对应的js代码
+>
+>3、创建config-->webpack.config.js写入webpack基础配置（entry和output）
+>
+>4、创建lib文件夹，里面写webpack的主要配置
+>
+>5、创建script-->build.js（将lib文件夹下面的myWebpack核心代码和config文件下的webpack基础配置引入并调用run()函数开始打包）
+>
+>6、为了方便启动，控制台通过输入命令 `npm init -y`拉取出package.json文件，修改文件中scripts部分为`"build": "node ./script/build.js"`表示通过在终端输入命令`npm run build`时会运行/script/build.js文
+>
+>7、如果需要断点调试:在scripts中添加`"debug": "node --inspect-brk ./script/build.js"`表示通过在终端输入命令`npm run debug`时会调试/script/build.js文件中的代码
+
+> 下面部分暂停学习,转回React系统学习 2021/3/6
 
 
 

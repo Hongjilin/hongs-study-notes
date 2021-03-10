@@ -1,12 +1,18 @@
 >本笔记为本人洪系统学习React阶段笔记-观看B站尚硅谷教学视频 整理而成
 >
->​						始于:2021-2-3  暂停于:2021-2-4(补充webpack知识)~3-9 	`更新中`
+>始于:2021-2-3  暂停于:2021-2-4(补充webpack知识)~3-9   2021-3-10（补充axios知识点）	  `暂停中`
 
-# React系统学习笔记(`更新中 `)
+# React系统学习笔记(`暂停中 `)
 
 ------
 
 # Ⅰ-React基础知识与概念
+
+> React相对于vue来说学习成本更高，或者说需要的基础知识更多，需要有一些预备知识点支撑
+>
+> 1. webpack相关知识
+> 2. axios相关知识
+> 3. js基础与es6相关知识
 
 ## 一、React简介
 
@@ -761,13 +767,69 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >​                    ---- 组件单元测试的文件(需要jest-dom库的支持)
 
+### 3、功能界面的组件化编码流程
 
+>\1. 拆分组件: 拆分界面,抽取组件
+>
+>\2. 实现静态组件: 使用组件实现静态页面效果
+>
+>\3. 实现动态组件
+>
+>​	3.1 动态显示初始化数据
+>
+>​		3.1.1 数据类型
+>
+>​		3.1.2 数据名称
+>
+>​		3.1.2 保存在哪个组件?
+>
+>​	3.2 交互(从绑定事件监听开始)
 
+### 4、TodoList部分代码
 
+>1、更新时可以利用赋值解构后再传入重复字段会自动覆盖的方式进行更新数据
+>
+>​	--》if(todoObj.id === id) return `{...todoObj,done}`
+>
+>2、数组批量删除可以用filter过滤实现
 
+```js
+	//updateTodo用于更新一个todo对象
+	updateTodo = (id,done)=>{
+		//获取状态中的todos
+		const {todos} = this.state
+		//匹配处理数据
+		const newTodos = todos.map((todoObj)=>{
+			if(todoObj.id === id) return {...todoObj,done}
+			else return todoObj
+		})
+		this.setState({todos:newTodos})
+	}
 
+	//deleteTodo用于删除一个todo对象
+	deleteTodo = (id)=>{
+		//获取原来的todos
+		const {todos} = this.state
+		//删除指定id的todo对象
+		const newTodos = todos.filter((todoObj)=>{
+			return todoObj.id !== id
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
 
-
+	//checkAllTodo用于全选
+	checkAllTodo = (done)=>{
+		//获取原来的todos
+		const {todos} = this.state
+		//加工数据
+		const newTodos = todos.map((todoObj)=>{
+			return {...todoObj,done}
+		})
+		//更新状态
+		this.setState({todos:newTodos})
+	}
+```
 
 
 

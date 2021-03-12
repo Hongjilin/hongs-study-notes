@@ -402,6 +402,14 @@ mineReadFile('./resource/content.txt').then(value => {
 >    });
 >    p.then(value => {console.log(value);}, reason => {})
 >```
+>
+> (4) 个人理解--结合源码
+>
+>​	源码中,promise的状态是通过一个`默认为padding`的变量进行判断,所以当你`resolve/reject`延时(异步导致当then加载时,状态还未修改)后,这时直接进行p.then()会发现,目前状态还是`进行中`,所以只是这样导致只有同步操作才能成功.
+>
+>​	所以promise将传入的`回调函数`拷贝到promise对象实例上,然后在`resolve/reject`的执行过程中再进行调用,达到异步的目的
+>
+>​	具体代码实现看下方自定义promise
 
 #### Ⅳ-promise.then()返回的新 promise 的结果状态由什么决定?
 

@@ -27,3 +27,27 @@
 > 一旦你熟悉它后，除了能够为你节约大量时间，不中断、无干扰，让你可以更加专注地改变世界。
 >
 > 最简单的，uTools 可以作为一个程序快速启动器，支持英文、英文驼峰、中文拼音、拼音首字母来打开你的本地程序。除程序外， win10 和 macOS 用户还可以快速搜索并打开「控制面板」内的细项。总之，你只要还记得一个大概的名字，直接输入基本都能找到。
+
+## 4、json-server
+
+>1. 作为一个前端开发工程师，在后端还没有ready的时候，不可避免的要使用mock的数据。很多时候，我们并不想使用简单的静态数据，而是希望自己起一个本地的mock-server来完全模拟请求以及请求回来的过程。json-server是一个很好的可以替我们完成这一工作的工具。我们只需要提供一个json文件，或者写几行简单的js脚本就可以模拟出RESTful API的接口。
+>2. 安装json-server
+>   `npm install -g json-server`
+>3. 创建db.json
+>   在一个文件夹下新建一个db.json文件
+>
+>```json
+>{
+>  "posts": [
+>    { "id": 1, "title": "json-server", "author": "typicode" }
+>  ],
+>  "comments": [
+>    { "id": 1, "body": "some comment", "postId": 1 }
+>  ],
+>  "profile": { "name": "typicode" }
+>}
+>```
+>
+>4. 启动json-server
+>   在当前文件夹下输入如下命令：`json-server db.json`
+

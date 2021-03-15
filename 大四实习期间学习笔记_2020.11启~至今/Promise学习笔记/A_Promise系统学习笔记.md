@@ -6,7 +6,7 @@
 >
 >此部分知识为学习axios预备知识,预备知识链:ajax --> promise --> axios --> react/vue
 >
->​										记录时间:2021-3-10晚启
+>​										记录时间:2021-3-10晚启  截至3/16学完(周末休息)
 
 # 一、Promise的理解与使用
 
@@ -1389,4 +1389,108 @@ Promise.race = function (promises) {
 >
 ></html>
 >```
+
+# 三、Promise+ async + await 
+
+>##### 							1)Promise==>异步
+>
+>##### 							2)await==>异步转同步
+>
+>1. await 可以理解为是 async wait 的简写。await 必须出现在 async 函数内部，不能单独使用。
+>2. await 后面可以跟任何的JS 表达式。虽然说 await 可以等很多类型的东西，但是它最主要的意图是用来等待 Promise 对象的状态被 resolved。如果await的是 promise对象会造成异步函数停止执行并且等待 promise 的解决,如果等的是正常的表达式则立即执行		
+>
+>##### 							3)async==>同步转异步
+>
+>1.    方法体内部的某个表达式使用await修饰，那么这个方法体所属方法必须要用async修饰所以使用awit方法会自动升级为异步方法
+>
+>###### 4)mdn文档
+>
+>1. [async](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/async_function) 
+>2. [await](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/await)
+
+## Ⅰ-async函数
+
+>1. 函数的返回值为 promise 对象 
+>2. promise 对象的结果由 async 函数执行的返回值决定
+
+## Ⅱ-await表达式
+
+>1. await 右侧的表达式一般为 promise 对象, 但也可以是其它的值 
+>
+>2. 如果表达式是 promise 对象, await 返回的是 promise 成功的值 
+>3. 如果表达式是其它值, 直接将此值作为 await 的返回值
+
+## Ⅲ-注意
+
+>1. await 必须写在 async 函数中, 但 async 函数中可以没有 await 
+>
+>2. 如果 await 的 promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理
+
+
+
+# 四、宏任务与微任务
+
+## Ⅰ-说明
+
+>原理图:
+>
+>![image-20210315143756816](C:\Users\Administrator\Desktop\笔记\笔记中图片\Promise系统学习_宏任务微任务原理图.png)
+>
+>说明:
+>
+>	1. JS中用来存储待执行回调函数的队列包含2个不同特定的列队
+> 	2. `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
+> 	3. `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
+> 	4. JS执行时会区别这2个队列:
+>      	1. JS执行引擎首先必须执行所有的`初始化同步任务`代码
+>      	2. 每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
+
+## Ⅱ-代码与示例
+
+> 5. 代码示例
+>
+>    ```js
+>    setTimeout(() => { 
+>          console.log('timeout callback1（）')//立即放入宏队列
+>          Promise.resolve(3).then(
+>            value => { 
+>              console.log('Promise onResolved3()', value)//当这个宏任务执行后 立马放入微队列,所以这个微任务执行完后下个宏任务才能执行 
+>            }
+>          )
+>        }, 0)
+>    
+>        setTimeout(() => { 
+>          console.log('timeout callback2（）') //立即放入宏队列,
+>        }, 0)
+>    
+>        Promise.resolve(1).then(
+>          value => { 
+>            console.log('Promise onResolved1()', value)//立即放入微队列
+>            setTimeout(() => {
+>              console.log('timeout callback3（）', value) //立即放入宏任务
+>            }, 0)
+>          }
+>        )
+>    
+>        Promise.resolve(2).then(
+>          value => { 
+>            console.log('Promise onResolved2()', value)//立即放入微队列
+>          }
+>        )
+>    console.log('同步代码') //同步代码立即执行
+>    ```
+>
+> 6. 结果
+>
+>    ```js
+>     '同步代码',
+>      'Promise onResolved1()',
+>      'Promise onResolved2()',
+>      'timeout callback1（）',
+>      'Promise onResolved3()',
+>      'timeout callback2（）',
+>      'timeout callback3（）'
+>    ```
+
+
 

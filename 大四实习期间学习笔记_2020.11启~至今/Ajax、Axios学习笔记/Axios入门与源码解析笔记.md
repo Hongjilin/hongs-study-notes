@@ -243,25 +243,281 @@
 
 
 
-# 二、Axios源码解析
+# 二、Axios的难点问题	
+
+## Ⅰ-目录结构
+
+>├── /dist/ # 项目输出目录
+>├── /lib/ # 项目源码目录
+>│ ├── /adapters/ # 定义请求的适配器 xhr、http
+>│ │ ├── http.js # 实现 http 适配器(包装 http 包)
+>│ │ └── xhr.js # 实现 xhr 适配器(包装 xhr 对象)
+>│ ├── /cancel/ # 定义取消功能
+>│ ├── /core/ # 一些核心功能
+>│ │ ├── Axios.js # axios 的核心主类
+>│ │ ├── dispatchRequest.js # 用来调用 http 请求适配器方法发送请求的函数
+>│ │ ├── InterceptorManager.js # 拦截器的管理器
+>│ │ └── settle.js # 根据 http 响应状态，改变 Promise 的状态
+>│ ├── /helpers/ # 一些辅助方法
+>│ ├── axios.js # 对外暴露接口
+>│ ├── defaults.js # axios 的默认配置
+>│ └── utils.js # 公用工具
+>├── package.json # 项目信息
+>├── index.d.ts # 配置 TypeScript 的声明文件
+>└── index.js # 入口文件
+
+## Ⅱ-axios 与 Axios 的关系
+
+>1. 从`语法`上来说: axios 不是 Axios 的实例
+>2. 从`功能`上来说: axios 是 Axios 的实例
+>3. axios 是 `Axios.prototype.request` 函数 bind()返回的函数
+>4. axios 作为对象有 Axios 原型对象上的所有方法, 有 Axios 对象上所有属性
+
+## Ⅲ- instance 与 axios 的区别?
+
+>1. 相同: 
+>(1) 都是一个能发任意请求的函数: request(config)
+>(2) 都有发特定请求的各种方法: get()/post()/put()/delete()
+>(3) 都有默认配置和拦截器的属性: defaults/interceptors
+>2. 不同:
+>(1) 默认配置很可能不一样
+>(2) instance 没有 axios 后面添加的一些方法: create()/CancelToken()/all()
+
+## Ⅳ-axios运行的整体流程
+
+>1. 整体流程: 
+>  request(config) ==> dispatchRequest(config) ==> xhrAdapter(config)
+>
+>2. request(config): 
+>  将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 
+>  返回 promise
+>
+>3. dispatchRequest(config): 
+>  转换请求数据 ===> 调用 xhrAdapter()发请求 ===> 请求返回后转换响应数
+>  据. 返回 promise
+>
+>4. xhrAdapter(config): 
+>  创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 
+>  返回 promise 
+>
+>5. 流程图:
+>
+>  ![image-20210318145208671](C:\Users\Administrator\Desktop\笔记\笔记中图片\Axios系统学习流程图.png)
+>
+>
 
 
 
+## Ⅴ-axios 的请求/响应拦截器是什么?
+
+>1. 请求拦截器: 
+>Ⅰ- 在真正发送请求前执行的回调函数
+>Ⅱ- 可以对请求进行检查或配置进行特定处理
+>Ⅲ- 成功的回调函数, 传递的默认是 config(也必须是)
+>Ⅳ- 失败的回调函数, 传递的默认是 error
+>2. 响应拦截器
+>Ⅰ- 在请求得到响应后执行的回调函数
+>Ⅱ- 可以对响应数据进行特定处理
+>Ⅲ- 成功的回调函数, 传递的默认是 response
+>Ⅳ- 失败的回调函数, 传递的默认是 error
+
+## Ⅵ-axios 的请求/响应数据转换器是什么?
+
+>1. 请求转换器: 对请求头和请求体数据进行特定处理的函数
+>
+>  ```js
+>  if (utils.isObject(data)) {
+>   setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+>   return JSON.stringify(data);
+>  }
+>  ```
+>
+>2. 响应转换器: 将响应体 json 字符串解析为 js 对象或数组的函数
+>
+>  ```js
+>  response.data = JSON.parse(response.data)
+>  ```
+
+## Ⅶ- response与error  的整体结构
+
+>1. response的整体结构
+>
+>```js
+>{
+> data, status,statusText,headers,config,request
+> }
+>```
+>
+>2. error  的整体结构
+>
+>```js
+>{
+> message,response,request,
+>}
+>```
+
+## Ⅷ-如何取消未完成的请求?
+
+>1. 当配置了 cancelToken 对象时, 保存 cancel 函数
+>(1) 创建一个用于将来中断请求的 cancelPromise
+>(2) 并定义了一个用于取消请求的 cancel 函数
+>(3) 将 cancel 函数传递出来
+>2. 调用 cancel()取消请求
+>(1) 执行 cacel 函数, 传入错误信息 message
+>(2) 内部会让 cancelPromise 变为成功, 且成功的值为一个 Cancel 对象
+>(3) 在 cancelPromise 的成功回调中中断请求, 并让发请求的 proimse 失败, 
+>失败的 reason 为 Cancel 对象
 
 
 
+# 三、Axios源码模拟实现
 
+## Ⅰ- axios 的创建过程模拟实现
 
+>```js
+> <script>
+>    //构造函数
+>    function Axios(config) {
+>      //初始化
+>      this.defaults = config; //为了创建 default 默认属性
+>      this.intercepters = {
+>        request: {},
+>        response: {}
+>      }
+>    }
+>    //原型添加相关的方法
+>    Axios.prototype.request = function (config) {
+>      console.log('发送 AJAX 请求 请求的类型为 ' + config.method);
+>    }
+>    Axios.prototype.get = function (config) {
+>      return this.request({
+>        method: 'GET'
+>      });
+>    }
+>    Axios.prototype.post = function (config) {
+>      return this.request({
+>        method: 'POST'
+>      });
+>    }
+>
+>    //声明函数
+>    function createInstance(config) {
+>      //实例化一个对象
+>      let context = new Axios(config); // context.get()  context.post()  但是不能当做函数使用 context() X
+>      //创建请求函数
+>      let instance = Axios.prototype.request.bind(
+>      context); // instance 是一个函数 并且可以 instance({})  此时 instance 不能 instance.get X
+>      //将 Axios.prototype 对象中的方法添加到instance函数对象中,才可以instance.get....
+>      Object.keys(Axios.prototype).forEach(key => {
+>        instance[key] = Axios.prototype[key].bind(context); // this.default  this.interceptors
+>      });
+>      //为 instance 函数对象添加属性 default 与 interceptors
+>      Object.keys(context).forEach(key => {
+>        instance[key] = context[key];
+>      });
+>      return instance;
+>    }
+>
+>    let axios = createInstance();
+>    //发送请求
+>    // axios({method:'POST'});
+>    axios.get({});
+>    axios.post({});
+>  </script>
+>```
 
+## Ⅱ-axios发送请求过程详解
 
-
-
-
-
-
-
-
-
-
-
-
+>1. 整体流程: 
+>   request(config) ==> dispatchRequest(config) ==> xhrAdapter(config)
+>2. request(config): 
+>   将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 
+>   返回 promise
+>3. dispatchRequest(config): 
+>   转换请求数据 ===> 调用 xhrAdapter()发请求 ===> 请求返回后转换响应数
+>   据. 返回 promise
+>4. xhrAdapter(config): 
+>   创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 
+>   返回 promise 
+>
+>```js
+><script>
+>    // axios 发送请求   axios  Axios.prototype.request  bind
+>    //1. 声明构造函数
+>    function Axios(config) {
+>      this.config = config;
+>    }
+>    Axios.prototype.request = function (config) {
+>      //发送请求
+>      //创建一个 promise 对象
+>      let promise = Promise.resolve(config);
+>      //声明一个数组
+>      let chains = [dispatchRequest, undefined]; // undefined 占位
+>      //调用 then 方法指定回调
+>      let result = promise.then(chains[0], chains[1]);
+>      //返回 promise 的结果
+>      return result;
+>    }
+>
+>    //2. dispatchRequest 函数
+>    function dispatchRequest(config) {
+>      //调用适配器发送请求
+>      return xhrAdapter(config).then(response => {
+>        //响应的结果进行转换处理
+>        //....
+>        return response;
+>      }, error => {
+>        throw error;
+>      });
+>    }
+>
+>    //3. adapter 适配器
+>    function xhrAdapter(config) {
+>      console.log('xhrAdapter 函数执行');
+>      return new Promise((resolve, reject) => {
+>        //发送 AJAX 请求
+>        let xhr = new XMLHttpRequest();
+>        //初始化
+>        xhr.open(config.method, config.url);
+>        //发送
+>        xhr.send();
+>        //绑定事件
+>        xhr.onreadystatechange = function () {
+>          if (xhr.readyState === 4) {
+>            //判断成功的条件
+>            if (xhr.status >= 200 && xhr.status < 300) {
+>              //成功的状态
+>              resolve({
+>                //配置对象
+>                config: config,
+>                //响应体
+>                data: xhr.response,
+>                //响应头
+>                headers: xhr.getAllResponseHeaders(), //字符串  parseHeaders
+>                // xhr 请求对象
+>                request: xhr,
+>                //响应状态码
+>                status: xhr.status,
+>                //响应状态字符串
+>                statusText: xhr.statusText
+>              });
+>            } else {
+>              //失败的状态
+>              reject(new Error('请求失败 失败的状态码为' + xhr.status));
+>            }
+>          }
+>        }
+>      });
+>    }
+>
+>
+>    //4. 创建 axios 函数
+>    let axios = Axios.prototype.request.bind(null);
+>    axios({
+>      method: 'GET',
+>      url: 'http://localhost:3000/posts'
+>    }).then(response => {
+>      console.log(response);
+>    });
+>  </script>
+>```

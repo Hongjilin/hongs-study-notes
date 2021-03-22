@@ -10,7 +10,7 @@
 >
 >仅供本人`洪`学习使用
 >
->​												记录时间: 2021-3-15晚启
+>​												记录时间: 2021-3-15晚启  2021-2-19结束
 
 ## 预备工具
 
@@ -429,16 +429,16 @@
 ## Ⅱ-axios发送请求过程详解
 
 >1. 整体流程: 
->   request(config) ==> dispatchRequest(config) ==> xhrAdapter(config)
+>     request(config) ==> dispatchRequest(config) ==> xhrAdapter(config)
 >2. request(config): 
->   将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 
->   返回 promise
+>     将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 
+>     返回 promise
 >3. dispatchRequest(config): 
->   转换请求数据 ===> 调用 xhrAdapter()发请求 ===> 请求返回后转换响应数
->   据. 返回 promise
+>     转换请求数据 ===> 调用 xhrAdapter()发请求 ===> 请求返回后转换响应数
+>     据. 返回 promise
 >4. xhrAdapter(config): 
->   创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 
->   返回 promise 
+>     创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 
+>     返回 promise 
 >
 >```js
 ><script>
@@ -520,4 +520,265 @@
 >      console.log(response);
 >    });
 >  </script>
+>```
+
+## Ⅲ-拦截器的模拟实现
+
+>1. array.shift()该方法用于把数组的第一个元素从其中删除，并返回第一个元素的值
+>2. 思路为先将拦截器的响应回调与请求回调都压入一个数组中,之后进行遍历运行
+>3. `promise = promise.then(chains.shift(), chains.shift());` 通过循环使用promise的then链条得到最终的结果-->等式前面的`promise`将被最终的结果覆盖
+
+>```html
+><!DOCTYPE html>
+><html lang="en">
+><head>
+>    <meta charset="UTF-8">
+>    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+>    <title>拦截器</title>
+>    <!-- <script src="./node_modules/axios/dist/mine-axios.js"></script> -->
+></head>
+><body>
+>    <script>
+>        //构造函数
+>        function Axios(config){
+>            this.config = config;
+>            this.interceptors = {
+>                request: new InterceptorManager(),
+>                response: new InterceptorManager(),
+>            }
+>        }
+>        //发送请求  难点与重点
+>        Axios.prototype.request = function(config){
+>            //创建一个 promise 对象
+>            let promise = Promise.resolve(config);
+>            //创建一个数组
+>            const chains = [dispatchRequest, undefined];
+>            //处理拦截器
+>            //请求拦截器 将请求拦截器的回调 压入到 chains 的前面  request.handles = []
+>            this.interceptors.request.handlers.forEach(item => {
+>                chains.unshift(item.fulfilled, item.rejected);
+>            });
+>            //响应拦截器
+>            this.interceptors.response.handlers.forEach(item => {
+>                chains.push(item.fulfilled, item.rejected);
+>            });
+>
+>            // console.log(chains);
+>            //遍历
+>            while(chains.length > 0){ 
+>                //array.shift()
+>                promise = promise.then(chains.shift(), chains.shift());
+>            }
+>
+>            return promise;
+>        }
+>
+>        //发送请求
+>        function dispatchRequest(config){
+>            //返回一个promise 队形
+>            return new Promise((resolve, reject) => {
+>                resolve({
+>                    status: 200,
+>                    statusText: 'OK'
+>                });
+>            });
+>        }
+>       
+>        //创建实例
+>        let context = new Axios({});
+>        //创建axios函数
+>        let axios = Axios.prototype.request.bind(context);
+>        //将 context 属性 config interceptors 添加至 axios 函数对象身上
+>        Object.keys(context).forEach(key => {
+>            axios[key] = context[key];
+>        });
+>
+>        //拦截器管理器构造函数
+>        function InterceptorManager(){
+>            this.handlers = [];
+>        }
+>        InterceptorManager.prototype.use = function(fulfilled, rejected){
+>            this.handlers.push({
+>                fulfilled,
+>                rejected
+>            })
+>        }
+>
+>
+>        //以下为功能测试代码
+>        // 设置请求拦截器  config 配置对象
+>        axios.interceptors.request.use(function one(config) {
+>            console.log('请求拦截器 成功 - 1号');
+>            return config;
+>        }, function one(error) {
+>            console.log('请求拦截器 失败 - 1号');
+>            return Promise.reject(error);
+>        });
+>
+>        axios.interceptors.request.use(function two(config) {
+>            console.log('请求拦截器 成功 - 2号');
+>            return config;
+>        }, function two(error) {
+>            console.log('请求拦截器 失败 - 2号');
+>            return Promise.reject(error);
+>        });
+>
+>        // 设置响应拦截器
+>        axios.interceptors.response.use(function (response) {
+>            console.log('响应拦截器 成功 1号');
+>            return response;
+>        }, function (error) {
+>            console.log('响应拦截器 失败 1号')
+>            return Promise.reject(error);
+>        });
+>
+>        axios.interceptors.response.use(function (response) {
+>            console.log('响应拦截器 成功 2号')
+>            return response;
+>        }, function (error) {
+>            console.log('响应拦截器 失败 2号')
+>            return Promise.reject(error);
+>        });
+>
+>
+>        //发送请求
+>        axios({
+>            method: 'GET',
+>            url: 'http://localhost:3000/posts'
+>        }).then(response => {
+>            console.log(response);
+>        });
+>    </script>
+></body>
+></html>
+>```
+
+## Ⅳ-请求取消功能模拟实现
+
+>```html
+><!DOCTYPE html>
+><html lang="en">
+>
+><head>
+>  <meta charset="UTF-8">
+>  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+>  <title>取消请求</title>
+>  <link crossorigin='anonymous' href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
+>    rel="stylesheet">
+>  <!-- <script src="./node_modules/axios/dist/mine-axios.js"></script> -->
+></head>
+>
+><body>
+>  <div class="container">
+>    <h2 class="page-header">axios取消请求</h2>
+>    <button class="btn btn-primary"> 发送请求 </button>
+>    <button class="btn btn-warning"> 取消请求 </button>
+>  </div>
+>  <script>
+>    //构造函数
+>    function Axios(config) {
+>      this.config = config;
+>    }
+>    //原型 request 方法
+>    Axios.prototype.request = function (config) {
+>      return dispatchRequest(config);
+>    }
+>    //dispatchRequest 函数
+>    function dispatchRequest(config) {
+>      return xhrAdapter(config);
+>    }
+>    //xhrAdapter
+>    function xhrAdapter(config) {
+>      //发送 AJAX 请求
+>      return new Promise((resolve, reject) => {
+>        //实例化对象
+>        const xhr = new XMLHttpRequest();
+>        //初始化
+>        xhr.open(config.method, config.url);
+>        //发送
+>        xhr.send();
+>        //处理结果
+>        xhr.onreadystatechange = function () {
+>          if (xhr.readyState === 4) {
+>            //判断结果
+>            if (xhr.status >= 200 && xhr.status < 300) {
+>              //设置为成功的状态
+>              resolve({
+>                status: xhr.status,
+>                statusText: xhr.statusText
+>              });
+>            } else {
+>              reject(new Error('请求失败'));
+>            }
+>          }
+>        }
+>        //关于取消请求的处理
+>        if (config.cancelToken) {
+>          //对 cancelToken 对象身上的 promise 对象指定成功的回调
+>          config.cancelToken.promise.then(value => {
+>            xhr.abort();
+>            //将整体结果设置为失败
+>            reject(new Error('请求已经被取消'))
+>          });
+>        }
+>      })
+>    }
+>
+>    //创建 axios 函数
+>    const context = new Axios({});
+>    const axios = Axios.prototype.request.bind(context);
+>
+>    //CancelToken 构造函数
+>    function CancelToken(executor) {
+>      //声明一个变量
+>      var resolvePromise;
+>      //为实例对象添加属性
+>      this.promise = new Promise((resolve) => {
+>        //将 resolve 赋值给 resolvePromise
+>        resolvePromise = resolve
+>      });
+>      //调用 executor 函数
+>      executor(function () {
+>        //执行 resolvePromise 函数
+>        resolvePromise();
+>      });
+>    }
+>
+>    //获取按钮 以上为模拟实现的代码
+>    const btns = document.querySelectorAll('button');
+>    //2.声明全局变量
+>    let cancel = null;
+>    //发送请求
+>    btns[0].onclick = function () {
+>      //检测上一次的请求是否已经完成
+>      if (cancel !== null) {
+>        //取消上一次的请求
+>        cancel();
+>      }
+>
+>      //创建 cancelToken 的值
+>      let cancelToken = new CancelToken(function (c) {
+>        cancel = c;
+>      });
+>
+>      axios({
+>        method: 'GET',
+>        url: 'http://localhost:3000/posts',
+>        //1. 添加配置对象的属性
+>        cancelToken: cancelToken
+>      }).then(response => {
+>        console.log(response);
+>        //将 cancel 的值初始化
+>        cancel = null;
+>      })
+>    }
+>
+>    //绑定第二个事件取消请求
+>    btns[1].onclick = function () {
+>      cancel();
+>    }
+>  </script>
+></body>
+>
+></html>
 >```

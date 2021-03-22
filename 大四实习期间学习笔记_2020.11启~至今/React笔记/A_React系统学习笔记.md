@@ -1,8 +1,10 @@
->本笔记为本人洪系统学习React阶段笔记-观看B站尚硅谷教学视频 整理而成
+>本笔记为本人`洪`系统学习React阶段笔记-观看`尚硅谷2021版React技术全家桶全套完整版` 整理而成
 >
->始于:2021-2-3  暂停于:2021-2-4(补充webpack知识)~3-9   2021-3-10（补充axios知识点）	  `暂停中`
+>
+>
+>始于:2021-2-3  暂停于:2021-2-4(补充webpack、ajax、Promise、axios知识以及过年放假)~3-22  3-22~`更新中`	 
 
-# React系统学习笔记(`暂停中 `)
+# React系统学习笔记(`更新中 `)
 
 ------
 
@@ -831,13 +833,44 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 	}
 ```
 
+# Ⅲ-React ajax
 
+> 此部分需要预备技术栈:ajax、Axios,相关笔记已经记录在隔壁文件夹且学习完成
 
+### 1、React中配置代理(`proxy`)
 
-
-
-
-
-
+>1. `简单代理`:在package.json中追加如下配置 :`"proxy":http://localhost:5000`
+>      1. ps:当你请求`http://localhost:5000`产生跨域(本身在3000端口)时,添加此代码, 之后你请求时用`http://localhost:3000`进行请求,当其在`3000`端口中找不到资源时将会自动转发至`5000`端口进行请求,不产生跨域问题
+>      2. 优点：配置简单，前端请求资源时可以不加任何前缀。
+>      3. 缺点：不能配置多个代理
+>      4. 工作方式：上述方式配置代理，当请求了3000不存在的资源时，那么该请求会转发给5000 （优先匹配前端资源）
+>2. 方法二: 在src下创建配置文件：`src/setupProxy.js`
+>      1. ps:必须是这个文件名,react项目运行的时候会自动查找这个文件,并将其加入webpack的配置中,所以当你修改此文件后,你需要重新启动项目
+>      2. 优点：可以配置多个代理，可以灵活的控制请求是否走代理。
+>      3. 缺点：配置繁琐，前端请求资源时必须加前缀。
+>
+>```JS
+> const proxy = require('http-proxy-middleware')
+>   module.exports = function(app) {
+>     app.use(
+>       proxy('/api1', {  //api1是需要转发的请求(所有带有/api1前缀的请求都会转发给5000)
+>         target: 'http://localhost:5000', //配置转发目标地址(能返回数据的服务器地址)
+>         changeOrigin: true, //控制服务器接收到的请求头中host字段的值
+>         /*
+>         	changeOrigin设置为true时，服务器收到的请求头中的host为：localhost:5000
+>         	changeOrigin设置为false时，服务器收到的请求头中的host为：localhost:3000
+>         	changeOrigin默认值为false，但我们一般将changeOrigin值设为true
+>         */
+>         pathRewrite: {'^/api1': ''} //去除请求前缀，保证交给后台服务器的是正常请求地址(必须配置)
+>       }),
+>       proxy('/api2', { 
+>         target: 'http://localhost:5001',
+>         changeOrigin: true,
+>         pathRewrite: {'^/api2': ''}
+>       })
+>     )
+>   }
+>```
+>
 
 

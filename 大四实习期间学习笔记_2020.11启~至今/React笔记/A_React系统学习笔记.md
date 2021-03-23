@@ -873,4 +873,124 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >```
 >
 
+### 2、补充知识点
+
+#### Ⅰ-ES6小知识点:`连续赋值解构`+重命名
+
+>```js
+>	let obj = {a:{b:1}}
+>	const {a} = obj; //传统解构赋值
+>	const {a:{b}} = obj; //连续解构赋值
+>	const {a:{b:value}} = obj; //连续解构赋值+重命名
+>```
+
+#### Ⅱ-消息订阅与发布机制 --->  工具库: PubSubJS
+
+> 1.先订阅，再发布（理解：有一种隔空对话的感觉）
+>
+> 2.适用于任意组件间通信
+>
+> 3.要在组件的componentWillUnmount中取消订阅
+>
+> ```js
+> 下载: npm install pubsub-js --save
+> //使用举例
+> 1)	import PubSub from 'pubsub-js' //引入
+> 2)	PubSub.subscribe('delete', function(data){ }); //订阅
+> 3)	PubSub.publish('delete', data) //发布消息
+> //*------------------------------使用----------------------------------------------------
+> 	componentDidMount(){
+> 		this.token = PubSub.subscribe('atguigu',(_,stateObj)=>{
+> 			this.setState(stateObj)
+> 		})
+> 	}
+> 
+> 	componentWillUnmount(){
+> 		PubSub.unsubscribe(this.token)
+> 	}
+> //----------------------------------使用---------------------------------------------------
+> 		//发送请求前通知List更新状态
+> 		PubSub.publish('atguigu',{isFirst:false,isLoading:true})
+> 		//发送网络请求---使用fetch发送（优化）
+> 		try {
+> 			const response= await fetch(`/api1/search/users2?q=${keyWord}`)
+> 			const data = await response.json()
+> 			console.log(data);
+> 			PubSub.publish('atguigu',{isLoading:false,users:data.items})
+> 		} catch (error) {
+> 			console.log('请求出错',error);
+> 			PubSub.publish('atguigu',{isLoading:false,err:error.message})
+> 		}
+> 	}
+> ```
+
+#### Ⅲ-defaultChecked 、 checked的区别
+
+>注意defaultChecked 和 checked的区别，类似的还有：defaultValue 和 value
+
+### 3、`fetch`发送请求
+
+> 概念:`关注分离`的设计思想
+
+>1. Fetch 是浏览器提供的原生 AJAX 接口。
+>
+>  由于原来的XMLHttpRequest`不符合关注分离原则`，且基于事件的模型在处理异步上已经没有现代的Promise等那么有优势。因此Fetch出现来解决这种问题。
+>
+>2. 特点:
+>
+>   1. fetch: `原生函数`，不再使用XmlHttpRequest对象提交ajax请求
+>
+>   2. 老版本浏览器可能不支持
+>
+>   3. 使用 fetch 无法`取消一个请求`。这是因为Fetch API`基于 Promise`，而Promise无法做到这一点。由于Fetch是典型的异步场景，所以大部分遇到的问题不是 Fetch 的，其实是 Promise 的。
+>
+>   4. 如果直接使用`fetch`,返回的并不是直接的结果它只是一个`HTTP响应`，而不是真的数据。想要获取数据,方法有二:
+>
+>      ① 使用async+await获取
+>
+>      ② 使用promise的链式调用,再第一个then中将其返回,再下个then中在使用
+>
+>3. 代码示例
+>
+>```js
+>----------------------------- 未优化:使用then链式调用 ---------------------------------------------------------
+>fetch(`/api1/search/users2?q=${keyWord}`).then(
+>			response => {
+>				console.log('联系服务器成功了');
+>				return response.json()
+>			},
+>			error => {
+>				console.log('联系服务器失败了',error);
+>				return new Promise(()=>{})
+>			}
+>		).then(
+>			response => {console.log('获取数据成功了',response);},
+>			error => {console.log('获取数据失败了',error);}
+>) 
+>----------------------------- 优化后:使用async+await ---------------------------------------------------------
+>try {
+>		const response= await fetch(`/api1/search/users2?q=${keyWord}`)
+>		const data = await response.json()
+>		console.log(data);
+>		} catch (error) {
+>		onsole.log('请求出错',error);
+>		}
+>}
+>```
+
+# Ⅳ-React 路由
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

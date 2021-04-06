@@ -1423,8 +1423,87 @@ Promise.race = function (promises) {
 ## Ⅲ-注意
 
 >1. await 必须写在 async 函数中, 但 async 函数中可以没有 await 
->
 >2. 如果 await 的 promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理
+
+## Ⅳ-自己对某些问题理解解答
+
+### 1、如何在Promise外部使用Promise的结果
+
+>用到的本章节知识:
+>
+>1、axios本质上就是一个promise,所以下面用定时器+Promise模拟axios,效果一样,可以将`new Promise(resolve => {setTimeout(function() { resolve("promise普通结果"); }, 1000); })`等价于`axios({})`
+>
+>2、resolve() 与reject()是修改Promise状态并往外抛出的,一个Promise只能改变一次状态,所以一个primise中只能调用一次
+>
+>3、 上一步抛出后可以在下面 的.then()中获取到
+>
+>   Ⅰ-如果没有用.then(),则值会抛往Promise外部
+>
+>   Ⅱ-如果声明了.then(),则值会被.then()接住,放到里面处理,如果需要再次抛出--`某些业务场景需要` ,然后在下一个then()或者外部使用, 则可以 .then(v=>return v) ---前提这个链式调用前曾使用过resolve() 与reject()才用return,不然就用这两个resolve() 与reject()
+>
+>```js
+>//讲解时写的简单demo
+>let resolveCommon = ()=> {
+>  let result="普通promise初始值"
+>   result=new Promise(resolve => {setTimeout(function() { resolve("promise普通结果"); }, 1000); })
+>  console.log(result)
+>  //打印结果: Promise { <pending> } 
+>};
+>let resolveAsync=async ()=> {
+>  let result="await+async的promise初始值"
+>   result=await new Promise(resolve => { setTimeout(function() { resolve("这是async+await结果"); }, 1000);})
+>  console.log(result)
+>  //打印结果: 这是async+await结果  这里就是正确的值,你可以在下一步进行正常使用,也可以用在下一步的promise中
+>  //------------------------------------------------------
+>  //在第二个promise中调用使用
+>  let result2=""
+>  result2= await new Promise(resolve => { setTimeout(function() { resolve(result+"+经过第二个promise加工"); }, 1000);})
+>  .then(v=>{
+>    console.log("第二个promise的then()中打印并返回:",v)
+>    return v+",经过then()加工返回"
+>  })
+>  console.log("最终结果:第二个promise外部结果打印,",result2)
+>  //---------------------------------------------
+>};
+>resolveCommon()  //调用普通promise函数
+>resolveAsync()    //调用await+async
+>/**
+> 运行结果
+> 1.resolveCommon() 运行结果:    Promise { <pending> }
+> 2.resolveAsync() 运行结果:     
+>  这是async+await结果
+>  第二个promise的then()中打印并返回: 这是async+await结果+经过第二个promise加工
+>  最终结果:第二个promise外部结果打印, 这是async+await结果+经过第二个promise加工,经过then()加工返回
+>*/
+>```
+>
+>原因解析:
+>
+>1. new Promise()是一个异步任务,会加到异步队列中,而正常运行比如console.log()是同步运行的(即从上往下运行),会加到同步队列 
+>
+>   所以 Promise()通常是会在同一等级的同步任务之后才得到结果的 所以你得到的是一个挂起的 Promise { <pending> } 对象
+>
+>2. 而await则是让跟在后面的异步任务转为同步任务(效果如此,就通俗来讲,具体概念需要自学),所以result就能得到一个已经修改状态为成功或者失败的值
+>
+>   所以下面的任务就可以使用到这个值
+>
+>3. 为什么这些操作要放在同一个async fn()=>{} 中?
+>
+>  1)Promise==>异步
+>
+>  2)await==>异步转同步
+>
+>   1. await 可以理解为是 async wait 的简写。await 必须出现在 async 函数内部，不能单独使用。
+>
+>   2. await 后面可以跟任何的JS 表达式。虽然说 await 可以等很多类型的东西，但是它最主要的意图是用来等待 Promise 对象的状态被 resolved。如果await的是 promise对象会造成异步函数停止执行并且等待 promise 的解决,如果等的是正常的表达式则立即执行  
+>
+>  3)async==>同步转异步
+>
+>   方法体内部的某个表达式使用await修饰，那么这个方法体所属方法必须要用async修饰所以使用awit方法会自动升级为异步方法
+
+
+
+
 
 
 
@@ -1442,8 +1521,8 @@ Promise.race = function (promises) {
 > 	2. `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
 > 	3. `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
 > 	4. JS执行时会区别这2个队列:
->      	1. JS执行引擎首先必须执行所有的`初始化同步任务`代码
->      	2. 每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
+> 	 	1. JS执行引擎首先必须执行所有的`初始化同步任务`代码
+> 	 	2. 每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
 
 ## Ⅱ-代码与示例
 
@@ -1491,6 +1570,8 @@ Promise.race = function (promises) {
 >      'timeout callback2（）',
 >      'timeout callback3（）'
 >    ```
+
+
 
 
 

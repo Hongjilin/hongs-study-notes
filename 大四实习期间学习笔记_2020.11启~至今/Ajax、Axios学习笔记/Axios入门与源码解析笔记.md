@@ -782,3 +782,45 @@
 >
 ></html>
 >```
+
+# 四、自己对于某些问题解答与理解
+
+## Ⅰ-axios同步与异步转换,在外部取值
+
+```js
+const  axios  =  require ('axios');
+ //创建实例对象 
+ const $http = axios.create({
+  baseURL: 'http://localhost:53000',
+  timeout: 11000  //请求超时时间
+});
+let resolveCommon = ()=> {
+  let data=$http({ url:"/test"})
+  .then(v=>v.data)  //等于 `.then(v=>{return v})`
+  console.log(data)
+  //打印结果: Promise { <pending> } 
+};
+let resolveAsync=async ()=> {
+  let data=await $http({ url:"/test"})
+  .then(v=>v.data)  //等于 `.then(v=>{return v})`,我再then()中返回出去,让外部承接
+  console.log(data)  //获得正确的值
+   /** 
+    * 打印结果{ id: 1000,course_name: '这是请求数据1', autor: '袁明', college: '金并即总变史',category_Id: 2}
+    *  */
+
+  //模拟新增数据,将上一步的结果简单加工一下
+   data.course_name=data.course_name+1
+ $http({
+   url:"/test",
+   method:"put",
+   data
+ }).then(v=>{
+   console.log(v)  //直接打印了 需要再取出参照上一步
+ })
+
+};
+resolveCommon()  //调用普通promise函数
+resolveAsync()    //调用await+async
+
+```
+

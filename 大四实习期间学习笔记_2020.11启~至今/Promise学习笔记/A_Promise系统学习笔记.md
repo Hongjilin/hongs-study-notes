@@ -1503,10 +1503,6 @@ Promise.race = function (promises) {
 
 
 
-
-
-
-
 # 四、宏任务与微任务
 
 ## Ⅰ-说明

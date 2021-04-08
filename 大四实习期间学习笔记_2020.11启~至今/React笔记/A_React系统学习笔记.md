@@ -2,7 +2,7 @@
 >
 >建议预备知识:webpack、ajax、Promise、axios知识 
 
-# React系统学习笔记(`更新中 `)
+# React系统学习笔记
 
 ------
 
@@ -2920,7 +2920,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >   1. props：
 >      	(1).children props
->      	(2).render props
+>           	(2).render props
 >
 >   2. 消息订阅-发布：
 >      	pubs-sub、event等等

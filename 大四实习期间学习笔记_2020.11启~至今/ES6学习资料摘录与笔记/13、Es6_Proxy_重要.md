@@ -1,6 +1,6 @@
 # Proxy
 
-## 概述
+## Ⅰ-概述
 
 Proxy 用于修改某些操作的默认行为，等同于在语言层面做出修改，所以属于一种“元编程”（meta programming），即对编程语言进行编程。
 
@@ -8,6 +8,7 @@ Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界�
 
 ```javascript
 var obj = new Proxy({}, {
+   //拦截的对象,传入的对象属性,整个proxy对象
   get: function (target, propKey, receiver) {
     console.log(`getting ${propKey}!`);
     return Reflect.get(target, propKey, receiver);
@@ -139,7 +140,7 @@ fproxy.foo === "Hello, foo" // true
 - **apply(target, object, args)**：拦截 Proxy 实例作为函数调用的操作，比如`proxy(...args)`、`proxy.call(object, ...args)`、`proxy.apply(...)`。
 - **construct(target, args)**：拦截 Proxy 实例作为构造函数调用的操作，比如`new proxy(...args)`。
 
-## Proxy 实例的方法
+## Ⅱ-Proxy 实例的方法
 
 下面是上面这些拦截方法的详细介绍。
 
@@ -1047,7 +1048,7 @@ Object.setPrototypeOf(proxy, proto);
 
 注意，该方法只能返回布尔值，否则会被自动转为布尔值。另外，如果目标对象不可扩展（non-extensible），`setPrototypeOf()`方法不得改变目标对象的原型。
 
-## Proxy.revocable()
+## Ⅲ-Proxy.revocable()
 
 `Proxy.revocable()`方法返回一个可取消的 Proxy 实例。
 
@@ -1068,7 +1069,7 @@ proxy.foo // TypeError: Revoked
 
 `Proxy.revocable()`的一个使用场景是，目标对象不允许直接访问，必须通过代理访问，一旦访问结束，就收回代理权，不允许再次访问。
 
-## this 问题
+## Ⅳ-this 问题
 
 虽然 Proxy 可以代理针对目标对象的访问，但它不是目标对象的透明代理，即不做任何拦截的情况下，也无法保证与目标对象的行为一致。主要原因就是在 Proxy 代理的情况下，目标对象内部的`this`关键字会指向 Proxy 代理。
 
@@ -1166,7 +1167,7 @@ proxy.foo = 1
 
 上面例子中，`get()`和`set()`拦截函数内部的`this`，指向的都是`handler`对象。
 
-## 实例：Web 服务的客户端
+## Ⅴ-实例：Web 服务的客户端
 
 Proxy 对象可以拦截目标对象的任意属性，这使得它很合适用来写 Web 服务的客户端。
 
@@ -1192,3 +1193,201 @@ function createWebService(baseUrl) {
 ```
 
 同理，Proxy 也可以用来实现数据库的 ORM 层。
+
+## Ⅵ-Proxy实现双向绑定
+
+> `Proxy`就像一个代理器,当有人对目标对象进行处理(set、has、get 等等操作)的时候它会首先经过它，这时我们可以使用代码进行处理，此时`Proxy`相当于一个中介或者叫代理人,它经常被用于代理模式中,可以做字段验证、缓存代理、访问控制等等。
+
+### 1.`Object.defineProperty`
+
+>众所周知，`vue`使用了`Object.defineProperty`来做数据劫持，它是利用劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作
+>
+>```js
+>const obj = { a: 1 }
+>Object.defineProperty(obj, 'a', {
+>  get: function() {
+>    console.log('get val')
+>  },
+>  set: function(newVal) {
+>    console.log('set val:' + newVal)
+>  }
+>})
+>```
+
+### 2.与`Object.defineProperty`相比，`Proxy`的优势
+
+>1. 数组作为特殊的对象，但Object.defineProperty无法监听数组变化。
+>
+>2. Object.defineProperty只能劫持对象的属性,因此我们需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历,显然能劫持一个完整的对象是更好的选择。
+>
+>3. Proxy 有多达 13 种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是Object.defineProperty不具备的。
+>
+>4. Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而Object.defineProperty只能遍历对象属性直接修改
+>
+>5. Proxy作为新标准将受到浏览器厂商重点持续的性能优化
+
+### 3. 手写双向绑定代码
+
+>1. 简单实现双向绑定
+>
+>   ```js
+>   --------------------  html  ----------------------------
+>     <input id="input_el" oninput="inputHandle(this)" type="text">
+>     <br />
+>     <div id="show_el"></div>
+>   -------------------  js ------------------------------
+>   <script>
+>     proxy_bind = (traget) => {
+>       return new Proxy(traget, {
+>         get(obj, name) {
+>           console.log("获取")
+>           //如果传入的key并没有,则赋初始值
+>           if (!obj[name]) obj[name] = ""
+>           //根据传入的key进行相应属性返回
+>           return obj[name]
+>         },
+>         //拦截的对象,拦截对象的值,传入要修改的值,(第四个参数通常不用,返回整个Proxy对象)
+>         set(obj, name, val) {
+>           console.log("写入")
+>           obj[name] = val
+>           //将输入狂内容即修改的proxy对象属性渲染到页面节点上
+>           document.querySelector("#show_el").innerHTML = obj[name]
+>           return;
+>         }
+>       })
+>     }
+>     inputHandle = (e) => {
+>       //将输入框的值赋值给proxy对象的value属性上，此处触发proxy的`set（）`
+>       obj_bind.value = e.value
+>     }
+>   
+>     let obj = {
+>       a: "2",
+>       b: 3,
+>       value: "默认值"
+>     }
+>     let obj_bind = proxy_bind(obj)
+>     //自闭合，如果前面没有加分号 会导致压缩式合并到前面去就会报错，以防万一加分号，此处触发proxy的`get（）`
+>     ;
+>     (function () {
+>       document.querySelector("#show_el").innerHTML = obj_bind.value
+>       document.querySelector("#input_el").value = obj_bind.value
+>     })()
+>   </script>
+>   ```
+>
+>2. 模拟vue实现完整双向绑定实现
+>
+>   ```js
+>   --------------------  html  ----------------------------
+>   <div>
+>     <p>请输入:</p>
+>     <input type="text" id="input">
+>     <p id="p"></p>
+>   </div>
+>   -------------------  js ------------------------------
+>   class Watcher {
+>     constructor(vm, key, callback) {
+>       this.vm = vm
+>       this.callback = callback
+>       this.key = key // 被订阅的数据
+>       this.val = this.get() // 维护更新之前的数据
+>       vm.$data = this.createProxy(vm.$data)
+>     }
+>   
+>     update(newVal) {
+>       this.callback(newVal)
+>     }
+>     get() {
+>       const val = this.vm.$data[this.key]
+>       return val
+>     }
+>     createProxy(data) {
+>       let _this = this
+>       let handler = {
+>         get(target, property) {
+>           return Reflect.get(target, property)
+>         },
+>         set(target, property, value) {
+>           let res = null
+>           if (target[property] != value) {
+>             const isOk = Reflect.set(target, property, value)
+>             if (_this.key === property) {
+>               // 同一层级
+>               res = value
+>             } else {
+>               res = _this.get()
+>               console.log(res)
+>             }
+>             _this.callback(res)
+>             return isOk
+>           }
+>         }
+>       }
+>   
+>       return toDeepProxy(data, handler)
+>   
+>       function toDeepProxy(object, handler) {
+>         if (!isPureObject(object)) addSubProxy(object, handler)
+>         return new Proxy(object, handler)
+>   
+>         function addSubProxy(object, handler) {
+>           for (let prop in object) {
+>             if (typeof object[prop] == 'object') {
+>               if (!isPureObject(object[prop])) addSubProxy(object[prop], handler)
+>               object[prop] = new Proxy(object[prop], handler)
+>             }
+>           }
+>           object = new Proxy(object, handler)
+>         }
+>   
+>         function isPureObject(object) {
+>           if (typeof object !== 'object') {
+>             return false
+>           } else {
+>             for (let prop in object) {
+>               if (typeof object[prop] == 'object') {
+>                 return false
+>               }
+>             }
+>           }
+>           return true
+>         }
+>       }
+>     }
+>   }
+>   
+>   class Vue {
+>     constructor(data) {
+>       // 将所有data最外层属性代理到实例上
+>       this.$data = data
+>       Object.keys(data).forEach(key => this.$proxy(key))
+>     }
+>     $watch(key, cb) {
+>       new Watcher(this, key, cb)
+>     }
+>     $proxy(key) {
+>       Reflect.defineProperty(this, key, {
+>         configurable: true,
+>         enumerable: true,
+>         get: () => this.$data[key],
+>         set: val => {
+>           this._data[key] = val
+>         }
+>       })
+>     }
+>   }
+>   
+>   const p = document.getElementById('p')
+>   const input = document.getElementById('input')
+>   
+>   const data = new Vue({ text: { a: '' } })
+>   
+>   input.addEventListener('keyup', function(e) {
+>     data.text.a = e.target.value
+>   })
+>   
+>   data.$watch('text', content => p.innerHTML = content.a)
+>   
+>   ```
+

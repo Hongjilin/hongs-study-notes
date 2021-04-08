@@ -80,7 +80,7 @@
 
 #### Ⅲ-promise的基本流程
 
->![image-20210311093756594](C:\Users\Administrator\Desktop\笔记\笔记中图片\Promise系统学习_promise工作流程.png)
+>![Promise系统学习_promise工作流程](A_Promise系统学习笔记中的图片/Promise系统学习_promise工作流程.png)
 
 #### Ⅳ-promise的基本使用
 
@@ -247,7 +247,7 @@ mineReadFile('./resource/content.txt').then(value => {
 
 >回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调执行的条件
 >
-><img src="C:\Users\Administrator\Desktop\笔记\笔记中图片\Promise系统学习_回调地狱.jpg" alt="回调地狱"  />
+>![Promise系统学习_回调地狱](A_Promise系统学习笔记中的图片/Promise系统学习_回调地狱.jpg)
 
 ##### 	2、回调地狱的缺点?
 
@@ -1509,7 +1509,7 @@ Promise.race = function (promises) {
 
 >原理图:
 >
->![image-20210315143756816](C:\Users\Administrator\Desktop\笔记\笔记中图片\Promise系统学习_宏任务微任务原理图.png)
+>![Promise系统学习_宏任务微任务原理图](A_Promise系统学习笔记中的图片/Promise系统学习_宏任务微任务原理图.png)
 >
 >说明:
 >

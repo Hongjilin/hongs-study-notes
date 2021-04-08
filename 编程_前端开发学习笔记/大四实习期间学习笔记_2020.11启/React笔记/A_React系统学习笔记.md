@@ -1588,7 +1588,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ### Ⅳ-redux工作流程
 
->![image-20210326164505190](C:\Users\Administrator\Desktop\笔记\笔记中图片\React系统学习_Redux工作流程原理图.png)
+>![React系统学习_Redux工作流程原理图](A_React系统学习笔记中的图片/React系统学习_Redux工作流程原理图.png)
 
 ## 2、redux的三个核心概念
 

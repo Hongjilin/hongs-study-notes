@@ -74,7 +74,7 @@
 
 ## Ⅳ-原理图
 
-![image-20210318135249629](C:\Users\Administrator\Desktop\笔记\笔记中图片\Axios系统学习笔记原理图.png)
+![Axios系统学习笔记原理图](Axios入门与源码解析笔记中的图片/Axios系统学习笔记原理图.png)
 
 
 
@@ -302,7 +302,7 @@
 >
 >5. 流程图:
 >
->  ![image-20210318145208671](C:\Users\Administrator\Desktop\笔记\笔记中图片\Axios系统学习流程图.png)
+> ![Axios系统学习流程图](Axios入门与源码解析笔记中的图片/Axios系统学习流程图.png)
 >
 >
 

@@ -1,73 +1,61 @@
 # SassScript
 
-~~~
-在 CSS 属性的基础上 Sass 提供了一些名为 SassScript 的新功能。 SassScript 可作用于任何属性，允许属性使用变量、算数运算等额外功能。
-
-弱类型语言, 对语法要求没那么严格
-~~~
+>在 CSS 属性的基础上 Sass 提供了一些名为 SassScript 的新功能。 SassScript 可作用于任何属性，允许属性使用变量、算数运算等额外功能。
+>
+>弱类型语言, 对语法要求没那么严格
 
 
 
 ## 一、注释
 
-1. Sass 支持标准的 CSS 多行注释 `/* */`，以及单行注释 `//`，前者会被完整输出到编译后的 CSS 文件中，而后者则不会。
-
-2. 将 `!` 作为多行注释的第一个字符表示在压缩输出模式下保留这条注释并输出到 CSS 文件中，通常用于添加版权信息。
-
-3. 插值语句 (interpolation) 也可写进多行注释中输出变量值
-
-例如：
-
-~~~scss
-/* 
-	hello
-	world!
-*/
-
-// compile scss files to css
-// it's ready to do it.
-$pink: #f3e1e1;
-html{
-    background-color: $pink;
-}
-
-$author: 'gdream@126.com';
-/*!
-	Author: #{$author}.
-*/
-~~~
-
-开发模式编译后:
-
-~~~css
-/* 
-	hello
-	world!
-*/
-html{
-    background-color: #f3e1e1;
-}
-/*!
-	Author: 'gdream@126.com'.
-*/
-~~~
-
-压缩输出模式编译后：
-
-~~~css
-html{
-    background-color: #f3e1e1;
-}
-/*!
-	Author: 'gdream@126.com'.
-*/
-~~~
-
-
-
-
-
-
+>1. Sass 支持标准的 CSS 多行注释 `/* */`，以及单行注释 `//`，前者会被完整输出到编译后的 CSS 文件中，而后者则不会。
+>
+>2. 将 `!` 作为多行注释的第一个字符表示在压缩输出模式下保留这条注释并输出到 CSS 文件中，通常用于添加版权信息。
+>
+>3. 插值语句 (interpolation) 也可写进多行注释中输出变量值
+>
+>   例如：
+>
+>```scss
+>// compile scss files to css
+>// it's ready to do it.
+>$pink: #f3e1e1;
+>html{
+>    background-color: $pink;
+>}
+>
+>$author: 'gdream@126.com';
+>/*!
+>	Author: #{$author}.
+>*/
+>```
+>
+>开发模式编译后:
+>
+>~~~css
+>/* 
+>	hello
+>	world!
+>*/
+>html{
+>    background-color: #f3e1e1;
+>}
+>/*!
+>	Author: 'gdream@126.com'.
+>*/
+>~~~
+>
+>压缩输出模式编译后：
+>
+>~~~css
+>html{
+>    background-color: #f3e1e1;
+>}
+>/*!
+>	Author: 'gdream@126.com'.
+>*/
+>~~~
+>
 
 ------
 
@@ -75,7 +63,7 @@ html{
 
 ### 1.定义
 
-变量以美元符号开头，赋值方法与 CSS 属性的写法一样
+> 变量以美元符号开头，赋值方法与 CSS 属性的写法一样
 
 ~~~scss
 $width: 1600px;
@@ -84,7 +72,7 @@ $pen-size: 3em;
 
 ### 2.使用
 
-直接使用变量的名称即可调用变量
+> 直接使用变量的名称即可调用变量
 
 ~~~scss
 #app {
@@ -95,7 +83,7 @@ $pen-size: 3em;
 
 ### 3.作用域
 
-变量支持块级作用域，嵌套规则内定义的变量只能在嵌套规则内使用（局部变量），不在嵌套规则内定义的变量则可在任何地方使用（全局变量）。将局部变量转换为全局变量可以添加 `!global` 声明
+> 变量支持块级作用域，嵌套规则内定义的变量只能在嵌套规则内使用（局部变量），不在嵌套规则内定义的变量则可在任何地方使用（全局变量）。将局部变量转换为全局变量可以添加 `!global` 声明
 
 ~~~scss
 #foo {
@@ -130,27 +118,23 @@ $pen-size: 3em;
 
 ## 三、数据类型
 
-SassScript 支持 7 种主要的数据类型：
-
-- 数字，`1, 2, 13, 10px`
-- 字符串，有引号字符串与无引号字符串，`"foo", 'bar', baz`
-- 颜色，`blue, #04a3f9, rgba(255,0,0,0.5)`
-- 布尔型，`true, false`
-- 空值，`null`
-- 数组 (list)，用空格或逗号作分隔符，`1.5em 1em 0 2em, Helvetica, Arial, sans-serif`
-- maps, 相当于 JavaScript 的 object，`(key1: value1, key2: value2)`
-
-SassScript 也支持其他 CSS 属性值，比如 Unicode 字符集，或 `!important` 声明。然而Sass 不会特殊对待这些属性值，一律视为无引号字符串。
-
-
-
-判断数据类型的方式：`type-of($value)`
-
-
+>SassScript 支持 7 种主要的数据类型：
+>
+>- 数字，`1, 2, 13, 10px`
+>- 字符串，有引号字符串与无引号字符串，`"foo", 'bar', baz`
+>- 颜色，`blue, #04a3f9, rgba(255,0,0,0.5)`
+>- 布尔型，`true, false`
+>- 空值，`null`
+>- 数组 (list)，用空格或逗号作分隔符，`1.5em 1em 0 2em, Helvetica, Arial, sans-serif`
+>- maps, 相当于 JavaScript 的 object，`(key1: value1, key2: value2)`
+>
+>SassScript 也支持其他 CSS 属性值，比如 Unicode 字符集，或 `!important` 声明。然而Sass 不会特殊对待这些属性值，一律视为无引号字符串。
+>
+>判断数据类型的方式：`type-of($value)`
 
 ### 1.字符串 (Strings)
 
-SassScript 支持 CSS 的两种字符串类型：`有引号字符串 (quoted strings)`，和`无引号字符串 (unquoted strings)`。
+> SassScript 支持 CSS 的两种字符串类型：`有引号字符串 (quoted strings)`，和`无引号字符串 (unquoted strings)`。
 
 ~~~scss
 $name: 'Tom Bob';
@@ -164,7 +148,7 @@ $what: heart;
 
 ### 2.数字(Numbers)
 
-SassScript支持两种数字类型：`带单位数字`和`不带单位数字`。（可正可负可为零，可正可浮点）
+> SassScript支持两种数字类型：`带单位数字`和`不带单位数字`。（可正可负可为零，可正可浮点）
 
 ~~~scss
 $my-age: 19;
@@ -178,7 +162,7 @@ $height: 120px;
 
 ### 3.空值(Null)
 
-只有一个取值`null`
+> 只有一个取值`null`
 
 ~~~scss
 $value: null;
@@ -190,7 +174,7 @@ $value: null;
 
 ### 4.布尔型(Booleans)
 
-只有两个取值：`true`和`false`
+> 只有两个取值：`true`和`false`
 
 ~~~scss
 $a: true;
@@ -199,11 +183,9 @@ $b: false;
 // 注：只有自身是false和null才会返回false，其他一切都将返回true
 ~~~
 
-
-
 ### 5.数组 (Lists)
 
-通过空格或者逗号分隔的一系列的值。事实上，独立的值也被视为数组 —— 只包含一个值的数组。索引从`1`开始
+> 通过空格或者逗号分隔的一系列的值。事实上，独立的值也被视为数组 —— 只包含一个值的数组。索引从`1`开始
 
 ~~~scss
 $list0: 1px 2px 5px 6px;
@@ -211,19 +193,17 @@ $list1: 1px 2px, 5px 6px;
 $list2: (1px 2px) (5px 6px);
 ~~~
 
-数组中可以包含子数组，比如 `1px 2px, 5px 6px` 是包含 `1px 2px` 与 `5px 6px` 两个数组的数组。如果内外两层数组使用相同的分隔方式，需要用圆括号包裹内层，所以也可以写成 `(1px 2px) (5px 6px)`。变化是，之前的 `1px 2px, 5px 6px` 使用逗号分割了两个子数组 (comma-separated)，而 `(1px 2px) (5px 6px)` 则使用空格分割(space-separated)。
-
-当数组被编译为 CSS 时，Sass 不会添加任何圆括号（CSS 中没有这种写法），所以 `(1px 2px) (5px 6px)` 与 `1px 2px, 5px 6px` 在编译后的 CSS 文件中是完全一样的，但是它们在 Sass 文件中却有不同的意义，前者是包含两个数组的数组，而后者是包含四个值的数组。
-
-用 `()` 表示不包含任何值的空数组（在 Sass 3.3 版之后也视为空的 map）。空数组不可以直接编译成 CSS，比如编译 `font-family: ()` Sass 将会报错。如果数组中包含空数组或空值，编译时将被清除，比如 `1px 2px () 3px` 或 `1px 2px null 3px`。
-
-基于逗号分隔的数组允许保留结尾的逗号，这样做的意义是强调数组的结构关系，尤其是需要声明只包含单个值的数组时。例如 `(1,)` 表示只包含 `1` 的数组，而 `(1 2 3,)` 表示包含 `1 2 3` 这个以空格分隔的数组的数组。
-
-
+>数组中可以包含子数组，比如 `1px 2px, 5px 6px` 是包含 `1px 2px` 与 `5px 6px` 两个数组的数组。如果内外两层数组使用相同的分隔方式，需要用圆括号包裹内层，所以也可以写成 `(1px 2px) (5px 6px)`。变化是，之前的 `1px 2px, 5px 6px` 使用逗号分割了两个子数组 (comma-separated)，而 `(1px 2px) (5px 6px)` 则使用空格分割(space-separated)。
+>
+>当数组被编译为 CSS 时，Sass 不会添加任何圆括号（CSS 中没有这种写法），所以 `(1px 2px) (5px 6px)` 与 `1px 2px, 5px 6px` 在编译后的 CSS 文件中是完全一样的，但是它们在 Sass 文件中却有不同的意义，前者是包含两个数组的数组，而后者是包含四个值的数组。
+>
+>用 `()` 表示不包含任何值的空数组（在 Sass 3.3 版之后也视为空的 map）。空数组不可以直接编译成 CSS，比如编译 `font-family: ()` Sass 将会报错。如果数组中包含空数组或空值，编译时将被清除，比如 `1px 2px () 3px` 或 `1px 2px null 3px`。
+>
+>基于逗号分隔的数组允许保留结尾的逗号，这样做的意义是强调数组的结构关系，尤其是需要声明只包含单个值的数组时。例如 `(1,)` 表示只包含 `1` 的数组，而 `(1 2 3,)` 表示包含 `1 2 3` 这个以空格分隔的数组的数组。
 
 ### 6.映射(Maps)
 
-Maps必须被圆括号包围，可以映射任何类型键值对（任何类型，包括内嵌maps，不过不推荐这种内嵌方式）
+> Maps必须被圆括号包围，可以映射任何类型键值对（任何类型，包括内嵌maps，不过不推荐这种内嵌方式）
 
 ~~~scss
 $map: ( 
@@ -233,13 +213,11 @@ $map: (
 )
 ~~~
 
-
-
 ### 7.颜色 (Colors)
 
-CSS原有颜色类型，十六进制、RGB、RGBA、HSL、HSLA和色彩单词
-
-SCSS提供了内置Colors函数，从而更方便地使用颜色
+>CSS原有颜色类型，十六进制、RGB、RGBA、HSL、HSLA和色彩单词
+>
+>SCSS提供了内置Colors函数，从而更方便地使用颜色
 
 ~~~scss
 $color0: green;
@@ -252,21 +230,15 @@ $color5: (green + red);
 
 
 
-
-
-
-
-
-
 ------
 
 ## 四、运算
 
 ### 1.数字运算符
 
-SassScript 支持数字的加减乘除、取整等运算 (`+, -, *, /, %`)，如果必要会在不同单位间转换值
-
-如果要保留运算符号，则应该使用插值语法
+>SassScript 支持数字的加减乘除、取整等运算 (`+, -, *, /, %`)，如果必要会在不同单位间转换值
+>
+>如果要保留运算符号，则应该使用插值语法
 
 - `+`
 
@@ -356,9 +328,9 @@ SassScript 支持数字的加减乘除、取整等运算 (`+, -, *, /, %`)，如
 
 ### 2.关系运算符
 
-大前提：两端必须为`数字` 或 `前部分数字后部分字符`
-
-返回值：`true` or `false`
+>大前提：两端必须为`数字` 或 `前部分数字后部分字符`
+>
+>返回值：`true` or `false`
 
 
 - `>`
@@ -389,9 +361,9 @@ SassScript 支持数字的加减乘除、取整等运算 (`+, -, *, /, %`)，如
 
 ### 3.相等运算符
 
-作用范围：相等运算 `==, !=` 可用于所有数据类型
-
-返回值：`true` or `false`
+>作用范围：相等运算 `==, !=` 可用于所有数据类型
+>
+>返回值：`true` or `false`
 
 ~~~scss
 $a: 1 == 1px; // true
@@ -407,7 +379,7 @@ $b: "a" == a; // true
 
 ### 4.布尔运算符
 
-SassScript 支持布尔型的 `and` `or` 以及 `not` 运算。
+> SassScript 支持布尔型的 `and` `or` 以及 `not` 运算。
 
 ~~~scss
 $a: 1>0 and 0>=5; // fasle
@@ -422,7 +394,7 @@ $a: 1>0 and 0>=5; // fasle
 
 ### 5.颜色值运算
 
-颜色值的运算是分段计算进行的，也就是分别计算红色，绿色，以及蓝色的值
+> 颜色值的运算是分段计算进行的，也就是分别计算红色，绿色，以及蓝色的值
 
 - `颜色值与颜色值`
 
@@ -471,25 +443,11 @@ $a: 1>0 and 0>=5; // fasle
 2. `+`、`-`
 3. `>` 、`<`、`>=`、`<=`
 
-
-
-
-
-
-
-
-
 ------
 
 ## 五、嵌套语法
 
-
-
-
-
-
-
-
+> 此部分不计入笔记
 
 ------
 
@@ -572,30 +530,22 @@ $new_content: "First time reference" !default;
 
 
 
-
-
-
-
-
-
-
-
 ------
 
 ## 七、@-Rules与指令
 
 ### 1.`@import`
 
-Sass 拓展了 `@import` 的功能，允许其导入 SCSS 或 SASS 文件。被导入的文件将合并编译到同一个 CSS 文件中，另外，被导入的文件中所包含的变量或者混合指令 (mixin) 都可以在导入的文件中使用。
-
-通常，`@import` 寻找 Sass 文件并将其导入，但在以下情况下，`@import` 仅作为普通的 CSS 语句，不会导入任何 Sass 文件。
-
-- 文件拓展名是 `.css`；
-- 文件名以 `http://` 开头；
-- 文件名是 `url()`；
-- `@import` 包含 media queries。
-
-如果不在上述情况内，文件的拓展名是 `.scss` 或 `.sass`，则导入成功。没有指定拓展名，Sass 将会试着寻找文件名相同，拓展名为 `.scss` 或 `.sass` 的文件并将其导入。
+>Sass 拓展了 `@import` 的功能，允许其导入 SCSS 或 SASS 文件。被导入的文件将合并编译到同一个 CSS 文件中，另外，被导入的文件中所包含的变量或者混合指令 (mixin) 都可以在导入的文件中使用。
+>
+>通常，`@import` 寻找 Sass 文件并将其导入，但在以下情况下，`@import` 仅作为普通的 CSS 语句，不会导入任何 Sass 文件。
+>
+>- 文件拓展名是 `.css`；
+>- 文件名以 `http://` 开头；
+>- 文件名是 `url()`；
+>- `@import` 包含 media queries。
+>
+>如果不在上述情况内，文件的拓展名是 `.scss` 或 `.sass`，则导入成功。没有指定拓展名，Sass 将会试着寻找文件名相同，拓展名为 `.scss` 或 `.sass` 的文件并将其导入。
 
 ~~~scss
 @import "foo.scss";
@@ -610,13 +560,13 @@ Sass 拓展了 `@import` 的功能，允许其导入 SCSS 或 SASS 文件。被�
 @import url(foo);
 ~~~
 
-Sass 允许同时导入多个文件，例如同时导入 rounded-corners 与 text-shadow 两个文件：
+> Sass 允许同时导入多个文件，例如同时导入 rounded-corners 与 text-shadow 两个文件：
 
 ~~~scss
 @import "rounded-corners", "text-shadow";
 ~~~
 
-导入文件也可以使用 `#{ }` 插值语句，但不是通过变量动态导入 Sass 文件，只能作用于 CSS 的 `url()` 导入方式：
+> 导入文件也可以使用 `#{ }` 插值语句，但不是通过变量动态导入 Sass 文件，只能作用于 CSS 的 `url()` 导入方式：
 
 ~~~scss
 $family: unquote("Droid+Sans");
@@ -626,15 +576,14 @@ $family: unquote("Droid+Sans");
 @import url("http://fonts.googleapis.com/css?family=Droid+Sans");
 ~~~
 
-如果你有一个 SCSS 或 Sass 文件需要引入， 但是你又不希望它被编译为一个 CSS 文件， 这时，你就可以在文件名前面加一个下划线，就能避免被编译。 这将告诉 Sass 不要把它编译成 CSS 文件。 然后，你就可以像往常一样引入这个文件了，而且还可以省略掉文件名前面的下划线。
-
-除此之外，还支持嵌套 @import,但是不可以在混合指令 (mixin) 或控制指令 (control directives) 中嵌套 `@import`。
-
-
+>如果你有一个 SCSS 或 Sass 文件需要引入， 但是你又不希望它被编译为一个 CSS 文件， 这时，你就可以在文件名前面加一个下划线，就能避免被编译。 这将告诉 Sass 不要把它编译成 CSS 文件。 然后，你就可以像往常一样引入这个文件了，而且还可以省略掉文件名前面的下划线。
+>
+>除此之外，还支持嵌套 @import,但是不可以在混合指令 (mixin) 或控制指令 (control directives) 中嵌套 `@import`。
+>
 
 ### 2.`@media`
 
-Sass 中 `@media` 指令与 CSS 中用法一样，只是增加了一点额外的功能：允许其在 CSS 规则中嵌套。如果 `@media` 嵌套在 CSS 规则内，编译时，`@media` 将被编译到文件的最外层，包含嵌套的父选择器。这个功能让 `@media` 用起来更方便，不需要重复使用选择器，也不会打乱 CSS 的书写流程。
+> Sass 中 `@media` 指令与 CSS 中用法一样，只是增加了一点额外的功能：允许其在 CSS 规则中嵌套。如果 `@media` 嵌套在 CSS 规则内，编译时，`@media` 将被编译到文件的最外层，包含嵌套的父选择器。这个功能让 `@media` 用起来更方便，不需要重复使用选择器，也不会打乱 CSS 的书写流程。
 
 ~~~scss
 .sidebar {
@@ -652,7 +601,7 @@ Sass 中 `@media` 指令与 CSS 中用法一样，只是增加了一点额外的
 }
 ~~~
 
-`@media`的 queries 允许互相嵌套使用，编译时，Sass 自动添加 `and`
+> `@media`的 queries 允许互相嵌套使用，编译时，Sass 自动添加 `and`
 
 ~~~scss
 @media screen {
@@ -668,7 +617,7 @@ Sass 中 `@media` 指令与 CSS 中用法一样，只是增加了一点额外的
     width: 500px; } }
 ~~~
 
-`@media` 甚至可以使用 SassScript（比如变量，函数，以及运算符）代替条件的名称或者值
+> `@media` 甚至可以使用 SassScript（比如变量，函数，以及运算符）代替条件的名称或者值
 
 ~~~scss
 $media: screen;
@@ -690,9 +639,9 @@ $value: 1.5;
 
 ### 3.`*@extend`
 
-`@extend`即`继承`。在设计网页的时候常常遇到这种情况：一个元素使用的样式与另一个元素完全相同，但又添加了额外的样式。
-
-总的来看：支持层叠继承、多继承、允许延伸任何定义给单个元素的选择器（但是允许不一定好用）
+>`@extend`即`继承`。在设计网页的时候常常遇到这种情况：一个元素使用的样式与另一个元素完全相同，但又添加了额外的样式。
+>
+>总的来看：支持层叠继承、多继承、允许延伸任何定义给单个元素的选择器（但是允许不一定好用）
 
 a. `基本延伸`
 
@@ -708,7 +657,7 @@ a. `基本延伸`
 // 上面代码的意思是将 .error 下的所有样式继承给 .seriousError，border-width: 3px; 是单独给 .seriousError 设定特殊样式，这样，使用 .seriousError 的地方可以不再使用 .error。
 ~~~
 
-`@extend` 的作用是将重复使用的样式 (`.error`) 延伸 (extend) 给需要包含这个样式的特殊样式（`.seriousError`）
+> `@extend` 的作用是将重复使用的样式 (`.error`) 延伸 (extend) 给需要包含这个样式的特殊样式（`.seriousError`）
 
 注意理解以下情况：
 
@@ -735,7 +684,7 @@ a. `基本延伸`
   border-width: 3px; }
 ~~~
 
-当合并选择器时，`@extend` 会很聪明地避免无谓的重复，`.seriousError.seriousError` 将编译为 `.seriousError`，不能匹配任何元素的选择器也会删除。
+> 当合并选择器时，`@extend` 会很聪明地避免无谓的重复，`.seriousError.seriousError` 将编译为 `.seriousError`，不能匹配任何元素的选择器也会删除。
 
 
 
@@ -835,14 +784,15 @@ g.  `%placeholder`为选择器占位符，配合`@extend-Only选择器`使用。
 ### 4.`@at-root`
 
 > The @at-root directive causes one or more rules to be emitted at the root of the document, rather than being nested beneath their parent selectors. It can either be used with a single inline selector
-
-译文：@at root指令使一个或多个规则在文档的根发出，而不是嵌套在其父选择器下。它可以与单个内联选择器一起使用
-
-且@at-root 使多个规则跳出嵌套
-
-@at-root默认情况下并不能使规则或者选择器跳出指令，通过使用without和with可以解决该问题
-
-了解即可
+>
+> 译文：@at root指令使一个或多个规则在文档的根发出，而不是嵌套在其父选择器下。它可以与单个内联选择器一起使用
+>
+> 且@at-root 使多个规则跳出嵌套
+>
+> @at-root默认情况下并不能使规则或者选择器跳出指令，通过使用without和with可以解决该问题
+>
+> 了解即可
+>
 
 
 
@@ -883,12 +833,6 @@ $size: 9px;
 | 5    | @debug   | 用于调试，按标准错误输出流输出     |
 | 6    | @warn    | 用于警告，按标准错误输出流输出     |
 | 7    | @error   | 用于报错，按标准错误输出流输出     |
-
-
-
-
-
-
 
 
 
@@ -1124,12 +1068,6 @@ $i: 6;
 
   
 
-
-
-
-
-
-
 -----
 
 ## 九、混合指令
@@ -1295,7 +1233,9 @@ html .logo {
 
 
 
+### 5.混合指令用例
 
+>![混合指令用例](A_SassScript语法学习笔记中的图片/混合指令用例.png)
 
 
 
@@ -1474,8 +1414,6 @@ a. @extend、@Mixin和@function的选择
 
 
 
-
-
 **所以@extend我们就尽量不要使用了，而@Mixin和@function的差别在定义和使用上**
 
 
@@ -1484,16 +1422,21 @@ a. @extend、@Mixin和@function的选择
 >
 > 使用方式不同：`@mixin` 使用`@include`引用，而 `@function` 使用小括号执行函数。
 
-
-
-
-
-
-
 ### 2.展望
 
->
->
 >以上内容算是"基础"部分，但是对于日常开发，我觉得是足够使用的了。
 >
 >如果想要进一步了解，就必须先去学习下Ruby，使用Ruby相关模块进行更丰富地学习
+
+
+
+
+
+## 十二、项目中实战
+
+### Ⅰ-Scss混入
+
+>在工作中提出的对于同事代码的优化-->使用`sass混合指令知识`,方便后期维护
+>
+>![混合指令用例](A_SassScript语法学习笔记中的图片/混合指令用例.png)
+

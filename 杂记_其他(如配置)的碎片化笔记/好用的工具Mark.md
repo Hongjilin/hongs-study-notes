@@ -1,0 +1,54 @@
+# 好用的工具或者依赖
+
+> 此笔记Mark觉得好的工具或者依赖,方便他人也是防止自己忘记
+
+## 1、serve 前端依赖
+
+> 让你免写nodejs服务器代码,直接将代码作为静态资源暴露出去
+>
+> `npm i serve -g` -->`serve -s build` 启动服务器，将build目录下所有资源作为静态资源暴露出去
+
+## 2、Markdown Shortcuts
+
+>`vscode`预览md插件
+>
+>打开vscode商店,搜索`Markdown Shortcuts`,点击安装
+>
+>安装完毕，重启VSCode，然后打开.md文件。`Ctrl + Shift + V`，即可预览。然后双击相应位置即可修改对应内容
+
+## 3、uTools 
+
+> 官网链接:[官网链接](https://u.tools/)
+>
+> uTools 是一个极简、插件化、跨平台的现代桌面软件。通过自由选配丰富的插件，打造你得心应手的工具集合。
+>
+> 通过快捷键（默认 `alt + space` ）就可以快速呼出这个搜索框。它相当聪明，你可以往输入框内粘贴文本、图片、截图、文件、文件夹等等，能够处理此内容的插件也早已准备就绪，统一的设计风格和操作方式，助你高效的得到结果。
+>
+> 一旦你熟悉它后，除了能够为你节约大量时间，不中断、无干扰，让你可以更加专注地改变世界。
+>
+> 最简单的，uTools 可以作为一个程序快速启动器，支持英文、英文驼峰、中文拼音、拼音首字母来打开你的本地程序。除程序外， win10 和 macOS 用户还可以快速搜索并打开「控制面板」内的细项。总之，你只要还记得一个大概的名字，直接输入基本都能找到。
+
+## 4、json-server
+
+>1. 作为一个前端开发工程师，在后端还没有ready的时候，不可避免的要使用mock的数据。很多时候，我们并不想使用简单的静态数据，而是希望自己起一个本地的mock-server来完全模拟请求以及请求回来的过程。json-server是一个很好的可以替我们完成这一工作的工具。我们只需要提供一个json文件，或者写几行简单的js脚本就可以模拟出RESTful API的接口。
+>2. 安装json-server
+>    `npm install -g json-server`
+>3. 创建db.json
+>    在一个文件夹下新建一个db.json文件
+>
+>```json
+>{
+> "posts": [
+>   { "id": 1, "title": "json-server", "author": "typicode" }
+> ],
+> "comments": [
+>   { "id": 1, "body": "some comment", "postId": 1 }
+> ],
+> "profile": { "name": "typicode" }
+>}
+>```
+>
+>4. 启动json-server
+>    在当前文件夹下输入如下命令：`json-server db.json`
+>5. [文档](https://github.com/typicode/json-server)
+

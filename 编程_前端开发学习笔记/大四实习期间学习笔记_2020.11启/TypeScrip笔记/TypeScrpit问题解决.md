@@ -229,7 +229,38 @@ declare module "*.json"
     icon.className=IconStyles.iconfont+" "+IconStyles.icon_shoucang1
 ```
 
+## 10、赋值时间格式报错
 
+>Type `'any[]' is not assignable to type '[Moment, Moment]'`.Target requires 2 element(s) but source may have fewer.
+>
+>![image-20210412191035956](TypeScrpit问题解决中的图片/image-20210412191035956.png)
+>
+>解决
+>
+>```tsx
+>interface ISearchParams {
+>  keyword:any,
+>  customerId:any,
+>  resDate: [Moment, Moment],
+>  buyDate:[Moment, Moment],
+>  format:string,
+>  loading:boolean
+>}
+>
+>class Store {
+>  @observable datas = [];
+>  @observable searchParams:ISearchParams = {
+>    keyword: '',
+>    customerId: '',
+>    resDate:[undefined, undefined],
+>    buyDate: [undefined, undefined],
+>    format: 'YYYY-MM-DD',  
+>    loading: false,
+>  };
+>}
+>```
+>
+>
 
 
 

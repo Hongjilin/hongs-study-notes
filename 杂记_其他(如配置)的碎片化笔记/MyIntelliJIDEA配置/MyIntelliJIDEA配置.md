@@ -30,9 +30,21 @@
 
 ### Ⅲ-设置类注释
 
+### Ⅳ-格式化
 
+> 修改keymap:  reformat Code -->"`Ctrl+Shift+f`"
 
+### Ⅴ-取消按下两次`shift` 弹出全局搜索
 
+>1. 打开IDE  按快捷键 `Ctrl+Shift+A`或者`连续两次shift`  输入 registry 进入软件注册表，
+>
+>   ![image-20210413162815050](MyIntelliJIDEA配置中的图片/image-20210413162815050.png)
+>
+>2. 进入之后找到 ide.suppress.double.click.handler 打上勾 ，然后直接点右下角 close,`不要点restory defaults`(论英文的重要性！！！  我点错了好几次才知道那叫恢复默认！！！)  到此--》取消OK！
+>
+>   ![image-20210413162855433](MyIntelliJIDEA配置中的图片/image-20210413162855433.png)
+>
+>3. 然后设置快捷键  打开设置，找到keymap  ，找到`search everywhere`,右键第一个选项 然后根据喜好按键盘或者按组合键就会自动设置进去,本人是`shift+ALT+P`
 
 
 

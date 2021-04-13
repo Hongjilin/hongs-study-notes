@@ -1,6 +1,8 @@
 >本笔记为观看B站的: [`尚硅谷Java数据结构与java算法（Java数据结构与算法）`](https://www.bilibili.com/video/BV1E4411H73v?share_source=copy_web)进行整理记录
 >
->仅为本人洪学习使用
+>本人目前岗位为前端,但有较好的java基础,所以选定该学习视频   
+>
+>仅本人洪学习使用
 >
 >​									记录时间:2020/4/12启
 
@@ -177,5 +179,323 @@
 >4) 代码实现
 >
 >```java
->//休息休息,下周再学,学不动了
+>package com;
+>public class SparseArray {
+>    public static void main(String[] args) {
+>        //创建一个原始的二维数组11*11
+>        /* 0:表示没有棋子,1表示黑子,2表示蓝子 */
+>        int chessArr1[][] = new int[11][11];
+>        chessArr1[1][2] = 1;
+>        chessArr1[2][3] = 2;
+>        chessArr1[5][5] = 2;
+>        //输出原始的二维数组
+>        System.out.println("原始的二维数组");
+>        for (int[] row : chessArr1) {
+>            for (int data : row) {
+>                System.out.printf("%d\t", data);
+>            }
+>            System.out.println();
+>        }
+>        //将二维数组转稀疏数组
+>        //1.先遍历二维数组,得到非0数据的个数
+>        int sum = 0;
+>        for (int i = 0; i < 11; i++) {
+>            for (int j = 0; j < 11; j++) {
+>                if (chessArr1[i][j] != 0) sum++;
+>            }
+>        }
+>        //创建对应的稀疏数组
+>        int sparseArr[][] = new int[sum + 1][3];
+>        //给稀疏数组赋值  -->存行列长度,有效数据
+>        sparseArr[0][0] = 11;
+>        sparseArr[0][1] = 11;
+>        sparseArr[0][2] = sum;
+>        //遍历二维数组,
+>        int count = 0;//给稀疏数组当计数器
+>        for (int i = 0; i < 11; i++) {
+>            for (int j = 0; j < 11; j++) {
+>                //当数组中遇到不为0时,给稀疏数组插入(push同效果):行 列 有效数
+>                if (chessArr1[i][j] != 0) {
+>                    count++;
+>                    sparseArr[count][0] = i;
+>                    sparseArr[count][1] = j;
+>                    sparseArr[count][2] = chessArr1[i][j];
+>                }
+>            }
+>        }
+>        System.out.println("有效数据" + sum);
+>        //输出稀疏数组的形式
+>        System.out.println("'得到稀疏数组为~~'");
+>        for (int i = 0; i < sparseArr.length; i++) {
+>            System.out.printf("%d\t%d\t%d\t\n", sparseArr[i][0], sparseArr[i][1], sparseArr[i][2]);
+>        }
+>        System.out.println("将稀疏数组回复成原始的二维数组");
+>        //1. 先读取稀疏数组的第一行,根据第一行的数据,创建原始的二维数组
+>        int chessArr2[][] = new int[sparseArr[0][0]][sparseArr[0][1]];
+>        //2. 在读稀疏数组后几行的数据(从第二行开始,所以i=1),并赋值给原始的二维数组即可
+>        for (int i = 1; i < sparseArr.length; i++) {
+>            chessArr2[sparseArr[i][0]][sparseArr[i][1]] = sparseArr[i][2];
+>        }
+>        //输出恢复后的二维数组
+>        System.out.println("输出恢复后的二维数组");
+>        for (int[] row : chessArr2) {
+>            for (int data : row) {
+>                System.out.printf("%d\t", data);
+>            }
+>            System.out.println();
+>        }
+>    }
+>}
 >```
+>
+>5) 练习 要求： 1) 在前面的基础上，将稀疏数组保存到磁盘上，比如 map.data 2) 恢复原来的数组时，读取 map.data 进行恢复
+
+### 2、队列
+
+#### Ⅰ-队列介绍
+
+>1) 队列是一个有序列表，可以用数组或是链表来实现。 
+>
+>2) 遵循先入先出的原则。即：先存入队列的数据，要先取出。后存入的要后取出
+>
+>![image-20210413170353329](A_数据结构与算法(Java)学习笔记中的图片/image-20210413170353329.png)
+
+#### Ⅱ-数组模拟队列
+
+>1. 队列本身是有序列表，若使用数组的结构来存储队列的数据，则队列数组的声明如上图, 其中 maxSize 是该队列的最大容量。 
+>
+>2. 因为队列的输出、输入是分别从前后端来处理，因此需要两个变量 front 及 rear 分别记录队列前后端的下标， front 会随着数据输出而改变，而 rear 则是随着数据输入而改变，如队列介绍中图所示
+>
+>3. 当我们将数据存入队列时称为”addQueue”，addQueue 的处理需要有两个步骤：思路分析:
+>
+>   1) 将尾指针往后移：rear+1 , 当 front == rear 【空】 
+>
+>   2) 若尾指针 rear 小于队列的最大下标 maxSize-1，则将数据存入 rear 所指的数组元素中，否则无法存入数据
+>
+>4. `注意`:front并没有直接指向数据,而是数据前一位,所以当你要用front读取队列头时需要`front+1`
+>
+>5. 代码实现
+>
+>   ```java
+>   package com.queue;
+>   import java.util.Scanner;
+>   
+>   public class ArrayQueueDemo {
+>       public static void main(String[] args) {
+>           //创建一个队列
+>           ArrayQueue queue = new ArrayQueue(3);
+>           char key = ' ';//接受用户输入
+>           Scanner scanner = new Scanner(System.in);
+>           boolean loop = true;
+>           //输出一个菜单
+>           while (loop) {
+>               System.out.println("s(show):显示队列");
+>               System.out.println("e(exit):退出程序");
+>               System.out.println("a(add):添加数据到队列");
+>               System.out.println("g(get):从队列取出数据");
+>               System.out.println("h(head):查看队列头的数据");
+>               key = scanner.next().charAt(0);//接受一个字符
+>               switch (key) {
+>                   case 's':
+>                       queue.showQueue();
+>                       break;
+>                   case 'a':
+>                       System.out.println("输入一个数字");
+>                       int value = scanner.nextInt(); //不用再new一个新得scanner
+>                       queue.addQueue(value);
+>                       break;
+>                   case 'g':
+>                       try {
+>                           int res = queue.getQueue();
+>                           System.out.printf("取出的数据是%d\n", res);
+>                       } catch (Exception e) {
+>                           System.out.println(e.getMessage());
+>                       }
+>   
+>                       break;
+>                   case 'h':
+>                       try {
+>                           int head = queue.headQueue();
+>                           System.out.printf("表头是%d\n", head);
+>                       } catch (Exception e) {
+>                           System.out.println(e.getMessage());
+>                       }
+>                       break;
+>                   default:
+>                       scanner.close();//关闭不释放会有异常
+>                       loop = false;
+>                       break;
+>               }
+>           }
+>           System.out.println("程序退出");
+>       }
+>   }
+>   
+>   //使用数组模拟队列-编写一个ArrayQueue类
+>   class ArrayQueue {
+>       private int maxSize;//表示数组的最大容量
+>       private int front; //队列头
+>       private int rear;//队列尾
+>       private int[] arr; //该数据用于存放数据,模拟队列
+>   
+>       //创建队列的构造器
+>       public ArrayQueue(int arrMaxSize) {
+>           maxSize = arrMaxSize;
+>           arr = new int[maxSize];
+>           front = -1;//指向队列头部,分析出front是只想队列头的前一个位置
+>           rear = -1;//只想队列尾部,只想队列尾部数据(即队列最后一个数据)
+>       }
+>   
+>       //1. 判断队列是否满
+>       public boolean isFull() {
+>           return rear == maxSize - 1; //当队列为指向数组最后一位时就是队列满
+>       }
+>   
+>       //2. 判断队列是否为空
+>       public boolean isEmpty() {
+>           return rear == front; //当队列头与尾部相等时,说明该队列没有值了
+>       }
+>   
+>       //3. 添加数据到队列
+>       public void addQueue(int n) {
+>           //判断队列是否满
+>           if (isFull()) {
+>               System.out.println("队列满,不能加入数据~~~~~~");
+>               return;
+>           }
+>           rear++; //让rear 往后移动一位
+>           arr[rear] = n; //以后移后的rear作为数组下标进行赋值
+>       }
+>   
+>       //4. 获取队列的数据,出队列
+>       public int getQueue() {
+>           //判断队列是否为空//抛出异常
+>           if (isEmpty()) throw new RuntimeException("队列为空,不能取数据");
+>           front++; //front后移 出队列
+>           return arr[front];
+>       }
+>   
+>       //5. 显示队列的所有数据
+>       public void showQueue() {
+>           //遍历
+>           if (isEmpty()) {
+>               System.out.println("队列空的 没有数据");
+>               return;
+>           }
+>           for (int i = 0; i < arr.length; i++) {
+>               System.out.printf("arr[%d]=%d\n", i, arr[i]);
+>           }
+>       }
+>   
+>       //显示队列的头数据,注意不是取出数据
+>       public int headQueue() {
+>           //判断
+>           if (isEmpty())  throw new RuntimeException("队列空的,没有数据~~~~");
+>           return arr[front + 1]; //front并没有直接指向数据,而是数据前一位,所以需要+1
+>       }
+>   
+>   }
+>   ```
+>
+>6. 问题分析与优化方向:
+>
+>   1) 目前数组使用一次就不能用， 没有达到复用的效果.
+>
+>   ​	`原因`:取出数据时是将列表头(`front++`)向后移动,导致队列前面的空间并没有被释放,如上图第三个队列示例图 
+>
+>   2) 将这个数组使用算法，改进成一个环形的队列 取模：%
+
+#### Ⅲ-数组模拟环形队列思路分析
+
+>1. 对前面的数组模拟队列的优化，充分利用数组. 因此将数组看做是一个环形的。(通过取模的方式来实现即可)
+>
+>2. 分析说明:
+>
+>   1. 尾索引的下一个为头索引时表示队列满，即将队列容量空出一个作为约定,这个在做判断队列满的 时候需要注意 (rear + 1) % maxSize == front 满]
+>
+>   2.  rear == front [空]
+>
+>   3. 思路分析示例图3-2-3-1
+>
+>      ![image-20210413180656594](A_数据结构与算法(Java)学习笔记中的图片/image-20210413180656594.png)
+>
+>3. 环形队列示例图
+>
+>   ![image-20210413180729037](A_数据结构与算法(Java)学习笔记中的图片/image-20210413180729037.png)
+
+#### Ⅳ-个人对于环形队列的理解与总结
+
+>个人对于思路分析示例图3-2-3-1理解与总结:
+>
+>1. `rear`初始化为0:因为当队列为空时,`rear`队列尾应是指向`-1`位置,因为整个队列是空的
+>
+>   所以符合调整:rear指向队列的最后一个元素的后一个位置,可以留出一个空间作为约定(用来`判断是队空还是队满`)
+>
+>2. `front`初始化为0:因为要指向队列第一个位置,所以为0
+>
+>3. 队列满条件:`(rear+1)%maxSize==font`-->原理如环形队列示例图
+>
+>   当`(rear+1)%maxSize==font`时,队列情况如环形队列示例图右边部分 -->例: (4+1)%10==5
+>
+>4. 队列为空`rear==front`:假使你队列曾经加到8个数据,所以你`rear==8`,但当你将队列一个一个取出时front发生如下变化:`front==0-->front++*n-->front==8`,所以当front==rear==8时,就可以判断队列为空
+>
+>5. 队列的有效数据个数:`(rear+maxSize-font)%maxSize` -->
+>
+>   1)提出疑惑:为什么要先加`maxSize`-->可能出现队尾rear小于队首front的情况
+>
+>    通过这个环形队列图(里面数字是`数组下标`不是数据)你应该可以很容易理解:假使队列长8、队尾在2的位置、队首在6的位置
+>
+>     解决:如图所示
+>
+>   ![image-20210413184647572](A_数据结构与算法(Java)学习笔记中的图片/image-20210413184647572.png)
+>
+>   2)再次提出疑惑:老铁!!!我看图上`6~2`,甚至还用手指去数,明明就是五个数据啊!为什么还能算成`4`?
+>
+>     解:注意`rear`的定义:rear指向队列的最后一个元素的后一个位置,所以这时候最后一个队列数据是在`1`的位置,所以`6~1`是4位
+
+#### Ⅴ-环形队列代码实现
+
+>```java
+>//休息休息,快答辩了
+>```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

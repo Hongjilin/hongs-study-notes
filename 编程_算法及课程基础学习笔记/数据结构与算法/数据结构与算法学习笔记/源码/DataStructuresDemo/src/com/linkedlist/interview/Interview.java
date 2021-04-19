@@ -11,7 +11,7 @@ public class Interview {
         //先创建节点对象,一个节点就是一个节点英雄
         HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
         HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
-        HeroNode hero3 = new HeroNode(3, "吴用", "智多星");
+        HeroNode hero3 = new HeroNode(5, "洪吉林", "帅哥");
         HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
         HeroNode hero5 = new HeroNode(5, "洪吉林", "帅哥");
         HeroNode hero6 = new HeroNode(6, "努力学习的汪", "好学生");
@@ -31,44 +31,88 @@ public class Interview {
         singleLinkedList.addByOrder(hero4);
 //        singleLinkedList.addByOrder(hero4);
         singleLinkedList.addByOrder(hero7);
-//        singleLinkedList.list();
-//        System.out.println("两个链表分界线");
+        singleLinkedList.list();
+        System.out.println("两个链表分界线");
 
         //-----------课后作业:第二个链表-----------------------
         singleLinkedList1.addByOrder(hero2);
         singleLinkedList1.addByOrder(hero5);
         singleLinkedList1.addByOrder(hero6);
         singleLinkedList1.addByOrder(hero8);
-//        singleLinkedList1.list();
-//        System.out.println("合并两个链表");
-//        System.out.println(mergeLinkedList(singleLinkedList.getHead(), singleLinkedList1.getHead()));
-        //3. 测试修改节点的代码
-        HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
-        singleLinkedList.update(newHeroNode);
-        System.out.println("测试修改后的");
-        singleLinkedList.list();
-        //4. 删除一个节点
-        singleLinkedList.del(1);
-//        singleLinkedList.del(4);
-        System.out.println("删除后的链表情况~~");
-        singleLinkedList.list();
-
-        //5. 测试一下 求单链表中有效节点的个数
-        System.out.println("有效的节点个数=" + getLength(singleLinkedList.getHead()));//2
-        //6. 测试一下看看是否得到了倒数第K个节点
-        HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 2);
-        System.out.println("res=" + res);
-        //7. 测试一下单链表的反转功能
-        System.out.println("原来链表的情况~~");
-        singleLinkedList.list();
-        System.out.println("反转单链表~~");
-        reverseLinkedHead(singleLinkedList.getHead());
-        singleLinkedList.list();
-        //8.测试逆序打印单链表, 没有改变链表的结构~~
-        System.out.println("测试逆序打印单链表, 没有改变链表的结构~~");
-        reversePrint(singleLinkedList.getHead());
+        singleLinkedList1.list();
+        System.out.println("合并两个链表");
+        staticList(mergeLinkedList(singleLinkedList.getHead(), singleLinkedList1.getHead()));
+//        //3. 测试修改节点的代码
+//        HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
+//        singleLinkedList.update(newHeroNode);
+//        System.out.println("测试修改后的");
+//        singleLinkedList.list();
+//        //4. 删除一个节点
+//        singleLinkedList.del(1);
+////        singleLinkedList.del(4);
+//        System.out.println("删除后的链表情况~~");
+//        singleLinkedList.list();
+//
+//        //5. 测试一下 求单链表中有效节点的个数
+//        System.out.println("有效的节点个数=" + getLength(singleLinkedList.getHead()));//2
+//        //6. 测试一下看看是否得到了倒数第K个节点
+//        HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 2);
+//        System.out.println("res=" + res);
+//        //7. 测试一下单链表的反转功能
+//        System.out.println("原来链表的情况~~");
+//        singleLinkedList.list();
+//        System.out.println("反转单链表~~");
+//        reverseLinkedHead(singleLinkedList.getHead());
+//        singleLinkedList.list();
+//        //8.测试逆序打印单链表, 没有改变链表的结构~~
+//        System.out.println("测试逆序打印单链表, 没有改变链表的结构~~");
+//        reversePrint(singleLinkedList.getHead());
     }
 
+    /**
+     * 合并两个单链表
+     *
+     * @param head1 传入第一个链表头节点
+     * @param head2 传入第二个链表头节点
+     * @return 返回合并后的链表
+     */
+    public static HeroNode mergeLinkedList(HeroNode head1, HeroNode head2) {
+        if (head1 == null) return head2; //此处是递归,不能按head.next==null进行判断,否则会造成数据丢失
+        if (head2 == null)   return head1;
+        if (head1.no <= head2.no) {
+            //如果不加这个判断,如果两者的no相同,将会导致出现重复的数据(如两个),
+            //打印代码System.out.println("head"+head+",head.next"+head.next);  打印结果 headHeroNode[no=0,name=,nickname=],head.nextHeroNode[no=0,name=,nickname=]
+            head1.next = (head2.no != head1.no) ? mergeLinkedList(head1.next, head2) : mergeLinkedList(head1.next, head2.next);
+//            head1.next= mergeLinkedList(head1.next, head2);  犯下的错误
+            return head1;
+        } else {
+            head2.next = mergeLinkedList(head1, head2.next);
+            return head2;
+        }
+    }
+
+    /**
+     * 遍历打印静态链表
+     *
+     * @param head 传入打印的链表头节点
+     */
+    public static void staticList(HeroNode head) {
+        //判断链表是否为空
+        if (head.next == null) {
+            System.out.println("链表为空");
+            return;
+        }
+        //因为头节点不能动且头节点是没有数据的,所以直接`head.next;`
+        HeroNode temp = head.next;
+        System.out.println("head" + head + ",head.next" + head.next);
+        while (true) {
+            if (temp == null) break;
+            //输出节点信息
+            System.out.println(temp + "000");
+            //将temp后移,一定小心
+            temp = temp.next;
+        }
+    }
 
     /**
      * 1. 求单链表中有效节点的个数
@@ -138,15 +182,6 @@ public class Interview {
         }
         //遍历结束,将head.next指向reverseHead.next 接管链表,实现单链表的反转
         head.next = reverseHead.next;
-    }
-
-    /**
-     * 合并两个单链表
-     *
-     * @return
-     */
-    public static HeroNode mergeLinkedList(HeroNode head1, HeroNode head2) {
-        return null;
     }
 
 

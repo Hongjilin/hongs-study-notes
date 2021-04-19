@@ -1,14 +1,19 @@
->1. 本笔记为观看B站的: [`尚硅谷Java数据结构与java算法（Java数据结构与算法）`](https://www.bilibili.com/video/BV1E4411H73v?share_source=copy_web)进行整理记录,里面加了大量个人对于这门课程的注解/图解与理解,欢迎大家指出不足之处,我也会及时进行校正
->
+>1. 本笔记为观看B站的: [`尚硅谷Java数据结构与java算法（Java数据结构与算法）`](https://www.bilibili.com/video/BV1E4411H73v?share_source=copy_web) 、其他多个相关博客与资料进行整理记录,里面加了大量个人对于这门课程的注解/图解与理解,欢迎大家指出不足之处,我也会及时进行校正
 >2. 本人目前岗位为前端,但有较好的java基础,所以选定该学习视频,学习过程笔记也会使用`java语言进行demo实现`,毕竟是概念部分还是跟紧老师学习,但用的都是基础语法,js与java其实都差不多并不会影响理解,甚至这部分代码js写法与java相差无几。
->
 >3. 不过在随后`leetCode`部分,我将会用`java`与`javaScript`两种语言分别实现与记录,所以前后端的同学都将是可以看得懂的
->
 >4. 个人跟随课程进程编写出的相关练习也会上传在此笔记同级文件目录下,下面每个源码示例中第一行就是在各自源码中的位置  
 >
 >仅本人洪学习使用
 >
 >​												记录时间:2020/4/12启
+
+# #目录
+
+>[TOC]
+
+
+
+
 
 # 数据结构与算法
 
@@ -22,7 +27,7 @@
 >
 >5) 如果你不想永远都是代码工人,那就花时间来研究下数据结构和算法
 
-## 一、经典面试题及解决
+## 一、经典面试题举例及解决(后续才解决)
 
 ### 1、字符串匹配问题：
 
@@ -108,7 +113,7 @@
 >
 >2) 提示：用一个不带头结点的循环链表来处理 Josephu 问题：先构成一个有 n 个结点的单循环链表（单向环形链 表），然后由 k 结点起从 1 开始计数，计到 m 时，对应结点从链表中删除，然后再从被删除结点的下一个结点 又从 1 开始计数，直到最后一个结点从链表中删除算法结束。 
 >
->3) 小结：完成约瑟夫问题，需要使用到单向环形链表 这个数据结构
+>3) 小结：`该问题解决自 ->第四章链表的6小节 --环形链表实现 `
 
 
 
@@ -347,7 +352,7 @@
 >           maxSize = arrMaxSize;
 >           arr = new int[maxSize];
 >           front = -1;//指向队列头部,分析出front是只想队列头的前一个位置
->           rear = -1;//只想队列尾部,只想队列尾部数据(即队列最后一个数据)
+>           rear = -1;//指向队列尾部,只想队列尾部数据(即队列最后一个数据)
 >       }
 >   
 >       //1. 判断队列是否满
@@ -580,7 +585,7 @@
 
 > 1) 链表是以节点的方式来存储,是链式存储 
 >
-> 2) 每个节点包含 data 域， next 域：指向下一个节点. 
+> 2) 每一个结点包含 data 域、next 域。其中 next 域存放的是下一个结点的地址(双向链表还有一个`prev`)
 >
 > 3) 如图：发现链表的各个节点不一定是连续存储. 
 >
@@ -590,7 +595,17 @@
 >
 > 5) 单链表(带头结点) 逻辑结构示意图如下
 >
-> ​	![image-20210416104247623](A_数据结构与算法(Java)学习笔记中的图片/image-20210416104247623.png)
+> ​	<img src="A_数据结构与算法(Java)学习笔记中的图片/单链表结构示例图.png" alt="单链表结构示例图" style="zoom:50%;" />
+>
+> 6) 代码描述节点:
+>
+> 1. ```java
+>    public ListNode{
+>        public int age;				// 本结点的信息	
+>        public String name;
+>        public ListNode next; 		// 下一个结点的地址
+>    }
+>    ```
 
 ### 2、单链表的应用实例
 
@@ -603,6 +618,11 @@
 >    ![image-20210416104715422](A_数据结构与算法(Java)学习笔记中的图片/image-20210416104715422.png)
 >
 > 2. 演示最基础的链表插入:`插入到链表的最后面`,不考虑顺序
+>
+>    1. 首先我们需要创建一个头结点，该结点的作用就是表示单链表的头，如果没有头结点，我们是无法知道链表的首个结点是谁、在哪；
+>    2. 单链表是单向的，所以我们需要从头结点开始遍历整个链表直到末尾，然后增加结点到链表的末尾；
+>    3. 需要注意的是，头结点是万万不能乱动的，所以我们最好将头结点复制到一个临时结点变量中，对临时变量进行遍历。
+>       
 >
 > 3. 代码示例:
 >
@@ -706,122 +726,132 @@
 >
 >2. 思路分析示意图:
 >
->   ![image-20210416115735161](A_数据结构与算法(Java)学习笔记中的图片/image-20210416115735161.png)
+>  ![image-20210416115735161](A_数据结构与算法(Java)学习笔记中的图片/image-20210416115735161.png)
 >
 >3. 代码中实例场景示例图:
 >
 >![image-20210416115627100](A_数据结构与算法(Java)学习笔记中的图片/单链表添加代码中实例场景示例图.png)
 >
->4. 代码实现:(只是将第一方法代码示例中的`add()`替换未`addByOrder`)
+>4. 思路分析:
+>   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   2. 如果出现某个结点（假设是 A 结点）的下一个结点（假设是 B 结点）的编号大于待插入结点的情况，那么就首先将 B 结点记录在待插入的结点中，然后再将这个待插入结点插入到 A 结点之后；
+>   3. 如果遍历到了链表末尾还没找到编号更大的，就直接插入到末尾即可。
 >
->   ```java
->       public void addByOrder(HeroNode heroNode) {
->       /*因为head节点是不能动的,动了的话链表就找不到入口或者找错路口,所以我们需要一个辅助遍历
->          因为单链表,所以我们找的temp 必须为于添加位置的前一个节点,否则插入不了*/
->           HeroNode temp = head;
->           boolean flag = false; //flag标识添加的编号是否存在,默认为false
->           while (true) {
->               if (temp.next == null) break;//说明temp已经在链表的最后,就在链表插入(此时temp已经在链表尾部了)
->               if (temp.next.no > heroNode.no) break;//说明位置已经找到,就在temp的后面插入
->               else if (temp.next.no == heroNode.no) {//说明希望添加的heroNode编号已经存在
->                   flag = true;
->                   break;
->               }
->               temp = temp.next;//temp后移,直到找到符合上面条件为止
->           }
->           if (flag) System.out.printf("准备插入的英雄的编号%d已经存在了,不能加入\n", heroNode.no);
->           else {
->               //将heroNode插入到链表的temp后面
->               heroNode.next = temp.next;
->               temp.next = heroNode;
->           }
->       }
->   
->   -------------- main()中调用  ------------------------
->    singleLinkedList.addByOrder(hero2);
->    singleLinkedList.addByOrder(hero4);
->    singleLinkedList.addByOrder(hero4);
->   ```
+>5. 代码实现:(只是将第一方法代码示例中的`add()`替换未`addByOrder`)
+>
+>  ```java
+>      public void addByOrder(HeroNode heroNode) {
+>      /*因为head节点是不能动的,动了的话链表就找不到入口或者找错路口,所以我们需要一个辅助遍历
+>         因为单链表,所以我们找的temp 必须为于添加位置的前一个节点,否则插入不了*/
+>          HeroNode temp = head;
+>          boolean flag = false; //flag标识添加的编号是否存在,默认为false
+>          while (true) {
+>              if (temp.next == null) break;//说明temp已经在链表的最后,就在链表插入(此时temp已经在链表尾部了)
+>              if (temp.next.no > heroNode.no) break;//说明位置已经找到,就在temp的后面插入
+>              else if (temp.next.no == heroNode.no) {//说明希望添加的heroNode编号已经存在
+>                  flag = true;
+>                  break;
+>              }
+>              temp = temp.next;//temp后移,直到找到符合上面条件为止
+>          }
+>          if (flag) System.out.printf("准备插入的英雄的编号%d已经存在了,不能加入\n", heroNode.no);
+>          else {
+>              //将heroNode插入到链表的temp后面
+>              heroNode.next = temp.next;
+>              temp.next = heroNode;
+>          }
+>      }
+>
+>  -------------- main()中调用  ------------------------
+>   singleLinkedList.addByOrder(hero2);
+>   singleLinkedList.addByOrder(hero4);
+>   singleLinkedList.addByOrder(hero4);
+>  ```
 >
 
 #### Ⅲ-修改节点
 
 >1. 思路(1) 先找到该节点，通过遍历，(2) temp.name = newHeroNode.name ; temp.nickname= newHeroNode.nickname
->
+>   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   2. 遍历过程中，比对每个结点的编号与要更新的结点的编号是否一致，如果一致则说明找到了要更新的结点。接着将找到的结点中的数据替换成要更新的数据即可；
+>   3. 如果遍历结束还没找到对应编号的结点，说明链表中不存在这个结点；
+>      
 >2. 代码实现
 >
->   ```java
->     //5. 修改节点信息,根据no编号来修改,即no编号不能改
->       public void update(HeroNode newHeroNode) {
->           if (head.next == null) {
->               System.out.println("链表为空");
->               return;
->           }
->           ;
->           //定义一个辅助变量
->           HeroNode temp = head;
->           boolean flag = false;
->           //找到需要修改的节点,根据no编号
->           while (true) {
->               if (temp == null) break; //表示当前到链表尾端
->               if (temp.no == newHeroNode.no) {//表示找到该节点了
->                   flag = true;
->                   break;
->               }
->               temp = temp.next;
->           }
->           if (flag) {//根据flag可以判断是否找到要修改的节点
->               temp.name = newHeroNode.name;
->               temp.nickname = newHeroNode.nickname;
->           } else System.out.printf("没有找到编号%d的阶段,不能进行修改\n", newHeroNode.no);
->       }
->   ----------------- main()调用测试 ----------------------------------------
->     //测试修改节点的代码
->           HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
->           singleLinkedList.update(newHeroNode);
->           System.out.println("测试修改后的");
->           singleLinkedList.list();    
->   ```
+>  ```java
+>    //5. 修改节点信息,根据no编号来修改,即no编号不能改
+>      public void update(HeroNode newHeroNode) {
+>          if (head.next == null) {
+>              System.out.println("链表为空");
+>              return;
+>          }
+>          ;
+>          //定义一个辅助变量
+>          HeroNode temp = head;
+>          boolean flag = false;
+>          //找到需要修改的节点,根据no编号
+>          while (true) {
+>              if (temp == null) break; //表示当前到链表尾端
+>              if (temp.no == newHeroNode.no) {//表示找到该节点了
+>                  flag = true;
+>                  break;
+>              }
+>              temp = temp.next;
+>          }
+>          if (flag) {//根据flag可以判断是否找到要修改的节点
+>              temp.name = newHeroNode.name;
+>              temp.nickname = newHeroNode.nickname;
+>          } else System.out.printf("没有找到编号%d的阶段,不能进行修改\n", newHeroNode.no);
+>      }
+>  ----------------- main()调用测试 ----------------------------------------
+>    //测试修改节点的代码
+>          HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
+>          singleLinkedList.update(newHeroNode);
+>          System.out.println("测试修改后的");
+>          singleLinkedList.list();    
+>  ```
 
 #### Ⅳ-删除节点
 
 >1. 思路分析图
 >
->   ![image-20210416140539441](A_数据结构与算法(Java)学习笔记中的图片/image-20210416140539441.png)
+>  ![image-20210416140539441](A_数据结构与算法(Java)学习笔记中的图片/image-20210416140539441.png)
 >
 >2. 其实就是方法二中`实例场景示例图`的逆推
->
+>   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   2. 如果 遍历到某个结点的编号与要查找的给定的编号相同，那么就找到了结点；
+>   3. 如果遍历结束还没找到，说明该编号不在链表的结点中。
 >3. 代码示例
 >
->   ```java
->      //6. 删除节点1.head不能动,所以需要一个temp辅助节点找到待删除节点前的一个节点
->       //         2.我们比较时,时temp.next.no和待删除节点的no比较
->       public void del(int no) {
->           if (head.next == null) {
->               System.out.println("链表为空");
->               return;
->           }
->           HeroNode temp = head;
->           boolean flag = false;
->           while (true) {
->               if (temp.next == null) break;//说明到了链表的最后
->               if (temp.next.no == no) {
->                   //表示找到了待删除节点的前一个节点temp
->                   flag = true;
->                   break;
->               }
->               temp=temp.next;//temp后移,遍历
->           }
->           if (flag) temp.next=temp.next.next; //如果找到,进行删除
->           else System.out.printf("要删除的%d节点不存在\n",no);
->       }
->   ----------------- main()调用 ------------------------------
->      //删除一个节点
->       singleLinkedList.del(1);
->       singleLinkedList.del(4);
->       System.out.println("删除后的链表情况~~");
->       singleLinkedList.list();
->   ```
+>  ```java
+>     //6. 删除节点1.head不能动,所以需要一个temp辅助节点找到待删除节点前的一个节点
+>      //         2.我们比较时,时temp.next.no和待删除节点的no比较
+>      public void del(int no) {
+>          if (head.next == null) {
+>              System.out.println("链表为空");
+>              return;
+>          }
+>          HeroNode temp = head;
+>          boolean flag = false;
+>          while (true) {
+>              if (temp.next == null) break;//说明到了链表的最后
+>              if (temp.next.no == no) {
+>                  //表示找到了待删除节点的前一个节点temp
+>                  flag = true;
+>                  break;
+>              }
+>              temp=temp.next;//temp后移,遍历
+>          }
+>          if (flag) temp.next=temp.next.next; //如果找到,进行删除
+>          else System.out.printf("要删除的%d节点不存在\n",no);
+>      }
+>  ----------------- main()调用 ------------------------------
+>     //删除一个节点
+>      singleLinkedList.del(1);
+>      singleLinkedList.del(4);
+>      System.out.println("删除后的链表情况~~");
+>      singleLinkedList.list();
+>  ```
 
 #### Ⅴ-全部代码
 
@@ -1098,100 +1128,466 @@
 
 #### Ⅲ-单链表的反转【腾讯面试题，有点难度】
 
->1. 思路分析:
+>1. 解决这个问题的核心就是`头插法`。
 >
->   1)先定义一个节点 reverseHead=new HeroNode()
+>    1. 首先创建一个临时头结点用于记录反转过程中的链表；
+>   2. 遍历单链表，每遍历到一个有效结点，就让该有效结点指向临时头结点指向的结点；
+>    3. 临时头结点再指向该有效结点，
+>   4. 原单链表遍历结束之后，再让原头结点指向临时头结点指向的结点。
+>    5. 图片示例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="A_数据结构与算法(Java)学习笔记中的图片/头插法进行反转链表.gif" style="zoom: 33%;" />
 >
->   2)从头到尾遍历原来的链表,每遍历一个节点,就将其取出,并放在reverseHead的最前端
+> 2. 具体举例图解![image-20210416164158096](A_数据结构与算法(Java)学习笔记中的图片/单链表的反转实例场景示例图.png)
 >
->   3)原来的链表的head.next=reverseHead.next
+> 3. 代码实现:
 >
->   ![image-20210416171832478](A_数据结构与算法(Java)学习笔记中的图片/image-20210416171832478.png)
->
->2. 具体举例图解![image-20210416164158096](A_数据结构与算法(Java)学习笔记中的图片/单链表的反转实例场景示例图.png)
->
->3. 代码实现:
->
->   ```java
->     /**
->        * 3.单链表的反转【腾讯面试题，有点难度】
->        * @param head 传入需要进行反转的单链表
->        */
->       public static void reverseLinkedHead(HeroNode head) {
->           //1. 当链表为空或者只有一个节点时候,直接返回,无需反转
->           if (head.next == null || head.next.next == null) return;
->           //2. 定义一个辅助的指针遍历,帮助我们遍历原来的链表
->           HeroNode cur = head.next;
->           //3. 定义一个next,辅助变量,来指向当前节点[cur]的下一个节点,用来进行位置互换
->           HeroNode next = null;
->           //4. 初始化一个新的头节点,用来暂时存放反转链表
->           HeroNode reverseHead = new HeroNode(0, "", "");
->           //5. 遍历原来的链表,每遍历一个节点,就将其取出,并放在新的链表reverseHead的最前端
->           while (cur != null) {//当当前节点 为空时退出累计遍历
->               next = cur.next; //先暂时保存当前节点的下一个节点,后面换完位置后需要复原cur的下一位,否则无法遍历
->               cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
->               reverseHead.next = cur;//将cur链接到新的链表上
->               cur = next;//让cur后移
->           }
->           //遍历结束,将head.next指向reverseHead.next 接管链表,实现单链表的反转
->           head.next = reverseHead.next;
->       }
->   -----------------main()调用  ---------------------------
->      //7. 测试一下单链表的反转功能
->   	System.out.println("原来链表的情况~~");
->   	singleLinkedList.list();
->   	System.out.println("反转单链表~~");
->   	reverseLinkedHead(singleLinkedList.getHead());
->   	singleLinkedList.list();
->   ```
-
-#### Ⅳ-从尾到头打印单链表
-
->1. 【百度面试题，要求方式 1：反向遍历 。 方式 2：Stack 栈】
->
->2. 思路分析图解:
->
->   ![image-20210416171953411](A_数据结构与算法(Java)学习笔记中的图片/image-20210416171953411.png)
->
->3. 代码示例:
+>      1. 实现方法一:
 >
 >   ```java
 >       /**
->        * 4. 可以利用栈这个数据结构，将各个节点压入到栈中，然后利用栈的先进后出的特点，就实现了逆序打印的效果
->        * @param head 要传入的链表头
->        */
->       public static void reversePrint(HeroNode head) {
->           if (head.next == null) return; //空链表 不能打印
->           //创建一个栈,将各个节点压入栈
->           Stack<HeroNode> stack = new Stack<HeroNode>();
->           HeroNode cur = head.next;
->           //将链表所有节点压入栈
->           while (cur != null) {
->               stack.push(cur);
->               cur = cur.next;//cur后移,这样就可以压入下一个节点
->           }
->           //将栈中节点取出打印.利用其先进后出特点,实现逆序da'yin
->           while (stack.size() > 0) {
->               System.out.println(stack.pop());
->           }
->       }
->   -----------------main()调用  ---------------------------
->     //8.测试逆序打印单链表, 没有改变链表的结构~~
->      System.out.println("测试逆序打印单链表, 没有改变链表的结构~~");
->      reversePrint(singleLinkedList.getHead());
->   ```
+>          * 3.单链表的反转【腾讯面试题，有点难度】
+>          * @param head 传入需要进行反转的单链表
+>          */
+>         public static void reverseLinkedHead(HeroNode head) {
+>              //1. 当链表为空或者只有一个节点时候,直接返回,无需反转
+>             if (head.next == null || head.next.next == null) return;
+>              //2. 定义一个辅助的指针遍历,帮助我们遍历原来的链表
+>              HeroNode cur = head.next;
+>              //3. 定义一个next,辅助变量,来指向当前节点[cur]的下一个节点,用来进行位置互换
+>              HeroNode next = null;
+>              //4. 初始化一个新的头节点,用来暂时存放反转链表
+>              HeroNode reverseHead = new HeroNode(0, "", "");
+>              //5. 遍历原来的链表,每遍历一个节点,就将其取出,并放在新的链表reverseHead的最前端
+>              while (cur != null) {//当当前节点 为空时退出累计遍历
+>                  next = cur.next; //先暂时保存当前节点的下一个节点,后面换完位置后需要复原cur的下一位,否则无法遍历
+>                  cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
+>                  reverseHead.next = cur;//将cur链接到新的链表上
+>                  cur = next;//让cur后移
+>              }
+>              //遍历结束,将head.next指向reverseHead.next 接管链表,实现单链表的反转
+>              head.next = reverseHead.next;
+>          }
+>      -----------------main()调用  ---------------------------
+>         //7. 测试一下单链表的反转功能
+>      	System.out.println("原来链表的情况~~");
+>      	singleLinkedList.list();
+>      	System.out.println("反转单链表~~");
+>      	reverseLinkedHead(singleLinkedList.getHead());
+>      	singleLinkedList.list();
+>    ```
+> 
+>      1. 实现方法二(只是写法改变,但代码显得更容易理解):
+> 
+>    ```java
+>    /**
+>     * 单链表的反转
+>     */
+>    public SingleLinkedList reverse() {
+>       SingleLinkedList linkedList = new SingleLinkedList();
+>        // 遍历待反转的链表，将结点依次添加到新链表
+>       Node tmp = head;
+>        while (tmp.next != null) {
+>            linkedList.addFirst(tmp.next.item);
+>            tmp = tmp.next;
+>        }
+>        return linkedList;
+>    }
+>    public boolean addFirst(Integer item) {
+>        Node newNode = new Node(item, null);
+>        // tmp 指向头结点
+>        Node tmp = head;
+>        newNode.next = tmp.next;
+>        tmp.next = newNode;
+>        return true;
+>    }
+>    ```
+> 
+
+#### Ⅳ-从尾到头打印单链表
+
+>1. 【百度面试题，要求方式1：反向遍历(上一个问题解决) 。 方式2：Stack栈   方法3: 递归】
+>
+>2. `栈方法`
+>
+>   1. 思路分析图解:![image-20210416171953411](A_数据结构与算法(Java)学习笔记中的图片/image-20210416171953411.png)
+>
+>   2. 代码示例:
+>
+>      ```java
+>        /**
+>         * 4. 可以利用栈这个数据结构，将各个节点压入到栈中，然后利用栈的先进后出的特点，就实现了逆序打印的效果
+>         * @param head 要传入的链表头
+>         */
+>        public static void reversePrint(HeroNode head) {
+>            if (head.next == null) return; //空链表 不能打印
+>            //创建一个栈,将各个节点压入栈
+>            Stack<HeroNode> stack = new Stack<HeroNode>();
+>            HeroNode cur = head.next;
+>            //将链表所有节点压入栈
+>            while (cur != null) {
+>                stack.push(cur);
+>                cur = cur.next;//cur后移,这样就可以压入下一个节点
+>            }
+>            //将栈中节点取出打印.利用其先进后出特点,实现逆序da'yin
+>            while (stack.size() > 0) {
+>                System.out.println(stack.pop());
+>            }
+>        }
+>        -----------------main()调用  ---------------------------
+>       //8.测试逆序打印单链表, 没有改变链表的结构~~
+>       System.out.println("测试逆序打印单链表, 没有改变链表的结构~~");
+>       reversePrint(singleLinkedList.getHead());
+>      ```
+>
+>3. `递归方式`
+>
+>   1. 图例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="A_数据结构与算法(Java)学习笔记中的图片/递归方式实现单向链表逆序打印示例图.gif" alt="递归方式实现单向链表逆序打印示例图" style="zoom: 33%;" />
+>
+>   2. 代码实现:
+>
+>      ```java
+>      /**
+>       * 使用递归打印结点
+>       * @Param [node] 链表的第一个结点，即 head.next
+>       */
+>      public static void printReverse_3(HeroNode node){
+>          // 这里一定要先递归调用再打印
+>          if (node.next != null){
+>              printReverse_3(node.next);
+>          }
+>          System.out.println(node);
+>      }
+>      
+>      ```
+
+
 
 #### Ⅴ-合并两个有序的单链表，合并之后的链表依然有序
 
->合并两个有序的单链表，合并之后的链表依然有序
+>练习题目:合并两个有序的单链表，合并之后的链表依然有序
+>
+>1. 思路解析:
+>    1. 如果传入的节点1为空了(即已经递归到链表尾或者是空链表),返回节点2,反之亦然(同时return会结束该递归函数(但是递归函数结束后接着return,所以整个递归函数将会停止)并返回)。
+>    2. 判断no是否重复,如果重复就重新递归传入链表下一级`head2.next`,不重复就传入`head2`
+>    3. 递归其实都是在进行对于`head.next`的赋值,直到传入节点为空(符合前面两个判断条件),开始向外`return`,此时逐层给`head.next`赋值,最后会返回到最外层函数返回值处,就是合并后的链表
+>
+>2. 代码实现:
+>
+>   ```java
+>       /**
+>        * 合并两个单链表静态函数
+>        * @param head1 传入第一个链表头节点
+>        * @param head2 传入第二个链表头节点
+>        * @return 返回合并后的链表
+>        */
+>       public static HeroNode mergeLinkedList(HeroNode head1, HeroNode head2) {
+>           if (head1 == null) return head2; //此处是递归,不能按head.next==null进行判断,否则会造成数据丢失
+>           if (head2 == null)  return head1;     
+>           if (head1.no <= head2.no) {
+>               //如果不加这个判断,如果两者的no相同,将会导致出现重复的数据(如两个),判断后进入递归
+>               //打印代码 System.out.println("head:"+head+",head.next:"+head.next);
+>               //打印结果 headHeroNode:[no=0,name=,nickname=],head.nextHeroNode:[no=0,name=,nickname=]
+>               head1.next = (head2.no != head1.no) ? mergeLinkedList(head1.next, head2)
+>                 			  : mergeLinkedList(head1.next, head2.next);
+>   //            head1.next= mergeLinkedList(head1.next, head2);  犯下的错误,导致数据重复
+>               return head1;
+>           } else {
+>               head2.next = mergeLinkedList(head1, head2.next);
+>               return head2;
+>           }
+>       }
+>   
+>       /**
+>        * 遍历打印静态链表
+>        * @param head 传入打印的链表头节点
+>        */
+>       public static void staticList(HeroNode head) {
+>           //判断链表是否为空
+>           if (head.next == null) {
+>               System.out.println("链表为空");
+>               return;
+>           }
+>           //因为头节点不能动且头节点是没有数据的,所以直接`head.next;`
+>           HeroNode temp = head.next;
+>           System.out.println("head" + head + ",head.next" + head.next);
+>           while (true) {
+>               if (temp == null) break;
+>               //输出节点信息
+>               System.out.println(temp);
+>               //将temp后移,一定小心
+>               temp = temp.next;
+>           }
+>       }
+>   -------------------  main()调用 --------------------------------
+>     HeroNode hero1 = new HeroNode(1, "宋江", "及时雨");
+>     HeroNode hero2 = new HeroNode(2, "卢俊义", "玉麒麟");
+>     HeroNode hero3 = new HeroNode(5, "洪吉林", "帅哥");
+>     HeroNode hero4 = new HeroNode(4, "林冲", "豹子头");
+>     HeroNode hero5 = new HeroNode(5, "洪吉林", "帅哥");
+>     HeroNode hero6 = new HeroNode(6, "努力学习的汪", "好学生");
+>     HeroNode hero7 = new HeroNode(7, "离婚且带娃", "不是我");
+>     HeroNode hero8 = new HeroNode(8, "你听我狡辩", "口头禅");
+>         //创建链表对象
+>     SingleLinkedList singleLinkedList = new SingleLinkedList();
+>     SingleLinkedList singleLinkedList1 = new SingleLinkedList();
+>     //2. 添加方法
+>     singleLinkedList.addByOrder(hero1);
+>     singleLinkedList.addByOrder(hero3);
+>     singleLinkedList.addByOrder(hero4);
+>     singleLinkedList.addByOrder(hero7);
+>     singleLinkedList.list();
+>     System.out.println("两个链表分界线");
+>     //-----------课后作业:第二个链表-----------------------
+>     singleLinkedList1.addByOrder(hero2);
+>     singleLinkedList1.addByOrder(hero5);
+>     singleLinkedList1.addByOrder(hero6);
+>     singleLinkedList1.addByOrder(hero8);
+>     singleLinkedList1.list();
+>     System.out.println("合并两个链表");
+>     staticList(mergeLinkedList(singleLinkedList.getHead(), singleLinkedList1.getHead()));
+>   ```
 
+### 4、双向链表与其实例
 
+>1. 双向链表实现实际上对比单向链表多了一个`pre`属性,大部分功能相似
+>
+>2. 使用双向链表实现水浒传英雄增删改查思路图:
+>
+>   ![image-20210419144659899](A_数据结构与算法(Java)学习笔记中的图片/双向链表实例思路图.png)
+>
+>3. 删除部分代码实现:
+>
+>   ```java
+>     /**
+>        * 5. 从双向链表中删除一个节点
+>        * 说明:
+>        * 1.对于双向链表,我们可以直接找到要删除的这个节点
+>        * 2.找到后,自我删除即可
+>        */
+>       public void del(int no) {
+>           if (head.next == null) {
+>               System.out.println("链表为空,无法删除");
+>               return;
+>           }
+>           DoubleHeroNode temp = head;//辅助遍历(指针)
+>           boolean flag = false;//标识是否找到待删除节点
+>           while (true) {
+>               if (temp == null) break;//已经到了链表最后
+>               if (temp.no == no) { //找到待删除的节点
+>                   flag = true;
+>                   break;
+>               }
+>               temp = temp.next;//temp后移,遍历
+>           }
+>           if (flag) {
+>               temp.pre.next = temp.next;//将下一个节点地址赋值给上一个节点的`next`
+>               //如果不加判断,可能当前节点是最后一个,导致`temp.next.pre`会出现空指针异常
+>               if (temp.next != null) temp.next.pre = temp.pre;//将下一个节点的上一个(pre)赋值为当前节点的上一个(pre)
+>           } else System.out.printf("要删除的%d节点不存在\n", no);
+>   
+>       }
+>   ```
+>
+>4. 全部代码(`包括课堂练习题`):
+>
+>   ```java
+>   package com.linkedlist.doublelinked;
+>   public class DoubleLinkedListDemo {
+>       public static void main(String[] args) {
+>           DoubleHeroNode hero1 = new DoubleHeroNode(1, "宋江", "及时雨");
+>           DoubleHeroNode hero2 = new DoubleHeroNode(2, "卢俊义", "玉麒麟");
+>           DoubleHeroNode hero3 = new DoubleHeroNode(3, "吴用", "智多星");
+>           DoubleHeroNode hero4 = new DoubleHeroNode(4, "林冲", "豹子头");
+>           DoubleHeroNode hero5 = new DoubleHeroNode(5, "666", "666");
+>           //创建链表对象
+>           DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
+>           //1.直接添加到链表尾部
+>           doubleLinkedList.add(hero1);
+>           doubleLinkedList.add(hero2);
+>           doubleLinkedList.add(hero3);
+>           doubleLinkedList.add(hero4);
+>           doubleLinkedList.list();
+>           //修改测试
+>           System.out.println("测试修改林冲");
+>           DoubleHeroNode newHeroNode = new DoubleHeroNode(4, "洪吉林", "零充");
+>           doubleLinkedList.update(newHeroNode);
+>           doubleLinkedList.list();
+>           //删除测试
+>           System.out.println("测试删除吴用");
+>           doubleLinkedList.del(3);
+>           doubleLinkedList.list();
+>           //测试插入添加
+>           //1.直接添加到链表尾部
+>           System.out.println("测试插入添加 ");
+>           doubleLinkedList.addByOrder(hero5);
+>           doubleLinkedList.addByOrder(hero3);
+>           doubleLinkedList.list();
+>       }
+>   }
+>   
+>   class DoubleLinkedList {
+>       //1. 先初始化一个头节点,头节点不要动,不存放具体的数据
+>       private DoubleHeroNode head = new DoubleHeroNode(0, "", "");
+>   
+>       //2. 返回头节点,get方法
+>       public DoubleHeroNode getHead() {
+>           return head;
+>       }
+>   
+>       //3. 添加一个节点节点到双向链表的最后
+>       public void add(DoubleHeroNode heroNode) {
+>           //因为head节点是不能动的,动了的话链表就找不到入口或者找错路口,所以我们需要一个辅助遍历
+>           DoubleHeroNode temp = head;
+>           //遍历链表,找到最后
+>           while (true) {
+>               //找到链表的最后:当next值为空,就是最后一位
+>               if (temp.next == null) break;
+>               //如果没有找到最后,就将temp向后移动,不然就原地踏步死循环了
+>               temp = temp.next;
+>           }
+>           //当退出while循环的时候,temp就指向了链表的最后
+>           //形成一个双向链表
+>           temp.next = heroNode;
+>           heroNode.pre = temp;
+>       }
+>   
+>       //3.1 按照no进行对双向链表的插入,课堂练习题
+>       public void addByOrder(DoubleHeroNode heroNode) {
+>           DoubleHeroNode temp = head;//需要找到要添加位置的前一个节点
+>           boolean flag = false;
+>           while (true) {
+>               if (temp.next == null) break;//说明已经遍历到链表最后
+>               if (temp.next.no > heroNode.no) break;//说明已经找到,就在temp后面插入
+>               else if (temp.next.no == heroNode.no) {//说明已经存在重复no
+>                   flag = true;
+>                   break;
+>               }
+>               temp = temp.next;
+>           }
+>           if (flag) System.out.printf("准备插入的英雄的编号%d已经存在了,不能加入\n", heroNode.no);
+>           else {
+>               heroNode.next = temp.next; //将temp的下next赋值到要插入的节点的next
+>               heroNode.pre = temp;  //将temp作为heroNode的pre(上一位)
+>               temp.next = heroNode; //在找到的位置后面插入heroNode ,并且这里不用判断非空
+>           }
+>       }
+>   
+>       //4. 修改节点信息,
+>       //可以看到双向链表的节点内容修改与单向链表一样,只是节点类型改变
+>       public void update(DoubleHeroNode newHeroNode) {
+>           if (head.next == null) {
+>               System.out.println("链表为空");
+>               return;
+>           }
+>           DoubleHeroNode temp = head;
+>           boolean flag = false;
+>           //找到需要修改的节点,根据no编号
+>           while (true) {
+>               if (temp == null) break; //表示当前到链表尾端
+>               if (temp.no == newHeroNode.no) {//表示找到该节点了
+>                   flag = true;
+>                   break;
+>               }
+>               temp = temp.next;
+>           }
+>           if (flag) {//根据flag可以判断是否找到要修改的节点
+>               temp.name = newHeroNode.name;
+>               temp.nickname = newHeroNode.nickname;
+>           } else System.out.printf("没有找到编号%d的阶段,不能进行修改\n", newHeroNode.no);
+>       }
+>   
+>       /**
+>        * 5. 从双向链表中删除一个节点
+>        * 说明:
+>        * 1.对于双向链表,我们可以直接找到要删除的这个节点
+>        * 2.找到后,自我删除即可
+>        */
+>       public void del(int no) {
+>           if (head.next == null) {
+>               System.out.println("链表为空,无法删除");
+>               return;
+>           }
+>           DoubleHeroNode temp = head;//辅助遍历(指针)
+>           boolean flag = false;//标识是否找到待删除节点
+>           while (true) {
+>               if (temp == null) break;//已经到了链表最后
+>               if (temp.no == no) { //找到待删除的节点
+>                   flag = true;
+>                   break;
+>               }
+>               temp = temp.next;//temp后移,遍历
+>           }
+>           if (flag) {
+>               temp.pre.next = temp.next;//将下一个节点地址赋值给上一个节点的`next`
+>               //如果不加判断,可能当前节点是最后一个,导致`temp.next.pre`会出现空指针异常
+>               if (temp.next != null) temp.next.pre = temp.pre;//将下一个节点的上一个(pre)赋值为当前节点的上一个(pre)
+>           } else System.out.printf("要删除的%d节点不存在\n", no);
+>   
+>       }
+>   
+>       //7. 显示链表[遍历]
+>       public void list() {
+>           //判断链表是否为空
+>           if (head.next == null) {
+>               System.out.println("链表为空");
+>               return;
+>           }
+>           //因为头节点不能动且头节点是没有数据的,所以直接`head.next;`
+>           DoubleHeroNode temp = head.next;
+>           while (true) {
+>               if (temp == null) break;
+>               //输出节点信息
+>               System.out.println(temp);
+>               //将temp后移,一定小心
+>               temp = temp.next;
+>           }
+>       }
+>   
+>   }
+>   
+>   
+>   //一、定义一个HeroNode,每个HeroNode对象就是一个节点
+>   class DoubleHeroNode {
+>       public int no;
+>       public String name;
+>       public String nickname;
+>       public DoubleHeroNode next;//指向下一个节点,默认为null
+>       public DoubleHeroNode pre;//指向前一个节点,默认为null
+>   
+>       //构造器
+>       public DoubleHeroNode(int no, String name, String nickname) {
+>           this.no = no;
+>           this.name = name;
+>           this.nickname = nickname;
+>       }
+>   
+>       //为了显示方法,我们重新toString
+>       @Override
+>       public String toString() {
+>           return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickname + "]";
+>       }
+>   }
+>   ```
 
+### 5、单向与双向链表对比
 
-
-
-
-
+>1. 管理单向链表相较于双向链表的缺点分析
+>
+>   1) ① 单链表只有一个指向下一结点的指针，也就是只能next; ② 双链表除了有一个指向下一结点的指针外，还有一个指向前一结点的指针，可以通过prev()快速找到前一结点，顾名思义，单链表只能单向读取
+>
+>   2) 单向链表不能自我删除，需要靠辅助节点 ，而双向链表则可以自我删除，所以前面我们单链表删除时节点，总是找到 temp,temp 是待删除节点的前一个节点,双向链表则是可以直接将temp指向要删除的节点
+>
+>2. 双链表具有以下优点:
+>
+>   1. 删除单链表中的某个结点时，一定要得到待删除结点的前驱，得到该前驱有两种方法，第一种方法是在定位待删除结点的同时一路保存当前结点的前驱。第二种方法是在定位到待删除结点之后，重新从单链表表头开始来定位前驱。尽管通常会采用方法一。但其实这两种方法的效率是一样
+>   2. 查找时也一样，我们可以借用二分法的思路，从head（首节点）向后查找操作和last（尾节点）向前查找操作同步进行，这样双链表的效率可以提高一倍
+>
+>3. `面试官`：从你的描述来看，双链表的在查找、删除的时候可以利用二分法的思想去实现,但是为什么目前市场应用上`单链表的应用要比双链表的应用要广泛`的多呢?
+>
+>   > 从存储结构来看，每个双链表的节点要比单链表的节点多一个指针，而长度为n就需要 n*length（这个指针的length在32位系统中是4字节，在64位系统中是8个字节） 的空间，这在一些追求时间效率不高应用下并不适应，因为它占用空间大于单链表所占用的空间；这时设计者就会采用以时间换空间的做法，这时一种工程总体上的衡量。
+>
+>4. 结构对比图
+>
+>   ![image-20210419144142974](A_数据结构与算法(Java)学习笔记中的图片/单向链表与双向链表结构对比图.png)
 
 
 

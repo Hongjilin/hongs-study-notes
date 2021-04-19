@@ -1,3 +1,5 @@
+>本人笔记分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes) [`java笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Java/)
+
 # #目录
 
 >[TOC]

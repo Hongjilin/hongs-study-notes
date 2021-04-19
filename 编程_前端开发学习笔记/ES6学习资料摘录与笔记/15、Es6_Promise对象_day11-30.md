@@ -1,6 +1,6 @@
 >此笔记为网上[API文档摘录](http://caibaojian.com/es6/let.html)
 >
->本人有专门系统学习该知识点的笔记，与`Promise学习笔记`文件夹中
+>本人有专门系统学习该知识点的笔记，与[`Promise学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)文件夹中
 
 # #目录
 

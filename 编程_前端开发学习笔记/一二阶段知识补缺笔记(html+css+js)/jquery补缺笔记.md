@@ -1,3 +1,11 @@
+> 本笔记来自各资料整合 仅供学习使用
+>
+> 本人[笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
+
+# #目录
+
+>[TOC]
+
 # jQuery入口函数
 
 ## jQuery与JavaScript加载模式对比

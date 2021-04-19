@@ -2,7 +2,7 @@
 
 >本笔记为 观看 `尚硅谷的webpack5入门到精通` 教学视频整理而成
 >
->仅为本人洪jl方便学习记录	
+>仅为本人洪jl方便学习记录,本人[`webpack笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)	
 >
 >说明:
 >
@@ -10,7 +10,7 @@
 >
 >​	本知识点配置代码多,为了节约空间,后面的`配置部分`的配置代码,默认是基于上一个代码增加修改(`优化`部分基于`生产或者开发环境配置`代码进行优化),只写出新增或者修改部分(最后会在每部分最后一章写出完整配置在`代码),如有其他情况将在其代码示例或其上方注释指出
 >
->
+>本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`Webpack学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
 >
 >​									                    				  记录时间:2020_2月4 ~ 5号 、3月1 ~ 4号截止		 
 
@@ -2038,7 +2038,7 @@ module.exports = {
 >​	    Ⅲ- 多进程打包
 >
 > 	   Ⅳ- externals
->							
+>									
 > 	   Ⅴ- dll   这个技术加上代码拆分code split可以做出更加细度化拆分
 >
 >​	② 优化代码运行的性能

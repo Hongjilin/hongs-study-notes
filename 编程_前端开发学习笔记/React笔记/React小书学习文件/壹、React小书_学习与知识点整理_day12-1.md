@@ -1,4 +1,6 @@
 > -本笔记来自学习 作者:胡子大哈 原文链接：[ http://huziketang.com/books/react/lesson5](http://huziketang.com/books/react/lesson5) 的小书 而记录,仅本人洪学习使用
+>
+> 本人[笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
 
 # `小书一阶段`
 

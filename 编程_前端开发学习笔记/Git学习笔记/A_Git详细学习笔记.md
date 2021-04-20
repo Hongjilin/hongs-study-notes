@@ -223,8 +223,6 @@ git commit -m "xxx"
 git mv 原文件名  新文件名
 ```
 
-
-
 ## 五、配别名
 
 > Git并不会在你输入部分命令时自动推断出你想要的命令,如果不想每次都输入完整的Git命令,可以通过git config 文件来轻松为每一个命令设置一个别名
@@ -264,8 +262,6 @@ git logbranch
 >    3. 当你执行`git branch (branchname)`时,Git如何知道最新提交的SHA-1值呢?答案是HEAD文件
 >
 >       `HEAD文件`是一个符号引用(stmbolic reference),指向目前所在的分支.所谓符号医用,意味着它并不像普通引用那样包含一个SHA-1值.它时一个指向其他引用的指针
-
-
 
 ### 1、git branch 
 

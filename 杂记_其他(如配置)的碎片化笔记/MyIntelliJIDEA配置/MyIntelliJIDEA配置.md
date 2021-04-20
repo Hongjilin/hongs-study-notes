@@ -46,6 +46,14 @@
 >
 >3. 然后设置快捷键  打开设置，找到keymap  ，找到`search everywhere`,右键第一个选项 然后根据喜好按键盘或者按组合键就会自动设置进去,本人是`shift+ALT+P`
 
+### Ⅵ-呼出快捷get set 构造函数等`生成`面板
+
+> 打开设置中的keymap-->Code-->Generate
+>
+> 默认是`alt+insert`-->修改为`alt+shift+s`
+>
+> 与eclipse快捷键调整为一致
+
 
 
 ## 二、IntelliJIDEA报错

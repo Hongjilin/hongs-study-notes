@@ -1,16 +1,19 @@
+# #说明
+
 >1. 本笔记为观看B站的: [`尚硅谷Java数据结构与java算法（Java数据结构与算法）`](https://www.bilibili.com/video/BV1E4411H73v?share_source=copy_web) 、其他多个相关博客与资料进行整理记录,里面加了大量个人对于这门课程的注解/图解与理解,欢迎大家指出不足之处,我也会及时进行校正
 >2. 本人目前岗位为前端,但有较好的java基础,所以选定该学习视频,学习过程笔记也会使用`java语言进行demo实现`,毕竟是概念部分还是跟紧老师学习,但用的都是基础语法,js与java其实都差不多并不会影响理解,甚至这部分代码js写法与java相差无几。
 >3. 不过在随后`leetCode`部分,我将会用`java`与`javaScript`两种语言分别实现与记录,所以前后端的同学都将是可以看得懂的
->4. 个人跟随课程进程编写出的相关练习也会上传在此笔记同级文件目录下,下面每个源码示例中第一行就是在各自源码中的位置  
->5. 本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`数据结构与算法学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)、[`LeetCode笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/LeetCode)
+>4. 个人跟随课程进程编写出的相关练习也会上传在此笔记同级文件目录下
+>5. 数据结构与算法吃透比学完更重要,要确保吸收知识点且不影响工作的前提下,预计学习过程将持续几个月。但也坚信慢工出细活,形成的笔记以及知识体系也会更详细完整
+>6. 本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`数据结构与算法学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)、[`LeetCode笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/LeetCode)
 >
 >​												记录时间:2020/4/12启
 
-# #目录
+# #目录(`更新中`)
 
 >[TOC]
 
-
+------
 
 
 
@@ -1588,17 +1591,336 @@
 >
 >   ![image-20210419144142974](A_数据结构与算法(Java)学习笔记中的图片/单向链表与双向链表结构对比图.png)
 
+### 6、单链表之`约瑟夫问题`
+
+#### Ⅰ-问题描述:
+
+>1. `约瑟夫`（ *Josephu* ） 问题是一个非常著名的有趣的题目。问题具体描述如下：
+>
+>   设编号分别为1、2、3… n 的 n 个人围坐一圈，约定编号为 k（1≤k≤n）的人从 1 开始报数，数到 m 的那个人出列。出列的人的下一位又从 1 开始报数，数到 m 的那个人继续出列。以此类推，直到所有人都出列为止，由此产生一个出队编号的序列，这个序列也就是约瑟夫问题的解。
+>
+>2. 下面将用一个动图来描述一下这个问题(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):
+>
+>   假设有 4 个人围坐一圈，约定编号为 1 的人开始报数，数到 3 的那个出列。最后产生的出队编号的序列将会是：3、2、4、1。
+>
+>   <img src="A_数据结构与算法(Java)学习笔记中的图片/约瑟夫问题动态图解.gif" style="zoom: 25%;" />
+
+#### Ⅱ-老师给的思路实现
+
+>1. 用一个不带头结点的循环链表来处理 Josephu 问题：先构成一个有 n 个结点的单循环链表，然后由 k 结点起从 1 开 始计数，计到 m 时，对应结点从链表中删除，然后再从被删除结点的下一个结点又从 1 开始计数，直到最后一个结点从链表中删除算法结束。
+>
+>2. 约瑟夫问题-创建环形链表的思路图解
+>
+>   ![image-20210420142532651](A_数据结构与算法(Java)学习笔记中的图片/image-20210420142532651.png)
+>
+>3. 约瑟夫问题-小孩出圈的思路分析图
+>
+>   ![image-20210420142614947](A_数据结构与算法(Java)学习笔记中的图片/image-20210420142614947.png)
+>
+>4. 代码实现:
+>
+>   ```java
+>   package com.linkedlist.josepfu;
+>   
+>   public class Josepfu {
+>       public static void main(String[] args) {
+>          int NUM=5;// 加入5个小孩节点
+>           // 测试一把看看构建环形链表，和遍历是否ok
+>           CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
+>           circleSingleLinkedList.addBoy(NUM);
+>           circleSingleLinkedList.showBoy();
+>           //测试一把小孩出圈是否正确
+>           circleSingleLinkedList.countBoy(1, 2, NUM); // 2->4->1->5->3
+>       }
+>   }
+>   
+>   //二、创建一个环形的单向链表
+>   class CircleSingleLinkedList {
+>       //1. 创建一个first节点,当前没有编号
+>       private Boy first = null;
+>   
+>       //2. 添加小孩节点,构建成一个环形的链表
+>       public void addBoy(int nums) {
+>           //nums做一个数据校验
+>           if (nums < 1) {
+>               System.out.println("nums的值不正确");
+>               return;
+>           }
+>           Boy curBoy = null; //辅助指针,帮助构建环形链表
+>           //使用for来创建我们的环形链表
+>           for (int i = 1; i <= nums; i++) {//i从1开始,才能得到编号与数字顺序一样的no;
+>               //根据编号创建小孩节点
+>               Boy boy = new Boy(i);
+>               if (i == 1) { //如果fori从0开始遍历,这里也要改为i==0,否则下面 `curBoy.setNext(boy);`将空指针异常
+>                   first = boy;
+>                   first.setNext(first); //构成环,即只有一个时自己指向自己
+>                   curBoy = first;
+>               } else {
+>                   boy.setNext(first); //将当前次循环的next指向第一个节点形成环
+>                   curBoy.setNext(boy);//此处curBoy标记的是上一次循环的boy 如`i==2`-->curBoy==first、`i==3`-->curBoy==boy(第二个)
+>                   curBoy = boy;  //这一步是移动当前curBoy位置到boy,保存当前boy 用作在下轮循环中指定当前boy的next
+>               }
+>           }
+>       }
+>   
+>       //3. 遍历当前环形链表
+>       public void showBoy() {
+>           if (first == null) {
+>               System.out.println("没有任何小孩~~~~");
+>               return;
+>           }
+>           Boy curBoy = first;
+>           while (true) {
+>               System.out.printf("小孩编号%d\n", curBoy.getNo());
+>               if (curBoy.getNext() == first) break;
+>               curBoy = curBoy.getNext();//curBoy后移
+>           }
+>       }
+>   
+>       /**
+>        * //4. 根据用户输入,计算小孩出圈的顺序
+>        *
+>        * @param startNo  开始的位置
+>        * @param countNum 每次循环的数字
+>        * @param nums     单纯用来校验循环次数是否多于总长度
+>        */
+>       public void countBoy(int startNo, int countNum, int nums) {
+>           if (first == null || startNo < 1 || startNo > nums) {
+>               System.out.println("参数输入有误,请重新输入");
+>               return;
+>           }
+>           //①创建一个辅助指针,帮助完成小孩出圈
+>           Boy helper = first;
+>           //②将辅助指针事先指向环形列表的最后这个节点(即next指向first)
+>           while (true) {
+>               if (helper.getNext() == first) break;//说明helper指向最后的小孩节点
+>               helper = helper.getNext();
+>           }
+>           //③小孩报数前,先让first和helper移动K-1次(如果我是从3开始,我需要事先指向3的位置)
+>           //为什么是K-1次-->因为循环i是从0开始的
+>           for (int i = 0; i < startNo - 1; i++) {
+>               first = first.getNext();
+>               helper = helper.getNext();
+>           }
+>           //④出圈删除:当小孩报数时,让first和helper指针同时移动m-1次,然后出圈
+>           while (true) {
+>               if (helper == first) break; //说明圈中只有一个节点
+>               //让first和helper指针同时移动countNum-1次
+>               for (int i = 0; i < countNum - 1; i++) {
+>                   first = first.getNext();
+>                   helper = helper.getNext();
+>               }
+>               //出了for循环后,此时first指向的节点就是要出圈的小孩节点
+>               System.out.printf("小孩%d出圈\n", first.getNo());
+>               //此时将first指向的小孩节点出圈
+>               first = first.getNext();
+>              //注意:此处用的时setNext-->这步就是删除操作,原来的first指向的节点没有任何引用的时候,就会被回收
+>               helper.setNext(first);
+>           }
+>           System.out.printf("最后留在圈中的小孩编号%d\n", first.getNo());
+>       }
+>   
+>   }
+>   
+>   
+>   //一、创建一个Boy类,表示一个节点
+>   class Boy {
+>       private int no;//编号
+>       private Boy next; //指向下一个节点,默认null
+>   
+>       public Boy(int no) {
+>           this.no = no;
+>       }
+>   
+>       public int getNo() {
+>           return no;
+>       }
+>   
+>       public void setNo(int no) {
+>           this.no = no;
+>       }
+>   
+>       public Boy getNext() {
+>           return next;
+>       }
+>   
+>       public void setNext(Boy next) {
+>           this.next = next;
+>       }
+>   }
+>   ```
+>
+>   
+
+#### Ⅲ-思路改进与代码实现
+
+>将该问题解决思想带入 实现水浒传英雄 (该思路与解决于查阅[RonzL](https://blog.csdn.net/zhuxian1277)的博客后学习记录)
+>
+>1. 思路解析:
+>
+>     1. 首先要确定解决问题的核心思想：`使用一个不带头结点的循环(环形)链表来处理该问题`。
+>
+>     2. 假设每个结点代表一个人，那么一个由 n 个结点组成的循环链表就相当于是 n 个人围成的一个圈。那么约瑟夫问题以环形链表的形式来描述就是如下情景：
+>
+>        首先使用 n 个结点构成一个单向循环链表，然后由第 k 个结点起从 1 开始计数，当计到 m 时，从链表中删除对应结点；接着从被删除结点的下一个结点开始从 1 计数，当计到 m 时，继续从链表中删除。依次循环往复，直到链表中的所有结点都被删除为止。
+>
+>     3. 那么对于这个单向循环链表形式下的约瑟夫问题，我们如何解决呢？
+>
+>        1) 我们可以引入一个辅助指针 helperNode，这个指针总是指向待删除结点的前一个结点。为什么这个辅助指针要指向待删除结点的前一个结点，而不是指向自身呢？
+>
+>        2) 因为我们的目的是要删除当前计数为 m 的结点，但是受限于单向链表的特性（如果要删除单链表的某个结点，必须要知道该结点的前一个结点），我们无法让结点自己删除自己。鉴于这个特性，我们必须要引入一个辅助指针来记录当前正在计数的结点的前一个结点，这样才能符合删除条件的结点从链表中删除。
+>
+>2. 引入这个辅助指针之后，具体的操作思路如下:
+>
+>     1. 每一轮计数开始时，总让辅助指针 helperNode 初始指向本轮第一个计数的结点；
+>     2. 从第一个计数的结点开始计数至 m，实际上是向后移动了 m-1 个结点。由于辅助指针总是指向待删除结点的前一个结点，因此让需要让辅助指从第一个计数结点后移 m-2 个结点；
+>     3. 辅助指针移动到待删除结点的前一个结点之后，只需要让辅助指针指向待删除的结点的下一个结点即可完成删除操作；
+>     4. 依次循环往复，直至只剩最后一个结点；
+>     5. 对于环形链表判断是否只有最后一个结点，只需要判断辅助指针指向的结点是否是辅助指针指向的结点的下一个结点即可。
+>
+>3. 上面的思路可以用下面一个动图来描述:
+>
+>  <img src="A_数据结构与算法(Java)学习笔记中的图片/约瑟夫问题思路分析图2.gif" style="zoom:25%;" />
+>
+>4. 代码实现:
+>
+>  ```java
+>  package com.linkedlist.doublelinked;
+>  /**
+>   * 课程外思路实现
+>   */
+>  public class DoubleLinkedListDemo2 {
+>      public static void main(String[] args) {
+>          // 构造测试数据
+>          HeroNode node_1 = new HeroNode(1, "宋江", "及时雨");
+>          HeroNode node_2 = new HeroNode(2, "卢俊义", "玉麒麟");
+>          HeroNode node_3 = new HeroNode(3, "吴用", "智多星");
+>          HeroNode node_4 = new HeroNode(4, "公孙胜", "入云龙");
+>          HeroNode node_5 = new HeroNode(5, "洪吉林", "码农");
+>          HeroNode node_6 = new HeroNode(6, "努力学习的汪", "学习狗");
+>
+>          System.out.println("===============向环形链表中插入结点==================");
+>          HeroNode first = insertCircleList(null, node_1);
+>          first = insertCircleList(first, node_2);
+>          first = insertCircleList(first, node_3);
+>          first = insertCircleList(first, node_4);
+>          first = insertCircleList(first, node_5);
+>          first = insertCircleList(first, node_6);
+>          showList(first);
+>
+>          System.out.println("===============约瑟夫游戏开始===============");
+>          // 从第 1 个结点开始计数，每次计 3 个数。
+>          josepfuGame(first, 1, 3);
+>
+>      }
+>
+>      /**
+>       * @Description 1. 约瑟夫游戏开始
+>       * @Param [first, k, m]   头节点,从第 k 个人开始数，每次数 m 个
+>       */
+>      public static void josepfuGame(HeroNode first, int k, int m) {
+>          if (first == null) {
+>              System.out.println("链表为空！");
+>              return;
+>          }
+>          HeroNode helperNode = first;
+>          // 首先要移动到第 k 个结点，此时辅助指针初始指向第一个计数的结点
+>          for (int i = 1; i < k; i++) {
+>              helperNode = helperNode.next;
+>          }
+>          while (helperNode.next.getNo() != helperNode.getNo()) {
+>              // 报数， m 个数也就是相当于向后移动 m-1 次，也就是要把第 m-1 个结点去掉
+>              // 由于单链表的特点，要去掉第 m-1 个结点，肯定是要让指针前一个结点，即第(m-2)个结点
+>              for (int j = 0; j < m - 2; j++) {  // 让指针后移 m-2 个结点
+>                  helperNode = helperNode.next;
+>              }
+>              System.out.println(helperNode.next + "退出链表了!");
+>              // 删除结点
+>              helperNode.next = helperNode.next.next;
+>              // 因为下一轮要从刚刚去掉的结点的后面一个结点开始计数了，所以需要让辅助指针初始指向下一轮第一个计数的结点
+>              helperNode = helperNode.next;
+>          }
+>          System.out.println(helperNode + "退出链表了!");
+>      }
+>
+>      /**
+>       * @Description 2. 插入结点到环形链表中，用于构造环形链表
+>       */
+>      public static HeroNode insertCircleList(HeroNode first, HeroNode node) {
+>          // 判断链表是不是为空，如果为空，就直接插入
+>          if (first == null) {
+>              first = node;
+>              // 因为要环形链表，而且只有一个结点，所以要我指向我自己
+>              first.next = node;
+>          } else {
+>              // 如果环形链表不为空
+>              HeroNode tempNode = first;
+>              while (true) {
+>                  // 如果到了环形链表的最后一个元素
+>                  if (tempNode.next.getNo() == first.getNo()) {
+>                      tempNode.next = node;
+>                      // 因为是环形链表，所以最后一个结点还要指向第一个结点
+>                      node.next = first;
+>                      break;
+>                  }
+>                  tempNode = tempNode.next;
+>              }
+>          }
+>          return first;
+>      }
+>
+>      /**
+>       * @Description 3. 打印单向环形链表
+>       */
+>      public static void showList(HeroNode first) {
+>          if (first == null) {
+>              System.out.println("链表为空！");
+>              return;
+>          }
+>          HeroNode tempNode = first;
+>          while (true) {
+>              if (tempNode.next.getNo() == first.getNo()) {
+>                  System.out.println(tempNode);
+>                  break;
+>              }
+>              System.out.println(tempNode);
+>              tempNode = tempNode.next;
+>          }
+>      }
+>
+>  }
+>
+>
+>  class HeroNode {
+>      private int no;             // 本节点数据
+>      private String name;
+>      private String nickName;
+>      public HeroNode next;       // 指向下一个节点
+>
+>      public HeroNode(int no, String name, String nickName) {
+>          this.no = no;
+>          this.name = name;
+>          this.nickName = nickName;
+>      }
+>
+>      public int getNo() {
+>          return no;
+>      }
+>
+>      //为了显示方法,我们重新toString
+>      @Override
+>      public String toString() {
+>          return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickName + "]";
+>      }
+>  }
+>
+>  ```
 
 
 
+## 五、栈
 
-
-
-
-
-
-
-
+>公司技术栈需求改变,数据结构学习优先级降低,优先学习小程序,暂停学习数据结构
 
 
 

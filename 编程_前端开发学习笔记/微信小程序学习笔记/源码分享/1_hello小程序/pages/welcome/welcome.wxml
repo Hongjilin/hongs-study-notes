@@ -1,0 +1,18 @@
+<!--pages/welcome/welcome.wxml-->
+<view class="container">
+  <!-- <image class="avatar" lazy-load="true" mode="aspectFit" src="/images/测试头像图片.jpg"></image> -->
+ <l-avatar 
+ class="l-avatar"
+ placement="bottom" 
+ open-data="{{['userAvatarUrl','userNickName']}}"
+ size="200"
+ />
+  <text class="motto">Hello,洪jl</text>
+  <!-- <text selectable="{{true}}" decode="{{true}}">
+   普&nbsp;通
+ </text> -->
+  <!-- <button>开启小程序之旅</button> -->
+  <view class="journey-container"> 
+    <text class="journey">开启小程序之旅</text>
+  </view>
+</view>

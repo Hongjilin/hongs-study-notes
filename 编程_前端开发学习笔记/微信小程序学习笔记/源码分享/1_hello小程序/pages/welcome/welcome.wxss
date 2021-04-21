@@ -1,0 +1,41 @@
+/* pages/welcome/welcome.wxss */
+.avatar {
+  width: 300rpx;
+  height: 200rpx;
+  margin-top: 160rpx;
+}
+.l-avatar{
+  margin-top: 160rpx;
+}
+.container{
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  align-items: center;
+  /* min-height:900rpx; */
+  /* background-color: #b3d4db; */
+}
+.motto{
+  margin-top: 100rpx;
+  font-size: 32rpx; 
+  /* 在ipone6机型下,32rpx与16px是等同的 */
+  font-weight: bold;
+}
+.journey-container{
+  border:1px solid #405f80;
+  width: 200rpx;
+  height: 80rpx;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.journey{
+  font-size: 22rpx;
+  color: #405f80;
+
+}
+page{
+  background-color: #b3d4db;
+}

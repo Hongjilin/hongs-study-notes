@@ -1,1 +1,0 @@
-`project.config.json`里面有appid,就不上传,需要的可以自己创个项目把这个搬进去

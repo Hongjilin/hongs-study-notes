@@ -235,40 +235,51 @@ declare module "*.json"
     icon.className=IconStyles.iconfont+" "+IconStyles.icon_shoucang1
 ```
 
-## 10、赋值时间格式报错
+## 10、关于时间格式问题
 
->Type `'any[]' is not assignable to type '[Moment, Moment]'`.Target requires 2 element(s) but source may have fewer.
->
->![image-20210412191035956](TypeScrpit问题解决中的图片/image-20210412191035956.png)
->
->解决
->
->```tsx
->interface ISearchParams {
->  keyword:any,
->  customerId:any,
->  resDate: [Moment, Moment],
->  buyDate:[Moment, Moment],
->  format:string,
->  loading:boolean
->}
->
->class Store {
->  @observable datas = [];
->  @observable searchParams:ISearchParams = {
->    keyword: '',
->    customerId: '',
->    resDate:[undefined, undefined],
->    buyDate: [undefined, undefined],
->    format: 'YYYY-MM-DD',  
->    loading: false,
->  };
->}
->```
->
->
+### Ⅰ-赋值时间格式报错
 
+>1. Type `'any[]' is not assignable to type '[Moment, Moment]'`.Target requires 2 element(s) but source may have fewer.
+>
+>   ![image-20210412191035956](TypeScrpit问题解决中的图片/image-20210412191035956.png)
+>
+>2. 解决
+>
+>   ```tsx
+>   interface ISearchParams {
+>   keyword:any,
+>   customerId:any,
+>   resDate: [Moment, Moment],
+>   buyDate:[Moment, Moment],
+>   format:string,
+>   loading:boolean
+>   }
+>   
+>   class Store {
+>   @observable datas = [];
+>   @observable searchParams:ISearchParams = {
+>   keyword: '',
+>   customerId: '',
+>   resDate:[undefined, undefined],
+>   buyDate: [undefined, undefined],
+>   format: 'YYYY-MM-DD',  
+>   loading: false,
+>   };
+>   }
+>   ```
 
+### Ⅱ-取出Moment格式中的具体时间报错
+
+>1. 报错:`property '_d' does not exist on type 'moment'.`
+>2. 出现错误原因分析:![image-20210422115014706](TypeScrpit问题解决中的图片/取出Moment格式中的具体时间报错原因分析1.png)
+>
+>​	![image-20210422115208905](TypeScrpit问题解决中的图片/取出Moment格式中的具体时间报错原因分析2.png)
+>
+>3. 解决
+>
+>   1. 其实不用`_d`去取出来,Moment格式有相应的取出方法
+>
+>      ![image-20210422115825841](TypeScrpit问题解决中的图片/image-20210422115825841.png)
 
 
 

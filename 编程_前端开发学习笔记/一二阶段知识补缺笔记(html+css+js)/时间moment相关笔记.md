@@ -4,7 +4,36 @@
 
 >[TOC]
 
-# moment
+# 一、moment问题与解决
+
+### Ⅰ-取出Moment格式中的具体时间报错
+
+>1. 报错:`property '_d' does not exist on type 'moment'.`
+>2. 出现错误原因分析:![image-20210422115014706](时间moment相关笔记中的图片/取出Moment格式中的具体时间报错原因分析1.png)
+>
+>​	![image-20210422115208905](时间moment相关笔记中的图片/取出Moment格式中的具体时间报错原因分析2.png)
+>
+>3. 解决
+>
+>   1. 其实不用`_d`去取出来,Moment格式有相应的取出方法
+>
+>      ![image-20210422115825841](时间moment相关笔记中的图片/image-20210422115825841.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 二、moment常用基础知识点
 
 moment获取天的23时59分59秒可以用moment().endOf(String)，以及获取天的0时0分0秒可以用moment().startOf('day')
 

@@ -1,2 +1,75 @@
 <!--pages/posts/posts.wxml-->
-<text>pages/posts/posts.wxml</text>
+<view>
+  <!-- 
+    //1. "false" ==true 普通字符串  
+    //    "{{false}}"==false   {{}}视作运算标记,里面的内容表示表达式 
+    //2. 当你的属性为true时,可以省略value值-- indicator-dots="{{true}}" == indicator-dots
+  -->
+  <swiper indicator-dots="{{true}}" autoplay interval="2000" duration="1000" circular>
+    <swiper-item>
+      <!-- 插槽 -->
+      <image mode="scaleToFill" src="/images/1.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <!-- 插槽 -->
+      <image mode="scaleToFill" src="/images/2.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <!-- 插槽 -->
+      <image mode="scaleToFill" src="/images/3.jpg"></image>
+    </swiper-item>
+  </swiper>
+  <view class="post-container">
+    <l-icon size="20" color="#34bfa3" name="cart"></l-icon>
+    <l-icon name="research"></l-icon>
+    <view class="post-author-date">
+      <image class="post-author" src="/images/测试头像图片.jpg"></image>
+      <text class="post-date">2021/4/22</text>
+    </view>
+    <view class="post-mian">
+    <text class="post-title">归墟之地</text>
+    <image src="/images/2.jpg"></image>
+    <text class="post-content">传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮</text>
+  </view>
+    <view class="post-link">
+      <image  src="/images/icon/收藏.png"></image>
+      <text>996</text>
+      <image src="/images/icon/眼睛.png"></image>
+      <text>996</text>
+    </view>
+  </view>
+  <view class="post-container">
+    <view class="post-author-date">
+      <image class="post-author" src="/images/测试头像图片.jpg"></image>
+      <text class="post-date">2021/4/21</text>
+    </view>
+    <view class="post-mian">
+    <text class="post-title">东山县博物馆</text>
+    <image src="/images/ly1.jpg"></image>
+    <text class="post-content">东山县博物馆位于东山县风动石景区内，创建于1988年7月，是一座综合性博物馆，下辖黄道周纪念馆，占地面积2453平方米，建筑面积4349平方米，与县文物保护管理所合署办公，人员编制6名（含东山县文物管理所2名编制），实际在编人员5名，固定临时工（博物馆服务部合同工）5名，属于政府财政全额拨款的事业单位。长期以来，东山县博物馆充分发挥阵地作用，不断以丰富多彩、生动活泼的展览来服务于社会、服务于广大的人民群众。先后举办五十多个陈列展览，对东山文化建设、普及科学文化与爱国主义教育，发挥了积极的作用。</text>
+  </view>
+    <view class="post-link">
+      <image  src="/images/icon/收藏.png"></image>
+      <text>955</text>
+      <image src="/images/icon/眼睛.png"></image>
+      <text>95</text>
+    </view>
+  </view>
+  <view class="post-container">
+    <view class="post-author-date">
+      <image class="post-author" src="/images/测试头像图片.jpg"></image>
+      <text class="post-date">2021/4/22</text>
+    </view>
+    <view class="post-mian">
+    <text class="post-title">归德乡公所战斗遗址</text>
+    <image src="/images/ly2.gif"></image>
+    <text class="post-content">归德乡公所战斗遗址位于华安县高安镇高安村。1949年5月，根据中共闽南地委的指示，中国人民解放军粤赣边区纵队第8支队(即闽南支队)，所属1团、2团的5个连队500多人，进军华安，打击-势力，扩大解放军的影响，增强人民群众胜利的信心，同时，准备与安溪的4团联系，开展整军工作。部队在支队长李仲先、副支队长吴扬、副政委卢炎带领下，从南靖荆都出发，取道华安的归德乡(今高安镇)，以秋风扫落叶之势，攻打敌归德乡公所。驻守的-民团闻风丧胆，连忙放弃抵抗，缴-投降，部队由此取得进入华安的首场胜利</text>
+  </view>
+    <view class="post-link">
+      <image  src="/images/icon/收藏.png"></image>
+      <text>555</text>
+      <image src="/images/icon/眼睛.png"></image>
+      <text>5</text>
+    </view>
+  </view>
+</view>

@@ -12,7 +12,14 @@
    普&nbsp;通
  </text> -->
   <!-- <button>开启小程序之旅</button> -->
-  <view class="journey-container"> 
+  <!-- 事件
+    1. 事件--tap之类的 2. 捕捉事件--bind或者catch 3. 捕捉事件的回调函数--自定义的方法函数
+  -->
+  <view bind:tap="onTap" class="journey-container"> 
     <text class="journey">开启小程序之旅</text>
   </view>
+<!-- 路由
+
+ -->
+
 </view>

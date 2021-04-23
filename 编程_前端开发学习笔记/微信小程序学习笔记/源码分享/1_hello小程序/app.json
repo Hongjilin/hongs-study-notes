@@ -7,7 +7,7 @@
   "entryPagePath": "pages/welcome/welcome",
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "洪demo",
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#c22a1e"
   },

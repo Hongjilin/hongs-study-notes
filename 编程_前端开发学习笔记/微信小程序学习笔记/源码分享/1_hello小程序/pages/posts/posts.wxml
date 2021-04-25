@@ -23,7 +23,7 @@
 <!-- 一般默认小程序帮我们声明 wx:for-item="item"以及wx:for-index="index"  所以我们通常不用写,除非要改名 -->
 <!-- 绑定key时要不能绑定item.id而是要绑定成id,-->
 <block wx:for="{{posts}}"  wx:for-item="item"  wx:key="postId" wx:for-index="index">
-  <view class="post-container">
+  <view  bind:tap="onGoDetail" class="post-container">
     <!-- <l-icon size="20" color="#34bfa3" name="cart"></l-icon>
     <l-icon name="research"></l-icon> -->
     <view class="post-author-date">

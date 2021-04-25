@@ -2,7 +2,8 @@
   "pages": [
     "pages/welcome/welcome",
     "pages/index/index",
-    "pages/posts/posts"
+    "pages/posts/posts",
+    "pages/post-detail/post-detail"
   ],
   "entryPagePath": "pages/welcome/welcome",
   "window": {

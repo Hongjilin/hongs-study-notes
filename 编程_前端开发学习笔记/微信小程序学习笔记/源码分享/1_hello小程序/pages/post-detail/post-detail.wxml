@@ -1,0 +1,20 @@
+<!--pages/post-detail/post-detail.wxml-->
+
+<view class="container">
+  <image class="head-image" src="/images/2.jpg"> </image>
+  <view class="author-date">
+    <image class="avatar" src="/images/测试头像图片.jpg"> </image>
+    <text class="author">洪</text>
+    <text class="const-text">发表于</text>
+    <text class="date">16小时前</text>
+  </view>
+  <text class="title">归墟之地</text>
+  <view class="tool">
+    <view class="circle">
+      <image class="circle-img" src="/images/icon/sc2.png"></image>
+      <image class="circle-img" src="/images/icon/fenxiang.png"></image>
+    </view>
+    <view class="horizon"></view>
+  </view>
+  <text class="detail">传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮</text>
+</view>

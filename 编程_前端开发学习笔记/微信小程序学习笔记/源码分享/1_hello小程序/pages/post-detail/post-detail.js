@@ -1,41 +1,19 @@
-// pages/posts/posts.js
-const postData=require("../../data.js");
-// const postData=require("/data.js");不可以用绝对路径,需要用相对路径
-import {content} from '../../data'
-// console.log(postData)
-// console.log(content)
-
-
+// pages/post-detail/post-detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    posts: [],
-    test: "测试数据",
-    flag: true
+
   },
 
   /**
    * 生命周期函数--监听页面加载
-   * 钩子函数 hook function
    */
   onLoad: function (options) {
-    //setData可以直接将数据加入data中;如果在data中已经有该值,则修改
-    //它有着创建+更新功能  但正常是用来更新
-    this.setData({
-      posts: content
-    })
 
   },
-
-  onGoDetail:(e)=>{
-    wx.navigateTo({
-      url: '/pages/post-detail/post-detail',
-    })
-  },
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -55,7 +33,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log("onHide")
 
   },
 
@@ -63,7 +40,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log("onUnload")
+
   },
 
   /**
@@ -77,13 +54,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log("页面上拉触底事件")
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log("分享")
+
   }
 })

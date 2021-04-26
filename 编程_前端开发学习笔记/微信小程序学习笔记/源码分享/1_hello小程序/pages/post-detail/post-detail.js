@@ -1,4 +1,7 @@
 // pages/post-detail/post-detail.js
+import {
+  content
+} from '../../data'
 Page({
 
   /**
@@ -12,6 +15,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let postData = {};
+    content.map(item => {
+      if (item.postId == options.pid) postData = item
+    })
+    this.setData({
+      postData
+    })
 
   },
 

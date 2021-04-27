@@ -41,7 +41,7 @@
     <view class="post-link">
       <!-- <image  src="/images/icon/收藏.png"></image> -->
       <l-icon  color="#666" size="32" name="favor"></l-icon>
-      <text>{{item.reading}}</text>
+      <text style=" margin-left: 10rpx">{{item.reading}}</text>
       <image src="/images/icon/眼睛.png"></image>
       <text>{{item.collection}}</text>
     </view>

@@ -2,6 +2,9 @@
 
 <view class="container">
   <image class="head-image" src="{{postData.imgSrc}}"> </image>
+  <image wx:if="{{!isPlaying}}" class="audio" catch:tap="onMusic" src="/images/music/music.png"></image>
+  <image wx:else class="audio" catch:tap="onMusic" src="/images/music/play.png"></image>
+  <!-- <image src="/images/music/play.png"></image> -->
   <view class="author-date">
     <image class="avatar" src="{{postData.avatar}}"> </image>
     <text class="author">{{postData.author}}</text>
@@ -11,8 +14,9 @@
   <text class="title">{{postData.title}}</text>
   <view class="tool">
     <view class="circle">
-      <image class="circle-img" src="/images/icon/sc2.png"></image>
-      <image class="circle-img" src="/images/icon/fenxiang.png"></image>
+      <image wx:if="{{collected}}" catch:tap="onCollect" class="circle-img" src="/images/icon/sc1.png"></image>
+      <image wx:else="{{collected}}" catch:tap="onCollect" class="circle-img" src="/images/icon/sc2.png"></image>
+      <image catch:tap="onShare" class="circle-img" src="/images/icon/fenxiang.png"></image>
     </view>
     <view class="horizon"></view>
   </view>

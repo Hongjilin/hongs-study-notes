@@ -1,7 +1,9 @@
 // pages/posts/posts.js
-const postData=require("../../data.js");
+const postData = require("../../data.js");
 // const postData=require("/data.js");不可以用绝对路径,需要用相对路径
-import {content} from '../../data'
+import {
+  content
+} from '../../data'
 // console.log(postData)
 // console.log(content)
 
@@ -21,19 +23,28 @@ Page({
    * 生命周期函数--监听页面加载
    * 钩子函数 hook function
    */
-  onLoad: function (options) {
+  onLoad:async function (options) {
     //setData可以直接将数据加入data中;如果在data中已经有该值,则修改
     //它有着创建+更新功能  但正常是用来更新
     this.setData({
       posts: content
     })
+    //前端的数据库
+    wx.setStorageSync('flag',"xxxxxxxxxxxxx")
+    // // wx.setStorageSync('flag', false)
+    // const flag=wx.getStorageSync('flag')
+    // console.log(flag)
+    const flag = await wx.getStorage({ key: 'flag'})
+    console.log(flag)
+
+
 
   },
 
-  onGoDetail:(e)=>{
-    const pid=e.currentTarget.dataset.id
+  onGoDetail: (e) => {
+    const pid = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/post-detail/post-detail?pid='+pid,
+      url: '/pages/post-detail/post-detail?pid=' + pid,
     })
   },
 

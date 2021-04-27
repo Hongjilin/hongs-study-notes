@@ -1,16 +1,20 @@
 const content = [{
     title: "归墟之地",
-    content: "传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮",
+    content: "传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮!!",
     imgSrc: "/images/2.jpg",
     reading: 996,
     collection: 996,
-    detail: "传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮!!!",
+    detail: "传说程序员多写几年代码要秃头了,他的头就像这里的太阳一般闪亮!!!他遗留下来的笔记地址:https://gitee.com/hongjilin/hongs-study-notes",
     dateTime: "24小时前",
     headImgSrc: "/images/测试头像图片.jpg",
     author: "努力学习的汪",
     date: "Nov 20 2021",
     avatar: "/images/测试头像图片.jpg",
-    postId: 3
+    postId: 3,
+    music:{
+      url:"https://m801.music.126.net/20210427184731/86071f54f49fed6b5c922e7591a5aa03/jdyyaac/055e/0f09/535d/24ee7281878c7804e64ad7cc7ec63165.m4a",
+      title:"未闻花名"
+    }
   },
   {
     title: "漳浦屠宰场",
@@ -24,7 +28,11 @@ const content = [{
     author: "洪",
     date: "Nov 0 2019",
     avatar: "/images/1.jpg",
-    postId: 4
+    postId: 4,
+    music:{
+      url:"https://m801.music.126.net/20210427184731/86071f54f49fed6b5c922e7591a5aa03/jdyyaac/055e/0f09/535d/24ee7281878c7804e64ad7cc7ec63165.m4a",
+      title:"未闻花名"
+    }
   },
   {
     title: "惊了!某程序猿的头发竟然....",
@@ -38,7 +46,11 @@ const content = [{
     author: "晓",
     date: "Nov 0 2019",
     avatar: "/images/4.jpg",
-    postId: 5
+    postId: 5,
+    music:{
+      url:"https://m801.music.126.net/20210427184731/86071f54f49fed6b5c922e7591a5aa03/jdyyaac/055e/0f09/535d/24ee7281878c7804e64ad7cc7ec63165.m4a",
+      title:"音乐名字"
+    }
   }
 ]
 

@@ -72,4 +72,14 @@ margin-top: 20rpx;
 margin-right: 30rpx;
 line-height: 44rpx;
 letter-spacing: 2px;
+font-size: 22rpx;
+}
+.audio{
+  width: 102rpx;
+  height: 102rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 150rpx;
+  opacity: 0.4;
 }

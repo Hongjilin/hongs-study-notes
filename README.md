@@ -54,18 +54,24 @@
 #### 笔记目录
 
 >此处笔记目录可能存在更新不及时的情况,所以建议有需要的直接看仓库内的笔记,但每隔一段时间将会更新一次,`每个笔记相应学习资料将标识在其笔记说明中`,下边这部分主要是当作知识索引,方便大家查找
+>
+>有的笔记下方会给出有必要的简略的介绍,然后都添加上相应位置的链接,点击即可跳转
 
 ##### Ⅰ-[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)
 
->1. [`偷师`笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E5%81%B7%E5%B8%88%E7%AC%94%E8%AE%B0/%E5%AE%9E%E4%B9%A0%E6%9C%9F%E9%97%B4'%E5%81%B7%E5%B8%88'%E8%AE%B0%E5%BD%95))
+>1. [`偷师`笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E5%81%B7%E5%B8%88%E7%AC%94%E8%AE%B0/%E5%AE%9E%E4%B9%A0%E6%9C%9F%E9%97%B4'%E5%81%B7%E5%B8%88'%E8%AE%B0%E5%BD%95)
 >
->   > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享的内容
+>    > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享的内容
 >
 >2. [一二阶段知识补缺笔记(html+css+js)](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%8C%E9%98%B6%E6%AE%B5%E7%9F%A5%E8%AF%86%E8%A1%A5%E7%BC%BA%E7%AC%94%E8%AE%B0(html+css+js))
+>
+>    > 该阶段学习的时候没有形成系统的学习笔记,较为碎片化,预计在未来时间再次进行相关知识梳理与笔记重录
 >
 >3. [Scss笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
 >
 >4. [ES6学习资料摘录与笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6学习资料摘录与笔记)
+>
+>    > 该笔记主要是相关学习资料整合,主要出自[阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html),个人对于es6-11使用过程遇到的问题及相关解决、见解注释在其中的[A_ES6知识补充与所遇问题](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ES6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%91%98%E5%BD%95%E4%B8%8E%E7%AC%94%E8%AE%B0/A_ES6%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%E4%B8%8E%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98.md)笔记中
 >
 >5. [Ajax、Axios学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Ajax、Axios学习笔记)
 >
@@ -97,15 +103,15 @@
 
 >1. [Java学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Java)
 >
->   > 此处目前只有javaSE阶段学习笔记,即java基础,其他如SSM、微服务等部分因当初学习不够系统,并未留下笔记,计划在未来时间重新进行知识梳理与笔记记录
+>    > 此处目前只有javaSE阶段学习笔记,即java基础,其他如SSM、微服务等部分因当初学习不够系统,并未留下笔记,计划在未来时间重新进行知识梳理与笔记记录
 >
 >2. [NodeJs学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Nodejs)
 >
->   > 此处目前记录的是`Nodejs`、`Express框架`、其他如node中使用`redis`、`图片校验码`、`JWT和MD5加密`、`文件上传`等相关知识点笔记
+>    > 此处目前记录的是`Nodejs`、`Express框架`、其他如node中使用`redis`、`图片校验码`、`JWT和MD5加密`、`文件上传`等相关知识点笔记
 >
 >3. [Mysql数据库](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93)
 >
->   > 此处目前只记录的是Mysql的安装卸载
+>    > 此处目前只记录的是Mysql的安装卸载,其他知识学习时间较早,当时未形成笔记,留待以后重新进行知识梳理与相关笔记记录
 >
 >4. 此部分更新较慢
 
@@ -113,15 +119,15 @@
 
 >1. [数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)(`目前持续学习更新中`)
 >
->     > 即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记
+>    > 即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记
 >
 >2. [软件模式设计](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1)
 >
->     > 编程基石,在我达到一定技术能力后将会继续完善该部分
+>    > 编程基石,在我达到一定技术能力后将会继续完善该部分
 >
 >3. [计算机网络](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/计算机网络)
 >
->   > 此部分未学习,列入未来学习计划,待更新
+>    > 此部分未学习,列入未来学习计划,待更新
 >
 >4. 其他
 
@@ -133,7 +139,7 @@
 >
 >2. [教坏小孩子的笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/%E6%95%99%E5%9D%8F%E5%B0%8F%E5%AD%A9%E5%AD%90%E7%9A%84%E7%AC%94%E8%AE%B0)
 >
->   > 各种如何`白(po)嫖(jie)学习软件`的教程整理(你懂的),仅供学习用途、如果侵犯到他人权益请私聊本人删除
+>    > 各种如何`白(po)嫖(jie)学习软件`的教程整理(你懂的),仅供学习用途、如果侵犯到他人权益请私聊本人删除
 >
 >3. [我的 Vscode配置](https://gitee.com/hongjilin/hongs-study-notes/blob/master/杂记_其他(如破解与配置)的碎片化笔记/MyVscode配置.md)
 >

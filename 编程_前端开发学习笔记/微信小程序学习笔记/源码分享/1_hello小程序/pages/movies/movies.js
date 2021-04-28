@@ -1,4 +1,4 @@
-// pages/welcome/welcome.js
+// pages/movies/movies.js
 Page({
 
   /**
@@ -7,28 +7,12 @@ Page({
   data: {
 
   },
-  //跳转页面
-  onTap: (params) => {
 
-    console.log("跳转")
-    //这个方法跳转相当于变成子页面
-    wx.switchTab({
-      url: '/pages/posts/posts',
-    })
-    // //关闭这个
-    // wx.redirectTo({
-    //   url: '/pages/posts/posts',
-    // })
-/**
- wx.navigateTo() 没有关闭当前的是将页面压入页面站
- redirectTo() 
- */
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-console.log("页面加载welcome")
+
   },
 
   /**

@@ -1,0 +1,2 @@
+<!--components/posts/index.wxml-->
+<text>{{text}}</text>

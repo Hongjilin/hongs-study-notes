@@ -1,5 +1,6 @@
 <!--pages/posts/posts.wxml-->
 <view>
+<post text="777"/>
   <!-- 
     //1. "false" ==true 普通字符串  
     //    "{{false}}"==false   {{}}视作运算标记,里面的内容表示表达式 

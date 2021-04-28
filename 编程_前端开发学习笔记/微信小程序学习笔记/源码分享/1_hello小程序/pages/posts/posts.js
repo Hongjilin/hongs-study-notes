@@ -34,11 +34,8 @@ Page({
     // // wx.setStorageSync('flag', false)
     // const flag=wx.getStorageSync('flag')
     // console.log(flag)
-    const flag = await wx.getStorage({ key: 'flag'})
-    console.log(flag)
-
-
-
+    // const flag = await wx.getStorage({ key: 'flag'})
+    // console.log(flag)
   },
 
   onGoDetail: (e) => {
@@ -67,7 +64,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log("onHide")
 
   },
 
@@ -75,7 +71,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log("onUnload")
   },
 
   /**
@@ -89,13 +84,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log("页面上拉触底事件")
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log("分享")
   }
 })

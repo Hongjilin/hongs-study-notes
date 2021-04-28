@@ -1,4 +1,6 @@
 App({
+  // gIsPlayMusic:false,
+  gIsPlayMusicId:-1,//此处设计,只有一篇文章由背景音乐,所以直接存id即可
 
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）

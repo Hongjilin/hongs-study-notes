@@ -7,14 +7,14 @@
 >
 > 标记 `A_` 开头的通常是整合梳理后的版本 or 更为详细系统学习阶段的笔记
 >
-> 觉得本笔记好的、想要保存下来阅读的,建议先看本人[关于Typora笔记分享](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/Typora%E4%BD%BF%E7%94%A8%E5%88%86%E4%BA%AB.md)
+> 觉得本笔记好的、想要保存下来阅读的,建议先看本人[杂记-Typora使用笔记分享](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/Typora%E4%BD%BF%E7%94%A8%E5%88%86%E4%BA%AB.md)
 
 
 #### 声明
 > 记笔记的当初是为了记录自己学习以及归类知识点,所以当初出于方便的原因,某些部分引用没有标记出处,现在也无从找寻。如今将其分享出来,笔记中如有错误或者疑问欢迎提出来交流讨论,但求共同进步
 >
 > 建议使用或者阅读本人笔记时使用Typora笔记软件打开使用,因为本人就是用该软件进行笔记撰写,很多地方都是按照在该软件中看到的模样进行笔记排版,使用后你会发现`新世界`的
->本人[关于Typora笔记分享](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/Typora%E4%BD%BF%E7%94%A8%E5%88%86%E4%BA%AB.md),在里面我会进行大致使用方法,使用后本笔记展示效果截图等
+>本人[杂记-Typora使用笔记分享](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/Typora%E4%BD%BF%E7%94%A8%E5%88%86%E4%BA%AB.md),在里面我会进行大致使用方法,使用后本笔记展示效果截图等
 
 
 #### 内容
@@ -48,3 +48,105 @@
 > 本人本着方便同学们,大家共同进步的初心,所以将本人过滤一遍后还觉得很好用的知识或者软件推荐给大家,本人基本每天都会进行笔记的更新与勘误,所以觉得有用的话给本笔记`点个star`,能`及时收到笔记的更新的同时也能给予本人些许肯定`,感谢不尽
 >
 > 加油,打工人!
+
+#### 笔记目录
+
+>此处笔记目录可能存在更新不及时的情况,所以建议有需要的直接看仓库内的笔记,但每隔一段时间将会更新一次,`每个笔记相应学习资料将标识在其笔记说明中`,下边这部分主要是当作知识索引,方便大家查找
+
+##### Ⅰ-[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)
+
+>1. [偷师笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E5%81%B7%E5%B8%88%E7%AC%94%E8%AE%B0/%E5%AE%9E%E4%B9%A0%E6%9C%9F%E9%97%B4'%E5%81%B7%E5%B8%88'%E8%AE%B0%E5%BD%95)
+>
+>   -->该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享的内容
+>
+>2. [一二阶段知识补缺笔记(html+css+js)](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%8C%E9%98%B6%E6%AE%B5%E7%9F%A5%E8%AF%86%E8%A1%A5%E7%BC%BA%E7%AC%94%E8%AE%B0(html+css+js))
+>
+>3. [Scss笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
+>
+>4. [ES6学习资料摘录与笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6学习资料摘录与笔记)
+>
+>5. [Ajax、Axios学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Ajax、Axios学习笔记)
+>
+>6. [Promise学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Promise学习笔记)
+>
+>7. [Vue框架笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Vue%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/)
+>
+>8. [微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
+>
+>9. [React框架笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)
+>
+>10. [ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ReactHooks%E7%AC%94%E8%AE%B0)
+>
+>11. [Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)
+>
+>12. [Mobx学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Mobx学习笔记)
+>
+>13. [TypeScrip笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScrip%E7%AC%94%E8%AE%B0)
+>
+>14. [UmiJS笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/UmiJS%E7%AC%94%E8%AE%B0)
+>
+>15. [Webpack学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
+>
+>16. [Chrome扩展程序开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome扩展程序开发学习笔记)
+>
+>17. 其他待更新
+
+##### Ⅱ-[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)
+
+>1. [Java学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Java)
+>
+>   -->此处目前只有javaSE阶段学习笔记,即java基础,其他如SSM、微服务等部分因当初学习不够系统,并未留下笔记,计划在未来时间重新进行知识梳理与笔记记录
+>
+>2. [NodeJs学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Nodejs)
+>
+>   -->此处目前记录的是`Nodejs`、`Express框架`、其他如node中使用`redis`、`图片校验码`、`JWT和MD5加密`、`文件上传`等相关知识点笔记
+>
+>3. [Mysql数据库](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93)
+>
+>   -->此处目前只记录的是Mysql的安装卸载
+>
+>4. 此部分更新较慢
+
+##### Ⅲ-[编程_算法及课程基础学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记)
+
+>1. [数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)(`目前持续学习更新中`)
+>   -->即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记
+>
+>2. [软件模式设计](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1)
+>
+>   -->编程基石,在我达到一定技术能力后将会继续完善该部分
+>
+>3. [计算机网络](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/计算机网络)
+>
+>   -->此部分未学习,列入未来学习计划,待更新
+>
+>4. 其他
+
+##### Ⅳ-[杂记_其他(如破解与配置)的碎片化笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
+
+>此处主要记录`值得Mark的网站及工具`、`各种软件白(po)嫖(jie)`、`本人编程工具配置`、`本人软件分享`、以及其他碎片化知识点
+>
+>1. [Typora笔记软件分享](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记/Typora笔记软件分享)
+>
+>2. [教坏小孩子的笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/%E6%95%99%E5%9D%8F%E5%B0%8F%E5%AD%A9%E5%AD%90%E7%9A%84%E7%AC%94%E8%AE%B0)
+>
+>   -->各种如何`白(po)嫖(jie)学习软件`的教程整理(你懂的),仅供学习用途、如果侵犯到他人权益请私聊本人删除
+>
+>3. [我的 Vscode配置](https://gitee.com/hongjilin/hongs-study-notes/blob/master/杂记_其他(如破解与配置)的碎片化笔记/MyVscode配置.md)
+>
+>4. [我的 IntelliJIDEA配置](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记/MyIntelliJIDEA配置)
+>
+>5. [我的 uTools配置](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/MyuTools%E9%85%8D%E7%BD%AE.md)
+>
+>6. 其他
+
+##### Ⅴ-[面试_面试题整理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86)
+
+>本笔记将记录本人以及朋友备战的面试题、面试过程遇到的面试题、觉得有用的面试题,以不同时期作为分类
+>
+>1. [前端-实习生阶段面试题](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E9%9D%A2%E5%90%91%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%98%B6%E6%AE%B5(vue%E6%8A%80%E6%9C%AF%E6%A0%88)_2020-10%E6%9C%88%E6%95%B4%E7%90%86)
+>2. 其他待更新
+
+##### Ⅵ-[提升_自我提升学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/提升_自我提升学习笔记)
+
+> 这是本人自我提升学习笔记,觉得可以有益于大家的笔记分享

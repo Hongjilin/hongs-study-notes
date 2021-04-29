@@ -1,0 +1,27 @@
+/* components/movie-list/index.wxss */
+text{
+  font-size: 24rpx;
+
+}
+.title-container{
+display: flex;
+flex-flow: row;
+justify-content: space-between;
+}
+.movie-container{
+  display: flex;
+  flex-flow: row;
+}
+
+
+.container{
+  display: flex;
+  /* flex-flow: column nowrap; */
+  flex-direction: column;
+  padding:36rpx 38rpx;
+}
+.movie-container{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}

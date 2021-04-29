@@ -1,11 +1,11 @@
-// components/posts/index.js
+// components/movie-list/index.js
 Component({
   /**
    * 组件的属性列表
    */
+  externalClasses:['f-class'],
   properties: {
-     res:Object 
-      // text:String  //这么定义不能赋默认值
+      // 
   },
 
   /**

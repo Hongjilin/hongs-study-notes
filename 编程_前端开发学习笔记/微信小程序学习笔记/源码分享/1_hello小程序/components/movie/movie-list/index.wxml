@@ -1,0 +1,14 @@
+<!--components/movie-list/index.wxml-->
+
+
+<view class="container ">
+  <view class="title-container">
+    <text>正在热映</text>
+    <text>更多</text>
+  </view>
+  <view class="movie-container">
+    <movie-demo />
+    <movie-demo />
+    <movie-demo />
+  </view>
+</view>

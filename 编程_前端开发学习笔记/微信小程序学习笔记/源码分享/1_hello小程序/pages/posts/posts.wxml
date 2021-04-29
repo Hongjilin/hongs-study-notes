@@ -1,6 +1,6 @@
 <!--pages/posts/posts.wxml-->
 <view>
-<post text="777"/>
+
   <!-- 
     //1. "false" ==true 普通字符串  
     //    "{{false}}"==false   {{}}视作运算标记,里面的内容表示表达式 
@@ -20,34 +20,14 @@
       <image mode="scaleToFill" src="/images/3.jpg"></image>
     </swiper-item>
   </swiper>
+
+ 
+
 <!-- 一般循环要在外面加block包裹,如果只有一个view可以放在view上省略block -->
 <!-- 一般默认小程序帮我们声明 wx:for-item="item"以及wx:for-index="index"  所以我们通常不用写,除非要改名 -->
 <!-- 绑定key时要不能绑定item.id而是要绑定成id,-->
 <block wx:for="{{posts}}"  wx:for-item="item"  wx:key="postId" wx:for-index="index">
-  <view data-id="{{item.postId}}"  bind:tap="onGoDetail" class="post-container">
-    <!-- <l-icon size="20" color="#34bfa3" name="cart"></l-icon>
-    <l-icon name="research"></l-icon> -->
-    <view class="post-author-date">
-      <!--条件渲染
-         <image wx:if="{{true}}" class="post-author" src="/images/测试头像图片.jpg"></image>
-      <text wx:else class="post-date">2021/4/22</text> -->
-      <image class="post-author" src="{{item.avatar}}"></image>
-      <text class="post-date">{{item.author}}</text>
-    </view>
-    <view class="post-mian">
-    <text class="post-title">{{item.title}}</text>
-    <image src="{{item.imgSrc}}"></image>
-    <text class="post-content">{{item.content}}</text>
-  </view>
-    <view class="post-link">
-      <!-- <image  src="/images/icon/收藏.png"></image> -->
-      <l-icon  color="#666" size="32" name="favor"></l-icon>
-      <text style=" margin-left: 10rpx">{{item.reading}}</text>
-      <image src="/images/icon/眼睛.png"></image>
-      <text>{{item.collection}}</text>
-    </view>
-  </view>
-
+ <post res="{{item}}"/>
 </block>
 
 

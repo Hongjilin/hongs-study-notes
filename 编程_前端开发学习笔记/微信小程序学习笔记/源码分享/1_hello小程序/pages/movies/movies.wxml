@@ -1,5 +1,14 @@
 <!--pages/movies/movies.wxml-->
-<text>pages/movies/movies.wxml</text>
+<!-- <text>pages/movies/movies.wxml</text> -->
+
+<view  >
+<movie-list f-class="aa"/>
+<movie-list f-class="movie-list"/>
+<movie-list f-class="movie-list"/>
+</view>
+
+
+
 
 
 

@@ -1,11 +1,10 @@
-// components/posts/index.js
+// components/movie/movie-demo/index.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-     res:Object 
-      // text:String  //这么定义不能赋默认值
+
   },
 
   /**

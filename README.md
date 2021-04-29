@@ -63,9 +63,9 @@
 
 ##### Ⅰ-[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)
 
->1. [`偷师`笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E5%81%B7%E5%B8%88%E7%AC%94%E8%AE%B0/%E5%AE%9E%E4%B9%A0%E6%9C%9F%E9%97%B4'%E5%81%B7%E5%B8%88'%E8%AE%B0%E5%BD%95)
+>1. [A_编程习惯改进Mark](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E7%BC%96%E7%A8%8B%E4%B9%A0%E6%83%AF%E6%94%B9%E8%BF%9BMark)
 >
->    > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享的内容
+>    > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享、并且要用以改进自身编程能力及习惯的内容
 >
 >2. [一二阶段知识补缺笔记(html+css+js)](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%8C%E9%98%B6%E6%AE%B5%E7%9F%A5%E8%AF%86%E8%A1%A5%E7%BC%BA%E7%AC%94%E8%AE%B0(html+css+js))
 >
@@ -135,7 +135,21 @@
 >
 >4. 其他
 
-##### Ⅳ-[杂记_其他(如破解与配置)的碎片化笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
+##### Ⅳ-[编程_自封装utils或组件整合笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
+
+>本人学编程以来封装的部分工具包分享,有从刚开始接触编程便撰写出来的相对low的代码快,也有的后面时间写就会显得稍好些的模块包。如果对于其中内容有所不理解的可以私聊我 作者：[hongjilin](https://gitee.com/hongjilin) 著作权归作者所有,转载请注明出处。
+>
+>1. [自封装JavaScript工具包](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E8%87%AA%E5%B0%81%E8%A3%85utils%E6%88%96%E7%BB%84%E4%BB%B6%E6%95%B4%E5%90%88%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%B0%81%E8%A3%85JavaScript%E5%B7%A5%E5%85%B7%E5%8C%85)
+>
+>   > 本人目前阶段封装的最多的工具包,对各种项目中会遇到的操作进行简化封装,并能抽出到各种项目中使用的
+>
+>1. [自封装前端组件](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E8%87%AA%E5%B0%81%E8%A3%85utils%E6%88%96%E7%BB%84%E4%BB%B6%E6%95%B4%E5%90%88%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%B0%81%E8%A3%85%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6)
+>
+>   > 目前还未整理,预将未来自己封装的通用组件记录于此,为以后自己开发开源组件库做准备
+>1. 其他,其它语言项目开发接触少,暂无准备封装
+
+
+##### Ⅴ-[杂记_其他(如破解与配置)的碎片化笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
 
 >此处主要记录`值得Mark的网站及工具`、`各种软件白(po)嫖(jie)`、`本人编程工具配置`、`本人软件分享`、以及其他碎片化知识点
 >
@@ -153,13 +167,13 @@
 >
 >6. 其他
 
-##### Ⅴ-[面试_面试题整理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86)
+##### Ⅵ-[面试_面试题整理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86)
 
 >本笔记将记录本人以及朋友备战的面试题、面试过程遇到的面试题、觉得有用的面试题,以不同时期作为分类
 >
 >1. [前端-实习生阶段面试题](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E9%9D%A2%E5%90%91%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%98%B6%E6%AE%B5(vue%E6%8A%80%E6%9C%AF%E6%A0%88)_2020-10%E6%9C%88%E6%95%B4%E7%90%86)
 >2. 其他待更新
 
-##### Ⅵ-[提升_自我提升学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/提升_自我提升学习笔记)
+##### Ⅶ-[提升_自我提升学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/提升_自我提升学习笔记)
 
 > 这是本人自我提升学习笔记

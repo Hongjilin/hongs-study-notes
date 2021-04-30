@@ -103,7 +103,7 @@
 
 ##### Ⅳ-[编程_自封装utils或组件整合笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
 
->本人学编程以来封装的部分工具包分享,有从刚开始接触编程便撰写出来的相对low的代码快,也有的后面时间写就会显得稍好些的模块包。如果对于其中内容有所不理解的可以私聊我 作者：[hongjilin](https://gitee.com/hongjilin) 著作权归作者所有,转载请注明出处。
+>本人学编程以来封装的部分工具包分享,有从刚开始接触编程便撰写出来的相对low的代码快,也有的后面时间写就会显得稍好些的模块包。如果对于其中内容有所不理解的可以私聊我 转载请注明出处。
 >
 >1. [自封装JavaScript工具包](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E8%87%AA%E5%B0%81%E8%A3%85utils%E6%88%96%E7%BB%84%E4%BB%B6%E6%95%B4%E5%90%88%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%B0%81%E8%A3%85JavaScript%E5%B7%A5%E5%85%B7%E5%8C%85)
 >

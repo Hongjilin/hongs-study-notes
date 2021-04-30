@@ -40,7 +40,7 @@
 
 >ps:小程序中使用async、await需开启`增强编译`。
 >
->1. 以`wx.request`为示例,本人初学小程序时写的demo,[`源码地址分享`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%BA%90%E7%A0%81%E5%88%86%E4%BA%AB)
+>1. 以`wx.request`为示例,本人初学小程序时写的demo,[`源码地址分享`](https://gitee.com/hongjilin/wechat-applet-demo-source-code)
 >
 >  ```js
 >  import { toPromise } from '../../utils/index'

@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "l-avatar":"/miniprogram_npm/lin-ui/avatar/index"
-  },
-    "navigationBarBackgroundColor": "#b3d4db",
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "小程序welcome"
-  
-}

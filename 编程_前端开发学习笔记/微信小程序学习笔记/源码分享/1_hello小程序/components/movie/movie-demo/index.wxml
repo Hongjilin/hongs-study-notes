@@ -1,9 +1,0 @@
-<!--components/movie/movie-demo/index.wxml-->
-<view class="container">
-  <image class="poster" src="/images/1.jpg" />
-  <text class="title">盗梦空间盗梦空间盗梦空间</text>
-  <view class="rate-container">
-    <l-rate disabled size="22" score="3.2" />
-    <text class="score">3.0</text>
-  </view>
-</view>

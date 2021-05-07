@@ -33,9 +33,9 @@
 >
 >    > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享、并且要用以改进自身编程能力及习惯的内容
 >
->2. [一二阶段知识补缺笔记(html+css+js)](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E4%B8%80%E4%BA%8C%E9%98%B6%E6%AE%B5%E7%9F%A5%E8%AF%86%E8%A1%A5%E7%BC%BA%E7%AC%94%E8%AE%B0(html+css+js))
+>2. [(html+css+js)零散笔记,待梳理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/(html+css+js)%E9%9B%B6%E6%95%A3%E7%AC%94%E8%AE%B0,%E5%BE%85%E6%A2%B3%E7%90%86)
 >
->    > 该阶段学习的时候没有形成系统的学习笔记,较为碎片化,预计在未来时间再次进行相关知识梳理与笔记重录
+>    > 该阶段学习的时候没有形成系统的学习笔记,较为碎片化,后续补充知识点将暂时以单独知识点陈列,但计划在未来某一时间再次进行一次完整的知识系统梳理学习与笔记重录
 >
 >3. [Scss笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
 >

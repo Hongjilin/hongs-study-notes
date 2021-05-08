@@ -379,7 +379,9 @@ git logbranch
 
 ### 1、git stash
 
-> `git stash`命令会将未完成的修改保存到一个栈上,而你可以在任何时候重新应用这些改动(`git stash apply`)
+> `git stash`命令会将未完成的修改保存到一个栈上,而你可以在任何时候重新应用这些改动(`git stash apply`),
+>
+> `注意!!!!!`:使用前你要先`git add .`,否则你会发现,你执行此命令后,没有追踪的部分全部消失了
 
 ### 2、git stash list 
 
@@ -584,33 +586,41 @@ git tag -a v1.0 提交对象哈希 -m "我的注释信息"
 >
 >2. Header
 >
->   Header部分只有一行，包括三个字段：`type`（必需）、`scope`（可选）和`subject`（必需）。
+> Header部分只有一行，包括三个字段：`type`（必需）、`scope`（可选）和`subject`（必需）。
 >
->   **（1）type**
+> **（1）type**
 >
->   `type`用于说明 commit 的类别，只允许使用下面7个标识。
+> `type`用于说明 commit 的类别，只允许使用下面几个标识。
 >
->   > - feat：新功能（feature）
->   > - fix：修补bug
->   > - docs：文档（documentation）
->   > - style： 格式（不影响代码运行的变动）
->   > - refactor：重构（即不是新增功能，也不是修改bug的代码变动）
->   > - test：增加测试
->   > - chore：构建过程或辅助工具的变动
+> > ```js
+> > feat：新功能（feature）。
+> > fix/to：修复bug，可以是QA发现的BUG，也可以是研发自己发现的BUG。
+> > fix：产生diff并自动修复此问题。适合于一次提交直接修复问题
+> > to：只产生diff不自动修复此问题。适合于多次提交。最终修复问题提交时使用fix
+> > docs：文档（documentation）。
+> > style：格式（不影响代码运行的变动）。
+> > refactor：重构（即不是新增功能，也不是修改bug的代码变动）。
+> > perf：优化相关，比如提升性能、体验。
+> > test：增加测试。
+> > chore：构建过程或辅助工具的变动。
+> > revert：回滚到上一个版本。
+> > merge：代码合并。
+> > sync：同步主线或分支的Bug。
+> > ```
 >
->   如果`type`为`feat`和`fix`，则该 commit 将肯定出现在 Change log 之中。其他情况（`docs`、`chore`、`style`、`refactor`、`test`）由你决定，要不要放入 Change log，建议是不要。
+> 如果`type`为`feat`和`fix`，则该 commit 将肯定出现在 Change log 之中。其他情况（`docs`、`chore`、`style`、`refactor`、`test`）由你决定，要不要放入 Change log，建议是不要。
 >
->   **（2）scope**
+> **（2）scope**
 >
->   `scope`用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
+> `scope`用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
 >
->   **（3）subject**
+> **（3）subject**
 >
->   `subject`是 commit 目的的简短描述，不超过50个字符。
+> `subject`是 commit 目的的简短描述，不超过50个字符。
 >
->   > - 以动词开头，使用第一人称现在时，比如`change`，而不是`changed`或`changes`
->   > - 第一个字母小写
->   > - 结尾不加句号（`.`）
+> > - 以动词开头，使用第一人称现在时，比如`change`，而不是`changed`或`changes`
+> > - 第一个字母小写
+> > - 结尾不加句号（`.`）
 
 # Ⅲ-远程操作
 
@@ -627,8 +637,6 @@ git tag -a v1.0 提交对象哈希 -m "我的注释信息"
 >3. 远程分支
 >
 >   指保存在git网站上的那个远程仓库中的分支
->
->
 
 ### 1、团队协作流程
 
@@ -772,15 +780,374 @@ git tag -a v1.0 提交对象哈希 -m "我的注释信息"
 > git merge 对应的远程跟踪分支
 > ```
 
+------
 
 
 
+# Ⅳ- 实际遇到的问题与解决Mark
+
+## 1、将本地已有的一个项目上传到新建的git仓库的方法
+
+将本地已有的一个非git项目上传到新建的git仓库的方法一共有两种。
+
+### Ⅰ-  克隆+拷贝
+
+>第一种方法比较简单，直接用把远程仓库拉到本地，然后再把自己本地的项目拷贝到仓库中去。然后push到远程仓库上去即可。**此方法适用于本地项目不是一个git仓库的情况。**
+>
+>具体步骤如下：
+>
+>#### 1、首先克隆
+>
+>```bash
+>git clone git@github.com:yuanmingchen/tensorflow_study.git
+>```
+>
+>#### 2、然后复制自己项目的所有文件到刚刚克隆下来的仓库中
+>
+>#### 3、最后push到远程仓库上面去：
+>
+>```bash
+>git push -u origin master
+>```
+
+### Ⅱ-  强行合并两个仓库
+
+>第二种方法就是先将本地的项目初始化为一个git仓库，然后再强行合并本地仓库和远程仓库，由于这两个仓库是完全不同的两个仓库，所以直接pull都会报错，需要在pull的时候假加上–allow-unrelated-histories才可以pull成功。**此方法适用于本地项目已经是一个git仓库的情况。**
+>
+>具体步骤如下：
+>
+>#### 1、新建git仓库，将本地项目设置为一个git仓库。如果本地项目已经是一个git仓库了，请跳过这一步。在项目根目录下：
+>
+>```bash
+>git init
+>```
+>
+>#### 2、把当前目录下的已有文件全部加到刚刚新建的git仓库中：
+>
+>```bash
+>git add .
+>```
+>
+>#### 3、保存刚刚加入的文件，并书写保存信息：
+>
+>```bash
+>git commit -m "push current files"
+>```
+>
+>#### 4、将本地仓库与远程仓库关联起来：
+>
+>```bash
+>git remote add origin git@github.com:yuanmingchen/tensorflow_study.git
+>```
+>
+>#### 5、pull远程仓库的内容，更新本地仓库，使用–allow-unrelated-histories忽略本地仓库和远程仓库的无关性，强行合并（关键）：
+>
+>```bash
+>git pull origin master --allow-unrelated-histories
+>```
+>
+>#### 6、把本地仓库的内容push到远程仓库：
+>
+>```bash
+>git push -u origin master
+>```
+>
+>然后就ok了。
+
+### Ⅲ- 其他git命令
+
+>最后附上git的一些其他命令：
+>1、删除已将关联的远程主机
+>
+>```bash
+>git remote rm origin
+>```
+>
+>2、查看所有本地分支
+>
+>```bash
+>git branch -a
+>```
+>
+>3、新建一个分支，名字叫xf
+>
+>```bash
+>git branch xf
+>```
+>
+>4、切换分支到xf分支
+>
+>```bash
+>git checkout xf
+>```
+>
+>5、把远程分支的代码pull到本地分支：git pull <远程主机名> <远程分支名>:<本地分支名>
+>如：取回origin主机的master分支，与本地的xf分支合并，输入命令：
+>
+>```bash
+>git pull origin master:xf
+>```
+>
+>6、推送当前的分支，git push <远程主机名> <本地分支名>:<远程分支名>
+>PS:注意，分支推送顺序的写法是<来源地>:<目的地>，所以git pull是<远程分支>:<本地分支>，而git push是<本地分支>:<远程分支>。
+>如：把本地的xf分支推送到origin主机的master分支，输入命令：
+>
+>```bash
+>git push origin xf:master
+>```
 
 
 
+## 2、解决同一台电脑生成两份或多份ssh密钥、公钥映射两个或多个GitHub账号
+
+> 此解决方案由百度多个方案结合而来,截取对我有用部分
+
+### Ⅰ- 需求分析
+
+> 本人注册一个GitHub账户，用来分享本人自己的开源项目或者代码，同时，公司注册了一个GitHub账户，用来分享公司的开源项目。如果按照单个ssh公钥生成的方法则会把之前的公钥覆盖掉，这样将导致其中一方在下一次上传代码，本机和GitHub无法映射成功。
+>
+> 解决这个问题首先要明确如何生成单个ssh公钥。
+> ssh生成单个公钥命令：`ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`。[如何生成ssh公钥](https://blog.csdn.net/mynameissls/article/details/50528048)
+> 上述命令会在当前`~/.ssh`目录下生成`id_rsa`和`id_rsa.pub`两个文件。其中`id_rsa`是私钥文件，`id_rsa_.pub`是公钥文件。
+> `id_rsa`和`id_rsa_.pub`文件都是通过一个邮箱号生成的，同一个公钥文件不可以配置两个不同GitHub账户（已测试）。
+> 那么两个GitHub账户就需要两个不同的邮箱号，来生成两组不同的公钥文件。
+
+### Ⅱ- 解决方案思路
+
+>命令：`ssh-keygen -t rsa -C "your_email@example.com" -f ~/.ssh/id_rsa_example`
+>示例：分别以791815567@qq.com和galaxysoft@sina.cn两个邮箱在`~/.ssh`目录下生成两级不同的公钥文件。
+>791815567@qq.com邮箱：`ssh-keygen -t rsa -C "791815567@qq.com" -f ~/.ssh/id_rsa_me`
+>galaxysoft@sina.cn邮箱：`ssh-keygen -t rsa -C "galaxysoft@sina.cn" -f ~/.ssh/id_rsa_galaxysoft`
+>生成过程可参考[如何生成单个ssh公钥](https://blog.csdn.net/mynameissls/article/details/50528048) 这篇文章。
+>执行完成后，会以`~/.ssh`目录下看791815567@qq.com邮箱对应的私钥文件`id_rsa_me`、公钥文件`id_rsa_me.pub`和galaxysoft@sina.cn邮箱对应的私钥文件`id_rsa_galaxysoft`、公钥文件`id_rsa_galaxysoft.pub`
+>分别在两个GitHub账户中添加对应的公钥信息即可，可参考[如何生成单个ssh公钥](https://blog.csdn.net/mynameissls/article/details/50528048) 这篇文章
+
+### Ⅲ- 生成新ssh key
+
+> 如果我们电脑上已经存在了一个ssh key，那么我们需要在我们电脑上生成第二个你想在本电脑上使用的id_rsa，使用命令：`ssh-keygen -t rsa -C "你的github注册邮箱"`。
+>
+> 下图红色标注部分会提示你把新生成的id_rsa存放到哪里，此处默认会存放在c盘的用户名下的.ssh文件夹下（即你第一个github用户ssh key存放的目录），因此我们需要输入路径/c/Users/DodoMonster/.ssh（注意此路径是你的系统盘下用户目录安放ssh密钥的目录，请使用自己电脑上相对应的目录），最后我以“id_rsa_me”重新命名了ssh key防止默认与已有的ssh key重复。
+>
+> > 在输入了路径后，会提示你输入提交项目时输入的验证密码，不输则表示不用密码，这是为了防止别人随便在你的项目上push东西，所以最好还是输入以下你的密码。回车，再重复输入确认回车即可。
+
+### Ⅳ- 添加新ssh key
+
+>默认SSH只会读取id_rsa，所以为了让SSH识别新的私钥，需要将其添加到SSH agent
+>使用命令：`ssh-add ~/.ssh/id_rsa_me`(后面的是自己取的名字)
+>
+>如果报错：Could not open a connection to your authentication agent.无法连接到ssh agent
+>可执行`ssh-agent bash`命令后再执行`ssh-add`命
+>
+>然后将公钥添加到git账号中 https://github.com/settings/keys
+
+### Ⅴ- 配置config文件
+
+> 查看.ssh文件中是否存在config文件
+>
+> 如果已存在则直接编辑config文件，命令：`vim config` #这是linux的命令，进入了vim界面后按`a或i或A或I`进入编辑模式，编辑完成后按esc键输入`:wq` 保存文件退出
+>
+> 如果不存在则需要创建config文件，命令：`touch config`，再对config文件进行编辑
+>
+> 对config文件进行配置填写：
+>
+> ```bash
+> #Default 第一个账号(123456@xxxx.com)
+> 
+> Host gsgit
+>     HostName gitee.com
+>     PreferredAuthentications publickey
+>     IdentityFile ~/.ssh/id_rsa_me
+>     
+>    
+> #second 第二个账号（38894403@xxxx.com）
+>     
+> Host mygit
+>      HostName gitee.com
+>     PreferredAuthentications publickey
+>     IdentityFile ~/.ssh/id_rsa
+> ```
+>
+> > 其中Host 后的名字可以随意方便自己记忆，但HostName必须为`github.com(或者其它git地址)。`
+
+### Ⅵ- 测试是否配置成功
+
+>使用命令：
+>
+>```bash
+>ssh -T git@zc
+>```
+>
+>出现欢迎语则为配置成功。
+>
+>注意：配置完成后，在连接Host不是github.com的github仓库时，远程库的地址要对应地做一些修改：
+>
+>而并非原来的git@github.com
+>
+>```shell
+>git clone git@gitee.com:hongjilin/cx.git
+>//改为
+>git clone git@mygit:hongjilin/cx.git
+>```
+>
+>这样每次连接都会使用id_rsa_me与服务器进行连接。
+>
+>配置至此，大功告成！
+
+###  Ⅶ- 问题Mark
+
+> 当我切换到另外一个账号提交时 commit的提交者仍寻找全局配置中的username作为签名 而不是当前本地库绑定提交账号的用户名
+>
+> 询问老师后老师的回答是:目前切换账号后就只有 去修改配置文件的信息 这个解决办法
+>
+> 所以此处`Mark`,留待后续学习生活解决
+
+## 3、commit报错无法提交
+
+>```shell
+>> running pre-commit hook: lint-staged
+>[STARTED] Preparing...
+>[FAILED] warning: LF will be replaced by CRLF in sh.exe.stackdump.
+>[FAILED] The file will have its original line endings in your working directory.
+>[STARTED] Running tasks...
+>[SKIPPED] Skipped because of previous git error.
+>[STARTED] Applying modifications...
+>[SKIPPED]
+>[SKIPPED]   × lint-staged failed due to a git error.
+>
+>  × lint-staged failed due to a git error.
+>[STARTED] Cleaning up...
+>[SKIPPED]   × lint-staged failed due to a git error.
+>  Any lost modifications can be restored from a git stash:
+>
+>
+>pre-commit hook failed (add --no-verify to bypass)
+>```
+>
+>解决方式
+>
+>```shell
+>执行npm run lint， 根据提示修改错误（推荐）
+>git commit -m "" --no-verify 绕过了lint的检查
+>```
 
 
 
+## 4、Git提交时出现`Merge branch 'master' of ...`之解决方法
+
+>多人协作开发项目，在上传代码时通常会先pull一下远程代码，使本地与远程同步更新，但是如果远程此时与自己代码存在冲突，在解决冲突后提交有时会出现“Merge branch ‘master’ of …”这条信息。这是因为pull其本质是fetch+Merge的结合。通常会分为以下两种情况：
+>
+>1.如果远程分支超前于本地分支，并且本地也没有commit操作，此时pull会采用’fast-forward’模式，该模式不会产生合并节点，也即不产生"Merge branch ‘master’ of …"信息。
+>
+>2.如果本地有commit提交，此时若存在冲突，pull拉取代码时远程和本地会出现分叉，会进行分支合并，就会产生"Merge branch ‘master’ of …"信息。
+>
+>**解决方法**
+>
+>使用git pull --rebase命令，如果没有冲突,则会直接合并，如果存在冲突，手动解决冲突即可，不会再产生那条多余的信息。如果你不想每次都rebase，可以在git bash里执行
+>
+>```shell
+>git config --global pull.rebase true
+>```
+>
+>这个配置就是告诉git在每次pull前先进行rebase操作。
 
 
 
+## 5、Git删除误提交的大文件历史记录
+
+>1. 应用场景:在我们日常使用Git的时候，一般比较小的项目，我们可能不会注意到.git 这个文件。其实.git文件主要用来记录每次提交的变动，当我们的项目越来越大的时候，我们发现.git文件越来越大。很大的可能是因为提交了大文件，如果你提交了大文件，那么即使你在之后的版本中将其删除，但是`实际上记录中的大文件仍然存在`。
+>2. 原因分析:为什么呢？仔细想一想，虽然你在后面的版本中删除了大文件，但是Git是有版本倒退功能的吧，那么如果大文件不记录下来，git拿什么来给你回退呢？
+>3. 导致的问题:.git文件越来越大导致的问题是--每次拉项目都要耗费大量的时间，并且每个人都要花费那么多的时间。
+>4. git给出了解决方案，使用git branch-filter来遍历git history tree, 可以永久删除history中的大文件，达到让.git文件瘦身的目的。
+>
+>下面给出步骤（以下步骤非常危险，`操作需谨慎!`,最好最好不要在公司项目中使用）
+
+### Ⅰ-列出仓库中最大的几个对象及其文件名
+
+>列出所有仓库中的对象（包括SHA值、大小、路径等），并按照大小降序排列，列出TOP 5(本人示例,你也可多展示)
+>
+>1. 命令示例
+>
+>   ```bash
+>   git rev-list --all --objects | grep "$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -n 5 | awk -F ' '  '{print $1}')"
+>   ```
+>
+>2. 图示
+>
+>   ![image-20210508171542001](A_Git详细学习笔记中的图片/列出仓库中最大的几个对象及其文件名.png)
+
+### Ⅱ-将某文件从历史记录中删除
+
+>既然文件找到了(此处删除`杂记_其他(如破解与配置)的碎片化笔记/Typora笔记软件分享/tools/软件包/Typora.dmg`)，那么得将该文件从历史记录中删除，执行以下命令：
+>
+>1. 命令示例:
+>
+>   ```bash
+>   git log --pretty=oneline --branches -- "杂记_其他(如破解与配置)的碎片化笔记/Typora笔记软件分享/tools/软件包/Typora.dmg"
+>   ```
+>
+>2. 图示
+>
+>   ![image-20210508171916951](A_Git详细学习笔记中的图片/image-20210508171916951.png)
+
+### Ⅲ-重写所有 commit，将该文件从 Git 历史中完全删除
+
+>上面的命令执行后只是从历史记录中移除，还没有完全删除它，我们需要重写所有 commit，将该文件从 Git 历史中完全删除：
+>
+>1. 代码示例:
+>
+>   ```bash
+>   git filter-branch --index-filter 'git rm --cached --ignore-unmatch  "杂记_其他(如破解与配置)的碎片化笔记/Typora笔记软件分享/tools/软件包/Typora.dmg"' -- --all
+>   ```
+>
+>2. 图示
+>
+>   ![](A_Git详细学习笔记中的图片/删除截图.png)
+>
+>3. 补充注意点:
+>
+>   如果你像我一样,工作区有新写的内容没有追踪与提交导致无法进行删除操作时,千万不要直接暂存`stash`,否则这些没有暂存的内容就没了,要记得先`git add .`
+
+### Ⅳ-把该文件的引用完全删除
+
+>上面的命令执行后，此时历史记录中已经没有该文件了，此时是真正删除了它。 不过我们运行 filter-branch 产生的日志还是会对该文件有引用，所以我们还需要运行以下几条命令，把该文件的引用完全删除：
+>
+>1. 命令示例:
+>
+>   ```bash
+>   rm -rf .git/refs/original/
+>   git reflog expire --expire=now --all
+>   git gc --prune=now
+>   git gc --aggressive --prune=now
+>   ```
+>
+>2. 图示
+>
+>   ![](A_Git详细学习笔记中的图片/删除引用.png)
+
+### Ⅴ-强制提交
+
+>现在我们再看 .git 文件的大小明显变小了，少了那个大文件，说明我们之前误提交的大文件已经删除了。 最后一步就是 push 代码了，不过就是需要强制 push
+>
+>1. 命令示例
+>
+>   ```bash
+>   git push --force
+>   ```
+>
+>2. 图示
+>
+>   ![](A_Git详细学习笔记中的图片/强制提交.jpg)
+
+### Ⅵ-删除前后`.git`大小对比
+
+>本人此时测试删除的文件正好为10M,成功删除
+>
+>1. 删除前截图
+>
+>   <img src="A_Git详细学习笔记中的图片/删除大文件前大小.png" style="zoom:67%;" />
+>
+>2. 删除后截图
+>
+>   <img src="A_Git详细学习笔记中的图片/删除大文件后大小.png" style="zoom:67%;" />
+>
+>

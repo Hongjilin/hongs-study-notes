@@ -1166,7 +1166,7 @@ git tag -a v1.0 提交对象哈希 -m "我的注释信息"
 >
 >   >删除原来的子文件夹的.git  -->`rm -r .git`,当然也可以手动删除
 >   >
->   >删除本地git缓存  -->`git rm -r --cached .`
+>   >删除本地git缓存  -->`git rm -r --cached fileName`
 >   >
 >   >重新add，push 
 >
@@ -1174,4 +1174,4 @@ git tag -a v1.0 提交对象哈希 -m "我的注释信息"
 >
 >   <img src="A_Git详细学习笔记中的图片/image-20210510172159472.png" alt="image-20210510172159472" style="zoom:67%;" />
 >
->
+

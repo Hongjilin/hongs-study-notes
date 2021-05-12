@@ -227,122 +227,144 @@
 
 >```ts
 >class Tool {
->  isUndefined = (data: any) => {
->    return data === undefined;
->  };
->  isDefined = (data: any) => {
->    return !this.isUndefined(data);
->  };
->  // 传入一个可执行字符串，并且运行
->  evalString = (string: string, needReturn?: boolean) => {
->    let newString = string;
->    if (needReturn) {
->      newString = `return ${string}`;
->    }
->    let evalFunction = new Function(newString);
->    return evalFunction();
->  };
+>isUndefined = (data: any) => {
+>return data === undefined;
+>};
+>isDefined = (data: any) => {
+>return !this.isUndefined(data);
+>};
+>// 传入一个可执行字符串，并且运行
+>evalString = (string: string, needReturn?: boolean) => {
+>let newString = string;
+>if (needReturn) {
+> newString = `return ${string}`;
+>}
+>let evalFunction = new Function(newString);
+>return evalFunction();
+>};
 >
->  /**
->   * 四舍五入保留n位小数
->   */
->  roundNumber = (num: number, digits?: number): number => {
->    if (!digits) {
->      return Math.round(num);
->    } else {
->      let digitsPow = Math.pow(10, digits);
->      return Math.round(num * digitsPow) / digitsPow;
->    }
->  };
+>/**
+>  * 四舍五入保留n位小数
+>  */
+> roundNumber = (num: number, digits?: number): number => {
+>   if (!digits) {
+>     return Math.round(num);
+>   } else {
+>     let digitsPow = Math.pow(10, digits);
+>     return Math.round(num * digitsPow) / digitsPow;
+>   }
+> };
 >
->  downloadFile = (url: string, filename?: string) => {
->    const a = document.createElement('a');
->   a.href = url;
->    if (filename)  a.download = filename;
->   document.body.appendChild(a);
->    a.click();
->  };
-> 
-> isProductionEnv = () => {
->    return process.env.API_ENV === 'prod';
->  };
-> 
-> //选中文本
->  textSelect = (element) => {
->    const start = 0;
->    const end = element.value.length;
->   if (element.createTextRange) {
->      //IE浏览器
->      var range = element.createTextRange();
->      range.moveStart('character', -end);
->      range.moveEnd('character', -end);
->      range.moveStart('character', start);
->      range.moveEnd('character', end);
->      range.select();
->    } else {
->      element.setSelectionRange(start, end);
->      element.focus();
->    }
->  };
->  //公用排序方法
->  setSorter = (field: string, order: string): Object => {
->    let sorter: Object;
->    if (order) {
->      sorter = {
->        field: field,
->        order: order.replace('end', ''),
->      };
->    }
->    return sorter;
->  };
-> 
->  // 节流
->  throttle = (fn: Function, interval: number) => {
->    let canRun = true;
->    return () => {
->     if (!canRun) {
->        return;
->      }
->      canRun = false;
->      setTimeout(() => {
->        fn();
->        canRun = true;
->      }, interval);
->    };
->  };
-> 
->  // 防抖
->  deBounce = (
->    fn: (...args: any[]) => any,
->    interval: number
-> ): ((...args: any[]) => any) => {
->    let timer = null;
->    return (e) => {
+> downloadFile = (url: string, filename?: string) => {
+>   const a = document.createElement('a');
+>  a.href = url;
+>   if (filename)  a.download = filename;
+>  document.body.appendChild(a);
+>   a.click();
+> };
+>
+>isProductionEnv = () => {
+>   return process.env.API_ENV === 'prod';
+> };
+>
+>//选中文本
+> textSelect = (element) => {
+>   const start = 0;
+>   const end = element.value.length;
+>  if (element.createTextRange) {
+>     //IE浏览器
+>     var range = element.createTextRange();
+>     range.moveStart('character', -end);
+>     range.moveEnd('character', -end);
+>     range.moveStart('character', start);
+>     range.moveEnd('character', end);
+>     range.select();
+>   } else {
+>     element.setSelectionRange(start, end);
+>     element.focus();
+>   }
+> };
+> //公用排序方法
+> setSorter = (field: string, order: string): Object => {
+>   let sorter: Object;
+>   if (order) {
+>     sorter = {
+>       field: field,
+>       order: order.replace('end', ''),
+>     };
+>   }
+>   return sorter;
+> };
+>
+> // 节流
+> throttle = (fn: Function, interval: number) => {
+>   let canRun = true;
+>   return () => {
+>    if (!canRun) {
+>       return;
+>     }
+>     canRun = false;
+>     setTimeout(() => {
+>       fn();
+>       canRun = true;
+>     }, interval);
+>   };
+> };
+>
+> // 防抖
+> deBounce = (
+>   fn: (...args: any[]) => any,
+>   interval: number
+>): ((...args: any[]) => any) => {
+>   let timer = null;
+>   return (e) => {
+>     if (timer) {
+>       clearTimeout(timer);
+>       timer = null;
+>     }
+>     timer = setTimeout(() => {
+>       fn(e);
+>     }, interval);
+>   };
+> };
+>/**
+>  * 防抖1
+>  * @param fnc 传入函数
+>  * @param params 
+>  * @param t 
+>  * @returns 
+>  调用示例:onClick={tool.DebounceSendSMSCode(sendSMSCode, [phoneItem, index], 300)}
+>  */
+>   DebounceSendSMSCode = (fnc,params, t) => {
+>    let delay = t || 200; // 默认0.2s
+>    let timer;
+>    return function () {
 >      if (timer) {
 >        clearTimeout(timer);
->        timer = null;
 >      }
 >      timer = setTimeout(() => {
->        fn(e);
->      }, interval);
->    };
->  };
+>        timer = null;
+>        fnc(...params)
+>      }, delay);
+>    }
+>  }
+>
 > 
->  // 深拷贝
->  deepClone = (obj) => {
->    const isObject = (args) =>
->      (typeof args === 'object' || typeof args === 'function') &&
->     typeof args !== null;
->    if (!isObject) throw new Error('Not Reference Types');
->    let newObj = Array.isArray(obj) ? [...obj] : { ...obj };
->    Reflect.ownKeys(newObj).map((key) => {
->      newObj[key] = isObject(obj[key]) ? this.deepClone(obj[key]) : obj[key];
->    });
->    return newObj;
->  };
-> }
-> export const tool = new Tool();
-> export default Tool;
-> ```
-> 
+> // 深拷贝
+> deepClone = (obj) => {
+>   const isObject = (args) =>
+>     (typeof args === 'object' || typeof args === 'function') &&
+>    typeof args !== null;
+>   if (!isObject) throw new Error('Not Reference Types');
+>   let newObj = Array.isArray(obj) ? [...obj] : { ...obj };
+>   Reflect.ownKeys(newObj).map((key) => {
+>     newObj[key] = isObject(obj[key]) ? this.deepClone(obj[key]) : obj[key];
+>   });
+>   return newObj;
+> };
+>}
+>export const tool = new Tool();
+>export default Tool;
+>```
+>
 >

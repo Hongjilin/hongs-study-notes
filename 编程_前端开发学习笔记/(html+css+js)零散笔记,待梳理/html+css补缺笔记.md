@@ -4,7 +4,36 @@
 
 >[TOC]
 
-## 1、图片不拉伸属性 ` object-fit`
+# 一、知识点详解
+
+## Ⅰ-css3 `pointer-events`
+
+>此属性会阻止hover、active、onclick等触发事件
+>
+>1. ###### `pointer-events `更像是JavaScript，它能够：
+>
+>   - 阻止用户的点击动作产生任何效果
+>   - 阻止缺省鼠标指针的显示
+>   - 阻止CSS里的 `hover `和 `active `状态的变化触发事件
+>   - 阻止JavaScript点击动作触发的事件
+>
+>2. ###### 具体用法：
+>
+>   ```css
+>   pointer-events:  auto | none | visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | inherit
+>   ```
+>
+>   > pointer-events属性有很多值，但是对于浏览器来说，`只有auto和none两个值可用`，其它的几个是针对SVG的(本身这个属性就来自于SVG技术)。
+>
+>3. ###### pointer-events属性值详解
+>
+>   - auto——效果和没有定义pointer-events属性相同，鼠标不会穿透当前层。在SVG中，该值和visiblePainted的效果相同。
+>   - none——元素不再是鼠标事件的目标，鼠标不再监听当前层而去监听下面的层中的元素。但是如果它的子元素设置了pointer-events为其它值，比如auto，鼠标还是会监听这个子元素的。
+>   - 其它属性值为SVG专用，这里不再多介绍了。
+
+# 二、实际问题解决
+
+## Ⅰ-图片不拉伸属性 ` object-fit`
 
 ```css
    width: 100%;
@@ -12,7 +41,7 @@
         object-fit: cover;
 ```
 
-## 2、css鼠标点击的五种状态
+## Ⅱ-css鼠标点击的五种状态
 
 ```css
   1、a:link{color:#fff}  未访问时的状态（鼠标点击前显示的状态）
@@ -22,7 +51,7 @@
   5、a:focus{color:#fff}  点击后鼠标移开保持鼠标点击时的状态（只有在<a href="#"></a>时标签中有效）
 ```
 
-## 3、阴影效果
+## Ⅲ-阴影效果
 
 ```css
 box-shadow:2px 2px 5px #000; 	//正常
@@ -91,3 +120,76 @@ box-shadow:0px 0px 0px 3px #bb0a0a,
  }
 ```
 
+## Ⅳ-实现a标签禁用
+
+>1. 需求分析:业务中遇到一个需求-根据当前数据类别进行权限限制,当我为新用户数据时,开放编辑操作,当我为旧用户数据时,禁用编辑操作
+>
+>2. 代码:
+>
+>     1. css代码:
+>
+>   ```scss
+>   /**设置a标签禁用
+>   */
+>   a.disabled {
+>     pointer-events: none;
+>     filter: alpha(opacity=50);
+>     /*IE滤镜，透明度50%*/
+>     -moz-opacity: 0.5;
+>     /*Firefox私有，透明度50%*/
+>     opacity: 0.5;
+>     /*其他，透明度50%*/
+>     color: gray;
+>
+>   }
+>
+>   //因为pointer-events会阻止hover事件,所以在外层进行判断,同时变为行内元素
+>   .disabledbox {
+>     display: inline-block
+>   }
+>   .combox {
+>     display: inline-block
+>   }
+>   .disabledbox:hover {
+>     cursor: not-allowed;
+>   }
+>
+>   ```
+>
+>     1. html部分调用代码--示例中是在:antd中table组件中试用
+>
+>   ```jsx
+>   //新旧渠道商标识
+>   const CHANNELBZ = {
+>     OLD: 0,
+>     NEW: 1
+>   } 
+>   ....
+>   {
+>       title: '推荐折扣',
+>       dataIndex: 'discount',
+>       width: 100,
+>       render: (value, item) => (
+>         <div>
+>           <span>{value}</span>
+>           <div className={item.sourceType == CHANNELBZ.OLD ? style.disabledbox : style.combox}>
+>             <a
+>               className={item.sourceType == CHANNELBZ.OLD ? style.disabled : ""}
+>               style={{ marginLeft: 10 }}
+>               onClick={() => {
+>                 console.log(item.sourceType, "itemmmmmm")
+>               }}
+>             >
+>               编辑
+>           </a>
+>           </div>
+>         </div>
+>       ),
+>     },
+>   ```
+>
+>  3. 效果实现截图:
+>
+>     <img src="html+css补缺笔记中的图片/image-20210517184121490.png" alt="image-20210517184121490" style="zoom:80%;" />
+>
+>

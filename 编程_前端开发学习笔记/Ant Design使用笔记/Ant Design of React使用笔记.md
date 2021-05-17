@@ -82,7 +82,7 @@
 >    </From>
 >   ```
 
-### Ⅲ-表单中动态修改表单value
+### Ⅲ-表单中动态修改数字输入框的value
 
 >1. 出现场景:在 第一次对[`InputNumber`](https://ant.design/components/input-number-cn/#API)组件输入0时，就自动填充为设置的`min`了，这时我的需求是改成输入框失去焦点时再自动填充为min
 >

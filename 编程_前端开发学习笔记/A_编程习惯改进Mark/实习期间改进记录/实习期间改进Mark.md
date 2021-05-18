@@ -142,3 +142,7 @@
 >  requImg = require(`@/img/${url}.png)
 >  ```
 
+## Ⅱ-控制台中的`Store as global variable`
+
+>如果在console中打印了一堆数据，想对这堆数据做额外的操作，可以将它存储为一个全局变量。只需要右击它，并选择 “Store as global variable”选项。第一次使用的话，它会创建一个名为 temp1 的变量，第二次创建 temp2，第三次 ... 。通过使用这些变量来操作对应的数据，不用再担心影响到他们原来的值。
+

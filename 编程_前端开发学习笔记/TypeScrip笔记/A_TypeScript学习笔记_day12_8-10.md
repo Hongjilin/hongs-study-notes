@@ -1,6 +1,4 @@
-> 本笔记是本人查阅
->
-> [xcatliu](https://github.com/xcatliu/)的typeScript笔记 B站学习视频  TypeScript官方文档的学习摘录整理而成  
+> 本笔记是来自翻阅[xcatliu](https://github.com/xcatliu/)的typeScript入门教程文档、TypeScript官方文档的部分摘录、以及观看B站学习视频进行笔记记录与知识点补充、本人实际使用时遇到的问题与解决记录、碎片化接触到相关知识点合并整理而成  
 >
 > 仅供本人洪的学习使用
 >
@@ -127,7 +125,7 @@ console.log(sayHello(user));
 >
 > 本节主要介绍**前五种**原始数据类型在 TypeScript 中的应用。
 
-## 1、布尔值[§]()
+## 1、布尔值 
 
 布尔值是最基础的数据类型，在 TypeScript 中，使用 `boolean` 定义布尔值类型：
 
@@ -161,7 +159,7 @@ let createdByBoolean: boolean = Boolean(1);
 
 在 TypeScript 中，`boolean` 是 JavaScript 中的基本类型，而 `Boolean` 是 JavaScript 中的构造函数。其他基本类型（除了 `null` 和 `undefined`）一样，不再赘述。
 
-## 二、数值[§]()
+## 二、数值 
 
 使用 `number` 定义数值类型：
 
@@ -191,7 +189,7 @@ var infinityNumber = Infinity;
 
 其中 `0b1010` 和 `0o744` 是 [ES6 中的二进制和八进制表示法](http://es6.ruanyifeng.com/#docs/number#二进制和八进制表示法)，它们会被编译为十进制数字。
 
-## 三、字符串[§]()
+## 三、字符串 
 
 使用 `string` 定义字符串类型：
 
@@ -216,7 +214,7 @@ I'll be " + (myAge + 1) + " years old next month.";
 
 其中 ``` 用来定义 [ES6 中的模板字符串](http://es6.ruanyifeng.com/#docs/string#模板字符串)，`${expr}` 用来在模板字符串中嵌入表达式。
 
-## 四、空值[§]()
+## 四、空值 
 
 JavaScript 没有空值（Void）的概念，在 TypeScript 中，可以用 `void` 表示没有任何返回值的函数：
 
@@ -232,7 +230,7 @@ function alertName(): void {
 let unusable: void = undefined;
 ```
 
-## 五、Null 和 Undefined[§]()
+## 五、Null 和 Undefined 
 
 在 TypeScript 中，可以使用 `null` 和 `undefined` 来定义这两个原始数据类型：
 
@@ -264,7 +262,7 @@ let num: number = u;
 
 > 任意值（Any）用来表示允许赋值为任意类型。
 
-## 1、什么是任意值类型[§]()
+## 1、什么是任意值类型 
 
 如果是一个普通类型，在赋值过程中改变类型是不被允许的：
 
@@ -281,7 +279,7 @@ let myFavoriteNumber: any = 'seven';
 myFavoriteNumber = 7;
 ```
 
-## 2、任意值的属性和方法[§]()
+## 2、任意值的属性和方法 
 
 > 在任意值上访问任何属性都是允许的：
 
@@ -302,7 +300,7 @@ anyThing.myName.setFirstName('Cat');
 
 > 可以认为，**声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值**。
 
-## 3、未声明类型的变量[§]()
+## 3、未声明类型的变量 
 
 **变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型**：
 
@@ -328,7 +326,7 @@ something.setName('Tom');
 
 如果没有明确的指定类型，那么 TypeScript 会依照类型推论（Type Inference）的规则推断出一个类型。
 
-## 1、什么是类型推论[§]()
+## 1、什么是类型推论 
 
 > 以下代码虽然没有指定类型，但是会在编译的时候报错：
 
@@ -361,7 +359,7 @@ myFavoriteNumber = 7;
 
 > 联合类型（Union Types）表示取值可以为多种类型中的一种。
 
-## 1、简单的例子[§]()
+## 1、简单的例子 
 
 ```ts
 let myFavoriteNumber: string | number;
@@ -378,7 +376,7 @@ myFavoriteNumber = true;
 
 这里的 `let myFavoriteNumber: string | number` 的含义是，允许 `myFavoriteNumber` 的类型是 `string` 或者 `number`，但是不能是其他类型。
 
-## 2、访问联合类型的属性或方法[§]()
+## 2、访问联合类型的属性或方法 
 
 当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们**只能访问此联合类型的所有类型里共有的属性或方法**：
 
@@ -421,13 +419,13 @@ console.log(myFavoriteNumber.length); // 编译时报错
 
 > 在 TypeScript 中，我们使用接口（Interfaces）来定义对象的类型。
 
-## 1、什么是接口[§](https://ts.xcatliu.com/basics/type-of-object-interfaces.html#什么是接口)
+## 1、什么是接口
 
 > 在面向对象语言中，接口（Interfaces）是一个很重要的概念，它是对行为的抽象，而具体如何行动需要由类（classes）去实现（implement）。
 >
 > TypeScript 中的接口是一个非常灵活的概念，除了可用于[对类的一部分行为进行抽象]()以外，也常用于对「对象的形状（Shape）」进行描述
 
-## 2、简单的例子[§]()
+## 2、简单的例子 
 
 ```ts
 interface Person {
@@ -481,7 +479,7 @@ let tom: Person = {
 
 可见，**赋值的时候，变量的形状必须和接口的形状保持一致**。
 
-## 3、可选属性[§]()
+## 3、可选属性 
 
 > 有时我们希望不要完全匹配一个形状，那么可以用可选属性：
 
@@ -525,7 +523,7 @@ let tom: Person = {
 //   Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
 ```
 
-## 4、任意属性[§]()
+## 4、任意属性 
 
 > 有时候我们希望一个接口允许有任意的属性，可以使用如下方式：
 
@@ -589,7 +587,7 @@ let tom: Person = {
 };
 ```
 
-## 5、只读属性[§]()
+## 5、只读属性 
 
 > 有时候我们希望对象中的一些字段只能在创建的时候被赋值，那么可以用 `readonly` 定义只读属性：
 
@@ -644,7 +642,7 @@ tom.id = 89757;
 
 在 TypeScript 中，数组类型有多种定义方式，比较灵活。
 
-## 1、「类型 + 方括号」表示法[§]()
+## 1、「类型 + 方括号」表示法 
 
 最简单的方法是使用「类型 + 方括号」来表示数组：
 
@@ -670,7 +668,7 @@ fibonacci.push('8');
 
 上例中，`push` 方法只允许传入 `number` 类型的参数，但是却传了一个 `"8"` 类型的参数，所以报错了。这里 `"8"` 是一个字符串字面量类型，会在后续章节中详细介绍。
 
-## 2、数组泛型[§]()
+## 2、数组泛型 
 
 我们也可以使用数组泛型（Array Generic） `Array<elemType>` 来表示数组：
 
@@ -680,7 +678,7 @@ let fibonacci: Array<number> = [1, 1, 2, 3, 5];
 
 关于泛型，可以参考[泛型]()一章。
 
-## 3、用接口表示数组[§]()
+## 3、用接口表示数组 
 
 接口也可以用来描述数组：
 
@@ -697,7 +695,7 @@ let fibonacci: NumberArray = [1, 1, 2, 3, 5];
 >
 > 不过有一种情况例外，那就是它常用来表示类数组。
 
-## 4、类数组[§]()
+## 4、类数组 
 
 类数组（Array-like Object）不是数组类型，比如 `arguments`：
 
@@ -741,7 +739,7 @@ interface IArguments {
 }
 ```
 
-## 5、any 在数组中的应用[§]()
+## 5、any 在数组中的应用 
 
 一个比较常见的做法是，用 `any` 表示数组中允许出现任意类型：
 
@@ -753,7 +751,7 @@ let list: any[] = ['xcatliu', 25, { website: 'http://xcatliu.com' }];
 
 > [函数是 JavaScript 中的一等公民](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch2.html)
 
-## 1、函数声明[§]()
+## 1、函数声明 
 
 在 JavaScript 中，有两种常见的定义函数的方式——函数声明（Function Declaration）和函数表达式（Function Expression）：
 
@@ -794,7 +792,7 @@ sum(1);
 // index.ts(4,1): error TS2346: Supplied parameters do not match any signature of call target.
 ```
 
-## 2、函数表达式[§]()
+## 2、函数表达式 
 
 如果要我们现在写一个对函数表达式（Function Expression）的定义，可能会写成这样：
 
@@ -818,7 +816,7 @@ let mySum: (x: number, y: number) => number = function (x: number, y: number): n
 
 在 ES6 中，`=>` 叫做箭头函数，应用十分广泛，可以参考 [ES6 中的箭头函数](http://es6.ruanyifeng.com/#docs/function#箭头函数)。
 
-## 3、用接口定义函数的形状[§]()
+## 3、用接口定义函数的形状 
 
 我们也可以使用接口的方式来定义一个函数需要符合的形状：
 
@@ -835,7 +833,7 @@ mySearch = function(source: string, subString: string) {
 
 采用函数表达式|接口定义函数的方式时，对等号左侧进行类型限制，可以保证以后对函数名赋值时保证参数个数、参数类型、返回值类型不变。
 
-## 4、可选参数[§]()
+## 4、可选参数 
 
 前面提到，输入多余的（或者少于要求的）参数，是不允许的。那么如何定义可选的参数呢？
 
@@ -869,7 +867,7 @@ let tom = buildName(undefined, 'Tom');
 // index.ts(1,40): error TS1016: A required parameter cannot follow an optional parameter.
 ```
 
-## 5、参数默认值[§]()
+## 5、参数默认值 
 
 在 ES6 中，我们允许给函数的参数添加默认值，**TypeScript 会将添加了默认值的参数识别为可选参数**：
 
@@ -894,7 +892,7 @@ let cat = buildName(undefined, 'Cat');
 
 > 关于默认参数，可以参考 [ES6 中函数参数的默认值](http://es6.ruanyifeng.com/#docs/function#函数参数的默认值)。
 
-## 6、剩余参数[§]()
+## 6、剩余参数 
 
 ES6 中，可以使用 `...rest` 的方式获取函数中的剩余参数（rest 参数）：
 
@@ -924,7 +922,7 @@ push(a, 1, 2, 3);
 
 注意，rest 参数只能是最后一个参数，关于 rest 参数，可以参考 [ES6 中的 rest 参数](http://es6.ruanyifeng.com/#docs/function#rest参数)。
 
-## 7、重载[§](https://ts.xcatliu.com/basics/type-of-function.html#重载)
+## 7、重载
 
 重载允许一个函数接受不同数量或类型的参数时，作出不同的处理。
 
@@ -966,7 +964,7 @@ function reverse(x: number | string): number | string {
 
 类型断言（Type Assertion）可以用来手动指定一个值的类型。
 
-## 1、语法[§]()
+## 1、语法 
 
 ```ts
 值 as 类型
@@ -984,11 +982,11 @@ function reverse(x: number | string): number | string {
 
 故建议大家在使用类型断言时，统一使用 `值 as 类型` 这样的语法。
 
-## 2、类型断言的用途[§]()
+## 2、类型断言的用途 
 
 类型断言的常见用途有以下几种：
 
-### 2.1、将一个联合类型断言为其中一个类型[§]()
+### 2.1、将一个联合类型断言为其中一个类型 
 
 之前提到过，当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们**只能访问此联合类型的所有类型中共有的属性或方法**：
 
@@ -1090,7 +1088,7 @@ Uncaught TypeError: animal.swim is not a function`
 
 总之，使用类型断言时一定要格外小心，尽量避免断言后调用方法或引用深层属性，以减少不必要的运行时错误。
 
-### 2.2、将一个父类断言为更加具体的子类[§]()
+### 2.2、将一个父类断言为更加具体的子类 
 
 当类之间有继承关系时，类型断言也是很常见的：
 
@@ -1172,7 +1170,7 @@ function isApiError(error: Error) {
 }
 ```
 
-### 2.3、将任何一个类型断言为 `any`[§]()
+### 2.3、将任何一个类型断言为 `any` 
 
 理想情况下，TypeScript 的类型系统运转良好，每个值的类型都具体而精确。
 
@@ -1215,7 +1213,7 @@ window.foo = 1;
 
 总之，**一方面不能滥用 `as any`，另一方面也不要完全否定它的作用，我们需要在类型的严格性和开发的便利性之间掌握平衡**（这也是 [TypeScript 的设计理念](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Design-Goals)之一），才能发挥出 TypeScript 最大的价值。
 
-### 2.4、将 `any` 断言为一个具体的类型[§]()
+### 2.4、将 `any` 断言为一个具体的类型 
 
 在日常的开发中，我们不可避免的需要处理 `any` 类型的变量，它们可能是由于第三方库未能定义好自己的类型，也有可能是历史遗留的或其他人编写的烂代码，还可能是受到 TypeScript 类型系统的限制而无法精确定义类型的场景。
 
@@ -1249,7 +1247,7 @@ tom.run();
 
 上面的例子中，我们调用完 `getCacheData` 之后，立即将它断言为 `Cat` 类型。这样的话明确了 `tom` 的类型，后续对 `tom` 的访问时就有了代码补全，提高了代码的可维护性。
 
-## 3、类型断言的限制[§](https://ts.xcatliu.com/basics/type-assertion.html#类型断言的限制)
+## 3、类型断言的限制
 
 > 本小结的前置知识点：[结构类型系统（TODO）][]、[类型兼容性（TODO）][]
 
@@ -1345,7 +1343,7 @@ function testCat(cat: Cat) {
 
 其实前四种情况都是最后一个的特例。
 
-## 4、双重断言[§]()
+## 4、双重断言 
 
 既然：
 
@@ -1375,7 +1373,7 @@ function testCat(cat: Cat) {
 
 `**除非迫不得已，千万别用双重断言。`**
 
-## 5、类型断言 vs 类型转换[§]()
+## 5、类型断言 vs 类型转换 
 
 类型断言只会影响 TypeScript 编译时的类型，类型断言语句在编译结果中会被删除：
 
@@ -1412,7 +1410,7 @@ toBoolean(1);
 // 返回值为 true
 ```
 
-## 6、类型断言 vs 类型声明[§]()
+## 6、类型断言 vs 类型声明 
 
 在这个例子中：
 
@@ -1517,7 +1515,7 @@ const tom: Cat = getCacheData('tom');
 
 所以为了增加代码的质量，我们最好优先使用类型声明，这也比类型断言的 `as` 语法更加优雅。
 
-## 7、类型断言 vs 泛型[§]()
+## 7、类型断言 vs 泛型 
 
 > 本小结的前置知识点：[泛型]()
 
@@ -1559,7 +1557,7 @@ tom.run();
 
 当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。
 
-## 1、新语法索引[§]()
+## 1、新语法索引 
 
 - [`declare var`]() 声明全局变量
 - [`declare function`]() 声明全局方法
@@ -1576,7 +1574,7 @@ tom.run();
 - [`declare module`]() 扩展模块
 - [`/// `]() 三斜线指令
 
-## 2、什么是声明语句[§]()
+## 2、什么是声明语句 
 
 假如我们想使用第三方库 jQuery，一种常见的方式是在 html 中通过 `<script>` 标签引入 jQuery，然后就可以使用全局变量 `$` 或 `jQuery` 了。
 
@@ -1611,7 +1609,7 @@ jQuery('#foo');
 
 除了 `declare var` 之外，还有其他很多种声明语句，将会在后面详细介绍。
 
-## 3、什么是声明文件[§]()
+## 3、什么是声明文件 
 
 通常我们会把声明语句放到一个单独的文件（`jQuery.d.ts`）中，这就是声明文件[3](https://github.com/xcatliu/typescript-tutorial/tree/master/examples/declaration-files/03-jquery-d-ts)：
 
@@ -1640,7 +1638,7 @@ jQuery('#foo');
 
 这里只演示了全局变量这种模式的声明文件，假如是通过模块导入的方式使用第三方库的话，那么引入声明文件又是另一种方式了，将会在后面详细介绍。
 
-### 3.1、第三方声明文件[§]()
+### 3.1、第三方声明文件 
 
 当然，jQuery 的声明文件不需要我们定义了，社区已经帮我们定义好了：[jQuery in DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery/index.d.ts)。
 
@@ -1654,7 +1652,7 @@ npm install @types/jquery --save-dev
 
 可以在[这个页面](https://microsoft.github.io/TypeSearch/)搜索你需要的声明文件。
 
-## 4、书写声明文件[§]()
+## 4、书写声明文件 
 
 当一个第三方库没有提供声明文件时，我们就需要自己书写声明文件了。前面只介绍了最简单的声明文件内容，而真正书写一个声明文件并不是一件简单的事，以下会详细介绍如何书写声明文件。
 
@@ -1669,7 +1667,7 @@ npm install @types/jquery --save-dev
 - [在 npm 包或 UMD 库中扩展全局变量]()：引用 npm 包或 UMD 库后，改变一个全局变量的结构
 - [模块插件]()：通过 `<script>` 或 `import` 导入后，改变另一个模块的结构
 
-## 5、全局变量[§]()
+## 5、全局变量 
 
 全局变量是最简单的一种场景，之前举的例子就是通过 `<script>` 标签引入 jQuery，注入全局变量 `$` 和 `jQuery`。
 
@@ -2552,7 +2550,7 @@ export declare function bar(): string;
 
 仅当我们在给别人的仓库添加类型声明文件，但原作者不愿意合并 pull request 时，才需要使用第二种方案，将声明文件发布到 `@types` 下。
 
-##### 将声明文件和源码放在一起[§]()
+##### 将声明文件和源码放在一起 
 
 如果声明文件是通过 `tsc` 自动生成的，那么无需做任何其他配置，只需要把编译好的文件也发布到 npm 上，使用方就可以获取到类型提示了。
 
@@ -2595,7 +2593,7 @@ export declare function bar(): string;
 
 有的库为了支持导入子模块，比如 `import bar from 'foo/lib/bar'`，就需要额外再编写一个类型声明文件 `lib/bar.d.ts` 或者 `lib/bar/index.d.ts`，这与自动生成声明文件类似，一个库中同时包含了多个类型声明文件。
 
-### 7.8、将声明文件发布到 `@types` 下[§]()
+### 7.8、将声明文件发布到 `@types` 下 
 
 如果我们是在给别人的仓库添加类型声明文件，但原作者不愿意合并 pull request，那么就需要将声明文件发布到 `@types` 下。
 
@@ -2630,7 +2628,7 @@ let r: RegExp = /[a-z]/;
 
 而他们的定义文件，则在 [TypeScript 核心库的定义文件](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中。
 
-## 2、DOM 和 BOM 的内置对象[§]()
+## 2、DOM 和 BOM 的内置对象 
 
 DOM 和 BOM 提供的内置对象有：
 
@@ -2648,7 +2646,7 @@ document.addEventListener('click', function(e: MouseEvent) {
 
 它们的定义文件同样在 [TypeScript 核心库的定义文件](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中。
 
-## 3、TypeScript 核心库的定义文件[§]()
+## 3、TypeScript 核心库的定义文件 
 
 [TypeScript 核心库的定义文件](https://github.com/Microsoft/TypeScript/tree/master/src/lib)中定义了所有浏览器环境需要用到的类型，并且是预置在 TypeScript 中的。
 
@@ -2695,7 +2693,7 @@ interface Document extends Node, GlobalEventHandlers, NodeSelector, DocumentEven
 
 注意，TypeScript 核心库的定义中不包含 Node.js 部分。
 
-## 4、用 TypeScript 写 Node.js[§]()
+## 4、用 TypeScript 写 Node.js 
 
 Node.js 不是内置对象的一部分，如果想用 TypeScript 写 Node.js，则需要引入第三方声明文件：
 
@@ -2709,7 +2707,7 @@ npm install @types/node --save-dev
 
 类型别名用来给一个类型起个新名字。
 
-## 简单的例子[§]()
+## 简单的例子 
 
 ```ts
 type Name = string;
@@ -2793,7 +2791,7 @@ tom = ['Tom'];
 // Property '1' is missing in type '[string]' but required in type '[string, number]'.
 ```
 
-## 越界的元素[§]()
+## 越界的元素 
 
 当添加越界的元素时，它的类型会被限制为元组中每个类型的联合类型：
 
@@ -2956,7 +2954,7 @@ enum Color {Red = "red".length, Green, Blue};
 
 所有其它情况的枚举成员被当作是需要计算得出的值。
 
-## 常数枚举[§]()
+## 常数枚举 
 
 常数枚举是使用 `const enum` 定义的枚举类型：
 
@@ -3041,7 +3039,7 @@ TypeScript 除了实现了所有 ES6 中的类的功能以外，还添加了一�
 
 这一节主要介绍类的用法，下一节再介绍如何定义类的类型。
 
-## 类的概念[§]()
+## 类的概念 
 
 虽然 JavaScript 中有类的概念，但是可能大多数 JavaScript 程序员并不是非常熟悉类，这里对类相关的概念做一个简单的介绍。
 
@@ -3056,11 +3054,11 @@ TypeScript 除了实现了所有 ES6 中的类的功能以外，还添加了一�
 - 抽象类（Abstract Class）：抽象类是供其他类继承的基类，抽象类不允许被实例化。抽象类中的抽象方法必须在子类中被实现
 - 接口（Interfaces）：不同类之间公有的属性或方法，可以抽象成一个接口。接口可以被类实现（implements）。一个类只能继承自另一个类，但是可以实现多个接口
 
-## ES6 中类的用法[§]()
+## ES6 中类的用法 
 
 下面我们先回顾一下 ES6 中类的用法，更详细的介绍可以参考 [ECMAScript 6 入门 - Class](http://es6.ruanyifeng.com/#docs/class)。
 
-### 属性和方法[§]()
+### 属性和方法 
 
 使用 `class` 定义类，使用 `constructor` 定义构造函数。
 
@@ -3081,7 +3079,7 @@ let a = new Animal('Jack');
 console.log(a.sayHi()); // My name is Jack
 ```
 
-### 类的继承[§]()
+### 类的继承 
 
 使用 `extends` 关键字实现继承，子类中使用 `super` 关键字来调用父类的构造函数和方法。
 
@@ -3100,7 +3098,7 @@ let c = new Cat('Tom'); // Tom
 console.log(c.sayHi()); // Meow, My name is Tom
 ```
 
-### 存取器[§]()
+### 存取器 
 
 使用 getter 和 setter 可以改变属性的赋值和读取行为：
 
@@ -3122,7 +3120,7 @@ a.name = 'Tom'; // setter: Tom
 console.log(a.name); // Jack
 ```
 
-### 静态方法[§]()
+### 静态方法 
 
 使用 `static` 修饰符修饰的方法称为静态方法，它们不需要实例化，而是直接通过类来调用：
 
@@ -3138,11 +3136,11 @@ Animal.isAnimal(a); // true
 a.isAnimal(a); // TypeError: a.isAnimal is not a function
 ```
 
-## ES7 中类的用法[§]()
+## ES7 中类的用法 
 
 ES7 中有一些关于类的提案，TypeScript 也实现了它们，这里做一个简单的介绍。
 
-### 实例属性[§]()
+### 实例属性 
 
 ES6 中实例的属性只能通过构造函数中的 `this.xxx` 来定义，ES7 提案中可以直接在类里面定义：
 
@@ -3159,7 +3157,7 @@ let a = new Animal();
 console.log(a.name); // Jack
 ```
 
-### 静态属性[§]()
+### 静态属性 
 
 ES7 提案中，可以使用 `static` 定义一个静态属性：
 
@@ -3175,9 +3173,9 @@ class Animal {
 console.log(Animal.num); // 42
 ```
 
-## TypeScript 中类的用法[§]()
+## TypeScript 中类的用法 
 
-### public private 和 protected[§]()
+### public private 和 protected 
 
 TypeScript 可以使用三种访问修饰符（Access Modifiers），分别是 `public`、`private` 和 `protected`。
 
@@ -3316,7 +3314,7 @@ let a = new Animal('Jack');
 // index.ts(13,9): TS2674: Constructor of class 'Animal' is protected and only accessible within the class declaration.
 ```
 
-### 参数属性[§]()
+### 参数属性 
 
 修饰符和`readonly`还可以使用在构造函数参数中，等同于类中定义该属性同时给该属性赋值，使代码更简洁。
 
@@ -3329,7 +3327,7 @@ class Animal {
 }
 ```
 
-### readonly[§]()
+### readonly 
 
 只读属性关键字，只允许出现在属性声明或索引签名或构造函数中。
 
@@ -3359,7 +3357,7 @@ class Animal {
 }
 ```
 
-### 抽象类[§]()
+### 抽象类 
 
 `abstract` 用于定义抽象类和其中的抽象方法。
 
@@ -3460,7 +3458,7 @@ var Cat = (function (_super) {
 var cat = new Cat('Tom');
 ```
 
-## 类的类型[§]()
+## 类的类型 
 
 给类加上 TypeScript 的类型很简单，与接口类似：
 
@@ -3487,7 +3485,7 @@ console.log(a.sayHi()); // My name is Jack
 
 这一章主要介绍接口的另一个用途，对类的一部分行为进行抽象。
 
-## 类实现接口[§]()
+## 类实现接口 
 
 实现（implements）是面向对象中的一个重要概念。一般来讲，一个类只能继承自另一个类，有时候不同类之间可以有一些共有的特性，这时候就可以把特性提取成接口（interfaces），用 `implements` 关键字来实现。这个特性大大提高了面向对象的灵活性。
 
@@ -3541,7 +3539,7 @@ class Car implements Alarm, Light {
 
 上例中，`Car` 实现了 `Alarm` 和 `Light` 接口，既能报警，也能开关车灯。
 
-## 接口继承接口[§]()
+## 接口继承接口 
 
 接口与接口之间可以是继承关系：
 
@@ -3558,7 +3556,7 @@ interface LightableAlarm extends Alarm {
 
 这很好理解，`LightableAlarm` 继承了 `Alarm`，除了拥有 `alert` 方法之外，还拥有两个新方法 `lightOn` 和 `lightOff`。
 
-## 接口继承类[§]()
+## 接口继承类 
 
 常见的面向对象语言中，接口是不能继承类的，但是在 TypeScript 中却是可以的：
 
@@ -3773,7 +3771,7 @@ function createArray<T>(length: number, value: T): Array<T> {
 createArray(3, 'x'); // ['x', 'x', 'x']
 ```
 
-## 多个类型参数[§]()
+## 多个类型参数 
 
 定义泛型的时候，可以一次定义多个类型参数：
 
@@ -3787,7 +3785,7 @@ swap([7, 'seven']); // ['seven', 7]
 
 上例中，我们定义了一个 `swap` 函数，用来交换输入的元组。
 
-## 泛型约束[§]()
+## 泛型约束 
 
 在函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法：
 
@@ -3851,7 +3849,7 @@ copyFields(x, { b: 10, d: 20 });
 
 上例中，我们使用了两个类型参数，其中要求 `T` 继承 `U`，这样就保证了 `U` 上不会出现 `T` 中不存在的字段。
 
-## 泛型接口[§]()
+## 泛型接口 
 
 可以使用接口的方式来定义一个函数需要符合的形状：
 
@@ -3906,7 +3904,7 @@ createArray(3, 'x'); // ['x', 'x', 'x']
 
 注意，此时在使用泛型接口的时候，需要定义泛型的类型。
 
-## 泛型类[§]()
+## 泛型类 
 
 与泛型接口类似，泛型也可以用于类的类型定义中：
 
@@ -3921,7 +3919,7 @@ myGenericNumber.zeroValue = 0;
 myGenericNumber.add = function(x, y) { return x + y; };
 ```
 
-## 泛型参数的默认类型[§]()
+## 泛型参数的默认类型 
 
 在 TypeScript 2.3 以后，我们可以为泛型中的类型参数指定默认类型。当使用泛型时没有在代码中直接指定类型参数，从实际值参数中也无法推测出时，这个默认类型就会起作用。
 
@@ -3939,7 +3937,7 @@ function createArray<T = string>(length: number, value: T): Array<T> {
 
 如果定义了两个相同名字的函数、接口或类，那么它们会合并成一个类型：
 
-## 函数的合并[§]()
+## 函数的合并 
 
 我们可以使用重载定义多个函数类型：
 
@@ -3957,7 +3955,7 @@ function reverse(x: number | string): number | string {
 }
 ```
 
-## 接口的合并[§]()
+## 接口的合并 
 
 接口中的属性在合并时会简单的合并到一个接口中：
 
@@ -4024,7 +4022,7 @@ interface Alarm {
 }
 ```
 
-## 类的合并[§]()
+## 类的合并 
 
 类的合并与接口的合并规则一致。
 
@@ -4053,135 +4051,7 @@ interface Alarm {
 
 
 
-
-
-
-
-# `使用过程问题与解决`
-
->`补`为知识点补充与代码示例的意思
-
-## 1、vsCode报错函数重复
-
-> 我正在开始使用TypeScript，并且我正在遵循[TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)指南,而当我写了一个函数(如下面代码),并且确定没错问题时候报错
->
-> `Duplicate function implementation.`
-
-```ts
-function jspang(){
-    let web : string ="hello World"
-    console.log(web)
-}
- /*  */
-jspang()
-//`Duplicate function implementation.`函数重复
-```
-
-##### 解决:
-
->看起来像这是Visual Studio代码中的一个错误。 GitHub对此有几个问题，如[here](https://github.com/Microsoft/TypeScript/issues/10804)和[here](https://github.com/Microsoft/vscode/issues/1773)。对这些问题的评论意味着它是一个问题，然后被修复，并在v1.12.1中再次成为问题。
->
->解决方案是运行`tsc --init`来初始化文件夹中的`tsconfig.json`。
-
-## 2、在不同ts文件中声明同一个name时报错：
-
->主要错误信息：
->
->```bash
->无法重新声明块范围变量“name”
->```
->
->我们前面明明（明明说管我什么事）没有声明name，但是却说我们重复声明了
->
->- 这次是因为我们的`typescript` 将 `DOM typings` 作为全局的运行环境；
->- 所以当我们声明 `name`时， 与 `DOM` 中的全局  `name` 属性出现了重名；
-
-```tsx
-//Demo1.ts
-let count :number=1
-//Demo2.ts
-let count :number=2
-```
-
-##### 解决:
-
->如何解决这个问题呢？
->
->- 有两种方案：去掉 DOM typings 的环境和声明模块
->
->**方式一：删除DOM typings的环境**
->
->但是这种办法对于我们来说并不合适，因为我们依然希望在DOM下编译我们的TypeScript代码
->
->**方式二：声明我们的ts文件为一个模块**(`推荐`)
->
->既然与全局的变量出现重名，那我们将脚本封装到模块（module）中，因为模块有属于自己的作用域，就不会和全局的产生冲突：
->
->- 在 Typescript 中，我们可以使用ES6的export来导出一个对象，并且该文件被视为 module
->
->```javascript
->let name = "coderwhy";
->export {}
->```
-
-## 3、模块类的导入与导出
-
->当我尝试从一个ts文件中声明一个类或者一个对象或者一个变量 然后import到另外一个ts文件中,我发现我拿过来的值是`undefined`
-
-##### 解决
-
-> 1、由于我用的是ts-node直接运行,我发现将之前编译的js文件删除,在运行就可以了
->
-> 2、类的导入需要new进行实例化
-
-##### 代码示例
-
-```ts
-demox.ts导出
-//声明一个类  
-class Animal {
-    name: string ="xx";
-    show(): string {
-        return this.name;
-    }
-    show1():void{
-        console.log(this.name)
-    }
-}
-//声明一个变量
- let test:string="洪吉林"
-//导出方式
- export{ Animal,test }
-//声明一个对象
-export const xiaohong = {
-    uname: "小洪",
-    age: 18
-}
-```
-
-```ts
-demox1.ts导入
-import  {Animal,xiaohong,test} from "./demox"
-let a=new Animal()
-a.show1()
-console.log(a.show())
-console.log(test)
-console.log(xiaohong)
-console.log(xiaohong.uname)
-/*
-xx
-xx
-洪吉林
-{ uname: '小洪', age: 18 }
-小洪
-*/
-```
-
-
-
-
-
-# `知识补充与代码示例`
+# `补充知识点`
 
 ## 1、箭头函数写法
 
@@ -4525,6 +4395,293 @@ namespace Comments {
     }
     Comments.sub.Test //使用
 ```
+
+
+
+# `问题与解决`
+
+# TypeScrpit`使用过程问题与解决`
+
+>本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`TypeScript所有学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScrip%E7%AC%94%E8%AE%B0)
+>
+>此部分是本人实际使用过程中遇到的问题与解决记录
+
+## 1、vsCode报错函数重复
+
+> 我正在开始使用TypeScript，并且我正在遵循[TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)指南,而当我写了一个函数(如下面代码),并且确定没错问题时候报错
+>
+> `Duplicate function implementation.`
+
+```ts
+function jspang(){
+    let web : string ="hello World"
+    console.log(web)
+}
+ /*  */
+jspang()
+//`Duplicate function implementation.`函数重复
+```
+
+##### 解决:
+
+>看起来像这是Visual Studio代码中的一个错误。 GitHub对此有几个问题，如[here](https://github.com/Microsoft/TypeScript/issues/10804)和[here](https://github.com/Microsoft/vscode/issues/1773)。对这些问题的评论意味着它是一个问题，然后被修复，并在v1.12.1中再次成为问题。
+>
+>解决方案是运行`tsc --init`来初始化文件夹中的`tsconfig.json`。
+
+## 2、在不同ts文件中声明同一个name时报错：
+
+>主要错误信息：
+>
+>```bash
+>无法重新声明块范围变量“name”
+>```
+>
+>我们前面明明（明明说管我什么事）没有声明name，但是却说我们重复声明了
+>
+>- 这次是因为我们的`typescript` 将 `DOM typings` 作为全局的运行环境；
+>- 所以当我们声明 `name`时， 与 `DOM` 中的全局  `name` 属性出现了重名；
+
+```tsx
+//Demo1.ts
+let count :number=1
+//Demo2.ts
+let count :number=2
+```
+
+##### 解决:
+
+>如何解决这个问题呢？
+>
+>- 有两种方案：去掉 DOM typings 的环境和声明模块
+>
+>**方式一：删除DOM typings的环境**
+>
+>但是这种办法对于我们来说并不合适，因为我们依然希望在DOM下编译我们的TypeScript代码
+>
+>**方式二：声明我们的ts文件为一个模块**(`推荐`)
+>
+>既然与全局的变量出现重名，那我们将脚本封装到模块（module）中，因为模块有属于自己的作用域，就不会和全局的产生冲突：
+>
+>- 在 Typescript 中，我们可以使用ES6的export来导出一个对象，并且该文件被视为 module
+>
+>```javascript
+>let name = "coderwhy";
+>export {}
+>```
+
+## 3、模块类的导入与导出
+
+>当我尝试从一个ts文件中声明一个类或者一个对象或者一个变量 然后import到另外一个ts文件中,我发现我拿过来的值是`undefined`
+
+##### 解决
+
+> 1、由于我用的是ts-node直接运行,我发现将之前编译的js文件删除,在运行就可以了
+>
+> 2、类的导入需要new进行实例化
+
+##### 代码示例
+
+```ts
+demox.ts导出
+//声明一个类  
+class Animal {
+    name: string ="xx";
+    show(): string {
+        return this.name;
+    }
+    show1():void{
+        console.log(this.name)
+    }
+}
+//声明一个变量
+ let test:string="洪吉林"
+//导出方式
+ export{ Animal,test }
+//声明一个对象
+export const xiaohong = {
+    uname: "小洪",
+    age: 18
+}
+```
+
+```ts
+demox1.ts导入
+import  {Animal,xiaohong,test} from "./demox"
+let a=new Animal()
+a.show1()
+console.log(a.show())
+console.log(test)
+console.log(xiaohong)
+console.log(xiaohong.uname)
+/*
+xx
+xx
+洪吉林
+{ uname: '小洪', age: 18 }
+小洪
+*/
+```
+
+## 4、React - 类型“Readonly<{}>”上不存在属性
+
+>问题定位在了 TypeScript 上。
+>解决方案如下:
+>将 `props 和 state 的类型定位成 any` 就可以解决这个问题了!
+
+```tsx
+class Login extends Component <any,any>{}
+```
+
+## 5、继承state类型接口后使用`setState`修改报错`缺少类型`
+
+>类型“{ [x: string]: string; }”的参数不能赋给类型“IState | ((prevState: Readonly<IState>, props: Readonly<any>) => IState | Pick<IState, "username" | "password"> | null) | Pick<...> | null”的参数。
+>类型“{ [x: string]: string; }”缺少类型“Pick<IState, "username" | "password">”中的以下属性: username, password
+
+```tsx
+/* 定义state类型接口 */
+interface IState {
+    username: string,
+    password: string,
+}
+    //方法一:输入框改变事件,双向绑定数据
+    handleChange: (value: string, name: string) => void = (value, name) => {
+        this.setState({
+            [name]: value
+        })
+    }
+```
+
+>其实是定义接口时没有写缺省,导致赋值时候只赋值一个报错
+
+```tsx
+interface IState {
+    username?: string,
+    password?: string,
+}
+```
+
+> 对象定义也可以用这个方法
+
+```tsx
+interface JWTInf{
+  verify?:any,
+  sign?:any,
+  verifysync?:any
+}
+const JWT:JWTInf ={}
+```
+
+## 6、TS引用json文件报错
+
+> Module '@/pages/components/util/list.json' was resolved to 'c:/Users/ZG/WebstormProjects/VsCodeProjects/yapi_system/src/pages/components/util/list.json', but '--`resolveJsonModule' is not used`.
+>
+> 当我引用json时报错,这也是我一下子魔愣了没想到,我应该在typings.d.ts文件中这样声明,ts中引用json文件才不会报错
+
+```ts
+//path: typings.d.ts
+declare module "*.json"
+```
+
+## 7、TS报错具有隐式any
+
+> Parameter 'item' implicitly has an 'any' type.
+>
+> `noImplicitAny 当表达式和申明 类型为any时，是否需要发出警告，设置true，则不警告`
+
+## 8、Ts报错,不能自定义属性标签
+
+>Type '{ children: Element[]; key: any; tag: any; onClick: (e: MouseEvent<HTMLLIElement, MouseEvent>) => void; }' is not assignable to type 'DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>'.
+>Property 'tag' does not exist on type 'DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>'.
+
+解决
+
+>HTML支持自定义属性的data- *属性类型.你可以阅读更多 here.
+>Definition and Usage The data-* attributes is used to store custom
+>data private to the page or application.
+>
+>The data-* attributes gives us the ability to embed custom data
+>attributes on all HTML elements.
+>
+>The stored (custom) data can then be used in the page’s JavaScript to
+>create a more engaging user experience (without any Ajax calls or
+>server-side database queries).
+>
+>The data-* attributes consist of two parts:
+>
+>The attribute name should not contain any uppercase letters,and must
+>be at least one character long after the prefix “data-”
+>The attribute value can be any string
+>Note: Custom attributes prefixed with “data-” will be completely ignored by the user agent.
+>
+>`而不是只使用size =“A4”,你可以使用data-size =“A4”`
+
+```tsx
+<page className="page" tag={item.id}>//报错
+</page>
+<div className="page" data-tag={item.id}>//正确
+  // ....
+</div>
+```
+
+## 9、Ts报错,当操作dom节点操作
+
+>Property 'className' does not exist on type 'Element | Text'.
+>Property 'className' does not exist on type 'Text'.
+
+原因:这是typescript的类型检查导致的，需要在querySelector或者其他查询语句方法前面加个类型断言。
+
+```tsx
+   let icon =  ReactDom.findDOMNode(document.getElementById('collect')) as HTMLElement;
+    icon.className=IconStyles.iconfont+" "+IconStyles.icon_shoucang1
+```
+
+## 10、关于时间格式问题
+
+### Ⅰ-赋值时间格式报错
+
+>1. Type `'any[]' is not assignable to type '[Moment, Moment]'`.Target requires 2 element(s) but source may have fewer.
+>
+>  ![image-20210412191035956](A_TypeScript学习笔记_day12_8-10中的图片/image-20210412191035956.png)
+>
+>2. 解决
+>
+>  ```tsx
+>  interface ISearchParams {
+>  keyword:any,
+>  customerId:any,
+>  resDate: [Moment, Moment],
+>  buyDate:[Moment, Moment],
+>  format:string,
+>  loading:boolean
+>  }
+>
+>  class Store {
+>  @observable datas = [];
+>  @observable searchParams:ISearchParams = {
+>  keyword: '',
+>  customerId: '',
+>  resDate:[undefined, undefined],
+>  buyDate: [undefined, undefined],
+>  format: 'YYYY-MM-DD',  
+>  loading: false,
+>  };
+>  }
+>  ```
+
+### Ⅱ-取出Moment格式中的具体时间报错
+
+>1. 报错:`property '_d' does not exist on type 'moment'.`
+>2. 出现错误原因分析:![image-20210422115014706](A_TypeScript学习笔记_day12_8-10中的图片/取出Moment格式中的具体时间报错原因分析1.png)
+>
+>​	![image-20210422115208905](A_TypeScript学习笔记_day12_8-10中的图片/取出Moment格式中的具体时间报错原因分析2.png)
+>
+>3. 解决
+>
+>  4. 其实不用`_d`去取出来,Moment格式有相应的取出方法
+>
+>     ![image-20210422115825841](A_TypeScript学习笔记_day12_8-10中的图片/image-20210422115825841.png)
+
+
 
 
 

@@ -119,11 +119,78 @@
 >    </From>
 >   ```
 
+### Ⅳ-限制表单中输入框-不能只输入纯空格以及为空(保留value中间空格)
+
+>1. 出现场景:详见截图
+>
+> <img src="Ant Design of React使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
+>
+>2. 代码示例:此处指举例第一个输入框,并在里面进行注释
+>
+> ```jsx
+>   <Form {...FORM_LAYOUT} form={form} onFinish={handleFinish}>
+>           <Item
+>             label="xxx名"
+>             name="name"
+>             validateTrigger="onBlur"
+>             // normalize={(value) => value.replace(/\s/g, '')} //此行代码是直接限制无法输入空格,不符需求所以废弃
+>             rules={[
+>               //1. 此处message要置空,因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
+>               //2. 为何保留此处? 需要输入框前有*提示必填 如果不是必填项就不需要
+>               { required: true, message: '' },
+>               {
+>                 validator: async (_, value) => {
+>                   //此行是去除前后空格后为空字符串或者直接为空的话返回 不能为空提示
+>                   if (value == null ||value.trim() == '') { 
+>                     return Promise.reject('xxx名不能为空');
+>                   } else {
+>                     const res: IResult<IExist> = await ChannelApi.isChannelExist(
+>                       value
+>                     );
+>                     if (res?.data.status) {
+>                       return Promise.reject('xxx名已存在');
+>                     } else {
+>                       return Promise.resolve();
+>                     }
+>                   }
+>                 },
+>               },
+>             ]}
+>           >
+>             <Input placeholder="请输入渠道商名" />
+>           </Item>
+>     	 //不是必须项的对比
+>       	 <Item label="联系人" name="contactName">
+>             <Input placeholder="请输入联系人" />
+>           </Item>
+> </Form>
+> ```
+>
+>3. 解析
+>
+>    1. `rules`中`message`为什么要置空?
+>
+>       因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
+>
+>    2. 为什么下方`validator`中已经给出为空提示,为何还要保留`  { required: true, message: '' }`?
+>
+>       因为需要输入框前有*提示必填 如果不是必填项就不需要,此项会给你增加`*`号标识
+>       
+>    3. 为何不直接给输入内容`.trim()`去除前后空格?
+>
+>       因为输入监听导师value是单次输入,需要你在后面提交时将参数进行一次trim()去除前后空格
+
+
+
+
+
+
+
 # 二、数据展示
 
 ## 1、[Table表格](https://ant.design/components/table-cn/)
 
-### Ⅰ-列表渲染映射
+### Ⅰ-列表渲染映射文字
 
 >1. 场景:当你对下列表渲染时,服务端传送过来的`值是数字`(0,1,2),而你要`显示成相对应的文字时`
 >
@@ -172,3 +239,141 @@
 >       </Fragment>
 >     );
 >   ```
+
+### Ⅱ-列表渲染映射-小数转百分比
+
+>1. 当服务端给你的数据是小数,而你需要将其渲染成百分比进行展示   0.25-->25%
+>
+>2. 解析:应用的是`render`相关知识点
+>
+>3. 代码示例:
+>
+>    1. 转换函数代码
+>    
+>       ```jsx
+>         /**
+>          * 将小数转化为百分比
+>          * @param point 
+>          * @returns 
+>          */
+>          toPercent=(point:number)=>{
+>           if (point==0)   return 0;
+>           let str=Number(point*100).toFixed()+"%";
+>           return str;
+>         }
+>       ```
+>    
+>    2. 列表table组件代码 
+>    
+>       ```jsx
+>         //写法一
+>         <Table>
+>         <Column title="抽成比例" dataIndex="rate"
+>               //将小数转换成百分比,当为数字时,进行转换
+>                render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
+>          />
+>         </Table>
+>                                                                         
+>         //写法二
+>          const columns = [ {
+>               title: '抽成比例',
+>               dataIndex: 'rate',
+>               width: 150,
+>               ellipsis: true,
+>               //将小数转换成百分比
+>               render: data => (typeof data == 'number') ? tool.toPercent(data) : data
+>                                                                         
+>          },];
+>         <Table columns={columns}></Table>
+>       ```
+
+### Ⅲ-表格列固定
+
+>1. 需求场景:当你的列表过长时,使用滚轮进行拖动会导致用户体验感较差,这时就需要进行表格列固定
+>
+>   1. 未使用时效果
+>
+>      <img src="Ant Design of React使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
+>
+>         2. 使用后效果
+>
+>      <img src="Ant Design of React使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
+>
+>        `ps`:截图中展示的都是开发中的`测试假数据`
+>
+> 2. 代码示例:只给出必要部分
+>
+>     1. css样式代码(需要给定`width`,否则无法生效,给定高度,防止超出)
+>
+>        ```scss
+>        .tableWidth{
+>          width: 1600px;
+>          height: calc(100% - 48px);
+>          :global {
+>            .ant-table-wrapper,
+>            .ant-spin-nested-loading,
+>            .ant-spin-container,
+>            .ant-table-container {
+>              height: 100%;
+>            }
+>            .ant-table {
+>              height: calc(100% - 48px);
+>            }
+>            .ant-table-pagination.ant-pagination,
+>            div.ant-typography,
+>            .ant-typography p {
+>              margin-bottom: 0;
+>            }
+>          }
+>        }
+>        ```
+>
+>    2. js调用代码示例1
+>
+>       ```jsx
+>        const columns = [
+>         {
+>             title: '公司ID',  
+>             fixed: 'left',  //这就是固定在左边写法
+>             dataIndex: 'companyId',
+>             width: 150,
+>             ellipsis: true,
+>           },
+>        ]
+>       return (
+>           <Table
+>             className={` ${style.tableWidth}`}
+>             columns={columns}
+>             scroll={{ x: 600 }}  
+>           />
+>         );
+>       ```
+>
+>    3. js调用2:(都可实现,效果一样)
+>
+>       ```jsx
+>        const columns = [
+>           {
+>           title: '名称',
+>           dataIndex: 'name',
+>           width: 150,
+>           fixed: 'left' as const,
+>         }, {
+>           title: '操作',
+>           dataIndex: 'agentId',
+>           width: 400,
+>           fixed: 'right' as const,
+>         }
+>        ]
+>       return (
+>           <div className={style.tableWidth}>
+>             <Table
+>               scroll={{ x: 600, y: 'calc(100% - 48px)' }}
+>               columns={columns}
+>             />
+>           </div>
+>         );
+>       ```
+>
+>3. 注意:需要给定宽度,不然不会生效
+

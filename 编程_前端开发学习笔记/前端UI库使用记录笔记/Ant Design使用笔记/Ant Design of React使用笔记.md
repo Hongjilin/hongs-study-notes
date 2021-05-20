@@ -273,7 +273,7 @@
 >                render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
 >          />
 >         </Table>
->                                                                         
+>                                                                                     
 >         //写法二
 >          const columns = [ {
 >               title: '抽成比例',
@@ -282,7 +282,7 @@
 >               ellipsis: true,
 >               //将小数转换成百分比
 >               render: data => (typeof data == 'number') ? tool.toPercent(data) : data
->                                                                         
+>                                                                                     
 >          },];
 >         <Table columns={columns}></Table>
 >       ```
@@ -377,3 +377,38 @@
 >
 >3. 注意:需要给定宽度,不然不会生效
 
+### Ⅳ-列表内容超出隐藏且悬停显示全
+
+>这属于**超长连续字段（长数字和长单词）**破坏表格布局的问题（**即使你指定了列的宽度也会**被挤开），组件之前默认内加过`word-break: break-word;`去纠正此类布局,又会引起[＃13624](https://github.com/ant-design/ant-design/issues/13624)的问题--列高也会被撑开(此处给的例子于其不一样,但原理相似)
+>
+>1. 需求场景:当我的列表内容过多使得表格撑开,导致整个表格样式与希望效果不符合时,我希望能将其超出隐藏,并能悬停显示全部信息
+>
+>   <img src="Ant Design of React使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
+>
+>2. 代码实现
+>
+>   ```jsx
+>   import { Tooltip } from 'antd';
+>   const columns=[
+>     { title: '渠道商账号', dataIndex: 'username',
+>     width: 150,
+>     onCell: () => {
+>       return {
+>         style: {
+>           maxWidth: 180,
+>           overflow: 'hidden',
+>           whiteSpace: 'nowrap',
+>           textOverflow:'ellipsis',
+>           cursor:'pointer'
+>         }
+>       }
+>     },
+>      //此处引入用作悬停显示全
+>     render: (text) => <Tooltip placement="topLeft" title={text}>{text}</Tooltip>
+>   },
+>   ]
+>   ```
+>
+>3. 效果实现图
+>
+>   <img src="Ant Design of React使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />

@@ -2,8 +2,7 @@
 
 >此处是杂项工具包,就各种零碎的工具函数整合
 >
->作者：[hongjilin](https://gitee.com/hongjilin)
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
 
 
 

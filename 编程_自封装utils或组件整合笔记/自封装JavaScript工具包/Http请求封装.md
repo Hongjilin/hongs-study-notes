@@ -2,8 +2,8 @@
 
 >各种对于网络请求的封装,不同时间会有不同需求,当然,写法也更简洁
 >
->作者：[hongjilin](https://gitee.com/hongjilin)
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
+>转载请注明出处。
 
 
 
@@ -12,7 +12,6 @@
 >该模块封装于2020疫情本人撰写 [nodejs+vue搭建校园疫情防控系统实战项目(全栈项目)](https://www.bilibili.com/video/BV1Z54y1y79p?share_source=copy_web)项目期间,主要用于项目中前端部分前后端交互功能实现中
 >
 >文件上传模块 [hongjilin](https://gitee.com/hongjilin) 2020年7月29日
->
 
 ## Ⅰ-代码示例
 
@@ -73,7 +72,7 @@
 >默认带`token`进行请求
 >
 >1. `axios.defaults.withCredentials`:登录之后的请求会带登录用户信息，需要把登录时的cookie设置到之后的请求头里面。而跨域请求要想带上cookie，必须要请求属性withCredentials=true，这是浏览器的同源策略导致的问题：不允许JS访问跨域的Cookie。
->   withCredentials 属性是一个Boolean类型，它指示了是否该使用类似cookies,authorization，headers(头部授权)或者TLS客户端证书这一类资格证书来创建一个跨站点访问控制（cross-site Access-Control）请求。
+>     withCredentials 属性是一个Boolean类型，它指示了是否该使用类似cookies,authorization，headers(头部授权)或者TLS客户端证书这一类资格证书来创建一个跨站点访问控制（cross-site Access-Control）请求。
 >2. `cancelTokenSource`:取消ajax请求的
 >
 >```tsx

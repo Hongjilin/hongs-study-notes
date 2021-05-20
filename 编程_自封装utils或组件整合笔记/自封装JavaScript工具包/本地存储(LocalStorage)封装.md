@@ -2,8 +2,7 @@
 
 >本工具包是对`localStorage`与`sessionStorage`存取的简单封装,方便使用
 >
->作者：[hongjilin ](https://gitee.com/hongjilin)  时间:2021年4月
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin) 时间:2021年4月
 
 # Ⅰ-工具类代码-`2021`
 

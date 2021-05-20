@@ -1,6 +1,8 @@
 # #说明
 
 >各种对于`Promise`操作的封装
+>
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
 
 # 一、对`Promise`返回值进行加工
 

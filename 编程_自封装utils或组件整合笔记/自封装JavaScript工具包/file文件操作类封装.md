@@ -2,8 +2,8 @@
 
 >该部分为文件操作类工具包记录整理 
 >
->作者：[hongjilin](https://gitee.com/hongjilin)
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
+>转载请注明出处。
 
 # 一、文件上传 -`2020`
 

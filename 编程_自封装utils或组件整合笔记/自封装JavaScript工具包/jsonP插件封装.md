@@ -2,8 +2,8 @@
 
 >该模块封装于2020疫情学习前端基础知识期间,
 >
->作者：[hongjilin](https://gitee.com/hongjilin)
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
+>转载请注明出处。
 
 # 一、jsonP概念 -`2020`
 

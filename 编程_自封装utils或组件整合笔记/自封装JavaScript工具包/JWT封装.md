@@ -6,8 +6,8 @@
 >
 >该模块封装于2020疫情本人撰写 [nodejs+vue搭建校园疫情防控系统实战项目(全栈项目)](https://www.bilibili.com/video/BV1Z54y1y79p?share_source=copy_web)项目期间,主要用于用户数据的加密传输,并用于替代`session`与`cookie`,当时编程习惯还不是很好,如类名命名规范等,可以自行更正
 >
->作者：[hongjilin](https://gitee.com/hongjilin)
->著作权归作者所有。转载请注明出处。
+>笔记分享：[hongjilin](https://gitee.com/hongjilin)
+>转载请注明出处。
 
 # Ⅰ-工具包代码 -`2020`
 

@@ -291,7 +291,7 @@
 >        <Table columns={columns}></Table>
 >      ```
 >   
->4. 如果对于`if(!!!point) `此行代码不懂的同学可以看本人[`js中为什么需要!!?`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/(html+css+js)零散笔记,待梳理/JavaScript笔记(零散待梳理)/js中为什么需要!!？.md)笔记部分
+>4. 如果对于`if(!!!point) `此行代码不懂的同学可以看本人在js笔记中的[`js中为什么需要!!?`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/(html+css+js)零散笔记,待梳理/JavaScript笔记(零散待梳理)/js中为什么需要!!？.md)部分
 
 ### Ⅲ-表格列固定
 

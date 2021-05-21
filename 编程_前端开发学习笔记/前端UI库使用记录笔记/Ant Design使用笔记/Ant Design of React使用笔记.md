@@ -273,7 +273,7 @@
 >                render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
 >          />
 >         </Table>
->                                                                                     
+>                                                                                           
 >         //写法二
 >          const columns = [ {
 >               title: '抽成比例',
@@ -282,7 +282,7 @@
 >               ellipsis: true,
 >               //将小数转换成百分比
 >               render: data => (typeof data == 'number') ? tool.toPercent(data) : data
->                                                                                     
+>                                                                                           
 >          },];
 >         <Table columns={columns}></Table>
 >       ```
@@ -379,7 +379,7 @@
 
 ### Ⅳ-列表内容超出隐藏且悬停显示全
 
->这属于**超长连续字段（长数字和长单词）**破坏表格布局的问题（**即使你指定了列的宽度也会**被挤开），组件之前默认内加过`word-break: break-word;`去纠正此类布局,又会引起[＃13624](https://github.com/ant-design/ant-design/issues/13624)的问题--列高也会被撑开(此处给的例子于其不一样,但原理相似)
+>这属于`超长连续字段（长数字和长单词）破坏表格布局的问题`（即使你指定了列的宽度也会被挤开），组件之前默认内加过`word-break: break-word;`去纠正此类布局,又会引起[＃13624](https://github.com/ant-design/ant-design/issues/13624)的问题--列高也会被撑开(此处给的例子于其不一样,但原理相似)
 >
 >1. 需求场景:当我的列表内容过多使得表格撑开,导致整个表格样式与希望效果不符合时,我希望能将其超出隐藏,并能悬停显示全部信息
 >

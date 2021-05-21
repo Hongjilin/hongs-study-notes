@@ -96,7 +96,7 @@
 
 >本地存储的增删改查,并且通过命名空间,闭包的相关知识,可以很轻松的将不同常量直接添加到一个对象变量中并存到本地
 >
->![image-20210521202047347](本地存储(LocalStorage、Session)相关封装中的图片/本地存储(LocalStorage、Session)相关封装中的图片.png)
+>![image-20210521202047347](JavaScirpt工具封装中的图片/本地存储(LocalStorage、Session)相关封装中的图片.png)
 
 ## Ⅲ-封装代码实现
 
@@ -395,5 +395,8 @@
 >   //删
 >   platformDB.remove(PLATFORM.TAB_PANES);
 >   ```
->
+
+## Ⅴ-函数概要截图
+
+>![image-20210521202903681](JavaScirpt工具封装中的图片/本地存储(LocalStorage、Session)相关封装中的概要.png)
 

@@ -248,44 +248,50 @@
 >
 >3. 代码示例:
 >
->    1. 转换函数代码
->    
->       ```jsx
->         /**
->          * 将小数转化为百分比
->          * @param point 
->          * @returns 
->          */
->          toPercent=(point:number)=>{
->           if (point==0)   return 0;
->           let str=Number(point*100).toFixed()+"%";
->           return str;
->         }
->       ```
->    
->    2. 列表table组件代码 
->    
->       ```jsx
->         //写法一
->         <Table>
->         <Column title="抽成比例" dataIndex="rate"
->               //将小数转换成百分比,当为数字时,进行转换
->                render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
->          />
->         </Table>
->                                                                                           
->         //写法二
->          const columns = [ {
->               title: '抽成比例',
->               dataIndex: 'rate',
->               width: 150,
->               ellipsis: true,
->               //将小数转换成百分比
->               render: data => (typeof data == 'number') ? tool.toPercent(data) : data
->                                                                                           
->          },];
->         <Table columns={columns}></Table>
->       ```
+>   1. 转换函数代码
+>
+>      ```jsx
+>        /**
+>         * 将小数转化为百分比
+>         * @param point 
+>         * @returns 
+>         */
+>      toPercent=(point:number)=>{
+>          //判断是否为空,如果为空不做处理 -->此处如果为空要转换成0,将此行代码下移一位即可
+>       	if(!!!point) return point
+>          //服务端可能传来的数据是字符串,转换一下
+>           point=Number(point)
+>          if (point==0)   return 0;
+>          let str=Number(point*100).toFixed()+"%";
+>          return str;
+>        }
+>      ```
+>   
+>   2. 列表table组件代码 
+>   
+>      ```jsx
+>        //写法一
+>        <Table>
+>        <Column title="抽成比例" dataIndex="rate"
+>              //将小数转换成百分比,当为数字时,进行转换
+>               render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
+>         />
+>        </Table>
+>      
+>        //写法二
+>         const columns = [ {
+>              title: '抽成比例',
+>              dataIndex: 'rate',
+>              width: 150,
+>              ellipsis: true,
+>              //将小数转换成百分比
+>              render: data => tool.toPercent(data) 
+>      
+>         },];
+>        <Table columns={columns}></Table>
+>      ```
+>   
+>4. 如果对于`if(!!!point) `此行代码不懂的同学可以看本人[`js中为什么需要!!?`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/(html+css+js)零散笔记,待梳理/JavaScript笔记(零散待梳理)/js中为什么需要!!？.md)笔记部分
 
 ### Ⅲ-表格列固定
 

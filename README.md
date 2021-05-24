@@ -69,9 +69,7 @@
 >
 >16. [Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)
 >
->    > 此笔记时记录Chrome相关知识,如:
->    >
->    > [Chrome扩展程序资料摘录及开发笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome 开发使用及学习笔记/Chrome扩展程序资料摘录及开发笔记)、[ChromeDevTools操作记录分享笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Chrome%20%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Chrome%20DevTools%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%88%86%E4%BA%AB%E7%AC%94%E8%AE%B0)、[DevTools调试工具之断点调试笔记](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记/ChromeDevTools操作记录分享笔记/DevTools调试工具之断点调试.md)等
+>    > 此笔记时记录Chrome相关知识,如:[Chrome扩展程序资料摘录及开发笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记/Chrome扩展程序资料摘录及开发笔记)、[ChromeDevTools操作记录分享笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Chrome%20%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ChromeDevTools%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%88%86%E4%BA%AB%E7%AC%94%E8%AE%B0)、[DevTools调试工具之断点调试笔记](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记/ChromeDevTools操作记录分享笔记/DevTools调试工具之断点调试.md)等
 >    
 > 17. [正则表达式收录笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%94%B6%E5%BD%95%E7%AC%94%E8%AE%B0)
 >

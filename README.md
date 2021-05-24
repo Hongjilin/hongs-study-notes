@@ -23,7 +23,7 @@
 
 #### 笔记目录
 
->此处笔记目录可能存在更新不及时的情况,所以建议有需要的直接看仓库内的笔记,但每隔一段时间将会更新一次,`每个笔记相应学习资料将标识在其笔记说明中`,下边这部分主要是当作知识索引,方便大家查找
+>此处笔记目录可能存在更新不及时的情况,所以建议有需要的直接看仓库内的笔记,可能隔较长时间才会更新一次,`每个笔记相应学习资料将标识在其笔记说明中`,下边这部分主要是当作知识索引,方便大家查找
 >
 >有的笔记下方会给出有必要的简略的介绍,然后都添加上相应位置的链接,点击即可跳转
 
@@ -31,17 +31,17 @@
 
 >1. [A_编程习惯改进Mark](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/A_%E7%BC%96%E7%A8%8B%E4%B9%A0%E6%83%AF%E6%94%B9%E8%BF%9BMark)
 >
->    > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享、并且要用以改进自身编程能力及习惯的内容
+>  > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享、并且要用以改进自身编程能力及习惯的内容
 >
 >2. [(html+css+js)零散笔记,待梳理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/(html+css+js)%E9%9B%B6%E6%95%A3%E7%AC%94%E8%AE%B0,%E5%BE%85%E6%A2%B3%E7%90%86)
 >
->    > 该阶段学习的时候没有形成系统的学习笔记,较为碎片化,后续补充知识点将暂时以单独知识点陈列,但计划在未来某一时间再次进行一次完整的知识系统梳理学习与笔记重录
+>  > 该阶段学习的时候没有形成系统的学习笔记,较为碎片化,后续补充知识点将暂时以单独知识点陈列,但计划在未来某一时间再次进行一次完整的知识系统梳理学习与笔记重录,这是前端编程基石,待本人变强变秃后进行梳理
 >
 >3. [Scss笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
 >
 >4. [ES6学习资料摘录与笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6学习资料摘录与笔记)
 >
->    > 该笔记主要是相关学习资料整合,主要出自[阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html),个人对于es6-11使用过程遇到的问题及相关解决、见解注释在其中的[A_ES6知识补充与所遇问题](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ES6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%91%98%E5%BD%95%E4%B8%8E%E7%AC%94%E8%AE%B0/A_ES6%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%E4%B8%8E%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98.md)笔记中
+>  > 该笔记主要是相关学习资料整合,主要出自[阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html),个人对于es6-11使用过程遇到的问题及相关解决、见解注释在其中的[A_ES6知识补充与所遇问题](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ES6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%91%98%E5%BD%95%E4%B8%8E%E7%AC%94%E8%AE%B0/A_ES6%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%E4%B8%8E%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98.md)笔记中
 >
 >5. [Ajax、Axios学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Ajax、Axios学习笔记)
 >
@@ -49,9 +49,9 @@
 >
 >7. [Vue框架笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Vue%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/)
 >
->8. [微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)(`目前优先学习更新中`)
+>8. [微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
 >
->    > 本人该学习笔记[`配套源码分享`](https://gitee.com/hongjilin/wechat-applet-demo-source-code),其中的`hello小程序项目`为慕课网教学视频学习过程源码,此初阶段已经更新完成。下阶段将进行项目实战学习,即将更新
+>  > 本人该学习笔记[`配套源码分享`](https://gitee.com/hongjilin/wechat-applet-demo-source-code),其中的`hello小程序项目`为慕课网教学视频学习过程源码,此初阶段已经更新完成。下阶段将进行项目实战学习,即将更新
 >
 >9. [React框架笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)
 >
@@ -67,9 +67,21 @@
 >
 >15. [Webpack学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
 >
->16. [Chrome扩展程序开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome扩展程序开发学习笔记)
+>16. [Chrome 开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome 开发使用及学习笔记)
 >
->17. 其他待更新
+>   >此笔记时记录Chrome相关知识,如开发、DevTools例:
+>   >
+>   >​	a)[Chrome扩展程序资料摘录及开发笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome 开发使用及学习笔记/Chrome扩展程序资料摘录及开发笔记)
+>   >
+>   >​	b)[Chrome DevTools操作记录分享笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Chrome%20%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Chrome%20DevTools%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95%E5%88%86%E4%BA%AB%E7%AC%94%E8%AE%B0)
+>   >
+>   >​	c)[DevTools调试工具之断点调试笔记](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/Chrome 开发使用及学习笔记/Chrome DevTools操作记录分享笔记/DevTools调试工具之断点调试.md)
+>
+>17. [正则表达式收录笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%94%B6%E5%BD%95%E7%AC%94%E8%AE%B0)
+>
+>   >此处会收录开发中遇到的正则,方便自己后续开发查阅使用
+>
+>18. 其他待更新
 
 ##### Ⅱ-[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)
 
@@ -83,7 +95,7 @@
 >
 >3. [Mysql数据库](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93)
 >
->    > 此处目前只记录的是Mysql的安装卸载,其他知识学习时间较早,当时未形成笔记,留待以后重新进行知识梳理与相关笔记记录
+>    > 此处目前只记录的是Mysql的安装卸载以及一些基本操作,其他知识学习时间较早,当时未形成笔记,留待以后重新进行知识梳理与相关笔记记录
 >
 >4. 此部分更新较慢
 
@@ -91,7 +103,7 @@
 
 >1. [数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)(`目前持续学习更新中`)
 >
->    > 即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记,目前学习优先级在`微信小程序学习`之下,所以当前更新速度略慢
+>    > 即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记,目前公司业务相对较重,所以当前更新速度略慢
 >
 >2. [软件模式设计](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1)
 >
@@ -105,11 +117,11 @@
 
 ##### Ⅳ-[编程_自封装utils或组件整合笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记)
 
->本人学编程以来封装的部分工具包分享,有从刚开始接触编程便撰写出来的相对low的代码快,也有的后面时间写就会显得稍好些的模块包。如果对于其中内容有所不理解的可以私聊我 转载请注明出处。
+>本人学编程以来封装的部分工具包分享,有从刚开始接触编程便撰写出来的相对low的代码快,也有的后面时间写就会显得稍好些的模块包。如果对于其中内容有所不理解的或者感觉可以改进的可以私聊我 转载请注明出处。
 >
 >1. [自封装JavaScript工具包](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E8%87%AA%E5%B0%81%E8%A3%85utils%E6%88%96%E7%BB%84%E4%BB%B6%E6%95%B4%E5%90%88%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%B0%81%E8%A3%85JavaScript%E5%B7%A5%E5%85%B7%E5%8C%85)
 >
->    > 本人目前阶段封装的最多的工具包,对各种项目中会遇到的操作进行简化封装,并能抽出到各种项目中使用的
+>    > 本人目前阶段封装的最多的工具包,对各种项目中会遇到的操作进行简化封装,并能抽出到各种项目中使用的,能很好的锻炼自己的同时也能给各位同学一些借鉴与启发
 >
 >2. [自封装小程序工具包](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E8%87%AA%E5%B0%81%E8%A3%85utils%E6%88%96%E7%BB%84%E4%BB%B6%E6%95%B4%E5%90%88%E7%AC%94%E8%AE%B0/%E8%87%AA%E5%B0%81%E8%A3%85%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B7%A5%E5%85%B7%E5%8C%85)
 >
@@ -149,7 +161,7 @@
 
 ##### Ⅶ-[提升_自我提升学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/提升_自我提升学习笔记)
 
-> 这是本人自我提升学习笔记
+> 这是本人自我提升学习笔记,此部分笔记只是上传部分
 
 
 

@@ -10,7 +10,7 @@
 
 ## 2、Markdown Shortcuts
 
->`vscode`预览md插件
+>`vscode`预览`md笔记文件`插件
 >
 >打开vscode商店,搜索`Markdown Shortcuts`,点击安装
 >
@@ -59,4 +59,12 @@
 >`很常用`,但是有时候项目有用到Redis,``但是临时用别人电脑运行项目无法运行``,重新去下载安装又很麻烦,所以我这里分享一下免安装版本的,只要下载压缩包后解压,双击运行其中的`redis-server.exe`即可运行此数据库
 >
 >下载地址[百度云下载](https://pan.baidu.com/s/1l6hVNELCkUB7bEpuCTk2ZQ ) 提取码：hjl6 
+
+## 6、Postwoman(ApiDebug) http接口测试工具
+
+>Postwoman（原apiDebug） 是一个完全免费的接口调试插件，该插件可独立使用，同时数据也能同步至云端，实现跨终端共享。Postwoman支持post、get、xml、josn等测试，支持环境切换（全局变量）。 相比于Postman等插件，Postwoman无需跨过长城即可安装使用，同时有完善的接口管理系统（postwoman.cn 可内网部署），Postwoman支持接口、文档等管理等。产品开发来着BAT，拥有丰富的接口开发、调试经验，产品不断更新迭代，更适合国内用户使用。
+>
+>这个是`chrome浏览器插件`,所以使用非常方便
+>
+>[视频介绍](https://www.bilibili.com/video/BV1kv411B7j5/) 下载地址:[插件](https://gitee.com/CrapApi/resources/blob/master/Postwoman%E6%8F%92%E4%BB%B6/postwoman.v.1.1.7.zip)
 

@@ -1,3 +1,9 @@
+# #目录
+
+>[TOC]
+
+
+
 # vscode
 
 ## 一.修改快捷键
@@ -331,6 +337,12 @@ File >> Preferences >> Keyboard Shprtcuts >>右上角+ 代码模式>>复制以�
 > | `ctr→` | `console.trace(object)`             |
 > | `cwa→` | `console.warn`                      |
 > | `cin→` | `console.info`                      |
+
+##### (16)GitLens — Git supercharged
+
+>由于分支太多，开发人员太多，有时候合代码需要查看哪行代码谁写的。用 git blame太过繁琐，而且查看起来眼花缭乱，降低生产力。
+>
+>建议使用插件GitLens
 
 ## 三、格式化修改缩进2(4)格无效解决
 

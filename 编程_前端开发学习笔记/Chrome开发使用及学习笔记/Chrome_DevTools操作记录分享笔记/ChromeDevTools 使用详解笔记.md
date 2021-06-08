@@ -64,7 +64,7 @@
 >
 >3. 上面两种方式不仅可以打开 DevTools，还可以关闭 DevTools。当然，还有一种方式可以打开 DevTools。
 >
->- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](DevTools常用操作记录分享笔记中的图片/20180319215106122))
+>- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](ChromeDevTools 使用详解笔记中的图片/20180319215106122))
 
 ### Ⅱ-刷新页面与强制刷新
 

@@ -4,7 +4,7 @@
 >
 > 这个真的很有必要,对于此工具的使用从侧面也体现了一个前端程序员的经验(本人看到前辈流畅的使用这个工具的时候内心独白:6啊老铁,还能这样的?),对于前端来说会使用DevTools真的是一项必备技能了
 >
-> 此笔记将结合[官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`的博客等、以及自己的理解进行整理与撰写,不是文档翻译哦
+> 此笔记将结合[官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板
 >
@@ -50,7 +50,7 @@
 
 ## 二、常用操作及快捷键
 
-### Ⅰ-打开 Chrome DevTools
+### 1、打开 Chrome DevTools
 
 >1. 鼠标点击
 >
@@ -66,32 +66,32 @@
 >
 >- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](ChromeDevTools 使用详解笔记中的图片/20180319215106122))
 
-### Ⅱ-刷新页面与强制刷新
+### 2、刷新页面与强制刷新
 
 >- `F5, Ctrl + R / Cmd + R`，刷新页面
 >- `Ctrl + F5, Ctrl + Shift + R / Cmd + Shift + R`，刷新页面并忽略缓存
 
-### Ⅲ-缩放DevTools
+### 3、缩放DevTools
 
 >- `Ctrl + '+' / Cmd + Shift + '+'`，放大 DevTools
 >- `Ctrl + '-' / Cmd + Shift + '-'`，缩小 DevTools
 >- `Ctrl + 0 / Cmd + 0`，DevTools 恢复大小
 
-### Ⅳ-切换设备
+### 4、切换设备
 
 >`Ctrl+Shift+M`切换设备 或者直接点击机身图标
 >
 >具体操作如下:
 ><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608153745991.png" alt="image-20210608153745991" style="zoom: 80%;" />
 
-### Ⅴ-禁用缓存
+### 5、禁用缓存
 
 >1. 应用场景:如有时要多次查看第一次进入该网页时加载的资源时会用到,防止有的数据走缓存导致下次刷新查看不到
 >2. 操作:切换到“Network”网络面板,勾选“Disable cache”项
 >
 ><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608154516531.png" alt="image-20210608154516531" style="zoom:80%;" />
 
-### Ⅵ-手动清理网站缓存
+### 6、手动清理网站缓存
 
 >1. 应用场景:此操作能清空Cookies、WebSQL、Service Workers、Cache Storage、IndexedDB、Local Storage、Application Cache
 >
@@ -105,7 +105,7 @@
 >
 >   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608155141634.png" alt="image-20210608155141634" style="zoom:80%;" />
 
-### Ⅶ-强制设置元素的状态
+### 7、强制设置元素的状态
 
 >1. 应用场景:当我要看如点击状态下的某个元素的样式,可以勾选点击状态,那么页面上该元素就会呈现此状态下的样式
 >
@@ -119,7 +119,7 @@
 >
 ><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
 
-### Ⅷ-查找某元素绑定的事件
+### 8、查找某元素绑定的事件
 
 >1. 应用场景举例:当你想要查找某个元素绑定的点击事件,就可以通过该方法直接定位到代码中
 >
@@ -139,7 +139,7 @@
 >
 >   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
 
-### Ⅸ-打开某个资源文件及定位源代码行数
+### 9、打开某个资源文件及定位源代码行数
 
 >1. 打开某个资源文件
 >
@@ -155,13 +155,13 @@
 >
 >   3) 效果图:![image-20210608163332015](ChromeDevTools 使用详解笔记中的图片/image-20210608163332015.png)
 
-### Ⅹ-格式化代码
+### 10、格式化代码
 
 >1. 应用场景:当你打开的源码是压缩过或者格式很乱的,影响阅读时可以使用
 >2. 操作:点击已打开文件的`左下角花括号`
 >3. 效果图:![image-20210608164044091](ChromeDevTools 使用详解笔记中的图片/image-20210608164044091.png)
 
-### ⅩⅠ-查找加载图片的代码-(其他资源同理)
+### 11、查找加载图片的代码-(其他资源同理)
 
 >1. 应用场景:当你要查找加载图片(其他资源)的代码时
 >
@@ -173,7 +173,7 @@
 >
 >3. 效果图![image-20210608165025868](ChromeDevTools 使用详解笔记中的图片/image-20210608165025868.png)
 
-### ⅩⅡ-全局查询请求头和响应体
+### 12、全局查询请求头和响应体
 
 >1. 应用场景:
 >
@@ -193,7 +193,7 @@
 >
 >
 
-### ⅩⅢ-切换网络模式及限制网速
+### 13、切换网络模式及限制网速
 
 >1. 应用场景:当你想要测试`无网络`、`快速的3G`、`卡顿的3G`、`限速的网络`环境时自己软件的表现时
 >
@@ -217,11 +217,86 @@
 >
 >   ![image-20210608184929873](ChromeDevTools 使用详解笔记中的图片/image-20210608184929873.png)
 
+### 14、在Console控制台查找DOM及多行输入
 
+> 1. 在Console控制台查找DOM:
+>
+>    切换到Console控制台面板 输入:`document.querySelector("#id")`或`documen.querySelector("className")`敲回车键,很简单就不演示了
+>
+> 2. 在控制台中输入多行代码
+>
+>    输入时,按住Shift键敲回车即可换行
 
+### 15、将DOM、打印结果、处理函数等存成全局变量在 console 面板使用
 
+> 很多地方的右键上下文菜单上有这个`Store as global variable`这个选项--作用是`在 console 面板存成全局变量`,因为对象的引用类型,修改这个全局变量,`其实就是改变原对象的值`,很强大。
+>
+> 注:刷新后保存的变量会重置
 
+#### Ⅰ-将DOM变成全局变量
 
+>1. 应用场景:当你想从控制台进行对DOM节点的操作时,也可以变相等同于进行了一步`let temp2=document.querySelector("#id")`操作
+>
+>2. 操作:
+>
+>   1) devtools的Elements面板中选中要操作的DOM节点
+>
+>   2) 右键选择`Store object as global variable`,就会自动保存成全局变量
+>
+>   3) 可以如同js般对其进行操作
+>
+>3. 示例图:
+>
+>   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210609114057156.png" alt="image-20210609114057156" style="zoom:67%;" />
+
+#### Ⅱ-打断点时候的任意一个局部变量
+
+>1. 应用场景:当你需要保留观察或者进行操作调试过程中某个时期的变量时
+>
+>2. 操作:
+>
+>  1) 在代码中写`debugger`或者在控制台代码出打上断点,运行
+>
+>  2) 选中任意想要保存的局部变量,右键存储即可
+>
+>3. 示例图
+>
+>  ![image-20210609120022864](ChromeDevTools 使用详解笔记中的图片/image-20210609120022864.png)
+
+#### Ⅲ-消息的响应体预览界面
+
+>1. 应用场景:通常就是保留下某些请求变量用作对比罢了,方便开发
+>
+><img src="ChromeDevTools 使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" />
+
+#### Ⅳ-保存控制台输出内容
+
+>1. 应用场景:当你不用`debugger`而只是使用`console.log`简单打印出变量时,可以将控制台打印出来的变量保存下来使用
+>
+>2. 操作:
+>
+>   1) 代码中进行打印或者控制台输入代码`console`打印出需要的变量
+>
+>   2) 右键选择`Store object as global variable`,就会自动保存成全局变量
+>
+>3. 示例图:
+>
+>   ![image-20210609141027576](ChromeDevTools 使用详解笔记中的图片/image-20210609141027576.png)
+
+### 16、截图操作
+
+>首先你需要`F12`打开devtools,下面操作才会生效
+>
+>1. 按 command + shift + p （windows 按 Ctrl + shift + p），弹出命令输入框
+>2. 输入：screenshot
+>3. 如下图选择相应的截图方式：
+>
+>- Capture area screenshot：截取某个区域（需要选择某个标签）
+>- Capture full size screenshot：截取整个网页
+>- Capture node screenshot：截取某个标签节点
+>- Capture screenshot：截取当前可视区域
+>
+>![image-20210609141545657](ChromeDevTools 使用详解笔记中的图片/image-20210609141545657.png)
 
 
 

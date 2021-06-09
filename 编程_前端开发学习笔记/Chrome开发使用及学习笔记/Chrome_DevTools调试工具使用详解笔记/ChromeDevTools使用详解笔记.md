@@ -40,7 +40,7 @@
 >
 >这是本人gitee的Elements面板
 >
->![image-20210609144357487](ChromeDevTools 使用详解笔记中的图片/image-20210609144357487.png)
+>![image-20210609144357487](ChromeDevTools使用详解笔记中的图片/image-20210609144357487.png)
 >
 >可以看到整个面板被分成 3 个部分(`截图上看是4个,但实际上3个部分`,中右两个同是样式)，左边主体为`DOM树`,左下角为选中的元素节点,(中间为选中节点的样式,最右边也是样式(*是内置的Computed面板*)--此处也是后面点即内置面板出现内容的地方),当你界面较小时可以合并至同一处视图
 
@@ -49,7 +49,7 @@
 ##### 	1)  检查页面元素
 
 >- 右击页面任意一处，选择检查 / 审查元素，查看选中页面对应的 DOM 元素
->- 点击 ![toolbar-1.png](ChromeDevTools 使用详解笔记中的图片/toolbar-1.png)，当图标显示为蓝色时，鼠标点击页面任意一处，可以查看选中页面对应的 DOM 元素
+>- 点击 ![toolbar-1.png](ChromeDevTools使用详解笔记中的图片/toolbar-1.png)，当图标显示为蓝色时，鼠标点击页面任意一处，可以查看选中页面对应的 DOM 元素
 >- 鼠标悬停 DOM 树上的任意一个节点，页面会用淡蓝色的蒙板在页面上标记 DOM 节点对应的页面
 >- 按键盘的向上向下键可以在展开的节点之间进行切换，向左向右键可以收缩和展开节点
 
@@ -68,7 +68,7 @@
 
 ###### 	② *选中后右键更多操作详解*
 
->1. 选中后右键更多操作截图:<img src="ChromeDevTools 使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" />
+>1. 选中后右键更多操作截图:<img src="ChromeDevTools使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" />
 >
 >2. 更多的操作详解
 >
@@ -102,11 +102,11 @@
 >
 >     - 这 3 种断点可以同时作用在一个节点上。为了便于大家理解，我们举个例子:我给本人gitee页面上的节点加一个 "attribute modifications" 的断点，如下图所示：
 >
->       ![image-20210609151828033](ChromeDevTools 使用详解笔记中的图片/image-20210609151828033.png)
+>       ![image-20210609151828033](ChromeDevTools使用详解笔记中的图片/image-20210609151828033.png)
 
 #### Ⅱ- elements的内置面板
 
-> ![image-20210609152836698](ChromeDevTools 使用详解笔记中的图片/image-20210609152836698.png)
+> ![image-20210609152836698](ChromeDevTools使用详解笔记中的图片/image-20210609152836698.png)
 >
 > 分别是：
 >
@@ -123,15 +123,15 @@
 >Styles 面板可以允许你通过各种方式来修改元素的样式，并且会想方设法使得你调试时简单方便。
 >
 >下方按照图中标注的序号进行描述：
->![image-20210609155354802](ChromeDevTools 使用详解笔记中的图片/image-20210609155354802.png)
+>![image-20210609155354802](ChromeDevTools使用详解笔记中的图片/image-20210609155354802.png)
 
 ###### 	① *element.style*：
 
 > 代表所选元素的内联样式。比如我选择的是 Git 的 header 块，如果我直接修改其 HTML 为 `<div class="header" style="background: red"></div>`，那么 element.style 中就会出现 `background: red;`，相反，如果我在 element.style 块中点击任意空白处，添加 CSS 样式，那么你会在对应的元素节点上看到 style 属性，值就是你写在 element.style 内的内容
 
-###### 	②*鼠标悬浮在*![element-style-6.png](ChromeDevTools 使用详解笔记中的图片/element-style-6.png)上:
+###### 	②*鼠标悬浮在*![element-style-6.png](ChromeDevTools使用详解笔记中的图片/element-style-6.png)上:
 
-> 鼠标悬浮在![element-style-6.png](ChromeDevTools 使用详解笔记中的图片/element-style-6.png)上会出现 ![element-style-5.png](ChromeDevTools 使用详解笔记中的图片/element-style-5.png)(有些版本没有)，可以帮助你通过可视化界面的形式调试 text-shadow、 box-shadow、 color、 background。另外，最后一个 "+" 的符号代表可以添加新的 CSS 规则
+> 鼠标悬浮在![element-style-6.png](ChromeDevTools使用详解笔记中的图片/element-style-6.png)上会出现 ![element-style-5.png](ChromeDevTools使用详解笔记中的图片/element-style-5.png)(有些版本没有)，可以帮助你通过可视化界面的形式调试 text-shadow、 box-shadow、 color、 background。另外，最后一个 "+" 的符号代表可以添加新的 CSS 规则
 
 ###### 	③ *单击属性或者属性值*
 
@@ -153,11 +153,11 @@
 
 >1. 点击"`:hov`":可以强制所选元素处于某个状态，这个也能通过右击元素，选择一个状态来实现
 >
->   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
+>   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
 >
 >2. "`cls`":查看所有与当前元素直接相关的样式规则，你可以禁止/允许某个类作用于所选元素，也可以添加新的类(可以与隔壁`+`功能搭配使用)
 >
->   ![image-20210609161540168](ChromeDevTools 使用详解笔记中的图片/image-20210609161540168.png)
+>   ![image-20210609161540168](ChromeDevTools使用详解笔记中的图片/image-20210609161540168.png)
 >
 >3. "`+`":默认给选中元素新建一个样式规则类(可以与`cls`搭配),上面的`span.aaa`就是此功能创建出来的
 
@@ -175,7 +175,7 @@
 >
 >鼠标悬停在盒模型上的 margin、border、padding 以及内容区域，可以在网页中看到与之相对应的区域。你还可以双击盒模型上的数字来修改它。如果所选元素的 position 属性的值为 absolute 或者 fixed 的话，还可以在 margin 的外围设置 position。
 >
->![image-20210609164044139](ChromeDevTools 使用详解笔记中的图片/image-20210609164044139.png)
+>![image-20210609164044139](ChromeDevTools使用详解笔记中的图片/image-20210609164044139.png)
 
 ##### 	3) Event Listeners
 
@@ -196,7 +196,7 @@
 >
 >3. 示例图
 >
->  <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
+>  <img src="ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
 
 ##### 	4) DOM Breakpoints
 
@@ -204,7 +204,7 @@
 >
 >当把鼠标悬停在节点标识符上时可以在网页相应区域显示对应的页面元素，勾选前面的复选框代表断点有效，不勾选代表断点虽然存在，但无法使用。
 >
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210609170200907.png" alt="image-20210609170200907" style="zoom:80%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210609170200907.png" alt="image-20210609170200907" style="zoom:80%;" />
 >
 >
 
@@ -212,7 +212,7 @@
 
 >这是所选 DOM 节点对应的对象以及这个对象的父类、父类的父类...的集合。
 >
->![image-20210609170750848](ChromeDevTools 使用详解笔记中的图片/image-20210609170750848.png)
+>![image-20210609170750848](ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png)
 
 ### 2、Console
 
@@ -220,7 +220,6 @@
 >
 >- 在开发过程中记录代码诊断信息
 >- 与文档和 DevTools 交互的命令行工具
->
 
 #### Ⅰ- 打开 Console
 
@@ -228,30 +227,30 @@
 
 #### Ⅱ- Console 中的内置菜单详解
 
-> 我们先看一下 Console 的界面，看看这个曾经很熟悉的界面是否真的熟悉![image-20210609181850152](ChromeDevTools 使用详解笔记中的图片/image-20210609181850152.png)
+> 我们先看一下 Console 的界面，看看这个曾经很熟悉的界面是否真的熟悉![image-20210609181850152](ChromeDevTools使用详解笔记中的图片/image-20210609181850152.png)
 >
 > 上下结构，上面是功能按钮或选项，下面是信息展示或交互的面板。先看上面，从左往右，依次是：
 >
-> - ![image-20210609182042261](ChromeDevTools 使用详解笔记中的图片/image-20210609182042261.png):显示/隐藏侧边栏的按钮，其功能是进行控制台面板的显示信息过滤。
-> - ![image-20210609182028915](ChromeDevTools 使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
-> - ![image-20210609182234858](ChromeDevTools 使用详解笔记中的图片/image-20210609182234858.png):执行环境选择器,比如切换成`vue-devtools`
-> - ![image-20210609182327170](ChromeDevTools 使用详解笔记中的图片/image-20210609182327170.png):监听变量,点击后输入某变量,就会将其置顶显示在console顶部,每次变量值改变都会同步上去
-> - ![image-20210609182136699](ChromeDevTools 使用详解笔记中的图片/image-20210609182136699.png):过滤 Console 中的信息,可以用正则,也可以直接输入变量名
-> - ![image-20210609182826833](ChromeDevTools 使用详解笔记中的图片/image-20210609182826833.png):也是对消息的过滤-分为**Verbose（详细）,Info（信息），Warnings（警告）,Error（错误)**四个等级类型
-> - ![image-20210609182447874](ChromeDevTools 使用详解笔记中的图片/image-20210609182447874.png):其他的隐藏功能-如`Preserve log`刷新时保存当前console的变量等
+> - ![image-20210609182042261](ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png):显示/隐藏侧边栏的按钮，其功能是进行控制台面板的显示信息过滤。
+> - ![image-20210609182028915](ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
+> - ![image-20210609182234858](ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png):执行环境选择器,比如切换成`vue-devtools`
+> - ![image-20210609182327170](ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):监听变量,点击后输入某变量,就会将其置顶显示在console顶部,每次变量值改变都会同步上去
+> - ![image-20210609182136699](ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):过滤 Console 中的信息,可以用正则,也可以直接输入变量名
+> - ![image-20210609182826833](ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):也是对消息的过滤-分为**Verbose（详细）,Info（信息），Warnings（警告）,Error（错误)**四个等级类型
+> - ![image-20210609182447874](ChromeDevTools使用详解笔记中的图片/image-20210609182447874.png):其他的隐藏功能-如`Preserve log`刷新时保存当前console的变量等
 
 ##### 	1)	 过滤信息
 
 >上面按钮中过滤信息的为
 >
->1. ![image-20210609182042261](ChromeDevTools 使用详解笔记中的图片/image-20210609182042261.png)、![image-20210609182826833](ChromeDevTools 使用详解笔记中的图片/image-20210609182826833.png):显示侧边栏时其右边的`Default levels`下拉菜单会被禁止使用，因为它的作用也是过滤信息并且侧边栏的过滤功能包含它![image-20210609184500891](ChromeDevTools 使用详解笔记中的图片/image-20210609184500891.png)
+>1. ![image-20210609182042261](ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png)、![image-20210609182826833](ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):显示侧边栏时其右边的`Default levels`下拉菜单会被禁止使用，因为它的作用也是过滤信息并且侧边栏的过滤功能包含它![image-20210609184500891](ChromeDevTools使用详解笔记中的图片/image-20210609184500891.png)
 >
 >   **共有四种选项，按照严重级别排序分别为：Verbose（详细）,Info（信息），Warnings（警告）,Error（错误）。**
 >   **在侧边栏的信息过滤功能中，除了上述四种过滤方式外还可以根据具体的messages进行过滤**
 >
 >   
 >
->2. ![image-20210609182136699](ChromeDevTools 使用详解笔记中的图片/image-20210609182136699.png):**过滤框主要能按照以下三种类型的输入进行信息过滤：**
+>2. ![image-20210609182136699](ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):**过滤框主要能按照以下三种类型的输入进行信息过滤：**
 >
 >   1) URL
 >
@@ -261,17 +260,17 @@
 >
 >   示例图
 >
->   ![image-20210609185937713](ChromeDevTools 使用详解笔记中的图片/image-20210609185937713.png)
+>   ![image-20210609185937713](ChromeDevTools使用详解笔记中的图片/image-20210609185937713.png)
 
 ##### 	2) 清空标志:清空控制台信息
 
->1. ![image-20210609182028915](ChromeDevTools 使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
+>1. ![image-20210609182028915](ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
 >2. 在控制台中键入clear()，然后运行
 >3. Ctrl+L清空
 
 ##### 	3) top下拉标志:切换执行环境
 
->1. ![image-20210609182234858](ChromeDevTools 使用详解笔记中的图片/image-20210609182234858.png)此下拉菜单称为 Execution Context Selector,通常，您会看到此环境设置为 `top`（页面的顶部框架)。
+>1. ![image-20210609182234858](ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png)此下拉菜单称为 Execution Context Selector,通常，您会看到此环境设置为 `top`（页面的顶部框架)。
 >
 >2. 其他框架和扩展程序在其自身的环境中运行。要使用这些其他环境，您需要从下拉菜单中选中它们。 例如，如果您要查看 `<iframe>` 元素的日志输出，并修改该环境中存在的某个变量，您需要从 Execution Context Selector 下拉菜单中选中该元素。
 >
@@ -279,13 +278,13 @@
 >
 >4. 示例图
 >
->   ![image-20210609191945880](ChromeDevTools 使用详解笔记中的图片/image-20210609191945880.png)
+>   ![image-20210609191945880](ChromeDevTools使用详解笔记中的图片/image-20210609191945880.png)
 
 ##### 	4) 眼睛标志:监听变量
 
->![image-20210609182327170](ChromeDevTools 使用详解笔记中的图片/image-20210609182327170.png):**用于创建一个Live表达式，此表达式的值可实时更新。**
+>![image-20210609182327170](ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):**用于创建一个Live表达式，此表达式的值可实时更新。**
 >
->![image-20210609193128590](ChromeDevTools 使用详解笔记中的图片/image-20210609193128590.png)
+>![image-20210609193128590](ChromeDevTools使用详解笔记中的图片/image-20210609193128590.png)
 
 ##### 	5) **settings按钮具备显示信息的控制功能，其里面有八个选择项**
 
@@ -294,7 +293,7 @@
 >1. `Preserve log`:默认是不勾选的，所以当刷新页面时，Console 中的信息会被清空掉。如果勾选了的话，那么刷新页面之后，信息还会被保留。
 >2. 其他的我不常用谢谢
 >
->![image-20210609193539202](ChromeDevTools 使用详解笔记中的图片/image-20210609193539202.png)
+>![image-20210609193539202](ChromeDevTools使用详解笔记中的图片/image-20210609193539202.png)
 
 #### Ⅲ- Console 能干什么事
 
@@ -311,7 +310,7 @@
 >- $()：是 `document.querySelector()` 的缩写
 >- $$()：是 `document.querySelectorAll()` 的缩写
 >- $x()：通过 XPath 的方式查看元素，注意是 "XPath" 中的 "x"，而不是 `+-*/` 中的 `*`
->- 示例图![image-20210609194732798](ChromeDevTools 使用详解笔记中的图片/image-20210609194732798.png)
+>- 示例图![image-20210609194732798](ChromeDevTools使用详解笔记中的图片/image-20210609194732798.png)
 
 
 
@@ -335,7 +334,7 @@
 >
 >3. 上面两种方式不仅可以打开 DevTools，还可以关闭 DevTools。当然，还有一种方式可以打开 DevTools。
 >
->- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](ChromeDevTools 使用详解笔记中的图片/20180319215106122))
+>- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](ChromeDevTools使用详解笔记中的图片/20180319215106122))
 
 ### 2、刷新页面与强制刷新
 
@@ -353,14 +352,14 @@
 >`Ctrl+Shift+M`切换设备 或者直接点击机身图标
 >
 >具体操作如下:
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608153745991.png" alt="image-20210608153745991" style="zoom: 80%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210608153745991.png" alt="image-20210608153745991" style="zoom: 80%;" />
 
 ### 5、禁用缓存
 
 >1. 应用场景:如有时要多次查看第一次进入该网页时加载的资源时会用到,防止有的数据走缓存导致下次刷新查看不到
 >2. 操作:切换到“Network”网络面板,勾选“Disable cache”项
 >
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608154516531.png" alt="image-20210608154516531" style="zoom:80%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210608154516531.png" alt="image-20210608154516531" style="zoom:80%;" />
 
 ### 6、手动清理网站缓存
 
@@ -374,7 +373,7 @@
 >
 >3. 效果图
 >
->   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608155141634.png" alt="image-20210608155141634" style="zoom:80%;" />
+>   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608155141634.png" alt="image-20210608155141634" style="zoom:80%;" />
 
 ### 7、强制设置元素的状态
 
@@ -388,7 +387,7 @@
 >
 >   3) 勾选要设置的状态,那么页面该元素就会呈现该选中状态下的样式
 >
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
 
 ### 8、查找某元素绑定的事件
 
@@ -408,7 +407,7 @@
 >
 >3. 示例图
 >
->   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
+>   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
 
 ### 9、打开某个资源文件及定位源代码行数
 
@@ -416,7 +415,7 @@
 >
 >   1) 按 command p (windows 按 Ctrl p),弹出文件搜索框,输入文件名回车即可定位
 >
->   2) 效果图<img src="ChromeDevTools 使用详解笔记中的图片/image-20210608163035973.png" alt="image-20210608163035973" style="zoom:80%;" />
+>   2) 效果图<img src="ChromeDevTools使用详解笔记中的图片/image-20210608163035973.png" alt="image-20210608163035973" style="zoom:80%;" />
 >
 >2. 快速定位源代码行数
 >
@@ -424,13 +423,13 @@
 >
 >   2) 输入 :行数,如 “:480”,回车即可
 >
->   3) 效果图:![image-20210608163332015](ChromeDevTools 使用详解笔记中的图片/image-20210608163332015.png)
+>   3) 效果图:![image-20210608163332015](ChromeDevTools使用详解笔记中的图片/image-20210608163332015.png)
 
 ### 10、格式化代码
 
 >1. 应用场景:当你打开的源码是压缩过或者格式很乱的,影响阅读时可以使用
 >2. 操作:点击已打开文件的`左下角花括号`
->3. 效果图:![image-20210608164044091](ChromeDevTools 使用详解笔记中的图片/image-20210608164044091.png)
+>3. 效果图:![image-20210608164044091](ChromeDevTools使用详解笔记中的图片/image-20210608164044091.png)
 
 ### 11、查找加载图片的代码-(其他资源同理)
 
@@ -442,7 +441,7 @@
 >
 >   2) 点击 “Initiator” 列下的文件名即会跳转至代码处
 >
->3. 效果图![image-20210608165025868](ChromeDevTools 使用详解笔记中的图片/image-20210608165025868.png)
+>3. 效果图![image-20210608165025868](ChromeDevTools使用详解笔记中的图片/image-20210608165025868.png)
 
 ### 12、全局查询请求头和响应体
 
@@ -460,7 +459,7 @@
 >
 >3. 效果图
 >
->   ![image-20210608165747119](ChromeDevTools 使用详解笔记中的图片/image-20210608165747119.png)
+>   ![image-20210608165747119](ChromeDevTools使用详解笔记中的图片/image-20210608165747119.png)
 >
 >
 
@@ -474,7 +473,7 @@
 >
 >   2) 效果图
 >
->   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210608171012060.png" alt="image-20210608171012060" style="zoom: 67%;" />
+>   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608171012060.png" alt="image-20210608171012060" style="zoom: 67%;" />
 >
 >3. 限制网速操作:
 >
@@ -486,7 +485,7 @@
 >
 >   4) 效果图:第一步操作同上切换网络操作
 >
->   ![image-20210608184929873](ChromeDevTools 使用详解笔记中的图片/image-20210608184929873.png)
+>   ![image-20210608184929873](ChromeDevTools使用详解笔记中的图片/image-20210608184929873.png)
 
 ### 14、在Console控制台查找DOM及多行输入
 
@@ -518,7 +517,7 @@
 >
 >3. 示例图:
 >
->   <img src="ChromeDevTools 使用详解笔记中的图片/image-20210609114057156.png" alt="image-20210609114057156" style="zoom:67%;" />
+>   <img src="ChromeDevTools使用详解笔记中的图片/image-20210609114057156.png" alt="image-20210609114057156" style="zoom:67%;" />
 
 #### Ⅱ-打断点时候的任意一个局部变量
 
@@ -532,13 +531,13 @@
 >
 >3. 示例图
 >
->  ![image-20210609120022864](ChromeDevTools 使用详解笔记中的图片/image-20210609120022864.png)
+>  ![image-20210609120022864](ChromeDevTools使用详解笔记中的图片/image-20210609120022864.png)
 
 #### Ⅲ-消息的响应体预览界面
 
 >1. 应用场景:通常就是保留下某些请求变量用作对比罢了,方便开发
 >
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" />
 
 #### Ⅳ-保存控制台输出内容
 
@@ -552,7 +551,7 @@
 >
 >3. 示例图:
 >
->   ![image-20210609141027576](ChromeDevTools 使用详解笔记中的图片/image-20210609141027576.png)
+>   ![image-20210609141027576](ChromeDevTools使用详解笔记中的图片/image-20210609141027576.png)
 
 ### 16、截图操作
 
@@ -567,14 +566,14 @@
 >- Capture node screenshot：截取某个标签节点
 >- Capture screenshot：截取当前可视区域
 >
->![image-20210609141545657](ChromeDevTools 使用详解笔记中的图片/image-20210609141545657.png)
+>![image-20210609141545657](ChromeDevTools使用详解笔记中的图片/image-20210609141545657.png)
 
 ### 17、打开控制台抽屉
 
 >1. 应用场景:当你在如Network、elements界面要用要console控制台时,就如我上面的例子截图,
 >2. 下面举例在`Elements`面板打开抽屉
 >
-><img src="ChromeDevTools 使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" />
 >
 >3. 更简单的:直接点击`esc`就可以在别的地方打开
 >

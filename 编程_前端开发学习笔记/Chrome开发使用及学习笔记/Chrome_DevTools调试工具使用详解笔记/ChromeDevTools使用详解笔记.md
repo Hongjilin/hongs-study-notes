@@ -6,7 +6,7 @@
 >
 > 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
 >
-> 测试页面截图也都直接按照本人gitee为模板
+> 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
 > 本人[全部笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
 
@@ -125,7 +125,7 @@
 >下方按照图中标注的序号进行描述：
 >![image-20210609155354802](ChromeDevTools使用详解笔记中的图片/image-20210609155354802.png)
 
-###### 	① *element.style*：
+###### 	① *element.style：*
 
 > 代表所选元素的内联样式。比如我选择的是 Git 的 header 块，如果我直接修改其 HTML 为 `<div class="header" style="background: red"></div>`，那么 element.style 中就会出现 `background: red;`，相反，如果我在 element.style 块中点击任意空白处，添加 CSS 样式，那么你会在对应的元素节点上看到 style 属性，值就是你写在 element.style 内的内容
 
@@ -149,7 +149,7 @@
 
 > 将鼠标悬停在一个选择器上时，可以看到这个选择器所影响的所有页面元素（不包括可视区域外的元素）
 
-###### 	*⑦ 三个选项:`:hov`、`cls`、`+`*
+###### 	⑦ *三个选项:`:hov`、`cls`、`+`*
 
 >1. 点击"`:hov`":可以强制所选元素处于某个状态，这个也能通过右击元素，选择一个状态来实现
 >
@@ -301,22 +301,64 @@
 
 >你可以输入任何表达式，按回车执行。在输入过程中，可能会出现智能提醒，你可以按 tab 或者 → 键来完成自动补全。另外，还可以按 ↑ 和 ↓ 键来翻阅历史表达式
 
-##### 	2) Chrome DevTools 自带了哪些有用的表达式?
+##### 	2) Chrome DevTools 自带了哪些常用的表达式?
 
 >下面描述的都是 Chrome DevTools 自带的方法或者变量，需要注意一下的是，当页面暴露相同的方法或变量的话，DevTools `自带的会被覆盖`，比如 jQuery 官网下的 Console 中的 $() 就是自己的方法。
 
-###### 	① 选择元素
+###### 	① *选择元素*
 
 >- $()：是 `document.querySelector()` 的缩写
 >- $$()：是 `document.querySelectorAll()` 的缩写
 >- $x()：通过 XPath 的方式查看元素，注意是 "XPath" 中的 "x"，而不是 `+-*/` 中的 `*`
 >- 示例图![image-20210609194732798](ChromeDevTools使用详解笔记中的图片/image-20210609194732798.png)
 
+###### ② *inspect*
 
+>在 Console 中输入 `inspect()` 参数是 DOM 元素或者 JS 引用，可以跳转到 Elements 面板并且定位到你选择的那个 DOM 节点那。
+>
+>![image-20210609201540829](ChromeDevTools使用详解笔记中的图片/image-20210609201540829.png)
 
+###### 	③ **$0-4*
 
+>$0， $1...$4，代表 5 个最近访问过的 DOM 或者堆对象（Heap Object），$0 是最近访问的。那访问的意思是什么？就是在 Elements 面板被审查或者在 Memory 面板被选择的 DOM 元素或者堆对象
+>
+>![image-20210609201830754](ChromeDevTools使用详解笔记中的图片/image-20210609201830754.png)
 
+###### 	④ *$_*
 
+>`$_` 返回上一次表达式执行的结果。举个栗子：
+>
+>![image-20210609202055771](ChromeDevTools使用详解笔记中的图片/image-20210609202055771.png) 
+
+###### 	⑤ *Event*
+
+>在 Chrome DevTools 里你可以给 DOM 绑定事件、解绑事件，也能查看 DOM 注册了哪些事件
+>
+>- `monitorEvents(DOM_element, event)`，如果 event 为空的话，那会给选定的 DOM 元素加上所有事件；如果想监听多个事件的话，event 还可以是 Array 类型的变量
+>
+>- `unmonitorEvents(DOM_element)`，为某个 DOM 元素解绑事件
+>
+>- `getEventListeners(DOM_element)`，查看某个 DOM 元素绑定了哪些事件
+>
+>  ![image-20210609202813407](ChromeDevTools使用详解笔记中的图片/image-20210609202813407.png)
+>
+>  在上面例子中,我为`<p>本人是2021届毕业生</p>`注册了一个点击事件并解绑
+
+###### 	⑥ *debug(function) 与 undebug(function)*
+
+>在 Console 中调用 debug() 方法，当调用这个方法的时候，就会开启 debug 模式。用 `undebug` 方法来关闭。
+>
+>![image-20210609203225834](ChromeDevTools使用详解笔记中的图片/image-20210609203225834.png)
+
+###### 	⑥ *monitor(function) 与 unmonitor(function)*
+
+>当调用某个 function 时，Console 会输出这个 function 的名字和参数。
+
+###### 	⑦ *dir(object) 与 dirxml(object)*
+
+>dir() 与 console.dir() 一样，dirxml() 与 console.dirxml() 一样。
+>
+>dir() 将选中元素以对象的形式输出，而 dirxml() 将元素以 xml 的形式输出。
 
 ## 二、常用操作及快捷键
 

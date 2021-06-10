@@ -4,7 +4,7 @@
 >
 > 这个真的很有必要,对于此工具的使用从侧面也体现了一个前端程序员的经验(本人看到前辈流畅的使用这个工具的时候内心独白:6啊老铁,还能这样的?),对于前端来说会使用DevTools真的是一项必备技能了
 >
-> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
+> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`、CSDN的`@Demi`等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
@@ -223,7 +223,9 @@
 
 #### Ⅰ- 打开 Console
 
->首先，先提一下打开 Console 的方法。第一种是之前提到过的：`Ctrl + Shift + J / Cmd + Opt + J`，打开 DevTools，并且直接定位到控制台面板。另外一种比较特殊，如果你想打开其他功能面板的同时，还想打开 Console 的话，[详见本笔记常用操作第17点](#17、打开控制台抽屉)
+>1. 首先，先提一下打开 Console 的方法。第一种是之前提到过的：`Ctrl + Shift + J / Cmd + Opt + J`，打开 DevTools，并且直接定位到控制台面板。
+>
+>2. `Console drawer`:这种比较特殊，如果你想打开其他功能面板的同时，还想打开 Console 的话，[详见本笔记常用操作第17点](#17、打开控制台抽屉)
 
 #### Ⅱ- Console 中的内置菜单详解
 
@@ -359,6 +361,157 @@
 >dir() 与 console.dir() 一样，dirxml() 与 console.dirxml() 一样。
 >
 >dir() 将选中元素以对象的形式输出，而 dirxml() 将元素以 xml 的形式输出。
+
+#### Ⅳ- Console drawer状态查看与修改你的值
+
+>ps:[`Console drawer`](#Ⅰ- 打开 Console)其实就是在别的面板打开控制台
+>
+>如果你以为 Chrome DevTools 就简单看看这些值那就太小瞧她了，在中断状态下，还能动态修改变量的值。比如中断处有个变量叫 v，值是 1，如果我直接按 "Resume script execution" 的话，那么下一次的 v 也是 1，但如果我在按恢复执行按钮之前，我在 Console drawer 中输入 `v = 2` 回车，那么，下一处的 v 就是 2 了。
+>
+>还有更厉害的，你不仅可以修改变量的值，你还可以修改代码！当程序中断时，你可以在 [`Sources`](#Ⅰ- Sources 面板图解)(断点调试) 面板修改你的代码
+
+### 3、Sources 面板
+
+> 在 Chrome 中调试 JS 代码，那你不得不与 Chrome DevTools 的 Sources 面板打交道,使用谷歌控制台Sources面板可以:
+>
+> - 查看文件
+> - 编辑 Css 和 JavaScript。
+> - 创建和保存 JavaScript 的**代码段**，您可以在任何页面上运行此代码段。 **代码段**与小书签相似。
+> - 调试 JavaScript。
+> - 设置工作区，以将您在 DevTools 中作出的更改保存到文件系统的代码中。
+
+#### Ⅰ- Sources 面板图解
+
+>![image-20210610162606051](ChromeDevTools使用详解笔记中的图片/image-20210610162606051.png)
+
+#### Ⅱ-左侧面板详解
+
+##### 	1) `Page`:
+
+> 已加载的全部资源，以域名划分文件夹。
+
+##### 	2) `Content Scripts`:
+
+>浏览器扩展工具的脚本，比如我安装了`Vue.js devtools`、`React Developer Tools`、[`PostWoman接口调试工具(挺好用的,点我传送)`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7Mark.md/#6、Postwoman(ApiDebug)%20http接口测试工具)等插件都会显示出来
+>
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210610165221422.png" alt="image-20210610165221422" style="zoom:80%;" /> 
+
+##### 	3) `Snippets`
+
+>代码片段，可以在这里添加一小段程序，这个一小段程序`可以访问这个页面中的变量和函数等`。不会因为刷新丢失，使用：添加=>保存(ctrl+s)=>运行(`Run`)=>不用则移除(`Remove`)
+>
+>![image-20210610170040085](ChromeDevTools使用详解笔记中的图片/image-20210610170040085.png)
+
+##### 	4) `Filesystem&Overrides`
+
+> 可以加载本地文件夹,就是可以将整个项目加载到此进行调试
+
+#### Ⅲ-中间代码展示面板详解
+
+##### 	1) `添加断点`
+
+> 1. 断点:代码行号所在的位置叫做行号槽，点击行号槽，为相应的行添加断点，并在相应的行号上面加上一个类似肩章的五边形图标(蓝色的)。
+>
+>    ![image-20210610173049623](ChromeDevTools使用详解笔记中的图片/image-20210610173049623.png) 
+>
+> 2. 条件断点:右键一个没有添加断点的行号，选择 "Add conditional breakpoint"或者 右键行号选择`Edit已有断点`输入你的条件，当条件满足时，断点才会生效。回车后效果如下
+>
+>    ![image-20210610173249169](ChromeDevTools使用详解笔记中的图片/image-20210610173249169.png) 
+>
+> 3. 行内断点:当你将代码打在某些js语句上是,与上述例子不同的是同一行出现了 3 处标红的位置(也可能是2行,这得看你标注的代码具体情况)，表示 3 处断点。但第1个断点跟后2个不一样的是，第1个断点是默认处于激活状态，而后2个则不是，`只有点击激活后才能生效`
+>
+>    ![image-20210610174041549](ChromeDevTools使用详解笔记中的图片/image-20210610174041549.png)
+
+##### 	2)` 右键行号` 及 `右键断点`
+
+>1. 右键行号
+>
+>   - **Add breakpoint** 添加断点
+>   - **Add conditional breakpoint** 添加条件断点
+>   - **Never pause here** 永不停顿
+>
+>2. 右键断点
+>
+>   - **Remove breakpoint** 删除断点
+>   - **Edit breakpoint** 修改断点
+>   - **Disable breakpoint** 忽略断点
+>   - Deactivate breakpoints：暂时忽略所有断点 (暗淡断点标志和断点列表，右键列表某个断点选择 Activate all breakpoints可恢复所有断点)
+>   - Disable all breakpoints： 暂时忽略所有断点 (暗淡断点标志和断点列表，右键列表某个断点选择 Enable all breakpoints可恢复所有断点)
+>   - Remove all breakpoints：删除所有断点
+>     
+>
+>3. 比较奇怪的是我在网上看到的很多文章会写到右键有`Blackbox script (黑盒脚本)`,但本人无,所以推测可能是浏览器版本问题
+>
+>   > 这里另外指出并给出原文描述:我们写项目时，很多时候是要引用第三方库或框架的，当我们调试时，调试的对象应该是我们自己写的代码，但很多时候，我们经常在焦灼地进行下一步下一步时，突然代码跳到了第三方库或框架的源码上去，这让我们焦灼的内心更添了一把柴火。黑盒脚本就是用来解决这个问题的。它能够将一个脚本文件标记为 "Blackbox Script"，那么我们就永远不可能进入这个文件内部，这个文件对我们来讲就是一个黑盒子。为什么要强调“永远”呢？因为不仅普通的断点不能访问这个被标记了的脚本，其他的，比如说 DOM 断点、事件断点等等都无法访问那个脚本文件内部。
+
+#### Ⅳ-右侧断点调试按钮组详解
+
+> 首先我们先介绍右侧功能按钮组的各个作用
+> ![image-20210610175433702](ChromeDevTools使用详解笔记中的图片/image-20210610175433702.png)
+>
+> - ![sources-debug-btn-1.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-1.png)：当程序中断在断点处时，点击去往下一个断点
+> - ![sources-debug-btn-2.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-2.png)：当程序中断在断点处时，`长按上面的按钮出现此标志(还有一个方形按钮为中断)`，点击这个按钮可以在 0.5s 内忽略任何中断，当中断出现在循环内部时一般比较有用
+> - ![sources-debug-btn-3.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-3.png)：执行下一条语句.按正常步骤，应该会一行一行的执行相关代码，以便深入探索哪些代码影响着正在更新的变量。如果你的代码中调用了另一个函数，点击此按钮将不会进入该函数，而是直接略过，将焦点留在当前函数上
+> - ![sources-debug-btn-4.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-4.png)：当中断停留在一个函数调用处时，点击这个按钮会进入函数内部，而上面的按钮则会执行函数调用的下一句，不会进入函数内部
+> - ![sources-debug-btn-5.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-5.png)：当中断停留在函数内部时，点击这个按钮则会跳出函数内部，停留在函数调用的下一个语句
+> - ![img](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-6.png)：在不取消断点标记的情况下，使得所有断点失效
+
+#### Ⅴ- 右侧面板详解
+
+> 此处用到上面[`左侧面板的Snippets相关知识`](#Ⅱ-左侧面板详解)插入了一个`代码块`模拟断点调试,方便展示
+
+##### 	1) `Watch` (变量监听):
+
+>正如名字所表示的，观察，观察什么呢？`主要观察变量`。
+>
+>示例图如下
+>
+>![image-20210610182432191](ChromeDevTools使用详解笔记中的图片/image-20210610182432191.png)
+
+##### 	2) `BreakPoints `(断点列表)：
+
+>展示断点列表，将每个断点所在文件/行数/该行简略内容展示
+>
+>![image-20210610182855822](ChromeDevTools使用详解笔记中的图片/image-20210610182855822.png)
+
+##### 	3) `Scope` (作用域):
+
+>Scope 面板显示了你当前断点所在函数所有属性的值。Scope 会显示2种类型的值： Script和 Global。如下图，当前作用域里的对象是本地参数Script
+>
+>![image-20210610185055065](ChromeDevTools使用详解笔记中的图片/image-20210610185055065.png)
+>
+>注:在网上查阅资料时很多都说`Scope 会显示三种类型的值： Local、Closure 和 Global`。但是本人没有,仍是推测版本问题,所以我仍是以本人所见为主,备注出此资料
+
+##### 	4) `Call Stack `(函数调用堆栈):
+
+>Call Stack 面板会显示代码的执行路径
+
+##### 	5) `XHR Breakpoints` (请求断点列表)
+
+>对达到满足过滤条件的请求进行断点拦截，点击该面板右侧加号按钮，会跳出"Break when URL contains"以填写过滤条件。如下图，我们对请求URL包含字母`/console/querycentre....`的内容进行断点
+>
+>下方示例图为了不影响观看体验打码无用部分
+>
+>![image-20210610191827642](ChromeDevTools使用详解笔记中的图片/image-20210610191827642.png)
+
+##### 	6) `DOM Breakpoints `(DOM断点列表)
+
+>给DOM加断点，在达到规定条件时触发断点，截断javascript的执行并且定位到断点处。例如：在[Elements](#Ⅱ- elements的内置面板)面板，右键 body 元素→Break on→ modifications，在DOM Breakpoints面板中会显示DOM元素名
+
+##### 	7) `Event Listener Breakpoints` (可断点的事件监听列表)
+
+>打开这个列表，可以在监听事件并且在触发该事件时进入断点，调试器会停留在触发事件代码行。只需要展开事件列表，选择要监听的事件打上勾即可
+>
+>举个栗子,勾选键盘按下事件:![image-20210610192527599](ChromeDevTools使用详解笔记中的图片/image-20210610192527599.png)
+
+#### Ⅵ- 源码调试小贴士
+
+>现在的项目几乎都是经过编译过的，所以当我们调试时会与编译后的代码打交道，但那并不是我们想要的。不要急，Chrome DevTools 提供了预处理过的代码与源码的映射，主要表现在两点：
+>
+>- 在 console 上，源链接指向的是源码，而不是编译后的文件
+>- 在 debug 时，在 Call Stack 面板上的源链接指向的也是源码，不是编译后的文件
+>
+>不过需要注意的是，上面所讲的能查看源码的前提是 Chrome DevTools 在设置中提供了相应权限，具体是：Settings - Sources - Enable Javascript source maps / Enable CSS source maps，勾选这两项即可。不过，默认情况下就是勾选。
 
 ## 二、常用操作及快捷键
 

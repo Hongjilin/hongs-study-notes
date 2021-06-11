@@ -4,7 +4,7 @@
 >
 > 这个真的很有必要,对于此工具的使用从侧面也体现了一个前端程序员的经验(本人看到前辈流畅的使用这个工具的时候内心独白:6啊老铁,还能这样的?),对于前端来说会使用DevTools真的是一项必备技能了
 >
-> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`、CSDN的`@Demi`等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
+> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`、简书的`澄澄真可爱`、CSDN的`@Demi`、[`精致灰`](https://blog.csdn.net/qq_26858401)等包括但不仅限此的博客或资料、以及自己的理解进行整理与撰写,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
@@ -705,7 +705,20 @@
 >
 >![image-20210611184508312](ChromeDevTools使用详解笔记中的图片/image-20210611184508312.png)
 
+##### 	1)  工具栏功能
 
+>- 录制: 点击 Record （按Ctrl+E），这时候Devtools就开始录制各种性能指标。记录时，Record 按钮会变成红色。然后按 Record 按钮或再次键入键盘快捷键停止记录；
+>- 刷新: 刷新页面分析；
+>- 清除: 清除页面分析结果；
+>- 上下箭头: 用来上传和下载每一次性能检测报告；
+>- Screendshots:  显示屏幕快照，是用来查看在每个时间段界面的变化；
+>- Memory: 存储调用栈的大小，在不同时间段的不同大小；
+>- Disable Javascript samples:  禁用 JavaScript 调用栈；
+>- Enable advanced paint instrumentation(slow):  记录渲染事件的细节；
+>- Network: 模拟不同的网络环境；
+>- CPU: 模拟不同的CPU运行速度
+
+​	2) 
 
 
 

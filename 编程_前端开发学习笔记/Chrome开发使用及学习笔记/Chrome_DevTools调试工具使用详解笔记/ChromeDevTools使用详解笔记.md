@@ -9,6 +9,8 @@
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
 > 本人[全部笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
+>
+> 说明:本人此笔记记录于2021年,用的是如今最新版本的chrome
 
 # #目录
 
@@ -34,7 +36,7 @@
 >
 >`ps`:有的 Chrome 上面没有 Performance 和 Memory，而是 Timeline 和 Profiles，是不是我写错了呢？不是的，而是 Chrome 到 v57 后，便将 Timeline 更名为 Performance，将 Profiles 更名为 Memory。目前来看，Google 仅仅是更名以及调整了部分功能所属的面板而已，并没有功能上的增删
 
-### 1、Elements
+### 1、Elements 面板
 
 >Elements 面板主要用于对页面 HTML 和 CSS 的检查以及可视化编辑。
 >
@@ -214,7 +216,7 @@
 >
 >![image-20210609170750848](ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png)
 
-### 2、Console
+### 2、Console 面板
 
 >Chrome DevTools 的 Console 主要提供两类功能：
 >
@@ -513,6 +515,202 @@
 >
 >不过需要注意的是，上面所讲的能查看源码的前提是 Chrome DevTools 在设置中提供了相应权限，具体是：Settings - Sources - Enable Javascript source maps / Enable CSS source maps，勾选这两项即可。不过，默认情况下就是勾选。
 
+
+
+### 4、Network 面板
+
+>Chrome DevTools 的 Network 面板主要用于度量当前网页的网络性能状况，其记录了当前网页每个网络操作的信息，包括时间数据、HTTP 请求、返回数据等等。
+>
+>国际惯例,先看完整截图概览
+>
+>![image-20210611163234495](ChromeDevTools使用详解笔记中的图片/image-20210611163234495.png)
+
+#### Ⅰ- Control 面板
+
+>![image-20210611163316092](ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
+>
+>> 
+
+##### 	1)  `开始/停止记录`
+
+>**![network-3.png](ChromeDevTools使用详解笔记中的图片/network-3.png)** 表示正常记录网络的请求状况，点击，当图标变成 ![img](ChromeDevTools使用详解笔记中的图片/network-4.png) 时，代表停止记录请求状况,此时页面上不会对后续请求进行记录(保留点击前的记录)。
+
+##### 	2) `清除记录`
+
+> 点击 ![img](ChromeDevTools使用详解笔记中的图片/network-5.png) 可以清除请求表格内的内容。
+
+##### 	3)  `截取加载的瞬间`
+
+>本人`Control 面板`中没有录制图标,但其实是收置在了设置面板中,详见下方 `9)右侧设置图标`部分
+>
+>1. 仍是推测为版本区别,此处给出网上对于其功能描述:
+>
+>> 点击 ![img](ChromeDevTools使用详解笔记中的图片/network-6.png)，当图标变成 ![img](ChromeDevTools使用详解笔记中的图片/network-7.png) 时，代表开启截屏模式，即截取网页在加载过程中的瞬间，这些瞬间显示了网页在什么时间加载出了哪些部分。
+>
+>2. 本人操作
+>
+>   >出现下面的结果(`放出本人示例图`)：
+>   >
+>   >![image-20210611172334006](ChromeDevTools使用详解笔记中的图片/image-20210611172334006.png)
+
+##### 	4) `过滤`
+
+>点击 ![img](ChromeDevTools使用详解笔记中的图片/network-10.png) 可以显示/隐藏过滤面板，如下：
+>
+>![image-20210611163316092](ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
+>
+>1. 可以把过滤面板看成由三个部分组成的面板，从左到右分别是：过滤文本域、隐藏 Data URLs 和请求资源类型选择。
+>
+>2. 对 Data URLs 不理解的可以看：[Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs)。在这里主要就是为了隐藏这些用 Data URLs 来展示的资源,此处不赘述
+>3. 在 "Hide data URLs" 后面有一组文件类型，选择一个可以在下面的请求表格中只显示相应类型的文件请求，当然你还可以在选择的同时按着 `ctrl / cmd`，那么就可以多选
+
+###### 	① *请求资源类型选择*
+
+>在 "Hide data URLs" 后面有一组文件类型，选择一个可以在下面的请求表格中只显示相应类型的文件请求，当然你还可以在选择的同时按着 `ctrl / cmd`，那么就可以多选
+
+###### 	②  *过滤文本域*
+
+>下面来说过滤文本域，就是过滤面板最左边的输入框
+>
+>1. 首先，最简单的用法就是我们输入一个字符串，然后可以过滤出那些资源名称中包含相应字符串的资源。这是我们一般使用的，除此以外，文本域还支持一些关键词，举个栗子：
+>
+>   ![image-20210611165236991](ChromeDevTools使用详解笔记中的图片/image-20210611165236991.png)
+>
+>   上面的例子就用到了 `status-code` 关键词，后面跟的参数是状态码，可以刷选出 `状态码为304` 的请求
+>
+>2. 常用关键词有哪些
+>
+>   - domain：刷选来自特定域的请求
+>   - has-response-header：刷选 HTTP 返回值包含特定头部信息的请求
+>   - is：可以用 `is:running` 查看 WebSocket 资源
+>   - larger-than：筛选文件大小超过特定数字的请求，默认单位是 byte
+>   - method：刷选特定 HTTP 请求方法的请求
+>   - mime-type：刷选特定 MIME 类型的请求
+>   - mixed-content：有 `mixed-content:all` 和 `mixed-content:displayed` 两种
+>   - scheme：刷选特定 scheme 的请求
+>   - set-cookie-domain：刷选特定的 HTTP 返回头部的 set-cookie 属性的请求
+>   - set-cookie-name：也是对返回的 HTTP 头部中某个属性进行刷选的关键词
+>   - set-cookie-value：同上
+>   - status-code：对请求的状态值进行刷选
+>
+>3. 注意点
+>
+>   >1) 冒号后面不能有空格；2) 大小写敏感。
+
+##### 	5) `搜索`
+
+>第4个搜索图标，可以打开search面板。search与filter的区别在于，filter只能按照请求URL来筛选请求，但search可以搜索到请求和响应中的内容。“Aa”表示是否匹配大小写，“.*”表示根据某种格式匹配。
+>
+>![image-20210611170207544](ChromeDevTools使用详解笔记中的图片/image-20210611170207544.png)
+
+##### 	6)  `preserve log`
+
+>preserve log表示保留log。如果不勾选，当切换页面时，上个页面的log将被清除掉；勾选后，切换页面时，上个页面的log依然存在。
+
+##### 	7) ` Disable cache`
+
+> Disable cache表示禁止缓存，勾选后，页面将不再从缓存中获取文件。
+
+##### 	8) `模拟网络状况`
+
+> 点击online，打开模拟网络选项，可以调试网页在不同网络状况下的表现情况。这对移动端的调试非常有用
+>
+> 1. 具体操作见下方常用操作:[切换网络模式及限制网速方式](#13、切换网络模式及限制网速)
+>
+> 2. 除了在 Network 面板可以设置网络状况，还可以在 Drawer 中看见。具体有两种方法：
+>
+>    1) [![img](https://github.com/CompileYouth/front-end-study/raw/master/tool/devtools/res/toolbar-3.png)]-> More tools -> Network conditions
+>
+>    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 [![img](https://github.com/CompileYouth/front-end-study/raw/master/tool/devtools/res/toolbar-3.png)]，点击，选择 Network conditions
+
+##### 	9) `右侧设置图标`
+
+> 点击右侧设置图标后会出现几个选项
+>
+> ![image-20210611171729978](ChromeDevTools使用详解笔记中的图片/image-20210611171729978.png)
+
+
+
+#### Ⅱ- 时间刻度表
+
+>我一开始跟很多人一样，看到这个图时觉得头晕，感觉上是显示加载情况的，但又说不出具体什么意思，下面就跟大家一起了解一下这张图的含义。
+>
+>![image-20210611172936963](ChromeDevTools使用详解笔记中的图片/image-20210611172936963.png)
+>
+>首先从水平方向上从左看到右，你会看见：
+>
+>- 刻度：代表时间
+>
+>- 一条条水平线：一条水平线代表一项资源，这条水平线上的不同的颜色段代表这项资源在加载过程中处于什么阶段
+>
+>- 有两条竖线：前面一条是蓝色，代表 DOMContentLoaded 事件被触发；后面一条是红色，代表 load 事件被触发。`从概览面板也能看到`这两个信息：
+>
+>  ![image-20210611173031807](ChromeDevTools使用详解笔记中的图片/image-20210611173031807.png)
+>
+>然后从垂直方向看，这些五彩斑斓的水平线有的有重叠有的没有重叠，具有重叠部分说明这些资源是在同一时间被加载的。
+>
+>`ps`:筛选不同时间的请求
+>
+>![image-20210611173524970](ChromeDevTools使用详解笔记中的图片/image-20210611173524970.png)
+
+
+
+#### Ⅲ- 概况面板
+
+>![image-20210611174207620](ChromeDevTools使用详解笔记中的图片/image-20210611174207620.png)
+>
+>网络面板的最下方，展示了整个页面的请求概况，下图可以看出，本人[`gitee`](https://gitee.com/hongjilin)首页共发起了57个请求，网络传输38.9KB，一共加载资源5.2MB，所有请求完成的时间是2.0min，DOM构建完成的时间是1.61s，所有外部资源加载完成的时间是2.00s。
+>
+>ps:`红蓝字部分的时间差大致是外部资源的加载时间`
+
+
+
+#### Ⅳ- 请求列表操作面板
+
+>  使用Network面板最多的地方莫过于调试aJax请求了。点开一个请求，可以看到几个标签。
+>
+>![image-20210611180024944](ChromeDevTools使用详解笔记中的图片/image-20210611180024944.png)
+>
+>
+
+##### 	1) `Headers`
+
+>Headers里面展示了一些请求的基本信息，包括请求头、响应头等。里面展示了一些请求的基本信息，包括请求头、响应头、`请求参数(常用)`等。
+
+##### 	2) `Preview`和`Response`
+
+> Preview和Response都是对返回信息的展示。区别是Response展示的是请求返回的原始内容；Preview是根据原始内容的不同类型进行的直观展示。
+>
+> 可以看到其实数据是一样的,但是格式不同
+>
+> ![image-20210611180602561](ChromeDevTools使用详解笔记中的图片/image-20210611180602561.png) 
+
+##### 	3)  `Timing`查看请求参数
+
+> Timing里面列举了一些请求的参数,也可以在请求列表的Waterfall中看到请求的参数。
+>
+>![image-20210611180940478](ChromeDevTools使用详解笔记中的图片/image-20210611180940478.png)
+>
+>应用场景: Queued表示队列时间，由于单个域名最多只能并发6个请求，所以不是所有的请求都是在页面初始就开始加载的。Started表示开始请求的时间。可以根据每个请求各阶段花费的时间来制定优化方案
+
+##### 	4)  修改想展示的请求列表参数
+
+> ![image-20210611181859716](ChromeDevTools使用详解笔记中的图片/image-20210611181859716.png)
+
+
+
+### 5、Performance
+
+
+
+
+
+
+
+------
+
+
+
 ## 二、常用操作及快捷键
 
 ### 1、打开 Chrome DevTools
@@ -774,9 +972,11 @@
 >
 >关掉的方法同理
 
+### 18、重新发起某请求
 
-
-
+>在与后端联调过程中，若需要重新发起请求，除了刷新页面或重新触发请求事件外，还可以使用更简单的方式。右击需要重新发起的请求，选择Replay XHR，就可以重新发起请求了
+>
+>![image-20210611181403919](ChromeDevTools使用详解笔记中的图片/image-20210611181403919.png)
 
 
 

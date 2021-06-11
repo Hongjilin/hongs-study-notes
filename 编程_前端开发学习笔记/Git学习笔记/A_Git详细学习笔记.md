@@ -111,7 +111,7 @@ git read-tree -prefix=bak 哈希值(树对象的)
 git write-tree
 ```
 
-##### ②查看暂存区当前样子
+##### ② 查看暂存区当前样子
 
 ```shell
 git ls-files -s
@@ -123,7 +123,7 @@ git ls-files -s
 > 2. 我们可以通过调用commit-tree命令创建一个提交对象,为此需要指定一个树对象的SHA-1值,为此需要指定一个树对象的SHA-1值 , 以及该提交的父提交对象(如果有的话,第一次将暂存区做快照就没有父对象)
 > 3. 真正的一个版本其实就是提交对象
 
-##### ①创建提交对象
+##### ① 创建提交对象
 
 ```shell
 echo "first commit" |git commit-tree 树对象的哈希值

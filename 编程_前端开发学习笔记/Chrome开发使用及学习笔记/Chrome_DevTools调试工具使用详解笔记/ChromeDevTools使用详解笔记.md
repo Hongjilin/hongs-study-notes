@@ -701,6 +701,10 @@
 
 ### 5、Performance
 
+> Performance 一个在前端开发领域中，无法被忽视的存在。使用Chrome DevTools的performance面板可以记录和分析页面在运行时的所有活动。本文将详细介绍如何使用performance面板解决性能瓶颈
+>
+>![image-20210611184508312](ChromeDevTools使用详解笔记中的图片/image-20210611184508312.png)
+
 
 
 

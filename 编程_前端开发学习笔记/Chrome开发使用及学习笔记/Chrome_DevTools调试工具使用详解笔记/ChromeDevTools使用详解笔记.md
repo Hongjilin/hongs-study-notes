@@ -6,7 +6,7 @@
 >
 > 由于网上该部分知识的资料十分零散,基本都是各位程序员前辈用爱发电`非常零散`地发出自己的经验使用(并且很多示例版本已经相对此时落后,特别是部分相对少用的面板基本没有资料),所以学的也是磕磕绊绊艰难的很,所以我就有意的学习并梳理出一份相对全面且利于自己后续查阅补充的笔记,下方会尽量在说明处给出学习资料出处(放进笔记具体知识点中会破坏自己笔记排版)
 >
-> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys)、HTM等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
+> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda)、[*`changchao`*](https://www.jianshu.com/u/870a1e4c7f0b);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys)、HTM等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
@@ -34,7 +34,7 @@
 >- **Memory**：Memory 面板主要显示页面 JS 对象和相关联的 DOM 节点的内存分布情况
 >- **Application**：记录网页加载的所有资源，包括存储信息、缓存信息以及页面用到的图片、字体、脚本、样式等信息
 >- **Security**：用于检测当面页面的安全性
->- **Audits**：审计面板会对页面的加载进行分析，然后给出提高页面性能的建议，官网建议查看 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) 来获得更多的页面加载建议。
+>- **Lighthouse(Audits)**：审计面板会对页面的加载进行分析，然后给出提高页面性能的建议，官网建议查看 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) 来获得更多的页面加载建议。
 >
 >`ps`:有的 Chrome 上面没有 Performance 和 Memory，而是 Timeline 和 Profiles，是不是我写错了呢？不是的，而是 Chrome 到 v57 后，便将 Timeline 更名为 Performance，将 Profiles 更名为 Memory。目前来看，Google 仅仅是更名以及调整了部分功能所属的面板而已，并没有功能上的增删
 
@@ -1141,7 +1141,7 @@
 >
 >`注意`:iframe 的内容不能预览，如果页面带`x-frame-options=SAMEORIGIN`，则其他域名网站就无法嵌入了。
 
-### 8、security
+### 8、security 面板
 
 >HTTPS为您的网站提供关键安全和数据完整以及用户的隐私数据信息。使用Chrome DevTools中的Security(安全)面板可以调试安全隐患,并确保您已在网站上正确实施HTTPS。
 >
@@ -1186,19 +1186,124 @@
 >1. 单击安全源以查看该源的连接和证书详细信息。 -->看示例图 [点我跳转](#① *安全的源*)
 >2. 如果您点击不安全的源，Security(安全)面板会显示一个链接到Network（网络）面板的过滤视图的链接。点击这个链接可以查看来自该源的所有通过HTTP协议提供的请求。  -->看示例图 [点我跳转](#② *不安全的源*)
 
+### 9、Lighthouse(Audits) 审计面板
 
+>- 上面的Performance可以给我们提供非常多的信息，但它不够直观，需要开发者透过表面的这些参数去分析背后的性能问题。有了这个需求之后，另一个性能优化工具就出现了，它就是`LightHouse`。
+>
+>- LightHouse 是 Google 开源的一个自动化工具，用于改进网络应用的质量。你可以将其作为一个 Chrome 扩展程序运行，或从命令行运行。 当为 Lighthouse 提供一个要审查的网址，它将针对此页面运行一连串的测试，然后生成一个有关页面性能的报告。可以参考失败的测试，看看可以采取哪些措施来改进应用
+>
+>- `Audits`就是LightHouse的其中一种运行方式
+>
+>- Audits主要从5个方面来给网页打分，最终会生成一个report
+>
+>  ![image-20210615200749360](ChromeDevTools使用详解笔记中的图片/image-20210615200749360.png)
 
-### 9、Lighthouse
+#### 1) Performance 性能
 
+##### ① *Metrics 指标*
 
+>网页性能，这个不用多说，网页加载慢一秒，可能对应的就是多少客户的流失，所以大家都懂的
+>
+>在这里强烈推荐大家点击每个指标后面的**`Learn More`**，来查看详细的指标介绍
+>
+>![image-20210615201555991](ChromeDevTools使用详解笔记中的图片/image-20210615201555991.png)
+>
+>1. 首次有效绘制:
+>
+>   > **可以简单理解为用户看到网页主要内容的时间，“首次有效绘制”分数越低，页面显示其主要内容的速度就越快**
+>   >
+>   > [Learn more](https://web.dev/first-contentful-paint/?utm_source=lighthouse&utm_medium=devtools)
+>
+>2. 互动时间
+>
+>   >交互时间 (`TTI`) 是一个很重要的指标,因为某些站点以交互性为代价来优化内容可见性。这可能会造成令人沮丧的用户体验：该站点似乎已准备就绪，但当用户尝试与之交互时，却什么也没有发生
+>   >
+>   >衡量一个页面需要多长时间才能*完全*交互。在以下情况下，页面被认为是完全交互的：
+>   >
+>   >- 页面显示有用的内容，这是由[First Contentful Paint](https://web.dev/first-contentful-paint)衡量的，
+>   >- 为大多数可见的页面元素注册了事件处理程序，并且
+>   >- 该页面在 50 毫秒内响应用户交互。
+>   >
+>   >[Learn more](https://web.dev/interactive/?utm_source=lighthouse&utm_medium=devtools)
+>
+>3. 速度指标
+>
+>   >速度指标是一个页面加载性能指标，向您展示明显填充页面内容的速度。 此指标的分数越低越好。
+>   >
+>   >[Learn more](https://web.dev/speed-index/?utm_source=lighthouse&utm_medium=devtools)
+>
+>4. 总阻塞时间
+>
+>   >TBT 衡量页面被阻止响应用户输入（例如鼠标点击、屏幕点击或键盘按下）的总时间。总和是通过在[First Contentful Paint](https://web.dev/first-contentful-paint/)和[Time to Interactive](https://web.dev/interactive/)之间添加所有[长任务](https://web.dev/long-tasks-devtools)的*阻塞部分*来计算的。任何执行时间超过 50 毫秒的任务都是长任务。50 毫秒后的时间量是阻塞部分。例如，如果 Lighthouse 检测到一个 70 毫秒长的任务，则阻塞部分将为 20 毫秒。
+>   >
+>   >[Learn more](https://web.dev/lighthouse-total-blocking-time/?utm_source=lighthouse&utm_medium=devtools)
+>
+>5. 最大的内容绘制
+>
+>   >LCP 测量视口中最大的内容元素何时呈现到屏幕上。这大约是页面的主要内容对用户可见的时间。有关如何确定 LCP 的更多详细信息，请参阅[定义的最大内容绘制](https://web.dev/largest-contentful-paint/#largest-contentful-paint-defined)。
+>   >
+>   >[Learn more](https://web.dev/lighthouse-largest-contentful-paint/?utm_source=lighthouse&utm_medium=devtools)
+>
+>6. 累积布局偏移 (CLS)
+>
+>   >当页面上的某些内容突然发生变化时，您是否曾经在线阅读过一篇文章？在没有警告的情况下，文本移动了，你就失去了位置。或者更糟糕的是：您正要点击一个链接或一个按钮，但在您的手指落地之前的瞬间——BOOM——链接移动，你最终点击了其他东西！
+>   >
+>   >页面内容的意外移动通常是因为资源是异步加载的，或者 DOM 元素被动态添加到现有内容上方的页面中。罪魁祸首可能是尺寸未知的图像或视频、呈现的字体大于或小于其后备，或者是动态调整自身大小的第三方广告或小部件。
+>   >
+>   >[Learn more](https://web.dev/cls/?utm_source=lighthouse&utm_medium=devtools)
 
+##### ② *Opportunities 可优化项*
 
+>![image-20210615202558923](ChromeDevTools使用详解笔记中的图片/image-20210615202558923.png)
+>
+> 
+>
+>这项里面的内容指的是LightHouse发现的一些可以直接优化的点，你可以对应这些点来进行优化，比如本例中：
+>
+>- 未用到的Css ：发现了一些没有用到的css，浪费了带宽，同时有可能延缓了首屏加载时间。浏览器必须先处理当前网页的所有样式和布局信息，然后才能呈现内容。因此，浏览器会阻止呈现网页内容，直到外部样式表已下载完毕并处理完毕（这可能需要进行多次往返，因而可能会导致首次呈现时间延迟）
+>- 去除阻塞渲染的样式、脚本等：Lighthouse 列出了其检测到的所有阻塞渲染的链接或脚本。 我们应该去减少这些链接或脚本的数量。
+>- 合理压缩图片：对于实际展示区较小的图片，我们应该避免使用原图，而使用缩略图等，同时考虑使用压缩率较高的图片格式。
 
+##### ③ *Diagnostics (手动诊断项目)*
 
+>这些项目表示LightHouse并不能替你决定当前是好是坏，但是把详情列出来，由你手动排查每个项目的情况:![image-20210615202659065](ChromeDevTools使用详解笔记中的图片/image-20210615202659065.png)
+>
+>就如同截图中所说:
+>
+>- Does not use passive listeners to improve scrolling performance :不使用被动侦听器提高滚动性能
+>- image elements do not have explicit width and height:图片元素没有显式宽度和高度。
+>- Image elements do not have explicit:图像元素没有显示
+>- 其他略,自己选择优化项
 
+##### ④ *通过的审查项目*
 
+>顾名思义这里列出的都是你做的好的地方
+>
+>![image-20210615203233819](ChromeDevTools使用详解笔记中的图片/image-20210615203233819.png)
 
+#### 2) Accessibility辅助功能
 
+>辅助功能指的是那些可能超出“典型”用户范围之外的用户的体验，他们以不同于你期望的方式访问你的网页或进行交互
+>
+>辅助功能类别测试屏幕阅读器的能力和其他辅助技术是否能在页面中正常工作。例如：按元素来使用属性，ARIA属性的最佳实践，可辨别的元素命名等等。
+
+#### 3) Best Practice 最佳实践
+
+>本项指标是指LightHouse用业界公认的几项最佳实践来评估站点，然后看你有几项没有做到，几项做到了
+>
+>![image-20210615203646680](ChromeDevTools使用详解笔记中的图片/image-20210615203646680.png)
+
+#### 4) SEO 搜索引擎优化
+
+>检查目的很明确，就是优化搜索引擎索引,这里`gitee`是做的真好
+>
+>![image-20210615203741846](ChromeDevTools使用详解笔记中的图片/image-20210615203741846.png)
+
+#### 5) PWA
+
+>这一项很容易理解，其实就是检查网页对于PWA的兼容性,想详细了解的点进去里面的`showmore`了解详情,此处不详解
+>
+>![image-20210615204048272](ChromeDevTools使用详解笔记中的图片/image-20210615204048272.png) 
 
 ------
 

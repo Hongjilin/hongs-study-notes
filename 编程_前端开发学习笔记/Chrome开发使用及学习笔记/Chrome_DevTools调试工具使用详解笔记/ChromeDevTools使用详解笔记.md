@@ -4,9 +4,9 @@
 >
 > 这个真的很有必要,对于此工具的使用从侧面也体现了一个前端程序员的经验(本人看到前辈流畅的使用这个工具的时候内心独白:6啊老铁,还能这样的?),对于前端来说会使用DevTools真的是一项必备技能了
 >
-> 由于网上该部分知识的资料十分零散,基本都是各位程序员前辈用爱发电零散地发出自己的经验使用(并且很多示例版本已经相对此时落后),所以学的也是磕磕绊绊艰难的很,所以我就有意的学习并梳理出一份相对全面且利于自己后续查阅补充的笔记,下方会尽量在说明处给出学习资料出处(放进笔记具体知识点中会破坏自己笔记排版)
+> 由于网上该部分知识的资料十分零散,基本都是各位程序员前辈用爱发电`非常零散`地发出自己的经验使用(并且很多示例版本已经相对此时落后,特别是部分相对少用的面板基本没有资料),所以学的也是磕磕绊绊艰难的很,所以我就有意的学习并梳理出一份相对全面且利于自己后续查阅补充的笔记,下方会尽量在说明处给出学习资料出处(放进笔记具体知识点中会破坏自己笔记排版)
 >
-> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys)等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
+> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys)、HTM等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
@@ -72,41 +72,42 @@
 
 ###### 	② *选中后右键更多操作详解*
 
->1. 选中后右键更多操作截图:<img src="ChromeDevTools使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" />
+>1. 选中后右键更多操作截图:
+>     <img src="ChromeDevTools使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" /> 
 >
 >2. 更多的操作详解
 >
->   - `Add Attribute`：为选中节点添加一个属性
+>  - `Add Attribute`：为选中节点添加一个属性
 >
->   - `Edit Attribute`：修改选中节点中选中属性
+>  - `Edit Attribute`：修改选中节点中选中属性
 >
->   - `Edit as HTML`：将选中节点当做 HTML 进行编辑
+>  - `Edit as HTML`：将选中节点当做 HTML 进行编辑
 >
->   - `Delete element`：删除节点
+>  - `Delete element`：删除节点
 >
->   - `Copy→`:复制选中的节点，可以复制选中节点的选择器、XPath、元素本身、outerHTML 等，也能剪切、粘贴节点，我们一般选择复制节点的选择器
+>  - `Copy→`:复制选中的节点，可以复制选中节点的选择器、XPath、元素本身、outerHTML 等，也能剪切、粘贴节点，我们一般选择复制节点的选择器
 >
->   - `Hide element`：隐藏节点
+>  - `Hide element`：隐藏节点
 >
->   - `Force state→`:4个伪类-选中则表示所选节点处于相应的状态，比如选中 `er` 则表示所选节点当前正处于鼠标悬停的状态
+>  - `Force state→`:4个伪类-选中则表示所选节点处于相应的状态，比如选中 `er` 则表示所选节点当前正处于鼠标悬停的状态
 >
->   - `Expand all`：展开所选节点下的所有子节点
+>  - `Expand all`：展开所选节点下的所有子节点
 >
->   - `Collapse all`：收缩所选节点下的所有子节点，包括自己
+>  - `Collapse all`：收缩所选节点下的所有子节点，包括自己
 >
->   - `Scroll into View`：如果所选的 DOM 节点对应的页面元素不在可视区域内的话，点击这个选项则会将页面滚动到可以显示对应的页面元素的位置
+>  - `Scroll into View`：如果所选的 DOM 节点对应的页面元素不在可视区域内的话，点击这个选项则会将页面滚动到可以显示对应的页面元素的位置
 >
->   - `Break on`：给 DOM 节点设置断点，主要用来调试 JavaScript 代码，这段代码的作用是用来修改所加断点的 DOM 节点，这一般用在比较复杂的网页应用当中。可以给所选的 DOM 节点添加 3 种类型的断点：
+>  - `Break on`：给 DOM 节点设置断点，主要用来调试 JavaScript 代码，这段代码的作用是用来修改所加断点的 DOM 节点，这一般用在比较复杂的网页应用当中。可以给所选的 DOM 节点添加 3 种类型的断点：
 >
->     - subtree modifications：所选节点的子节点被添加、删除、移动的话，则会触发
+>    - subtree modifications：所选节点的子节点被添加、删除、移动的话，则会触发
 >
->     - attribute modifications：所选节点的属性被修改的话，则会触发
+>    - attribute modifications：所选节点的属性被修改的话，则会触发
 >
->     - node removal：所选节点被删除的话，则会触发
+>    - node removal：所选节点被删除的话，则会触发
 >
->     - 这 3 种断点可以同时作用在一个节点上。为了便于大家理解，我们举个例子:我给本人gitee页面上的节点加一个 "attribute modifications" 的断点，如下图所示：
+>    - 这 3 种断点可以同时作用在一个节点上。为了便于大家理解，我们举个例子:我给本人gitee页面上的节点加一个 "attribute modifications" 的断点，如下图所示：
 >
->       ![image-20210609151828033](ChromeDevTools使用详解笔记中的图片/image-20210609151828033.png)
+>      ![image-20210609151828033](ChromeDevTools使用详解笔记中的图片/image-20210609151828033.png)
 
 #### Ⅱ- elements的内置面板
 
@@ -1138,7 +1139,64 @@
 >
 >![image-20210615190437320](ChromeDevTools使用详解笔记中的图片/image-20210615190437320.png)
 >
->注意下，iframe 的内容不能预览，如果页面带`x-frame-options=SAMEORIGIN`，则其他域名网站就嵌入不了额。
+>`注意`:iframe 的内容不能预览，如果页面带`x-frame-options=SAMEORIGIN`，则其他域名网站就无法嵌入了。
+
+### 8、security
+
+>HTTPS为您的网站提供关键安全和数据完整以及用户的隐私数据信息。使用Chrome DevTools中的Security(安全)面板可以调试安全隐患,并确保您已在网站上正确实施HTTPS。
+>
+>- 使用Security中的Overview(概述)立即查明当前页面是否安全。
+>- 检查单个origins来查看连接和证书详细信息（对于Secure Origins）或者确定哪些请求是不受保护的（对于Non-Secure Origins）。
+
+#### 1) **Security Overview (安全概述)**
+
+>要查看页面整体的安全性，打开DevTools并转到Security面板。
+>
+>你看到的第一件事是Security Overview(安全概述)。一目了然,会显示是否安全(示例中为安全的)
+>
+> ![image-20210615193229553](ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
+
+##### ① *安全的源*
+
+>Security Overview(安全概述)会告诉您的页面是否安全。安全的页面会显示信息：`This page is secure (valid HTTPS)`.点击 View certificate 按钮可以查看[main origin](https://en.wikipedia.org/wiki/Same-origin_policy)的服务器证书
+>
+>![image-20210615193229553](ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
+
+##### ② *不安全的源*
+
+>不安全的网页会显示信息： This page is not secure.![image-20210615193340090](ChromeDevTools使用详解笔记中的图片/image-20210615193340090.png)
+>
+>1. Security面板识别两种类型的不安全网页
+>
+>     - 如果请求的页面通过HTTP提供，那么main origin被标记为不安全
+>     - 如果通过HTTPS检索所请求的页面，但该页面后续使用HTTP从其他源检索内容，那么该页面仍被标记为不安全。 这种页面被称为[混合内容](https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content)页面。混合内容页面仅部分内容受保护，因为HTTP内容可以被嗅探器访问并且容易受到中间人攻击
+>
+>2. 如何调试不安全页面?
+>
+>   - 点击View request in Network Panel(在网络面板中单击查看请求)可以打开 Network(网络)面板的过滤视图,并准确地查看通过HTTP协议提供的请求。这里显示所有来自未受保护的源的所有请求。
+>
+>     ![image-20210615193847645](ChromeDevTools使用详解笔记中的图片/image-20210615193847645.png)
+>
+>   
+
+#### 2) 检查源
+
+>使用左侧面板可以检查单个安全或不安全的源。
+>
+>1. 单击安全源以查看该源的连接和证书详细信息。 -->看示例图 [点我跳转](#① *安全的源*)
+>2. 如果您点击不安全的源，Security(安全)面板会显示一个链接到Network（网络）面板的过滤视图的链接。点击这个链接可以查看来自该源的所有通过HTTP协议提供的请求。  -->看示例图 [点我跳转](#② *不安全的源*)
+
+
+
+### 9、Lighthouse
+
+
+
+
+
+
+
+
 
 
 
@@ -1413,7 +1471,7 @@
 
 >1. 应用场景:通常就是保留下某些请求变量用作对比罢了,方便开发
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" /> 
 
 #### Ⅳ-保存控制台输出内容
 
@@ -1449,7 +1507,7 @@
 >1. 应用场景:当你在如Network、elements界面要用要console控制台时,就如我上面的例子截图,
 >2. 下面举例在`Elements`面板打开抽屉
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" />
+><img src="ChromeDevTools使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" /> 
 >
 >3. 更简单的:直接点击`esc`就可以在别的地方打开
 >

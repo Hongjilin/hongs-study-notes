@@ -54,32 +54,55 @@
 
 >1. 详见[`Rule`](https://ant.design/components/form-cn/#Rule)属性中自定义`validator`
 >
->2. 代码示例
+>2. 通常用作用户名等校验
+>
+>  ```jsx
+>  <Form form={form} onFinish={handleFinish}>
+>      <Item
+>        label="用户名"
+>        name="username"
+>        validateTrigger="onBlur"
+>        normalize={(value) => value.replace(/\s/g, '')}
+>        rules={[
+>         //此处message为空字符串是为了防止下方自定义校验返回的字符串重叠    
+>         { required: true, message: '' },
+>          {
+>            validator: async (_, value) => {
+>                //如果是修改时,可以用这句话,当你内容没改变时,不进行校验
+>                if (editData.name === value) return; 
+>                //判断空以及输入空字符串的报错
+>                if (value == null || value.trim() == '') return Promise.reject("用户名不能为空");
+>                //请求接口,查询通过上述两个校验后的字符串是否与数据库中重复,如果重复,则提示用户名已存在
+>                const res: IResult<IExist> = await ChannelApi.isUserExist( value );
+>                if (res?.data.status) return Promise.reject('用户名已存在');
+>                else  return Promise.resolve(); 
+>            },
+>          },
+>        ]}
+>      >
+>        <Input placeholder="请输入用户名" />
+>      </Item>
+>   </From>
+>  ```
+>
+>3. 通常用作必须字段校验(不进行数据库查询)
 >
 >   ```jsx
->   <Form form={form} onFinish={handleFinish}>
->       <Item
->         label="用户名"
->         name="username"
->         validateTrigger="onBlur"
->         normalize={(value) => value.replace(/\s/g, '')}
->         rules={[
->          { required: true, message: '用户名不能为空' },
->           {
->             validator: async (_, value) => {
->               if (value == null || value == '')  return Promise.resolve();
->               else {
->                 const res: IResult<IExist> = await ChannelApi.isUserExist( value );
->                 if (res?.data.status) return Promise.reject('用户名已存在');
->                 else  return Promise.resolve();
->               }
->             },
+>     <Item
+>       label="必填项"
+>       name="incomeType"
+>       rules={[
+>         { required: true, message: '' },
+>         {
+>           validator: async (_, value) => {
+>             if (value == null || value.trim() == '') 
+>               return Promise.reject('必填项不能为空');
 >           },
->         ]}
->       >
->         <Input placeholder="请输入用户名" />
->       </Item>
->    </From>
+>         },
+>       ]}
+>     >
+>       <Input.TextArea placeholder="请输入必填项信息" />
+>     </Item>
 >   ```
 
 ### Ⅲ-表单中动态修改数字输入框的value

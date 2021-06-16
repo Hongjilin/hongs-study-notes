@@ -193,3 +193,28 @@ box-shadow:0px 0px 0px 3px #bb0a0a,
 >     <img src="Css补缺笔记中的图片/image-20210517184121490.png" alt="image-20210517184121490" style="zoom:80%;" />
 >
 >
+
+## Ⅴ-实现父元素半透明，子元素不透明
+
+>CSS实现父元素半透明，子元素不透明。 很久以来大家都习惯使用opacity:0.5在新式浏览器里实现半透明，而对IE较旧的版本使用filter:Alpha(opacity=0.5)的滤镜来实现半透明。但是这样实现的半透明有个问题，那就是这个属性会被子元素所继承。
+>
+>如下代码，则子元素中也将是半透明效果，无论你将子元素的半透明值重置还是如何都不会改变这一情况。
+>
+>```css
+>.parent{opacity:0.9; background-color:#fff;}
+>.child{opacity:1.0; background-color:#fff; height:200px;}
+>```
+>
+>1. 问题效果
+>
+><img src="Css补缺笔记中的图片/image-20210616183632386.png" alt="image-20210616183632386" style="zoom:67%;" /> 
+>
+>2. 解决:其实在新的CSS3规则里面的属性 GRBA已经可以方便的实现父元素透明，而子元素不透明了。
+>
+>   ```css
+>   //使用背景色透明可以限制子类不继承,防止下方按钮也变得半透明
+>     background:rgba(255,255,255,0.9) ;
+>   ```
+>
+>   <img src="Css补缺笔记中的图片/image-20210616183902406.png" alt="image-20210616183902406" style="zoom:67%;" /> 
+

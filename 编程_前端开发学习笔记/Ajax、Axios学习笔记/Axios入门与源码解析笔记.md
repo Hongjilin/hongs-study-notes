@@ -12,7 +12,7 @@
 >
 >本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`axios笔记`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E3%80%81Axios%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Axios%E5%85%A5%E9%97%A8%E4%B8%8E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E7%AC%94%E8%AE%B0.md)
 >
->​												记录时间: 2021-3-15晚启  2021-2-19结束
+>​												记录时间: 2021-3-15晚启  2021-3-19结束
 
 # #目录
 
@@ -296,15 +296,15 @@
 >
 >2. request(config): 
 >  将请求拦截器 / dispatchRequest() / 响应拦截器 通过 promise 链串连起来, 
->  返回 promise
+>   返回 promise
 >
 >3. dispatchRequest(config): 
 >  转换请求数据 ===> 调用 xhrAdapter()发请求 ===> 请求返回后转换响应数
->  据. 返回 promise
+>   据. 返回 promise
 >
 >4. xhrAdapter(config): 
 >  创建 XHR 对象, 根据 config 进行相应设置, 发送特定请求, 并接收响应数据, 
->  返回 promise 
+>   返回 promise 
 >
 >5. 流程图:
 >

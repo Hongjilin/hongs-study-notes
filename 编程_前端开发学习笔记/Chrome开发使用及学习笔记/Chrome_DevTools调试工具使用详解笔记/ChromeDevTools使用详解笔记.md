@@ -6,7 +6,7 @@
 >
 > 由于网上该部分知识的资料十分零散,基本都是各位程序员前辈用爱发电`非常零散`地发出自己的经验使用(并且很多示例版本已经相对此时落后,特别是部分相对少用的面板基本没有资料),所以学的也是磕磕绊绊艰难的很,所以我就有意的学习并梳理出一份相对全面且利于自己后续查阅补充的笔记,下方会尽量在说明处给出学习资料出处(放进笔记具体知识点中会破坏自己笔记排版)
 >
-> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda)、[*`changchao`*](https://www.jianshu.com/u/870a1e4c7f0b);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys);css-tricks的[`SARAH DRASNER所写的Debugging Tips and Tricks`](https://css-tricks.com/debugging-tips-tricks/)等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
+> 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda)、[*`changchao`*](https://www.jianshu.com/u/870a1e4c7f0b);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys);css-tricks的[`SARAH DRASNER所写的Debugging Tips and Tricks`](https://css-tricks.com/debugging-tips-tricks/)、腾讯云中腾讯技术工程官方号的[`大型前端项目的断点调试共享化和复用化实践`](https://cloud.tencent.com/developer/article/1711214?from=article.detail.1471757)等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
 >
@@ -1403,7 +1403,7 @@
 >
 >前端调试中最少你要看前面九大面板中的 JS调试:[`Console 面板`](#2、Console 面板)、[`Sources 面板`](#3、Sources 面板);网络调试: [`Network 面板`](#4、Network 面板); 样式调试: [`Elements 面板`](#1、Elements 面板);  至于性能调优:哥,都到能调优的水准了,那不得都会啊? --> [`九大功能模块面板详解`](#一、九大功能模块面板详解)
 >
->查阅参考的资料:[Debugging Tips and Tricks](https://css-tricks.com/debugging-tips-tricks/)
+>查阅参考的资料:[Debugging Tips and Tricks](https://css-tricks.com/debugging-tips-tricks/)、腾讯云中腾讯技术工程官方号的[大型前端项目的断点调试共享化和复用化实践](https://cloud.tencent.com/developer/article/1711214?from=article.detail.1471757)
 
 ### 1、主要概念
 

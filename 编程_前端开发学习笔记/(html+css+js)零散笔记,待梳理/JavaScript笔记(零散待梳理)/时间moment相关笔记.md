@@ -1,5 +1,5 @@
->本笔记摘录及整理Monent.js相关知识点笔记
->
+本笔记摘录及整理Monent.js相关知识点笔记
+
 >本人全部笔记地址分享 -->[点我跳转](https://gitee.com/hongjilin/hongs-study-notes)
 
 # #目录
@@ -262,220 +262,188 @@
 
 
 
+## 2、设置时间
+
+>`常被用做获取某一特定时间的moment`
+
+### Ⅰ- Set Time
+
+>**`常用格式`**  --直接设置时间
+>
+>```js
+>moment().year(Number), moment().month(Number)
+>moment().set(String, Int)
+>moment().set(Object)
+>```
+>
+>- ##### 设置年份
+>
+>  ```js
+>  moment().year(2019)
+>  
+>  moment().set('year', 2019)
+>  
+>  moment().set({year: 2019})
+>  ```
+>
+>- ##### 设置月份
+>
+>  ```js
+>  moment().month(11) (0~11, 0: January, 11: December) moment().set('month', 11) 
+>  ```
+>
+>- ##### 设置某个月中的某一天
+>
+>  ```js
+>  moment().date(15)
+>  
+>  moment().set('date', 15)
+>  ```
+>
+>- ##### 设置某个星期中的某一天
+>
+>  ```js
+>  moment().weekday(0) // 设置日期为本周第一天（周日）
+>  
+>  moment().isoWeekday(1) // 设置日期为本周周一
+>  
+>  moment().set('weekday', 0) moment().set('isoWeekday', 1)
+>  ```
+>
+>- ##### 设置小时
+>
+>  ```js
+>  moment().hours(12)
+>  
+>  moment().set('hours', 12)
+>  ```
+>
+>- ##### 设置分钟
+>
+>  ```js
+>  moment().minutes(30)
+>  
+>  moment().set('minutes', 30)
+>  ```
+>
+>- ##### 设置秒数
+>
+>  ```js
+>  moment().seconds(30)
+>  
+>  moment().set('seconds', 30)
+>  ```
+
+### Ⅱ- Add Time
+
+>  **`常用格式`** --增加(符号时为减少) 时间
+>  
+>  ```js
+>moment().add(Number, String)
+>    moment().add(Object)
+>```
+>    
+>      - ##### 设置年份
+>    
+>    ```js
+>      moment().add(1, 'years')
+>    
+>      moment().add({years: 1})
+>      ```
+>  
+>  - ##### 设置月份
+>  
+>    ```js
+>      moment().add(1, 'months')
+>          ```
+>  
+>  - ##### 设置日期
+>  
+>    ```js
+>      moment().add(1, 'days')
+>      ```
+>  
+>  - ##### 设置星期
+>  
+>    ```js
+>      moment().add(1, 'weeks')
+>      ```
+>  
+>  - ##### 设置小时
+>  
+>    ```js
+>      moment().add(1, 'hours')
+>      ```
+>  
+>  - ##### 设置分钟
+>  
+>    ```js
+>      moment().add(1, 'minutes')
+>      ```
+>  
+>  - ##### 设置秒数
+>  
+>    ```js
+>      moment().add(1, 'seconds')
+>      ```
+
+### Ⅲ- Subtract Time
+
+>**`常用格式`** --往前多少的 时间
+>
+>```js
+>moment().subtract(Number, String)
+>
+>moment().subtract(Object)
+>```
+>
+>- ##### 设置年份
+>
+>  ```js
+>  moment().subtract(1, 'years')
+>  
+>  moment().subtract({years: 1})
+>  ```
+>
+>- ##### 设置月份
+>
+>  ```js
+>  moment().subtract(1, 'months')
+>  ```
+>
+>- ##### 设置日期
+>
+>  ```js
+>  moment().subtract(1, 'days')
+>  ```
+>
+>- ##### 设置星期
+>
+>  ```js
+>  moment().subtract(1, 'weeks')
+>  ```
+>
+>- ##### 设置小时
+>
+>  ```js
+>  moment().subtract(1, 'hours')
+>  ```
+>
+>- ##### 设置分钟
+>
+>  ```js
+>  moment().subtract(1, 'minutes')
+>  ```
+>
+>- ##### 设置秒数
+>
+>  ```js
+>  moment().subtract(1, 'seconds')
+>  ```
 
 
 
-
-
-
-
-
-
-
-- ##### 设置时间
-
-
-  - #### Set Time
-
-    ```
-    moment().year(Number), moment().month(Number)...
-    
-    
-    
-    moment().set(String, Int)
-    
-    
-    
-    moment().set(Object)
-    ```
-
-    - ##### 设置年份
-
-      ```
-      moment().year(2019)
-      
-      
-      
-      moment().set('year', 2019)
-      
-      
-      
-      moment().set({year: 2019})
-      ```
-
-    - ##### 设置月份
-
-      ```
-      moment().month(11) (0~11, 0: January, 11: December) moment().set('month', 11) 
-      ```
-
-    - ##### 设置某个月中的某一天
-
-      ```
-      moment().date(15)
-      
-      
-      
-      moment().set('date', 15)
-      ```
-
-    - ##### 设置某个星期中的某一天
-
-      ```
-      moment().weekday(0) // 设置日期为本周第一天（周日）
-      
-      
-      
-      moment().isoWeekday(1) // 设置日期为本周周一
-      
-      
-      
-      moment().set('weekday', 0) moment().set('isoWeekday', 1)
-      ```
-
-    - ##### 设置小时
-
-      ```
-      moment().hours(12)
-      
-      
-      
-      moment().set('hours', 12)
-      ```
-
-    - ##### 设置分钟
-
-      ```
-      moment().minutes(30)
-      
-      
-      
-      moment().set('minutes', 30)
-      ```
-
-    - ##### 设置秒数
-
-      ```
-      moment().seconds(30)
-      
-      
-      
-      moment().set('seconds', 30)
-      ```
-
-  - #### Add Time
-
-    ```
-    moment().add(Number, String)
-    
-    
-    
-    moment().add(Object)
-    ```
-
-    - ##### 设置年份
-
-      ```
-      moment().add(1, 'years')
-      
-      
-      
-      moment().add({years: 1})
-      ```
-
-    - ##### 设置月份
-
-      ```
-      moment().add(1, 'months')
-      ```
-
-    - ##### 设置日期
-
-      ```
-      moment().add(1, 'days')
-      ```
-
-    - ##### 设置星期
-
-      ```
-      moment().add(1, 'weeks')
-      ```
-
-    - ##### 设置小时
-
-      ```
-      moment().add(1, 'hours')
-      ```
-
-    - ##### 设置分钟
-
-      ```
-      moment().add(1, 'minutes')
-      ```
-
-    - ##### 设置秒数
-
-      ```
-      moment().add(1, 'seconds')
-      ```
-
-  - #### Subtract Time
-
-    ```
-    moment().subtract(Number, String)
-    
-    
-    
-    moment().subtract(Object)
-    ```
-
-    - ##### 设置年份
-
-      ```
-      moment().subtract(1, 'years')
-      
-      
-      
-      moment().subtract({years: 1})
-      ```
-
-    - ##### 设置月份
-
-      ```
-      moment().subtract(1, 'months')
-      ```
-
-    - ##### 设置日期
-
-      ```
-      moment().subtract(1, 'days')
-      ```
-
-    - ##### 设置星期
-
-      ```
-      moment().subtract(1, 'weeks')
-      ```
-
-    - ##### 设置小时
-
-      ```
-      moment().subtract(1, 'hours')
-      ```
-
-    - ##### 设置分钟
-
-      ```
-      moment().subtract(1, 'minutes')
-      ```
-
-    - ##### 设置秒数
-
-      ```
-      moment().subtract(1, 'seconds')
-      ```
-
-  ## 2、格式化时间
+## 3、格式化时间
 
 >#### 格式:Format Time
 >
@@ -520,7 +488,7 @@
 >  moment().format('x') // 返回值为字符串类型
 >  ```
 
-## 3、比较时间
+## 4、比较时间
 
 >#### Difference
 >
@@ -540,7 +508,7 @@
 
 
 
-## 4、转化为JavaScript原生Date对象
+## 5、转化为JavaScript原生Date对象
 
 >  ```js
 >moment().toDate()
@@ -551,14 +519,13 @@
 >
 >    ```js
 >    let m = moment()
->    
+>          
 >    let nativeDate1 = m.toDate()
->    
+>          
 >    let nativeDate2 = new Date(m) String(nativeDate1) === String(nativeDate2) // true
 >    ```
->
 
-## 5、引入moment时使用中文
+## 6、引入moment时使用中文
 
 >在入口文件处引用即可显示中文
 >
@@ -591,7 +558,7 @@
 
 >1. 应用场景:当我使用Antd的时间选择框时需要给其绑定的时间限制Ts格式(不设置的时候会报红),这时候就可以用monent自带的格式
 >
->    ![image-20210412191035956](时间moment相关笔记中的图片/image-20210412191035956.png)
+>    ![image-20210412191035956](零散笔记中的图片/image-20210412191035956.png) 
 >
 >2. 应用代码
 >

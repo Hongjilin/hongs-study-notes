@@ -228,7 +228,7 @@
 
 >这是所选 DOM 节点对应的对象以及这个对象的父类、父类的父类...的集合。
 >
->![image-20210609170750848](ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png)
+>![image-20210609170750848](ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png) 
 
 ### 2、Console 面板
 
@@ -322,6 +322,8 @@
 ##### 	2) Chrome DevTools 自带了哪些常用的表达式?
 
 >下面描述的都是 Chrome DevTools 自带的方法或者变量，需要注意一下的是，当页面暴露相同的方法或变量的话，DevTools `自带的会被覆盖`，比如 jQuery 官网下的 Console 中的 $() 就是自己的方法。
+>
+>`常用来调试`
 
 ###### 	① *选择元素*
 
@@ -662,9 +664,9 @@
 >
 > 2. 除了在 Network 面板可以设置网络状况，还可以在 Drawer 中看见。具体有两种方法：
 >
->    1) [![img](https://github.com/CompileYouth/front-end-study/raw/master/tool/devtools/res/toolbar-3.png)]-> More tools -> Network conditions
+>    1) ![img](ChromeDevTools使用详解笔记中的图片/toolbar-3.png)-> More tools -> Network conditions
 >
->    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 [![img](https://github.com/CompileYouth/front-end-study/raw/master/tool/devtools/res/toolbar-3.png)]，点击，选择 Network conditions
+>    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 ![img](ChromeDevTools使用详解笔记中的图片/toolbar-3.png)，点击，选择 Network conditions
 
 ##### 	9) `右侧设置图标`
 
@@ -1358,7 +1360,7 @@
 >3. 使用堆快照(`Memory面板`)标识分离的DOM树（内存泄漏的常见原因）。 -->[`点我跳转`](#6、Memory(Profiles) 面板)
 >4. 通过堆动态分配时间轴(`Memory面板`)记录了解在JS堆中分配及回收情况。  -->[`点我跳转`](#6、Memory(Profiles) 面板)
 
-#### 1、**chrome任务管理器**
+### 1、**chrome任务管理器**
 
 >1. 按Shift + Esc打开任务管理器。或点击右上角菜单--更多工具---任务管理器。
 >
@@ -1385,7 +1387,7 @@
 >
 >     >有可能是有JS变量引用了DOM，这个DOM节点本身不大，但影响了其他DOM节点(比如父级节点树)。
 
-#### 2、其他
+### 2、其他
 
 >其他三个方法在上方`Performance面板`、`Memory面板`均有指出,不再赘述
 >
@@ -1536,7 +1538,7 @@
 
 >发现的一篇很好的文章,是腾讯工程师enoyao写的.此处直接给出链接  -->[点我传送](https://cloud.tencent.com/developer/article/1711214?from=article.detail.1471757)
 >
->下面给出文章简述
+>下面给出文章简述:
 >
 >随着我们项目越来越大，我们有可能需要维护很多的模块，我们腾讯文档 Excel 项目大模块有 10 几个，而每个大模块分别有 N 个小模块，每个大模块下的小模块都有主要的负责人在跟进模块问题。这就会导致一个很大的问题是，模块负责人大部分情况只会关注自己模块的问题，而不甚了解其他负责人手上模块的具体问题。
 >

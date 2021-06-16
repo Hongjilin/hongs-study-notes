@@ -190,6 +190,6 @@ box-shadow:0px 0px 0px 3px #bb0a0a,
 >
 >  3. 效果实现截图:
 >
->     <img src="html+css补缺笔记中的图片/image-20210517184121490.png" alt="image-20210517184121490" style="zoom:80%;" />
+>     <img src="Css补缺笔记中的图片/image-20210517184121490.png" alt="image-20210517184121490" style="zoom:80%;" />
 >
 >

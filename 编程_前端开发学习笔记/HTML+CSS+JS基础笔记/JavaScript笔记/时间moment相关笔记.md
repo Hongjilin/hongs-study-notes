@@ -349,43 +349,43 @@
 >      moment().add(1, 'years')
 >    
 >      moment().add({years: 1})
->      ```
+>    ```
 >  
 >  - ##### 设置月份
 >  
 >    ```js
 >      moment().add(1, 'months')
->          ```
+>    ```
 >  
 >  - ##### 设置日期
 >  
 >    ```js
 >      moment().add(1, 'days')
->      ```
+>    ```
 >  
 >  - ##### 设置星期
 >  
 >    ```js
 >      moment().add(1, 'weeks')
->      ```
+>    ```
 >  
 >  - ##### 设置小时
 >  
 >    ```js
 >      moment().add(1, 'hours')
->      ```
+>    ```
 >  
 >  - ##### 设置分钟
 >  
 >    ```js
 >      moment().add(1, 'minutes')
->      ```
+>    ```
 >  
 >  - ##### 设置秒数
 >  
 >    ```js
 >      moment().add(1, 'seconds')
->      ```
+>    ```
 
 ### Ⅲ- Subtract Time
 
@@ -519,9 +519,9 @@
 >
 >    ```js
 >    let m = moment()
->          
+>            
 >    let nativeDate1 = m.toDate()
->          
+>            
 >    let nativeDate2 = new Date(m) String(nativeDate1) === String(nativeDate2) // true
 >    ```
 
@@ -542,15 +542,15 @@
 ### Ⅰ-取出Moment格式中的具体时间报错(`TS报错`)
 
 >1. 报错:`property '_d' does not exist on type 'moment'.`
->2. 出现错误原因分析:![image-20210422115014706](零散笔记中的图片/取出Moment格式中的具体时间报错原因分析1.png)
+>2. 出现错误原因分析:![image-20210422115014706](JavaScript笔记中的图片/取出Moment格式中的具体时间报错原因分析1.png)
 >
->​	![image-20210422115208905](零散笔记中的图片/取出Moment格式中的具体时间报错原因分析2.png)
+>​	![image-20210422115208905](JavaScript笔记中的图片/取出Moment格式中的具体时间报错原因分析2.png)
 >
 >3. 解决
 >
 >  4. 其实不用`_d`去取出来,Moment格式有相应的取出方法
 >
->     ![image-20210422115825841](零散笔记中的图片/image-20210422115825841.png)
+>     ![image-20210422115825841](JavaScript笔记中的图片/image-20210422115825841.png)
 
 
 
@@ -558,7 +558,7 @@
 
 >1. 应用场景:当我使用Antd的时间选择框时需要给其绑定的时间限制Ts格式(不设置的时候会报红),这时候就可以用monent自带的格式
 >
->    ![image-20210412191035956](零散笔记中的图片/image-20210412191035956.png) 
+>    ![image-20210412191035956](JavaScript笔记中的图片/image-20210412191035956.png) 
 >
 >2. 应用代码
 >

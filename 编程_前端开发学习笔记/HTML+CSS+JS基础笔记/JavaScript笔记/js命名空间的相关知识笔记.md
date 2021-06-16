@@ -229,7 +229,7 @@
 
 >1. 代码截图
 >
->   <img src="零散笔记中的图片/image-20210608112006677.png" alt="image-20210608112006677" style="zoom:67%;" />
+>   <img src="JavaScript笔记中的图片/image-20210608112006677.png" alt="image-20210608112006677" style="zoom:67%;" />
 >
 >2. 使用代码举例:
 >
@@ -252,7 +252,7 @@
 >
 >    这样的话，就不会在全局变量区，引入很多的函数，将所有要使用的函数已经变量都放入了命名空间druid.index中，避免了不同js库中的函数名的冲突
 >
->3. 控制台使用效果截图<img src="零散笔记中的图片/image-20210608120149921.png" alt="image-20210608120149921" style="zoom:67%;" />
+>3. 控制台使用效果截图<img src="JavaScript笔记中的图片/image-20210608120149921.png" alt="image-20210608120149921" style="zoom:67%;" />
 >
 >4. 想看人家源码的同学点这里:[源码地址](https://github.com/alibaba/druid/blob/master/src/main/resources/support/http/resources/js/jquery.min.js)
 
@@ -321,7 +321,7 @@
 
 >本地存储的增删改查,并且通过命名空间,闭包的相关知识,可以很轻松的将不同常量直接添加到一个对象变量中并存到本地
 >
->![image-20210521202047347](零散笔记中的图片/本地存储(LocalStorage、Session)相关封装中的图片.png)
+>![image-20210521202047347](JavaScript笔记中的图片/本地存储(LocalStorage、Session)相关封装中的图片.png)
 
 ### 3、封装代码实现
 
@@ -652,11 +652,10 @@
 >        loginDB.syncSource();
 >      }
 >  ```
->
 
 ### 5、函数概要截图
 
->![image-20210521202903681](零散笔记中的图片/本地存储(LocalStorage、Session)相关封装中的概要.png)
+>![image-20210521202903681](JavaScript笔记中的图片/本地存储(LocalStorage、Session)相关封装中的概要.png)
 
 
 

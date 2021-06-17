@@ -441,3 +441,53 @@
 >3. 效果实现图
 >
 >   <img src="Ant Design of React使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
+
+### Ⅴ-AntD的Table表头title加Icon图标和气泡提示Tooltip
+
+>1. 需求场景:当你的产品要你实现这个效果时
+>
+>   ![image-20210617185457284](Ant Design of React使用笔记中的图片/image-20210617185457284.png)
+>
+>2. 代码实现:直接在title中写即可
+>
+>   ```tsx
+>   import React, { Component } from 'react';
+>   import { Table, Button, Modal, Typography } from 'antd';
+>   import { QuestionCircleOutlined } from '@ant-design/icons';
+>   import { Tooltip } from 'antd';
+>   interface IProps {
+>     store: Store;
+>   }
+>   
+>   const ManageTable = (props: IProps) => {
+>     const { store } = props;
+>     const columns = [
+>       {
+>         dataIndex: 'monthCount',
+>         ellipsis: true,
+>        //效果实现就在这行
+>         title: 
+>         <div> 本月新增付费IP数&nbsp;
+>             <Tooltip placement='top' title='仅为当前月新增付费IP数'>
+>                 <QuestionCircleOutlined />
+>             </Tooltip>
+>         </div>,
+>       },
+>   
+>     ];
+>     return (
+>       <Table
+>         rowKey={(record, index) => record.id || index}
+>         className="table-box"
+>         columns={columns}
+>       />
+>     );
+>   };
+>   
+>   export default observer(ManageTable);
+>   ```
+>
+>3. 效果展示
+>
+>   ![image-20210617185606230](Ant Design of React使用笔记中的图片/image-20210617185606230.png)
+

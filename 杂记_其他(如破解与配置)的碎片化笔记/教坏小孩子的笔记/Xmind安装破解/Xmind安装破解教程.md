@@ -1,8 +1,12 @@
 # #说明
 
 > 我只是搬运工,记录以下网上的方法,由于当初记录时间太过久远,出处已经忘记了,有小伙伴知道的可以私聊我让我加上去
+>
+> 链接：https://pan.baidu.com/s/1Ng1BkZDN5moLCo8MLUQTgw 
+> 提取码：h123 
+> 分享软件百度云盘下载
 
-https://pan.baidu.com/s/1tH4St5DEtOYynWgiFx3S_A 提取码：0691
+
 
 安装方法
 

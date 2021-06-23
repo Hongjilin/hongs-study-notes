@@ -136,7 +136,210 @@
 >
 >   比如对于上面的 `test` 函数，它有 3 个箭头， 这个函数要被调用 3 次 `test(a)(b)(c)`，前两次调用只是在传递参数，只有最后依次调用才会返回 `{xxx}` 代码段的返回值，并且在 `{xxx}` 代码段中可以调用 a,b,c
 
-## 二、问题与解决
+## 二、Proxy模拟实现Vue的双向绑定
+
+> 更多`Proxy`相关知识点(摘录)  -->[点我传送](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ES6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%91%98%E5%BD%95%E4%B8%8E%E7%AC%94%E8%AE%B0/13%E3%80%81Es6_Proxy_%E9%87%8D%E8%A6%81.md)
+>
+> `Proxy`就像一个代理器,当有人对目标对象进行处理(set、has、get 等等操作)的时候它会首先经过它，这时我们可以使用代码进行处理，此时`Proxy`相当于一个中介或者叫代理人,它经常被用于代理模式中,可以做字段验证、缓存代理、访问控制等等。
+>
+> 此处我自己用Proxy实现Vue的双向绑定
+
+### 1.`Object.defineProperty`
+
+>众所周知，`vue`使用了`Object.defineProperty`来做数据劫持，它是利用劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作
+>
+>```js
+>const obj = { a: 1 }
+>Object.defineProperty(obj, 'a', {
+>get: function() {
+>console.log('get val')
+>},
+>set: function(newVal) {
+>console.log('set val:' + newVal)
+>}
+>})
+>```
+
+### 2.与`Object.defineProperty`相比，`Proxy`的优势
+
+>1. 数组作为特殊的对象，但Object.defineProperty无法监听数组变化。
+>
+>2. Object.defineProperty只能劫持对象的属性,因此我们需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历,显然能劫持一个完整的对象是更好的选择。
+>
+>3. Proxy 有多达 13 种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是Object.defineProperty不具备的。
+>
+>4. Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而Object.defineProperty只能遍历对象属性直接修改
+>
+>5. Proxy作为新标准将受到浏览器厂商重点持续的性能优化
+
+### 3. 手写双向绑定代码
+
+>1. 简单实现双向绑定
+>
+>  ```js
+>  --------------------  html  ----------------------------
+>    <input id="input_el" oninput="inputHandle(this)" type="text">
+>    <br />
+>    <div id="show_el"></div>
+>  -------------------  js ------------------------------
+>  <script>
+>    proxy_bind = (traget) => {
+>      return new Proxy(traget, {
+>        get(obj, name) {
+>          console.log("获取")
+>          //如果传入的key并没有,则赋初始值
+>          if (!obj[name]) obj[name] = ""
+>          //根据传入的key进行相应属性返回
+>          return obj[name]
+>        },
+>        //拦截的对象,拦截对象的值,传入要修改的值,(第四个参数通常不用,返回整个Proxy对象)
+>        set(obj, name, val) {
+>          console.log("写入")
+>          obj[name] = val
+>          //将输入狂内容即修改的proxy对象属性渲染到页面节点上
+>          document.querySelector("#show_el").innerHTML = obj[name]
+>          return;
+>        }
+>      })
+>    }
+>    inputHandle = (e) => {
+>      //将输入框的值赋值给proxy对象的value属性上，此处触发proxy的`set（）`
+>      obj_bind.value = e.value
+>    }
+>
+>    let obj = {
+>      a: "2",
+>      b: 3,
+>      value: "默认值"
+>    }
+>    let obj_bind = proxy_bind(obj)
+>    //自闭合，如果前面没有加分号 会导致压缩式合并到前面去就会报错，以防万一加分号，此处触发proxy的`get（）`
+>    ;
+>    (function () {
+>      document.querySelector("#show_el").innerHTML = obj_bind.value
+>      document.querySelector("#input_el").value = obj_bind.value
+>    })()
+>  </script>
+>  ```
+>
+>2. 模拟vue实现完整双向绑定实现
+>
+>  ```js
+>  --------------------  html  ----------------------------
+>  <div>
+>    <p>请输入:</p>
+>    <input type="text" id="input">
+>    <p id="p"></p>
+>  </div>
+>  -------------------  js ------------------------------
+>  class Watcher {
+>    constructor(vm, key, callback) {
+>      this.vm = vm
+>      this.callback = callback
+>      this.key = key // 被订阅的数据
+>      this.val = this.get() // 维护更新之前的数据
+>      vm.$data = this.createProxy(vm.$data)
+>    }
+>
+>    update(newVal) {
+>      this.callback(newVal)
+>    }
+>    get() {
+>      const val = this.vm.$data[this.key]
+>      return val
+>    }
+>    createProxy(data) {
+>      let _this = this
+>      let handler = {
+>        get(target, property) {
+>          return Reflect.get(target, property)
+>        },
+>        set(target, property, value) {
+>          let res = null
+>          if (target[property] != value) {
+>            const isOk = Reflect.set(target, property, value)
+>            if (_this.key === property) {
+>              // 同一层级
+>              res = value
+>            } else {
+>              res = _this.get()
+>              console.log(res)
+>            }
+>            _this.callback(res)
+>            return isOk
+>          }
+>        }
+>      }
+>
+>      return toDeepProxy(data, handler)
+>
+>      function toDeepProxy(object, handler) {
+>        if (!isPureObject(object)) addSubProxy(object, handler)
+>        return new Proxy(object, handler)
+>
+>        function addSubProxy(object, handler) {
+>          for (let prop in object) {
+>            if (typeof object[prop] == 'object') {
+>              if (!isPureObject(object[prop])) addSubProxy(object[prop], handler)
+>              object[prop] = new Proxy(object[prop], handler)
+>            }
+>          }
+>          object = new Proxy(object, handler)
+>        }
+>
+>        function isPureObject(object) {
+>          if (typeof object !== 'object') {
+>            return false
+>          } else {
+>            for (let prop in object) {
+>              if (typeof object[prop] == 'object') {
+>                return false
+>              }
+>            }
+>          }
+>          return true
+>        }
+>      }
+>    }
+>  }
+>
+>  class Vue {
+>    constructor(data) {
+>      // 将所有data最外层属性代理到实例上
+>      this.$data = data
+>      Object.keys(data).forEach(key => this.$proxy(key))
+>    }
+>    $watch(key, cb) {
+>      new Watcher(this, key, cb)
+>    }
+>    $proxy(key) {
+>      Reflect.defineProperty(this, key, {
+>        configurable: true,
+>        enumerable: true,
+>        get: () => this.$data[key],
+>        set: val => {
+>          this._data[key] = val
+>        }
+>      })
+>    }
+>  }
+>
+>  const p = document.getElementById('p')
+>  const input = document.getElementById('input')
+>
+>  const data = new Vue({ text: { a: '' } })
+>
+>  input.addEventListener('keyup', function(e) {
+>    data.text.a = e.target.value
+>  })
+>
+>  data.$watch('text', content => p.innerHTML = content.a)
+>
+>  ```
+
+
+
+## 三、问题与解决
 
 ### Ⅰ-`import`动态导入图片时报错
 

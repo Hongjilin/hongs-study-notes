@@ -1,8 +1,8 @@
-# #此文件专为方便gitee网站观阅使用
+# #此文件为方便gitee网站观阅使用专门创建
 
-> 可能存在更新不及时问题,建议观看同级目录下的笔记文件
+> 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
-> 此部分为上面`微信小程序学习笔记`,基础学习部分,复制至此方便阅读
+> 此部分截取自上面`微信小程序学习笔记`的部分知识点笔记,属于小程序基础学习部分,复制至此方便阅读
 
 # #说明
 
@@ -595,7 +595,7 @@
 >           {{item}}
 >         </view>
 >         等同于
->                         
+>                               
 >         <view wx:for="{{[1,2,3] + ' '}}">
 >           {{item}}
 >         </view>
@@ -1687,7 +1687,7 @@
 >        Component({
 >          externalClasses: ['my-class']
 >        })
->                                                                       
+>                                                                          
 >        <!-- 组件 custom-component.wxml 如何引用 -->
 >        <custom-component class="my-class">这段文本的颜色由组件外的 class 决定</custom-component>                                 
 >        ```
@@ -1702,7 +1702,7 @@
 >      <custom-component my-class="large-text" />
 >      <!-- 以下写法需要基础库版本 2.7.1 以上  注意 这只是一个组件传入两个类名,而不是分别创建两个组件-->
 >      <custom-component my-class="red-text large-text" />
->                                                                                                               
+>                                                                                                                    
 >      ------------ 样式类声明 页面.wxss ---------------------------------
 >      .red-text {
 >        color: red;
@@ -1957,7 +1957,7 @@
 >
 >       ```js
 >         let con  //用来保存this指向
->                                                                               
+>                                                                                     
 >         Page({
 >           //1. 生命周期函数中保存this指向
 >         onLoad: function (options) {
@@ -1970,7 +1970,7 @@
 >             title:  !con.data.collected ? '进行收藏' : '取消收藏',
 >           })
 >           if (!result.confirm) return;
->                                                                               
+>                                                                                     
 >           let postCollected = con.data._postCollected //将当前data中(相当于之前本地缓存的postCollected)拉去下来,防止被覆盖
 >           postCollected[con.data._pid] = !con.data.collected
 >           con.setData({

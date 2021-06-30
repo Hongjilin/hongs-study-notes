@@ -6,27 +6,19 @@
 
 >#####  [编程_算法及课程基础学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记)
 >
->1. [Java学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Java)
+>1. [数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)(`目前持续学习更新中`)
 >
->  > 此处目前只有javaSE阶段学习笔记,即java基础,其他如SSM、微服务等部分因当初学习不够系统,并未留下笔记,计划在未来时间重新进行知识梳理与笔记记录
+>   > 即本人算法的系统学习笔记:内分为`数据结构与算法`与`leetCode`两部分,本人还在学习过程,将边学习边完善该笔记,目前公司业务相对较重,所以当前更新速度略慢
 >
->2. [NodeJs学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Nodejs)
+>2. [软件模式设计](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1)
 >
->  > 此处目前记录的是`Nodejs`、`Express框架`、其他如node中使用`redis`、`图片校验码`、`JWT和MD5加密`、`文件上传`等相关知识点笔记
+>   > 编程基石,在我达到一定技术能力后将会继续完善该部分
 >
->3. [Mysql数据库](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Mysql%E6%95%B0%E6%8D%AE%E5%BA%93)
+>3. [计算机网络](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/计算机网络)
 >
->  > 此处目前只记录的是Mysql的安装卸载以及一些基本操作,其他知识学习时间较早,当时未形成笔记,留待以后重新进行知识梳理与相关笔记记录
+>   > 此部分为本人学习计算机网络相关知识笔记,也是`持续更新类型笔记`,目前为`浅学`阶段
 >
->4. [云服务器相关笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/云服务器相关笔记)
->
->  > 此处记载本人对于服务器使用及相关学习笔记
->
->5. **[Golang学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Golang)** 
->
->  > 此处记录本人对于`Go`语言的学习笔记,为持续学习笔记,更新较慢
->
->6. 此部分更新较慢
+>4. 其他
 
 
 

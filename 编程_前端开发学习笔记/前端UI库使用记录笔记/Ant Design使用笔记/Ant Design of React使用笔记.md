@@ -497,21 +497,31 @@
 >
 >2. 代码实现与截图
 >
->   ```tsx
->     //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
->   {
->         title: '采集结束时间',
->         dataIndex: 'end_time',
->         key: 'end_time',
->         sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
->    },
->    -----------------封装与调用--------------------------
->   工具函数抽出:timeSorter = (a, b) => (type) => new Date(a[type]).getTime() - new Date(b[type]).getTime()  
->   //此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
->   调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
->   ```
+>  ```tsx
+>    //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
+>  {
+>        title: '采集结束时间',
+>        dataIndex: 'end_time',
+>        key: 'end_time',
+>        sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
+>   },
+>   -----------------封装与调用--------------------------
+>  工具函数抽出:
+>   /**
+>     * 时间列表排序方法
+>     * 可以更换a,b顺序,做到初次为逆序还是正序排序
+>     * @param a 包含时间属性的对象a
+>     * @param b 包含时间属性的对象b
+>     * @param type 作为排序依据的时间属性名字
+>     * @returns boolean
+>     */
+>    timeSorter = (a, b) => (type) => new Date(a[type]).getTime() - new Date(b[type]).getTime()
+>  
+>  //此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
+>  调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
+>  ```
 >
-> ![image-20210630115858466](Ant Design of React使用笔记中的图片/image-20210630115858466.png)
+>![image-20210630115858466](Ant Design of React使用笔记中的图片/image-20210630115858466.png)
 >
 >3. 小贴士:antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
 

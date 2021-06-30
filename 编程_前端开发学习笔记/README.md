@@ -26,6 +26,8 @@
 >
 >7. [Vue框架笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Vue%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/)
 >
+> > 此处即本人对于`Vue`框架的学习笔记,目前有`VUE2.x`版本学习笔记,之后会补充`vue3.0`等,因为目前阶段本人学习使用的是`react`,此处笔记暂缓
+>
 >8. [微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
 >
 >> 本人该学习笔记[`配套源码分享`](https://gitee.com/hongjilin/wechat-applet-demo-source-code),其中的`hello小程序项目`为慕课网教学视频学习过程源码,此初阶段已经更新完成。下阶段将进行项目实战学习,即将更新
@@ -36,11 +38,16 @@
 >
 >11. [前端UI库使用记录笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/前端UI库使用记录笔记)
 >
->> 本笔记主要记录工作中项目中遇到关于各种UI库的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
+> > 本笔记主要记录工作中项目中遇到关于各种UI库的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
+> > 当然,更多的是官方中没有但是业务中会遇到的各种细节,是自己自学过程难以接触或者容易忽略的,分享出来也有利于大家补缺
 >
 >12. [Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)
 >
+>   > Git详细系统的学习笔记、提交规范、工作流、实际遇到的问题与解决等笔记归纳于此
+>
 >13. [Mobx学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Mobx学习笔记)
+>
+>    > Mobx:*`简单，可扩展的状态管理`*,可以代替react中的`redux`状态管理器.就如vuex于vue一般
 >
 >14. [TypeScrip笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScrip%E7%AC%94%E8%AE%B0)
 >

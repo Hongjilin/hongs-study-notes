@@ -12,7 +12,7 @@
 
 # A_ES6知识补充与所遇问题
 
-## 一、补充知识
+## 一、实践过程补充知识点
 
 ### Ⅰ-ES6小知识点:`连续赋值解构`+重命名
 
@@ -135,6 +135,33 @@
 >3. `调用特点`:let test = a => b => c => {xxx}
 >
 >   比如对于上面的 `test` 函数，它有 3 个箭头， 这个函数要被调用 3 次 `test(a)(b)(c)`，前两次调用只是在传递参数，只有最后依次调用才会返回 `{xxx}` 代码段的返回值，并且在 `{xxx}` 代码段中可以调用 a,b,c
+
+
+
+### Ⅲ- Array.filter(Boolean)
+
+>ECMAScirpt5 中 ***Array*** 类中的 ***filter*** 方法使用目的是移除所有的 *”false“* 类型元素 *(**`false`**, **`null`**, **`undefined`**, **`0`**, **`NaN`** or **an empty string**)*：
+>
+>Boolean 是一个函数，它会对遍历数组中的元素，并根据元素的真假类型，对应返回 true 或 false.
+>
+>```tsx
+>const a=[1,2,"b",0,{},"",NaN,3,undefined,null,5];
+>let b=a.filter(Boolean); // [1,2,"b",{},3,5]
+>
+>this.menus = this.menuRouterConfig.filter(Boolean);//可以用作路由处理,将不符合权限的部分置为空,再通过此函数进行筛选
+>```
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 二、Proxy模拟实现Vue的双向绑定
 

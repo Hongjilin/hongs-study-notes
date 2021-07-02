@@ -25,12 +25,13 @@
 
 ## 2、存在意义
 
->- 整个研发流程(软件工程)管理中的重要环节
->  - 上游:项目管理/缺陷管理  
->  - 下游:运维部署(CD)
->- 所有类型的提出基本能解决:
->  - 特性独立开发互不影响,记录发布历史
->  - 多版本并行,多环境多渠道部署的不同需求
+>1. 整个研发流程(软件工程)管理中的重要环节
+>    - 上游:项目管理/缺陷管理  
+>    - 下游:运维部署(CD)
+>
+>2. 所有类型的提出基本能解决:
+>   - 特性独立开发互不影响,记录发布历史
+>    - 多版本并行,多环境多渠道部署的不同需求
 
 ## 3、功能驱动
 
@@ -61,15 +62,15 @@
 
 >它主要有两个特点
 >
->- 首先项目存在两个长期分支:
->  - 主分支`master`
->  - 开发分支`develop`
->  - `ps`:前者用于存放对外发布的版本，任何时候在这个分支拿到的，都是稳定的分布版；后者用于日常开发，存放最新的开发版。
->- 其次，项目存在三种短期分支。
->  - 功能分支（feature branch）
->  - 补丁分支（hotfix branch）
->  - 预发分支（release branch）
->  - `ps`:一旦完成开发，它们就会被合并进`develop`或`master`，然后被删除。
+>1. 首先项目存在两个长期分支:
+>   - 主分支`master`
+>   - 开发分支`develop`
+>   - `ps`:前者用于存放对外发布的版本，任何时候在这个分支拿到的，都是稳定的分布版；后者用于日常开发，存放最新的开发版。
+>2. 其次，项目存在三种短期分支
+>   - 功能分支（feature branch）
+>   - 补丁分支（hotfix branch）
+>   - 预发分支（release branch）
+>   - ps`:一旦完成开发，它们就会被合并进`develop`或`master`，然后被删除。
 
 ## 3、分支删除管理
 
@@ -140,36 +141,35 @@
 
 >- 当我们初始化完成之后，就可以开始一个新功能的开发，开发新功能需要在feature分支上进行，下面就让我们创建一个新的叫做rss-feed的feature分支
 >
->  ```sh
->  git flow feature start rss-feed
->  ```
+>```sh
+>git flow feature start rss-feed
+>```
 >
 >- 这个功能可能需要多人协作才能完成，所以我们需要把它发布到远端（如果是本地创建的项目，请先与远端仓库建立联系）
 >
->  ```sh
->  git flow feature public rss-feed
->  ```
+>```sh
+>git flow feature public rss-feed
+>```
 >
->  这条指令在远程仓库新建了一个feature/rss-feed的分支，并将本地ree-feed分支track上述分支，push本地分支代码。
+>这条指令在远程仓库新建了一个feature/rss-feed的分支，并将本地ree-feed分支track上述分支，push本地分支代码。
 >
->  ps:该命令只能执行一次，当远程仓库已经有了相应分支，在执行该命令将会报错，这个时候只要执行push命令就可以了。
+>ps:该命令只能执行一次，当远程仓库已经有了相应分支，在执行该命令将会报错，这个时候只要执行push命令就可以了。
 >
 >- 经过一段时间的努力，我们跟同事一起协作开发完成了rss-feed分支上的功能，我们需要把这个feature分支合并到develop分支(可能还有别的feature分支，一起合并到develop)。
 >
->  ```sh
->  git flow feature finish rss-feed
->  ```
+>```sh
+>git flow feature finish rss-feed
+>```
 >
->  *该命令做了以下几件事*
+>*该命令做了以下几件事*
 >
->  - 切换到develop分支
->  - 将feature/rss-feed分支merge到develop分支
->  - 删除本地feature/rss-feed分支
+>- 切换到develop分支
+>- 将feature/rss-feed分支merge到develop分支
+>- 删除本地feature/rss-feed分支
 >
->- 注意:
->
->  - git flow进行merge操作或者tag操作的时候，会让打开vim编辑器让你填写merge信息或者tag信息（tag信息必须填写，否则无法打tag）
->  - 如果merge过程发生了冲突，则在第二步merge时终止流程，即不会再删除本地分支。但当前已处于develop分支，待本地冲突解决并commit后，重新执行git flow feature finish <feature_name>即可完成finish流程。
+>  `注意`:
+> - git flow进行merge操作或者tag操作的时候，会让打开vim编辑器让你填写merge信息或者tag信息（tag信息必须填写，否则无法打tag）
+> - 如果merge过程发生了冲突，则在第二步merge时终止流程，即不会再删除本地分支。但当前已处于develop分支，待本地冲突解决并commit后，重新执行git flow feature finish <feature_name>即可完成finish流程。
 
 #### ② *同步远程仓库*
 

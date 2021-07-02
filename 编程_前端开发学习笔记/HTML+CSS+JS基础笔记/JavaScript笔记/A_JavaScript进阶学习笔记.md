@@ -148,6 +148,30 @@
 >  * 基本类型: 保存就是`基本类型`的数据
 >  * 引用类型: 保存的是地址值(对象类型)
 
+### Ⅶ-补充知识点:
+
+#### ①符串对比*`>`、`<`*以及*`charCodeAt()`*方法
+
+>1. Javascript字符串在进行大于(小于)比较时，会根据第一个不同的字符的ascii值码进行比较，当数字(number)与字符串(string)进行比较大小时，会强制的将数字(number)转换成字符串(string)然后再进行比较
+>
+>   ```js
+>   (function(){
+>       console.log('13'>'3'); // 输出：false
+>       console.log(5>'6');  // 输出： false
+>       console.log('d'>'ABDC') // 输出： true
+>       console.log(19>'ssf') // 输出 false
+>       console.log('A'>'abcdef') // 输出 false
+>   })()
+>   ```
+>
+>2. 手动转换为ascii后相减,用正负数表示大小
+>
+>   ```tsx
+>   sorter={(a:string,b:string)=> a.charCodeAt()-b.charCodeAt()}
+>   ```
+
+
+
 
 
 ## 2、数据,变量, 内存的理解

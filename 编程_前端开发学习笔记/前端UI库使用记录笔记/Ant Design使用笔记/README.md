@@ -493,31 +493,66 @@
 >
 >   ![image-20210617185606230](Ant Design of React使用笔记中的图片/image-20210617185606230.png)
 
-### Ⅵ-table按时间排序
+### Ⅵ-table排序相关
+
+>antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
+>
+>其实可以直接写,只是如果不抽出,多处使用重复的代码,万一修改就很麻烦
+
+#### ①*`table按时间排序`*
 
 >1. 需求场景分析:当你需要对列表中数据按照时间排序,但是antd默认排序方法无法认出根据你传入对象的何属性进行排序,此时你就需要自己写时间排序
 >
 >2. 代码实现与截图
 >
->  ```tsx
->  //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
->{
->      title: '采集结束时间',
->      dataIndex: 'end_time',
->      key: 'end_time',
->      sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
-> },
-> -----------------封装与调用--------------------------
->工具函数抽出:timeSorter = (a, b) => (type) => new Date(a[type]).getTime() - new Date(b[type]).getTime()  
->//此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
->调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
->  ```
+> ```tsx
+>   //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
+> {
+>       title: '采集结束时间',
+>       dataIndex: 'end_time',
+>       key: 'end_time',
+>       sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
+>  },
+>  -----------------封装与调用--------------------------
+> 工具函数抽出:
+> /**
+>   * 时间列表排序方法
+>   * 可以更换a,b顺序,做到初次为逆序还是正序排序
+>   * @param a 包含时间属性的对象a
+>   * @param b 包含时间属性的对象b
+>   * @param type 作为排序依据的时间属性名字
+>   * @returns number 利用正负数进行判断
+>   */
+>  timeSorter = (a:object, b:object):Function => (type):number => new Date(a[type]).getTime() - new Date(b[type]).getTime()
+>
+> //此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
+> 调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
+> ```
 >
 >![image-20210630115858466](Ant Design of React使用笔记中的图片/image-20210630115858466.png)
->
->3. 小贴士:antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
 
- 
+####  ②*`table通用排序`*
+
+>1. 包括时间排序,你都能使用此封装函数
+>
+>2. 代码实现与截图
+>
+>   ```tsx
+>     -----------------封装与调用--------------------------
+>    工具函数抽出:
+>     /**
+>      * 通用对比法
+>      * @param a 包含要对比属性的对象a
+>      * @param b 包含要对比属性的对象b
+>      *  @param type 作为排序依据的属性名字
+>      * @returns boolean
+>      */
+>     commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]
+>   
+>   sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
+>   ```
+>
+>   ![image-20210702110850176](Ant Design of React使用笔记中的图片/image-20210702110850176.png)
 
 
 

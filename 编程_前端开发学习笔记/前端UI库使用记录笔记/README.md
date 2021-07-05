@@ -2,7 +2,7 @@
 
 > 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
-> 此处只截取了`Ant Design使用笔记`中的小部分笔记至此,方便网站阅读
+> 此处只截取了`AntDesign使用笔记`中的小部分笔记至此,方便网站阅读
 >
 > 其他框架如`Echart`以及后续的`uni-app`等等都会放在此目录,需要者自行查阅
 
@@ -150,7 +150,7 @@
 
 >1. 出现场景:详见截图
 >
-> <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
+> <img src="AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
 >
 >2. 代码示例:此处指举例第一个输入框,并在里面进行注释
 >
@@ -215,7 +215,7 @@
 >
 >2. 需求示例截图
 >
->   ![image-20210705164549793](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210705164549793.png)
+>   ![image-20210705164549793](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210705164549793.png)
 >
 >3. 实现思路:
 >
@@ -410,11 +410,11 @@
 >
 >   1. 未使用时效果
 >
->      <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
+>      <img src="AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
 >
 >         2. 使用后效果
 >
->      <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
+>      <img src="AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
 >
 >        `ps`:截图中展示的都是开发中的`测试假数据`
 >
@@ -500,7 +500,7 @@
 >
 >1. 需求场景:当我的列表内容过多使得表格撑开,导致整个表格样式与希望效果不符合时,我希望能将其超出隐藏,并能悬停显示全部信息
 >
->   <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
+>   <img src="AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
 >
 >2. 代码实现
 >
@@ -528,13 +528,13 @@
 >
 >3. 效果实现图
 >
->   <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
+>   <img src="AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
 
 ### Ⅴ-AntD的Table表头title加Icon图标和气泡提示Tooltip
 
 >1. 需求场景:当你的产品要你实现这个效果时
 >
->   ![image-20210617185457284](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210617185457284.png)
+>   ![image-20210617185457284](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210617185457284.png)
 >
 >2. 代码实现:直接在title中写即可
 >
@@ -577,7 +577,7 @@
 >
 >3. 效果展示
 >
->   ![image-20210617185606230](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210617185606230.png)
+>   ![image-20210617185606230](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210617185606230.png)
 
 ### Ⅵ-table排序对比大小相关
 
@@ -615,7 +615,7 @@
 >调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
 >```
 >
->![image-20210630115858466](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210630115858466.png)
+>![image-20210630115858466](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210630115858466.png)
 
 ####  ②*`table通用对比大小`*
 
@@ -638,7 +638,7 @@
 >  sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
 >  ```
 >
->  ![image-20210702110850176](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210702110850176.png)
+>  ![image-20210702110850176](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210702110850176.png)
 
 
 

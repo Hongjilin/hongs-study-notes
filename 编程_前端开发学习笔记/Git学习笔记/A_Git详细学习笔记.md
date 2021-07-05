@@ -1084,13 +1084,34 @@ Git 可以支持很多不同的工作流程：长期分支、功能分支、合�
 >
 >**解决方法**
 >
->使用git pull --rebase命令，如果没有冲突,则会直接合并，如果存在冲突，手动解决冲突即可，不会再产生那条多余的信息。如果你不想每次都rebase，可以在git bash里执行
+>使用`git pull --rebase`命令，如果没有冲突,则会直接合并，如果存在冲突，手动解决冲突即可，不会再产生那条多余的信息。如果你不想每次都rebase，可以在git bash里执行
 >
 >```shell
 >git config --global pull.rebase true
 >```
 >
 >这个配置就是告诉git在每次pull前先进行rebase操作。
+
+### ① 可能出现的相关报错`error:Cannot pull with rebase`
+
+>1. git 执行git pull –rebase报错误如下：
+>
+>   ```sh
+>   error: cannot pull with rebase: Your index contains uncommitted changes.
+>   error: please commit or stash them.
+>   ```
+>
+>2. 原因：如果有未提交的更改，是不能git pull的
+>
+>3. 解决：
+>
+>   - 先执行`git stash`    -->#可用来暂存当前正在进行的工作
+>   - 再执行`git pull –-rebase`
+>   - 最后再执行`git stash pop`  -->#从Git栈中读取最近一次保存的内容
+
+
+
+
 
 
 

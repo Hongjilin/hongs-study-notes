@@ -1094,6 +1094,27 @@ Git 可以支持很多不同的工作流程：长期分支、功能分支、合�
 >
 >这个配置就是告诉git在每次pull前先进行rebase操作。
 
+### ① 可能出现的相关报错`error:Cannot pull with rebase`
+
+>1. git 执行git pull –rebase报错误如下：
+>
+>   ```sh
+>   error: cannot pull with rebase: Your index contains uncommitted changes.
+>   error: please commit or stash them.
+>   ```
+>
+>2. 原因：如果有未提交的更改，是不能git pull的
+>
+>3. 解决：
+>
+>   - 先执行`git stash`    -->#可用来暂存当前正在进行的工作
+>   - 再执行`git pull –-rebase`
+>   - 最后再执行`git stash pop`  -->#从Git栈中读取最近一次保存的内容
+>
+>4. 截图示例
+>
+>   ![image-20210705115521085](A_Git详细学习笔记中的图片/image-20210705115521085.png) 
+
 
 
 ## 5、Git删除误提交的大文件历史记录

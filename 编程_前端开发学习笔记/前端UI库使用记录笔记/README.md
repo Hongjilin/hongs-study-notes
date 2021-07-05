@@ -150,7 +150,7 @@
 
 >1. 出现场景:详见截图
 >
-> <img src="Ant Design of React使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
+> <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
 >
 >2. 代码示例:此处指举例第一个输入框,并在里面进行注释
 >
@@ -208,6 +208,90 @@
 >       因为输入监听导师value是单次输入,需要你在后面提交时将参数进行一次trim()去除前后空格
 
 
+
+### Ⅴ- 实现嵌套结构-多类型输入效果
+
+>1. 需求场景:当要求通过下拉框切换后面输入框类别,同时后面的输入框绑定的值不同(与文档中给出的不同:文档中后续输入框时同一个,只是简单时输入框组合)
+>
+>2. 需求示例截图
+>
+>   ![image-20210705164549793](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210705164549793.png)
+>
+>3. 实现思路:
+>
+>   - `Form.Item`中再嵌套`Form.Item`,然后将各自规则分开写(不能写在`父item`中).分别绑定不同变量名,通过选择的类型切换渲染后面的`Form.Item`
+>   - 在取数据时,可以判断其中一个变量为空时进行对另一个变量的数据(如果不渲染Form.Item,其绑定的变量为undefined),如此就能实现此需求
+>   - 此处记录主要起到借鉴作用,我感觉应有更好的写法,但是暂时没想出,同学们如果有好写法希望可以提出交流
+>
+>4. 解决代码:
+>
+>   ```jsx
+>     <Form.Item {...formItemLayout} label="公司">
+>           <Select
+>             defaultValue="0"
+>             style={{ width: 120 }}
+>             onChange={(v) => setinputType(v)}
+>           >
+>             <Option value="0">公司名</Option>
+>             <Option value="1">公司ID</Option>
+>           </Select>
+>           {/* 当前方选择框选择公司ID输入时,渲染输入公司ID
+>               当前方选择框选择公司名输入时,渲染请选择可见公司 */}
+>           {inputType != '0' ? (
+>             <Form.Item
+>               {...formItemLayout}
+>               //此处name需要绑定不同变量名,否则会导致与下方`选择可见公司`选择框变量互相污染
+>               name="company_inputIds"
+>               noStyle
+>               rules={[{ required: true, message: '输入公司ID' }]}
+>             >
+>               {/*  此处使用antd自带下拉框   */}
+>               <Select
+>                 mode="tags"
+>                 value={showCompanyIDList}
+>                 onChange={(val) => changeCompanyIds(val)}
+>                 showArrow={true}
+>                 placeholder="输入公司ID"
+>                 style={{ minWidth: 250, maxWidth: 350 }}
+>                 tokenSeparators={[',']}
+>               />
+>             </Form.Item>
+>           ) : (
+>             //此处调用公用组件
+>             <Form.Item
+>               {...formItemLayout}
+>               name="company_ids"
+>               noStyle
+>               rules={[{ required: true, message: '请选择指定公司' }]}
+>             >
+>               <SuperSelect
+>                 value={showCompanyList}
+>                 placeholder="请选择可见公司"
+>                 loading={companyLoading}
+>                 options={companyList}
+>                 showArrow={true}
+>                 onChange={(val) => {
+>                   companyListChange(val);
+>                 }}
+>                 getData={() => {
+>                   getCompanyList();
+>                 }}
+>                 onSearch={onSearchCompany}
+>               />{' '}
+>             </Form.Item>
+>           )}
+>         </Form.Item>
+>    ---------------------------------  数据处理 ----------------------------------------------------  
+>      const params = {
+>         //当 `company_ids`为空时,取`company_inputIds`的值(反之相反),然后将值转为字符串形式(以,隔开)
+>         company_ids:
+>           data?.company_ids?.length > 0
+>             ? data?.company_ids?.map((value) => value.key).join(',')
+>             : !toJS(data?.company_inputIds)
+>               ? undefined
+>               : data?.company_inputIds?.toString(),
+>       };
+>   ```
 
 
 
@@ -326,11 +410,11 @@
 >
 >   1. 未使用时效果
 >
->      <img src="Ant Design of React使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
+>      <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
 >
 >         2. 使用后效果
 >
->      <img src="Ant Design of React使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
+>      <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
 >
 >        `ps`:截图中展示的都是开发中的`测试假数据`
 >
@@ -416,7 +500,7 @@
 >
 >1. 需求场景:当我的列表内容过多使得表格撑开,导致整个表格样式与希望效果不符合时,我希望能将其超出隐藏,并能悬停显示全部信息
 >
->   <img src="Ant Design of React使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
+>   <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
 >
 >2. 代码实现
 >
@@ -444,13 +528,13 @@
 >
 >3. 效果实现图
 >
->   <img src="Ant Design of React使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
+>   <img src="Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
 
 ### Ⅴ-AntD的Table表头title加Icon图标和气泡提示Tooltip
 
 >1. 需求场景:当你的产品要你实现这个效果时
 >
->   ![image-20210617185457284](Ant Design of React使用笔记中的图片/image-20210617185457284.png)
+>   ![image-20210617185457284](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210617185457284.png)
 >
 >2. 代码实现:直接在title中写即可
 >
@@ -493,15 +577,21 @@
 >
 >3. 效果展示
 >
->   ![image-20210617185606230](Ant Design of React使用笔记中的图片/image-20210617185606230.png)
+>   ![image-20210617185606230](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210617185606230.png)
 
-### Ⅵ-table按时间排序
+### Ⅵ-table排序对比大小相关
+
+>antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
+>
+>其实可以直接写,只是如果不抽出,多处使用重复的代码,万一修改就很麻烦
+
+#### ①*`table按时间排序`*
 
 >1. 需求场景分析:当你需要对列表中数据按照时间排序,但是antd默认排序方法无法认出根据你传入对象的何属性进行排序,此时你就需要自己写时间排序
 >
 >2. 代码实现与截图
 >
->  ```tsx
+>```tsx
 >  //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
 >{
 >      title: '采集结束时间',
@@ -510,16 +600,71 @@
 >      sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
 > },
 > -----------------封装与调用--------------------------
->工具函数抽出:timeSorter = (a, b) => (type) => new Date(a[type]).getTime() - new Date(b[type]).getTime()  
+>工具函数抽出:
+>/**
+>  * 时间列表排序方法
+>  * 可以更换a,b顺序,做到初次为逆序还是正序排序
+>  * @param a 包含时间属性的对象a
+>  * @param b 包含时间属性的对象b
+>  * @param type 作为排序依据的时间属性名字
+>  * @returns number 利用正负数进行判断
+>  */
+> timeSorter = (a:object, b:object):Function => (type):number => new Date(a[type]).getTime() - new Date(b[type]).getTime()
+>
 >//此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
 >调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
+>```
+>
+>![image-20210630115858466](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210630115858466.png)
+
+####  ②*`table通用对比大小`*
+
+>1. 包括时间排序,你都能使用此封装函数
+>
+>2. 代码实现与截图
+>
+>  ```tsx
+>    -----------------封装与调用--------------------------
+>   工具函数抽出:
+>    /**
+>     * 通用对比法
+>     * @param a 包含要对比属性的对象a
+>     * @param b 包含要对比属性的对象b
+>     *  @param type 作为排序依据的属性名字
+>     * @returns boolean
+>     */
+>    commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]
+>
+>  sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
 >  ```
 >
->![image-20210630115858466](Ant Design of React使用笔记中的图片/image-20210630115858466.png)
->
->3. 小贴士:antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
+>  ![image-20210702110850176](Ant Design使用笔记/Ant Design of React使用笔记中的图片/image-20210702110850176.png)
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

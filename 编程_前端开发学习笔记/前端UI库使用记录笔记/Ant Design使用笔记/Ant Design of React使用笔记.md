@@ -203,7 +203,89 @@
 >
 >       因为输入监听导师value是单次输入,需要你在后面提交时将参数进行一次trim()去除前后空格
 
+### Ⅴ- 实现嵌套结构-多类型输入效果
 
+>1. 需求场景:当要求通过下拉框切换后面输入框类别,同时后面的输入框绑定的值不同(与文档中给出的不同:文档中后续输入框时同一个,只是简单时输入框组合)
+>
+>2. 需求示例截图
+>
+>   ![image-20210705164549793](Ant Design of React使用笔记中的图片/image-20210705164549793.png)
+>
+>3. 实现思路:
+>
+>   - `Form.Item`中再嵌套`Form.Item`,然后将各自规则分开写(不能写在`父item`中).分别绑定不同变量名,通过选择的类型切换渲染后面的`Form.Item`
+>   - 在取数据时,可以判断其中一个变量为空时进行对另一个变量的数据(如果不渲染Form.Item,其绑定的变量为undefined),如此就能实现此需求
+>   - 此处记录主要起到借鉴作用,我感觉应有更好的写法,但是暂时没想出,同学们如果有好写法希望可以提出交流
+>
+>4. 解决代码:
+>
+>   ```jsx
+>     <Form.Item {...formItemLayout} label="公司">
+>           <Select
+>             defaultValue="0"
+>             style={{ width: 120 }}
+>             onChange={(v) => setinputType(v)}
+>           >
+>             <Option value="0">公司名</Option>
+>             <Option value="1">公司ID</Option>
+>           </Select>
+>           {/* 当前方选择框选择公司ID输入时,渲染输入公司ID
+>               当前方选择框选择公司名输入时,渲染请选择可见公司 */}
+>           {inputType != '0' ? (
+>             <Form.Item
+>               {...formItemLayout}
+>               //此处name需要绑定不同变量名,否则会导致与下方`选择可见公司`选择框变量互相污染
+>               name="company_inputIds"
+>               noStyle
+>               rules={[{ required: true, message: '输入公司ID' }]}
+>             >
+>               {/*  此处使用antd自带下拉框   */}
+>               <Select
+>                 mode="tags"
+>                 value={showCompanyIDList}
+>                 onChange={(val) => changeCompanyIds(val)}
+>                 showArrow={true}
+>                 placeholder="输入公司ID"
+>                 style={{ minWidth: 250, maxWidth: 350 }}
+>                 tokenSeparators={[',']}
+>               />
+>             </Form.Item>
+>           ) : (
+>             //此处调用公用组件
+>             <Form.Item
+>               {...formItemLayout}
+>               name="company_ids"
+>               noStyle
+>               rules={[{ required: true, message: '请选择指定公司' }]}
+>             >
+>               <SuperSelect
+>                 value={showCompanyList}
+>                 placeholder="请选择可见公司"
+>                 loading={companyLoading}
+>                 options={companyList}
+>                 showArrow={true}
+>                 onChange={(val) => {
+>                   companyListChange(val);
+>                 }}
+>                 getData={() => {
+>                   getCompanyList();
+>                 }}
+>                 onSearch={onSearchCompany}
+>               />{' '}
+>             </Form.Item>
+>           )}
+>         </Form.Item>
+>    ---------------------------------  数据处理 ----------------------------------------------------  
+>      const params = {
+>         //当 `company_ids`为空时,取`company_inputIds`的值(反之相反),然后将值转为字符串形式(以,隔开)
+>         company_ids:
+>           data?.company_ids?.length > 0
+>             ? data?.company_ids?.map((value) => value.key).join(',')
+>             : !toJS(data?.company_inputIds)
+>               ? undefined
+>               : data?.company_inputIds?.toString(),
+>       };
+>   ```
 
 
 
@@ -528,7 +610,6 @@
 > ```
 >
 >![image-20210630115858466](Ant Design of React使用笔记中的图片/image-20210630115858466.png)
->
 
 ####  ②*`table通用对比大小`*
 

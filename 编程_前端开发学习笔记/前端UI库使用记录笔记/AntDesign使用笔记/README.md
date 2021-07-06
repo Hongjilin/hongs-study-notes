@@ -303,6 +303,99 @@
 >    };
 >  ```
 
+### Ⅵ-实现From中使用富文本编辑器
+
+>1. 需求场景:当你的表单提交中有富文本编辑器,且你要将其变为受控组件时
+>
+>2. 难点分析:
+>
+>  - 如何将让from认到富文本编辑器中的值:使用`form.setFieldsValue`方法设置`Form.Item`绑定的默认值,用作`校验`
+>  - 为什么不用`setState`去将其绑定成受控组件?-->你不应该用 `setState`，可以使用 `form.setFieldsValue` 来动态改变表单值
+>    --> [(此处为官方文档原话,点我传送)](https://ant.design/components/form-cn/#Form.Item)
+>
+>3. 代码及其注解
+>
+>   ```tsx
+>     -----------------------  组件调用处 ------------------------
+>     <Form.Item
+>               {...formItemLayout}
+>               name="EditorContent"
+>               style={{ width: '120%' }}
+>               rules={[
+>                 {
+>                   required: true,
+>                   validator: (_, value) => {
+>                     //此处只是简单判断是否为空,
+>                     //但其实value在store中将undefined的值赋值成了'<p><br/></p>';
+>                     //如果要严格判断是否为空,应加正则进行判断
+>                     if (value) return Promise.resolve();
+>                     return Promise.reject('请输入推送内容');
+>                   },
+>                 },
+>               ]}
+>             >
+>               {/* 富文本编辑器-- 此组件为封装的组件*/}
+>               <SuperWangeditor
+>                 EditorContent={newEditorContent}
+>                 setEditorContent={setEditorContent}
+>                 setContentType={setContentType}
+>                 disable={true}
+>                 //此处将`changeHandle`方法传给子组件,目的是让其将值传递出来给`form.setFieldsValue`使用
+>                 changeHandle={(content) => {
+>                   form.setFieldsValue({
+>                     'EditorContent': content,
+>                   });
+>                 }}
+>               />
+>      </Form.Item>
+>     ------------------------ 封装的富文本组件中的`onchange`事件处代码    ----------------------------------------
+>   import Wangeditor from 'wangeditor';
+>   ..省略..
+>     componentDidMount() {
+>       const {  changeHandle } = this.props;
+>     //当输入修改时触发
+>   //3.x版本写法
+>   //      editor.customConfig.onchange = (html) => {
+>   //        //将子组件的值抛给父类,这样可以使得此组件更有通用性   ----------------->主要是这步
+>    //       if (changeHandle) changeHandle?.(html);
+>    //       //文本
+>    //       if (setEditorContent || setContentType) {
+>    //         //设置内容
+>   //          setEditorContent(editor.txt.html());
+>   //          setContentType(false);
+>   //        }
+>   //      };
+>      //4.x版本应将`customConfig`更改为config
+>       editor.config.onchange = (html) => {
+>         // console.log(html)
+>         //将子组件的值抛给父类,这样可以使得此组件更有通用性
+>         if (changeHandle) changeHandle?.(html);
+>         //文本
+>         // console.log(editor.txt.text())
+>         if (setEditorContent || setContentType) {
+>           //设置内容
+>           setEditorContent(editor.txt.html());
+>           setContentType(false);
+>         }
+>       };
+>     }
+>     ---------------------- 对于输入富文本数据进行处理(此处可忽略,只是指出数据处理)  --------------------------------------
+>       @computed
+>       get newEditorContent() {
+>         let content;
+>           //此处如果为undefined时置换成'<p><br/></p>'     -->所以在上述校验条件中指出:如果严格校验输入为空以及纯空格需要用正则判断
+>         if (typeof this.tableData.content == 'undefined') {
+>           content = '<p><br/></p>';
+>         } else {
+>           content = toJS(this.tableData?.content);
+>         }
+>         return content;
+>       }
+>   
+>   ```
+>
+>4. 富文本编辑器官网  -->[点我跳转](https://www.wangeditor.com/)
+
 
 
 

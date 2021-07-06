@@ -383,33 +383,110 @@
 
 ### Ⅲ-回调函数
 
+#### ① *什么函数才是回调函数?*
+
+>- 你定义的
+>- 你没有调
+>- 但最终它执行了(在某个时刻或某个条件下)
+
+#### ② *常见的回调函数?*
+
+>* dom事件回调函数 ==>发生事件的dom元素
+>* 定时器回调函数 ===>window
+>* ajax请求回调函数(后面讲)
+>* 生命周期回调函数(后面讲)
+>
+>```js
+>   // dom事件回调函数
+>  document.getElementById('btn').onclick = function () {alert(this.innerHTML)}
+>  // 定时器回调函数
+>  setTimeout(function () {   alert('到点了'+this)}, 2000)
+>```
+
+### Ⅳ-IIFE (自调用函数)
+
+>1. 全称: `Immediately-Invoked Function Expression` 自调用函数
+>
+>2. 作用:
+>
+>     * 隐藏实现
+>     * 不会污染外部(一般指全局)命名空间
+>     * 用它来编码js模块
+>
+>3. 代码示例
+>
+>   ```js
+>     (function () { //匿名函数自调用
+>       var a = 3
+>       console.log(a + 3)
+>     })()
+>     console.log(a) // a is not defined
+>   
+>     //此处前方为何要一个`;`-->因为自调用函数外部有一个()包裹,可能与前方以()结尾的代码被一起认为是函数调用
+>     //不加分号可能会被认为这样 console.log(a)(IIFE)
+>     ;(function () {//不会污染外部(全局)命名空间-->举例
+>       let a = 1;
+>       function test () { console.log(++a) } //声明一个局部函数test
+>       window.$ = function () {  return {test: test} }// 向外暴露一个全局函数
+>     })()
+>    test ()  //test is not defined
+>     $().test() // 1. $是一个函数 2. $执行后返回的是一个对象
+>   ```
+
+### Ⅴ-函数中的this
+
+#### ① *this是什么?*
+
+>* 任何函数本质上都是通过某个对象来调用的,如果没有直接指定就是window
+>* 所有函数内部都有一个变量this
+>* 它的值是`调用函数的当前对象`
+
+#### ② *如何确定this的值?*
+
+>* test(): window
+>* p.test(): p
+>* new test(): 新创建的对象
+>* p.call(obj): obj
+
+#### ③ *代码举例详解*
+
+>```js
+>  function Person(color) {
+>    console.log(this)
+>    this.color = color;
+>    this.getColor = function () {
+>      console.log(this)
+>      return this.color;
+>    };
+>    this.setColor = function (color) {
+>      console.log(this)
+>      this.color = color;
+>    };
+>  }
+>
+>  Person("red"); //this是谁? window
+>
+>  const p = new Person("yello"); //this是谁? p
+>
+>  p.getColor(); //this是谁? p
+>
+>  const obj = {};
+>  //调用call会改变this指向-->让我的p函数成为`obj`的临时方法进行调用
+>  p.setColor.call(obj, "black"); //this是谁? obj
+>
+>  const test = p.setColor;
+>  test(); //this是谁? window  -->因为直接调用了
+>
+>  function fun1() {
+>    function fun2() {  console.log(this); }
+>    fun2(); //this是谁? window
+>  }
+> fun1();//调用fun1
+>```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 5、关于语句分号
 
 
 

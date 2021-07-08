@@ -379,7 +379,6 @@
 >   ```
 >
 >4. 富文本编辑器官网  -->[点我跳转](https://www.wangeditor.com/)
->
 
 
 
@@ -624,7 +623,9 @@
 >
 >   <img src="AntDesign_ofReact使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
 
-### Ⅴ-AntD的Table表头title加Icon图标和气泡提示Tooltip
+### Ⅴ-Table表中使用气泡提示Tooltip
+
+#### ① *AntD的Table表头title加Icon图标和气泡提示Tooltip*
 
 >1. 需求场景:当你的产品要你实现这个效果时
 >
@@ -672,6 +673,31 @@
 >3. 效果展示
 >
 >   ![image-20210617185606230](AntDesign_ofReact使用笔记中的图片/image-20210617185606230.png)
+
+#### ②*列表中正常使用气泡提示Tooltip*
+
+>1. 正常列表中使用气泡提示
+>
+>2. 代码示例:---在`columns`的render中使用
+>
+>   ```tsx
+>    const columns = [ {
+>         title: '列名',
+>         dataIndex: '属性名',
+>         render: (text, record) => (
+>           <Tooltip placement="top" title={text}>
+>             <a onClick={() => showModal(true, record.id, text)}>{text}</a>
+>           </Tooltip>
+>         ),
+>       },
+>    ]
+>   ```
+>
+>3. 实现效果
+>
+>   ![image-20210708114340551](AntDesign_ofReact使用笔记中的图片/image-20210708114340551.png) 
+
+
 
 ### Ⅵ-table排序对比大小相关
 

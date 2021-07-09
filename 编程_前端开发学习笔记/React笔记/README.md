@@ -16,7 +16,7 @@
 >
 >1. **[ReactB站jspang学习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/ReactB站jspang学习)** 
 >
->   > 该笔记记录本人看他人代码过程中觉得值得学习的、被别人指出的不足需要修改的、细节部分想要mark的、我个人觉得可以分享、并且要用以改进自身编程能力及习惯的内容
+>   > 该笔记学自B站`jspang`的react教程视频
 >
 >2.  **[React小书学习文件](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React小书学习文件)** 
 >
@@ -43,7 +43,6 @@
 >进阶笔记:[`React Hook`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ReactHooks%E7%AC%94%E8%AE%B0)相关详细笔记 
 >
 >本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/React%E7%AC%94%E8%AE%B0)									
->
 
 # Ⅰ-React基础知识与概念
 

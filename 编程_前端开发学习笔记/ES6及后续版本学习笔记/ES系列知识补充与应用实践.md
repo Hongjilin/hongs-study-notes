@@ -1,8 +1,8 @@
 >本笔记是ES系列知识点笔记梳理与本人新的体会,当然记录最多的应该还是`ES6`部分知识点,因为也是最常用的
 >
->ES6相关材料摘录本人放至隔壁`[ES6资料文档摘录]目录中` ,此处是本人看阮一峰老师写的ES6相关材料时摘录下来的 -->点我传送
+>ES6相关材料摘录本人放至隔壁`[ES6资料文档摘录]目录中` ,此处是本人看阮一峰老师写的ES6相关材料时摘录下来的 -->**[点我传送](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
 >
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)
+>本人笔记地址分享:[全部笔记](https://gitee.com/hongjilin/hongs-study-notes)、**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
 >
 
 # #目录

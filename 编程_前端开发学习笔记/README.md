@@ -16,9 +16,9 @@
 >
 >3. [Scss笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
 >
->4. [ES6学习资料摘录与笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6学习资料摘录与笔记)
+>4. **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
 >
->> 该笔记主要是相关学习资料整合,主要出自[阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html),个人对于es6-11使用过程遇到的问题及相关解决、见解注释在其中的[A_ES6知识补充与所遇问题](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ES6%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%91%98%E5%BD%95%E4%B8%8E%E7%AC%94%E8%AE%B0/A_ES6%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%E4%B8%8E%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98.md)笔记中
+>> 该笔记主要是相关学习资料整合,主要出自[阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html),个人对于es6-11使用过程遇到的问题及相关解决、见解注释在其中的[**ES系列知识补充与应用实践**](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)笔记中
 >
 >5. [Ajax、Axios学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Ajax、Axios学习笔记)
 >

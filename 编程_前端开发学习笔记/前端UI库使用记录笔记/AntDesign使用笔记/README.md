@@ -530,7 +530,9 @@
 >
 >  <img src="AntDesign_ofReact使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
 
-### Ⅴ-AntD的Table表头title加Icon图标和气泡提示Tooltip
+### Ⅴ-Table表中使用气泡提示Tooltip
+
+#### ① *AntD的Table表头title加Icon图标和气泡提示Tooltip*
 
 >1. 需求场景:当你的产品要你实现这个效果时
 >
@@ -539,12 +541,177 @@
 >2. 代码实现:直接在title中写即可
 >
 >  ```tsx
->  import React, { Component } from 'react';  import { Table, Button, Modal, Typography } from 'antd';  import { QuestionCircleOutlined } from '@ant-design/icons';  import { Tooltip } from 'antd';  interface IProps {    store: Store;  }  const ManageTable = (props: IProps) => {    const { store } = props;    const columns = [      {        dataIndex: 'monthCount',        ellipsis: true,       //效果实现就在这行        title:         <div> 本月新增付费IP数&nbsp;            <Tooltip placement='top' title='仅为当前月新增付费IP数'>                <QuestionCircleOutlined />            </Tooltip>        </div>,      },    ];    return (      <Table        rowKey={(record, index) => record.id || index}        className="table-box"        columns={columns}      />    );  };  export default observer(ManageTable);
+>  import React, { Component } from 'react';
+>  import { Table, Button, Modal, Typography } from 'antd';
+>  import { QuestionCircleOutlined } from '@ant-design/icons';
+>  import { Tooltip } from 'antd';
+>  interface IProps {
+>    store: Store;
+>  }
+>
+>  const ManageTable = (props: IProps) => {
+>    const { store } = props;
+>    const columns = [
+>      {
+>        dataIndex: 'monthCount',
+>        ellipsis: true,
+>       //效果实现就在这行
+>        title: 
+>        <div> 本月新增付费IP数&nbsp;
+>            <Tooltip placement='top' title='仅为当前月新增付费IP数'>
+>                <QuestionCircleOutlined />
+>            </Tooltip>
+>        </div>,
+>      },
+>
+>    ];
+>    return (
+>      <Table
+>        rowKey={(record, index) => record.id || index}
+>        className="table-box"
+>        columns={columns}
+>      />
+>    );
+>  };
+>
+>  export default observer(ManageTable);
 >  ```
 >
 >3. 效果展示
 >
 >  ![image-20210617185606230](AntDesign_ofReact使用笔记中的图片/image-20210617185606230.png)
+
+#### ②*列表中正常使用气泡提示Tooltip*
+
+>1. 正常列表中使用气泡提示
+>
+>2. 代码示例:---在`columns`的render中使用
+>
+>  ```tsx
+> const columns = [ {
+>      title: '列名',
+>      dataIndex: '属性名',
+>      render: (text, record) => (
+>        <Tooltip placement="top" title={text}>
+>          <a onClick={() => showModal(true, record.id, text)}>{text}</a>
+>        </Tooltip>
+>      ),
+>    },
+> ]
+>  ```
+>
+>3. 实现效果
+>
+>  ![image-20210708114340551](AntDesign_ofReact使用笔记中的图片/image-20210708114340551.png) 
+
+#### ③ *列表中使用[Tooltip]组件却出现两个提示*的问题解决
+
+>1. 问题场景:当你想为表格中超出隐藏文字部分加气泡提示时却发现出现两个提示
+>
+>  - 问题代码:
+>
+>    - ```tsx
+>      <Column
+>        title="支付宝账户"
+>        dataIndex="zfb_account_name"
+>        ellipsis
+>        width={120}
+>         render={text => (
+>          <Tooltip  placement="top" title={text}>
+>          {/* {text} //此处直接将内容数据返回出去渲染 */}
+>           {`这是返回出去列表渲染的:${text}`}
+>           </Tooltip>   
+>        )}
+>      />
+>      ```
+>
+>
+>
+>  - 问题截图与分析:
+>    ![image-20210712161809111](AntDesign_ofReact使用笔记中的图片/image-20210712161809111.png) .
+>
+>2. 问题分析:
+>
+>  - 在`render()`中返回如果是纯文本,会被[Table]自动渲染成白色气泡提示,但此提示不符合我们自己的需求(无法复制、不够美观)
+>
+>  - 所以我们返回给`render()`的可以是自己定义的`DOM`.但是此处也会引出一个新的问题,看下方-->
+>
+>    - 初次改进代码:
+>
+>      ```jsx
+>      -----------------------修改后出现问题的代码------------------------------------;
+>      <Column
+>        title="支付宝账户"
+>        dataIndex="zfb_account_name"
+>        ellipsis
+>        width={120}
+>         render={text => (
+>          <Tooltip  placement="top" title={text}>
+>          {/* {text} //此处直接将内容数据返回出去渲染 */}
+>           <div>{`这是返回出去列表渲染的:${text}`}</div> 
+>           </Tooltip>   
+>        )}
+>      />
+>      ```
+>
+>    - 初次改进效果:
+>      ![image-20210712162540686](AntDesign_ofReact使用笔记中的图片/image-20210712162540686.png).
+>
+>  - 可以看出虽然解决了`双气泡提示`的问题,但也引出了一个新问题::返回的新的DOM它不受前方`ellipsis`属性影响,虽然气泡提示成功变为只有一个,但是下方文本仍然超出,怎么办?
+>
+>3. 最正确写法(数组写法也一样,自行转换下即可):
+>
+>  - 代码
+>
+>    ```tsx
+>    -----------------------  正确写法1:给dom加以下样式 -----------------------------------;
+>    //tsx
+>    <Column
+>      title="支付宝账户"
+>      dataIndex="zfb_account_name"
+>     // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>      width={120}
+>       render={text => (
+>      <Tooltip  placement="top" title={text}>
+>        {/* {text} //此处直接将内容数据返回出去渲染 */}
+>         <div className={style.text}>{`这是返回出去列表渲染的:${text}`}</div>
+>      </Tooltip>   
+>      )}
+>    />
+>    //scss
+>      .text {
+>        white-space: nowrap;
+>        overflow: hidden;
+>        text-overflow: ellipsis;
+>      }
+>    -----------------------  正确写法2:直接将写成内联样式(不推荐) -----------------------------------;
+>    
+>    <Column
+>      title="支付宝账户"
+>      dataIndex="zfb_account_name"
+>     // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>      width={120}
+>       render={text => (
+>      <Tooltip  placement="top" title={text}>
+>        <div style={{
+>          overflow: 'hidden',
+>          whiteSpace: 'nowrap',
+>          textOverflow: 'ellipsis',
+>        }}>{text}</div>
+>     </Tooltip> 
+>      )}
+>    />
+>    ```
+>
+>  - 效果截图:
+>
+>    ![image-20210712163609695](AntDesign_ofReact使用笔记中的图片/image-20210712163609695.png) 
+>
+>
+>
+>  于此问题完美解决了
+
+
 
 ### Ⅵ-table排序对比大小相关
 

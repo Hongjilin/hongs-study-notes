@@ -24,6 +24,8 @@
 
 ## 1、From表单
 
+> 许多数据录入是与From表单相结合的
+
 ### Ⅰ-限制表单中输入框不能为空以及中文
 
 >1. 通过[`From.Item`](https://ant.design/components/form-cn/#Form.Item) 中的 `normalize`属性进行处理对value的处理:组件获取值后进行转换，再放入 Form 中。不支持异步
@@ -394,6 +396,8 @@
 
 ## 1、[Table表格](https://ant.design/components/table-cn/)
 
+> 基本前端大部分页面数据展示都是使用`Table`进行展示
+
 ### Ⅰ-列表渲染映射文字
 
 >1. 场景:当你对下列表渲染时,服务端传送过来的`值是数字`(0,1,2),而你要`显示成相对应的文字时`
@@ -696,6 +700,115 @@
 >3. 实现效果
 >
 >   ![image-20210708114340551](AntDesign_ofReact使用笔记中的图片/image-20210708114340551.png) 
+
+#### ③ *列表中使用[Tooltip]组件却出现两个提示*的问题解决
+
+>1. 问题场景:当你想为表格中超出隐藏文字部分加气泡提示时却发现出现两个提示
+>
+>   - 问题代码:
+>
+>     - ```tsx
+>       <Column
+>         title="支付宝账户"
+>         dataIndex="zfb_account_name"
+>         ellipsis
+>         width={120}
+>          render={text => (
+>           <Tooltip  placement="top" title={text}>
+>           {/* {text} //此处直接将内容数据返回出去渲染 */}
+>            {`这是返回出去列表渲染的:${text}`}
+>            </Tooltip>   
+>         )}
+>       />
+>       ```
+>
+>       
+>
+>   - 问题截图与分析:
+>     ![image-20210712161809111](AntDesign_ofReact使用笔记中的图片/image-20210712161809111.png) .
+>
+>2. 问题分析:
+>
+>   - 在`render()`中返回如果是纯文本,会被[Table]自动渲染成白色气泡提示,但此提示不符合我们自己的需求(无法复制、不够美观)
+>
+>   - 所以我们返回给`render()`的可以是自己定义的`DOM`.但是此处也会引出一个新的问题,看下方-->
+>
+>     - 初次改进代码:
+>
+>       ```jsx
+>       -----------------------修改后出现问题的代码------------------------------------;
+>       <Column
+>         title="支付宝账户"
+>         dataIndex="zfb_account_name"
+>         ellipsis
+>         width={120}
+>          render={text => (
+>           <Tooltip  placement="top" title={text}>
+>           {/* {text} //此处直接将内容数据返回出去渲染 */}
+>            <div>{`这是返回出去列表渲染的:${text}`}</div> 
+>            </Tooltip>   
+>         )}
+>       />
+>       ```
+>
+>     - 初次改进效果:
+>       ![image-20210712162540686](AntDesign_ofReact使用笔记中的图片/image-20210712162540686.png).
+>
+>   - 可以看出虽然解决了`双气泡提示`的问题,但也引出了一个新问题::返回的新的DOM它不受前方`ellipsis`属性影响,虽然气泡提示成功变为只有一个,但是下方文本仍然超出,怎么办?
+>
+>3. 最正确写法(数组写法也一样,自行转换下即可):
+>
+>   - 代码
+>
+>     ```tsx
+>     -----------------------  正确写法1:给dom加以下样式 -----------------------------------;
+>     //tsx
+>     <Column
+>       title="支付宝账户"
+>       dataIndex="zfb_account_name"
+>      // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>       width={120}
+>        render={text => (
+>       <Tooltip  placement="top" title={text}>
+>         {/* {text} //此处直接将内容数据返回出去渲染 */}
+>          <div className={style.text}>{`这是返回出去列表渲染的:${text}`}</div>
+>       </Tooltip>   
+>       )}
+>     />
+>     //scss
+>       .text {
+>         white-space: nowrap;
+>         overflow: hidden;
+>         text-overflow: ellipsis;
+>       }
+>     -----------------------  正确写法2:直接将写成内联样式(不推荐) -----------------------------------;
+>     
+>     <Column
+>       title="支付宝账户"
+>       dataIndex="zfb_account_name"
+>      // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>       width={120}
+>        render={text => (
+>       <Tooltip  placement="top" title={text}>
+>         <div style={{
+>           overflow: 'hidden',
+>           whiteSpace: 'nowrap',
+>           textOverflow: 'ellipsis',
+>         }}>{text}</div>
+>      </Tooltip> 
+>       )}
+>     />
+>     ```
+>
+>   - 效果截图:
+>
+>     ![image-20210712163609695](AntDesign_ofReact使用笔记中的图片/image-20210712163609695.png) 
+>
+>   
+>
+>   于此问题完美解决了
+
+
 
 
 

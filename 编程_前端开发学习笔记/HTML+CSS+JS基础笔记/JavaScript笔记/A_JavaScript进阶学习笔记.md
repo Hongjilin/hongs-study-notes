@@ -1,8 +1,10 @@
+
+
 # #说明
 
 > 此笔记为JavaScript进阶学习笔记,会对之前javaScript基础做一次梳理,并进行对于其进阶知识进行学习与记录
 >
-> 借阅以及参照学习资料:印记中文的[`现在JavaScript教程`](https://zh.javascript.info/)、B站尚硅谷的[`尚硅谷JavaScript高级教程(javascript实战进阶)`](https://www.bilibili.com/video/BV14s411E7qf?share_source=copy_web)
+> 借阅以及参照学习资料:B站尚硅谷的[`尚硅谷JavaScript高级教程(javascript实战进阶)`](https://www.bilibili.com/video/BV14s411E7qf?share_source=copy_web);印记中文的[`现在JavaScript教程`](https://zh.javascript.info/)、
 >
 > 此笔记为实习工作半年后发觉之前学习JavaScript不够系统全面,或者说当初只是囫囵吞枣,首先并没有系统学习javaScript,其次没有较为深入的学习进阶知识,只是知道`怎么做,而不知道为什么`(当然这也符合本人学习节奏,先`know how`再`know why`)
 >
@@ -484,9 +486,146 @@
 > fun1();//调用fun1
 >```
 
-
-
 ## 5、关于语句分号
+
+>1. js一条语句的后面可以不加分号
+>2. 是否加分号是编码风格问题, 没有应该不应该，只有你自己喜欢不喜欢
+>3. 在下面2种情况下不加分号会有问题
+>  * `小括号开头的前一条语句`
+>  * `中方括号开头的前一条语句`
+>4. 解决办法: 在行首加分号
+>5. 强有力的例子: vue.js库
+>6. 知乎热议: https://www.zhihu.com/question/20298345
+
+------
+
+
+
+# 二、函数高级
+
+## 1、原型与原型链
+
+### Ⅰ-原型 [prototype]
+
+>1. 函数的`prototype`属性
+>  * 每个函数都有一个prototype属性, 它默认指向一个Object空对象(即称为: 原型对象)
+>  * 原型对象中有一个属性constructor, 它指向函数对象
+>  * ![image-20210714201049312](A_JavaScript进阶学习笔记中的图片/image-20210714201049312.png)
+>2. 给原型对象添加属性(`一般都是方法`)
+>  * 作用: 函数的所有实例对象自动拥有原型中的属性(方法)
+>
+>3. 代码示例
+>
+>   ```js
+>   
+>     // 每个函数都有一个prototype属性, 它默认指向一个Object空对象(即称为: 原型对象)
+>     console.log(Date.prototype, typeof Date.prototype)
+>     function Fun () { }
+>     console.log(Fun.prototype)  // 默认指向一个Object空对象(没有我们的属性)
+>   
+>     // 原型对象中有一个属性constructor, 它指向函数对象
+>     console.log(Date.prototype.constructor===Date)
+>     console.log(Fun.prototype.constructor===Fun)
+>   
+>     //给原型对象添加属性(一般是方法) ===>实例对象可以访问
+>     Fun.prototype.test = function () { console.log('test()') }
+>     var fun = new Fun()
+>     fun.test()
+>   ```
+
+### Ⅱ-显式原型与隐式原型
+
+>1. 每个函数function都有一个`prototype`，即`显式`原型(属性)
+>
+>2. 每个实例对象都有一个[`__ proto __`]，可称为`隐式`原型(属性)
+>
+>3. 对象的隐式原型的值为其对应构造函数的显式原型的值
+>
+>4. 内存结构
+>
+>   ![image-20210714203043314](A_JavaScript进阶学习笔记中的图片/image-20210714203043314.png) 
+>
+>5. 总结:
+>  * 函数的[`prototype`]属性: 在定义函数时自动添加的, 默认值是一个空Object对象
+>  * 对象的[`__ proto __`]属性: 创建对象时自动添加的, `默认值为构造函数的prototype属性值`
+>  * 程序员能直接操作显式原型, 但不能直接操作隐式原型(ES6之前)
+>
+>6. 代码示例:
+>
+>   ```js
+>     //定义构造函数
+>     function Fn() {
+>      // 内部默认执行语句: this.prototype = {}
+>       }
+>     // 1. 每个函数function都有一个prototype，即显式原型属性, 默认指向一个空的Object对象
+>     console.log(Fn.prototype)
+>     // 2. 每个实例对象都有一个__proto__，可称为隐式原型
+>     //创建实例对象
+>     var fn = new Fn()  // 内部默认执行语句: this.__proto__ = Fn.prototype
+>     console.log(fn.__proto__)
+>     // 3. 对象的隐式原型的值为其对应构造函数的显式原型的值
+>     console.log(Fn.prototype===fn.__proto__) // true
+>     //给原型添加方法
+>     Fn.prototype.test = function () {
+>       console.log('test()')
+>     }
+>     //通过实例调用原型的方法
+>     fn.test()
+>   ```
+
+
+
+### Ⅲ-原型链
+
+#### ① *原型链*
+
+>1. 原型链
+>  * 访问一个对象的属性时，
+>    * 先在自身属性中查找，找到返回
+>    * 如果没有, 再沿着[`__ proto __`]这条链向上查找, 找到返回
+>    * 如果最终没找到, 返回undefined
+>    * ![image-20210714210912653](A_JavaScript进阶学习笔记中的图片/image-20210714210912653.png)
+>  * 别名: 隐式原型链
+>  * 作用: 查找对象的属性(方法) 
+
+#### ②*构造函数/原型/实例对象的关系(图解)*
+
+>1. ```js
+>   var o1 = new Object();
+>   var o2 = {};
+>   ```
+>
+>   ![image-20210714212928432](A_JavaScript进阶学习笔记中的图片/image-20210714212928432.png) 
+>
+>2. ```js
+>   function Foo(){  }
+>   ```
+>
+>   ![image-20210714212945164](A_JavaScript进阶学习笔记中的图片/image-20210714212945164.png) 
+>
+>    ps:所有函数的[`__ proto __`]都是一样的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

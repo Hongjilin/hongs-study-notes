@@ -774,6 +774,158 @@
 
 
 
+## 2、Tree 树形控件
+
+> [官方文档部分](https://ant.design/components/tree-cn/)
+>
+> ps:下方解决代码只给出本效果所需必要代码,其余代码不展示出来-->`必须代码上都有相应注释`
+
+### Ⅰ- 实现点击复选框后的文字也能进行选择的效果
+
+>1. 需求场景:
+>
+>   ![image-20210714140338803](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210714140338803.png) 
+>
+>2. API概述:
+>
+>   - [`checkedKeys`]API是显示记录表单中选中的节点
+>   - [`onCheck`]API是针对前面的复选框点击,点击时传`参数为所有选中的数组`,此处可以直接看官方文档就能实现
+>   - [`onSelect`]API是针对后面文字树节点的点击,但是点击时传`参数为当前选中树节点`,且其选中与未选中与[`checkedKeys`]无关联
+>
+>3. 思路分析:
+>
+>   - 首先,声明[`checkedKeys`]变量,然后从服务端获取已有选中项,进行初始化
+>   - 不论是[onCheck]还是[onSelect],都是对于`checkedKeys`变量进行拼装操作,再写入渲染
+>   - 只是说[onSelect]传来的参数需要经过加工,略显复杂,详情请看下方代码
+>
+>4. 代码:
+>
+>   ```tsx
+>   import { Button, Form, Input, Tree } from 'antd';
+>   import { inject, observer, useLocalStore } from 'mobx-react';
+>   import React, { useEffect, useMemo, useRef, useState } from 'react';
+>   import style from './style.scss';
+>   
+>   
+>   const EditModal = (props) => {
+>      //用来存 [checkedKeys]-->已经选中的状态  通常需要从服务端先获取初始化原先已经选中的数据
+>     const [checkedKeys, setCheckedKeys] = useState([]);
+>     const [form] = Form.useForm();
+>       
+>    /**
+>      * 一 复选框选中函数
+>      * @param checked 传入当前勾选上的所有节点key
+>      */
+>     const handleSearchTreeNode = (checked) => {
+>         setCheckedKeys(checked);
+>     };
+>     /**
+>      * 二 树节点选中函数
+>      * @param checked 选中时传入当前树节点  --注意:当为未选中状态时传入为空,所以不能用作[权限选中判断]
+>      * @param e 点击树节点时传入整个树节点数据信息 --不论是否选中都会传入
+>      * @param node
+>      * @param event
+>      */
+>     const handleSelectTreeNode = (checked, e, node, event) => {
+>       //将点击的树节点的[key]解构出来
+>       const {
+>         node: { key },
+>       } = e;
+>       //声明一个SET数组,将key存入(以防万一同时防止重复赋值)
+>       const data = Array.from(new Set([...checkedKeys, key]));
+>       //首先判断原有[树数组:checkedKeys]中是否含有当前点击的[key],如果有则筛选掉,
+>       if (checkedKeys.includes(key))
+>       setCheckedKeys(checkedKeys.filter((value) => value != key));
+>       //如果原有[树数组]中不含有,则直接将新增好的[data]写入替代掉[树数组:checkedKeys]
+>       else setCheckedKeys(data);
+>     };
+>   
+>     return (
+>       <Form onFinish={submit} {...formItemLayout} form={form}>
+>         <Form.Item label="权限" required>
+>           <Form.Item
+>             name="roles"
+>             noStyle
+>             rules={[
+>               () => ({
+>                 validator(rule: any, value: any) {
+>                   if (checkedKeys && checkedKeys.length === 0)  return Promise.reject('请选择角色对应的权限');
+>                   return Promise.resolve();
+>                 },
+>               }),
+>             ]}
+>           >
+>             <Tree
+>               defaultCheckedKeys={[]}
+>               checkable
+>               expandedKeys={expandedKeys}
+>               onExpand={(keys) => {
+>                 setExpandedKeys(keys);
+>               }}
+>               //此处绑定所有Tree数据  
+>               treeData={menuTree}
+>                //此处绑定选中的key
+>               checkedKeys={checkedKeys}
+>                 //此处为复选框点击触发API
+>               onCheck={handleSearchTreeNode}
+>                 //此处为后面的文字树节点点击触发API
+>               onSelect={handleSelectTreeNode}
+>               height={300}
+>             />
+>           </Form.Item>
+>         </Form.Item>
+>         </div>
+>       </Form>
+>     );
+>   };
+>   ```
+>
+>5. 效果展示:
+>
+>   ![Tree选中效果](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/Tree选中效果.gif) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

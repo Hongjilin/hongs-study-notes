@@ -2,7 +2,7 @@
 
 > 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
-> 只截取了上方`ChromeDevTools使用详解笔记`部分笔记的部分知识点至此,方便网站阅读
+> 只截取了上方`Chrome_DevTools调试工具使用详解笔记`中部分笔记的部分知识点至此,方便网站阅读
 >
 > `只截取了部分笔记至此,方便网站阅读`
 
@@ -59,7 +59,7 @@
 >
 >这是本人gitee的Elements面板
 >
->![image-20210609144357487](ChromeDevTools使用详解笔记中的图片/image-20210609144357487.png)
+>![image-20210609144357487](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609144357487.png)
 >
 >可以看到整个面板被分成 3 个部分(`截图上看是4个,但实际上3个部分`,中右两个同是样式)，左边主体为`DOM树`,左下角为选中的元素节点,(中间为选中节点的样式,最右边也是样式(*是内置的Computed面板*)--此处也是后面点即内置面板出现内容的地方),当你界面较小时可以合并至同一处视图
 
@@ -68,7 +68,7 @@
 ##### 	1) 检查页面元素
 
 >- 右击页面任意一处，选择检查 / 审查元素，查看选中页面对应的 DOM 元素
->- 点击 ![toolbar-1.png](ChromeDevTools使用详解笔记中的图片/toolbar-1.png)，当图标显示为蓝色时，鼠标点击页面任意一处，可以查看选中页面对应的 DOM 元素
+>- 点击 ![toolbar-1.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-1.png)，当图标显示为蓝色时，鼠标点击页面任意一处，可以查看选中页面对应的 DOM 元素
 >- 鼠标悬停 DOM 树上的任意一个节点，页面会用淡蓝色的蒙板在页面上标记 DOM 节点对应的页面
 >- 按键盘的向上向下键可以在展开的节点之间进行切换，向左向右键可以收缩和展开节点
 
@@ -88,7 +88,7 @@
 ###### 	② *选中后右键更多操作详解*
 
 >1. 选中后右键更多操作截图:
->     <img src="ChromeDevTools使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" /> 
+>     <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609145621990.png" alt="image-20210609145621990" style="zoom:67%;" /> 
 >
 >2. 更多的操作详解
 >
@@ -122,11 +122,11 @@
 >
 >    - 这 3 种断点可以同时作用在一个节点上。为了便于大家理解，我们举个例子:我给本人gitee页面上的节点加一个 "attribute modifications" 的断点，如下图所示：
 >
->      ![image-20210609151828033](ChromeDevTools使用详解笔记中的图片/image-20210609151828033.png)
+>      ![image-20210609151828033](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609151828033.png)
 
 #### Ⅱ- elements的内置面板
 
-> ![image-20210609152836698](ChromeDevTools使用详解笔记中的图片/image-20210609152836698.png)
+> ![image-20210609152836698](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609152836698.png)
 >
 > 分别是：
 >
@@ -143,15 +143,15 @@
 >Styles 面板可以允许你通过各种方式来修改元素的样式，并且会想方设法使得你调试时简单方便。
 >
 >下方按照图中标注的序号进行描述：
->![image-20210609155354802](ChromeDevTools使用详解笔记中的图片/image-20210609155354802.png)
+>![image-20210609155354802](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609155354802.png)
 
 ###### 	① *element.style：*
 
 > 代表所选元素的内联样式。比如我选择的是 Git 的 header 块，如果我直接修改其 HTML 为 `<div class="header" style="background: red"></div>`，那么 element.style 中就会出现 `background: red;`，相反，如果我在 element.style 块中点击任意空白处，添加 CSS 样式，那么你会在对应的元素节点上看到 style 属性，值就是你写在 element.style 内的内容
 
-###### 	② *鼠标悬浮在*![element-style-6.png](ChromeDevTools使用详解笔记中的图片/element-style-6.png)上:
+###### 	② *鼠标悬浮在*![element-style-6.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/element-style-6.png)上:
 
-> 鼠标悬浮在![element-style-6.png](ChromeDevTools使用详解笔记中的图片/element-style-6.png)上会出现 ![element-style-5.png](ChromeDevTools使用详解笔记中的图片/element-style-5.png)(有些版本没有)，可以帮助你通过可视化界面的形式调试 text-shadow、 box-shadow、 color、 background。另外，最后一个 "+" 的符号代表可以添加新的 CSS 规则
+> 鼠标悬浮在![element-style-6.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/element-style-6.png)上会出现 ![element-style-5.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/element-style-5.png)(有些版本没有)，可以帮助你通过可视化界面的形式调试 text-shadow、 box-shadow、 color、 background。另外，最后一个 "+" 的符号代表可以添加新的 CSS 规则
 
 ###### 	③ *单击属性或者属性值*
 
@@ -173,11 +173,11 @@
 
 >1. 点击"`:hov`":可以强制所选元素处于某个状态，这个也能通过右击元素，选择一个状态来实现
 >
->   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
+>   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
 >
 >2. "`cls`":查看所有与当前元素直接相关的样式规则，你可以禁止/允许某个类作用于所选元素，也可以添加新的类(可以与隔壁`+`功能搭配使用)
 >
->   ![image-20210609161540168](ChromeDevTools使用详解笔记中的图片/image-20210609161540168.png)
+>   ![image-20210609161540168](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609161540168.png)
 >
 >3. "`+`":默认给选中元素新建一个样式规则类(可以与`cls`搭配),上面的`span.aaa`就是此功能创建出来的
 
@@ -195,7 +195,7 @@
 >
 >鼠标悬停在盒模型上的 margin、border、padding 以及内容区域，可以在网页中看到与之相对应的区域。你还可以双击盒模型上的数字来修改它。如果所选元素的 position 属性的值为 absolute 或者 fixed 的话，还可以在 margin 的外围设置 position。
 >
->![image-20210609164044139](ChromeDevTools使用详解笔记中的图片/image-20210609164044139.png)
+>![image-20210609164044139](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609164044139.png)
 
 ##### 	3) Event Listeners
 
@@ -216,7 +216,7 @@
 >
 >3. 示例图
 >
->  <img src="ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
+>  <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
 
 ##### 	4) DOM Breakpoints
 
@@ -224,7 +224,7 @@
 >
 >当把鼠标悬停在节点标识符上时可以在网页相应区域显示对应的页面元素，勾选前面的复选框代表断点有效，不勾选代表断点虽然存在，但无法使用。
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210609170200907.png" alt="image-20210609170200907" style="zoom:80%;" />
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609170200907.png" alt="image-20210609170200907" style="zoom:80%;" />
 >
 >
 
@@ -232,7 +232,7 @@
 
 >这是所选 DOM 节点对应的对象以及这个对象的父类、父类的父类...的集合。
 >
->![image-20210609170750848](ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png) 
+>![image-20210609170750848](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609170750848.png) 
 
 ### 2、Console 面板
 
@@ -249,30 +249,30 @@
 
 #### Ⅱ- Console 中的内置菜单详解
 
-> 我们先看一下 Console 的界面，看看这个曾经很熟悉的界面是否真的熟悉![image-20210609181850152](ChromeDevTools使用详解笔记中的图片/image-20210609181850152.png)
+> 我们先看一下 Console 的界面，看看这个曾经很熟悉的界面是否真的熟悉![image-20210609181850152](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609181850152.png)
 >
 > 上下结构，上面是功能按钮或选项，下面是信息展示或交互的面板。先看上面，从左往右，依次是：
 >
-> - ![image-20210609182042261](ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png):显示/隐藏侧边栏的按钮，其功能是进行控制台面板的显示信息过滤。
-> - ![image-20210609182028915](ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
-> - ![image-20210609182234858](ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png):执行环境选择器,比如切换成`vue-devtools`
-> - ![image-20210609182327170](ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):监听变量,点击后输入某变量,就会将其置顶显示在console顶部,每次变量值改变都会同步上去
-> - ![image-20210609182136699](ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):过滤 Console 中的信息,可以用正则,也可以直接输入变量名
-> - ![image-20210609182826833](ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):也是对消息的过滤-分为**Verbose（详细）,Info（信息），Warnings（警告）,Error（错误)**四个等级类型
-> - ![image-20210609182447874](ChromeDevTools使用详解笔记中的图片/image-20210609182447874.png):其他的隐藏功能-如`Preserve log`刷新时保存当前console的变量等
+> - ![image-20210609182042261](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png):显示/隐藏侧边栏的按钮，其功能是进行控制台面板的显示信息过滤。
+> - ![image-20210609182028915](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
+> - ![image-20210609182234858](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png):执行环境选择器,比如切换成`vue-devtools`
+> - ![image-20210609182327170](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):监听变量,点击后输入某变量,就会将其置顶显示在console顶部,每次变量值改变都会同步上去
+> - ![image-20210609182136699](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):过滤 Console 中的信息,可以用正则,也可以直接输入变量名
+> - ![image-20210609182826833](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):也是对消息的过滤-分为**Verbose（详细）,Info（信息），Warnings（警告）,Error（错误)**四个等级类型
+> - ![image-20210609182447874](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182447874.png):其他的隐藏功能-如`Preserve log`刷新时保存当前console的变量等
 
 ##### 	1) 过滤信息
 
 >上面按钮中过滤信息的为
 >
->1. ![image-20210609182042261](ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png)、![image-20210609182826833](ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):显示侧边栏时其右边的`Default levels`下拉菜单会被禁止使用，因为它的作用也是过滤信息并且侧边栏的过滤功能包含它![image-20210609184500891](ChromeDevTools使用详解笔记中的图片/image-20210609184500891.png)
+>1. ![image-20210609182042261](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182042261.png)、![image-20210609182826833](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182826833.png):显示侧边栏时其右边的`Default levels`下拉菜单会被禁止使用，因为它的作用也是过滤信息并且侧边栏的过滤功能包含它![image-20210609184500891](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609184500891.png)
 >
 >   **共有四种选项，按照严重级别排序分别为：Verbose（详细）,Info（信息），Warnings（警告）,Error（错误）。**
 >   **在侧边栏的信息过滤功能中，除了上述四种过滤方式外还可以根据具体的messages进行过滤**
 >
 >   
 >
->2. ![image-20210609182136699](ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):**过滤框主要能按照以下三种类型的输入进行信息过滤：**
+>2. ![image-20210609182136699](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):**过滤框主要能按照以下三种类型的输入进行信息过滤：**
 >
 >   1) URL
 >
@@ -282,17 +282,17 @@
 >
 >   示例图
 >
->   ![image-20210609185937713](ChromeDevTools使用详解笔记中的图片/image-20210609185937713.png)
+>   ![image-20210609185937713](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609185937713.png)
 
 ##### 	2) 清空标志:清空控制台信息
 
->1. ![image-20210609182028915](ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
+>1. ![image-20210609182028915](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182028915.png):清空 Console控制台打印内容
 >2. 在控制台中键入clear()，然后运行
 >3. Ctrl+L清空
 
 ##### 	3) top下拉标志:切换执行环境
 
->1. ![image-20210609182234858](ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png)此下拉菜单称为 Execution Context Selector,通常，您会看到此环境设置为 `top`（页面的顶部框架)。
+>1. ![image-20210609182234858](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182234858.png)此下拉菜单称为 Execution Context Selector,通常，您会看到此环境设置为 `top`（页面的顶部框架)。
 >
 >2. 其他框架和扩展程序在其自身的环境中运行。要使用这些其他环境，您需要从下拉菜单中选中它们。 例如，如果您要查看 `<iframe>` 元素的日志输出，并修改该环境中存在的某个变量，您需要从 Execution Context Selector 下拉菜单中选中该元素。
 >
@@ -300,13 +300,13 @@
 >
 >4. 示例图
 >
->   ![image-20210609191945880](ChromeDevTools使用详解笔记中的图片/image-20210609191945880.png)
+>   ![image-20210609191945880](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609191945880.png)
 
 ##### 	4) 眼睛标志:监听变量
 
->![image-20210609182327170](ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):**用于创建一个Live表达式，此表达式的值可实时更新。**
+>![image-20210609182327170](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182327170.png):**用于创建一个Live表达式，此表达式的值可实时更新。**
 >
->![image-20210609193128590](ChromeDevTools使用详解笔记中的图片/image-20210609193128590.png)
+>![image-20210609193128590](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609193128590.png)
 
 ##### 	5) settings按钮具备显示信息的控制功能，其里面有八个选择项
 
@@ -315,7 +315,7 @@
 >1. `Preserve log`:默认是不勾选的，所以当刷新页面时，Console 中的信息会被清空掉。如果勾选了的话，那么刷新页面之后，信息还会被保留。
 >2. 其他的我不常用谢谢
 >
->![image-20210609193539202](ChromeDevTools使用详解笔记中的图片/image-20210609193539202.png)
+>![image-20210609193539202](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609193539202.png)
 
 #### Ⅲ- Console 能干什么事
 
@@ -334,25 +334,25 @@
 >- $()：是 `document.querySelector()` 的缩写
 >- $$()：是 `document.querySelectorAll()` 的缩写
 >- $x()：通过 XPath 的方式查看元素，注意是 "XPath" 中的 "x"，而不是 `+-*/` 中的 `*`
->- 示例图![image-20210609194732798](ChromeDevTools使用详解笔记中的图片/image-20210609194732798.png)
+>- 示例图![image-20210609194732798](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609194732798.png)
 
 ###### ② *inspect*
 
 >在 Console 中输入 `inspect()` 参数是 DOM 元素或者 JS 引用，可以跳转到 Elements 面板并且定位到你选择的那个 DOM 节点那。
 >
->![image-20210609201540829](ChromeDevTools使用详解笔记中的图片/image-20210609201540829.png)
+>![image-20210609201540829](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609201540829.png)
 
 ###### 	③ **$0-4*
 
 >$0， $1...$4，代表 5 个最近访问过的 DOM 或者堆对象（Heap Object），$0 是最近访问的。那访问的意思是什么？就是在 Elements 面板被审查或者在 Memory 面板被选择的 DOM 元素或者堆对象
 >
->![image-20210609201830754](ChromeDevTools使用详解笔记中的图片/image-20210609201830754.png)
+>![image-20210609201830754](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609201830754.png)
 
 ###### 	④ *$_*
 
 >`$_` 返回上一次表达式执行的结果。举个栗子：
 >
->![image-20210609202055771](ChromeDevTools使用详解笔记中的图片/image-20210609202055771.png) 
+>![image-20210609202055771](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609202055771.png) 
 
 ###### 	⑤ *Event*
 
@@ -364,7 +364,7 @@
 >
 >- `getEventListeners(DOM_element)`，查看某个 DOM 元素绑定了哪些事件
 >
->  ![image-20210609202813407](ChromeDevTools使用详解笔记中的图片/image-20210609202813407.png)
+>  ![image-20210609202813407](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609202813407.png)
 >
 >  在上面例子中,我为`<p>本人是2021届毕业生</p>`注册了一个点击事件并解绑
 
@@ -372,7 +372,7 @@
 
 >在 Console 中调用 debug() 方法，当调用这个方法的时候，就会开启 debug 模式。用 `undebug` 方法来关闭。
 >
->![image-20210609203225834](ChromeDevTools使用详解笔记中的图片/image-20210609203225834.png)
+>![image-20210609203225834](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609203225834.png)
 
 ###### 	⑥ *monitor(function) 与 unmonitor(function)*
 
@@ -404,7 +404,7 @@
 
 #### Ⅰ- Sources 面板图解
 
->![image-20210610162606051](ChromeDevTools使用详解笔记中的图片/image-20210610162606051.png)
+>![image-20210610162606051](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610162606051.png)
 
 #### Ⅱ- 左侧面板详解
 
@@ -416,13 +416,13 @@
 
 >浏览器扩展工具的脚本，比如我安装了`Vue.js devtools`、`React Developer Tools`、[`PostWoman接口调试工具(挺好用的,点我传送)`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7Mark.md/#6、Postwoman(ApiDebug)%20http接口测试工具)等插件都会显示出来
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210610165221422.png" alt="image-20210610165221422" style="zoom:80%;" /> 
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610165221422.png" alt="image-20210610165221422" style="zoom:80%;" /> 
 
 ##### 	3) `Snippets`
 
 >代码片段，可以在这里添加一小段程序，这个一小段程序`可以访问这个页面中的变量和函数等`。不会因为刷新丢失，使用：添加=>保存(ctrl+s)=>运行(`Run`)=>不用则移除(`Remove`)
 >
->![image-20210610170040085](ChromeDevTools使用详解笔记中的图片/image-20210610170040085.png)
+>![image-20210610170040085](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610170040085.png)
 
 ##### 	4) `Filesystem&Overrides`
 
@@ -434,15 +434,15 @@
 
 > 1. 断点:代码行号所在的位置叫做行号槽，点击行号槽，为相应的行添加断点，并在相应的行号上面加上一个类似肩章的五边形图标(蓝色的)。
 >
->    ![image-20210610173049623](ChromeDevTools使用详解笔记中的图片/image-20210610173049623.png) 
+>    ![image-20210610173049623](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610173049623.png) 
 >
 > 2. 条件断点:右键一个没有添加断点的行号，选择 "Add conditional breakpoint"或者 右键行号选择`Edit已有断点`输入你的条件，当条件满足时，断点才会生效。回车后效果如下
 >
->    ![image-20210610173249169](ChromeDevTools使用详解笔记中的图片/image-20210610173249169.png) 
+>    ![image-20210610173249169](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610173249169.png) 
 >
 > 3. 行内断点:当你将代码打在某些js语句上是,与上述例子不同的是同一行出现了 3 处标红的位置(也可能是2行,这得看你标注的代码具体情况)，表示 3 处断点。但第1个断点跟后2个不一样的是，第1个断点是默认处于激活状态，而后2个则不是，`只有点击激活后才能生效`
 >
->    ![image-20210610174041549](ChromeDevTools使用详解笔记中的图片/image-20210610174041549.png)
+>    ![image-20210610174041549](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610174041549.png)
 
 ##### 	2) `右键行号` 及 `右键断点`
 
@@ -475,7 +475,7 @@
 >
 >   >注意：有的数字行是灰色的，就是不可断点。有时候点击15行断点选中14行，这是因为浏览器真正执行的代码行不是你看到的那一行，可能是优化掉了或者经过某种转换。
 >
->2. 还有一种情况是:添加某一行断点，会跳转到另一个页面并命中某一行,这个页面的背景色是黄色且文件名是VM开头。上述情况，大部分都是因为浏览器显示的源码版本，跟真正的源码文件不一致，只需要刷新一下页面，保证显示的源码是最新的即可。![image-20210616161922254](ChromeDevTools使用详解笔记中的图片/image-20210616161922254.png) 
+>2. 还有一种情况是:添加某一行断点，会跳转到另一个页面并命中某一行,这个页面的背景色是黄色且文件名是VM开头。上述情况，大部分都是因为浏览器显示的源码版本，跟真正的源码文件不一致，只需要刷新一下页面，保证显示的源码是最新的即可。![image-20210616161922254](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616161922254.png) 
 
 ##### 4) 打断点小技巧
 
@@ -483,7 +483,7 @@
 
 >***时候源码历经千辛万苦都找不到在哪，这时候就需要祭出console.log了。在需要调试的那一行代码前加上console.log(666),然后运行一次，到控制台查看结果输出，点击右边的链接会自动跳转到源码，这样就可以直接断点了。\***
 >
->![image-20210616162044585](ChromeDevTools使用详解笔记中的图片/image-20210616162044585.png) 
+>![image-20210616162044585](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616162044585.png) 
 
 ###### ② *小技巧2*
 
@@ -491,21 +491,21 @@
 >
 >***如下图，在Filesystem添加文件夹到工作路径，选择之后会有提示，点击接受。如果你的谷歌浏览器没有这玩意，请升级版本，还是没有的话，请忽略这段话。虽然不知道这是什么时候出的功能，但是我偶然发现的，它可以编辑之后真的保存到文件，这个可以当编辑器用了。\***
 >
->![image-20210616162309551](ChromeDevTools使用详解笔记中的图片/image-20210616162309551.png) 
+>![image-20210616162309551](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616162309551.png) 
 
 
 
 #### Ⅳ- 右侧断点调试按钮组详解
 
 > 首先我们先介绍右侧功能按钮组的各个作用
-> ![image-20210610175433702](ChromeDevTools使用详解笔记中的图片/image-20210610175433702.png)
+> ![image-20210610175433702](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610175433702.png)
 >
-> - ![sources-debug-btn-1.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-1.png)：当程序中断在断点处时，点击去往下一个断点
-> - ![sources-debug-btn-2.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-2.png)：当程序中断在断点处时，`长按上面的按钮出现此标志(还有一个方形按钮为中断)`，点击这个按钮可以在 0.5s 内忽略任何中断，当中断出现在循环内部时一般比较有用
-> - ![sources-debug-btn-3.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-3.png)：执行下一条语句.按正常步骤，应该会一行一行的执行相关代码，以便深入探索哪些代码影响着正在更新的变量。如果你的代码中调用了另一个函数，点击此按钮将不会进入该函数，而是直接略过，将焦点留在当前函数上
-> - ![sources-debug-btn-4.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-4.png)：当中断停留在一个函数调用处时，点击这个按钮会进入函数内部，而上面的按钮则会执行函数调用的下一句，不会进入函数内部
-> - ![sources-debug-btn-5.png](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-5.png)：当中断停留在函数内部时，点击这个按钮则会跳出函数内部，停留在函数调用的下一个语句
-> - ![img](ChromeDevTools使用详解笔记中的图片/sources-debug-btn-6.png)：在不取消断点标记的情况下，使得所有断点失效
+> - ![sources-debug-btn-1.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-1.png)：当程序中断在断点处时，点击去往下一个断点
+> - ![sources-debug-btn-2.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-2.png)：当程序中断在断点处时，`长按上面的按钮出现此标志(还有一个方形按钮为中断)`，点击这个按钮可以在 0.5s 内忽略任何中断，当中断出现在循环内部时一般比较有用
+> - ![sources-debug-btn-3.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-3.png)：执行下一条语句.按正常步骤，应该会一行一行的执行相关代码，以便深入探索哪些代码影响着正在更新的变量。如果你的代码中调用了另一个函数，点击此按钮将不会进入该函数，而是直接略过，将焦点留在当前函数上
+> - ![sources-debug-btn-4.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-4.png)：当中断停留在一个函数调用处时，点击这个按钮会进入函数内部，而上面的按钮则会执行函数调用的下一句，不会进入函数内部
+> - ![sources-debug-btn-5.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-5.png)：当中断停留在函数内部时，点击这个按钮则会跳出函数内部，停留在函数调用的下一个语句
+> - ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/sources-debug-btn-6.png)：在不取消断点标记的情况下，使得所有断点失效
 
 #### Ⅴ- 右侧面板详解
 
@@ -517,19 +517,19 @@
 >
 >示例图如下
 >
->![image-20210610182432191](ChromeDevTools使用详解笔记中的图片/image-20210610182432191.png)
+>![image-20210610182432191](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610182432191.png)
 
 ##### 	2) `BreakPoints `(断点列表)：
 
 >展示断点列表，将每个断点所在文件/行数/该行简略内容展示
 >
->![image-20210610182855822](ChromeDevTools使用详解笔记中的图片/image-20210610182855822.png)
+>![image-20210610182855822](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610182855822.png)
 
 ##### 	3) `Scope` (作用域):
 
 >Scope 面板显示了你当前断点所在函数所有属性的值。Scope 会显示2种类型的值： Script和 Global。如下图，当前作用域里的对象是本地参数Script
 >
->![image-20210610185055065](ChromeDevTools使用详解笔记中的图片/image-20210610185055065.png)
+>![image-20210610185055065](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610185055065.png)
 >
 >注:在网上查阅资料时很多都说`Scope 会显示三种类型的值： Local、Closure 和 Global`。但是本人没有,仍是推测版本问题,所以我仍是以本人所见为主,备注出此资料
 
@@ -543,7 +543,7 @@
 >
 >下方示例图为了不影响观看体验打码无用部分
 >
->![image-20210610191827642](ChromeDevTools使用详解笔记中的图片/image-20210610191827642.png)
+>![image-20210610191827642](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610191827642.png)
 
 ##### 	6) `DOM Breakpoints `(DOM断点列表)
 
@@ -553,7 +553,7 @@
 
 >打开这个列表，可以在监听事件并且在触发该事件时进入断点，调试器会停留在触发事件代码行。只需要展开事件列表，选择要监听的事件打上勾即可
 >
->举个栗子,勾选键盘按下事件:![image-20210610192527599](ChromeDevTools使用详解笔记中的图片/image-20210610192527599.png)
+>举个栗子,勾选键盘按下事件:![image-20210610192527599](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210610192527599.png)
 
 #### Ⅵ- 源码调试小贴士
 
@@ -572,21 +572,21 @@
 >
 >国际惯例,先看完整截图概览
 >
->![image-20210611163234495](ChromeDevTools使用详解笔记中的图片/image-20210611163234495.png)
+>![image-20210611163234495](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611163234495.png)
 
 #### Ⅰ- Control 面板
 
->![image-20210611163316092](ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
+>![image-20210611163316092](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
 >
 >> 
 
 ##### 	1) `开始/停止记录`
 
->**![network-3.png](ChromeDevTools使用详解笔记中的图片/network-3.png)** 表示正常记录网络的请求状况，点击，当图标变成 ![img](ChromeDevTools使用详解笔记中的图片/network-4.png) 时，代表停止记录请求状况,此时页面上不会对后续请求进行记录(保留点击前的记录)。
+>**![network-3.png](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-3.png)** 表示正常记录网络的请求状况，点击，当图标变成 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-4.png) 时，代表停止记录请求状况,此时页面上不会对后续请求进行记录(保留点击前的记录)。
 
 ##### 	2) `清除记录`
 
-> 点击 ![img](ChromeDevTools使用详解笔记中的图片/network-5.png) 可以清除请求表格内的内容。
+> 点击 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-5.png) 可以清除请求表格内的内容。
 
 ##### 	3) `截取加载的瞬间`
 
@@ -594,19 +594,19 @@
 >
 >1. 仍是推测为版本区别,此处给出网上对于其功能描述:
 >
->> 点击 ![img](ChromeDevTools使用详解笔记中的图片/network-6.png)，当图标变成 ![img](ChromeDevTools使用详解笔记中的图片/network-7.png) 时，代表开启截屏模式，即截取网页在加载过程中的瞬间，这些瞬间显示了网页在什么时间加载出了哪些部分。
+>> 点击 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-6.png)，当图标变成 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-7.png) 时，代表开启截屏模式，即截取网页在加载过程中的瞬间，这些瞬间显示了网页在什么时间加载出了哪些部分。
 >
 >2. 本人操作
 >
 >   >出现下面的结果(`放出本人示例图`)：
 >   >
->   >![image-20210611172334006](ChromeDevTools使用详解笔记中的图片/image-20210611172334006.png)
+>   >![image-20210611172334006](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611172334006.png)
 
 ##### 	4) `过滤`
 
->点击 ![img](ChromeDevTools使用详解笔记中的图片/network-10.png) 可以显示/隐藏过滤面板，如下：
+>点击 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/network-10.png) 可以显示/隐藏过滤面板，如下：
 >
->![image-20210611163316092](ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
+>![image-20210611163316092](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611163316092.png)
 >
 >1. 可以把过滤面板看成由三个部分组成的面板，从左到右分别是：过滤文本域、隐藏 Data URLs 和请求资源类型选择。
 >
@@ -623,7 +623,7 @@
 >
 >1. 首先，最简单的用法就是我们输入一个字符串，然后可以过滤出那些资源名称中包含相应字符串的资源。这是我们一般使用的，除此以外，文本域还支持一些关键词，举个栗子：
 >
->   ![image-20210611165236991](ChromeDevTools使用详解笔记中的图片/image-20210611165236991.png)
+>   ![image-20210611165236991](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611165236991.png)
 >
 >   上面的例子就用到了 `status-code` 关键词，后面跟的参数是状态码，可以刷选出 `状态码为304` 的请求
 >
@@ -650,7 +650,7 @@
 
 >第4个搜索图标，可以打开search面板。search与filter的区别在于，filter只能按照请求URL来筛选请求，但search可以搜索到请求和响应中的内容。“Aa”表示是否匹配大小写，“.*”表示根据某种格式匹配。
 >
->![image-20210611170207544](ChromeDevTools使用详解笔记中的图片/image-20210611170207544.png)
+>![image-20210611170207544](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611170207544.png)
 
 ##### 	6) `preserve log`
 
@@ -668,15 +668,15 @@
 >
 > 2. 除了在 Network 面板可以设置网络状况，还可以在 Drawer 中看见。具体有两种方法：
 >
->    1) ![img](ChromeDevTools使用详解笔记中的图片/toolbar-3.png)-> More tools -> Network conditions
+>    1) ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)-> More tools -> Network conditions
 >
->    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 ![img](ChromeDevTools使用详解笔记中的图片/toolbar-3.png)，点击，选择 Network conditions
+>    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)，点击，选择 Network conditions
 
 ##### 	9) `右侧设置图标`
 
 > 点击右侧设置图标后会出现几个选项
 >
-> ![image-20210611171729978](ChromeDevTools使用详解笔记中的图片/image-20210611171729978.png)
+> ![image-20210611171729978](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611171729978.png)
 
 
 
@@ -684,7 +684,7 @@
 
 >我一开始跟很多人一样，看到这个图时觉得头晕，感觉上是显示加载情况的，但又说不出具体什么意思，下面就跟大家一起了解一下这张图的含义。
 >
->![image-20210611172936963](ChromeDevTools使用详解笔记中的图片/image-20210611172936963.png)
+>![image-20210611172936963](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611172936963.png)
 >
 >首先从水平方向上从左看到右，你会看见：
 >
@@ -694,19 +694,19 @@
 >
 >- 有两条竖线：前面一条是蓝色，代表 DOMContentLoaded 事件被触发；后面一条是红色，代表 load 事件被触发。`从概览面板也能看到`这两个信息：
 >
->  ![image-20210611173031807](ChromeDevTools使用详解笔记中的图片/image-20210611173031807.png)
+>  ![image-20210611173031807](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611173031807.png)
 >
 >然后从垂直方向看，这些五彩斑斓的水平线有的有重叠有的没有重叠，具有重叠部分说明这些资源是在同一时间被加载的。
 >
 >`ps`:筛选不同时间的请求
 >
->![image-20210611173524970](ChromeDevTools使用详解笔记中的图片/image-20210611173524970.png)
+>![image-20210611173524970](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611173524970.png)
 
 
 
 #### Ⅲ- 概况面板
 
->![image-20210611174207620](ChromeDevTools使用详解笔记中的图片/image-20210611174207620.png)
+>![image-20210611174207620](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611174207620.png)
 >
 >网络面板的最下方，展示了整个页面的请求概况，下图可以看出，本人[`gitee`](https://gitee.com/hongjilin)首页共发起了57个请求，网络传输38.9KB，一共加载资源5.2MB，所有请求完成的时间是2.0min，DOM构建完成的时间是1.61s，所有外部资源加载完成的时间是2.00s。
 >
@@ -718,7 +718,7 @@
 
 >  使用Network面板最多的地方莫过于调试aJax请求了。点开一个请求，可以看到几个标签。
 >
->![image-20210611180024944](ChromeDevTools使用详解笔记中的图片/image-20210611180024944.png)
+>![image-20210611180024944](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611180024944.png)
 >
 >
 
@@ -732,19 +732,19 @@
 >
 > 可以看到其实数据是一样的,但是格式不同
 >
-> ![image-20210611180602561](ChromeDevTools使用详解笔记中的图片/image-20210611180602561.png) 
+> ![image-20210611180602561](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611180602561.png) 
 
 ##### 	3) `Timing`查看请求参数
 
 > Timing里面列举了一些请求的参数,也可以在请求列表的Waterfall中看到请求的参数。
 >
->![image-20210611180940478](ChromeDevTools使用详解笔记中的图片/image-20210611180940478.png)
+>![image-20210611180940478](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611180940478.png)
 >
 >应用场景: Queued表示队列时间，由于单个域名最多只能并发6个请求，所以不是所有的请求都是在页面初始就开始加载的。Started表示开始请求的时间。可以根据每个请求各阶段花费的时间来制定优化方案
 
 ##### 	4) 修改想展示的请求列表参数
 
-> ![image-20210611181859716](ChromeDevTools使用详解笔记中的图片/image-20210611181859716.png)
+> ![image-20210611181859716](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611181859716.png)
 
 
 
@@ -754,7 +754,7 @@
 >
 > 可以通过单击、鼠标滚动或者拖动来选中FPS,CPU或NET图标中的一部分，Main部分和Summary Tab就会只显示选中部分的录制信息
 >
-> ![image-20210611184508312](ChromeDevTools使用详解笔记中的图片/image-20210611184508312.png) 
+> ![image-20210611184508312](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611184508312.png) 
 
 ##### 	1) performance面板的四个窗格
 
@@ -850,7 +850,7 @@
 
 >这里最主要是整体的界面渲染的时候，每个时间段执行的事件顺序，我们就能知道我们每个时间段（精确到毫秒）都做了什么，当鼠标放上去的时候，我们还可以`大图的形式`去查看我们每个时间段界面的渲染情况,下面上`概览详解图`:
 >
->![image-20210615115259924](ChromeDevTools使用详解笔记中的图片/image-20210615115259924.png)
+>![image-20210615115259924](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615115259924.png)
 >
 >**`注意`：**无论鼠标移动到FPS,CPU或者NET图表上，DevTools都会显示在该时间节点上的屏幕截图，将你的鼠标左右移动，可以重放录制画面，这被称为擦洗。
 
@@ -905,7 +905,7 @@
 
 >可以通过单击、鼠标滚动或者拖动来选中FPS,CPU或NET图标中的一部分，Main部分和Summary Tab就会只显示选中部分的录制信息
 >
->![image-20210615120142567](ChromeDevTools使用详解笔记中的图片/image-20210615120142567.png)
+>![image-20210615120142567](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615120142567.png)
 
 ###### ① *Network*
 
@@ -915,7 +915,7 @@
 
 > **Frames:** 表示每幅帧的运行情况 -- 帧线程，鼠标悬浮绿色块可以看到fps
 >
-> ![image-20210615150445469](ChromeDevTools使用详解笔记中的图片/image-20210615150445469.png)
+> ![image-20210615150445469](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615150445469.png)
 >
 > 在这个例子中，页面的性能能很明显地被观察到，但是在实际场景中，可能并不是那么的容易，所以，要用所有这些工具来进行综合测量。
 >
@@ -923,7 +923,7 @@
 
 ###### ③ *Timings*
 
->**![image-20210615134012715](ChromeDevTools使用详解笔记中的图片/image-20210615134012715.png)**
+>**![image-20210615134012715](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615134012715.png)**
 >
 >上图中有 4 条虚线，分别表示如下：
 >
@@ -946,7 +946,7 @@
 
 ###### ④ *Main*
 
->![image-20210615135441425](ChromeDevTools使用详解笔记中的图片/image-20210615135441425.png)
+>![image-20210615135441425](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615135441425.png)
 >
 >**Main: **主线程，负责执行Javascript, 解析HTML/CSS, 完成绘制。可以看到主线程调用栈和耗时情况，每个长条都是一个事件，悬浮可以看到耗时和事件名  --`PS`:
 >
@@ -956,11 +956,11 @@
 >
 >3. 各个事件类型(该图取自[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda)博客)   如果要看其中具体事件请看上方`颜色中具体事件分类表格` ->[`点我传送`](#③ *颜色中具体事件分类表格列举*)
 >
->   ![image-20210615140212535](ChromeDevTools使用详解笔记中的图片/image-20210615140212535.png) 
+>   ![image-20210615140212535](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615140212535.png) 
 >
 >4. 可以看到某些事件右上角的`红色三角形图标`，该红色三角图标是这个事件可能有问题的警告,或者耗时过长(通常超过50ms)。如果是函数事件,那么就会显示导致问题的代码行号
 >
->  ![image-20210615142115728](ChromeDevTools使用详解笔记中的图片/image-20210615142115728.png)
+>  ![image-20210615142115728](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615142115728.png)
 >
 >5. **主要负责：**
 >
@@ -1002,7 +1002,7 @@
 
 ###### ① *Summary面板--统计报表*
 
->![image-20210615152555782](ChromeDevTools使用详解笔记中的图片/image-20210615152555782.png)
+>![image-20210615152555782](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615152555782.png)
 
 ###### ② *Bottom-Up面板--事件时长排序列表*  
 
@@ -1010,7 +1010,7 @@
 >
 >ps:排列顺序为时间`倒序`
 >
->![image-20210615152821510](ChromeDevTools使用详解笔记中的图片/image-20210615152821510.png)
+>![image-20210615152821510](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615152821510.png)
 
 ###### ③ *Call Tree面板--表示事件调用顺序列表*  
 
@@ -1024,7 +1024,7 @@
 
 > Memory(Profiles)用来更深入的分析性能问题、内存问题。之前介绍的Performance(Timeline)可以直观的发现问题所在，但是要深入分析，定位问题原因，还得靠Memory。  --`一般初学者不会用到,同学们可以选择性学习`
 >
-> ![image-20210615161608657](ChromeDevTools使用详解笔记中的图片/image-20210615161608657.png)
+> ![image-20210615161608657](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615161608657.png)
 >
 > **使用方式与注意点**:
 >
@@ -1037,7 +1037,7 @@
 
 ###### ① ***Summary总览视图***
 
->![image-20210615163751810](ChromeDevTools使用详解笔记中的图片/image-20210615163751810.png)
+>![image-20210615163751810](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615163751810.png)
 >
 >- Constructor：构造函数，节点下的对象都是由改构造函数创建而来。
 >- Distance：与根节点的距离。
@@ -1056,13 +1056,13 @@
 >
 >比如你觉得登陆页面内存泄露，那可以先登陆到首页，拍第一个堆快照。然后退出到登陆界面，再重新登陆到首页，录制第二个快照。比对这两个快照的大小，如果增长有可能是泄露，可以反复操作几次。`记得每次录制之前要先点击垃圾回收`。
 >
->![image-20210615170250587](ChromeDevTools使用详解笔记中的图片/image-20210615170250587.png)
+>![image-20210615170250587](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615170250587.png)
 
 ##### 2) **`Allocation instrumentation on timeline` (JS堆分配时间线)**
 
 > 通过`Allocation instrumentation on timeline`可以持续的记录堆分配的情况，显示了对象在什么时候被创建、什么时候存在内存泄漏等
 >
->![image-20210615172515242](ChromeDevTools使用详解笔记中的图片/image-20210615172515242.png)
+>![image-20210615172515242](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615172515242.png)
 >
 >上面的柱条表示堆中生成的新对象。高度表示这个对象的大小，颜色表示这个对象的内存释放情况：蓝色柱表示这个对象在timeline中生成，结束前仍然存在；灰色柱表示这个对象在timeline中生成，但结束前已经被回收了。
 >我们可以重复执行某个动作，如果最后有不少蓝色柱被保留，这些蓝色柱就是潜在的内存泄露问题。
@@ -1113,7 +1113,7 @@
 
 >Service Workers 是独立于当前页面的一段运行在浏览器后台进程里的脚本，由于运行在 worker 上下文，因此它不能访问 DOM，不过可以做一些简单的辅助性逻辑处理和离线缓存等。兼容性的话...除了 IE 都还行。
 >
->![image-20210615183528843](ChromeDevTools使用详解笔记中的图片/image-20210615183528843.png)
+>![image-20210615183528843](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615183528843.png)
 
 #### 3) Cache Storage
 
@@ -1121,7 +1121,7 @@
 >
 >该图例来自知乎的[QAQ-YS](https://www.zhihu.com/people/qaq-ys)--(本人没找到合适的项目例子)
 >
->![image-20210615184539565](ChromeDevTools使用详解笔记中的图片/image-20210615184539565.png)
+>![image-20210615184539565](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615184539565.png)
 
 #### 4) Background Services
 
@@ -1129,7 +1129,7 @@
 >
 >该图例来自知乎的[QAQ-YS](https://www.zhihu.com/people/qaq-ys)--(本人没找到合适的项目例子)
 >
->![image-20210615184516959](ChromeDevTools使用详解笔记中的图片/image-20210615184516959.png)
+>![image-20210615184516959](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615184516959.png)
 >
 >列表的内容是`只读`的。图中可以看到，一次 fetch、sync 的各个阶段状态转变都会被记录
 
@@ -1137,7 +1137,7 @@
 
 > 该面板主要用于展示当前浏览器存储信息的一个总览清除各种缓存(可自行勾选所需清理的内容)
 >
-> ![image-20210615184850613](ChromeDevTools使用详解笔记中的图片/image-20210615184850613.png)
+> ![image-20210615184850613](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615184850613.png)
 >
 > 图中可以看到，可清理的有：
 >
@@ -1153,7 +1153,7 @@
 
 >1. 他们两都属于 Web Storage，且兼容比较好。两者大致区别是：localStorage 的生命周期是需要人为干涉的，sessionStorage 的生命周期是一次会话窗口,且存储大小不相同
 >
->2. Local Storage 面板和 Seesion Storage 面板显示的是浏览器的 localStorage/sessionStorage 键值对(KVP)数据(该数据大小在 2~5MB 之间，各浏览器，各平台不同)，在这个面板中。你可以执行查看值、双击空行新增 KVP、双击 KVP 对齐进行修改、删除 KVP 等操作![image-20210615185642222](ChromeDevTools使用详解笔记中的图片/image-20210615185642222.png)
+>2. Local Storage 面板和 Seesion Storage 面板显示的是浏览器的 localStorage/sessionStorage 键值对(KVP)数据(该数据大小在 2~5MB 之间，各浏览器，各平台不同)，在这个面板中。你可以执行查看值、双击空行新增 KVP、双击 KVP 对齐进行修改、删除 KVP 等操作![image-20210615185642222](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615185642222.png)
 >3. 常见代码中存取操作
 >
 >```js
@@ -1177,13 +1177,13 @@
 >
 >- 3. 当前的 cookies 值是可以通过 js 代码获取和修改的，也可以直接修改。如果不希望 js 可以操控该条 cookies，则需要在 Set-Cookies 时加上`httpOnly`字段。
 >
->  ![image-20210615190236366](ChromeDevTools使用详解笔记中的图片/image-20210615190236366.png)
+>  ![image-20210615190236366](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615190236366.png)
 
 #### 9) Frames
 
 >该面板显示了该网站所有内容资源。效果如图
 >
->![image-20210615190437320](ChromeDevTools使用详解笔记中的图片/image-20210615190437320.png)
+>![image-20210615190437320](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615190437320.png)
 >
 >`注意`:iframe 的内容不能预览，如果页面带`x-frame-options=SAMEORIGIN`，则其他域名网站就无法嵌入了。
 
@@ -1200,17 +1200,17 @@
 >
 >你看到的第一件事是Security Overview(安全概述)。一目了然,会显示是否安全(示例中为安全的)
 >
-> ![image-20210615193229553](ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
+> ![image-20210615193229553](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
 
 ##### ① *安全的源*
 
 >Security Overview(安全概述)会告诉您的页面是否安全。安全的页面会显示信息：`This page is secure (valid HTTPS)`.点击 View certificate 按钮可以查看[main origin](https://en.wikipedia.org/wiki/Same-origin_policy)的服务器证书
 >
->![image-20210615193229553](ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
+>![image-20210615193229553](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615193229553.png)
 
 ##### ② *不安全的源*
 
->不安全的网页会显示信息： This page is not secure.![image-20210615193340090](ChromeDevTools使用详解笔记中的图片/image-20210615193340090.png)
+>不安全的网页会显示信息： This page is not secure.![image-20210615193340090](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615193340090.png)
 >
 >1. Security面板识别两种类型的不安全网页
 >
@@ -1221,7 +1221,7 @@
 >
 >   - 点击View request in Network Panel(在网络面板中单击查看请求)可以打开 Network(网络)面板的过滤视图,并准确地查看通过HTTP协议提供的请求。这里显示所有来自未受保护的源的所有请求。
 >
->     ![image-20210615193847645](ChromeDevTools使用详解笔记中的图片/image-20210615193847645.png)
+>     ![image-20210615193847645](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615193847645.png)
 >
 >   
 
@@ -1242,7 +1242,7 @@
 >
 >- Audits主要从5个方面来给网页打分，最终会生成一个report
 >
->  ![image-20210615200749360](ChromeDevTools使用详解笔记中的图片/image-20210615200749360.png)
+>  ![image-20210615200749360](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615200749360.png)
 
 #### 1) Performance 性能
 
@@ -1252,7 +1252,7 @@
 >
 >在这里强烈推荐大家点击每个指标后面的**`Learn More`**，来查看详细的指标介绍
 >
->![image-20210615201555991](ChromeDevTools使用详解笔记中的图片/image-20210615201555991.png)
+>![image-20210615201555991](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615201555991.png)
 >
 >1. 首次有效绘制:
 >
@@ -1300,7 +1300,7 @@
 
 ##### ② *Opportunities 可优化项*
 
->![image-20210615202558923](ChromeDevTools使用详解笔记中的图片/image-20210615202558923.png)
+>![image-20210615202558923](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615202558923.png)
 >
 > 
 >
@@ -1312,7 +1312,7 @@
 
 ##### ③ *Diagnostics (手动诊断项目)*
 
->这些项目表示LightHouse并不能替你决定当前是好是坏，但是把详情列出来，由你手动排查每个项目的情况:![image-20210615202659065](ChromeDevTools使用详解笔记中的图片/image-20210615202659065.png)
+>这些项目表示LightHouse并不能替你决定当前是好是坏，但是把详情列出来，由你手动排查每个项目的情况:![image-20210615202659065](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615202659065.png)
 >
 >就如同截图中所说:
 >
@@ -1325,7 +1325,7 @@
 
 >顾名思义这里列出的都是你做的好的地方
 >
->![image-20210615203233819](ChromeDevTools使用详解笔记中的图片/image-20210615203233819.png)
+>![image-20210615203233819](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615203233819.png)
 
 #### 2) Accessibility辅助功能
 
@@ -1337,19 +1337,19 @@
 
 >本项指标是指LightHouse用业界公认的几项最佳实践来评估站点，然后看你有几项没有做到，几项做到了
 >
->![image-20210615203646680](ChromeDevTools使用详解笔记中的图片/image-20210615203646680.png)
+>![image-20210615203646680](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615203646680.png)
 
 #### 4) SEO 搜索引擎优化
 
 >检查目的很明确，就是优化搜索引擎索引,这里`gitee`是做的真好
 >
->![image-20210615203741846](ChromeDevTools使用详解笔记中的图片/image-20210615203741846.png)
+>![image-20210615203741846](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615203741846.png)
 
 #### 5) PWA
 
 >这一项很容易理解，其实就是检查网页对于PWA的兼容性,想详细了解的点进去里面的`showmore`了解详情,此处不详解
 >
->![image-20210615204048272](ChromeDevTools使用详解笔记中的图片/image-20210615204048272.png) 
+>![image-20210615204048272](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615204048272.png) 
 
 ------
 
@@ -1368,14 +1368,14 @@
 
 >1. 按Shift + Esc打开任务管理器。或点击右上角菜单--更多工具---任务管理器。
 >
->2. 主要关注`内存占用空间`、`Javascript使用的内存`。Javascript使用的内存默认不显示，可以点击右键添加![image-20210615175926101](ChromeDevTools使用详解笔记中的图片/image-20210615175926101.png)
+>2. 主要关注`内存占用空间`、`Javascript使用的内存`。Javascript使用的内存默认不显示，可以点击右键添加![image-20210615175926101](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615175926101.png)
 >
 >3. 这两列是在用不同角度来告诉你，网页的内存使用情况︰
 >
 >   - 内存占用空间表示本机内存。DOM节点存储在本机内存中。如果这个值在增加，则说明正在创建DOM节点。
 >   - JavaScript 使用的内存列 表示JS堆。这一列包含两个值。关注实际使用大小即可（括号中的数字）。跳动的数字表示您网页上的可获得的对象正在使用多少内存。如果这个数字在增加，那说明正在创建新对象，或现有对象正在增长。
 >
->   ![image-20210615180249274](ChromeDevTools使用详解笔记中的图片/image-20210615180249274.png) 
+>   ![image-20210615180249274](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615180249274.png) 
 >
 >4. 如何判断?
 >
@@ -1444,11 +1444,11 @@
 >
 >`console.table` 函数也是我最喜欢的工具之一。当你有大量的数据（例如很长的数组、巨大的对象等等）需要展示的时候，它特别有用。
 >
->![image-20210616154005161](ChromeDevTools使用详解笔记中的图片/image-20210616154005161.png) 
+>![image-20210616154005161](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616154005161.png) 
 >
 >`console.dir` 函数也是个不错的选择。它可以把一个对象的属性以可交互的形式展示出来。
 >
->![image-20210616153809768](ChromeDevTools使用详解笔记中的图片/image-20210616153809768.png) 
+>![image-20210616153809768](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616153809768.png) 
 
 #### Ⅱ- 保持条理清晰
 
@@ -1518,7 +1518,7 @@
 >
 >此方法可以用在很多地方而不仅仅是调试样式,包括js都可以
 >
->![debugger](ChromeDevTools使用详解笔记中的图片/debugger.gif) 
+>![debugger](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/debugger.gif) 
 >
 >`ps`:该动图来自[Chris Coyier的Set a Timed Debugger To Web Inspect Hard-To-Grab Elements文章中](https://css-tricks.com/set-timed-debugger-web-inspect-hard-grab-elements/) 
 
@@ -1568,7 +1568,7 @@
 >
 >3. 上面两种方式不仅可以打开 DevTools，还可以关闭 DevTools。当然，还有一种方式可以打开 DevTools。
 >
->- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](ChromeDevTools使用详解笔记中的图片/20180319215106122))
+>- `Ctrl + Shift + C / Cmd + Opt + C`，打开 DevTools，并且开启审查元素模式（相当于点击了 DevTools 左上角的图标： ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/20180319215106122))
 
 ### 2、刷新页面与强制刷新
 
@@ -1586,14 +1586,14 @@
 >`Ctrl+Shift+M`切换设备 或者直接点击机身图标
 >
 >具体操作如下:
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210608153745991.png" alt="image-20210608153745991" style="zoom: 80%;" />
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608153745991.png" alt="image-20210608153745991" style="zoom: 80%;" />
 
 ### 5、禁用缓存
 
 >1. 应用场景:如有时要多次查看第一次进入该网页时加载的资源时会用到,防止有的数据走缓存导致下次刷新查看不到
 >2. 操作:切换到“Network”网络面板,勾选“Disable cache”项
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210608154516531.png" alt="image-20210608154516531" style="zoom:80%;" />
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608154516531.png" alt="image-20210608154516531" style="zoom:80%;" />
 
 ### 6、手动清理网站缓存
 
@@ -1607,7 +1607,7 @@
 >
 >3. 效果图
 >
->   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608155141634.png" alt="image-20210608155141634" style="zoom:80%;" />
+>   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608155141634.png" alt="image-20210608155141634" style="zoom:80%;" />
 
 ### 7、强制设置元素的状态
 
@@ -1621,7 +1621,7 @@
 >
 >   3) 勾选要设置的状态,那么页面该元素就会呈现该选中状态下的样式
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608161110741.png" alt="image-20210608161110741" style="zoom:80%;" />
 
 ### 8、查找某元素绑定的事件
 
@@ -1641,7 +1641,7 @@
 >
 >3. 示例图
 >
->   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
+>   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608162406603.png" alt="image-20210608162406603" style="zoom: 67%;" />
 
 ### 9、打开某个资源文件及定位源代码行数
 
@@ -1649,7 +1649,7 @@
 >
 >   1) 按 command p (windows 按 Ctrl p),弹出文件搜索框,输入文件名回车即可定位
 >
->   2) 效果图<img src="ChromeDevTools使用详解笔记中的图片/image-20210608163035973.png" alt="image-20210608163035973" style="zoom:80%;" />
+>   2) 效果图<img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608163035973.png" alt="image-20210608163035973" style="zoom:80%;" />
 >
 >2. 快速定位源代码行数
 >
@@ -1657,13 +1657,13 @@
 >
 >   2) 输入 :行数,如 “:480”,回车即可
 >
->   3) 效果图:![image-20210608163332015](ChromeDevTools使用详解笔记中的图片/image-20210608163332015.png)
+>   3) 效果图:![image-20210608163332015](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608163332015.png)
 
 ### 10、格式化代码
 
 >1. 应用场景:当你打开的源码是压缩过或者格式很乱的,影响阅读时可以使用
 >2. 操作:点击已打开文件的`左下角花括号`
->3. 效果图:![image-20210608164044091](ChromeDevTools使用详解笔记中的图片/image-20210608164044091.png)
+>3. 效果图:![image-20210608164044091](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608164044091.png)
 
 ### 11、查找加载图片的代码-(其他资源同理)
 
@@ -1675,7 +1675,7 @@
 >
 >   2) 点击 “Initiator” 列下的文件名即会跳转至代码处
 >
->3. 效果图![image-20210608165025868](ChromeDevTools使用详解笔记中的图片/image-20210608165025868.png)
+>3. 效果图![image-20210608165025868](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608165025868.png)
 
 ### 12、全局查询请求头和响应体
 
@@ -1693,7 +1693,7 @@
 >
 >3. 效果图
 >
->   ![image-20210608165747119](ChromeDevTools使用详解笔记中的图片/image-20210608165747119.png)
+>   ![image-20210608165747119](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608165747119.png)
 >
 >
 
@@ -1707,7 +1707,7 @@
 >
 >   2) 效果图
 >
->   <img src="ChromeDevTools使用详解笔记中的图片/image-20210608171012060.png" alt="image-20210608171012060" style="zoom: 67%;" />
+>   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608171012060.png" alt="image-20210608171012060" style="zoom: 67%;" />
 >
 >3. 限制网速操作:
 >
@@ -1719,7 +1719,7 @@
 >
 >   4) 效果图:第一步操作同上切换网络操作
 >
->   ![image-20210608184929873](ChromeDevTools使用详解笔记中的图片/image-20210608184929873.png)
+>   ![image-20210608184929873](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608184929873.png)
 
 ### 14、在Console控制台查找DOM及多行输入
 
@@ -1751,7 +1751,7 @@
 >
 >3. 示例图:
 >
->   <img src="ChromeDevTools使用详解笔记中的图片/image-20210609114057156.png" alt="image-20210609114057156" style="zoom:67%;" />
+>   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609114057156.png" alt="image-20210609114057156" style="zoom:67%;" />
 
 #### Ⅱ-打断点时候的任意一个局部变量
 
@@ -1765,13 +1765,13 @@
 >
 >3. 示例图
 >
->  ![image-20210609120022864](ChromeDevTools使用详解笔记中的图片/image-20210609120022864.png)
+>  ![image-20210609120022864](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609120022864.png)
 
 #### Ⅲ-消息的响应体预览界面
 
 >1. 应用场景:通常就是保留下某些请求变量用作对比罢了,方便开发
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" /> 
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609140306767.png" alt="image-20210609140306767" style="zoom: 67%;" /> 
 
 #### Ⅳ-保存控制台输出内容
 
@@ -1785,7 +1785,7 @@
 >
 >3. 示例图:
 >
->   ![image-20210609141027576](ChromeDevTools使用详解笔记中的图片/image-20210609141027576.png)
+>   ![image-20210609141027576](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609141027576.png)
 
 ### 16、截图操作
 
@@ -1800,14 +1800,14 @@
 >- Capture node screenshot：截取某个标签节点
 >- Capture screenshot：截取当前可视区域
 >
->![image-20210609141545657](ChromeDevTools使用详解笔记中的图片/image-20210609141545657.png)
+>![image-20210609141545657](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609141545657.png)
 
 ### 17、打开控制台抽屉
 
 >1. 应用场景:当你在如Network、elements界面要用要console控制台时,就如我上面的例子截图,
 >2. 下面举例在`Elements`面板打开抽屉
 >
-><img src="ChromeDevTools使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" /> 
+><img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609143711131.png" alt="image-20210609143711131" style="zoom:67%;" /> 
 >
 >3. 更简单的:直接点击`esc`就可以在别的地方打开
 >
@@ -1817,7 +1817,7 @@
 
 >在与后端联调过程中，若需要重新发起请求，除了刷新页面或重新触发请求事件外，还可以使用更简单的方式。右击需要重新发起的请求，选择Replay XHR，就可以重新发起请求了
 >
->![image-20210611181403919](ChromeDevTools使用详解笔记中的图片/image-20210611181403919.png)
+>![image-20210611181403919](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611181403919.png)
 
 
 

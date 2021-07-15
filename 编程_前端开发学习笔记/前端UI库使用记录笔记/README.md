@@ -755,22 +755,24 @@
 >
 >2. 代码实现与截图
 >
->  ```tsx
->    -----------------封装与调用--------------------------
->   工具函数抽出:
->    /**
->     * 通用对比法
->     * @param a 包含要对比属性的对象a
->     * @param b 包含要对比属性的对象b
->     *  @param type 作为排序依据的属性名字
->     * @returns boolean
->     */
->    commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]
+> ```tsx
+>   -----------------封装与调用--------------------------
+>  工具函数抽出:
+>   /**
+>    * 通用对比法
+>    * @param a 包含要对比属性的对象a
+>    * @param b 包含要对比属性的对象b
+>    *  @param type 作为排序依据的属性名字
+>    * @returns boolean
+>    */
+>   commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]
 >
->  sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
->  ```
+> sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
+> ```
 >
->  ![image-20210702110850176](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210702110850176.png)
+>![image-20210715153029004](AntDesign使用笔记/AntDesign_ofReact使用笔记中的图片/image-20210715153029004.png)
+>
+>`注意`:排序返回应为`正负数[如1、-1]`而不是`boolean`类型
 
 
 

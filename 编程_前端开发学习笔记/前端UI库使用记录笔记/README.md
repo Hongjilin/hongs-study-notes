@@ -765,7 +765,7 @@
 >    *  @param type 作为排序依据的属性名字
 >    * @returns boolean
 >    */
->   commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]
+>   commonSorter = (a:object, b:object):Function=> (type):number  => a[type] > b[type] ? 1 : -1
 >
 > sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
 > ```

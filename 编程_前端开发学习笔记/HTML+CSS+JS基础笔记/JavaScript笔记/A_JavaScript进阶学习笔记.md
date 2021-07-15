@@ -591,8 +591,8 @@
 #### ②*构造函数/原型/实例对象的关系(图解)*
 
 >1. ```js
->   var o1 = new Object();
->   var o2 = {};
+>     var o1 = new Object();
+>     var o2 = {};
 >   ```
 >
 >   ![image-20210714212928432](A_JavaScript进阶学习笔记中的图片/image-20210714212928432.png) 
@@ -605,13 +605,72 @@
 >
 >    ps:所有函数的[`__ proto __`]都是一样的
 
+#### ③ *属性问题*
 
+>- 读取对象的属性值时: 会自动到原型链中查找
+>
+>- 设置对象的属性值时: 不会查找原型链, 如果当前对象中没有此属性, 直接添加此属性并设置其值
+>
+>- 方法一般定义在原型中, 属性一般通过构造函数定义在对象本身上
+>
+>- 代码示例
+>
+>  ```js
+>    function Fn() { }
+>    Fn.prototype.a = 'xxx'
+>    var fn1 = new Fn()
+>    console.log(fn1.a, fn1) //xxx Fn{}
+>  
+>    var fn2 = new Fn()
+>    fn2.a = 'yyy'
+>    console.log(fn1.a, fn2.a, fn2) //xxx yyy  Fn{a: "yyy"}
+>  
+>    function Person(name, age) {
+>      this.name = name
+>      this.age = age
+>    }
+>    Person.prototype.setName = function (name) {
+>      this.name = name
+>    }
+>    var p1 = new Person('Tom', 12)
+>    p1.setName('Bob')
+>    console.log(p1)  //Person {name: "Bob", age: 12}
+>  
+>    var p2 = new Person('Jack', 12)
+>    p2.setName('Cat')
+>    console.log(p2) //Person {name: "Cat", age: 12}
+>    console.log(p1.__proto__===p2.__proto__) // true   -->所以方法一般定义在原型中
+>  ```
 
+### Ⅳ-instanceof
 
-
-
-
-
+>1. instanceof是如何判断的?
+>  * 表达式: A instanceof B
+>  * 如果B函数的显式原型对象在A对象的原型链上, 返回true, 否则返回false
+>2. Function是通过new自己产生的实例
+>
+>```js
+>  /*
+>  案例1
+>   */
+>  function Foo() {  }
+>  var f1 = new Foo()
+>  console.log(f1 instanceof Foo) // true
+>  console.log(f1 instanceof Object) // true
+>
+>  /*
+>  案例2
+>   */
+>  console.log(Object instanceof Function) // true
+>  console.log(Object instanceof Object) // true
+>  console.log(Function instanceof Function) // true
+>  console.log(Function instanceof Object) // true
+>
+>  function Foo() {}
+>  console.log(Object instanceof  Foo) // false
+>```
+>
+>
 
 
 

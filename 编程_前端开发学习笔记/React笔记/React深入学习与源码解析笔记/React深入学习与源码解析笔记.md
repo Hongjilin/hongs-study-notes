@@ -494,9 +494,272 @@
 >
 >顺便说一下：**React中对比一个ClassComponent是否需要更新，只有两个地方。一是看有没有`shouldComponentUpdate`方法，二就是这里的`PureComponent`判断**
 
+### Ⅳ-createContext
+
+>createContext 是官方定稿的 context 方案，在这之前我们一直在用的老的 context API 都是 React 不推荐的 API，官方在17大版本会把老 API 去除。
+>
+>Context 通过`组件树`提供了一个传递数据的方法，从而避免了在每一个层级手动的传递 props 属性。下面的例子展示了在顶层组件通过 [`Provider`] 的方式提供了一个值，在下层组件可以通过 [`Consumer`] 拿到，中间不需要任何的 props 传参。
+>
+>```jsx
+>const { Provider, Consumer } = React.createContext('default');
+>
+>class Top extends React.Component {
+>  state = { contextValue: '123' };
+>  render() {
+>    return (
+>      <Provider value={this.state.contextValue}>
+>        {this.props.children}
+>      </Provider>
+>    )
+>  }
+>}
+>
+>class Bottom extends React.Component {
+>  render() {
+>    return (
+>      <Consumer>
+>        {value => <p>contextValue: {value}</p>}
+>      </Consumer>
+>    )    
+>  }
+>}
+>
+>export default () => (
+>  <Top>
+>    <Bottom />
+>  </Top>
+>)
+>```
+>
+>查看React.createContext的源码，我摘出其中的重要代码:
+>
+>```js
+>// react\src\ReactContext.js
+>export function createContext<T>(
+>  defaultValue: T,
+>  calculateChangedBits: ?(a: T, b: T) => number,
+>): ReactContext<T> {
+>
+>    const context: ReactContext<T> = {
+>      $$typeof: REACT_CONTEXT_TYPE,
+>      _calculateChangedBits: calculateChangedBits,
+>      //作为支持多个并发渲染器的解决方案，我们将其分类  
+>      //一些渲染器是主要的，另一些是次要的。 我们只希望  
+>      //最多有两个并发渲染器:React Native (primary)和  
+>      //面料(二级); React DOM(主要)和React ART(次要)。  
+>      //二级渲染器将它们的上下文值存储在单独的字段中。  
+>      _currentValue: defaultValue,
+>      _currentValue2: defaultValue,
+>      //用于跟踪当前有多少并发渲染此上下文  
+>      //在单个渲染器中支持。 例如并行服务器呈现。  
+>      _threadCount: 0,
+>      // These are circular
+>      Provider: (null: any),
+>      Consumer: (null: any),
+>  };
+>
+>  context.Provider = {
+>    $$typeof: REACT_PROVIDER_TYPE,
+>    _context: context,
+>  };
+>
+>  context.Consumer = context;
+>
+>  return context;
+>}
+>```
+>
+>createContext接收的是一个 `defaultValue` ，还有一个是 `calculateChangedBits` 。这是一个方法，这个方法接受 newValue 与 oldValue 的函数，返回值作为 changedBits，在 Provider 中，当 changedBits = 0，将不再触发更新。
+>
+>方法里面声明了一个 context 对象，有一个 $$typeof 属性，需要注意的是，`这个 [$$typeof]` 跟 `ReactElement的 [$$typeof] 是不一样的`。
+>
+>下面列出了两个$$typeof的不同之处。
+>
+>```json
+>{
+>  $$typeof: REACT_ELEMENT_TYPE // 其实是一个Symbol类型的标志
+>  type: {
+>    $$typeof: REACT_PROVIDER_TYPE // 其实是一个Symbol类型的标志
+>    _currentValue: "default",
+>    ...
+>  }
+>}
+>```
+>
+>_currentValue ， _currentValue2 这两个属性是一样的，只是用到的地方不一样。 _currentValue 这个 value 是用来记录 Provider 里面的这个 value 。 他有变化的情况下就会更新到这个 _currentValue 。是用来记录最新的 context 的值的。
+>
+>context.Provider 有个属性 _context ，这个属性会指向这个 context。context.Consumer = context。 `也就是说 Consumer 是等于自己的`。
+
+### Ⅴ-forwardRef
+
+>`forwardRef`是用来解决HOC组件传递`ref`的问题的，所谓HOC就是`Higher Order Component(高阶组件)`，比如使用`redux`的时候，我们用`connect`来给组件绑定需要的state，这其中其实就是给我们的组件在外部包了一层组件，然后通过`...props`的方式把外部的`props`传入到实际组件
+>
+>在低版本使用string ref的时候，ref 是不能加在 Component 上的。原因也很简单，ref 这个字段会被单独处理，不会传递到子组件上（[`详见ReactElement部分`](#2、ReactElement)）。React16之后，通过 forwardRef 就能实现父组件向子组件自动传递引用 ref。这种需求通常发生在需要处理焦点，动画，或者是集成第三方 Dom 库的时候。下面列举了一个处理输入框焦点的例子。
+>
+>```jsx
+>import React, { Component, createRef, forwardRef } from 'react';
+>//forwardRef使用方式举例
+>const FocusInput = forwardRef((props, ref) => (
+>  <input type="text" ref={ref} />
+>));
+>
+>class ForwardRef extends Component {
+>  constructor(props) {
+>      super(props);
+>      this.ref = createRef();
+>  }
+>
+>  componentDidMount() {
+>    const { current } = this.ref;
+>    current.focus();
+>  }
+>
+>  render() {
+>    return (
+>      <div>
+>        <p>forward ref</p>
+>        <FocusInput ref={this.ref} />
+>      </div>
+>    );
+>  }
+>}
+>export default ForwardRef;
+>```
+>
+>查看 forwardRef 源码。
+>
+>```js
+>// react\src\forwardRef.js
+>export default function forwardRef<Props, ElementType: React$ElementType>(
+>   //render函数作为参数-->即包装的FunctionComponent
+>  render: (props: Props, ref: React$Ref<ElementType>) => React$Node,
+>) {
+>  return {
+>    $$typeof: REACT_FORWARD_REF_TYPE,
+>    render,
+>  };
+>}
+>```
+>
+>1. 被forwardRef包裹后，组件内部的$$typeof是`REACT_FORWARD_REF_TYPE`
+>2. render即包装的FunctionComponent，ClassComponent是不用forwardRef的
+
+### Ⅵ-四个类型
+
+>1. Fragment: REACT_FRAGMENT_TYPE
+>2. Profiler: REACT_PROFILER_TYPE
+>3. StrictMode: REACT_STRICT_MODE_TYPE
+>4. Suspense: REACT_SUSPENSE_TYPE
+>
+>这四个都是React提供的组件，但他们其实都只是占位符，都是一个Symbol，在React实际检测到他们的时候会做一些特殊的处理。
+
+#### ① Fragment
+
+>`Fragment 是我们使用最多的`，React 中一个常见模式是为一个组件返回多个元素。Fragments 可以让你聚合一个子元素列表，并且不在DOM中增加额外节点。 <> 是 的语法糖。
+>
+>```jsx
+>render() {
+>  return (
+>    <> //<Fragment></Fragment> 等同
+>      <ChildA />
+>      <ChildB />
+>    </>
+>  );
+>}
+>```
+
+#### ② Profiler
+
+>Profiler是用来测量渲染性能的，几乎不用。
+
+#### ③ StrictMode
+
+>StrictMode 是一个用来突出显示应用程序中潜在问题的工具。与 Fragment 一样，StrictMode 不会渲染任何可见的 UI。它为其后代元素触发额外的检查和警告。
+>
+>```jsx
+>import React from 'react';
+>
+>function ExampleApplication() {
+>  return (
+>    <div>
+>      <Header />
+>      <React.StrictMode>
+>        <div>
+>          <ComponentOne />
+>          <ComponentTwo />
+>        </div>
+>      </React.StrictMode>
+>      <Footer />
+>    </div>
+>  );
+>}
+>```
+>
+>在上述的示例中，不会对 Header 和 Footer 组件运行严格模式检查。但是，`ComponentOne` 和 `ComponentTwo` 以及`它们的所有后代元素`都将进行检查。
+
+#### ④ Suspense
+
+>```jsx
+>const OtherComponent = React.lazy(() => import('./OtherComponent'));
+>
+>function MyComponent() {
+>  return (
+>    <div>
+>      <Suspense fallback={<div>Loading...</div>}>
+>        <OtherComponent />
+>      </Suspense>
+>    </div>
+>  );
+>}
+>```
+>
+>OtherComponent是通过懒加载加载进来的，所以渲染页面的时候可能会有延迟，`但使用了Suspense之后，可优化交互`。 在外面使用Suspense标签，并在fallback中声明OtherComponent加载完成前做的事，即可优化整个页面的交互
+>
+>fallback 属性接受任何在组件加载过程中你想展示的 React 元素。你可以将 Suspense 组件置于懒加载组件之上的任何位置。你甚至可以用一个 Suspense 组件包裹多个懒加载组件。
+
+### Ⅶ-四个Element API
+
+#### ① createElement & 
+
+>`createElement`可谓是React中最重要的API了，他是用来创建`ReactElement`的，但是很多同学却从没见过也没用过，这是为啥呢？因为你用了JSX，JSX并不是标准的js，所以要经过编译才能变成可运行的js，而编译之后，`createElement`就出现了：
+>
+>```js
+>// jsx
+><div id="app">content</div>
+>
+>// js
+>React.createElement('div', { id: 'app' }, 'content')
+>```
+
+#### ② cloneElement 
+
+>`cloneElement`就很明显了，是用来克隆一个`ReactElement`的
+
+#### ③ createFactory 
+
+> `createFactory`是用来创建专门用来创建某一类`ReactElement`的工厂的
+>
+> ```js
+>export function createFactory(type) {
+> const factory = createElement.bind(null, type);
+> factory.type = type;
+>   return factory;
+>   }
+>   ```
+> 
+> 他其实就是绑定了第一个参数的`createElement`，一般我们用JSX进行编程的时候不会用到这个API
+
+#### ④ isValidElement
+
+>`isValidElement`顾名思义就是用来验证是否是一个`ReactElement`的，基本也用不太到
 
 
 
+## 4、React Children
+
+> 此处为什么不放在`API梳理`中而是单独拿出来讲? [`同学们可以忽略不看此部分`]
+>
+> 一方面平时不怎么用，另一方面跟数组处理功能差不多，不深究实现是比较容易理解的.但是观阅许多相关资料后,觉得这个还是可以记录一下
 
 
 

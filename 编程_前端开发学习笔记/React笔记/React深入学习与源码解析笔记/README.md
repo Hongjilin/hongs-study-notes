@@ -1,3 +1,11 @@
+# #此文件为方便gitee网站观阅使用专门创建
+
+> 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
+>
+> 截取了上方了`React深入学习与源码解析笔记`的部分知识点至此,方便网站阅读
+>
+> 本人的React学习笔记分类(也是对应本人技术成长路程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React基础系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
+
 # #说明
 
 >本笔记为本人`洪`深入学习React并尝试阅读理解React源码所记录笔记
@@ -9,10 +17,6 @@
 >本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、**[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)** 
 >
 >本人的React学习笔记分类(也是对应本人技术成长路程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React基础系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
-
-# #目录	​
-
->[TOC]
 
 # 一、React基础知识总结
 
@@ -1506,11 +1510,7 @@
 
 # 二、创建更新
 
->react创建更新的方式有三种
->
->- ReactDOM.render
->- setState
->- forceUpdate
+`更多请看上方[React深入学习与源码解析笔记]`
 
 
 

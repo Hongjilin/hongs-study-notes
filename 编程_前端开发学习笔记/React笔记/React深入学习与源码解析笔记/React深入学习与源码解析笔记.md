@@ -6,17 +6,21 @@
 >
 >学习过程及笔记记录时查阅借鉴的相关资料官方文档的[源码概览](https://zh-hans.reactjs.org/docs/codebase-overview.html);ILoveDevelop的[`React 源码解析`](https://react.jokcy.me/);知乎的神马翔[`React专栏`](https://www.zhihu.com/people/song-meng-xiang-95)、[全栈潇晨](https://www.zhihu.com/people/qbtqiuqiu)的React系列文章、[`万字长文+图文并茂+全面解析 React 源码 - render 篇`](https://segmentfault.com/a/1190000022105022);前端桃园的[`Deep In React之浅谈 React Fiber 架构`](https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651556940&idx=1&sn=d40506db3d4d78da9a94ae6c7dc61af6&chksm=80255b8db752d29bbb8edc79eb40ce4122f3fddca121a53a5c3f859259cf4b1d7402ff676a84&scene=21#wechat_redirect);还有`公司前辈的技术分享`
 >
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/React%E7%AC%94%E8%AE%B0)	
+>本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、**[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)** 
+>
+>本人的React学习笔记分类(也是对应本人技术成长路程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React基础系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
 
 # #目录
 
->		​	
+>​	​	
 >
->		[TOC]
+>	[TOC]
 
 # 一、React基础知识总结
 
 > 在深入学习前,还是先捋一捋对于React基础知识的理解与总结
+>
+> 如果想看详细的React基础知识点笔记,可以看本人 **[React系统学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)** 
 
 ## 1、JSX
 
@@ -138,6 +142,8 @@
 
 ## 2、ReactElement
 
+> 为何这个放在JSX下方,因为此知识有jsx做铺垫就容易理解很多,有做对比更易理解
+
 ### Ⅰ-React.createElement函数
 
 >通过Babel编译后的JS代码，频繁出现React.createElement这个函数。这个函数的返回值就是ReactElement，通过上面的示例可以看出，React.createElement函数的入参有三个，或者说三类
@@ -161,34 +167,36 @@
 
 ### Ⅱ-ReactElement的结构
 
->1. [`$$typeof`] 是一个常量，所有通过React.createElement生成的元素都有这个值。一般使用 React 的组件都是挂到父组件的 this.props.children 上面，但是也有例外，比如要实现一个模态框，就需要将模态框挂载到body节点下，这个时候需要使用ReactDOM.createPortals(child, container)这个函数实现，这个函数生成的$$typeof值就是REACT_PORTAL_TYPE。
->2. [`type`]指代这个ReactElement的类型
+>1. [`$$typeof`] 是一个常量，所有通过React.createElement生成的元素都有这个值。一般使用 React 的组件都是挂到父组件的 this.props.children 上面，但是也有例外，比如要实现一个模态框，就需要将模态框挂载到body节点下，这个时候需要使用ReactDOM.createPortals(child, container)这个函数实现，这个函数生成的$$typeof值就是REACT_PORTAL_TYPE。 -->`用于确定是否属于ReactElement`
+>2. [`type`]指代这个ReactElement的类型 -->`用作判断如何创建节点`
 >3. [`key]`和[`ref`]都是从config对象中找到的特殊配置，将其单独抽取出来，放在ReactElement下
->4. [`props`]包含了两部分，第一部分是去除了key和ref的config，第二部分是children数组，数组的成员也是通过React.createElement生成的对象，示例中省略了这个步骤。
+>4. [`props`]包含了两部分，第一部分是去除了key和ref的config，第二部分是children数组，数组的成员也是通过React.createElement生成的对象  -->`新的属性内容`
 >5. _owner在16.7的版本上是Fiber，Fiber是react16+版本的核心,也是调度算法
+>
+>这些信息对于后期构建应用的树结构是非常重要的,**`而React通过提供这种类型的数据，来脱离平台的限制`**
 >
 >```js
 >const element = {
->    // 这个标签允许我们唯一地将其标识为React元素  
->    $$typeof: REACT_ELEMENT_TYPE,
+>   // 这个标签允许我们唯一地将其标识为React元素  
+>   $$typeof: REACT_ELEMENT_TYPE,
 >
->    //属于元素的内置属性  
->    type: type,
->    key: key,
->    ref: ref,
->    props: props,
+>   //属于元素的内置属性  
+>   type: type,
+>   key: key,
+>   ref: ref,
+>   props: props,
 >
->    // 记录负责创建此元素的组件。
->    _owner: owner,
->  };
+>   // 记录负责创建此元素的组件。
+>   _owner: owner,
+> };
 >```
 >
 >它就是一个简单的对象，为了看清楚这个对象的创建规则，我们举个例子。 首先是我们写的JSX：
 >
 >```jsx
 ><div class='class_name' id='id_name' key='key_name' ref='ref_name'>
->    <span>Tom</span>
->    <span>Jerry</span>
+>   <span>Tom</span>
+>   <span>Jerry</span>
 ></div>
 >```
 >
@@ -196,10 +204,10 @@
 >
 >```js
 >React.createElement("div", {
->    class: "class_name",
->    id: "id_name",
->    key: "key_name",
->    ref: "ref_name"
+>   class: "class_name",
+>   id: "id_name",
+>   key: "key_name",
+>   ref: "ref_name"
 >}, React.createElement("span", null, "Tom"), React.createElement("span", null, "Jerry"));
 >```
 >
@@ -207,23 +215,25 @@
 >
 >```js
 >{
->    $$typeof: REACT_ELEMENT_TYPE,
->    type：'div'，
->    key: 'key_name',
->    ref: "ref_name",
->    props: {
->        class: "class_name",
->        id: "id_name",
->        children: [
->            React.createElement("span", null, "Tom"),
->            React.createElement("span", null, "Jerry")
->        ]
->    }
->     _owner: ReactCurrentOwner.current,
+>   $$typeof: REACT_ELEMENT_TYPE,
+>   type：'div'，
+>   key: 'key_name',
+>   ref: "ref_name",
+>   props: {
+>       class: "class_name",
+>       id: "id_name",
+>       children: [
+>           React.createElement("span", null, "Tom"),
+>           React.createElement("span", null, "Jerry")
+>       ]
+>   }
+>    _owner: ReactCurrentOwner.current,
 >}
 >```
 
-## 3、对虚拟DOM的理解
+
+
+## X、对虚拟DOM的理解
 
 ### Ⅰ-什么是虚拟DOM
 
@@ -273,19 +283,218 @@
 
 
 
+## 3、React API 梳理
 
+### Ⅰ-暴露出来的API
 
+>```jsx
+>// react\src\React.js
+>const React = {
+>  Children: {
+>    map,
+>    forEach,
+>    count,
+>    toArray,
+>    only,
+>  },
+>
+>  createRef,
+>  Component,
+>  PureComponent,
+>
+>  createContext,
+>  forwardRef,
+>  lazy,
+>  memo,
+>
+>  useCallback,
+>  useContext,
+>  useEffect,
+>  useImperativeHandle,
+>  useDebugValue,
+>  useLayoutEffect,
+>  useMemo,
+>  useReducer,
+>  useRef,
+>  useState,
+>
+>  Fragment: REACT_FRAGMENT_TYPE,
+>  Profiler: REACT_PROFILER_TYPE,
+>  StrictMode: REACT_STRICT_MODE_TYPE,
+>  Suspense: REACT_SUSPENSE_TYPE,
+>  unstable_SuspenseList: REACT_SUSPENSE_LIST_TYPE,
+>
+>  createElement: __DEV__ ? createElementWithValidation : createElement,
+>  cloneElement: __DEV__ ? cloneElementWithValidation : cloneElement,
+>  createFactory: __DEV__ ? createFactoryWithValidation : createFactory,
+>  isValidElement: isValidElement,
+>
+>  version: ReactVersion,
+>
+>  unstable_withSuspenseConfig: withSuspenseConfig,
+>
+>  __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: ReactSharedInternals,
+>};
+>```
+>
+>挑一些常见的分析下用法和源码
 
+### Ⅱ-createRef
 
+>react获得ref的方式有三种
+>
+>- String ref 方式(被废弃)
+>- callback ref 方式
+>- `React.createRef` (16.3版本新增特性)
+>
+>代码举例:
+>
+>```jsx
+>----------------------- string ref -------------------------
+>class App extends React.Component {
+>  componentDidMount() {
+>    this.refs.myRef.focus();
+>  }
+>  render() {
+>    return <input ref="myRef" />;
+>  }
+>}
+>------------------------ callback ref-------------------------
+>class App extends React.Component {
+>  componentDidMount() {
+>    this.myRef.focus();
+>  }
+>  render() {
+>    return <input ref={(ele) => {
+>      this.myRef = ele;
+>    }} />;
+>  }
+>}
+>---------------------- React.createRef ------------------------
+>class App extends React.Component {
+>  constructor(props) {
+>    super(props);
+>    this.myRef = React.createRef();
+>  }
+>  componentDidMount() {
+>    this.myRef.current.focus();
+>  }
+>  render() {
+>    return <input ref={this.myRef} />;
+>  }
+>}
+>```
+>
+>查看 React.createRef 的源码，`发现只是生成了一个对象，用于保存 current 的值`。
+>
+>```js
+>// react\src\ReactCreateRef.js
+>export function createRef(): RefObject {
+>  const refObject = {
+>    current: null,
+>  };
+>  return refObject;
+>}
+>```
+>
+>`React.createRef 并不负责将 dom 节点绑定 current 上面，它只负责生成对应的结构`。
+>
+>`真正做事的是 react-dom`。react 这么拆分，将公共的部分放在 react 中，而与平台相关的单独抽离，比如在移动端，负责将页面元素挂在到 current 字段上的就不是 `react-dom` 了，而是`react-native`。
 
+### Ⅲ-Component & PureComponent
 
+#### ① Component:
 
+>Component源码
+>
+>```jsx
+>// react\src\ReactBaseClasses.js
+>function Component(props, context, updater) {
+>this.props = props;
+>this.context = context;
+>// 如果一个组件有字符串引用，我们将在以后分配一个不同的对象。  
+>this.refs = emptyObject;
+>// 初始化默认更新器，但真正的更新器由 renderer.
+>this.updater = updater || ReactNoopUpdateQueue;
+>}
+>
+>Component.prototype.setState = function(partialState, callback) {
+>this.updater.enqueueSetState(this, partialState, callback, 'setState');
+>};
+>
+>Component.prototype.forceUpdate = function(callback) {
+>this.updater.enqueueForceUpdate(this, callback, 'forceUpdate');
+>};
+>```
+>
+>Component 中维护了4个变量，props，context，refs 以及 updater。前三者都是我们常见的，updater 是与平台相关的，他基本负责了 react 中的所有任务，包括数据更新，界面渲染等一系列的工作。
+>
+>以下是 Component 的数据结构，f 表示函数，省略号表示暂时不用关注
+>
+>```json
+>{
+>props: {},
+>context: {},
+>refs: {},
+>updater: {...},
+>state: null,
+>__proto__: {
+> constructor: class Demo，
+> render: f
+> __proto__: {
+>   constructor: f,
+>   setState: f,
+>   forceUpdate: f,
+>   isReactComponent: {}
+> }}}
+>```
+>
+>可以看到，`eact 中的声明周期不是在 Component 中定义的`，这一点在后续的章节会详细讲解。
 
+#### ② PureComponent
 
+>和 Component 是基本一致的，只是比 Component 多了一个属性
+>
+>```js
+>pureComponentPrototype.isPureReactComponent = true;
+>```
+>
+>以下是 PureComponent 的数据结构
+>
+>```json
+>{
+>props: {},
+>context: {},
+>refs: {},
+>updater: {...},
+>state: null,
+>__proto__: {
+> constructor: class Demo，
+> render: f
+> __proto__: {
+>   constructor: f,
+>   setState: f,
+>   forceUpdate: f,
+>   isReactComponent: {}，
+>   isPureReactComponent: true  //多了这个
+> }
+>}
+>}
+>```
 
+#### ③ 多出的[`isPureReactComponent`]有什么用?
 
-
-
+>```js
+>if (ctor.prototype && ctor.prototype.isPureReactComponent) {
+>  return (
+>    !shallowEqual(oldProps, newProps) || !shallowEqual(oldState, newState)
+>  );
+>}
+>```
+>
+>这是检查组件是否需要更新的一个判断，`ctor`就是你声明的继承自`Component or PureComponent`的类，他会判断你是否继承自`PureComponent`，如果是的话就`shallowEqual`比较`state`和`props`。
+>
+>顺便说一下：**React中对比一个ClassComponent是否需要更新，只有两个地方。一是看有没有`shouldComponentUpdate`方法，二就是这里的`PureComponent`判断**
 
 
 

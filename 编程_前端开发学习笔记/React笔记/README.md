@@ -3,6 +3,8 @@
 > 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
 > 截取了上方了`A_React系统学习笔记`的部分知识点至此,方便网站阅读
+>
+> 本人的React学习笔记分类(也是对应本人技术成长路程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React基础系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
 
 # #说明
 
@@ -14,21 +16,33 @@
 
 >#####  **[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)** 
 >
->1. **[ReactB站jspang学习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/ReactB站jspang学习)** 
+>1. **[React基础快速入门学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)** 
 >
->   > 该笔记学自B站`jspang`的react教程视频
+>  > 此部分是本人刚接触React时对于其基础的学习笔记,相较而言不够系统,但是能快速入门,看完基本就能简单的使用react了 
+>  >
+>  > 该笔记学自B站`jspang`的react教程视频 与 作者:胡子大哈的小书资料 整理而成 --[点我传送]( http://huziketang.com/books/react/lesson5 )
+>  >
+>  > [`想快速入门看这部分`]
 >
->2.  **[React小书学习文件](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React小书学习文件)** 
+>2. [A_React系统学习笔记.md](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
 >
->   > 本笔记来自学习 作者:胡子大哈的小书资料 整理而成 --[点我传送]( http://huziketang.com/books/react/lesson5 )
+>  > 本笔记为本人`洪`系统学习React阶段笔记-观看`尚硅谷2021版React技术全家桶全套完整版` 整理而成 ,
+>  >
+>  > 同时也是在 **[React基础快速入门学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)** 的基础上进行的一次梳理学习,推荐朋友直接看这份
+>  >
+>  > [`想对React基础系统全面进行学习的同学看这里`]
 >
->3. [A_React系统学习笔记.md](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)
+>3. **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 
 >
->   > 本笔记为本人`洪`系统学习React阶段笔记-观看`尚硅谷2021版React技术全家桶全套完整版` 整理而成 ,`最为全面`
+>  > 本笔记收录在本人隔壁ReactHooks笔记中,此处做一个索引
 >
->4. **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 
+>4. **[React深入学习与源码解析笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)**
 >
->   > 本笔记收录在本人隔壁ReactHooks笔记中,此处做一个索引
+>   > 本笔记为本人`洪`深入学习React并尝试阅读理解React源码所记录笔记 
+>   >
+>   > 里面有本人对于React基础的理解总结以及源码阅读解析
+>   >
+>   > [`对基础学习完成且有了一定开发经验`]
 
 ------
 

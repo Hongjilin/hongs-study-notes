@@ -1,6 +1,8 @@
 > -本笔记来自学习 作者:胡子大哈 原文链接：[ http://huziketang.com/books/react/lesson5](http://huziketang.com/books/react/lesson5) 的小书 而记录,仅本人洪学习使用
 >
 > 本人[笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
+>
+> 本人的React学习笔记分类(也是对应本人技术成长过程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
 
 # `小书一阶段`
 

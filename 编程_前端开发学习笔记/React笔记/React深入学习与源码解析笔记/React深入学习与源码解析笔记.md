@@ -760,20 +760,457 @@
 > 此处为什么不放在`API梳理`中而是单独拿出来讲? [`同学们可以忽略不看此部分`]
 >
 > 一方面平时不怎么用，另一方面跟数组处理功能差不多，不深究实现是比较容易理解的.但是观阅许多相关资料后,觉得这个还是可以记录一下
+>
+> 以[`React.Children.map`]进行分析
+>
+> `map`和`forEach`的最大区别就是有没有`return result`。
+
+### Ⅰ- 使用方式
+
+>首先看下这个 API 的用法
+>
+>```jsx
+>import React from 'react'
+>
+>function ChildrenDemo(props) {
+>  return React.Children.map(props.children, c => [c, c])
+>}
+>
+>export default () => (
+>  <ChildrenDemo>
+>    <div>Tom and Jerry</div>
+>  </ChildrenDemo>
+>)
+>```
+>
+>界面上显示
+>
+>```js
+>Tom and Jerry
+>Tom and Jerry
+>```
+>
+>如果将上述的代码稍微调整
+>
+>```jsx
+>function ChildrenDemo(props) {
+>  return React.Children.map(props.children, c => [c, [c, c]])
+>}
+>```
+>
+>有意思的事情发生了，界面上显示
+>
+>```js
+>Tom and Jerry
+>Tom and Jerry
+>Tom and Jerry
+>```
+
+### Ⅱ- 源码分析
+
+>接下来从代码的角度分析，为什么出现这种情况，从React入口文件开始
+>
+>```js
+>// react\src\React.js
+>import {forEach, map, count, toArray, only} from './ReactChildren';
+>
+>const React = {
+>Children: {
+>map,
+>forEach,
+>count,
+>toArray,
+>only,
+>},
+>
+>...
+>
+>}
+>```
+>
+>可以看出，React Clildren 的所有 API 来自 ReactChildren.js 文件。
+>
+>```js
+>// react\src\ReactChildren.js
+>export {
+>forEachChildren as forEach,
+>mapChildren as map,
+>countChildren as count,
+>onlyChild as only,
+>toArray,
+>}
+>```
+>
+>`map 只是个别名，真正的函数是 mapChildren`
+>
+>```js
+>// react\src\ReactChildren.js
+>function mapChildren(children, func, context) {
+>if (children == null) {
+>return children;
+>}
+>const result = [];
+>mapIntoWithKeyPrefixInternal(children, result, null, func, context);
+>// map和forEach的最大区别就是有没有return result。
+>return result;
+>}
+>
+>function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
+>let escapedPrefix = '';
+>
+>// 用来生成key的
+>if (prefix != null) {
+>escapedPrefix = escapeUserProvidedKey(prefix) + '/';
+>}
+>const traverseContext = getPooledTraverseContext(
+>array,
+>escapedPrefix,
+>func,
+>context,
+>);
+>traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
+>releaseTraverseContext(traverseContext);
+>}
+>```
+>
+>`map`和`forEach`的最大区别就是有没有`return result`。
+
+#### ① 分析 getPooledTraverseContext 和 releaseTraverseContext
 
 
+>getPooledTraverseContext 就是从 pool 里面找一个对象，releaseTraverseContext 会把当前的 context 对象清空然后放回到 pool 中。
+>
+>```jsx
+>// react\src\ReactChildren.js
+>const POOL_SIZE = 10;
+>const traverseContextPool = [];
+>function getPooledTraverseContext(
+>mapResult,
+>keyPrefix,
+>mapFunction,
+>mapContext,
+>) {
+>if (traverseContextPool.length) {
+>const traverseContext = traverseContextPool.pop();
+>// set attrs
+>return traverseContext;
+>} else {
+>return {
+>result: mapResult,
+>keyPrefix: keyPrefix,
+>func: mapFunction,
+> context: mapContext,
+> count: 0,
+>};
+>}
+>}
+>
+>function releaseTraverseContext(traverseContext) {
+>// clear attrs
+>if (traverseContextPool.length < POOL_SIZE) {
+>traverseContextPool.push(traverseContext);
+>}
+>}
+>```
+>
+>这么做主要是为了节省对象重复创建带来的性能消耗，React 中后续还会有一些这样的管理对象的方式。
+>
+>那么按照这个流程来看，是不是`pool`永远都只有一个值呢，毕竟推出之后操作完了就推入了，这么循环着。答案肯定是否的，这就要讲到`React.Children.map`的一个特性了，那就是对每个节点的`map`返回的如果是数组，那么还会继续展开，这是一个递归的过程。接下去我们就来`分析traverseAllChildren`。
 
+#### ② 分析traverseAllChildren 方法
 
+>`traverseContext` 对象`封装完毕`后，调用 traverseAllChildren 方法
+>
+>```js
+>// react\src\ReactChildren.js
+>function traverseAllChildren(children, callback, traverseContext) {
+>if (children == null) {
+>return 0;
+>  }
+>    
+>  return traverseAllChildrenImpl(children, '', callback, traverseContext);
+>}
+>  ```
+>
+>直接调用 traverseAllChildrenImpl 方法,`下方代码是连着上面的,只是拆出来更清晰 `
+>
+>```js
+>// react\src\ReactChildren.js
+>// children: ReactElement
+>// nameSoFar: ''
+>// callback: 是个函数 mapSingleChildIntoContext，在mapChildren 函数中传入
+>// traverseContext： { result: [], keyPrefix: "", func: c => [c, [c, c]], context: undefined, count: 0}
+>function traverseAllChildrenImpl(
+>children,
+>nameSoFar,
+>  callback,
+>  traverseContext,
+>  ) {
+>  // children一般是一个React Element，或者是多个React Element
+>const type = typeof children;
+>  
+>  // 判断children的合理性
+>if (type === 'undefined' || type === 'boolean') {
+>  children = null
+>  }
+>    
+>  let invokeCallback = false
+>
+>  // 对于单个节点，invokeCallback = true
+>if (children === null) {
+>  invokeCallback = true
+>  } else {
+>    switch (type) {
+>  case 'string':
+>      case 'number':
+>        invokeCallback = true
+>        break
+>      case 'object':
+>        switch (children.$$typeof) {
+>          case REACT_ELEMENT_TYPE:
+>          case REACT_PORTAL_TYPE:
+>            invokeCallback = true
+>        }
+>     }
+>     }
+>    
+>  if (invokeCallback) {
+>// callback 指的是 mapSingleChildIntoContext
+>  callback(
+>    traverseContext,
+>      children,
+>         //此处是设置Key的代码
+>      nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar,
+>     )
+>    return 1
+>    }
+>  
+>let child;
+>  let nextName;
+>  let subtreeCount = 0; // Count of children found in the current subtree.
+>  const nextNamePrefix =
+>  nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+>    
+>// 对于本例，第一次进入这个函数 clildren 是两个 span，是一个array
+>  if (Array.isArray(children)) {
+>  for (let i = 0; i < children.length; i++) {
+>     child = children[i];
+>      nextName = nextNamePrefix + getComponentKey(child, i);
+>     
+> // 递归调用 traverseAllChildrenImpl
+>      subtreeCount += traverseAllChildrenImpl(
+>        child,
+>        nextName,
+>        callback,
+>        traverseContext,
+>      );
+>     }
+>    } else {
+>  // 针对的是那些不是Array类型，但是有迭代器，能遍历的情况，正常代码不会这样，可以忽略
+>    const iteratorFn = getIteratorFn(children);
+>    if (typeof iteratorFn === 'function') {
+>     const iterator = iteratorFn.call(children);
+>      let step;
+>      let ii = 0;
+>      while (!(step = iterator.next()).done) {
+>        child = step.value;
+>        nextName = nextNamePrefix + getComponentKey(child, ii++);
+>        subtreeCount += traverseAllChildrenImpl(
+>          child,
+>          nextName,
+>          callback,
+>          traverseContext,
+>        );
+>      }
+>     } else if (type === 'object') {
+>     let addendum = '';
+>      const childrenString = '' + children;
+>      invariant(
+>        false,
+>        'Objects are not valid as a React child (found: %s).%s',
+>        childrenString === '[object Object]'
+>          ? 'object with keys {' + Object.keys(children).join(', ') + '}'
+>          : childrenString,
+>        addendum,
+>      );
+>     }
+>    }
+>  
+>return subtreeCount;
+>  }
+>```
+>
+>`traverseAllChildrenImpl` 函数做的事情比较简单，children如果是可循环的，遍历children中的每个元素，`递归调用本身`，直到是一个节点的情况， 然后调用callback，也就是 mapSingleChildIntoContext。
+>
+>```js
+>// react\src\ReactChildren.js
+>function mapSingleChildIntoContext(bookKeeping, child, childKey) {
+>const {result, keyPrefix, func, context} = bookKeeping;
+>  
+>// child 调用 我们传入的函数 c => [c, [c, c]]
+>  let mappedChild = func.call(context, child, bookKeeping.count++);
+>  
+>// 如果 返回的值依然是个数组，递归调用mapIntoWithKeyPrefixInternal
+>  if (Array.isArray(mappedChild)) {
+>  // 注意 c => c 
+>    mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, c => c);
+>    } else if (mappedChild != null) {
+>  // 如果返回的值是个合格的Element，将结果放入result中
+>    if (isValidElement(mappedChild)) {
+>     mappedChild = cloneAndReplaceKey(
+>        mappedChild,
+>        // Keep both the (mapped) and old keys if they differ, just as
+>        // traverseAllChildren used to do for objects as children
+>        keyPrefix +
+>          (mappedChild.key && (!child || child.key !== mappedChild.key)
+>            ? escapeUserProvidedKey(mappedChild.key) + '/'
+>            : '') +
+>          childKey,
+>      );
+>     }
+>    result.push(mappedChild);
+>    }
+>  }
+>```
+>
+>mapSingleChildIntoContext 这个方法其实就是调用 React.Children.map(children, callback) 这里的callback，就是我们传入的第二个参数，并得到map之后的结果。
+>
+>- 如果`map`之后的节点还是一个数组，那么再次进入`mapIntoWithKeyPrefixInternal`，那么这个时候我们就会再次从`pool`里面去`context`了，而`pool`的意义大概也就是在这里了，如果循环嵌套多了，可以减少很多对象创建和`gc`的损耗。
+>- 而如果不是数组并且是一个合规的ReactElement，就触达顶点了，替换一下key就推入result了。
+>- React 将重复对象放在Pool中是因为对Children的处理一般在render里面，所以会比较频繁，所以设置一个pool减少声明和gc的开销。
 
+#### ③ React 这么实现的目的
 
+>1. 拆分`map`出来的数组
+>2. 因为对`Children`的处理一般在`render`里面，所以会比较频繁，所以设置一个`pool`减少声明和`gc`的开销
 
+### Ⅲ-Key值的设置
 
-
-
-
-
-
-
+>将原先的一个children映射为多个children的过程中，涉及到了一些key值的变换
+>
+>```js
+>//源码
+>function traverseAllChildrenImpl() {
+>  ...
+>
+>  if (invokeCallback) {
+>    callback(
+>      traverseContext,
+>      children,
+>   		 //如果它是唯一的子元素，那么就把它当作包装在数组中  
+>		//如果孩子的数量增长，它是一致的。  
+>      nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar,
+>    );
+>    return 1;
+>  }
+>
+>  ...
+>
+>  const nextNamePrefix =
+>    nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+>
+>  if (Array.isArray(children)) {
+>    for (let i = 0; i < children.length; i++) {
+>      child = children[i];
+>      nextName = nextNamePrefix + getComponentKey(child, i);
+>      subtreeCount += traverseAllChildrenImpl(
+>        child,
+>        nextName,
+>        callback,
+>        traverseContext,
+>      );
+>    }
+>  }
+>
+>  ...
+>}
+>```
+>
+>举例来说明key的生成过程
+>
+>```jsx
+>// React.Children.map(props.children, c => c)
+>() => (
+>  <div >Tom</div>
+>  <div >Jerry</div>
+>)
+>```
+>
+>如果 children 是一个数组，那么首先会计算一个 nextNamePrefix，计算的规则如下
+>
+>```js
+>// const SEPARATOR = '.';
+>// const SUBSEPARATOR = ':';
+>const nextNamePrefix =
+>    nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+>```
+>
+>nameSoFar === '' 成立， nextNamePrefix 是 SEPARATOR ，也就是 “.”。在遍历数组的过程中
+>
+>```js
+>nextName = nextNamePrefix + getComponentKey(child, i);
+>```
+>
+>getComponentKey 会获得元素上的key值，如果没有key值，那么就是 i， i代表数组中的index。对于一个对象调用callback的过程中，key的规则是
+>
+>```js
+>nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar
+>```
+>
+>由于此时nameSoFar不为空串， Tom 的 key是 “.0”, Jerry 的 key 是 “.1”。
+>
+>如果 c => [ c, c ]，即映射出的是数组，那么在 mapSingleChildIntoContext 函数中 会走到这个分支
+>
+>```js
+>if (Array.isArray(mappedChild)) {
+>    mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, c => c);
+>  }
+>```
+>
+>此时会重新调用 mapIntoWithKeyPrefixInternal，也就是
+>
+>```js
+>if (prefix != null) {
+>    escapedPrefix = escapeUserProvidedKey(prefix) + '/';
+>}
+>```
+>
+>执行完毕后，key后面多加了 ‘/’ 。继续执行 traverseAllChildrenImpl，nameSoFar === '' 成立， nextNamePrefix 是 SEPARATOR ，也就是 ‘.’， key后面多加了 ‘.’。再次执行
+>
+>```js
+>nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar
+>```
+>
+>最终生成的4个key分别是
+>
+>```text
+>.0/.0
+>.0/.1
+>.1/.0
+>.1/.1
+>```
+>
+>如果 c => [ c, [c, c] ]，那么
+>
+>```js
+>const nextNamePrefix =
+>    nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+>```
+>
+>会被循环调用，第二次进入循环的时候，nameSoFar === ''这个条件不满足，key后面会加一个 ‘SUBSEPARATOR’，也就是 ‘:’，其余流程不变。
+>
+>最终生成的6个key分别是
+>
+>```text
+>.0/.0
+>.0/.1:0
+>.0/.1:1
+>.1/.0
+>.1/.1:0
+>.1/.1:1
+>```
+>
+>`还需要注意的是，如果component设置了key，会使用component上的key，不使用index，此时会如果两个元素的key相同，react会给出警告。`
 
 
 

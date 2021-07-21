@@ -44,7 +44,7 @@
 >    agentId: 'jilinhong',
 >    name: '特别努力学习的单身汪',
 >    cooperationStatus: 2,
->    month: '20210',
+>    month: '202107',
 >    totalCompany: 666,
 >    qty: 1111,
 >    increaQty: 111,
@@ -120,14 +120,14 @@
 >       console.log(titles, "titlestitlestitles")'
 >       tools.OnExport(toJS(this.datas), `${month}月份的数据表`,titles);
 >       */
->       //没有数据能导出时给出提示 
+>       //没有数据能导出时给出提示  -->此处调用的是封装好的[信息提示]组件,同学们可以忽略此行代码
 >      if (this.datas?.length == 0)  SuperNotification.warning({  msg: '无数据可导出'});
 >      //调用工具函数
 >      tools.OnExport(toJS(this.datas), `${month}月份的数据表`);
 >    };
 >   
 >   --------------- 将其绑定于点击事件上 ----------------------------------------
->    <Button type="primary"  onClick={() => { store.exportXlsx();  }} >
+>    <Button type="primary"  onClick={() => { store.exportXlsx(); }} >
 >      导出
 >    </Button>
 >   ```
@@ -143,9 +143,9 @@
 >
 >   当然,有的浏览器是直接下载不会给出下载提示
 >
->2. ![image-20210721154626462](JS碎片化知识点中的图片/image-20210721155153046.png)
+>2. xlsx文件查看![image-20210721154626462](JS碎片化知识点中的图片/image-20210721155153046.png)
 >
->3. 很简单不是吗?
+>3. OK了,其实不止在`React`中能使用,在`Vue`甚至原生js都可以调用这个函数
 
 
 

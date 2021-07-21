@@ -4,9 +4,9 @@
 >
 >建议预备知识:react基础
 >
->学习过程及笔记记录时查阅借鉴的相关资料官方文档的[源码概览](https://zh-hans.reactjs.org/docs/codebase-overview.html);ILoveDevelop的[`React 源码解析`](https://react.jokcy.me/);知乎的神马翔[`React专栏`](https://www.zhihu.com/people/song-meng-xiang-95)、[全栈潇晨](https://www.zhihu.com/people/qbtqiuqiu)的React系列文章、[`万字长文+图文并茂+全面解析 React 源码 - render 篇`](https://segmentfault.com/a/1190000022105022);前端桃园的[`Deep In React之浅谈 React Fiber 架构`](https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651556940&idx=1&sn=d40506db3d4d78da9a94ae6c7dc61af6&chksm=80255b8db752d29bbb8edc79eb40ce4122f3fddca121a53a5c3f859259cf4b1d7402ff676a84&scene=21#wechat_redirect);还有`公司前辈的技术分享`
+>学习过程及笔记记录时查阅借鉴的相关资料官方文档的[源码概览](https://zh-hans.reactjs.org/docs/codebase-overview.html);ILoveDevelop的[`React 源码解析`](https://react.jokcy.me/);知乎的[全栈潇晨](https://www.zhihu.com/people/qbtqiuqiu)的React系列文章、[`万字长文+图文并茂+全面解析 React 源码 - render 篇`](https://segmentfault.com/a/1190000022105022);前端桃园的[`Deep In React之浅谈 React Fiber 架构`](https://mp.weixin.qq.com/s?__biz=MzAxODE2MjM1MA==&mid=2651556940&idx=1&sn=d40506db3d4d78da9a94ae6c7dc61af6&chksm=80255b8db752d29bbb8edc79eb40ce4122f3fddca121a53a5c3f859259cf4b1d7402ff676a84&scene=21#wechat_redirect);还有`公司前辈的技术分享`
 >
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、**[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)** 
+>本人笔记地址分享:[[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)]、[**[`React笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**]
 >
 >本人的React学习笔记分类(也是对应本人技术成长路程):[[`想快速入门看这部分`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React基础补充学习笔记)]、[[`想对React基础系统全面进行学习的同学看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Scss%E7%AC%94%E8%AE%B0)]、[[`对基础学习完成且有了一定开发经验,想尝试解析源码的看这里`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记/React深入学习与源码解析笔记)]
 
@@ -1512,35 +1512,206 @@
 >- setState
 >- forceUpdate
 
+## 1、ReactDOM.render
+
+### Ⅰ-使用概述
+
+>```jsx
+>// index.js
+>import React from 'react';
+>import ReactDOM from 'react-dom';
+>import App from './App';
+>ReactDOM.render(<App />, document.getElementById('root'));
+>```
+>
+>ReactDOM.render 是 React 程序的起点。ReactDom 中包含了 createPortal，findDOMNode， render 等方法，这里需要注意的是 `hydrate` 和 `render` 方法，这两个方法其实调用的是一个函数，`只是一个参数不同`，hydrate 一般用于服务端渲染，它会复用服务端返回的Html结构。我们这次只分析 render，hydrate后续会单独分析。
+
+### Ⅱ-ReactDOM源码示例
+
+>[`unstable_createRoot`] 和 [`unstable_createSyncRoot`] 这两个接口需要注意下，特别是 `createRoot`，其实就是 16.9 之前的 [Concurrent Mode] 的`替代`，会启用 React 的并行模型。
+>
+>```js
+>// react-dom\src\client\ReactDOM.js
+> const ReactDOM: Object = {
+>  hydrate(element: React$Node, container: DOMContainer, callback: ?Function) {
+>    // TODO: throw or warn if we couldn't hydrate?
+>    return legacyRenderSubtreeIntoContainer(
+>      null,
+>      element,
+>      container,
+>      true,
+>      callback,
+>    );
+>  },
+>
+>  render(
+>    element: React$Element<any>,
+>    container: DOMContainer,
+>    callback: ?Function,
+>  ) {
+>    return legacyRenderSubtreeIntoContainer(
+>      null,
+>      element,
+>      container,
+>      false,
+>      callback,
+>    );
+>  }，
+>
+>  unstable_createRoot: createRoot,
+>  unstable_createSyncRoot: createSyncRoot,
+>}
+>```
+
+### Ⅲ-render源码解析
+
+>render 接受三个参数，第一个参数是ReactElement，第二个参数为组件所要挂载的DOM节点，第三个参数为回调函数。
+>
+>```jsx
+>  render(
+>    element: React$Element<any>,
+>    container: DOMContainer, //组件索要挂在的DOM节点
+>    callback: ?Function, //回调函数
+>  ) {
+>    return legacyRenderSubtreeIntoContainer(
+>      null,
+>      element,
+>      container,
+>      false,
+>      callback,
+>    );
+>  }，
+>```
+
+#### ① legacyRenderSubtreeIntoContainer函数解析
+
+>[`legacyRenderSubtreeIntoContainer`] 函数第一个入参 parentComponent 是写死的 null，函数首先生成了一个 root 对象， 调用的方法是 [`legacyCreateRootFromDOMContainer`]。
+>
+>```jsx
+>// react-dom\src\client\ReactDOM.js
+>function legacyRenderSubtreeIntoContainer(
+>  parentComponent: ?React$Component<any, any>, // null
+>  children: ReactNodeList, // ReactElement
+>  container: DOMContainer, // dom节点
+>  forceHydrate: boolean,
+>  callback: ?Function,
+>) {
+>  // 第一次 container 上没有 _reactRootContainer 属性，所以初次渲染为 null
+>  let root: _ReactSyncRoot = (container._reactRootContainer: any);
+>  let fiberRoot;
+>  if (!root) {
+>    // 生成一个 root 节点
+>    root = container._reactRootContainer = legacyCreateRootFromDOMContainer(
+>      container,
+>      forceHydrate,
+>    );
+>    fiberRoot = root._internalRoot;
+>
+>    // 处理回调函数
+>    if (typeof callback === 'function') {
+>      const originalCallback = callback;
+>      callback = function() {
+>        // 其实就是 root.current.child.stateNode
+>        const instance = getPublicRootInstance(fiberRoot);
+>        originalCallback.call(instance);
+>      };
+>    }
+>    // Initial mount should not be batched.
+>    // 不会进行批量策略的更新，而是需要尽快的完成，后续详细介绍
+>    unbatchedUpdates(() => {
+>      updateContainer(children, fiberRoot, parentComponent, callback);
+>    });
+>  } else {
+>    // root已经存在的情况，会复用之前生成的root，暂时不考虑这种情况
+>  }
+>  return getPublicRootInstance(fiberRoot);
+>}
+>```
+
+#### ② legacyCreateRootFromDOMContainer
+
+>```jsx
+>// react-dom\src\client\ReactDOM.js
+>function legacyCreateRootFromDOMContainer(
+>  container: DOMContainer,
+>  forceHydrate: boolean,
+>): _ReactSyncRoot {
+>  // 判断 forceHydrate 参数，render 函数插入的是false
+>  // shouldHydrateDueToLegacyHeuristic 函数只要是判断我们传入的Dom元素上是否有 data-reactroot 属性，这个属性一般是服务端渲染的时候赋给的
+>  const shouldHydrate =
+>    forceHydrate || shouldHydrateDueToLegacyHeuristic(container);
+>
+>  // 如果不复用页面上的 DOM 节点，那么调用 removeChild 方法将 DOM 节点的子节点全部清除 
+>  if (!shouldHydrate) {
+>    let warned = false;
+>    let rootSibling;
+>    while ((rootSibling = container.lastChild)) {
+>      container.removeChild(rootSibling);
+>    }
+>  }
+>
+>  // 通过 new 创建对象
+>  return new ReactSyncRoot(
+>    container,
+>    LegacyRoot,
+>    shouldHydrate
+>      ? {
+>          hydrate: true,
+>        }
+>      : undefined,
+>  );
+>}
+>```
+>
+>LegacyRoot 是一个常量，代表的是传统的同步的渲染方式。
+>
+>```js
+>// shared\ReactRootTags.js
+>export const LegacyRoot = 0;
+>export const BatchedRoot = 1;
+>export const ConcurrentRoot = 2;
+>```
+
+#### ③  ReactSyncRoot
+
+>```jsx
+>
+>// react-dom\src\client\ReactDOM.js
+>function ReactSyncRoot(
+>  container: DOMContainer,
+>  tag: RootTag,
+>  options: void | RootOptions,
+>) {
+>  // Tag is either LegacyRoot or Concurrent Root
+>  const hydrate = options != null && options.hydrate === true;
+>  const hydrationCallbacks =
+>    (options != null && options.hydrationOptions) || null;
+>  const root = createContainer(container, tag, hydrate, hydrationCallbacks);
+>
+>  // 可以看出，new 出来的对象上，只有一个 _internalRoot 属性
+>  this._internalRoot = root;
+>}
+>```
+>
+>实际调用的是 `createContainer` 函数
+>
+>需要注意的是，如果不是ReactDOM.render，而是ReactDOM.unstable_createRoot，那么程序也会走到 createContainer 这步，但是 tag 就不是 RootTag，而是 ConcurrentRoot。
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler.js
+>export function createContainer(
+>  containerInfo: Container, // div
+>  tag: RootTag, // 0
+>  hydrate: boolean, // false
+>  hydrationCallbacks: null | SuspenseHydrationCallbacks, // null
+>): OpaqueRoot {
+>  return createFiberRoot(containerInfo, tag, hydrate, hydrationCallbacks);
+>}
+>```
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+....
 
 
 

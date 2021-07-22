@@ -8,7 +8,7 @@
 
 # #说明
 
->本笔记为本人`洪`深入学习React并尝试阅读理解React源码所记录笔记
+>本笔记为本人`洪`深入学习React并尝试阅读理解React源码所记录笔记 -->`源码版本16.9.0`
 >
 >建议预备知识:react基础
 >
@@ -1510,7 +1510,688 @@
 
 # 二、创建更新
 
-`更多请看上方[React深入学习与源码解析笔记]`
+>react创建更新的方式有三种
+>
+>- ReactDOM.render
+>- setState
+>- forceUpdate
+
+## 1、ReactDOM.render
+
+### Ⅰ-使用概述
+
+>```jsx
+>// index.js
+>import React from 'react';
+>import ReactDOM from 'react-dom';
+>import App from './App';
+>ReactDOM.render(<App />, document.getElementById('root'));
+>```
+>
+>ReactDOM.render 是 React 程序的起点。ReactDom 中包含了 createPortal，findDOMNode， render 等方法，这里需要注意的是 `hydrate` 和 `render` 方法，这两个方法其实调用的是一个函数，`只是一个参数不同`，hydrate 一般用于服务端渲染，它会复用服务端返回的Html结构。我们这次只分析 render，hydrate后续会单独分析。
+
+### Ⅱ-ReactDOM源码示例
+
+>[`unstable_createRoot`] 和 [`unstable_createSyncRoot`] 这两个接口需要注意下，特别是 `createRoot`，其实就是 16.9 之前的 [Concurrent Mode] 的`替代`，会启用 React 的并行模型。
+>
+>创建`ReactRoot`，并且根据情况调用`root.legacy_renderSubtreeIntoContainer`或者`root.render`，前者是遗留的 API 将来应该会删除，根据`ReactDOM.render`的调用情况也可以发现`parentComponent`是写死的`null`
+>
+>```js
+>// react-dom\src\client\ReactDOM.js
+>const ReactDOM: Object = {
+>hydrate(element: React$Node, container: DOMContainer, callback: ?Function) {
+>// TODO: throw or warn if we couldn't hydrate?
+>return legacyRenderSubtreeIntoContainer(
+>null,
+>element,
+>container,
+>true,
+>callback,
+>);
+>},
+>
+>render(
+>element: React$Element<any>,
+>container: DOMContainer,
+>callback: ?Function,
+>) {
+>return legacyRenderSubtreeIntoContainer(
+>null,
+>element,
+>container,
+>false,
+>callback,
+>);
+>}，
+>
+>unstable_createRoot: createRoot,
+>unstable_createSyncRoot: createSyncRoot,
+>}
+>```
+
+### Ⅲ-render源码解析
+
+>render 接受三个参数，第一个参数是`ReactElement`，第二个参数为`组件所要挂载的DOM节点`，第三个参数为`回调函数`。
+>
+>```jsx
+>render(
+>element: React$Element<any>,
+>container: DOMContainer, //组件索要挂在的DOM节点
+>callback: ?Function, //回调函数
+>) {
+>//将继承来的render渲染成容器
+>return legacyRenderSubtreeIntoContainer(
+>null,
+>element,
+>container,
+>false,
+>callback,
+>);
+>}，
+>```
+
+#### ① legacyRenderSubtreeIntoContainer
+
+>[`legacyRenderSubtreeIntoContainer`] 函数第一个入参 parentComponent 是写死的 null，函数首先生成了一个 root 对象， 调用的方法是 [`legacyCreateRootFromDOMContainer`]。
+>
+>首先会创建`ReactRoot`对象，然后调用他的`render`方法
+>
+>```jsx
+>// react-dom\src\client\ReactDOM.js
+>function legacyRenderSubtreeIntoContainer(
+>parentComponent: ?React$Component<any, any>, // null
+>children: ReactNodeList, // ReactElement
+>container: DOMContainer, // dom节点
+>forceHydrate: boolean,
+>callback: ?Function,
+>) {
+>// 第一次 container 上没有 _reactRootContainer 属性，所以初次渲染为 null
+>let root: _ReactSyncRoot = (container._reactRootContainer: any);
+>let fiberRoot;
+>if (!root) {
+>// 生成一个 root 节点    ==根据DOM容器生成一个 根节点
+>root = container._reactRootContainer = legacyCreateRootFromDOMContainer(
+>container,
+>forceHydrate,
+>);
+>fiberRoot = root._internalRoot;
+>
+>// 处理回调函数
+>if (typeof callback === 'function') {
+>const originalCallback = callback;
+>callback = function() {
+>// 其实就是 root.current.child.stateNode
+>const instance = getPublicRootInstance(fiberRoot);
+>//以instance的身份调用回调函数
+>originalCallback.call(instance);
+>};
+>}
+>//DOMRenderer.unbatchedUpdates制定不使用batchedUpdates，因为这是初次渲染，需要尽快完成。    
+>// 不会进行批量策略的更新
+>unbatchedUpdates(() => {
+>updateContainer(children, fiberRoot, parentComponent, callback);
+>});
+>} else {
+>// root已经存在的情况，会复用之前生成的root，暂时不考虑这种情况
+>}
+>return getPublicRootInstance(fiberRoot);
+>}
+>```
+>
+>下一步运行`legacyCreateRootFromDOMContainer` -->[③ legacyCreateRootFromDOMContainer](#③ legacyCreateRootFromDOMContainer)
+>
+>接着解析初次渲染不会进入的[`updateContainer`]函数
+
+#### ② updateContainer
+
+>此处虽然初次渲染先不会进入[`updateContainer`]函数,但仍在此处给出部分解析,在[⑦ createFiber](#⑦ createFiber)创建完RootFiber后将会回到此处运行
+>
+>其中`DOMRenderer`是`react-reconciler/src/ReactFiberReconciler`，他的`updateContainer`如下在这里计算了一个时间，这个时间叫做`expirationTime`，顾名思义就是这次更新的 **超时时间**。
+>
+>关于时间是如何计算的   -->请看[expiration Time]部分
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler
+>export function updateContainer(
+>element: ReactNodeList,
+>container: OpaqueRoot,
+>parentComponent: ?React$Component<any, any>,
+>callback: ?Function,
+>): ExpirationTime {
+>const current = container.current
+>const currentTime = requestCurrentTime()
+>// 计算超时时间
+>const expirationTime = computeExpirationForFiber(currentTime, current)
+>return updateContainerAtExpirationTime(
+>element,
+>container,
+>parentComponent,
+>expirationTime,
+>callback,
+>)
+>}
+>
+>export function updateContainerAtExpirationTime(
+>element: ReactNodeList,
+>container: OpaqueRoot,
+>parentComponent: ?React$Component<any, any>,
+>expirationTime: ExpirationTime,
+>callback: ?Function,
+>) {
+>// TODO: If this is a nested container, this won't be the root.
+>const current = container.current
+>const context = getContextForSubtree(parentComponent)
+>if (container.context === null) {
+>container.context = context
+>} else {
+>container.pendingContext = context
+>}
+>//这个方法中开始了调度。
+>return scheduleRootUpdate(current, element, expirationTime, callback)
+>}
+>```
+>
+>然后调用了`updateContainerAtExpirationTime`，在这个方法里调用了`scheduleRootUpdate`,这个方法中开始了调度。
+>
+>首先要生成一个`update`，不管你是`setState`还是`ReactDOM.render`造成的 React 更新，都会生成一个叫`update`的对象，并且会赋值给`Fiber.updateQueue`
+>
+>关于`update`请看此部分
+
+##### scheduleWork
+
+>然后就是调用`scheduleWork`。注意到这里之前`setState`和`ReactDOM.render`是不一样，但进入`schedulerWork`之后，就是任务调度的事情了，跟之前你是怎么调用的没有任何关系
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler
+>function scheduleRootUpdate(
+>current: Fiber, // RootFiber 对象
+>element: ReactNodeList,// ReactElement
+>expirationTime: ExpirationTime,// 计算出的超时时间
+>suspenseConfig: null | SuspenseConfig, // null
+>callback: ?Function,
+>) {
+>//创建Updater
+>const update = createUpdate(expirationTime)
+>	//设置payload为React Element
+>update.payload = { element }
+>
+>callback = callback === undefined ? null : callback
+>if (callback !== null) {
+>warningWithoutStack(
+> typeof callback === 'function',
+> 'render(...): Expected the last optional `callback` argument to be a ' +
+>   'function. Instead received: %s.',
+> callback,
+>)
+>//设置回调  
+>update.callback = callback
+>}
+>//赋值给Fiber.updateQueue 
+>enqueueUpdate(current, update)
+>//任务调度,此部分就于后面部分详解
+>scheduleWork(current, expirationTime)
+>return expirationTime
+>}
+>```
+>
+>下面看看`createUpdate`创建Updater
+
+##### createUpdate
+
+>首先要做的就是创建一个 Updater， React 中所有的更新都要创建 Updater
+>
+>```js
+>// react-reconciler\src\ReactUpdateQueue.js
+>export function createUpdate(
+>expirationTime: ExpirationTime,
+>suspenseConfig: null | SuspenseConfig,
+>): Update<*> {
+>let update: Update<*> = {
+>// 更新的过期时间
+>expirationTime,
+>suspenseConfig,
+>// export const UpdateState = 0;
+>// export const ReplaceState = 1;
+>// export const ForceUpdate = 2;
+>// export const CaptureUpdate = 3;
+>// 指定更新的类型，值为以上几种
+>tag: UpdateState,
+>// 更新内容，比如`setState`接收的第一个参数
+>payload: null,
+>// 对应的回调，`setState`，`render`都有
+>callback: null,
+>// 指向下一个更新
+>next: null,
+>// 指向下一个`side effect`
+>nextEffect: null,
+>};
+>
+>return update;
+>}
+>```
+>
+>接下来会对 update 中的成员变量赋值，之后执行 enqueueUpdate
+
+##### enqueueUpdate
+
+>```js
+>// react-reconciler\src\ReactUpdateQueue.js
+>export function enqueueUpdate<State>(fiber: Fiber, update: Update<State>) {
+>
+>//alternate即workInProgress
+>//fiber即current
+>//current到alternate有一个映射关系
+>//所以要保证current和workInProgress的updateQueue是一致的
+>const alternate = fiber.alternate;
+>
+>// current的队列
+>let queue1;
+>
+>//alternate的队列
+>let queue2;
+>
+>// 如果 alternate 为null，说明此时没有更新，没有workInProgress，只更新queue1
+>if (alternate === null) {
+>// There's only one fiber.
+>queue1 = fiber.updateQueue;
+>queue2 = null;
+>if (queue1 === null) {
+> // 初始化更新队列，赋值给fiber.updateQueue
+> queue1 = fiber.updateQueue = createUpdateQueue(fiber.memoizedState);
+>}
+>} else {
+>// There are two owners.
+>// /如果alternate不为空，则取各自的更新队列
+>queue1 = fiber.updateQueue;
+>queue2 = alternate.updateQueue;
+>if (queue1 === null) {
+> if (queue2 === null) {
+>   // Neither fiber has an update queue. Create new ones.
+>   queue1 = fiber.updateQueue = createUpdateQueue(fiber.memoizedState);
+>   queue2 = alternate.updateQueue = createUpdateQueue(
+>     alternate.memoizedState,
+>   );
+> } else {
+>   // Only one fiber has an update queue. Clone to create a new one.
+>   // 如果queue2存在但queue1不存在的话，则根据queue2复制queue1
+>   // 复制的时候 firstUpdate， lastUpdate 是共用的
+>   queue1 = fiber.updateQueue = cloneUpdateQueue(queue2);
+> }
+>} else {
+> if (queue2 === null) {
+>   // Only one fiber has an update queue. Clone to create a new one.
+>   queue2 = alternate.updateQueue = cloneUpdateQueue(queue1);
+> } else {
+>   // Both owners have an update queue.
+> }
+>}
+>}
+>
+>// 经理上述步骤后，只可能是 queue2 为 null， queue1不可能为null
+>if (queue2 === null || queue1 === queue2) {
+>// There's only a single queue.
+>// 将update放入queue1中
+>appendUpdateToQueue(queue1, update);
+>} else {
+>// There are two queues. We need to append the update to both queues,
+>// while accounting for the persistent structure of the list — we don't
+>// want the same update to be added multiple times.
+>if (queue1.lastUpdate === null || queue2.lastUpdate === null) {
+> // One of the queues is not empty. We must add the update to both queues.
+> // react不想多次将同一个的update放入队列中
+> // 如果两个都是空队列，则添加update
+> appendUpdateToQueue(queue1, update);
+> appendUpdateToQueue(queue2, update);
+>
+>// 如果两个都不是空队列，由于两个结构共享，所以只在queue1加入update
+>// 在queue2中，将lastUpdate指向update
+>} else {
+> // Both queues are non-empty. The last update is the same in both lists,
+> // because of structural sharing. So, only append to one of the lists.
+> appendUpdateToQueue(queue1, update);
+> // But we still need to update the `lastUpdate` pointer of queue2.
+> queue2.lastUpdate = update;
+>}
+>}
+>}
+>```
+>
+>这段代码看着复杂，但实际上做的事情很简单，首先，初始化fiber对象上的updateQueue，没有的话新建一个，然后将这个update放到updateQueue中，其中让人迷惑的点在于为什么有两个queue，以及alternate的作用，简单来讲，在Fiber树更新的过程中，每个Fiber都会有一个跟其对应的Fiber， 我们称他为`current <==> workInProgress`，在渲染完成之后他们会交换位置，这样就保证了更新过程中Fiber本身不变，两个queue也就这么产生了。
+>
+>`alternate`即workInProgress,current到alternate有一个映射关系
+
+##### createUpdateQueue 
+
+>createUpdateQueue 就是创建了对象，如下。
+>
+>```js
+>// react-reconciler\src\ReactUpdateQueue.js
+>export function createUpdateQueue<State>(baseState: State): UpdateQueue<State> {
+>  const queue: UpdateQueue<State> = {
+>     // 每次操作完更新之后的`state`
+>    baseState,
+>    // 队列中的第一个`Update`
+>    firstUpdate: null,
+>    // 队列中的最后一个`Update`
+>    lastUpdate: null,
+>    // 第一个捕获类型的`Update`
+>    firstCapturedUpdate: null,
+>    // 最后一个捕获类型的`Update`
+>    lastCapturedUpdate: null,
+>    // 第一个`side effect`
+>    firstEffect: null,
+>    // 最后一个`side effect`
+>    lastEffect: null,
+>    // 第一个和最后一个捕获产生的`side effect`
+>    firstCapturedEffect: null,
+>    lastCapturedEffect: null,
+>  };
+>  return queue;
+>}
+>```
+>
+>到此，React 将更新放到了Fiber队列中，接下来就是使用scheduleWork来进行调度了，这个后续章节讲。
+
+#### ③ legacyCreateRootFromDOMContainer
+
+>```jsx
+>// react-dom\src\client\ReactDOM.js
+>function legacyCreateRootFromDOMContainer(
+>container: DOMContainer,
+>forceHydrate: boolean,
+>): _ReactSyncRoot {
+>// 判断 forceHydrate 参数，render 函数插入的是false
+>// shouldHydrateDueToLegacyHeuristic 函数主要是判断我们传入的Dom元素上是否有 data-reactroot 属性，这个属性一般是服务端渲染的时候赋给的
+>//[shouldHydrate]用作后续判断是否复用页面上的DOM节点
+>const shouldHydrate =
+>forceHydrate || shouldHydrateDueToLegacyHeuristic(container);
+>
+>// 如果不复用页面上的 DOM 节点，那么调用 removeChild 方法将 DOM 节点的子节点全部清除 
+>if (!shouldHydrate) {
+>let warned = false;
+>let rootSibling;
+>//循环删除每一个子节点
+>while ((rootSibling = container.lastChild)) {
+>container.removeChild(rootSibling);
+>}
+>}
+>
+>// 通过 new 创建对象
+>return new ReactSyncRoot(
+>container,
+>LegacyRoot,//LegacyRoot 是一个常量，代表的是传统的同步的渲染方式。
+>shouldHydrate //上面讲过 [这个属性一般是服务端渲染的时候赋给的,然后进行了判断],所以此处是判断是否为服务端渲染
+>? {
+>hydrate: true,
+>}
+>: undefined,
+>);
+>}
+>```
+>
+>LegacyRoot 是一个常量，代表的是传统的同步的渲染方式。
+>
+>```js
+>// shared\ReactRootTags.js
+>export const LegacyRoot = 0;
+>export const BatchedRoot = 1;
+>export const ConcurrentRoot = 2;
+>```
+>
+>接着看 `ReactSyncRoot` 函数
+
+#### ④  ReactSyncRoot
+
+>创建`ReactRoot`的时候会调用`DOMRenderer.createContainer`创建`FiberRoot`，在后期调度更新的过程中这个节点非常重要
+>
+>```jsx
+>// react-dom\src\client\ReactDOM.js
+>function ReactSyncRoot(
+>container: DOMContainer,
+>tag: RootTag, // Tag is either LegacyRoot or Concurrent Root
+>options: void | RootOptions, //前方传来的[服务端渲染判断]相关参数
+>) {
+>const hydrate = options != null && options.hydrate === true;
+>const hydrationCallbacks =
+>(options != null && options.hydrationOptions) || null;
+>const root = createContainer(container, tag, hydrate, hydrationCallbacks);
+>
+>// 可以看出，new 出来的对象上，只有一个 _internalRoot 属性
+>this._internalRoot = root;
+>}
+>```
+>
+>实际调用的是 `createContainer` 函数
+>
+>需要注意的是，如果不是ReactDOM.render，而是ReactDOM.unstable_createRoot，那么程序也会走到 createContainer 这步，但是 tag 就不是 RootTag，而是 ConcurrentRoot。
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler.js
+>export function createContainer(
+>containerInfo: Container,
+>tag: RootTag, // 0
+>hydrate: boolean, // false
+>hydrationCallbacks: null | SuspenseHydrationCallbacks, 
+>): OpaqueRoot {
+>return createFiberRoot(containerInfo, tag, hydrate, hydrationCallbacks);
+>}
+>```
+>
+>接着调用 `createFiberRoot` 函数
+
+#### ⑤ createFiberRoot 
+
+>```js
+>// react-reconciler\src\ReactFiberRoot.js
+>export function createFiberRoot(
+>containerInfo: any, // div
+>tag: RootTag, // 0
+>hydrate: boolean,// false //是否服务端渲染
+>hydrationCallbacks: null | SuspenseHydrationCallbacks,// null -->根据是否服务端渲染决定此参数
+>): FiberRoot {
+>
+>// new 一个 FiberRoot 对象
+>const root: FiberRoot = (new FiberRootNode(containerInfo, tag, hydrate): any);
+>
+>// false 不用管
+>if (enableSuspenseCallback) {
+>root.hydrationCallbacks = hydrationCallbacks;
+>}
+>
+>// Cyclic construction. This cheats the type system right now because
+>// stateNode is any.
+>// 创建了一个Fiber对象，由于是root节点的Fiber
+>const uninitializedFiber = createHostRootFiber(tag);
+>
+>// FiberRoot 通过 current 指向 [uninitializedFiber] 对象
+>root.current = uninitializedFiber;
+>
+>// [uninitializedFiber] 通过 stateNode 指向 dom 节点
+>uninitializedFiber.stateNode = root;
+>
+>// 返回 FiberRoot
+>return root;
+>}
+>```
+>
+>调用 new FiberRootNode 创建了一个 FiberRoot 对象
+>
+>```js
+>// react-reconciler\src\ReactFiberRoot.js
+>function FiberRootNode(containerInfo, tag, hydrate) {
+>// LegacyRoot | BatchedRoot | ConcurrentRoot
+>this.tag = tag;
+>// 当前应用对应的Fiber对象，是Root Fiber
+>this.current = null;
+>// root节点，render方法接收的第二个参数
+>this.containerInfo = containerInfo;
+>// react-dom不会用到
+>this.pendingChildren = null;
+>this.pingCache = null;
+>this.finishedExpirationTime = NoWork;
+>// 已经完成的任务的FiberRoot对象，如果你只有一个Root，那他永远只可能是这个Root对应的Fiber，或者是null
+>// 在commit阶段只会处理这个值对应的任务
+>this.finishedWork = null;
+>this.timeoutHandle = noTimeout;
+>// 顶层context对象，只有主动调用`renderSubtreeIntoContainer`时才会有用
+>this.context = null;
+>this.pendingContext = null;
+>// 用来确定第一次渲染的时候是否需要融合
+>this.hydrate = hydrate;
+>this.firstBatch = null;
+>this.callbackNode = null;
+>this.callbackExpirationTime = NoWork;
+>// 存在root中，最早的挂起时间
+>// 不确定是否挂起的状态（所有任务一开始均是该状态）
+>this.firstPendingTime = NoWork;
+>// 存在root中，最新的挂起时间
+>this.lastPendingTime = NoWork;
+>this.pingTime = NoWork;
+>}
+>```
+>
+>通过 `createHostRootFiber` 创建一个Fiber对象
+
+#### ⑥ createHostRootFiber 
+
+>此处会调用[createFiberRoot](#④ createFiberRoot)函数
+>
+>```js
+>// react-reconciler\src\ReactFiber.js
+>export function createHostRootFiber(tag: RootTag): Fiber {
+>
+>// 通过tag来生成mode
+>let mode;
+>if (tag === ConcurrentRoot) {
+>mode = ConcurrentMode | BatchedMode | StrictMode;
+>} else if (tag === BatchedRoot) {
+>mode = BatchedMode | StrictMode;
+>} else {
+>mode = NoMode;
+>}
+>
+>if (enableProfilerTimer && isDevToolsPresent) {
+>// Always collect profile timings when DevTools are present.
+>// This enables DevTools to start capturing timing at any point–
+>// Without some nodes in the tree having empty base times.
+>mode |= ProfileMode;
+>}
+>
+>// HostRoot 也是一个常量，用做标记，因为 root 节点的 Fiber 对象是Fiber树的头节点。后续会用的上
+>return createFiber(HostRoot, null, null, mode);
+>}
+>// react-reconciler\src\ReactTypeOfMode.js
+>export const NoMode = 0b0000;
+>export const StrictMode = 0b0001;
+>// TODO: Remove BatchedMode and ConcurrentMode by reading from the root
+>// tag instead
+>export const BatchedMode = 0b0010;
+>export const ConcurrentMode = 0b0100;
+>export const ProfileMode = 0b1000;
+>```
+>
+>在生成 mode 的过程中，用到了上面这些常量，是二进制的值。0b0100 | 0b0001 = 0b0101。使用按位或操作，不仅能提高运行速度，在常量的判断上也很方便
+>
+>接着调用`createFiber`
+
+#### ⑦ createFiber
+
+>```js
+>// react-reconciler\src\ReactFiber.js
+>const createFiber = function(
+>tag: WorkTag,
+>pendingProps: mixed,
+>key: null | string,
+>mode: TypeOfMode,
+>): Fiber {
+>// $FlowFixMe: the shapes are exact here but Flow doesn't like constructors
+>return new FiberNode(tag, pendingProps, key, mode);
+>};
+>// react-reconciler\src\ReactFiber.js
+>function FiberNode(
+>tag: WorkTag,
+>pendingProps: mixed,
+>key: null | string,
+>mode: TypeOfMode,
+>) {
+>// Instance
+>// 标记不同的组件类型
+>this.tag = tag;
+>// ReactElement里面的key
+>this.key = key;
+>// ReactElement.type，也就是我们调用`createElement`的第一个参数
+>this.elementType = null;
+>// 异步组件resolved之后返回的内容，一般是`function`或者`class`
+>this.type = null;
+>//跟当前Fiber相关本地状态（比如浏览器环境就是DOM节点）
+>this.stateNode = null;
+>
+>// Fiber
+>// 指向他在Fiber节点树中的`parent`，用来在处理完这个节点之后向上返回
+>this.return = null;
+>// 单链表树结构
+>// 指向自己的第一个子节点
+>this.child = null;
+>// 指向自己的兄弟结构
+>// 兄弟节点的return指向同一个父节点
+>this.sibling = null;
+>this.index = 0;
+>
+>// ref属性
+>this.ref = null;
+>
+>// 新的变动带来的新的props
+>this.pendingProps = pendingProps;
+>// 上一次渲染完成之后的props
+>this.memoizedProps = null;
+>// 该Fiber对应的组件产生的Update会存放在这个队列里面
+>this.updateQueue = null;
+>// 上一次渲染的时候的state
+>this.memoizedState = null;
+>// 一个列表，存放这个Fiber依赖的context
+>this.dependencies = null;
+>
+>// 用来描述当前Fiber和他子树的`Bitfield`
+>// 共存的模式表示这个子树是否默认是异步渲染的
+>// Fiber被创建的时候他会继承父Fiber
+>// 其他的标识也可以在创建的时候被设置
+>// 但是在创建之后不应该再被修改，特别是他的子Fiber创建之前
+>this.mode = mode;
+>
+>// Effects
+>// 用来记录Side Effect
+>this.effectTag = NoEffect;
+>// 单链表用来快速查找下一个side effect
+>this.nextEffect = null;
+>
+>// 子树中第一个side effect
+>this.firstEffect = null;
+>// 子树中最后一个side effect
+>this.lastEffect = null;
+>
+>// 代表任务在未来的哪个时间点应该被完成
+>// 不包括他的子树产生的任务
+>this.expirationTime = NoWork;
+>// 快速确定子树中是否有不在等待的变化
+>this.childExpirationTime = NoWork;
+>
+>// 在Fiber树更新的过程中，每个Fiber都会有一个跟其对应的Fiber
+>// 我们称他为`current <==> workInProgress`
+>// 在渲染完成之后他们会交换位置
+>this.alternate = null;
+>...
+>}
+>```
+>
+>终于把这个 RootFiber 创建出来了。接下来回到 legacyRenderSubtreeIntoContainer 函数，`执行 updateContainer(children, fiberRoot, parentComponent, callback)`。children是传入的 React 组件， fiberRoot 是一个 FiberRoot 对象，parentComponent 是 null。    
+>
+>updateContainer在前方②处已经给出详解-->[② updateContainer](#② updateContainer)
+
+
+
+
+
+# `更多请看上方[React深入学习与源码解析笔记]`
 
 
 

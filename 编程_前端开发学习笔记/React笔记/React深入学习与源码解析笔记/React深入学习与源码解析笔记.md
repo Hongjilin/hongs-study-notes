@@ -2334,7 +2334,179 @@
 >- `Sync`，代表同步执行，不会被调度也不会被打断
 >- `async`模式下计算出来的过期时间，一个时间戳
 >
->更详细请看官方文档叙述
+>更详细请看官方文档叙述,这里不再赘述
+
+## 3、setState
+
+>setState 用于更新 state 的状态，也是我们最常用的一个 API。举个栗子:
+>
+>```jsx
+>//栗子
+>class Parent extends React.Component {
+>  state = {  num: 1 },
+>
+>  updateNum1() {
+>    const newNum = this.state.num + 1;
+>    this.setState(
+>      {num: newNum}，
+>      //这里打印的是最新的state值
+>      () => { console.log(this.state.num); }
+>    )
+>  }
+>
+>  updateNum2() {
+>    const newNum = this.state.num + 1;
+>    this.setState(
+>      (preState) => {num: preState.num + 1},
+>      () => { console.log(this.state.num); }
+>    )
+>  }
+>  ...
+>}
+>```
+>
+>setState 的第一个参数可以传对象，也可以传方法，如果传对象，这个对象表示的就是新的 state，如果传方法，方法的返回值就是新的 state，方法入参则是当前的 state。第二个参数是一个回调函数，代表的是 setState 更新成功后执行的方法。这也是我们都知道的知识点了
+
+### Ⅰ-setState 的定义来源于 React.Component
+
+>setState 的定义来源于 React.Component
+>
+>```js
+>// react\src\ReactBaseClasses.js
+>Component.prototype.setState = function(partialState, callback) {
+>  invariant(
+>    typeof partialState === 'object' ||
+>      typeof partialState === 'function' ||
+>      partialState == null,
+>      //警告
+>    'setState(...): takes an object of state variables to update or a ' +
+>      'function which returns an object of state variables.',
+>  );
+>  this.updater.enqueueSetState(this, partialState, callback, 'setState');
+>};
+>```
+>
+>可以很明显的看到，`setState 的第一参数需要判断是否是对象，或者是函数，而且不能为空`。
+
+### Ⅱ-this.updater 是什么时候赋值的呢？
+
+>这里有一个问题就是 this.updater 是什么时候赋值的呢？
+>
+>```js
+>// react\src\ReactBaseClasses.js
+>function Component(props, context, updater) {
+>...
+>this.updater = updater || ReactNoopUpdateQueue;
+>}
+>```
+>
+>Component 在初始化的时候，如果 updater 没有传入，默认使用ReactNoopUpdateQueue 进行初始化。
+>
+>```js
+>// react\src\ReactNoopUpdateQueue.js
+>const ReactNoopUpdateQueue = {
+>...
+>enqueueSetState: function(
+>publicInstance,
+>partialState,
+>callback,
+>callerName,
+>) {
+>warnNoop(publicInstance, 'setState');
+>},
+>};
+>```
+>
+>ReactNoopUpdateQueue 主要起到一个在非生产版本中警告(warning)的作用。真正的 updater 是在 render 中注入(inject)的。`因此如果你在 constructor 中尝试调用 setState,也会给出相应的警告表明在非安装或已卸载的组件中不能使用setState。`
+>
+
+### Ⅲ-为什么这么设计呢?
+
+>React 源码大量地依赖于注入原则，实现在其他平台环境的渲染，即它可用于React Native，在浏览器端或服务器端运行的 ReactDOM。真实的update 的注入会在后续讲到。这里假设这个 updater 已经注入完成。
+>
+>```js
+>// react-reconciler\src\ReactFiberClassComponent.js
+>const classComponentUpdater = {
+>isMounted,
+>  enqueueSetState(inst, payload, callback) {
+>  const fiber = getInstance(inst);
+>const currentTime = requestCurrentTime();
+>const suspenseConfig = requestCurrentSuspenseConfig();
+>const expirationTime = computeExpirationForFiber(
+> currentTime,
+> fiber,
+> suspenseConfig,
+>);
+>
+>  const update = createUpdate(expirationTime, suspenseConfig);
+>  update.payload = payload;
+>    if (callback !== undefined && callback !== null) {
+>     update.callback = callback;
+>    }
+>    
+>  enqueueUpdate(fiber, update);
+>    scheduleWork(fiber, expirationTime);
+>  },
+>...
+>};
+>```
+>
+>enqueueSetState 的代码和 之前讲的 scheduleRootUpdate 的代码基本上是一模一样的，就不加赘述了。
+
+### Ⅳ-forceUpdate
+
+>```js
+>// react-reconciler\src\ReactFiberClassComponent.js
+>const classComponentUpdater = {
+>  ...
+>  enqueueForceUpdate(inst, callback) {
+>    const fiber = getInstance(inst);
+>    const currentTime = requestCurrentTime();
+>    const suspenseConfig = requestCurrentSuspenseConfig();
+>    const expirationTime = computeExpirationForFiber(
+>      currentTime,
+>      fiber,
+>      suspenseConfig,
+>    );
+>
+>    const update = createUpdate(expirationTime, suspenseConfig);
+>    update.tag = ForceUpdate;
+>
+>    if (callback !== undefined && callback !== null) {
+>      update.callback = callback;
+>    }
+>
+>    enqueueUpdate(fiber, update);
+>    scheduleWork(fiber, expirationTime);
+>  },
+>};
+>```
+>
+>setState和forceUpdate的代码我们可以看到，几乎是一模一样的。唯一的区别是Update.tag
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1644,7 +1644,7 @@
 >
 >其中`DOMRenderer`是`react-reconciler/src/ReactFiberReconciler`，他的`updateContainer`如下在这里计算了一个时间，这个时间叫做`expirationTime`，顾名思义就是这次更新的 **超时时间**。
 >
->关于时间是如何计算的   -->请看[expiration Time]部分
+>关于时间是如何计算的   -->请看[[expiration Time](#2、expirationTime计算)]部分
 >
 >```js
 >// react-reconciler\src\ReactFiberReconciler
@@ -2182,6 +2182,163 @@
 >终于把这个 RootFiber 创建出来了。接下来回到 legacyRenderSubtreeIntoContainer 函数，`执行 updateContainer(children, fiberRoot, parentComponent, callback)`。children是传入的 React 组件， fiberRoot 是一个 FiberRoot 对象，parentComponent 是 null。    
 >
 >updateContainer在前方②处已经给出详解-->[② updateContainer](#② updateContainer)
+
+## 2、expirationTime计算公式
+
+> expirationTime代表任务在未来的哪个时间点应该被完成。[`1、ReactDOM.render的`[② updateContainer](#② updateContainer)]中略过了它的计算分析，这里重新梳理下逻辑。
+
+### Ⅰ-回到`updateContainer`方法开始分析 
+
+>[② updateContainer](#② updateContainer)
+>
+>在生成一个新的Fiber节点后，需要更新这个Fibre节点的一些字段，调用 `updateContainer` 方法。
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler.js
+>export function updateContainer(
+>  element: ReactNodeList,
+>  container: OpaqueRoot,
+>  parentComponent: ?React$Component<any, any>,
+>  callback: ?Function,
+>): ExpirationTime {
+>  const current = container.current;
+>
+>  // 当前时间的一个变换
+>  const currentTime = requestCurrentTime();
+>
+>  // 忽略，返回null
+>  const suspenseConfig = requestCurrentSuspenseConfig();
+>
+>  // 计算过期时间
+>  const expirationTime = computeExpirationForFiber(
+>    currentTime,
+>    current,
+>    suspenseConfig,
+>  );
+>  return updateContainerAtExpirationTime(
+>    element,
+>    container,
+>    parentComponent,
+>    expirationTime,
+>    suspenseConfig,
+>    callback,
+>  );
+>}
+>```
+
+### Ⅱ- requestCurrentTime
+
+>首先看下其中调用的 `requestCurrentTime` 方法。
+>
+>```js
+>// react-reconciler\src\ReactFiberReconciler.js
+>export function requestCurrentTime() {
+>if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
+>// 我们在React内部，所以可以读取实际时间。  
+>return msToExpirationTime(now());
+>}
+>// 我们不在React中，所以我们可能在浏览器事件的中间
+>if (currentEventTime !== NoWork) {
+>//所有更新使用相同的开始时间，直到我们再次进入React。  
+>return currentEventTime;
+>}
+>// 这是React推出以来的第一次更新。 计算一个新的开始时间。  
+>currentEventTime = msToExpirationTime(now());//msToExpirationTime 函数是用一个固定值减去当前 ms 值除以10取整
+>return currentEventTime;
+>}
+>```
+>
+>我们一句一句看。
+>
+>```js
+>if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
+>// 我们在React内部，所以可以读取实际时间。  
+>return msToExpirationTime(now());//msToExpirationTime 函数是用一个固定值减去当前 ms 值除以10取整
+>}
+>```
+>
+>首先需要看一个全局变量， 那就是 `executionContext`。
+>
+>```js
+>const NoContext = /*                    */ 0b000000;
+>const BatchedContext = /*               */ 0b000001;
+>const EventContext = /*                 */ 0b000010;
+>const DiscreteEventContext = /*         */ 0b000100;
+>const LegacyUnbatchedContext = /*       */ 0b001000;
+>const RenderContext = /*                */ 0b010000;
+>const CommitContext = /*                */ 0b100000;
+>
+>let executionContext: ExecutionContext = NoContext;
+>```
+>
+>可以看出， `executionContext 是一个二进制的枚举值`， 初始值为 NoContext。
+>
+>executionContext & (RenderContext | CommitContext)) !== NoContext 这句话其实是`判断当前 executionContext 是否处在 RenderContext 或者是 CommitContext 的阶段。`
+>
+>那么什么时候 executionContext 会是 RenderContext 或者是 CommitContext 的阶段呢。只有在你 `renderRoot` 的时候， executionContext有可能是这两个值。`RenderContext代表着React正在计算更新`，`CommitContext代表着React正在提交更新`。
+>
+>```js
+>export const Sync = MAX_SIGNED_31_BIT_INT;
+>export const Batched = Sync - 1;
+>
+>const UNIT_SIZE = 10;
+>const MAGIC_NUMBER_OFFSET = Batched - 1;
+>//msToExpirationTime 函数是用一个固定值减去当前 ms 值除以10取整
+>export function msToExpirationTime(ms: number): ExpirationTime {
+>// 总是添加偏移量，这样我们就不会与NoWork的神奇数字发生冲突。
+>return MAGIC_NUMBER_OFFSET - ((ms / UNIT_SIZE) | 0);
+>}
+>//expirationTimeToMs 是将expirationTime还原为 ms 值。
+>export function expirationTimeToMs(expirationTime: ExpirationTime): number {
+>return (MAGIC_NUMBER_OFFSET - expirationTime) * UNIT_SIZE;
+>}
+>
+>function ceiling(num: number, precision: number): number {
+>  return (((num / precision) | 0) + 1) * precision
+>}
+>
+>```
+>
+>msToExpirationTime 函数是用一个固定值减去当前 ms 值除以10取整。expirationTimeToMs 是将expirationTime还原为 ms 值。 `这里为什么要除以10呢，原因是可以抹平10ms以内的误差，前后很近的两次更新，计算出的 expirationTime 是一样的，有利于批量更新`。
+>
+>`根据这个规则，优先级越高的任务，计算出的 expirationTime 越大（这和之前版本是完全反着的）`。Sync 是最大的， 它等以MAX_SIGNED_31_BIT_INT，是0b111111111111111111111111111111。
+>
+>综上，我们可以认为:
+>
+>1. 在 render 和 commit 阶段我们直接获取当前真实时间。
+>2. `而且currentEventTime不处于NoWork就说明react正在处理浏览器事件，React想让来自同一事件的相同优先级的更新的保持相同的时间，因此直接返回之前的时间`。
+>   - React 这么设计抹相当于抹平了`25ms`内计算过期时间的误差，那他为什么要这么做呢？我思考了很久都没有得到答案，直到有一天我盯着代码发呆，看到`LOW_PRIORITY_BATCH_SIZE`这个字样，`bacth`，是不是就对应`batchedUpdates`？再细想了一下，这么做也许是为了让非常相近的两次更新得到相同的`expirationTime`，然后在一次更新中完成，相当于一个自动的`batchedUpdates`。
+>3. 如果没有任务我们计算一个新的当前时间并赋给全局变量。
+>4. 另外一个要提的就是`msToExpirationTime`和`expirationTimeToMs`方法，他们是想换转换的关系。**有一点非常重要，那就是用来计算`expirationTime`的`currentTime`是通过`msToExpirationTime(now)`得到的，也就是预先处理过的，先处以`10`再加了`2`，所以后面计算`expirationTime`要减去`2`也就不奇怪了**
+
+### Ⅲ-各种不同的expirationTime
+
+>在 React 的调度过程中存在着非常多不同的*`expirationTime`*变量帮助 React 去实现在单线程环境中调度不同优先级的任务这个需求
+>
+>- `root.expirationTime`
+>- `root.nextExpirationTimeToWorkOn`
+>- `root.childExpirationTime`
+>- `root.earliestPendingTime & root.lastestPendingTime`
+>- `root.earliestSuspendedTime & root.lastestSuspendedTime`
+>- `root.lastestPingedTime`
+>- `nextFlushedExpirationTime`
+>- `nextLatestAbsoluteTimeoutMs`
+>- `currentRendererTime`
+>- `currentSchedulerTime`
+>
+>另外，所有节点都会具有`expirationTime`和`childExpirationTime`两个属性
+>
+>以上所有值初始都是`NoWork`也就是`0`，以及他们一共会有三种情况：
+>
+>- `NoWork`，代表没有更新
+>- `Sync`，代表同步执行，不会被调度也不会被打断
+>- `async`模式下计算出来的过期时间，一个时间戳
+>
+>更详细请看官方文档叙述
+
+
+
+
 
 
 

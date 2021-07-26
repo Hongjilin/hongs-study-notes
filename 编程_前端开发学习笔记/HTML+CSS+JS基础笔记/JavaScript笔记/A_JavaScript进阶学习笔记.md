@@ -2,7 +2,7 @@
 
 > 此笔记为JavaScript进阶学习笔记,会对之前javaScript基础做一次梳理,并进行对于其进阶知识进行学习与记录
 >
-> 借阅以及参照学习资料:B站尚硅谷的[`尚硅谷JavaScript高级教程(javascript实战进阶)`](https://www.bilibili.com/video/BV14s411E7qf?share_source=copy_web);印记中文的[`现在JavaScript教程`](https://zh.javascript.info/); CSDN的[Free Joe的JS执行过程与执行上下文（栈）](https://blog.csdn.net/wangfeijiu)
+> 借阅以及参照学习资料:B站尚硅谷的[`尚硅谷JavaScript高级教程(javascript实战进阶)`](https://www.bilibili.com/video/BV14s411E7qf?share_source=copy_web)、黑马程序员的[[JavaScript基础语法](https://www.bilibili.com/video/BV1ux411d75J?share_source=copy_web)];印记中文的[`现在JavaScript教程`](https://zh.javascript.info/); CSDN的[Free Joe的JS执行过程与执行上下文（栈）](https://blog.csdn.net/wangfeijiu)
 >
 > 此笔记为实习工作半年后发觉之前学习JavaScript不够系统全面,或者说当初只是囫囵吞枣,首先并没有系统学习javaScript,其次没有较为深入的学习进阶知识,只是知道`怎么做,而不知道为什么`(当然这也符合本人学习节奏,先`know how`再`know why`)
 >
@@ -865,3 +865,133 @@
 >}
 >c(2) // 报错  c is not a function
 >```
+
+## 3、作用域与作用域链
+
+### Ⅰ-作用域
+
+>1. 理解
+>  * 就是一块"地盘", 一个代码段所在的区域
+>  * 它是静态的(相对于上下文对象), 在编写代码时就确定了
+>2. 分类
+>  * 全局作用域
+>  * 函数作用域
+>  * 没有块作用域(ES6有了)   -->(java语言也有)
+>3. 作用
+>  * 隔离变量，不同作用域下同名变量不会有冲突
+>
+>```js
+>/*  //没块作用域
+>  if(true) { var c = 3 }
+>  console.log(c)
+>  */
+>  var a = 10,
+>    b = 20
+>  function fn(x) {
+>    var a = 100, c = 300;
+>    console.log('fn()', a, b, c, x) //100 20 300 10
+>    function bar(x) {
+>      var a = 1000, d = 400
+>      console.log('bar()', a, b, c, d, x)
+>    }
+>    bar(100)//1000 20 300 400 100
+>    bar(200)//1000 20 300 400 200
+>  }
+>  fn(10)
+>```
+
+### Ⅱ-作用域与执行上下文的区别与联系
+
+>1. 区别1:
+>  * 全局作用域之外，每个函数都会创建自己的作用域，`作用域在函数定义时就已经确定了。而不是在函数调用时`
+>  * 全局执行上下文环境是在全局作用域确定之后, js代码马上执行之前创建
+>  * 函数执行上下文是在调用函数时, 函数体代码执行之前创建
+>2. 区别2:
+>  * 作用域是静态的, 只要函数定义好了就一直存在, 且不会再变化
+>  * 执行上下文是动态的, 调用函数时创建, 函数调用结束时就会自动释放
+>3. 联系:
+>  * 执行上下文(对象)是从属于所在的作用域
+>  * 全局上下文环境==>全局作用域
+>  * 函数上下文环境==>对应的函数使用域
+
+### Ⅲ-作用域链
+
+>1. 理解
+>  * 多个上下级关系的作用域形成的链, 它的方向是从下向上的(从内到外)
+>  * 查找变量时就是沿着作用域链来查找的
+>2. 查找一个变量的查找规则
+>  * 在当前作用域下的执行上下文中查找对应的属性, 如果有直接返回, 否则进入2
+>  * 在上一级作用域的执行上下文中查找对应的属性, 如果有直接返回, 否则进入3
+>  * 再次执行2的相同操作, 直到全局作用域, 如果还找不到就抛出找不到的异常
+>
+>```js
+>  var a = 1
+>  function fn1() {
+>    var b = 2
+>    function fn2() {
+>      var c = 3
+>      console.log(c)
+>      console.log(b)
+>      console.log(a)
+>      console.log(d)
+>    }
+>    fn2()
+>  }
+>  fn1()
+>```
+
+### Ⅳ-相关面试题
+
+#### ① `作用域在函数定义时就已经确定了。而不是在函数调用时`
+
+>作用域1:`作用域在函数定义时就已经确定了。而不是在函数调用时`
+>
+>```js
+>  var x = 10;
+>  function fn() { console.log(x); }
+>  function show(f) {
+>    var x = 20;
+>    f();
+>  }
+>  show(fn); //输出10
+>```
+>
+>![image-20210726192714660](A_JavaScript进阶学习笔记中的图片/image-20210726192714660.png)
+
+#### ② 对象变量不能产生局部作用域
+
+>```js
+>var fn = function () {
+>  console.log(fn)
+>}
+>fn()
+>
+>var obj = { //对象变量不能产生局部作用域,所以会找到全局去,导致报错
+>  fn2: function () {
+>   console.log(fn2)
+>   //console.log(this.fn2)
+>  }
+>}
+>obj.fn2()
+>```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

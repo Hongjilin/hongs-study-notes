@@ -71,69 +71,70 @@
 >
 >1. 工具包封装(函数实现主体)
 >
->   ```tsx
->   import XLSX from 'xlsx';
->   class Tool {
->     /**
->      * 导出成XLSX文件
->      * @param dataSource  传入的对象数组
->      * @param fileName  生成的文件名
->      * @param title 设置列名,如果不传入则默认将对象数组的key当作表头
->      */
->     OnExport = (dataSource: Array<object>, fileName: string, title?: any) => {
->       //当传入的数组长度为0,直接退出
->       if (dataSource.length == 0) return;
->       let data = dataSource;
->       let head = Object.keys(data[0]);
->       //取出json格式数据中的[value]值
->       data = data.map((e) => Object.values(e));
->       //如果不传入[title],则用keys当表头  
->       data.unshift(title || head);
->       //文件名
->       let filename = `${fileName}.xlsx`;
->       // let ws_name = "xxx";
->       let wb = XLSX.utils.book_new();
->       let ws = XLSX.utils.aoa_to_sheet(data);
->       XLSX.utils.book_append_sheet(wb, ws);
->       XLSX.writeFile(wb, filename);
->     };
->   }
->   export const tool = new Tool();
->   export default Tool;
->   ```
+>  ```tsx
+>  import XLSX from 'xlsx';
+>  class Tool {
+>    /**
+>     * 导出成XLSX文件
+>     * @param dataSource  传入的对象数组
+>     * @param fileName  生成的文件名
+>     * @param title 设置列名,如果不传入则默认将对象数组的key当作表头
+>     */
+>    OnExport = (dataSource: Array<object>, fileName: string, title?: any) => {
+>      //当传入的数组长度为0,直接退出  此处加[?]是因为防错,防止真有人乱传参数
+>      //[!dataSource ]是防止传入undefined导致函数执行错误
+>       if (!dataSource || dataSource?.length == 0) return;
+>      let data = dataSource;
+>      let head = Object.keys(data[0]);
+>      //取出json格式数据中的[value]值
+>      data = data.map((e) => Object.values(e));
+>      //如果不传入[title],则用keys当表头  
+>      data.unshift(title || head);
+>      //文件名
+>      let filename = `${fileName}.xlsx`;
+>      // let ws_name = "xxx";
+>      let wb = XLSX.utils.book_new();
+>      let ws = XLSX.utils.aoa_to_sheet(data);
+>      XLSX.utils.book_append_sheet(wb, ws);
+>      XLSX.writeFile(wb, filename);
+>    };
+>  }
+>  export const tool = new Tool();
+>  export default Tool;
+>  ```
 >
 >2. 调用
 >
->   ```jsx
->   //导入工具包
->   import { Tool } from '~/utils';
->   const tools = new Tool();
->   
->   //[this.manage.date]是一个时间数据
->   //[this.datas]是要导出的数据  -->通常是服务端给定的数据,经过我们处理后成为如[Ⅰ]中示例代码的那种格式
->   
->    exportXlsx = () => {
->        //用于拼接月份
->      const month = this.manage.date.format('MM');
->      /*此处是列表头要渲染成中文,自定义列表头写法
->      let titles = Object.keys(this.datas[0]).map((key) => DATAS[key]);
->       console.log(titles, "titlestitlestitles")'
->       tools.OnExport(toJS(this.datas), `${month}月份的数据表`,titles);
->       */
->       //没有数据能导出时给出提示  -->此处调用的是封装好的[信息提示]组件,同学们可以忽略此行代码
->      if (this.datas?.length == 0)  SuperNotification.warning({  msg: '无数据可导出'});
->      //调用工具函数
->      tools.OnExport(toJS(this.datas), `${month}月份的数据表`);
->    };
->   
->   --------------- 将其绑定于点击事件上 ----------------------------------------
->    <Button type="primary"  onClick={() => { store.exportXlsx(); }} >
->      导出
->    </Button>
->   ```
+>  ```jsx
+>  //导入工具包
+>  import { Tool } from '~/utils';
+>  const tools = new Tool();
 >
->   [`this.manage.date`]是一个时间数据
->   [`this.datas`]是要导出的数据  -->通常是服务端给定的数据,经过我们处理后成为如[`Ⅰ`]中示例代码的假数据那种格式
+>  //[this.manage.date]是一个时间数据
+>  //[this.datas]是要导出的数据  -->通常是服务端给定的数据,经过我们处理后成为如[Ⅰ]中示例代码的那种格式
+>
+>   exportXlsx = () => {
+>       //用于拼接月份
+>     const month = this.manage.date.format('MM');
+>     /*此处是列表头要渲染成中文,自定义列表头写法
+>     let titles = Object.keys(this.datas[0]).map((key) => DATAS[key]);
+>      console.log(titles, "titlestitlestitles")'
+>      tools.OnExport(toJS(this.datas), `${month}月份的数据表`,titles);
+>      */
+>      //没有数据能导出时给出提示  -->此处调用的是封装好的[信息提示]组件,同学们可以忽略此行代码
+>     if (this.datas?.length == 0)  SuperNotification.warning({  msg: '无数据可导出'});
+>     //调用工具函数
+>     tools.OnExport(toJS(this.datas), `${month}月份的数据表`);
+>   };
+>
+>  --------------- 将其绑定于点击事件上 ----------------------------------------
+>   <Button type="primary"  onClick={() => { store.exportXlsx(); }} >
+>     导出
+>   </Button>
+>  ```
+>
+>  [`this.manage.date`]是一个时间数据
+>  [`this.datas`]是要导出的数据  -->通常是服务端给定的数据,经过我们处理后成为如[`Ⅰ`]中示例代码的假数据那种格式
 
 # Ⅲ-成功截图示例
 

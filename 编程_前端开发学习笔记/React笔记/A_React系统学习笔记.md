@@ -371,84 +371,79 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ###### 1、字符串形式的ref(`不推荐,将被淘汰`)
 
 ```jsx
-	//展示左侧输入框的数据
-			showData = ()=>{
-				const {input1} = this.refs
-				alert(input1.value)
-			}
-			//展示右侧输入框的数据
-			showData2 = ()=>{
-				const {input2} = this.refs
-				alert(input2.value)
-			}
-			render(){
-				return(
-					<div>
-						<input ref="input1" type="text" placeholder="点击按钮提示数据"/>&nbsp;
-						<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
-						<input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
-					</div>
-				)
-			}
-		}
+//展示左侧输入框的数据
+	showData = ()=>{
+		const {input1} = this.refs
+		alert(input1.value)
+	}
+	//展示右侧输入框的数据
+	showData2 = ()=>{
+		const {input2} = this.refs
+		alert(input2.value)
+	}
+	render(){
+		return(
+			<div>
+				<input ref="input1" type="text" placeholder="点击按钮提示数据"/>&nbsp;
+				<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+				<input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+			</div>
+		)
+	}
+}
 ```
 
 ###### 2、回调形式的ref
 
 ```jsx
-/**
-下面的this指的是组件实例,我直接this.input1 = c 意思是给实例上的input1赋值,之后直接通过调用打印得到
-*/
+/**下面的this指的是组件实例,我直接this.input1 = c 意思是给实例上的input1赋值,之后直接通过调用打印得到*/
 //展示左侧输入框的数据
-			showData = ()=>{
-				const {input1} = this
-				alert(input1.value)
-			}
-			//展示右侧输入框的数据
-			showData2 = ()=>{
-				const {input2} = this
-				alert(input2.value)
-			}
-			render(){
-				return(
-					<div>
-						<input ref={c => this.input1 = c } type="text" placeholder="点击按钮提示数据"/>&nbsp;
-						<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
-						<input onBlur={this.showData2} ref={c => this.input2 = c } type="text" placeholder="失去焦点提示数据"/>&nbsp;
-					</div>
-				)
-			}
-		}
+	showData = ()=>{
+		const {input1} = this
+		alert(input1.value)
+	}
+	//展示右侧输入框的数据
+	showData2 = ()=>{
+		const {input2} = this
+		alert(input2.value)
+	}
+	render(){
+		return(
+			<div>
+				<input ref={c => this.input1 = c } type="text" placeholder="点击按钮提示数据"/>&nbsp;
+				<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+				<input onBlur={this.showData2} ref={c => this.input2 = c } type="text" placeholder="失去焦点提示数据"/>&nbsp;
+			</div>
+		)
+	}
+}
 
 ```
 
 ###### 3、createRef创建ref容器`最推荐的`
 
 ```jsx
-	/* 
-				React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点,该容器是“专人专用”的
-			 */
-			myRef = React.createRef()
-			myRef2 = React.createRef()
-			//展示左侧输入框的数据
-			showData = ()=>{
-				alert(this.myRef.current.value);
-			}
-			//展示右侧输入框的数据
-			showData2 = ()=>{
-				alert(this.myRef2.current.value);
-			}
-			render(){
-				return(
-					<div>
-						<input ref={this.myRef} type="text" placeholder="点击按钮提示数据"/>&nbsp;
-						<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
-						<input onBlur={this.showData2} ref={this.myRef2} type="text" placeholder="失去焦点提示数据"/>&nbsp;
-					</div>
-				)
-			}
-		}	
-
+/*React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点,该容器是“专人专用”的*/
+myRef = React.createRef()
+myRef2 = React.createRef()
+//展示左侧输入框的数据
+showData = ()=>{
+	alert(this.myRef.current.value);
+}
+//展示右侧输入框的数据
+showData2 = ()=>{
+	alert(this.myRef2.current.value);
+}
+render(){
+	return(
+		<div>
+			<input ref={this.myRef} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+			<button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+			<input onBlur={this.showData2} ref={this.myRef2} type="text" placeholder="失去焦点提示数据"/>&nbsp;
+		</div>
+	)
+}
+}	
 ```
 
 ### 4、事件处理与收集表单数据
@@ -470,59 +465,58 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ##### 1、受控组件
 
 ```jsx
-		//初始化状态
-			state = {
-				username:'', //用户名
-				password:'' //密码
-			}
+state = {//初始化状态
+	username:'', //用户名
+	password:'' //密码
+}
 
-			//保存用户名到状态中
-			saveUsername = (event)=>{
-				this.setState({username:event.target.value})
-			}
+//保存用户名到状态中
+saveUsername = (event)=>{
+	this.setState({username:event.target.value})
+}
 
-			//保存密码到状态中
-			savePassword = (event)=>{
-				this.setState({password:event.target.value})
-			}
+//保存密码到状态中
+savePassword = (event)=>{
+	this.setState({password:event.target.value})
+}
 
-			//表单提交的回调
-			handleSubmit = (event)=>{
-				event.preventDefault() //阻止表单提交
-				const {username,password} = this.state
-				alert(`你输入的用户名是：${username},你输入的密码是：${password}`)
-			}
+//表单提交的回调
+handleSubmit = (event)=>{
+	event.preventDefault() //阻止表单提交
+	const {username,password} = this.state
+	alert(`你输入的用户名是：${username},你输入的密码是：${password}`)
+}
 
-			render(){
-				return(
-					<form onSubmit={this.handleSubmit}>
-						用户名：<input onChange={this.saveUsername} type="text" name="username"/>
-						密码：<input onChange={this.savePassword} type="password" name="password"/>
-						<button>登录</button>
-					</form>
-				)
-			}
-		}
+render(){
+	return(
+		<form onSubmit={this.handleSubmit}>
+			用户名：<input onChange={this.saveUsername} type="text" name="username"/>
+			密码：<input onChange={this.savePassword} type="password" name="password"/>
+			<button>登录</button>
+		</form>
+	)
+}
+}
 ```
 
 ##### 2、非受控组件
 
 ```jsx
-		handleSubmit = (event)=>{
-				event.preventDefault() //阻止表单提交
-				const {username,password} = this
-				alert(`你输入的用户名是：${username.value},你输入的密码是：${password.value}`)
-			}
-			render(){
-				return(
-					<form onSubmit={this.handleSubmit}>
-						用户名：<input ref={c => this.username = c} type="text" name="username"/>
-						密码：<input ref={c => this.password = c} type="password" name="password"/>
-						<button>登录</button>
-					</form>
-				)
-			}
-		}
+handleSubmit = (event)=>{
+		event.preventDefault() //阻止表单提交
+		const {username,password} = this
+		alert(`你输入的用户名是：${username.value},你输入的密码是：${password.value}`)
+	}
+	render(){
+		return(
+			<form onSubmit={this.handleSubmit}>
+				用户名：<input ref={c => this.username = c} type="text" name="username"/>
+				密码：<input ref={c => this.password = c} type="password" name="password"/>
+				<button>登录</button>
+			</form>
+		)
+	}
+}
 ```
 
 ### 5、高阶函数与函数柯里化
@@ -566,26 +560,26 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >1. 初始化阶段:由ReactDOM.render()触发 --初次渲染
 >
->      1. constructor()
+>      - constructor()
 >
->      2. compinentWillMount()
+>      - compinentWillMount()
 >
->      3. render()
+>      - render()
 >
->      4. componentDidMount() ==>`常用` 组件将要渲染
+>      - componentDidMount() ==>`常用` 组件将要渲染
 >
 >    一般在这个钩子中做一些初始化的事情,如:开启定时器,发送网络请求,订阅消息等
 >
 >2. 更新阶段:由组件内部的this.setState()或者父组件的render触发
 >
->      1. shouldComponentUpdate() 组件应该更新
->      2. componentWillUpdate() 组件将要更新
->      3. render()   ===>`必须使用`的一个
->      4. componentDidUpdate() 组件将要更新
+>      - shouldComponentUpdate() 组件应该更新
+>      - componentWillUpdate() 组件将要更新
+>      - render()   ===>`必须使用`的一个
+>      - componentDidUpdate() 组件将要更新
 >
 >3. 卸载组件:由ReactDOM.unmountComponentAtNode(`卸载节点上的组件`)触发
 >
->      1. componentWillUnmount() ===>`常用` 组件将要卸载
+>      - componentWillUnmount() ===>`常用` 组件将要卸载
 >
 >    一般在这个钩子中做一些首位的事情,如:关闭定时器,取消订阅等
 
@@ -593,22 +587,22 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 >1. 初始化阶段:由ReactDOM.render()触发 ---初次渲染
 >
->      1. constructor()
->      2. getDerivedStateFromProps() 从Props获得派生状态
->      3. render()
->      4. componentDidMount() ====>`常用` 
+>      - constructor()
+>      - getDerivedStateFromProps() 从Props获得派生状态
+>      - render()
+>      - componentDidMount() ====>`常用` 
 >
 >2. 更新阶段:由组件内部的this.setState()或者父组件的render触发
 >
->      1. getDerivedStateFromProps()  从Props获得派生状态
->      2. shouldComponentUpdate() 组件应该更新
->      3. render()
->      4. getSnapshotBeforeUpdate() 在更新前获得快照
->      5. componentDidUpdate()
+>      - getDerivedStateFromProps()  从Props获得派生状态
+>      - shouldComponentUpdate() 组件应该更新
+>      - render()
+>      - getSnapshotBeforeUpdate() 在更新前获得快照
+>      - componentDidUpdate()
 >
 >3. 卸载组件:由ReactDOM.unmountComponentAtNode()触发
 >
->      1. componentWillUnmount() ===>`常用`
+>      - componentWillUnmount() ===>`常用`
 >
 >    一般在这个钩子中做一些收尾的事情,如:关闭定时器、取消订阅消息
 
@@ -673,44 +667,43 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >1. 最好使用每条数据的唯一标识作为key,比如id,手机号,身份证号,学号等
 >2. 如果确定只是简单的展示诗句,用index也是可以的
 
-```js
-	慢动作回放----使用index索引值作为key
+```json
+//慢动作回放----使用index索引值作为key
+		初始数据：
+				{id:1,name:'小张',age:18},
+				{id:2,name:'小李',age:19},
+		初始的虚拟DOM：
+				<li key=0>小张---18<input type="text"/></li>
+				<li key=1>小李---19<input type="text"/></li>
 
-			初始数据：
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			初始的虚拟DOM：
-					<li key=0>小张---18<input type="text"/></li>
-					<li key=1>小李---19<input type="text"/></li>
+		更新后的数据：
+				{id:3,name:'小王',age:20},
+				{id:1,name:'小张',age:18},
+				{id:2,name:'小李',age:19},
+		更新数据后的虚拟DOM：
+				<li key=0>小王---20<input type="text"/></li>
+				<li key=1>小张---18<input type="text"/></li>
+				<li key=2>小李---19<input type="text"/></li>
 
-			更新后的数据：
-					{id:3,name:'小王',age:20},
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			更新数据后的虚拟DOM：
-					<li key=0>小王---20<input type="text"/></li>
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
+-----------------------------------------------------------------
 
-	-----------------------------------------------------------------
+//慢动作回放----使用id唯一标识作为key
 
-	慢动作回放----使用id唯一标识作为key
+		初始数据：
+				{id:1,name:'小张',age:18},
+				{id:2,name:'小李',age:19},
+		初始的虚拟DOM：
+				<li key=1>小张---18<input type="text"/></li>
+				<li key=2>小李---19<input type="text"/></li>
 
-			初始数据：
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			初始的虚拟DOM：
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
-
-			更新后的数据：
-					{id:3,name:'小王',age:20},
-					{id:1,name:'小张',age:18},
-					{id:2,name:'小李',age:19},
-			更新数据后的虚拟DOM：
-					<li key=3>小王---20<input type="text"/></li>
-					<li key=1>小张---18<input type="text"/></li>
-					<li key=2>小李---19<input type="text"/></li>
+		更新后的数据：
+				{id:3,name:'小王',age:20},
+				{id:1,name:'小张',age:18},
+				{id:2,name:'小李',age:19},
+		更新数据后的虚拟DOM：
+				<li key=3>小王---20<input type="text"/></li>
+				<li key=1>小张---18<input type="text"/></li>
+				<li key=2>小李---19<input type="text"/></li>
 ```
 
 
@@ -781,11 +774,11 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ### 3、功能界面的组件化编码流程
 
->\1. 拆分组件: 拆分界面,抽取组件
+>1. 拆分组件: 拆分界面,抽取组件
 >
->\2. 实现静态组件: 使用组件实现静态页面效果
+>2. 实现静态组件: 使用组件实现静态页面效果
 >
->\3. 实现动态组件
+>3. 实现动态组件
 >
 >​	3.1 动态显示初始化数据
 >
@@ -801,13 +794,13 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 >1、更新时可以利用赋值解构后再传入重复字段会自动覆盖的方式进行更新数据
 >
->​	--》if(todoObj.id === id) return `{...todoObj,done}`
+>​	-->if(todoObj.id === id) return `{...todoObj,done}`
 >
 >2、数组批量删除可以用filter过滤实现
 
 ```js
-	//updateTodo用于更新一个todo对象
-	updateTodo = (id,done)=>{
+//updateTodo用于更新一个todo对象
+updateTodo = (id,done)=>{
 		//获取状态中的todos
 		const {todos} = this.state
 		//匹配处理数据
@@ -840,7 +833,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 		})
 		//更新状态
 		this.setState({todos:newTodos})
-	}
+}
 ```
 
 # Ⅲ-React ajax
@@ -850,36 +843,37 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ### 1、React中配置代理(`proxy`)
 
 >1. `简单代理`:在package.json中追加如下配置 :`"proxy":http://localhost:5000`
->      1. ps:当你请求`http://localhost:5000`产生跨域(本身在3000端口)时,添加此代码, 之后你请求时用`http://localhost:3000`进行请求,当其在`3000`端口中找不到资源时将会自动转发至`5000`端口进行请求,不产生跨域问题
->      2. 优点：配置简单，前端请求资源时可以不加任何前缀。
->      3. 缺点：不能配置多个代理
->      4. 工作方式：上述方式配置代理，当请求了3000不存在的资源时，那么该请求会转发给5000 （优先匹配前端资源）
+>     - ps:当你请求`http://localhost:5000`产生跨域(本身在3000端口)时,添加此代码, 之后你请求时用`http://localhost:3000`进行请求,当其在`3000`端口中找不到资源时将会自动转发至`5000`端口进行请求,不产生跨域问题
+>     - 优点：配置简单，前端请求资源时可以不加任何前缀。
+>     - 缺点：不能配置多个代理
+>     - 工作方式：上述方式配置代理，当请求了3000不存在的资源时，那么该请求会转发给5000 （优先匹配前端资源）
 >2. 方法二: 在src下创建配置文件：`src/setupProxy.js`
->      1. ps:必须是这个文件名,react项目运行的时候会自动查找这个文件,并将其加入webpack的配置中,所以当你修改此文件后,你需要重新启动项目
->      2. 优点：可以配置多个代理，可以灵活的控制请求是否走代理。
->      3. 缺点：配置繁琐，前端请求资源时必须加前缀。
+>     - ps:必须是这个文件名,react项目运行的时候会自动查找这个文件,并将其加入webpack的配置中,所以当你修改此文件后,你需要重新启动项目
+>     - 优点：可以配置多个代理，可以灵活的控制请求是否走代理。
+>     - 缺点：配置繁琐，前端请求资源时必须加前缀。
 >
->```JS
-> const proxy = require('http-proxy-middleware')
->   module.exports = function(app) {
->     app.use(
->       proxy('/api1', {  //api1是需要转发的请求(所有带有/api1前缀的请求都会转发给5000)
->         target: 'http://localhost:5000', //配置转发目标地址(能返回数据的服务器地址)
->         changeOrigin: true, //控制服务器接收到的请求头中host字段的值
->         /*
->         	changeOrigin设置为true时，服务器收到的请求头中的host为：localhost:5000
->         	changeOrigin设置为false时，服务器收到的请求头中的host为：localhost:3000
->         	changeOrigin默认值为false，但我们一般将changeOrigin值设为true
->         */
->         pathRewrite: {'^/api1': ''} //去除请求前缀，保证交给后台服务器的是正常请求地址(必须配置)
->       }),
->       proxy('/api2', { 
->         target: 'http://localhost:5001',
->         changeOrigin: true,
->         pathRewrite: {'^/api2': ''}
->       })
->     )
->   }
+>```js
+>//代码示例
+>const proxy = require('http-proxy-middleware')
+>  module.exports = function(app) {
+>    app.use(
+>      proxy('/api1', {  //api1是需要转发的请求(所有带有/api1前缀的请求都会转发给5000)
+>        target: 'http://localhost:5000', //配置转发目标地址(能返回数据的服务器地址)
+>        changeOrigin: true, //控制服务器接收到的请求头中host字段的值
+>        /*
+>        	changeOrigin设置为true时，服务器收到的请求头中的host为：localhost:5000
+>        	changeOrigin设置为false时，服务器收到的请求头中的host为：localhost:3000
+>        	changeOrigin默认值为false，但我们一般将changeOrigin值设为true
+>        */
+>        pathRewrite: {'^/api1': ''} //去除请求前缀，保证交给后台服务器的是正常请求地址(必须配置)
+>      }),
+>      proxy('/api2', { 
+>        target: 'http://localhost:5001',
+>        changeOrigin: true,
+>        pathRewrite: {'^/api2': ''}
+>      })
+>    )
+>}
 >```
 
 ### 2、补充知识点
@@ -887,10 +881,10 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 #### Ⅰ-ES6小知识点:`连续赋值解构`+重命名
 
 >```js
->	let obj = {a:{b:1}}
->	const {a} = obj; //传统解构赋值
->	const {a:{b}} = obj; //连续解构赋值
->	const {a:{b:value}} = obj; //连续解构赋值+重命名
+>let obj = {a:{b:1}}
+>const {a} = obj; //传统解构赋值
+>const {a:{b}} = obj; //连续解构赋值
+>const {a:{b:value}} = obj; //连续解构赋值+重命名
 >```
 
 #### Ⅱ-消息订阅与发布机制 --->  工具库: PubSubJS
@@ -902,7 +896,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 > 3.要在组件的componentWillUnmount中取消订阅
 >
 > ```js
-> 下载: npm install pubsub-js --save
+> //下载: npm install pubsub-js --save
 > //使用举例
 > 1)	import PubSub from 'pubsub-js' //引入
 > 2)	PubSub.subscribe('delete', function(data){ }); //订阅
@@ -933,7 +927,181 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 > 	}
 > ```
 
-#### Ⅲ-defaultChecked 、 checked的区别
+#### Ⅲ-消息订阅与发布机制 --->  工具库: mitt
+
+>这是本人后来在githyb中找到并应用在项目代码中的,此工具库代码量特别少,可以阅读源码,会有很大好处
+>
+>此方法用的是[`mitt`]实现,其实本质上就是注册一个全局变量进行监听 --> [mitt源码地址](https://github.com/developit/mitt)
+>
+>可以自己实现,此处因为人家写的不错了,就以此作为例子
+>
+>1. 安装或者直接复制使用
+>
+>  ```sh
+>npm install --save mitt
+>  ```
+>
+>2. 使用示例
+>
+>  ```tsx
+>//
+>-------------- 首先要定义一个公用全局变量  --------------------------
+>  //文件 utils/index.ts
+>  import mitt from './mitt';
+>  //此处声明,将其变为全局变量
+>  const eventBus = mitt();
+>  export { eventBus }
+>  ---------------- 发送值的组件(要修改别人的组件)  ---------------------
+>  //导入共有变量
+>  import { eventBus } from '~/utils';
+>    <a
+>    onClick={() => {
+>  	//延迟发送是本人此之前有一个跳转动作,跳转到接收方组件
+>      // 防止修改了值的时候但是接收组件未注册  正常情况直接发送即可     
+>      //setTimeout(() => {
+>      // eventBus.emit('foo', data);
+>      //}, 100);
+>      eventBus.emit('foo', data);    
+>     }}
+>    />;
+>
+>  ------------------ 接受方组件(接受发送方的组件)  -------------------------------------
+>
+>  const Search: FC<IProps> = (props) => {
+>    useEffect(() => {
+>      //替换为mitt写法,此时已经接收到了
+>      eventBus.on('foo', (searchParams) => {console.log('接受到值了',searchParams) }
+>      });
+>    }, []);
+>  } 
+>  ```
+>
+>3. mitt源码
+>
+>  ```ts
+>  export type EventType = string | symbol;
+>
+>  // An event handler can take an optional event argument
+>  // and should not return a value
+>  export type Handler<T = unknown> = (event: T) => void;
+>  export type WildcardHandler<T = Record<string, unknown>> = (
+>    type: keyof T,
+>    event: T[keyof T]
+>  ) => void;
+>
+>  // An array of all currently registered event handlers for a type
+>  export type EventHandlerList<T = unknown> = Array<Handler<T>>;
+>  export type WildCardEventHandlerList<T = Record<string, unknown>> = Array<
+>    WildcardHandler<T>
+>  >;
+>
+>  // A map of event types and their corresponding event handlers.
+>  export type EventHandlerMap<Events extends Record<EventType, unknown>> = Map<
+>    keyof Events | '*',
+>    EventHandlerList<Events[keyof Events]> | WildCardEventHandlerList<Events>
+>  >;
+>
+>  export interface Emitter<Events extends Record<EventType, unknown>> {
+>    all: EventHandlerMap<Events>;
+>
+>    on: (<Key extends keyof Events>(type: Key, handler: Handler<Events[Key]>) => void) & ((type: '*', handler: WildcardHandler<Events>) => void);
+>
+>    off: (<Key extends keyof Events>(
+>      type: Key,
+>      handler?: Handler<Events[Key]>
+>    ) => void) & ((type: '*', handler: WildcardHandler<Events>) => void);
+>
+>    emit: (<Key extends keyof Events>(type: Key, event: Events[Key]) => void) & (<Key extends keyof Events>(
+>      type: undefined extends Events[Key] ? Key : never
+>    ) => void);
+>  }
+>
+>  /**
+>   * Mitt: Tiny (~200b) functional event emitter / pubsub.
+>   * @name mitt
+>   * @returns {Mitt}
+>   */
+>  export default function mitt<Events extends Record<EventType, unknown>>(
+>    all?: EventHandlerMap<Events>
+>  ): Emitter<Events> {
+>    type GenericEventHandler =
+>      | Handler<Events[keyof Events]>
+>      | WildcardHandler<Events>;
+>    all = all || new Map();
+>
+>    return {
+>      /**
+>       * A Map of event names to registered handler functions.
+>       */
+>      all,
+>
+>      /**
+>       * Register an event handler for the given type.
+>       * @param {string|symbol} type Type of event to listen for, or `'*'` for all events
+>       * @param {Function} handler Function to call in response to given event
+>       * @memberOf mitt
+>       */
+>      on<Key extends keyof Events>(type: Key, handler: GenericEventHandler) {
+>        const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
+>        if (handlers) {
+>          handlers.push(handler);
+>        } else {
+>          all!.set(type, [handler] as EventHandlerList<Events[keyof Events]>);
+>        }
+>      },
+>
+>      /**
+>       * Remove an event handler for the given type.
+>       * If `handler` is omitted, all handlers of the given type are removed.
+>       * @param {string|symbol} type Type of event to unregister `handler` from, or `'*'`
+>       * @param {Function} [handler] Handler function to remove
+>       * @memberOf mitt
+>       */
+>      off<Key extends keyof Events>(type: Key, handler?: GenericEventHandler) {
+>        const handlers: Array<GenericEventHandler> | undefined = all!.get(type);
+>        if (handlers) {
+>          if (handler) {
+>            handlers.splice(handlers.indexOf(handler) >>> 0, 1);
+>          } else {
+>            all!.set(type, []);
+>          }
+>        }
+>      },
+>
+>      /**
+>       * Invoke all handlers for the given type.
+>       * If present, `'*'` handlers are invoked after type-matched handlers.
+>       *
+>       * Note: Manually firing '*' handlers is not supported.
+>       *
+>       * @param {string|symbol} type The event type to invoke
+>       * @param {Any} [evt] Any value (object is recommended and powerful), passed to each handler
+>       * @memberOf mitt
+>       */
+>      emit<Key extends keyof Events>(type: Key, evt?: Events[Key]) {
+>        let handlers = all!.get(type);
+>        if (handlers) {
+>          (handlers as EventHandlerList<Events[keyof Events]>)
+>            .slice()
+>            .map((handler) => {
+>              handler(evt!);
+>            });
+>        }
+>
+>        handlers = all!.get('*');
+>        if (handlers) {
+>          (handlers as WildCardEventHandlerList<Events>)
+>            .slice()
+>            .map((handler) => {
+>              handler(type, evt!);
+>            });
+>        }
+>      },
+>    };
+>  }
+>  ```
+
+#### Ⅳ-defaultChecked 、 checked的区别
 
 >注意defaultChecked 和 checked的区别，类似的还有：defaultValue 和 value
 
@@ -943,25 +1111,26 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 >1. Fetch 是浏览器提供的原生 AJAX 接口。
 >
->  由于原来的XMLHttpRequest`不符合关注分离原则`，且基于事件的模型在处理异步上已经没有现代的Promise等那么有优势。因此Fetch出现来解决这种问题。
+> 由于原来的XMLHttpRequest`不符合关注分离原则`，且基于事件的模型在处理异步上已经没有现代的Promise等那么有优势。因此Fetch出现来解决这种问题。
 >
 >2. 特点:
 >
->   1. fetch: `原生函数`，不再使用XmlHttpRequest对象提交ajax请求
+>     - fetch: `原生函数`，不再使用XmlHttpRequest对象提交ajax请求
 >
->   2. 老版本浏览器可能不支持
+>     - `老版本浏览器可能不支持`
 >
->   3. 使用 fetch 无法`取消一个请求`。这是因为Fetch API`基于 Promise`，而Promise无法做到这一点。由于Fetch是典型的异步场景，所以大部分遇到的问题不是 Fetch 的，其实是 Promise 的。
+>     - 使用 fetch 无法`取消一个请求`。这是因为Fetch API`基于 Promise`，而Promise无法做到这一点。由于Fetch是典型的异步场景，所以大部分遇到的问题不是 Fetch 的，其实是 Promise 的。
 >
->   4. 如果直接使用`fetch`,返回的并不是直接的结果它只是一个`HTTP响应`，而不是真的数据。想要获取数据,方法有二:
+>  4. 如果直接使用`fetch`,返回的并不是直接的结果它只是一个`HTTP响应`，而不是真的数据。想要获取数据,方法有二:
 >
->      ① 使用async+await获取
+>     ① 使用async+await获取
 >
->      ② 使用promise的链式调用,再第一个then中将其返回,再下个then中在使用
+>     ② 使用promise的链式调用,再第一个then中将其返回,再下个then中在使用
 >
 >3. 代码示例
 >
 >```js
+>//代码示例
 >----------------------------- 未优化:使用then链式调用 ---------------------------------------------------------
 >fetch(`/api1/search/users2?q=${keyWord}`).then(
 >			response => {
@@ -1041,19 +1210,19 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ##### 1、内置组件
 
->1. <BrowserRouter>
+>1. `<BrowserRouter>`
 >
->2. <HashRouter>
+>2. `<HashRouter>`
 >
->3. <Route>
+>3. `<Route>`
 >
->4. <Redirect>
+>4. `<Redirect>`
 >
->5. <Link>
+>5. `<Link>`
 >
->6. <NavLink>
+>6. `<NavLink>`
 >
->7. <Switch>
+>7. `<Switch>`
 
 ##### 2、其他
 
@@ -1079,7 +1248,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ><Route path='/xxxx' component={Demo}/>
 >```
 >
->4.<App>的最外侧包裹了一个`<BrowserRouter>或<HashRouter>`
+>4.`<App>`的最外侧包裹了一个`<BrowserRouter>或<HashRouter>`
 >
 >```js
 >ReactDOM.render(
@@ -1094,9 +1263,9 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 >1.写法不同：
 >
->​      一般组件：<Demo/>
+>​      一般组件：`<Demo/>`
 >
->​      路由组件：<Route path="/demo" component={Demo}/>
+>​      路由组件：`<Route path="/demo" component={Demo}/>`
 >
 >2.存放位置不同：
 >
@@ -1106,26 +1275,27 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >3. 接收到的props不同：
 >
->   一般组件：写组件标签时传递了什么，就能收到什么
+>  一般组件：写组件标签时传递了什么，就能收到什么
 >
->   路由组件：接收到三个固定的属性
+>  路由组件：接收到三个固定的属性
 >
->   ```json
->   history:
->   	go: ƒ go(n)
->   	goBack: ƒ goBack()
->   	goForward: ƒ goForward()
->   	push: ƒ push(path, state)
->   	replace: ƒ replace(path, state)
->   location:
->       pathname: "/about"
->   	search: ""
->   	state: undefined
->   	match:
->   params: { }
->   	path: "/about"
->   	url: "/about"
->   ```
+>  ```json
+>  //路由属性打印结果展示
+>  history:
+>  	go: ƒ go(n)
+>  	goBack: ƒ goBack()
+>  	goForward: ƒ goForward()
+>  	push: ƒ push(path, state)
+>  	replace: ƒ replace(path, state)
+>  location:
+>      pathname: "/about"
+>  	search: ""
+>  	state: undefined
+>  	match:
+>  params: { }
+>  	path: "/about"
+>  	url: "/about"
+>  ```
 
 ## 4、NavLink使用与封装
 
@@ -1133,27 +1303,28 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >2. 封装
 >
->   ```jsx
->   export default class MyNavLink extends Component {
->   	render() {
->   		return (
->   			<NavLink activeClassName="atguigu" className="list-group-item" {...this.props}/>
->   		)
->   	}
->   }
->   ```
+>  ```jsx
+>  //封装示例
+>  export default class MyNavLink extends Component {
+>  	render() {
+>  		return (
+>  			<NavLink activeClassName="atguigu" className="list-group-item" {...this.props}/>
+>  		)
+>  	}
+>  }
+>  ```
 >
 >3. 使用与调用
 >
->   ```jsx
->   {/* 原生html中，靠<a>跳转不同的页面 */}
->   	{/* <a className="list-group-item" href="./about.html">About</a>
->   	<a className="list-group-item active" href="./home.html">Home</a> */}
->   
->   {/* 在React中靠路由链接实现切换组件--编写路由链接 */}
->   	<MyNavLink to="/about">About</MyNavLink>
->   	<MyNavLink to="/home">Home</MyNavLink>
->   ```
+>  ```jsx
+>//原生html中，靠<a>跳转不同的页面
+>{/* <a className="list-group-item" href="./about.html">About</a>
+><a className="list-group-item active" href="./home.html">Home</a> */}
+>
+>  {/* 在React中靠路由链接实现切换组件--编写路由链接 */}
+>  	<MyNavLink to="/about">About</MyNavLink>
+>  	<MyNavLink to="/home">Home</MyNavLink>
+>  ```
 
 ## 5、Switch的使用
 
@@ -1162,11 +1333,11 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >2.Switch可以提高路由匹配效率(单一匹配) ---- 即匹配到一个后将不再往下匹配
 >
 >```jsx
->	<Switch>
->		<Route path="/about" component={About}/>
->		<Route path="/home" component={Home}/>
->		<Route path="/home" component={Test}/>
->	</Switch>
+><Switch>
+>	<Route path="/about" component={About}/>
+>	<Route path="/home" component={Home}/>
+>	<Route path="/home" component={Test}/>
+></Switch>
 >```
 
 ## 6、解决多级路径刷新页面样式丢失的问题
@@ -1270,9 +1441,9 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ### Ⅰ-params参数
 
->1. 路由链接(携带参数)：<Link to='/demo/test/tom/18'}>详情</Link>
+>1. 路由链接(携带参数)：`<Link to='/demo/test/tom/18'}>详情</Link>`
 >
->2. 注册路由(声明接收)：<Route path="/demo/test/:name/:age" component={Test}/>
+>2. 注册路由(声明接收)：`<Route path="/demo/test/:name/:age" component={Test}/>`
 >
 >3. 接收参数：this.props.match.params
 >
@@ -1291,8 +1462,8 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ### Ⅱ-search参数
 
->1. 路由链接(携带参数)：<Link to='/demo/test?name=tom&age=18'}>详情</Link>
->2. 注册路由(`无需声明`，正常注册即可)：<Route path="/demo/test" component={Test}/>
+>1. 路由链接(携带参数)：`<Link to='/demo/test?name=tom&age=18'}>详情</Link>`
+>2. 注册路由(`无需声明`，正常注册即可)：`<Route path="/demo/test" component={Test}/>`
 >3. 接收参数：this.props.location.search
 >4. 备注：获取到的search是`urlencoded编码字符串`，需要`借助querystring解析`
 >
@@ -1314,11 +1485,11 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 ### Ⅲ-state参数
 
->1. 路由链接(携带参数)：<Link to={{pathname:'/demo/test',state:{name:'tom',age:18}}}>详情</Link>
->2. 注册路由(无需声明，正常注册即可)：<Route path="/demo/test" component={Test}/>
+>1. 路由链接(携带参数)：[`<Link to={{pathname:'/demo/test',state:{name:'tom',age:18}}}>详情</Link>`]
+>2. 注册路由(无需声明，正常注册即可)：[`<Route path="/demo/test" component={Test}/>`]
 >3. 接收参数：this.props.location.state
->4. 备注：使用`BrowserRouter`刷新才可以`保留住参数`,使用`HashRouter`刷新后state将会没有`history`来保存参数
->5. 子组件接受参数时`const {id,title} = this.props.location.state || {}` ,后面添加`||{}`是防止使用`HashRouter`后state为undefined时报错
+>   - 备注：使用`BrowserRouter`刷新才可以`保留住参数`,使用`HashRouter`刷新后state将会没有`history`来保存参数
+>   - 子组件接受参数时`const {id,title} = this.props.location.state || {}` ,后面添加`||{}`是防止使用`HashRouter`后state为undefined时报错
 >
 >```jsx
 > 	-------------------------------发送参数:父组件----------------------------------------------
@@ -1487,7 +1658,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 
 >1. BrowserRouter使用的是H5的history API，不兼容IE9及以下版本。
 >
->   但一般来说都用的这个
+>   `但一般来说都用的这个`
 >
 >2. HashRouter使用的是URL的哈希值。
 
@@ -1618,22 +1789,16 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ### Ⅱ-reducer
 
 >1. 用于初始化状态、加工状态。
+>2. 加工时，根据旧的state和action， 产生新的state的`纯函数(以下为纯函数概念)``
+>   - ``纯函数:`一类特别的函数: 只要是同样的输入(实参)，必定得到同样的输出(返回)
+>   - 必须遵守以下一些约束 
+>     1)   不得改写参数数据
+>     2)   不会产生任何副作用，例如网络请求，输入和输出设备
+>     3)   不能调用Date.now()或者Math.random()等不纯的方法 
+>3. `redux的reducer函数必须是一个纯函数`
 >
->2. 加工时，根据旧的state和action， 产生新的state的`纯函数(以下为纯函数概念)`
->
->   `纯函数:`
->
->   1. 一类特别的函数: 只要是同样的输入(实参)，必定得到同样的输出(返回)
->
->   2. 必须遵守以下一些约束 
->
->      1)   不得改写参数数据
->
->      2)   不会产生任何副作用，例如网络请求，输入和输出设备
->
->      3)   不能调用Date.now()或者Math.random()等不纯的方法 
->
->3. redux的reducer函数必须是一个纯函数
+
+
 
 ### Ⅲ-store
 
@@ -1641,19 +1806,17 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >2. `如何得到此对象`?
 >
->   1)   import {createStore} from 'redux'
+>      - import {createStore} from 'redux'
+>     - import reducer from './reducers'
+>      - const store = createStore(reducer)
 >
->   2)   import reducer from './reducers'
+> 3. 此对象的功能?
 >
->   3)   const store = createStore(reducer)
+>     - getState(): 得到state
 >
->3. 此对象的功能?
+>      - dispatch(action): 分发action, 触发reducer调用, 产生新的state
 >
->   1)   getState(): 得到state
->
->   2)   dispatch(action): 分发action, 触发reducer调用, 产生新的state
->
->   3)   subscribe(listener): 注册监听, 当产生了新的state时, 自动调用
+>      - subscribe(listener): 注册监听, 当产生了新的state时, 自动调用
 
 ## 3、redux的核心API
 
@@ -1664,6 +1827,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >applyMiddleware()作用：应用上基于redux的中间件(插件库)
 >
 >```js
+>//代码示例
 >---------------------------store.js 部分代码---------------------------------
 >//引入createStore,专门用于创建redux中最为核心的store对象
 >import {createStore,applyMiddleware} from 'redux'
@@ -1677,31 +1841,32 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >2. 它内部维护着:
 >
->   1)   state
+>     - state
 >
->   2)   reducer
+>     - reducer
 >
 >3. 核心方法:
 >
->   1)   getState()
+>     - getState()
 >
->   2)   dispatch(action)
+>     - dispatch(action)
 >
->   3)   subscribe(listener)
+>     - subscribe(listener)
 >
 >4. 具体编码:
 >
->   1)   store.getState()
+>     - store.getState()
 >
->   2)   store.dispatch({type:'INCREMENT', number})
+>     - store.dispatch({type:'INCREMENT', number})
 >
->   3)   store.subscribe(render)
+>     - store.subscribe(render)
 >
 >```jsx
+>//代码示例
 >---------------------------store.js---------------------------------
 >/**
-> * 该文件撰文用于暴露一个store对象,整个应用只有一个store对象
-> */
+>* 该文件撰文用于暴露一个store对象,整个应用只有一个store对象
+>*/
 >//引入createStore,专门用于创建redux中最为核心的store对象
 >import {createStore,applyMiddleware} from 'redux'
 >//引入汇总后的reducer
@@ -1733,6 +1898,7 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 > 作用：合并多个reducer函数
 >
 > ```jsx
+> //代码示例
 > ------------------ redux/reducers/index.js ------------------------------------
 > /**
 >  * 该文件用于汇总所有的reducer为一个总的reducer
@@ -1763,22 +1929,23 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >2. 使用
 >
->   ```jsx
->   ---------------------------store.js---------------------------------
->   /**
->    * 该文件撰文用于暴露一个store对象,整个应用只有一个store对象
->    */
->   //引入createStore,专门用于创建redux中最为核心的store对象
->   import {createStore,applyMiddleware} from 'redux'
->   //引入汇总后的reducer
->   import reducer from './reducers'
->   //引入redux-thunk，用于支持异步action
->   import thunk from 'redux-thunk'
->   //引入redux-devtools-extension
->   import {composeWithDevTools} from 'redux-devtools-extension'
->   //暴露store
->   export default createStore(reducer,composeWithDevTools(applyMiddleware(thunk)))
->   ```
+>  ```jsx
+>  //代码示例
+>  ---------------------------store.js---------------------------------
+>  /**
+>   * 该文件撰文用于暴露一个store对象,整个应用只有一个store对象
+>   */
+>  //引入createStore,专门用于创建redux中最为核心的store对象
+>  import {createStore,applyMiddleware} from 'redux'
+>  //引入汇总后的reducer
+>  import reducer from './reducers'
+>  //引入redux-thunk，用于支持异步action
+>  import thunk from 'redux-thunk'
+>  //引入redux-devtools-extension
+>  import {composeWithDevTools} from 'redux-devtools-extension'
+>  //暴露store
+>  export default createStore(reducer,composeWithDevTools(applyMiddleware(thunk)))
+>  ```
 
 ## 5、react-redux
 
@@ -2059,11 +2226,9 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >   (2).为Person组件编写：reducer、action，配置constant常量。
 >
->   (3).重点：Person的reducer和Count的Reducer要使用combineReducers进行合并，
+>   (3).重点：Person的reducer和Count的Reducer要使用combineReducers进行合并，合并后的总状态是一个对象！！！
 >
->​     合并后的总状态是一个对象！！！
->
->   (4).交给store的是总reducer，最后注意在组件中取出状态的时候，记得“取到位”。
+>(4).交给store的是总reducer，最后注意在组件中取出状态的时候，记得“取到位”。
 
 ### 7、求和案例_react-redux开发者工具的使用
 
@@ -2411,13 +2576,14 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 ### setState更新状态的2种写法
 
 >(1). setState(stateChange, [callback])------对象式的setState
->        1.stateChange为状态改变对象(该对象可以体现出状态的更改)
->        2.callback是可选的回调函数, 它在状态更新完毕、界面也更新后(render调用后)才被调用
->				
+>   1.stateChange为状态改变对象(该对象可以体现出状态的更改)
+>   2.callback是可选的回调函数, 它在状态更新完毕、界面也更新后(render调用后)才被调用
+>
 >(2). setState(updater, [callback])------函数式的setState
->        1.updater为返回stateChange对象的函数。
->        2.updater可以接收到state和props。
->        4.callback是可选的回调函数, 它在状态更新、界面也更新后(render调用后)才被调用。
+>
+>- updater为返回stateChange对象的函数。
+>- updater可以接收到state和props。
+>- callback是可选的回调函数, 它在状态更新、界面也更新后(render调用后)才被调用。
 >
 >总结:
 >		1.对象式的setState是函数式的setState的简写方式(`语法糖`)
@@ -2430,25 +2596,25 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >```js
 >import React, { Component } from 'react'
 >export default class Demo extends Component {
->  state = { count: 0 }
->  add = () => {
->    //对象式的setState
->    /* //1.获取原来的count值
->    const {count} = this.state
->    //2.更新状态
->    this.setState({count:count+1},()=>{ console.log(this.state.count); })
->    //console.log('12行的输出',this.state.count); //0 */
->    //函数式的setState
->    this.setState(state => ({ count: state.count + 1 }))
->  }
->  render() {
->    return (
->      <div>
->        <h1>当前求和为：{this.state.count}</h1>
->        <button onClick={this.add}>点我+1</button>
->      </div>
->    )}}
->  ```
+>state = { count: 0 }
+>add = () => {
+>//对象式的setState
+>/* //1.获取原来的count值
+>const {count} = this.state
+>//2.更新状态
+>this.setState({count:count+1},()=>{ console.log(this.state.count); })
+>//console.log('12行的输出',this.state.count); //0 */
+>//函数式的setState
+>this.setState(state => ({ count: state.count + 1 }))
+>}
+>render() {
+>return (
+> <div>
+>   <h1>当前求和为：{this.state.count}</h1>
+>   <button onClick={this.add}>点我+1</button>
+> </div>
+>)}}
+>```
 
 
 

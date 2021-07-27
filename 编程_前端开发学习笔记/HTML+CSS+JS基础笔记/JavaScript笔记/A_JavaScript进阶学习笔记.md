@@ -1859,9 +1859,10 @@
 
 ### Ⅴ-构造函数+原型的组合模式
 
->方式六: 构造函数+原型的组合模式
+>方式六: 构造函数+原型的组合模式-->`最好用这个写法`
 >  * 套路: 自定义构造函数, 属性在函数中初始化, 方法添加到原型上
 >  * 适用场景: 需要`创建多个类型确定`的对象
+>  * 放在原型上可以节省空间(只需要加载一遍方法)
 >
 >```js
 >//在构造函数中只初始化一般函数
@@ -1877,3 +1878,88 @@
 >var p2 = new Person('Jack', 24)
 >console.log(p1, p2)
 >```
+
+## 2、继承模式
+
+### Ⅰ-原型链继承
+
+>方式1: 原型链继承
+>    1. 套路
+>         - 定义父类型构造函数
+>         - 给父类型的原型添加方法
+>         - 定义子类型的构造函数
+>         - 创建父类型的对象赋值给子类型的原型
+>         - 将子类型原型的构造属性设置为子类型
+>         - 给子类型原型添加方法
+>         - 创建子类型的对象: 可以调用父类型的方法
+>    2. 关键
+>         - `子类型的原型为父类型的一个实例对象`
+>
+>```js
+>//父类型
+>function Supper() {
+>  this.supProp = '父亲的原型链'
+>}
+>//给父类型的原型上增加一个[showSupperProp]方法,打印自身subProp
+>Supper.prototype.showSupperProp = function () {
+>  console.log(this.supProp)
+>}
+>
+>//子类型
+>function Sub() {
+>  this.subProp = '儿子的原型链'
+>}
+>
+>// 子类型的原型为父类型的一个实例对象
+>Sub.prototype = new Supper()
+>// 让子类型的原型的constructor指向子类型
+>Sub.prototype.constructor = Sub
+>//给子类型的原型上增加一个[showSubProp]方法,打印自身subProp
+>Sub.prototype.showSubProp = function () {
+>  console.log(this.subProp)
+>}
+>
+>var sub = new Sub()
+>
+>sub.showSupperProp() //父亲的原型链
+>sub.showSubProp() //儿子的原型链
+>console.log(sub)  
+>/**
+>Sub {subProp: "儿子的原型链"}
+>subProp: "儿子的原型链"
+>__proto__: Supper
+>constructor: ƒ Sub()
+>showSubProp: ƒ ()
+>supProp: "父亲的原型链"
+>__proto__: Object
+>*/
+>```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

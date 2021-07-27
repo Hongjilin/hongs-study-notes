@@ -2929,24 +2929,28 @@ ReactDOM.render(VDOM,docoment.getElementById('test'))
 >
 >2. 几种通信方式：
 >
->         - props：
->              1).children props
->              (2).render props
->
->         - 消息订阅-发布：
->              ubs-sub、event等等
->
->         - 集中式管理：
->              edux、dva等等
->
->         - conText:
->              产者-消费者模式
+>    ```js
+>    - props：
+>         1).children props
+>         (2).render props
+>    
+>    - 消息订阅-发布：
+>         ubs-sub、event等等
+>    
+>    - 集中式管理：
+>         edux、dva等等
+>    
+>    - conText:
+>         产者-消费者模式
+>    ```
 >
 >3. 比较好的搭配方式
 >
->         - 父子组件：props
->         - 兄弟组件：消息订阅-发布、集中式管理
->         - 祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
+>    ```js
+>    - 父子组件：props
+>    - 兄弟组件：消息订阅-发布、集中式管理
+>    - 祖孙组件(跨级组件)：消息订阅-发布、集中式管理、conText(开发用的少，封装插件用的多)
+>    ```
 
 
 

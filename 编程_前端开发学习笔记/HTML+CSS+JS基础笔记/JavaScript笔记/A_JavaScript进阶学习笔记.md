@@ -1005,7 +1005,7 @@
 
 > 在进入闭包之前,你要确保上面知识点你能掌握.你不确定 ? 噢好吧,那你就跟着我看下这部分梳理(如果懂得直接跳过即可)
 
-#### ① 举个栗子分析执行上下文
+### Ⅰ- 举个栗子分析执行上下文
 
 >在讨论闭包之前，让我们看下下方的代码(建议先只看代码自己头脑风暴再看笔记中的描述),也算是对上面知识点的梳理回顾：
 >
@@ -1045,7 +1045,7 @@
 >
 >对于一个非常简单的程序，这是一个非常冗长的解释，我们甚至还没有涉及闭包。但肯定会涉及的，不过首先我们得绕一两个弯。
 
-#### ② 举个栗子分析词法作用域
+### Ⅱ-举个栗子分析词法作用域
 
 >这里想说明，我们在函数执行上下文中有变量，在全局执行上下文中有变量。JavaScript 的一个复杂之处在于它如何查找变量，如果在函数执行上下文中找不到变量，它将在调用上下文中寻找它，如果在它的调用上下文中没有找到，就一直往上一级，直到它在全局执行上下文中查找为止。(如果最后找不到，它就是 undefined)。
 >
@@ -1079,7 +1079,7 @@
 >
 >在这个例子中，我们需要记住一个函数可以访问在它的调用上下文中定义的变量，这个就是**词法作用域（Lexical scope）**。
 
-#### ③ 返回函数的函数[`高阶函数`]
+### Ⅲ- 返回函数的函数[`高阶函数`]
 
 >在第一个例子中，函数`addTwo`返回一个数字。请记住，函数可以返回任何东西。让我们看一个返回函数的函数示例，因为这对于下方理解闭包非常重要。看栗子：
 >
@@ -1537,14 +1537,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->     
+>         
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->     
+>         
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1557,14 +1557,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->     
+>         
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->         
+>             
 >     ```
 >
 >2. 模块调用
@@ -1729,3 +1729,151 @@
 >c.fun(3)//1 -->此处是陷阱!!!  一直没有改到n,所以一直是1
 >```
 
+# 三、面向对象高级
+
+## 1、对象创建模式
+
+### Ⅰ-Object构造函数模式
+
+>方式一: Object构造函数模式
+>  * 套路: 先创建空Object对象, 再动态添加属性/方法
+>  * 适用场景: 起始时不确定对象内部数据
+>  * 问题: 语句太多
+>
+>```js
+>/*一个人: name:"Tom", age: 12*/
+>// 先创建空Object对象
+>  var p = new Object()
+>  p = {} //此时内部数据是不确定的
+>  // 再动态添加属性/方法
+>  p.name = 'Tom'
+>  p.age = 12
+>  p.setName = function (name) {
+>    this.name = name
+>  }
+>
+>  //测试
+>  console.log(p.name, p.age)
+>  p.setName('Bob')
+>  console.log(p.name, p.age)
+>```
+
+### Ⅱ-对象字面量模式
+
+>方式二: 对象字面量模式
+>  * 套路: 使用{}创建对象, 同时指定属性/方法
+>  * 适用场景: 起始时对象内部数据是确定的
+>  * 问题: 如果创建多个对象, 有重复代码
+>
+>```js
+>//对象字面量模式
+>var p = {
+>    name: 'Tom',
+>    age: 12,
+>    setName: function (name) {
+>      this.name = name
+>    }
+>  }
+>  //测试
+>  console.log(p.name, p.age)
+>  p.setName('JACK')
+>  console.log(p.name, p.age)
+>
+>  var p2 = {  //如果创建多个对象代码很重复
+>    name: 'Bob',
+>    age: 13,
+>    setName: function (name) {
+>      this.name = name
+>    }
+>  }
+>```
+
+### Ⅲ-工厂模式
+
+>方式三: 工厂模式
+>  * 套路: 通过工厂函数动态创建对象并返回
+>  * 适用场景: 需要创建多个对象
+>  * 问题: `对象没有一个具体的类型`, 都是Object类型
+>
+>```js
+>//返回一个对象的函数===>工厂函数
+>function createPerson(name, age) { 
+>  var obj = {
+>    name: name,
+>    age: age,
+>    setName: function (name) {
+>      this.name = name
+>    }
+>  }
+>  return obj
+>}
+>
+>// 创建2个人
+>var p1 = createPerson('Tom', 12)
+>var p2 = createPerson('Bob', 13)
+>
+>// p1/p2是Object类型
+>
+>function createStudent(name, price) {
+>  var obj = {
+>    name: name,
+>    price: price
+>  }
+>  return obj
+>}
+>var s = createStudent('张三', 12000)
+>// s也是Object
+>```
+
+### Ⅳ-自定义构造函数模式
+
+>方式四: 自定义构造函数模式
+>  * 套路: 自定义构造函数, 通过new创建对象
+>  * 适用场景: 需要创建多个`类型确定`的对象,与上方工厂模式有所对比
+>  * 问题: 每个对象都有相同的数据, 浪费内存
+>
+>```js
+>//定义类型
+>function Person(name, age) {
+>  this.name = name
+>  this.age = age
+>  this.setName = function (name) {
+>    this.name = name
+>  }
+>}
+>var p1 = new Person('Tom', 12)
+>p1.setName('Jack')
+>console.log(p1.name, p1.age)
+>console.log(p1 instanceof Person)
+>
+>function Student (name, price) {
+>  this.name = name
+>  this.price = price
+>}
+>var s = new Student('Bob', 13000)
+>console.log(s instanceof Student)
+>
+>var p2 = new Person('JACK', 23)
+>console.log(p1, p2)
+>```
+
+### Ⅴ-构造函数+原型的组合模式
+
+>方式六: 构造函数+原型的组合模式
+>  * 套路: 自定义构造函数, 属性在函数中初始化, 方法添加到原型上
+>  * 适用场景: 需要`创建多个类型确定`的对象
+>
+>```js
+>//在构造函数中只初始化一般函数
+>function Person(name, age) { 
+>  this.name = name
+>  this.age = age
+>}
+>Person.prototype.setName = function (name) {
+>  this.name = name
+>}
+>
+>var p1 = new Person('Tom', 23)
+>var p2 = new Person('Jack', 24)
+>console.log(p1, p2)
+>```

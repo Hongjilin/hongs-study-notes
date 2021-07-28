@@ -1948,7 +1948,7 @@
 
 >对于代码中[`Sub.prototype.constructor = Sub`]是否有疑惑?
 >
->如果不加,其构造函数找的[`new Supper()`]是从顶层Object继承来的构造函数,指向[`Supper()`],虽然如果你不加这句话,大体上使用是不受影响的,但是你有一个属性指向是错误的
+>如果不加,其构造函数找的[`new Supper()`]是从顶层Object继承来的构造函数,指向[`Supper()`],虽然如果你不加这句话,大体上使用是不受影响的,但是你有一个属性指向是错误的,如果在大型项目中万一万一哪里再调用到了呢?
 >
 >1. 这里可以补充一下constructor 的概念：
 >   - `constructor 我们称为构造函数，因为它指回构造函数本身`
@@ -1957,6 +1957,123 @@
 >   - constructor本就存在于原型中,指向构造函数,成为子对象后，如果该原型链中的constructor在自身没有而是在父原型中找到,所以指向父类的构造函数
 >3. 由于这里的继承是直接改了构造函数的prototype 的指向，所以在 sub的原型链中，Sub.prototype 没有constructor 属性，反而是看到了一个super 实例
 >4. 这就让sub 实例的constructor 无法使用了。为了他还能用，就在那个super 实例中手动加了一个constructor 属性，且指向Sub 函数看到了一个super 实例
+
+### Ⅱ-借用构造函数继承(假的)
+
+>方式2: 借用构造函数继承(假的)
+>
+>1. 套路:
+>     - 定义父类型构造函数
+>     - 定义子类型构造函数
+>     - 在子类型构造函数中调用父类型构造
+>2. 关键:
+>     - `在子类型构造函数中通用call()调用父类型构造函数`
+>3. 作用:
+>   - 能借用父类中的构造方法,但是不灵活
+>
+>```js
+>function Person(name, age) {
+>  this.name = name
+>  this.age = age
+>}
+>function Student(name, age, price) {
+>   //此处利用call(),将 [Student]的this传递给Person构造函数
+>  Person.call(this, name, age)  // 相当于: this.Person(name, age)
+>  /*this.name = name
+>  this.age = age*/
+>  this.price = price
+>}
+>
+>var s = new Student('Tom', 20, 14000)
+>console.log(s.name, s.age, s.price)
+>```
+>
+>[`Person`]中的this是动态变化的,在[`Student`]中利用[`Person.call(this, name, age)`]改变了其this指向,所以可以实现此效果
+
+### Ⅲ-组合继承
+
+>方式3: 原型链+借用构造函数的组合继承
+>
+>1. 利用原型链实现对父类型对象的方法继承
+>2. 利用super()借用父类型构建函数初始化相同属性
+>
+>```js
+>function Person(name, age) {
+>  this.name = name
+>  this.age = age
+>}
+>Person.prototype.setName = function (name) {
+>  this.name = name
+>}
+>
+>function Student(name, age, price) {
+>  Person.call(this, name, age)  // 为了得到属性
+>  this.price = price
+>}
+>Student.prototype = new Person() // 为了能看到父类型的方法
+>Student.prototype.constructor = Student //修正constructor属性
+>Student.prototype.setPrice = function (price) {
+>  this.price = price
+>}
+>
+>var s = new Student('Tom', 24, 15000)
+>s.setName('Bob')
+>s.setPrice(16000)
+>console.log(s.name, s.age, s.price)
+>```
+
+# 三、线程机制与事件机制
+
+## 1、进程与线程
+
+> ![image-20210728115630974](A_JavaScript进阶学习笔记中的图片/image-20210728115630974.png)  
+
+### Ⅰ- 进程
+
+>1. 程序的一次执行,它`占有一片独有的内存空间`
+>2. 可以通过windows任务管理器查看进程
+>   - 可以看出每个程序的内存空间是相互独立的
+>   - <img src="A_JavaScript进阶学习笔记中的图片/image-20210728115541255.png" alt="image-20210728115541255" style="zoom:80%;" /> 
+
+### Ⅱ-线程
+
+>概念:
+>
+>- 是进程内的一个独立执行单元
+>- 是程序执行的一个完整流程
+>- 是CPU的最小的调度单元
+
+### Ⅲ-进程与线程
+
+>1. 应用程序必须运行在某个进程的某个线程上
+>2. 一个进程中至少有一个运行的线程:主线程-->进程启动后自动创建
+>3. 一个进程中也可以同时运行多个线程:此时我们会说这个程序是多线程运行的
+>4. 多个进程之间的数据是不能直接共享的 -->内存相互独立()隔离
+>5. `线程池(thread pool)`:保存多个线程对象的容器,实现线程对象的反复利用
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

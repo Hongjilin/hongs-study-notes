@@ -2452,7 +2452,7 @@
 
 >尽管没有提及，但是实际上node中存在着一个特殊的队列，即nextTick queue。这个队列中的回调执行虽然没有被表示为一个阶段，当时这些事件却会在每一个阶段执行完毕准备进入下一个阶段时优先执行。当事件循环准备进入下一个阶段之前，会先检查nextTick queue中是否有任务，如果有，那么会先清空这个队列。与执行poll queue中的任务不同的是，这个操作在队列清空前是不会停止的。这也就意味着，错误的使用`process.nextTick()`方法会导致node进入一个死循环。。直到内存泄漏。
 >
->适使用这个方法比较合适呢？下面有一个例子：
+>使用这个方法比较合适呢？下面有一个例子：
 >
 >```js
 >const server = net.createServer(() => {}).listen(8080);
@@ -2504,6 +2504,128 @@
 >```
 >
 >因为在I/O事件的回调中，setImmediate方法的回调永远在timer的回调前执行。
+
+## 5、Web Workers
+
+>想了解更多可以点击链接查看更多,此处只是大致了解学习   -->[Web Workers](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)
+>
+>1. H5规范提供了js分线程的实现, 取名为: Web Workers
+>2. 相关API
+>  * Worker: 构造函数, 加载分线程执行的js文件
+>  * Worker.prototype.onmessage: 用于接收另一个线程的回调函数
+>  * Worker.prototype.postMessage: 向另一个线程发送消息
+>3. 不足
+>  * worker内代码不能操作DOM(更新UI)
+>  * 不能跨域加载JS
+>  * 不是每个浏览器都支持这个新特性
+
+### Ⅰ-抛砖引玉,引出用处
+
+>还是拿斐波那契（Fibonacci）数列来做例子,这东西效率低,可以拿来模拟
+>
+>```html
+><body>
+><input type="text" placeholder="数值" id="number">
+><button id="btn">计算</button>
+><script type="text/javascript">
+>  // 1 1 2 3 5 8    f(n) = f(n-1) + f(n-2)
+>  function fibonacci(n) {
+>    return n<=2 ? 1 : fibonacci(n-1) + fibonacci(n-2)  //递归调用
+>  }
+>  // console.log(fibonacci(7))
+>  var input = document.getElementById('number')
+>  document.getElementById('btn').onclick = function () {
+>    var number = input.value
+>    var result = fibonacci(number)
+>    alert(result)
+>  }
+></script>
+>```
+>
+>当我运行此行代码,传入计算数值为50左右(有的甚至更低),整个页面就会卡住好久的时间不能操作(计算结束后才会弹窗,但是未弹窗的这段时间用户并不能进行操作),这时候就会发现单线程的弊端了
+
+### Ⅱ-尝试使用
+
+>1. H5规范提供了js分线程的实现, 取名为: Web Workers
+>2. 相关API
+>  * Worker: 构造函数, 加载分线程执行的js文件
+>  * Worker.prototype.onmessage: 用于接收另一个线程的回调函数
+>  * Worker.prototype.postMessage: 向另一个线程发送消息
+>3. 不足
+>  * worker内代码不能操作DOM(更新UI)
+>  * 不能跨域加载JS
+>  * 不是每个浏览器都支持这个新特性
+
+#### ① 主线程
+
+>1. 创建一个Worker对象
+>2. 绑定[主线程接收分线程返回的数据]方法
+>3. 主线程向分线程发送数据,然后等待接受数据
+>4. 接收到分线程回馈的数据,将数据进行处理(如弹窗)
+>
+>```html
+><body>
+><input type="text" placeholder="数值" id="number">
+><button id="btn">计算</button>
+><script type="text/javascript">
+>  var input = document.getElementById('number')
+>  document.getElementById('btn').onclick = function () {
+>    var number = input.value
+>
+>    //创建一个Worker对象
+>    var worker = new Worker('worker.js')
+>    // 绑定接收消息的监听
+>    worker.onmessage = function (event) { //此处变成回调代码,会在初始化工作完成后才会进行
+>      console.log('主线程接收分线程返回的数据: '+event.data)
+>      alert(event.data)
+>    }
+>
+>    // 向分线程发送消息
+>    worker.postMessage(number)
+>    console.log('主线程向分线程发送数据: '+number)
+>  }
+>  // console.log(this) // window
+>
+></script>
+></body>
+>```
+
+#### ② 分线程
+
+>将计算放置分线程中
+>
+>`注意`:alert(result)  alert是window的方法, 在分线程不能调用,`分线程中的全局对象不再是window`, 所以在分线程中不可能更新界面
+>
+>```js
+>//worker.js
+>function fibonacci(n) {
+>  return n<=2 ? 1 : fibonacci(n-1) + fibonacci(n-2)  //递归调用
+>}
+>
+>console.log(this)
+>this.onmessage = function (event) {
+>  var number = event.data
+>  console.log('分线程接收到主线程发送的数据: '+number)
+>  //计算
+>  var result = fibonacci(number)
+>  postMessage(result)
+>  console.log('分线程向主线程返回数据: '+result)
+>  // alert(result)  alert是window的方法, 在分线程不能调用
+>  // 分线程中的全局对象不再是window, 所以在分线程中不可能更新界面
+>}
+>```
+
+### Ⅲ-流程原理图
+
+> ![image-20210729173545339](A_JavaScript进阶学习笔记中的图片/image-20210729173545339.png)
+
+
+
+
+
+
+
+
 
 
 

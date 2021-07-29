@@ -5,6 +5,8 @@
 > 只截取了上方`A_数据结构与算法学习笔记`部分笔记的部分知识点至此,方便网站阅读
 >
 > `本文件复制时此笔记还在学习更新阶段,所以只有部分,更详细内容请看上方具体笔记`
+>
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -13,7 +15,8 @@
 >3. 不过在随后`leetCode`部分,我将会用`java`与`javaScript`两种语言分别实现与记录,所以前后端的同学都将是可以看得懂的
 >4. 个人跟随课程进程编写出的相关练习也会上传在此笔记同级文件目录下
 >5. 数据结构与算法吃透比学完更重要,要确保吸收知识点且不影响工作的前提下,预计学习过程将持续几个月。但也坚信慢工出细活,形成的笔记以及知识体系也会更详细完整
->6. 本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`数据结构与算法学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)、[`LeetCode笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/LeetCode)
+>
+>   
 >
 
 ------
@@ -648,7 +651,7 @@
 >            singleLinkedList.list();
 >        }
 >    }
->       
+>          
 >    //一、定义一个HeroNode,每个HeroNode对象就是一个节点
 >    class HeroNode {
 >        public int no;
@@ -666,7 +669,7 @@
 >        public String toString() {
 >            return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickname + "]";
 >        }
->       
+>          
 >    }
 >    //二、定义SingleLinkedList管理我们的英雄
 >    class SingleLinkedList {
@@ -676,7 +679,7 @@
 >        public HeroNode getHead() {
 >            return head;
 >        }
->       
+>          
 >        /**
 >         * 3. 添加节点到单链表后
 >         * 思路:不考虑编号顺序,直接插入到链表最后
@@ -697,7 +700,7 @@
 >            //将最后这个节点的next指向新的节点
 >            temp.next = heroNode;
 >        }
->       
+>          
 >        //4. 显示链表[遍历]
 >        public void list() {
 >            //判断链表是否为空
@@ -716,7 +719,7 @@
 >            }
 >        }
 >    }
->       
+>          
 >    ```
 
 #### Ⅱ-添加方法二:根据排名将英雄插入到指定位置
@@ -1253,7 +1256,7 @@
 >          }
 >          System.out.println(node);
 >      }
->           
+>                
 >      ```
 
 

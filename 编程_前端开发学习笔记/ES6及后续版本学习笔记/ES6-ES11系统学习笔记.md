@@ -2,7 +2,7 @@
 
 >本笔记是本人`ES6-ES11系统学习笔记`,将ES系列全部梳理一遍,包括新特性等
 >
->观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]
+>观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -58,7 +58,9 @@
 
 # 二、ECMASript 6 新特性
 
-> 想要查看更详细的ES6,可以看阮一峰的ES6文档,本人当初对其也进行了摘录放至此处方便查阅-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
+> 想要查看更详细的ES6,可以看阮一峰的ES6文档,本人当初对其进行了摘录放至此处方便查阅-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** ,当然此笔记中也会对其内容有所摘录梳理
+>
+> 此处ES6部分笔记主要为:`查看教程时笔记+查阅的资料博客整合摘录+个人心得体会`,以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
 
 ## 1、let和const命令、作用域
 
@@ -317,5 +319,351 @@
 
 
 
+## 2、赋值解构
 
+>ES6 允许按照一定模式，`从数组和对象中提取值，对变量进行赋值`，这被称为解构（Destructuring）。
+>
+>本质上，这种写法属于“`模式匹配`”，只要等号两边的模式相同，左边的变量就会被赋予对应的值
 
+### Ⅰ-基本用法
+
+#### ① 基本用法举例
+
+>以前，为变量赋值，只能直接指定值。
+>
+>```javascript
+>let a = 1;
+>let b = 2;
+>let c = 3;
+>```
+>
+>ES6 允许写成下面这样。
+>
+>```javascript
+>let [a, b, c] = [1, 2, 3];
+>```
+>
+>上面代码表示，可以从数组中提取值，按照对应位置，对变量赋值。
+>
+>本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。下面是一些使用嵌套数组进行解构的例子。
+>
+>```javascript
+>let [foo, [[bar], baz]] = [1, [[2], 3]];//foo : 1 bar : 2 baz : 3
+>
+>let [ , , third] = ["foo", "bar", "baz"];//third : "baz"
+>
+>let [x, , y] = [1, 2, 3];//x : 1 y : 3
+>
+>let [head, ...tail] = [1, 2, 3, 4];//head : 1 tail : [2, 3, 4]
+>
+>let [x, y, ...z] = ['a'];//x : "a" y : undefined z : []
+>```
+>
+>如果解构不成功，变量的值就等于`undefined`。
+>
+>```javascript
+>let [foo] = [];
+>let [bar, foo] = [1];
+>```
+>
+>以上两种情况都属于解构不成功，`foo`的值都会等于`undefined`。
+>
+>另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。
+>
+>```javascript
+>let [x, y] = [1, 2, 3];//x : 1  y : 2 
+>let [a, [b], d] = [1, [2, 3], 4];//a : 1 b : 2 d : 4
+>```
+>
+>上面两个例子，都属于不完全解构，但是可以成功。
+>
+>如果等号的右边不是数组（或者严格地说，不是可遍历的结构，参见《Iterator》一章），那么将会报错。
+>
+>```javascript
+>// 报错
+>let [foo] = 1;
+>let [foo] = false;
+>let [foo] = NaN;
+>let [foo] = undefined;
+>let [foo] = null;
+>let [foo] = {};
+>```
+>
+>上面的语句都会报错，因为等号右边的值，要么转为对象以后不具备 Iterator 接口（前五个表达式），要么本身就不具备 Iterator 接口（最后一个表达式）。
+>
+>`对于 Set 结构，也可以使用数组的解构赋值`。
+>
+>```javascript
+>let [x, y, z] = new Set(['a', 'b', 'c']);
+>x // "a"
+>```
+>
+>事实上，只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值。
+>
+>```javascript
+>function* fibs() {
+>  let a = 0;
+>  let b = 1;
+>  while (true) {
+>    yield a;
+>    [a, b] = [b, a + b];
+>  }
+>}
+>
+>let [first, second, third, fourth, fifth, sixth] = fibs();
+>sixth // 5
+>```
+>
+>上面代码中，`fibs`是一个 Generator 函数（详见《Generator 函数》），原生具有 Iterator 接口。解构赋值会依次从这个接口获取值。
+
+#### ② 默认值
+
+>解构赋值允许指定默认值。
+>
+>```javascript
+>let [foo = true] = [];//foo = true
+>let [x, y = 'b'] = ['a']; // x='a', y='b'
+>let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'
+>```
+>
+>注意，ES6 内部使用严格相等运算符（`===`），判断一个位置是否有值。所以，只有当一个数组成员严格等于`undefined`，默认值才会生效。
+>
+>```javascript
+>let [x = 1] = [undefined];//x = 1
+>let [x = 1] = [null];//x = null
+>```
+>
+>上面代码中，如果一个数组成员是`null`，默认值就不会生效，因为`null`不严格等于`undefined`。
+>
+>如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。
+>
+>```javascript
+>function f() { console.log('aaa');}
+>let [x = f()] = [1];
+>```
+>
+>上面代码中，因为`x`能取到值，所以函数`f`根本不会执行。上面的代码其实等价于下面的代码。
+>
+>```javascript
+>let x;
+>if ([1] === undefined) { x = f()} 
+>else { x = [1]; }
+>```
+>
+>默认值可以引用解构赋值的其他变量，但该变量必须已经声明。
+>
+>```javascript
+>let [x = 1, y = x] = [];     // x=1; y=1
+>let [x = 1, y = x] = [2];    // x=2; y=2
+>let [x = 1, y = x] = [1, 2]; // x=1; y=2
+>let [x = y, y = 1] = [];     // ReferenceError: y is not defined
+>```
+>
+>上面最后一个表达式之所以会报错，是因为`x`用`y`做默认值时，`y`还没有声明。
+
+### Ⅱ-对象的赋值解构
+
+> `此处应用的非常多`,需要多查阅
+
+#### ① 基本用法
+
+>解构不仅可以用于数组，还可以用于对象。
+>
+>```javascript
+>let { foo, bar } = { foo: 'aaa', bar: 'bbb' };//foo = "aaa"; bar = "bbb"
+>```
+>
+>对象的解构与数组有一个重要的不同。`数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值`
+>
+>```javascript
+>let { bar, foo } = { foo: 'aaa', bar: 'bbb' };//foo = "aaa" ; bar = "bbb"
+>let { baz } = { foo: 'aaa', bar: 'bbb' };//baz = undefined
+>```
+>
+>上面代码的第一个例子，等号左边的两个变量的次序，与等号右边两个同名属性的次序不一致，但是对取值完全没有影响。第二个例子的变量没有对应的同名属性，导致取不到值，最后等于`undefined`。
+>
+>如果解构失败，变量的值等于`undefined`。
+>
+>```javascript
+>let {foo} = {bar: 'baz'};//foo = undefined
+>```
+>
+>上面代码中，等号右边的对象没有`foo`属性，所以变量`foo`取不到值，所以等于`undefined`。
+>
+>对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。
+>
+>```javascript
+>// 例一
+>let { log, sin, cos } = Math;
+>// 例二
+>const { log } = console;
+>log('hello') // hello
+>```
+>
+>上面代码的例一将`Math`对象的对数、正弦、余弦三个方法，赋值到对应的变量上，使用起来就会方便很多。例二将`console.log`赋值到`log`变量。
+>
+>如果变量名与属性名不一致，必须写成下面这样-->`取别名`
+>
+>```javascript
+>let { foo: baz } = { foo: 'aaa', bar: 'bbb' };//baz = "aaa"
+>
+>let obj = { first: 'hello', last: 'world' };
+>let { first: f, last: l } = obj;//f = 'hello' ; l = 'world'
+>```
+>
+>这实际上说明，对象的解构赋值是下面形式的简写（详见《对象的扩展》）。
+>
+>```javascript
+>let { foo: foo, bar: bar } = { foo: 'aaa', bar: 'bbb' };
+>```
+>
+>也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。
+>
+>```javascript
+>let { foo: baz } = { foo: 'aaa', bar: 'bbb' };
+>//baz = "aaa";
+>//foo = error: foo is not defined
+>```
+>
+>上面代码中，`foo`是匹配的模式，`baz`才是变量。真正被赋值的是变量`baz`，而不是模式`foo`。
+>
+>与数组一样，解构也可以用于嵌套结构的对象。
+>
+>```javascript
+>let obj = {
+>  p: ['Hello', { y: 'World' }]
+>};
+>
+>let { p: [x, { y }] } = obj;
+>//x == "Hello"
+>//y == "World"
+>```
+>
+>注意，这时`p`是模式，不是变量，因此不会被赋值。如果`p`也要作为变量赋值，可以写成下面这样。
+>
+>```javascript
+>let obj = {
+>  p: [ 'Hello', { y: 'World' }]
+>};
+>
+>let { p, p: [x, { y }] } = obj;
+>//x == "Hello"
+>//y == "World"
+>//p == ["Hello", {y: "World"}]
+>```
+>
+>下面是另一个例子。
+>
+>```javascript
+>const node = {
+>  loc: { 
+>      start: { line: 1, column: 5 }
+>  }
+>};
+>
+>let { loc, loc: { start }, loc: { start: { line }} } = node;
+>//line == 1
+>//loc  == Object {start: Object}
+>//start == Object {line: 1, column: 5}
+>```
+>
+>上面代码有三次解构赋值，分别是对`loc`、`start`、`line`三个属性的解构赋值。注意，最后一次对`line`属性的解构赋值之中，只有`line`是变量，`loc`和`start`都是模式，不是变量。
+>
+>下面是嵌套赋值的例子。-->`注意:外部包着一层()`:
+>
+>```javascript
+>let obj = {};
+>let arr = [];
+>({ foo: obj.prop, bar: arr[0] } = { foo: 123, bar: true });
+>//因为 JavaScript 引擎会将`{x}`理解成一个代码块，从而发生语法错误。`只有不将大括号写在行首`，避免 JavaScript 将其解释为代码块，才能解决这个问题。
+>//obj == {prop:123}
+>//arr == [true]
+>```
+>
+>如果解构模式是嵌套的对象，而且子对象所在的父属性不存在，那么将会报错。
+>
+>```javascript
+>// 报错
+>let {foo: {bar}} = {baz: 'baz'};
+>```
+>
+>上面代码中，等号左边对象的`foo`属性，对应一个子对象。该子对象的`bar`属性，解构时会报错。原因很简单，因为`foo`这时等于`undefined`，再取子属性就会报错。
+>
+>注意，对象的解构赋值可以取到继承的属性。
+>
+>```javascript
+>const obj1 = {};
+>const obj2 = { foo: 'bar' };
+>Object.setPrototypeOf(obj1, obj2);//Object.setPrototypeOf() 方法设置一个指定的对象的原型 ( 即, 内部[[Prototype]]属性）到另一个对象或  null
+>const { foo } = obj1;
+>foo // "bar"
+>```
+>
+>上面代码中，对象`obj1`的原型对象是`obj2`。`foo`属性不是`obj1`自身的属性，而是继承自`obj2`的属性，解构赋值可以取到这个属性。
+>
+>注:`Object.setPrototypeOf()`详解,不知道此方法的同学们看这里 -->[点我传送](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf)
+
+#### ② 默认值
+
+>对象的解构也可以指定默认值。
+>
+>```javascript
+>var {x = 3} = {};//x == 3
+>var {x, y = 5} = {x: 1};
+>//x == 1
+>//y == 5
+>var {x: y = 3} = {};//y == 3
+>var {x: y = 3} = {x: 5};//y == 5
+>var { message: msg = 'Something went wrong' } = {};//msg == "Something went wrong"
+>```
+>
+>默认值生效的条件是，对象的属性值严格等于`undefined`。
+>
+>```javascript
+>var {x = 3} = {x: undefined};//x == 3
+>var {x = 3} = {x: null};//x == null
+>```
+>
+>上面代码中，属性`x`等于`null`，因为`null`与`undefined`不严格相等，所以是个有效的赋值，导致默认值`3`不会生效。-->[原因上面讲过](#② 默认值)
+
+#### ③ 注意点
+
+>（1）如果要将一个已经声明的变量用于解构赋值，必须非常小心。
+>
+>```javascript
+>// 错误的写法
+>let x;
+>{x} = {x: 1};
+>// SyntaxError: syntax error
+>```
+>
+>上面代码的写法会报错，因为 JavaScript 引擎会将`{x}`理解成一个代码块，从而发生语法错误。`只有不将大括号写在行首`，避免 JavaScript 将其解释为代码块，才能解决这个问题。
+>
+>```javascript
+>// 正确的写法
+>let x;
+>({x} = {x: 1});
+>```
+>
+>上面代码将整个解构赋值语句，`放在一个圆括号里面，就可以正确执行`。关于圆括号与解构赋值的关系，参见下文。
+>
+>（2）解构赋值允许等号左边的模式之中，不放置任何变量名。因此，可以写出非常古怪的赋值表达式。
+>
+>```javascript
+>({} = [true, false]);
+>({} = 'abc');
+>({} = []);
+>```
+>
+>上面的表达式虽然毫无意义，但是语法是合法的，可以执行。
+>
+>（3）`由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构`。
+>
+>```javascript
+>let arr = [1, 2, 3];
+>let {0 : first, [arr.length - 1] : last} = arr;
+>//first == 1
+>//last == 3
+>```
+>
+>上面代码对数组进行对象解构。数组`arr`的`0`键对应的值是`1`，`[arr.length - 1]`就是`2`键，对应的值是`3`。方括号这种写法，属于“属性名表达式”（详见《对象的扩展》）。

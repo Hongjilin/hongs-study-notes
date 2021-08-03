@@ -5,6 +5,8 @@
 > 只截取了上方`Chrome_DevTools调试工具使用详解笔记`中部分笔记的部分知识点至此,方便网站阅读
 >
 > `只截取了部分笔记至此,方便网站阅读`
+>
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -17,8 +19,6 @@
 > 此笔记将结合 [官方文档](https://developer.chrome.com/docs/devtools/javascript/)、HTML中文网的[`Chrome 开发者工具中文文档`](https://www.html.cn/doc/chrome-devtools/);查阅的博客如:segmentfault中`CompileYouth`;简书的`澄澄真可爱`、[`前往悬崖下寻宝的神三算`](https://www.jianshu.com/u/defb23ef5cda)、[*`changchao`*](https://www.jianshu.com/u/870a1e4c7f0b);CSDN的[`@Demi的Chrome Devtool — Performance、Sources`](https://blog.csdn.net/qq_38128179)、[`精致灰`](https://blog.csdn.net/qq_26858401)、[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)、[`杭电茶娃的内存泄漏分析工具`](https://blog.csdn.net/c11073138);知乎的[`QAQ-YS`](https://www.zhihu.com/people/qaq-ys);css-tricks的[`SARAH DRASNER所写的Debugging Tips and Tricks`](https://css-tricks.com/debugging-tips-tricks/)、腾讯云中腾讯技术工程官方号的[`大型前端项目的断点调试共享化和复用化实践`](https://cloud.tencent.com/developer/article/1711214?from=article.detail.1471757)等包括但不仅限此的博客或资料、实践学习后`加以自己的理解`进行整理与撰写成自己的笔记,不是文档翻译哦
 >
 > 测试页面截图也都直接按照本人gitee为模板,本部分知识点实践占比很重,`所以我会画大量示例图`,可以对照操作.所以还是建议下载笔记后使用[`Typora`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB),我就是按照这个软件排版写的,图片缩放什么的都设置了,从网页上看的话图片排版很乱(可能很大)且难以观阅的
->
-> 本人[全部笔记地址](https://gitee.com/hongjilin/hongs-study-notes)
 >
 > 说明:本人此笔记记录于2021年,用的是此时最新版本的chrome
 
@@ -204,15 +204,15 @@
 >1. 应用场景举例:当你想要查找某个元素绑定的点击事件,就可以通过该方法直接定位到代码中
 >2. 操作:
 >
->  1) 切换 “Elements" 元素面板,点击文档节点
+>  - 切换 “Elements" 元素面板,点击文档节点
 >
->  2) 选择 “Event Listeners” 页签
+>  - 选择 “Event Listeners” 页签
 >
->  3) 展开相应的事件名,如“click”
+>  - 展开相应的事件名,如“click”
 >
->  4) 对 “handler” 点击右键,选择 “Show funciton definition”
+>  - 对 “handler” 点击右键,选择 “Show funciton definition”
 >
->  5) 点击后就会自动定位
+>  - 点击后就会自动定位
 >
 >3. 示例图
 >
@@ -274,11 +274,11 @@
 >
 >2. ![image-20210609182136699](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210609182136699.png):**过滤框主要能按照以下三种类型的输入进行信息过滤：**
 >
->   1) URL
+>   - URL
 >
->   2) 上下文
+>   - 上下文
 >
->   3) 正则表达式
+>   - 正则表达式
 >
 >   示例图
 >
@@ -475,13 +475,13 @@
 >
 >   >注意：有的数字行是灰色的，就是不可断点。有时候点击15行断点选中14行，这是因为浏览器真正执行的代码行不是你看到的那一行，可能是优化掉了或者经过某种转换。
 >
->2. 还有一种情况是:添加某一行断点，会跳转到另一个页面并命中某一行,这个页面的背景色是黄色且文件名是VM开头。上述情况，大部分都是因为浏览器显示的源码版本，跟真正的源码文件不一致，只需要刷新一下页面，保证显示的源码是最新的即可。![image-20210616161922254](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616161922254.png) 
+>2. 还有一种情况是:添加某一行断点，会跳转到另一个页面并命中某一行,这个页面的背景色是黄色且文件名是VM开头。上述情况，大部分都是因为浏览器显示的源码版本，跟真正的源码文件不一致，只需要刷新一下页面，保证显示的源码是最新的即可。![image-20210616161922254](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616161922254.png)  
 
 ##### 4) 打断点小技巧
 
 ###### ① *小技巧1*
 
->***时候源码历经千辛万苦都找不到在哪，这时候就需要祭出console.log了。在需要调试的那一行代码前加上console.log(666),然后运行一次，到控制台查看结果输出，点击右边的链接会自动跳转到源码，这样就可以直接断点了。\***
+>***有时候源码历经千辛万苦都找不到在哪，这时候就需要祭出console.log了。在需要调试的那一行代码前加上console.log(666),然后运行一次，到控制台查看结果输出，点击右边的链接会自动跳转到源码，这样就可以直接断点了***
 >
 >![image-20210616162044585](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616162044585.png) 
 
@@ -489,7 +489,7 @@
 
 >其实这个在上面`左侧面板第四点Filesystem&Overrides`部分讲过 -->[点我传送](#Ⅱ- 左侧面板详解)
 >
->***如下图，在Filesystem添加文件夹到工作路径，选择之后会有提示，点击接受。如果你的谷歌浏览器没有这玩意，请升级版本，还是没有的话，请忽略这段话。虽然不知道这是什么时候出的功能，但是我偶然发现的，它可以编辑之后真的保存到文件，这个可以当编辑器用了。\***
+>***如下图，在Filesystem添加文件夹到工作路径，选择之后会有提示，点击接受。如果你的谷歌浏览器没有这玩意，请升级版本，还是没有的话，请忽略这段话。虽然不知道这是什么时候出的功能，但是我偶然发现的，它可以编辑之后真的保存到文件，这个可以当编辑器用了。***
 >
 >![image-20210616162309551](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210616162309551.png) 
 
@@ -623,28 +623,29 @@
 >
 >1. 首先，最简单的用法就是我们输入一个字符串，然后可以过滤出那些资源名称中包含相应字符串的资源。这是我们一般使用的，除此以外，文本域还支持一些关键词，举个栗子：
 >
->   ![image-20210611165236991](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611165236991.png)
+>  ![image-20210611165236991](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210611165236991.png)
 >
->   上面的例子就用到了 `status-code` 关键词，后面跟的参数是状态码，可以刷选出 `状态码为304` 的请求
+>  上面的例子就用到了 `status-code` 关键词，后面跟的参数是状态码，可以刷选出 `状态码为304` 的请求
 >
 >2. 常用关键词有哪些
 >
->   - domain：刷选来自特定域的请求
->   - has-response-header：刷选 HTTP 返回值包含特定头部信息的请求
->   - is：可以用 `is:running` 查看 WebSocket 资源
->   - larger-than：筛选文件大小超过特定数字的请求，默认单位是 byte
->   - method：刷选特定 HTTP 请求方法的请求
->   - mime-type：刷选特定 MIME 类型的请求
->   - mixed-content：有 `mixed-content:all` 和 `mixed-content:displayed` 两种
->   - scheme：刷选特定 scheme 的请求
->   - set-cookie-domain：刷选特定的 HTTP 返回头部的 set-cookie 属性的请求
->   - set-cookie-name：也是对返回的 HTTP 头部中某个属性进行刷选的关键词
->   - set-cookie-value：同上
->   - status-code：对请求的状态值进行刷选
+>  - domain：刷选来自特定域的请求
+>  - has-response-header：刷选 HTTP 返回值包含特定头部信息的请求
+>  - is：可以用 `is:running` 查看 WebSocket 资源
+>  - larger-than：筛选文件大小超过特定数字的请求，默认单位是 byte
+>  - method：刷选特定 HTTP 请求方法的请求
+>  - mime-type：刷选特定 MIME 类型的请求
+>  - mixed-content：有 `mixed-content:all` 和 `mixed-content:displayed` 两种
+>  - scheme：刷选特定 scheme 的请求
+>  - set-cookie-domain：刷选特定的 HTTP 返回头部的 set-cookie 属性的请求
+>  - set-cookie-name：也是对返回的 HTTP 头部中某个属性进行刷选的关键词
+>  - set-cookie-value：同上
+>  - status-code：对请求的状态值进行刷选
 >
 >3. 注意点
 >
->   >1) 冒号后面不能有空格；2) 大小写敏感。
+>  >- 冒号后面不能有空格
+>  >- 大小写敏感。
 
 ##### 	5) `搜索`
 
@@ -668,9 +669,9 @@
 >
 > 2. 除了在 Network 面板可以设置网络状况，还可以在 Drawer 中看见。具体有两种方法：
 >
->    1) ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)-> More tools -> Network conditions
+>    - ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)-> More tools -> Network conditions
 >
->    2) 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)，点击，选择 Network conditions
+>    - 按 esc 键调出 Console Drawer，在 Console Tab 旁边也有 ![img](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/toolbar-3.png)，点击，选择 Network conditions
 
 ##### 	9) `右侧设置图标`
 
@@ -798,38 +799,38 @@
 
 >  该表格内容在下方火焰图面板的Main面板中用到(观察瀑布流时) ->[`点我传送`](#④ *Main*)
 >
->| 颜色            | 事件                    | 描述                                                         |
->| --------------- | ----------------------- | ------------------------------------------------------------ |
->| 蓝色(Loading)   | Parse HTML              | 浏览器执行HTML解析                                           |
->|                 | Finish Loading          | 网络请求完毕事件                                             |
->|                 | Receive Data            | 请求的响应数据到达事件，如果响应数据很大（拆包），可能会多次触发该事件 |
->|                 | Receive Response        | 响应头报文到达时触发                                         |
->|                 | Send Request            | 发送网络请求时触发                                           |
->|                 |                         |                                                              |
->| 黄色(Scripting) | Animation Frame Fired   | 一个定义好的动画帧发生并开始回调处理时触发                   |
->|                 | Cancel Animation Frame  | 取消一个动画帧时触发                                         |
->|                 | GC Event                | 垃圾回收时触发                                               |
->|                 | DOMContentLoaded        | 当页面中的DOM内容加载并解析完毕时触发                        |
->|                 | Evaluate Script         | A script was evaluated.                                      |
->|                 | Event                   | js事件                                                       |
->|                 | Function Call           | 只有当浏览器进入到js引擎中时触发                             |
->|                 | Install Timer           | 创建计时器（调用setTimeout()和setInterval()）时触发          |
->|                 | Request Animation Frame | requestAnimationFrame（）调用预定一个新帧                    |
->|                 | Remove Timer            | 当清除一个计时器时触发                                       |
->|                 | Time                    | 调用console.time()触发                                       |
->|                 | Time End                | 调用console.timeEnd()触发                                    |
->|                 | Timer Fired             | 定时器激活回调后触发                                         |
->|                 | XHR Ready State Change  | 当一个异步请求为就绪状态后触发                               |
->|                 | XHR Load                | 当一个异步请求完成加载后触发                                 |
->|                 |                         |                                                              |
->| 紫色(Rendering) | Invalidate layout       | 当DOM更改导致页面布局失效时触发                              |
->|                 | Layout                  | 页面布局计算执行时触发                                       |
->|                 | Recalculate style       | Chrome重新计算元素样式时触发                                 |
->|                 | Scroll                  | 内嵌的视窗滚动时触发                                         |
->|                 | 绿色(Painting)          | Composite Layers                                             |
->|                 | Image Decode            | 一个图片资源完成解码后触发                                   |
->|                 | Image Resize            | 一个图片被修改尺寸后触发                                     |
->|                 | Paint                   | 合并后的层被绘制到对应显示区域后触发                         |
+>| 颜色              | 事件                     | 描述                                                         |
+>| ----------------- | ------------------------ | ------------------------------------------------------------ |
+>| 蓝色(Loading)     | Parse HTML               | 浏览器执行HTML解析                                           |
+>|                   | Finish Loading           | 网络请求完毕事件                                             |
+>|                   | Receive Data             | 请求的响应数据到达事件，如果响应数据很大（拆包），可能会多次触发该事件 |
+>|                   | Receive Response         | 响应头报文到达时触发                                         |
+>|                   | Send Request             | 发送网络请求时触发                                           |
+>| **-------------** | **--------------------** | **------------------------------**                           |
+>| 黄色(Scripting)   | Animation Frame Fired    | 一个定义好的动画帧发生并开始回调处理时触发                   |
+>|                   | Cancel Animation Frame   | 取消一个动画帧时触发                                         |
+>|                   | GC Event                 | 垃圾回收时触发                                               |
+>|                   | DOMContentLoaded         | 当页面中的DOM内容加载并解析完毕时触发                        |
+>|                   | Evaluate Script          | A script was evaluated.                                      |
+>|                   | Event                    | js事件                                                       |
+>|                   | Function Call            | 只有当浏览器进入到js引擎中时触发                             |
+>|                   | Install Timer            | 创建计时器（调用setTimeout()和setInterval()）时触发          |
+>|                   | Request Animation Frame  | requestAnimationFrame（）调用预定一个新帧                    |
+>|                   | Remove Timer             | 当清除一个计时器时触发                                       |
+>|                   | Time                     | 调用console.time()触发                                       |
+>|                   | Time End                 | 调用console.timeEnd()触发                                    |
+>|                   | Timer Fired              | 定时器激活回调后触发                                         |
+>|                   | XHR Ready State Change   | 当一个异步请求为就绪状态后触发                               |
+>|                   | XHR Load                 | 当一个异步请求完成加载后触发                                 |
+>| **-------------** | **--------------------** | **-----------------------**                                  |
+>| 紫色(Rendering)   | Invalidate layout        | 当DOM更改导致页面布局失效时触发                              |
+>|                   | Layout                   | 页面布局计算执行时触发                                       |
+>|                   | Recalculate style        | Chrome重新计算元素样式时触发                                 |
+>|                   | Scroll                   | 内嵌的视窗滚动时触发                                         |
+>|                   | 绿色(Painting)           | Composite Layers                                             |
+>|                   | Image Decode             | 一个图片资源完成解码后触发                                   |
+>|                   | Image Resize             | 一个图片被修改尺寸后触发                                     |
+>|                   | Paint                    | 合并后的层被绘制到对应显示区域后触发                         |
 >
 >ps:该表格总结来自[`tang_yi的初识Chrome Performance`](https://blog.csdn.net/tang_yi_)
 
@@ -1058,7 +1059,7 @@
 >
 >![image-20210615170250587](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210615170250587.png)
 
-##### 2) **`Allocation instrumentation on timeline` (JS堆分配时间线)**
+##### 2) ** `Allocation instrumentation on timeline` (JS堆分配时间线)**
 
 > 通过`Allocation instrumentation on timeline`可以持续的记录堆分配的情况，显示了对象在什么时候被创建、什么时候存在内存泄漏等
 >
@@ -1436,7 +1437,7 @@
 >- 你可以在你代码中写上 `debugger;`，这样你可以看到当时这一小块代码做了什么
 >- 你还可以在 Chrome 开发者工具中进一步进行调试，单步跟踪事件的发生。你也可以用它选择性地观察指定的事件监听器。-->[详情看前面九大功能面板中的Sources](#Ⅰ- Sources 面板图解)
 
-###### ②  *`console.log`*
+###### ②  `console.log`
 
 >建议看上面[`Console 面板`](#2、Console 面板)
 >
@@ -1671,9 +1672,9 @@
 >
 >2. 操作
 >
->   1) 切换 “`Network`” 网络面板,选中`Img`
+>   - 切换 “`Network`” 网络面板,选中`Img`
 >
->   2) 点击 “Initiator” 列下的文件名即会跳转至代码处
+>   - 点击 “Initiator” 列下的文件名即会跳转至代码处
 >
 >3. 效果图![image-20210608165025868](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608165025868.png)
 
@@ -1683,13 +1684,13 @@
 >
 >2. 操作:
 >
->   1) 切换 “Network” 页签
+>   - 切换 “Network” 页签
 >
->   2) 点击左上角的“放大镜”按钮
+>   - 点击左上角的“放大镜”按钮
 >
->   3) 在弹出的搜索框中输入要查询的内容,敲回车键
+>   - 在弹出的搜索框中输入要查询的内容,敲回车键
 >
->   4) 选择想要查看的请求点击,就能查阅其请求头与响应体
+>   - 选择想要查看的请求点击,就能查阅其请求头与响应体
 >
 >3. 效果图
 >
@@ -1703,21 +1704,21 @@
 >
 >2. 切换网络模式操作:
 >
->   1) 切换 Network 网络面板,点击 “ online ” 下拉面板,选择想要的模式
+>   - 切换 Network 网络面板,点击 “ online ” 下拉面板,选择想要的模式
 >
->   2) 效果图
+>   - 效果图
 >
 >   <img src="Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608171012060.png" alt="image-20210608171012060" style="zoom: 67%;" />
 >
 >3. 限制网速操作:
 >
->   1) 切换 Network 网络面板 点击 “ online ” 下拉面板 选择 “ add.. ” 选项
+>   - 切换 Network 网络面板 点击 “ online ” 下拉面板 选择 “ add.. ” 选项
 >
->   2) 点击 “ Add custom profile… ” 按钮 依次输入“Profile Name”、“Download”、“Upload”等输入项设置网速,再点击 “Add” 按钮
+>   - 点击 “ Add custom profile… ” 按钮 依次输入“Profile Name”、“Download”、“Upload”等输入项设置网速,再点击 “Add” 按钮
 >
->   3) 回到 Network 网络面板切换所新增的网络模式
+>   - 回到 Network 网络面板切换所新增的网络模式
 >
->   4) 效果图:第一步操作同上切换网络操作
+>   - 效果图:第一步操作同上切换网络操作
 >
 >   ![image-20210608184929873](Chrome_DevTools调试工具使用详解笔记/ChromeDevTools使用详解笔记中的图片/image-20210608184929873.png)
 
@@ -1743,11 +1744,11 @@
 >
 >2. 操作:
 >
->   1) devtools的Elements面板中选中要操作的DOM节点
+>   - devtools的Elements面板中选中要操作的DOM节点
 >
->   2) 右键选择`Store object as global variable`,就会自动保存成全局变量
+>   - 右键选择`Store object as global variable`,就会自动保存成全局变量
 >
->   3) 可以如同js般对其进行操作
+>   - 可以如同js般对其进行操作
 >
 >3. 示例图:
 >
@@ -1759,9 +1760,9 @@
 >
 >2. 操作:
 >
->  1) 在代码中写`debugger`或者在控制台代码出打上断点,运行
+>  - 在代码中写`debugger`或者在控制台代码出打上断点,运行
 >
->  2) 选中任意想要保存的局部变量,右键存储即可
+>  - 选中任意想要保存的局部变量,右键存储即可
 >
 >3. 示例图
 >
@@ -1779,9 +1780,9 @@
 >
 >2. 操作:
 >
->   1) 代码中进行打印或者控制台输入代码`console`打印出需要的变量
+>   - 代码中进行打印或者控制台输入代码`console`打印出需要的变量
 >
->   2) 右键选择`Store object as global variable`,就会自动保存成全局变量
+>   - 右键选择`Store object as global variable`,就会自动保存成全局变量
 >
 >3. 示例图:
 >

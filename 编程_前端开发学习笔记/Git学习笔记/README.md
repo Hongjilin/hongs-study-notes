@@ -393,13 +393,17 @@ git logbranch
 
 > 来应用储藏然后立即从栈上扔掉它 `这是最推荐的使用`
 
-#### 4、git stash apply stash@{2}
+### 4、git stash apply stash@{2}
 
 > 如果不指定一个储藏,git认为指定栈顶`不常用`
 
 ### 5、git stash drop "储藏的名字"
 
 >加上要储藏的名字移除他 `不常用`
+
+### 6、git stash clear 
+
+> 在查看存储后,运行此命令  清空stash栈
 
 ## 八、撤销与重置
 

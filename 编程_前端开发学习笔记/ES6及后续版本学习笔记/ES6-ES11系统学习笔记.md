@@ -2,7 +2,9 @@
 
 >本笔记是本人`ES6-ES11系统学习笔记`,将ES系列全部梳理一遍,包括新特性等
 >
->观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)
+>观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)、[[`JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)`](https://juejin.cn/user/2330620350432110)]
+>
+>笔记中每部分都会首先给出[`概括总结`],有基础的同学可以先看此部分,如果对概括内容不熟悉或者有疑惑的就能带着疑惑继续看笔记,如果还是不懂可以评论区指出
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -41,6 +43,8 @@
 >| ES.next   | 动态指向下一个版本 | `后续学到我会进行补充`                                       |
 >
 >`注：从 ES6 开始，每年发布一个版本，版本号比年份最后一位大 1`
+>
+>所以有些文章上提到的`ES7`(实质上是`ES2016`)、`ES8`(实质上是`ES2017`)、`ES9`(实质上是`ES2018`)、`ES10`(实质上是`ES2019`)、`ES11`(实质上是`ES2020`)，实质上都是一些不规范的概念。从ES1到ES6，每个标准都是花了好几年甚至十多年才制定下来，你一个ES6到ES7，ES7到ES8，才用了一年，按照这样的定义下去，那不是很快就ES20了。用正确的概念来说ES6目前涵盖了**ES2015**、**ES2016**、**ES2017**、**ES2018**、**ES2019**、**ES2020**。
 
 ### Ⅱ-谁在维护 ECMA-262
 
@@ -60,9 +64,19 @@
 
 > 想要查看更详细的ES6,可以看阮一峰的ES6文档,本人当初对其进行了摘录放至此处方便查阅-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** ,当然此笔记中也会对其内容有所摘录梳理,毕竟此文档已经写的非常详细了
 >
-> 此处ES6部分笔记主要为:`查看教程时笔记+查阅的资料博客整合摘录+个人心得体会`,以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
+> 此处ES6部分笔记主要为:`查阅的资料博客整合摘录`,加上学习ES6时笔记、个人心得体会以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
 
-## 1、let和const命令、作用域
+## 1、ES6更新的内容概括
+
+>**表达式**：声明、解构赋值
+>
+>**内置对象**：字符串扩展、数值扩展、对象扩展、数组扩展、函数扩展、正则扩展、Symbol、Set、Map、Proxy、Reflect
+>
+>**语句与运算**：Class、Module、Iterator
+>
+>**异步编程**：Promise、Generator、Async
+
+## 2、let和const命令、作用域
 
 > 注意:`不存在变量提升`
 >
@@ -70,7 +84,36 @@
 >
 > 为了纠正这种现象，`let`、`const`命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错
 
-### Ⅰ-let关键字命令
+### Ⅰ-概括与总结
+
+>> 声明
+>
+>-  **const命令**：声明常量
+>-  **let命令**：声明变量
+>
+>> 作用
+>
+>1. 作用域
+>   - **全局作用域**
+>   - **函数作用域**：`function() {}`
+>   - **块级作用域**：`{}`
+>2. 作用范围
+>   - `var命令`在全局代码中执行
+>   - `const命令`和`let命令`只能在代码块中执行
+>3. 赋值使用
+>   - `const命令`声明常量后必须立马赋值
+>   - `let命令`声明变量后可立马赋值或使用时赋值
+>4. 声明方法：`var`、`const`、`let`、`function`、`class`、`import`
+>
+>> 重点难点
+>
+>- 不允许重复声明
+>- 未定义就使用会报错：`const命令`和`let命令`不存在变量提升
+>- 暂时性死区：在代码块内使用`const命令`和`let命令`声明变量之前，该变量都不可用
+>
+>下一节为赋值解构的概括总结  -->[点我传送](#3、赋值解构)
+
+### Ⅱ-let关键字命令
 
 >let 关键字用来声明变量，使用 let 声明的变量有几个特点： 
 >
@@ -81,7 +124,7 @@
 >
 >应用场景：声明重复赋值的变量时可以用这个,如果你不是要求很高的话,基本上都能用let进行声明(var声明的可以都用这个替代了)
 
-### Ⅱ-const关键字命令
+### Ⅲ-const关键字命令
 
 >const 关键字用来声明常量，const 声明有以下特点:
 >
@@ -100,11 +143,11 @@
 >
 >应用场景：声明对象类型、确定不会再次赋值的变量使用 const，其他的可以用let
 
-### Ⅲ-ES6 声明变量的六种方法
+### Ⅳ-ES6 声明变量的六种方法
 
 >ES5 只有两种声明变量的方法：`var`命令和`function`命令。ES6 除了添加`let`和`const`命令，后面还会提到，另外两种声明变量的方法：`import`命令和`class`命令。所以，ES6 一共有 6 种声明变量的方法。
 
-### Ⅳ-块级作用域
+### Ⅴ-块级作用域
 
 #### ① 为什么需要块级作用域？
 
@@ -319,13 +362,51 @@
 
 
 
-## 2、赋值解构
+## 3、赋值解构
 
 >ES6 允许按照一定模式，`从数组和对象中提取值，对变量进行赋值`，这被称为解构（Destructuring）。
 >
 >本质上，这种写法属于“`模式匹配`”，只要等号两边的模式相同，左边的变量就会被赋予对应的值
 
-### Ⅰ-基本用法
+### Ⅰ-概括总结
+
+>1.  **字符串解构**：`const [a, b, c, d, e] = "hello"`
+>2.  **数值解构**：`const { toString: s } = 123`
+>3.  **布尔解构**：`const { toString: b } = true`
+>4. 对象解构
+>   - 形式：`const { x, y } = { x: 1, y: 2 }`
+>   - 默认：`const { x, y = 2 } = { x: 1 }`
+>   - 改名：`const { x, y: z } = { x: 1, y: 2 }`
+>5. 数组解构
+>   - 规则：数据结构具有`Iterator接口`可采用数组形式的解构赋值
+>   - 形式：`const [x, y] = [1, 2]`
+>   - 默认：`const [x, y = 2] = [1]`
+>6. 函数参数解构
+>   - 数组解构：`function Func([x = 0, y = 1]) {}`
+>   - 对象解构：`function Func({ x = 0, y = 1 } = {}) {}`
+>
+>> `应用场景`
+>
+>- 交换变量值：`[x, y] = [y, x]`
+>- 返回函数多个值：`const [x, y, z] = Func()`
+>- 定义函数参数：`Func([1, 2])`
+>- 提取JSON数据：`const { name, version } = packageJson`
+>- 定义函数参数默认值：`function Func({ x = 1, y = 2 } = {}) {}`
+>- 遍历Map结构：`for (let [k, v] of Map) {}`
+>- 输入模块指定属性和方法：`const { readFile, writeFile } = require("fs")`
+>
+>> `重点难点`
+>
+>- 匹配模式：只要等号两边的模式相同，左边的变量就会被赋予对应的值
+>- 解构赋值规则：只要等号右边的值不是对象或数组，就先将其转为对象
+>- 解构默认值生效条件：属性值严格等于`undefined`
+>- 解构遵循匹配模式
+>- 解构不成功时变量的值等于`undefined`
+>- `undefined`和`null`无法转为对象，因此无法进行解构
+>
+>下一节为字符串的拓展概括  -->[点我传送](#4、字符串的拓展)
+
+### Ⅱ-基本用法
 
 #### ① 基本用法举例
 
@@ -461,7 +542,7 @@
 >
 >上面最后一个表达式之所以会报错，是因为`x`用`y`做默认值时，`y`还没有声明。
 
-### Ⅱ-对象的赋值解构
+### Ⅲ-对象的赋值解构
 
 > `此处应用的非常多`,需要多查阅
 
@@ -668,7 +749,7 @@
 >
 >上面代码对数组进行对象解构。数组`arr`的`0`键对应的值是`1`，`[arr.length - 1]`就是`2`键，对应的值是`3`。方括号这种写法，属于“属性名表达式”（详见《对象的扩展》）。
 
-### Ⅲ-字符串的赋值结构
+### Ⅳ-字符串的赋值结构
 
 >字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
 >
@@ -684,7 +765,7 @@
 >```
 >
 
-### Ⅳ-数值和布尔值的解构赋值
+### Ⅴ-数值和布尔值的解构赋值
 
 >解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。
 >
@@ -758,7 +839,7 @@
 >```
 >
 
-### Ⅴ-圆括号问题
+### Ⅵ-圆括号问题
 
 >解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，`一个式子到底是模式，还是表达式`，没有办法从一开始就知道，必须解析到（或解析不到）等号才能知道。
 >
@@ -824,7 +905,7 @@
 >
 >上面三行语句都可以正确执行，因为`首先它们都是赋值语句，而不是声明语句`；其次它们的圆括号都不属于模式的一部分。第一行语句中，模式是取数组的第一个成员，跟圆括号无关；第二行语句中，模式是`p`，而不是`d`；第三行语句与第一行语句的性质一致。
 
-### Ⅵ-具体应用场景举例
+### Ⅶ-具体应用场景举例
 
 >变量的解构赋值用途很多
 
@@ -942,4 +1023,365 @@
 >```javascript
 >const { SourceMapConsumer, SourceNode } = require("source-map");
 >```
+
+## 4、字符串的拓展
+
+### Ⅰ-概括总结
+
+>-  **Unicode表示法**：`大括号包含`表示Unicode字符(`\u{0xXX}`或`\u{0XXX}`)
+>-  **字符串遍历**：可通过`for-of`遍历字符串
+>-  **字符串模板**：可单行可多行可插入变量的增强版字符串
+>-  **标签模板**：函数参数的特殊调用
+>-  **String.raw()**：返回把字符串所有变量替换且对斜杠进行转义的结果
+>-  **String.fromCodePoint()**：返回码点对应字符
+>-  **codePointAt()**：返回字符对应码点(`String.fromCodePoint()`的逆操作)
+>-  **normalize()**：把字符的不同表示方法统一为同样形式，返回`新字符串`(Unicode正规化)
+>-  **repeat()**：把字符串重复n次，返回`新字符串`
+>-  **matchAll()**：返回正则表达式在字符串的所有匹配
+>-  **includes()**：是否存在指定字符串
+>-  **startsWith()**：是否存在字符串头部指定字符串
+>-  **endsWith()**：是否存在字符串尾部指定字符串
+>
+>- 以上扩展方法均可作用于由`4个字节储存`的`Unicode字符`上
+
+### Ⅱ-模板字符串
+
+> 模板字符串（template string）是增强版的字符串，用反引号[ `  ]标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。
+>
+> 嵌入变量使用[`${变量名}`]:如果大括号中的值不是字符串，将按照一般的规则转为字符串。比如，大括号中是一个对象，将默认调用对象的`toString`方法。如果大括号内部是一个字符串，将会原样输出。
+
+#### ① 字符串中可以出现换行符
+
+>字符串中可以出现换行符:如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。
+>
+>```js
+>//代码中，所有模板字符串的空格和换行，都是被保留的，比如`<ul>`标签前面会有一个换行。如果你不想要这个换行，可以使用`trim`方法消除它。
+>$('#list').html(`
+><ul>
+>  <li>first</li>
+>  <li>second</li>
+></ul>
+>`.trim());
+>```
+
+#### ② 可以使用 ${xxx} 形式输出变量
+
+>```js
+>function authorize(user, action) {
+>  if (!user.hasPrivilege(action)) {
+>    throw new Error(
+>      // 传统写法为
+>      // 'User '
+>      // + user.name
+>      // + ' is not authorized to do '
+>      // + action
+>      // + '.'
+>      `User ${user.name} is not authorized to do ${action}.`);
+>  }
+>}
+>```
+
+#### ③ 大括号内部可以放入任意的 JavaScript 表达式
+
+>括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性。
+>
+>```js
+>let x = 1;
+>let y = 2;
+>`${x} + ${y} = ${x + y}`// "1 + 2 = 3"
+>`${x} + ${y * 2} = ${x + y * 2}`// "1 + 4 = 5"
+>let obj = {x: 1, y: 2};
+>`${obj.x + obj.y}`// "3"
+>```
+
+#### ④ 模板字符串之中还能调用函数。
+
+>```js
+>function fn() {  return "Hello World";}
+>`foo ${fn()} bar`
+>// foo Hello World bar
+>```
+
+#### ⑤ 字符串嵌套
+
+>```js
+>const tmpl = addrs => `
+>  <table>
+>  ${addrs.map(addr => `
+>    <tr><td>${addr.first}</td></tr>
+>    <tr><td>${addr.last}</td></tr>
+>  `).join('')}
+>  </table>
+>`;
+>```
+>
+>上面代码中，模板字符串的变量之中，又嵌入了另一个模板字符串，使用方法如下。
+>
+>```javascript
+>const data = [
+>    { first: '<Jane>', last: 'Bond' },
+>    { first: 'Lars', last: '<Croft>' },
+>];
+>console.log(tmpl(data));
+>/**下面是打印结果
+><table>
+>   <tr><td><Jane></td></tr>
+>  <tr><td>Bond</td></tr>
+>
+>   <tr><td>Lars</td></tr>
+>   <tr><td><Croft></td></tr>
+>
+></table>
+>*/
+>```
+>
+>如果需要引用模板字符串本身，在需要时执行，可以写成函数。
+>
+>```javascript
+>let func = (name) => `Hello ${name}!`;
+>func('Jack') // "Hello Jack!"
+>```
+>
+>上面代码中，模板字符串写成了一个函数的返回值。执行这个函数，就相当于执行这个模板字符串了。
+
+### Ⅲ-标签模板
+
+> 模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“`标签模板`”功能（tagged template`）。
+>
+> ```js
+> alert`hello`
+> // 等同于
+> alert(['hello'])
+> ```
+
+#### ① 简单实例
+
+>标签模板其实不是模板，而是函数调用的一种特殊形式。`[标签]指的就是函数`，紧跟在后面的模板字符串就是它的参数。
+>
+>但是，如果模板字符里面有变量，就不是简单的调用了，而是会将模板字符串先处理成多个参数，再调用函数。
+>
+>```javascript
+>let a = 5;
+>let b = 10;
+>
+>tag`Hello ${ a + b } world ${ a * b }`;
+>// 等同于
+>tag(['Hello ', ' world ',  ' '  ], 15, 50);
+>```
+>
+>上面代码中，模板字符串前面有一个标识名`tag`，它是一个函数。整个表达式的返回值，就是`tag`函数处理模板字符串后的返回值。
+>
+>函数`tag`依次会接收到多个参数。
+>
+>```javascript
+>function tag(stringArr, value1, value2){
+>  // ...
+>}
+>// 等同于
+>function tag(stringArr, ...values){
+>  // ...
+>}
+>```
+>
+>`tag`函数的第一个参数是一个数组，`该数组的成员是模板字符串中那些没有变量替换的部分`，也就是说，变量替换只发生在数组的第一个成员与第二个成员之间、第二个成员与第三个成员之间，以此类推。
+>
+>`tag`函数的其他参数，都是模板字符串各个变量被替换后的值。由于本例中，模板字符串含有两个变量，因此`tag`会接受到`value1`和`value2`两个参数。
+>
+>`tag`函数所有参数的实际值如下。
+>
+>- 第一个参数：`['Hello ', ' world ', '']`
+>- 第二个参数: 15
+>- 第三个参数：50
+>
+>也就是说，`tag`函数实际上以下面的形式调用。
+>
+>```javascript
+>tag(['Hello ', ' world ', ''], 15, 50)
+>```
+>
+>我们可以按照需要编写`tag`函数的代码。下面是`tag`函数的一种写法，以及运行结果。
+>
+>```javascript
+>let a = 5;
+>let b = 10;
+>
+>function tag(s, v1, v2) {
+>  console.log(s[0]);
+>  console.log(s[1]);
+>  console.log(s[2]);
+>  console.log(v1);
+>  console.log(v2);
+>
+>  return "OK";
+>}
+>
+>tag`Hello ${ a + b } world ${ a * b}`;
+>// "Hello "
+>// " world "
+>// ""
+>// 15
+>// 50
+>// "OK"
+>```
+>
+
+#### ② 稍微复杂的栗子
+
+>```javascript
+>let total = 30;
+>let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+>
+>function passthru(literals) {
+>  let result = '';
+>  let i = 0;
+>
+>  while (i < literals.length) {
+>    result += literals[i++];
+>    if (i < arguments.length) {
+>      result += arguments[i];
+>    }
+>  }
+>
+>  return result;
+>}
+>
+>msg // "The total is 30 (31.5 with tax)"
+>```
+>
+>上面这个例子展示了，如何将各个参数按照原来的位置拼合回去。
+>
+>`passthru`函数采用 rest 参数的写法如下。
+>
+>```javascript
+>function passthru(literals, ...values) {
+>  let output = "";
+>  let index;
+>  for (index = 0; index < values.length; index++) {
+>    output += literals[index] + values[index];
+>  }
+>
+>  output += literals[index]
+>  return output;
+>}
+>```
+>
+>“标签模板”的一个重要应用，就是过滤 HTML 字符串，防止用户输入恶意内容。
+>
+>```javascript
+>let message =
+>  SaferHTML`<p>${sender} has sent you a message.</p>`;
+>
+>function SaferHTML(templateData) {
+>  let s = templateData[0];
+>  for (let i = 1; i < arguments.length; i++) {
+>    let arg = String(arguments[i]);
+>
+>    // Escape special characters in the substitution.
+>    s += arg.replace(/&/g, "&amp;")
+>            .replace(/</g, "&lt;")
+>            .replace(/>/g, "&gt;");
+>
+>    // Don't escape special characters in the template.
+>    s += templateData[i];
+>  }
+>  return s;
+>}
+>```
+>
+>上面代码中，`sender`变量往往是用户提供的，经过`SaferHTML`函数处理，里面的特殊字符都会被转义。
+>
+>```js
+>let sender = '<script>alert("abc")</script>'; // 恶意代码
+>let message = SaferHTML`<p>${sender} has sent you a message.</p>`;
+>
+>message
+>// <p>&lt;script&gt;alert("abc")&lt;/script&gt; has sent you a message.</p>
+>```
+
+#### ③ 用作多语言转换（国际化处理）
+
+>标签模板的另一个应用，就是多语言转换（国际化处理）。
+>
+>```javascript
+>i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
+>// "欢迎访问xxx，您是第xxxx位访问者！"
+>```
+>
+>模板字符串本身并不能取代 Mustache 之类的模板库，因为没有条件判断和循环处理功能，但是通过标签函数，你可以自己添加这些功能。
+>
+>```javascript
+>// 下面的hashTemplate函数
+>// 是一个自定义的模板处理函数
+>let libraryHtml = hashTemplate`
+>  <ul>
+>    #for book in ${myBooks}
+>      <li><i>#{book.title}</i> by #{book.author}</li>
+>    #end
+>  </ul>
+>`;
+>```
+>
+>除此之外，你甚至可以使用标签模板，在 JavaScript 语言之中嵌入其他语言。
+>
+>```javascript
+>jsx`
+>  <div>
+>    <input
+>      ref='input'
+>      onChange='${this.handleChange}'
+>      defaultValue='${this.state.value}' />
+>      ${this.state.value}
+>   </div>
+>`
+>```
+>
+>上面的代码通过`jsx`函数，将一个 DOM 字符串转为 React 对象。
+>
+>下面则是一个假想的例子，通过`java`函数，在 JavaScript 代码之中运行 Java 代码。
+>
+>```javascript
+>java`
+>class HelloWorldApp {
+>  public static void main(String[] args) {
+>    System.out.println("Hello World!"); // Display the string.
+>  }
+>}
+>`
+>HelloWorldApp.main();
+>```
+>
+>模板处理函数的第一个参数（模板字符串数组），还有一个`raw`属性。
+>
+>```javascript
+>console.log`123`
+>// ["123", raw: Array[1]]
+>```
+>
+>上面代码中，`console.log`接受的参数，实际上是一个数组。该数组有一个`raw`属性，保存的是转义后的原字符串。
+>
+>请看下面的例子。
+>
+>```javascript
+>tag`First line\nSecond line`
+>
+>function tag(strings) {
+>  console.log(strings.raw[0]);
+>  // strings.raw[0] 为 "First line\\nSecond line"
+>  // 打印输出 "First line\nSecond line"
+>}
+>```
+>
+>上面代码中，`tag`函数的第一个参数`strings`，有一个`raw`属性，也指向一个数组。该数组的成员与`strings`数组完全一致。比如，`strings`数组是`["First line\nSecond line"]`，那么`strings.raw`数组就是`["First line\\nSecond line"]`。两者唯一的区别，就是字符串里面的斜杠都被转义了。比如，strings.raw 数组会将`\n`视为`\\`和`n`两个字符，而不是换行符。这是为了方便取得转义之前的原始模板而设计的。
+
+
+
+
+
+
+
+
+
+
+
+
 

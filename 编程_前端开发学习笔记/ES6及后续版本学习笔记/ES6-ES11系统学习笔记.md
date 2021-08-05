@@ -4,7 +4,7 @@
 >
 >观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)、[[`JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)`](https://juejin.cn/user/2330620350432110)]
 >
->笔记中每部分都会首先给出[`概括总结`],有基础的同学可以先看此部分,如果对概括内容不熟悉或者有疑惑的就能带着疑惑继续看笔记,如果还是不懂可以评论区指出
+>笔记中每部分都会首先给出[`概括总结`],总结概括此部分知识点,然后再于下方给出`部分常用重点`知识点详解
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -1148,7 +1148,7 @@
 
 ### Ⅲ-标签模板
 
-> 模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“`标签模板`”功能（tagged template`）。
+> 模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“`标签模板`”功能（tagged template`）。  -->反正我是很少用到,可阅读性较差
 >
 > ```js
 > alert`hello`
@@ -1236,17 +1236,15 @@
 >function passthru(literals) {
 >  let result = '';
 >  let i = 0;
->
->  while (i < literals.length) {
->    result += literals[i++];
+>while (i < literals.length) {
+>  result += literals[i++];
 >    if (i < arguments.length) {
->      result += arguments[i];
+>     result += arguments[i];
+>     }
 >    }
->  }
->
 >  return result;
 >}
->
+>  
 >msg // "The total is 30 (31.5 with tax)"
 >```
 >
@@ -1256,40 +1254,39 @@
 >
 >```javascript
 >function passthru(literals, ...values) {
->  let output = "";
->  let index;
+>let output = "";
+>let index;
 >  for (index = 0; index < values.length; index++) {
->    output += literals[index] + values[index];
+>  output += literals[index] + values[index];
 >  }
->
->  output += literals[index]
+>    output += literals[index]
 >  return output;
 >}
->```
->
+>  ```
+>  
 >“标签模板”的一个重要应用，就是过滤 HTML 字符串，防止用户输入恶意内容。
 >
 >```javascript
 >let message =
->  SaferHTML`<p>${sender} has sent you a message.</p>`;
+>SaferHTML`<p>${sender} has sent you a message.</p>`;
 >
 >function SaferHTML(templateData) {
 >  let s = templateData[0];
->  for (let i = 1; i < arguments.length; i++) {
->    let arg = String(arguments[i]);
->
->    // Escape special characters in the substitution.
+>for (let i = 1; i < arguments.length; i++) {
+>let arg = String(arguments[i]);
+>  
+>  // Escape special characters in the substitution.
 >    s += arg.replace(/&/g, "&amp;")
->            .replace(/</g, "&lt;")
->            .replace(/>/g, "&gt;");
->
->    // Don't escape special characters in the template.
->    s += templateData[i];
->  }
->  return s;
+>       .replace(/</g, "&lt;")
+>           .replace(/>/g, "&gt;");
+>    
+>     // Don't escape special characters in the template.
+>     s += templateData[i];
 >}
->```
->
+>    return s;
+>    }
+>  ```
+>  
 >上面代码中，`sender`变量往往是用户提供的，经过`SaferHTML`函数处理，里面的特殊字符都会被转义。
 >
 >```js
@@ -1375,15 +1372,97 @@
 >
 >上面代码中，`tag`函数的第一个参数`strings`，有一个`raw`属性，也指向一个数组。该数组的成员与`strings`数组完全一致。比如，`strings`数组是`["First line\nSecond line"]`，那么`strings.raw`数组就是`["First line\\nSecond line"]`。两者唯一的区别，就是字符串里面的斜杠都被转义了。比如，strings.raw 数组会将`\n`视为`\\`和`n`两个字符，而不是换行符。这是为了方便取得转义之前的原始模板而设计的。
 
+## 5、数值的拓展
 
+### Ⅰ- 概括总结
 
+> **二进制表示法**：`0b或0B开头`表示二进制(`0bXX`或`0BXX`)
+>
+> **八进制表示法**：`0o或0O开头`表示二进制(`0oXX`或`0OXX`)
+>
+>**指数运算符**:其实这是`ES2016` 新增的 ,指数运算符（`**`）。 -->详见下方
+>
+> **Number.EPSILON**：数值最小精度
+>
+> **Number.MIN_SAFE_INTEGER**：最小安全数值(`-2^53`)
+>
+> **Number.MAX_SAFE_INTEGER**：最大安全数值(`2^53`)
+>
+> **Number.parseInt()**：返回转换值的整数部分
+>
+> **Number.parseFloat()**：返回转换值的浮点数部分
+>
+> **Number.isFinite()**：是否为有限数值
+>
+> **Number.isNaN()**：是否为NaN
+>
+> **Number.isInteger()**：是否为整数
+>
+> **Number.isSafeInteger()**：是否在数值安全范围内
+>
+> **Math.trunc()**：返回数值整数部分
+>
+> **Math.sign()**：返回数值类型(`正数1`、`负数-1`、`零0`)
+>
+> **Math.cbrt()**：返回数值立方根
+>
+> **Math.clz32()**：返回数值的32位无符号整数形式
+>
+> **Math.imul()**：返回两个数值相乘
+>
+> **Math.fround()**：返回数值的32位单精度浮点数形式
+>
+> **Math.hypot()**：返回所有数值平方和的平方根
+>
+> **Math.expm1()**：返回`e^n - 1`
+>
+> **Math.log1p()**：返回`1 + n`的自然对数(`Math.log(1 + n)`)
+>
+> **Math.log10()**：返回以10为底的n的对数
+>
+> **Math.log2()**：返回以2为底的n的对数
+>
+> **Math.sinh()**：返回n的双曲正弦
+>
+> **Math.cosh()**：返回n的双曲余弦
+>
+> **Math.tanh()**：返回n的双曲正切
+>
+> **Math.asinh()**：返回n的反双曲正弦
+>
+> **Math.acosh()**：返回n的反双曲余弦
+>
+> **Math.atanh()**：返回n的反双曲正切
 
+### Ⅱ - 指数运算符
 
-
-
-
-
-
-
-
+>ES2016 新增了一个指数运算符（`**`）。
+>
+>```javascript
+>2 ** 2 // 4
+>2 ** 3 // 8
+>```
+>
+>这个运算符的一个特点是右结合，而不是常见的左结合。多个指数运算符连用时，是从最右边开始计算的。
+>
+>```javascript
+>// 相当于 2 ** (3 ** 2)
+>2 ** 3 ** 2
+>// 512
+>```
+>
+>上面代码中，首先计算的是第二个指数运算符，而不是第一个。
+>
+>指数运算符可以与等号结合，形成一个新的赋值运算符（`**=`）。
+>
+>```javascript
+>let a = 1.5;
+>a **= 2;
+>// 等同于 a = a * a;
+>
+>let b = 4;
+>b **= 3;
+>// 等同于 b = b * b * b;
+>```
+>
 

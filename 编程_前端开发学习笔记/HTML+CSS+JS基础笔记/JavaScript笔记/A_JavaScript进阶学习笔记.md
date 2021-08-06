@@ -1134,43 +1134,45 @@
 
 >所谓高阶函数，就是一个函数就可以接收另一个函数作为参数，或者是返回一个函数-->常见的高阶函数有map、reduce、filter、sort等
 >
->  ```js
+>```js
 >var ADD =function add(a) {
-> return function(b) {
->  return a+b
-> }
+>return function(b) {
+>return a+b
 >}
-> 调用：ADD(2)(3)即可获得结果
->  ```
+>}
+>调用：ADD(2)(3)即可获得结果
+>```
 >
 >1. map
 >
->   - ```js
->     //
->     map接受一个函数作为参数，不改变原来的数组，只是返回一个全新的数组
->     var arr = [1,2,3,4,5]
->     var arr1 = arr.map(item => item = 2)// 输出[1,1,1,1,1]
->     ```
+>  - ```js
+>    //
+>    map接受一个函数作为参数，不改变原来的数组，只是返回一个全新的数组
+>    var arr = [1,2,3,4,5]
+>    var arr1 = arr.map(item => item = 2)
+>    //arr  输出[1,2,3,4,5]
+>    //arr1 输出[2,2,2,2,2]
+>    ```
 >
 >2. reduce
 >
->   - ```js
->     //
->     reduce也是返回一个全新的数组。reduce接受一个函数作为参数，这个函数要有两个形参，代表数组中的前两项，reduce会将这个函数的结果与数组中的第三项再次组成这个函数的两个形参以此类推进行累积操作
->     var arr = [1,2,3,4,5]
->     var arr2 = arr.reduce((a,b)=> a+b)
->     console.log(arr2) // 15
->     ```
+>  - ```js
+>    //
+>    reduce也是返回一个全新的数组。reduce接受一个函数作为参数，这个函数要有两个形参，代表数组中的前两项，reduce会将这个函数的结果与数组中的第三项再次组成这个函数的两个形参以此类推进行累积操作
+>    var arr = [1,2,3,4,5]
+>    var arr2 = arr.reduce((a,b)=> a+b)
+>    console.log(arr2) // 15
+>    ```
 >
 >3. filter
 >
->   - ```js
->     //
->     filter返回过滤后的数组。filter也接收一个函数作为参数，这个函数将作用于数组中的每个元素，根据该函数每次执行后返回的布尔值来保留结果，如果是true就保留，如果是false就过滤掉（这点与map要区分）
->     var arr = [1,2,3,4,5]
->      var arr3 = arr.filter(item => item % 2 == 0)
->     console.log(arr3)// [2,4]
->     ```
+>  - ```js
+>    //
+>    filter返回过滤后的数组。filter也接收一个函数作为参数，这个函数将作用于数组中的每个元素，根据该函数每次执行后返回的布尔值来保留结果，如果是true就保留，如果是false就过滤掉（这点与map要区分）
+>    var arr = [1,2,3,4,5]
+>     var arr3 = arr.filter(item => item % 2 == 0)
+>    console.log(arr3)// [2,4]
+>    ```
 
 ## 5、闭包
 

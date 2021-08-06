@@ -1540,14 +1540,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                 
+>                     
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->                 
+>                     
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1560,14 +1560,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                 
+>                     
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->                     
+>                         
 >     ```
 >
 >2. 模块调用

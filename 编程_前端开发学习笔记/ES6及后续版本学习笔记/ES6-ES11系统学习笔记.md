@@ -2,7 +2,7 @@
 
 >本笔记是本人`ES6-ES11系统学习笔记`,将ES系列全部梳理一遍,包括新特性等
 >
->观阅或查阅的资料:[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)、[[`JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)`](https://juejin.cn/user/2330620350432110)]
+>观阅或查阅的资料:[[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)]、[[`尚硅谷Web前端ES6教程，涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[[`JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)`](https://juejin.cn/user/2330620350432110)]
 >
 >笔记中每部分都会首先给出[`概括总结`],总结概括此部分知识点,然后再于下方给出`部分常用重点`知识点详解
 >
@@ -1470,57 +1470,58 @@
 
 > `对于JS来说函数部分自然是重中之重`,相对而言篇幅占比也会较大
 
-### Ⅰ-概括总结
+### Ⅰ- 概括总结
 
 >> Ⅰ- 参数默认值：为函数参数指定默认值
 >
->  - 形式：`function Func(x = 1, y = 2) {}`
->  - 参数赋值：惰性求值(函数调用后才求值)
->  - 参数位置：尾参数
->  - 参数作用域：函数作用域
->  - 声明方式：默认声明，不能用`const`或`let`再次声明
->  - length：返回没有指定默认值的参数个数
->  - 与解构赋值默认值结合：`function Func({ x = 1, y = 2 } = {}) {}`
->  - 应用
->    1. 指定某个参数不得省略，省略即抛出错误：`function Func(x = throwMissing()) {}`
->    2. 将参数默认值设为`undefined`，表明此参数可省略：`Func(undefined, 1)`
+> - 形式：`function Func(x = 1, y = 2) {}`
+> - 参数赋值：惰性求值(函数调用后才求值)
+> - 参数位置：尾参数
+> - 参数作用域：函数作用域
+> - 声明方式：默认声明，不能用`const`或`let`再次声明
+> - length：返回没有指定默认值的参数个数
+> - 与解构赋值默认值结合：`function Func({ x = 1, y = 2 } = {}) {}`
+> - 应用
+>   1. 指定某个参数不得省略，省略即抛出错误：`function Func(x = throwMissing()) {}`
+>   2. 将参数默认值设为`undefined`，表明此参数可省略：`Func(undefined, 1)`
 >
->> Ⅱ - rest/spread参数(...)：返回函数多余参数
+>> Ⅱ - 箭头函数(=>)：函数简写  -->`重点`
 >
->  - 形式：以数组的形式存在，之后不能再有其他参数
->  - 作用：代替`Arguments对象`
->  - length：返回没有指定默认值的参数个数但不包括`rest/spread参数`
+> - 无参数：`() => {}`
+> - 单个参数：`x => {}`
+> - 多个参数：`(x, y) => {}`
+> - 解构参数：`({x, y}) => {}`
+> - 嵌套使用：** `部署管道机制` ** -->不懂的详见下方
+> - this指向固定化
+>   - 并非因为内部有绑定`this`的机制，而是根本没有自己的`this`，导致内部的`this`就是外层代码块的`this`
+>   - 因为没有`this`，因此不能用作构造函数
 >
->> Ⅲ - 严格模式：在严格条件下运行JS
+>> Ⅲ - rest/spread参数(...)：返回函数多余参数
 >
->  - 应用：只要函数参数使用默认值、解构赋值、扩展运算符，那么函数内部就不能显式设定为严格模式
+> - 形式：以数组的形式存在，之后不能再有其他参数
+> - 作用：代替`Arguments对象`
+> - length：返回没有指定默认值的参数个数但不包括`rest/spread参数`
 >
->> Ⅳ - name属性：返回函数的函数名
+>> Ⅳ - 严格模式：在严格条件下运行JS
 >
->  - 将匿名函数赋值给变量：`空字符串`(**ES5**)、`变量名`(**ES6**)
->  - 将具名函数赋值给变量：`函数名`(**ES5和ES6**)
->  - bind返回的函数：`bound 函数名`(**ES5和ES6**)
->  - Function构造函数返回的函数实例：`anonymous`(**ES5和ES6**)
+> - 应用：只要函数参数使用默认值、解构赋值、扩展运算符，那么函数内部就不能显式设定为严格模式
 >
->> Ⅴ - 箭头函数(=>)：函数简写
+>> Ⅴ - name属性：返回函数的函数名
 >
->  - 无参数：`() => {}`
->  - 单个参数：`x => {}`
->  - 多个参数：`(x, y) => {}`
->  - 解构参数：`({x, y}) => {}`
->  - 嵌套使用：** `部署管道机制` ** -->不懂的详见下方
->  - this指向固定化
->    - 并非因为内部有绑定`this`的机制，而是根本没有自己的`this`，导致内部的`this`就是外层代码块的`this`
->    - 因为没有`this`，因此不能用作构造函数
+> - 将匿名函数赋值给变量：`空字符串`(**ES5**)、`变量名`(**ES6**)
+> - 将具名函数赋值给变量：`函数名`(**ES5和ES6**)
+> - bind返回的函数：`bound 函数名`(**ES5和ES6**)
+> - Function构造函数返回的函数实例：`anonymous`(**ES5和ES6**)
+>
 >> Ⅵ - 尾调用优化：只保留内层函数的调用帧
 >
->  - 尾调用
->    - 定义：某个函数的最后一步是调用另一个函数
->    - 形式：`function f(x) { return g(x); }`
->  - 尾递归
->    - 定义：函数尾调用自身
->    - 作用：只要使用尾递归就不会发生栈溢出，相对节省内存
->    - 实现：把所有用到的内部变量改写成函数的参数并使用参数默认值
+> - 尾调用
+>   - 定义：某个函数的最后一步是调用另一个函数
+>   - 形式：`function f(x) { return g(x); }`
+> - 尾递归
+>   - 定义：函数尾调用自身
+>   - 作用：只要使用尾递归就不会发生栈溢出，相对节省内存
+>   - 实现：把所有用到的内部变量改写成函数的参数并使用参数默认值
 >
 >> 箭头函数常见误区的正解
 >
@@ -1841,7 +1842,7 @@
 >}
 >
 >foo() // 3
->x // 1
+>//x == 1
 >```
 >
 >上面代码中，函数`foo`的参数形成一个单独作用域。这个作用域里面，首先声明了变量`x`，然后声明了变量`y`，`y`的默认值是一个匿名函数。这个匿名函数内部的变量`x`，指向同一个作用域的第一个参数`x`。函数`foo`内部又声明了一个内部变量`x`，该变量与第一个参数`x`由于不是同一个作用域，所以不是同一个变量，因此执行`y`后，内部变量`x`和外部全局变量`x`的值都没变。
@@ -1857,6 +1858,496 @@
 >}
 >
 >foo() // 2
->x // 1
+>//x== 1
+>```
+
+#### ⑥ 应用
+
+>利用参数默认值，可以指定某一个参数不得省略，如果省略就抛出一个错误。
+>
+>```javascript
+>function throwIfMissing() { throw new Error('Missing parameter'); }
+>
+>function foo(mustBeProvided = throwIfMissing()) {  return mustBeProvided; }
+>
+>foo()
+>// Error: Missing parameter
 >```
 >
+>上面代码的`foo`函数，如果调用的时候没有参数，就会调用默认值`throwIfMissing`函数，从而抛出一个错误。
+>
+>从上面代码还可以看到，参数`mustBeProvided`的默认值等于`throwIfMissing`函数的运行结果（注意函数名`throwIfMissing`之后有一对圆括号），这表明参数的默认值不是在定义时执行，而是在运行时执行。如果参数已经赋值，默认值中的函数就不会运行。
+>
+>另外，可以将参数默认值设为`undefined`，表明这个参数是可以省略的。
+>
+>```javascript
+>function foo(optional = undefined) { ··· }
+>```
+>
+
+### Ⅲ - 箭头函数 (`重点`)
+
+> ES6最常见用法,这个必须要会
+
+#### ① 基本用法
+
+>ES6 允许使用“箭头”（`=>`）定义函数。
+>
+>```javascript
+>var f = v => v;
+>
+>// 等同于
+>var f = function (v) {
+>  return v;
+>};
+>```
+>
+>如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。
+>
+>```javascript
+>var f = () => 5;
+>// 等同于
+>var f = function () { return 5 };
+>
+>var sum = (num1, num2) => num1 + num2;
+>// 等同于
+>var sum = function(num1, num2) {
+>  return num1 + num2;
+>};
+>```
+>
+>如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用`return`语句返回。
+>
+>```javascript
+>var sum = (num1, num2) => { return num1 + num2; }
+>```
+>
+>`由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错`。
+>
+>```javascript
+>// 报错
+>let getTempItem = id => { id: id, name: "Temp" };
+>
+>// 不报错
+>let getTempItem = id => ({ id: id, name: "Temp" });
+>```
+>
+>下面是一种特殊情况，虽然可以运行，但会得到错误的结果。
+>
+>```javascript
+>let foo = () => { a: 1 };
+>foo() // undefined
+>```
+>
+>上面代码中，原始意图是返回一个对象`{ a: 1 }`，但是由于引擎认为大括号是代码块，所以执行了一行语句`a: 1`。这时，`a`可以被解释为语句的标签，因此实际执行的语句是`1;`，然后函数就结束了，没有返回值。
+>
+>如果箭头函数只有一行语句，且不需要返回值，可以采用下面的写法，就不用写大括号了。
+>
+>```javascript
+>let fn = () => void doesNotReturn();
+>```
+>
+>箭头函数可以与变量解构结合使用。
+>
+>```javascript
+>const full = ({ first, last }) => first + ' ' + last;
+>
+>// 等同于
+>function full(person) {
+>  return person.first + ' ' + person.last;
+>}
+>```
+>
+>箭头函数使得表达更加简洁。
+>
+>```javascript
+>const isEven = n => n % 2 === 0; //类型 boolean
+>const square = n => n * n;  //类型 number
+>```
+>
+>上面代码只用了两行，就定义了两个简单的工具函数。如果不用箭头函数，可能就要占用多行，而且还不如现在这样写醒目。
+>
+>箭头函数的一个用处是简化回调函数。
+>
+>```javascript
+>// 正常函数写法
+>[1,2,3].map(function (x) {
+>  return x * x;
+>});
+>
+>// 箭头函数写法
+>[1,2,3].map(x => x * x);
+>```
+>
+>另一个例子是
+>
+>```javascript
+>// 正常函数写法
+>var result = values.sort(function (a, b) {
+>  return a - b;
+>});
+>
+>// 箭头函数写法
+>var result = values.sort((a, b) => a - b);
+>```
+>
+>下面是 rest 参数与箭头函数结合的例子(`个人觉得很好用`)。
+>
+>```javascript
+>const numbers = (...nums) => nums;
+>
+>numbers(1, 2, 3, 4, 5)
+>// [1,2,3,4,5]
+>
+>const headAndTail = (head, ...tail) => [head, tail];
+>
+>headAndTail(1, 2, 3, 4, 5)
+>// [1,[2,3,4,5]]
+>```
+>
+
+#### ② 使用注意点
+
+>箭头函数有几个使用注意点。
+>
+>（1）函数体内的`this`对象，就是定义时所在的对象，而不是使用时所在的对象。
+>
+>（2）不可以当作构造函数，也就是说，不可以使用`new`命令，否则会抛出一个错误。
+>
+>（3）不可以使用`arguments`对象，该对象在函数体内不存在。如果要用，`可以用 rest 参数代替`。
+>
+>（4）不可以使用`yield`命令，因此箭头函数`不能用作 Generator 函数`。-->此类型函数在后方知识点会给出详解
+>
+>上面四点中，第一点尤其值得注意。`[this]对象的指向是可变的，但是在箭头函数中，它是固定的`。
+>
+>```javascript
+>function foo() {
+>  setTimeout(() => {
+>    console.log('id:', this.id);
+>  }, 100);
+>}
+>
+>var id = 21;
+>
+>foo.call({ id: 42 }); // id: 42
+>```
+>
+>上面代码中，`setTimeout()`的参数是一个箭头函数，这个箭头函数的定义生效是在`foo`函数生成时，而它的真正执行要等到 100 毫秒后。如果是普通函数，执行时`this`应该指向全局对象`window`，这时应该输出`21`。但是，箭头函数导致`this`总是指向函数定义生效时所在的对象（本例是`{id: 42}`），所以打印出来的是`42`。
+>
+>箭头函数可以让`setTimeout`里面的`this`，绑定定义时所在的作用域，而不是指向运行时所在的作用域。下面是另一个例子。
+>
+>```javascript
+>function Timer() {
+>  this.s1 = 0;
+>  this.s2 = 0;
+>  // 箭头函数
+>  setInterval(() => this.s1++, 1000);
+>  // 普通函数
+>  setInterval(function () {
+>    this.s2++;
+>  }, 1000);
+>}
+>
+>var timer = new Timer();
+>
+>setTimeout(() => console.log('s1: ', timer.s1), 3100);
+>setTimeout(() => console.log('s2: ', timer.s2), 3100);
+>// s1: 3
+>// s2: 0
+>```
+>
+>上面代码中，`Timer`函数内部设置了两个定时器，分别使用了箭头函数和普通函数。前者的`this`绑定定义时所在的作用域（即`Timer`函数），后者的`this`指向运行时所在的作用域（即全局对象）。所以，3100 毫秒之后，`timer.s1`被更新了 3 次，而`timer.s2`一次都没更新。
+>
+>箭头函数可以让`this`指向固定化，这种特性很有利于封装回调函数。下面是一个例子，DOM 事件的回调函数封装在一个对象里面。
+>
+>```javascript
+>var handler = {
+>  id: '123456',
+>
+>  init: function() {
+>    document.addEventListener('click',
+>      event => this.doSomething(event.type), false);
+>  },
+>
+>  doSomething: function(type) {
+>    console.log('Handling ' + type  + ' for ' + this.id);
+>  }
+>};
+>```
+>
+>上面代码的`init`方法中，使用了箭头函数，这导致这个箭头函数里面的`this`，总是指向`handler`对象。否则，回调函数运行时，`this.doSomething`这一行会报错，因为此时`this`指向`document`对象。
+>
+>`this`指向的固定化，并不是因为箭头函数内部有绑定`this`的机制，实际原因是箭头函数根本没有自己的`this`，导致内部的`this`就是外层代码块的`this`。正是因为它没有`this`，所以也就不能用作构造函数。
+>
+>所以，箭头函数转成 ES5 的代码如下。
+>
+>```javascript
+>// ES6
+>function foo() {
+>  setTimeout(() => {
+>    console.log('id:', this.id);
+>  }, 100);
+>}
+>
+>// ES5
+>function foo() {
+>  var _this = this;
+>
+>  setTimeout(function () {
+>    console.log('id:', _this.id);
+>  }, 100);
+>}
+>```
+>
+>上面代码中，转换后的 ES5 版本清楚地说明了，箭头函数里面根本没有自己的`this`，而是引用外层的`this`。
+>
+>请问下面的代码之中有几个`this`？
+>
+>```javascript
+>function foo() {
+>  return () => {
+>    return () => {
+>      return () => {
+>        console.log('id:', this.id);
+>      };
+>    };
+>  };
+>}
+>
+>var f = foo.call({id: 1});
+>
+>var t1 = f.call({id: 2})()(); // id: 1
+>var t2 = f().call({id: 3})(); // id: 1
+>var t3 = f()().call({id: 4}); // id: 1
+>```
+>
+>上面代码之中，只有一个`this`，就是函数`foo`的`this`，所以`t1`、`t2`、`t3`都输出同样的结果。因为所有的内层函数都是箭头函数，都没有自己的`this`，它们的`this`其实都是最外层`foo`函数的`this`。
+>
+>除了`this`，以下三个变量在箭头函数之中也是不存在的，指向外层函数的对应变量：`arguments`、`super`、`new.target`。
+>
+>```javascript
+>function foo() {
+>  setTimeout(() => {
+>    console.log('args:', arguments);
+>  }, 100);
+>}
+>
+>foo(2, 4, 6, 8)
+>// args: [2, 4, 6, 8]
+>```
+>
+>上面代码中，箭头函数内部的变量`arguments`，其实是函数`foo`的`arguments`变量。
+>
+>另外，由于箭头函数没有自己的`this`，所以当然也就不能用`call()`、`apply()`、`bind()`这些方法去改变`this`的指向。
+>
+>```javascript
+>(function() {
+>  return [
+>    (() => this.x).bind({ x: 'inner' })()
+>  ];
+>}).call({ x: 'outer' });
+>// ['outer']
+>```
+>
+>上面代码中，箭头函数没有自己的`this`，所以`bind`方法无效，内部的`this`指向外部的`this`。
+>
+>长期以来，JavaScript 语言的`this`对象一直是一个令人头痛的问题，在对象方法中使用`this`，必须非常小心。箭头函数”绑定”`this`，很大程度上解决了这个困扰。
+
+
+
+
+
+### Ⅳ - rest 参数 (`常用`)
+
+>ES6 引入 rest 参数（形式为`...变量名`），用于获取函数的多余参数，这样就不需要使用`arguments`对象了。rest 参数搭配的变量是一个数组，该变量将多余的参数放入数组中。
+>
+>```javascript
+>function add(...values) {
+>  let sum = 0;
+>  for (var val of values) {
+>    sum += val;
+>  }
+>  return sum;
+>}
+>
+>add(2, 5, 3) // 10
+>```
+>
+>上面代码的`add`函数是一个求和函数，利用 rest 参数，可以向该函数传入任意数目的参数。
+>
+>下面是一个 rest 参数代替`arguments`变量的例子。
+>
+>```javascript
+>// arguments变量的写法
+>function sortNumbers() {
+>  return Array.prototype.slice.call(arguments).sort();
+>}
+>
+>// rest参数的写法
+>const sortNumbers = (...numbers) => numbers.sort();
+>```
+>
+>上面代码的两种写法，比较后可以发现，rest 参数的写法更自然也更简洁。
+>
+>`arguments`对象不是数组，而是一个类似数组的对象。所以为了使用数组的方法，必须使用`Array.prototype.slice.call`先将其转为数组。`rest 参数就不存在这个问题，它就是一个真正的数组，数组特有的方法都可以使用`。下面是一个利用 rest 参数改写数组`push`方法的例子。
+>
+>```javascript
+>function push(array, ...items) {
+>  items.forEach(function(item) {
+>    array.push(item);
+>    console.log(item);
+>  });
+>}
+>
+>var a = [];
+>push(a, 1, 2, 3)
+>```
+>
+>注意，rest 参数之后不能再有其他参数（即只能是最后一个参数），否则会报错。
+>
+>```javascript
+>// 报错
+>function f(a, ...b, c) {
+>  // ...
+>}
+>```
+>
+>函数的`length`属性，不包括 rest 参数。
+>
+>```javascript
+>(function(a) {}).length  // 1
+>(function(...a) {}).length  // 0
+>(function(a, ...b) {}).length  // 1
+>```
+>
+
+### Ⅴ - 严格模式
+
+>从 ES5 开始，函数内部可以设定为严格模式。
+>
+>```javascript
+>function doSomething(a, b) {
+>  'use strict';
+>  // code
+>}
+>```
+>
+>ES2016 做了一点修改，`规定只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错`。
+>
+>```javascript
+>// 报错
+>function doSomething(a, b = a) {
+>  'use strict';
+>  // code
+>}
+>
+>// 报错
+>const doSomething = function ({a, b}) {
+>  'use strict';
+>  // code
+>};
+>
+>// 报错
+>const doSomething = (...a) => {
+>  'use strict';
+>  // code
+>};
+>
+>const obj = {
+>  // 报错
+>  doSomething({a, b}) {
+>    'use strict';
+>    // code
+>  }
+>};
+>```
+>
+>这样规定的原因是，函数内部的严格模式，同时适用于函数体和函数参数。但是，函数执行的时候，先执行函数参数，然后再执行函数体。这样就有一个不合理的地方，只有从函数体之中，才能知道参数是否应该以严格模式执行，但是参数却应该先于函数体执行。
+>
+>```javascript
+>// 报错
+>function doSomething(value = 070) {
+>  'use strict';
+>  return value;
+>}
+>```
+>
+>上面代码中，参数`value`的默认值是八进制数`070`，但是严格模式下不能用前缀`0`表示八进制，所以应该报错。但是实际上，JavaScript 引擎会先成功执行`value = 070`，然后进入函数体内部，发现需要用严格模式执行，这时才会报错。
+>
+>虽然可以先解析函数体代码，再执行参数代码，但是这样无疑就增加了复杂性。因此，标准索性禁止了这种用法，只要参数使用了默认值、解构赋值、或者扩展运算符，就不能显式指定严格模式。
+>
+>两种方法可以规避这种限制。第一种是设定全局性的严格模式，这是合法的。
+>
+>```javascript
+>'use strict';
+>
+>function doSomething(a, b = a) {
+>  // code
+>}
+>```
+>
+>第二种是把函数包在一个无参数的立即执行函数里面。
+>
+>```javascript
+>const doSomething = (function () {
+>  'use strict';
+>  return function(value = 42) {
+>    return value;
+>  };
+>}());
+>```
+>
+
+### Ⅵ - name 属性
+
+>函数的`name`属性，返回该函数的函数名。
+>
+>```javascript
+>function foo() {}
+>foo.name // "foo"
+>```
+>
+>这个属性早就被浏览器广泛支持，但是直到 ES6，才将其写入了标准。
+>
+>需要注意的是，ES6 对这个属性的行为做出了一些修改。如果将一个匿名函数赋值给一个变量，ES5 的`name`属性，会返回空字符串，而 ES6 的`name`属性会返回实际的函数名。
+>
+>```javascript
+>var f = function () {};
+>
+>// ES5
+>f.name // ""
+>
+>// ES6
+>f.name // "f"
+>```
+>
+>上面代码中，变量`f`等于一个匿名函数，ES5 和 ES6 的`name`属性返回的值不一样。
+>
+>如果将一个具名函数赋值给一个变量，则 ES5 和 ES6 的`name`属性都返回这个具名函数原本的名字。
+>
+>```javascript
+>const bar = function baz() {};
+>
+>// ES5
+>bar.name // "baz"
+>
+>// ES6
+>bar.name // "baz"
+>```
+>
+>`Function`构造函数返回的函数实例，`name`属性的值为`anonymous`。
+>
+>```javascript
+>(new Function).name // "anonymous"
+>```
+>
+>`bind`返回的函数，`name`属性值会加上`bound`前缀。
+>
+>```javascript
+>function foo() {};
+>foo.bind({}).name // "bound foo"
+>
+>(function(){}).bind({}).name // "bound "
+>```
+>
+

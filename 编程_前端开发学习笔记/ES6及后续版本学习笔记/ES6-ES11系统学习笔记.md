@@ -87,7 +87,7 @@
 
 > 注意:`不存在变量提升`
 >
-> `var`命令会发生“变量提升”现象, 即变量可以在声明之前使用, 值为`undefined`。这种现象多多少少是有些奇怪的, 按照一般的逻辑, 变量应该在声明语句之后才可以使用。
+> `var`命令会发生“变量提升”现象, 即变量可以在声明之前使用, 值为 **undefined** 。这种现象多多少少是有些奇怪的, 按照一般的逻辑, 变量应该在声明语句之后才可以使用。
 >
 > 为了纠正这种现象, `let`、`const`命令改变了语法行为, 它所声明的变量一定要在声明后使用, 否则报错
 
@@ -173,7 +173,7 @@
 >f(); // undefined
 >```
 >
->上面代码的原意是, `if`代码块的外部使用外层的`tmp`变量, 内部使用内层的`tmp`变量。但是, 函数 [ `f` ] 执行后, 输出结果为`undefined`, 原因在于变量提升, 导致内层的`tmp`变量覆盖了外层的`tmp`变量。
+>上面代码的原意是, `if`代码块的外部使用外层的`tmp`变量, 内部使用内层的`tmp`变量。但是, 函数 [ `f` ] 执行后, 输出结果为 **undefined** , 原因在于变量提升, 导致内层的`tmp`变量覆盖了外层的`tmp`变量。
 >
 >第二种场景, 用来计数的循环变量泄露为全局变量。
 >
@@ -406,10 +406,10 @@
 >
 >- 匹配模式：只要等号两边的模式相同, 左边的变量就会被赋予对应的值
 >- 解构赋值规则：只要等号右边的值不是对象或数组, 就先将其转为对象
->- 解构默认值生效条件：属性值严格等于`undefined`
+>- 解构默认值生效条件：属性值严格等于 **undefined** 
 >- 解构遵循匹配模式
->- 解构不成功时变量的值等于`undefined`
->- `undefined`和`null`无法转为对象, 因此无法进行解构
+>- 解构不成功时变量的值等于 **undefined** 
+>-  **undefined** 和`null`无法转为对象, 因此无法进行解构
 >
 >下一节为字符串的拓展概括  -->[点我传送](#4、字符串的拓展)
 
@@ -447,14 +447,14 @@
 >let [x, y, ...z] = ['a'];//x : "a" y : undefined z : []
 >```
 >
->如果解构不成功, 变量的值就等于`undefined`。
+>如果解构不成功, 变量的值就等于 **undefined** 。
 >
 >```javascript
 >let [foo] = [];
 >let [bar, foo] = [1];
 >```
 >
->以上两种情况都属于解构不成功, `foo`的值都会等于`undefined`。
+>以上两种情况都属于解构不成功, `foo`的值都会等于 **undefined** 。
 >
 >另一种情况是不完全解构, 即等号左边的模式, 只匹配一部分的等号右边的数组。这种情况下, 解构依然可以成功。
 >
@@ -514,14 +514,14 @@
 >let [x, y = 'b'] = ['a', undefined]; // x='a', y='b'
 >```
 >
->注意 , ES6 内部使用严格相等运算符（`===`）, 判断一个位置是否有值。所以, 只有当一个数组成员严格等于`undefined`, 默认值才会生效。
+>注意 , ES6 内部使用严格相等运算符（`===`）, 判断一个位置是否有值。所以, 只有当一个数组成员严格等于 **undefined** , 默认值才会生效。
 >
 >```javascript
 >let [x = 1] = [undefined];//x = 1
 >let [x = 1] = [null];//x = null
 >```
 >
->上面代码中, 如果一个数组成员是`null`, 默认值就不会生效, 因为`null`不严格等于`undefined`。
+>上面代码中, 如果一个数组成员是`null`, 默认值就不会生效, 因为`null`不严格等于 **undefined** 。
 >
 >如果默认值是一个表达式, 那么这个表达式是惰性求值的, 即只有在用到的时候, 才会求值。
 >
@@ -579,15 +579,15 @@
 >let { baz } = { foo: 'aaa', bar: 'bbb' };//baz = undefined
 >```
 >
->上面代码的第一个栗子, 等号左边的两个变量的次序, 与等号右边两个同名属性的次序不一致, 但是对取值完全没有影响。第二个栗子的变量没有对应的同名属性, 导致取不到值, 最后等于`undefined`。
+>上面代码的第一个栗子, 等号左边的两个变量的次序, 与等号右边两个同名属性的次序不一致, 但是对取值完全没有影响。第二个栗子的变量没有对应的同名属性, 导致取不到值, 最后等于 **undefined** 。
 >
->如果解构失败, 变量的值等于`undefined`。
+>如果解构失败, 变量的值等于 **undefined** 。
 >
 >```javascript
 >let {foo} = {bar: 'baz'};//foo = undefined
 >```
 >
->上面代码中, 等号右边的对象没有`foo`属性, 所以变量`foo`取不到值, 所以等于`undefined`。
+>上面代码中, 等号右边的对象没有`foo`属性, 所以变量`foo`取不到值, 所以等于 **undefined** 。
 >
 >对象的解构赋值, 可以很方便地将现有对象的方法, 赋值到某个变量。
 >
@@ -686,7 +686,7 @@
 >let {foo: {bar}} = {baz: 'baz'};
 >```
 >
->上面代码中, 等号左边对象的`foo`属性, 对应一个子对象。该子对象的`bar`属性, 解构时会报错。原因很简单, 因为`foo`这时等于`undefined`, 再取子属性就会报错。
+>上面代码中, 等号左边对象的`foo`属性, 对应一个子对象。该子对象的`bar`属性, 解构时会报错。原因很简单, 因为`foo`这时等于 **undefined** , 再取子属性就会报错。
 >
 >注意, 对象的解构赋值可以取到继承的属性。
 >
@@ -716,14 +716,14 @@
 >var { message: msg = 'Something went wrong' } = {};//msg == "Something went wrong"
 >```
 >
->默认值生效的条件是, 对象的属性值严格等于`undefined`。
+>默认值生效的条件是, 对象的属性值严格等于 **undefined** 。
 >
 >```javascript
 >var {x = 3} = {x: undefined};//x == 3
 >var {x = 3} = {x: null};//x == null
 >```
 >
->上面代码中, 属性`x`等于`null`, 因为`null`与`undefined`不严格相等, 所以是个有效的赋值, 导致默认值`3`不会生效。-->[原因上面讲过](#② 默认值)
+>上面代码中, 属性`x`等于`null`, 因为`null`与 **undefined** 不严格相等, 所以是个有效的赋值, 导致默认值`3`不会生效。-->[原因上面讲过](#② 默认值)
 
 #### ③ 注意点
 
@@ -797,7 +797,7 @@
 >
 >上面代码中, 数值和布尔值的包装对象都有`toString`属性, 因此变量`s`都能取到值。
 >
->解构赋值的规则是, 只要等号右边的值不是对象或数组, 就先将其转为对象。由于`undefined`和`null`无法转为对象, 所以对它们进行解构赋值, 都会报错。
+>解构赋值的规则是, 只要等号右边的值不是对象或数组, 就先将其转为对象。由于 **undefined** 和`null`无法转为对象, 所以对它们进行解构赋值, 都会报错。
 >
 >```javascript
 >let { prop: x } = undefined; // TypeError
@@ -851,7 +851,7 @@
 >
 >上面代码是为函数`move`的参数指定默认值, 而不是为变量`x`和`y`指定默认值, 所以会得到与前一种写法不同的结果。
 >
->`undefined`就会触发函数参数的默认值。
+> **undefined** 就会触发函数参数的默认值。
 >
 >```javascript
 >[1, undefined, 3].map((x = 'yes') => x);
@@ -1501,7 +1501,7 @@
 > - 与解构赋值默认值结合：`function Func({ x = 1, y = 2 } = {}) {}`
 > - 应用
 >   1. 指定某个参数不得省略, 省略即抛出错误：`function Func(x = throwMissing()) {}`
->   2. 将参数默认值设为`undefined`, 表明此参数可省略：`Func(undefined, 1)`
+>   2. 将参数默认值设为 **undefined** , 表明此参数可省略：`Func(undefined, 1)`
 >
 >> **Ⅱ - 箭头函数(=>)**：函数简写  -->`重点`
 >
@@ -1736,9 +1736,9 @@
 >f(1, undefined, 2) // [1, 5, 2]
 >```
 >
->上面代码中, 有默认值的参数都不是尾参数。这时, 无法只省略该参数, 而不省略它后面的参数, 除非显式输入`undefined`。
+>上面代码中, 有默认值的参数都不是尾参数。这时, 无法只省略该参数, 而不省略它后面的参数, 除非显式输入 **undefined** 。
 >
->如果传入`undefined`, 将触发该参数等于默认值, `null`则没有这个效果。
+>如果传入 **undefined** , 将触发该参数等于默认值, `null`则没有这个效果。
 >
 >```javascript
 >function foo(x = 5, y = 6) { console.log(x, y); }
@@ -1746,7 +1746,7 @@
 >// 5 null
 >```
 >
->上面代码中, `x`参数对应`undefined`, 结果触发了默认值, `y`参数等于`null`, 就没有触发默认值。
+>上面代码中, `x`参数对应 **undefined** , 结果触发了默认值, `y`参数等于`null`, 就没有触发默认值。
 
 #### ④ 函数的 length 属性
 
@@ -1896,7 +1896,7 @@
 >
 >从上面代码还可以看到, 参数`mustBeProvided`的默认值等于`throwIfMissing`函数的运行结果（注意函数名`throwIfMissing`之后有一对圆括号）, 这表明参数的默认值不是在定义时执行, 而是在运行时执行。如果参数已经赋值, 默认值中的函数就不会运行。
 >
->另外, 可以将参数默认值设为`undefined`, 表明这个参数是可以省略的。
+>另外, 可以将参数默认值设为 **undefined** , 表明这个参数是可以省略的。
 >
 >```javascript
 >function foo(optional = undefined) { ··· }
@@ -2883,7 +2883,7 @@
 >// 100001
 >```
 >
->上面代码中, `tco`函数是尾递归优化的实现, 它的奥妙就在于状态变量`active`。默认情况下, 这个变量是不激活的。一旦进入尾递归优化的过程, 这个变量就激活了。然后, 每一轮递归`sum`返回的都是`undefined`, 所以就避免了递归执行；而`accumulated`数组存放每一轮`sum`执行的参数, 总是有值的, 这就保证了`accumulator`函数内部的`while`循环总是会执行。这样就很巧妙地将“递归”改成了“循环”, 而后一轮的参数会取代前一轮的参数, 保证了调用栈只有一层。
+>上面代码中, `tco`函数是尾递归优化的实现, 它的奥妙就在于状态变量`active`。默认情况下, 这个变量是不激活的。一旦进入尾递归优化的过程, 这个变量就激活了。然后, 每一轮递归`sum`返回的都是 **undefined** , 所以就避免了递归执行；而`accumulated`数组存放每一轮`sum`执行的参数, 总是有值的, 这就保证了`accumulator`函数内部的`while`循环总是会执行。这样就很巧妙地将“递归”改成了“循环”, 而后一轮的参数会取代前一轮的参数, 保证了调用栈只有一层。
 
 #### ⑦ 尾调用优化默认关闭
 
@@ -3172,7 +3172,7 @@
 >3. **JSON.stringify()**：只串行化对象自身的可枚举的属性。
 >4. **Object.assign()**： 忽略`enumerable`为`false`的属性, 只拷贝对象自身的可枚举的属性。
 >
->这四个操作之中, 前三个是 ES5 就有的, 最后一个`Object.assign()`是 ES6 新增的。其中, 只有`for...in`会返回继承的属性, 其他三个方法都会忽略继承的属性, 只处理对象自身的属性。实际上, 引入“可枚举”（`enumerable`）这个概念的最初目的, 就是让某些属性可以规避掉`for...in`操作, 不然所有内部属性和方法都会被遍历到。比如, 对象原型的`toString`方法, 以及数组的`length`属性, 就通过“可枚举性”, 从而避免被`for...in`遍历到。
+>这四个操作之中, 前三个是 ES5 就有的, 最后一个 [ Object.assign() ] 是 ES6 新增的。其中, 只有`for...in`会返回继承的属性, 其他三个方法都会忽略继承的属性, 只处理对象自身的属性。实际上, 引入“可枚举”（`enumerable`）这个概念的最初目的, 就是让某些属性可以规避掉`for...in`操作, 不然所有内部属性和方法都会被遍历到。比如, 对象原型的`toString`方法, 以及数组的`length`属性, 就通过“可枚举性”, 从而避免被`for...in`遍历到。
 >
 >```javascript
 >Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
@@ -3311,7 +3311,7 @@
 >
 >上面代码中, 变量 [ z ] 是解构赋值所在的对象。它获取等号右边的所有尚未读取的键（`a`和`b`）, 将它们连同值一起拷贝过来。
 >
->由于解构赋值要求等号右边是一个对象, 所以如果等号右边是`undefined`或`null`, 就会报错, 因为它们无法转为对象。
+>由于解构赋值要求等号右边是一个对象, 所以如果等号右边是 **undefined** 或`null`, 就会报错, 因为它们无法转为对象。
 >
 >```javascript
 >let { ...z } = null; // 运行时错误
@@ -3444,7 +3444,7 @@
 >// {0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
 >```
 >
->对象的扩展运算符等同于使用`Object.assign()`方法。
+>对象的扩展运算符等同于使用 [ Object.assign() ] 方法。
 >
 >```javascript
 >let aClone = { ...a };
@@ -3540,6 +3540,477 @@
 >
 >上面栗子中, 取值函数`get`在扩展`a`对象时会自动执行, 导致报错。
 
+### Ⅶ -  对象的新增方法
+
+> 本来不想将这些新增方法摘录举例至此,但后面开发过程中发现这些方法应用频繁,所以还是罗列出来,
+>
+> 同时并不止是es6部分,而是将ES系列常用的都列举于此
+
+#### ① Object.is()
+
+>ES5 比较两个值是否相等，只有两个运算符：相等运算符（`==`）和严格相等运算符（`===`）。它们都有缺点，前者会自动转换数据类型，后者的`NaN`不等于自身，以及`+0`等于`-0`。JavaScript 缺乏一种运算，在所有环境中，只要两个值是一样的，它们就应该相等。
+>
+>ES6 提出“Same-value equality”（同值相等）算法，用来解决这个问题。 [ Object.is ] 就是部署这个算法的新方法。它用来比较两个值是否严格相等，与严格比较运算符（===）的行为基本一致。
+>
+>```javascript
+>Object.is('foo', 'foo')
+>// true
+>Object.is({}, {})
+>// false
+>```
+>
+>不同之处只有两个：一是`+0`不等于`-0`，二是`NaN`等于自身。
+>
+>```javascript
+>+0 === -0 //true
+>NaN === NaN // false
+>Object.is(+0, -0) // false
+>Object.is(NaN, NaN) // true
+>```
+>
+>ES5 可以通过下面的代码，部署 [ Object.is ] 。-->其实就是将无法判断的两个特殊清空特殊处理
+>
+>```javascript
+>Object.defineProperty(Object, 'is', {
+>  value: function(x, y) {
+>    if (x === y) {
+>      // 针对+0 不等于 -0的情况
+>      return x !== 0 || 1 / x === 1 / y;
+>    }
+>    // 针对NaN的情况
+>    return x !== x && y !== y;
+>  },
+>  configurable: true,
+>  enumerable: false,
+>  writable: true
+>});
+>```
+>
+
+#### ② Object.assign()
+
+> 开发中常能见到,这个方法还是要着重了解的,需要注意的就是此方法为:** `浅拷贝` **
+
+##### a) 基本用法
+
+> [ Object.assign() ] 方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+>
+>```javascript
+>const target = { a: 1 };
+>const source1 = { b: 2 };
+>const source2 = { c: 3 };
+>
+>Object.assign(target, source1, source2);
+>target // {a:1, b:2, c:3}
+>```
+>
+> [ Object.assign() ] 方法的第一个参数是目标对象，后面的参数都是源对象。
+>
+>注意: 如果目标对象与源对象有同名属性，或多个源对象有同名属性，则`后面的属性会覆盖前面的属性`。
+>
+>```javascript
+>const target = { a: 1, b: 1 };
+>
+>const source1 = { b: 2, c: 2 };
+>const source2 = { c: 3 };
+>
+>Object.assign(target, source1, source2);
+>target // {a:1, b:2, c:3}
+>```
+>
+>如果只有一个参数， [ Object.assign() ] 会直接返回该参数。
+>
+>```javascript
+>const obj = {a: 1};
+>Object.assign(obj) === obj // true
+>```
+>
+>如果该参数不是对象，则会先转成对象，然后返回。
+>
+>```javascript
+>typeof Object.assign(2) // "object"
+>```
+>
+>由于 **undefined** 和`null`无法转成对象，所以如果它们作为参数，就会报错。
+>
+>```javascript
+>Object.assign(undefined) // 报错
+>Object.assign(null) // 报错
+>```
+>
+>如果非对象参数出现在源对象的位置（即非首参数），那么处理规则有所不同。首先，这些参数都会转成对象，如果无法转成对象，就会跳过。这意味着，如果 **undefined** 和`null`不在首参数，就不会报错。
+>
+>```javascript
+>let obj = {a: 1};
+>Object.assign(obj, undefined) === obj // true
+>Object.assign(obj, null) === obj // true
+>```
+>
+>其他类型的值（即数值、字符串和布尔值）不在首参数，也不会报错。但是，除了字符串会以数组形式，拷贝入目标对象，其他值都不会产生效果。
+>
+>```javascript
+>const v1 = 'abc';
+>const v2 = true;
+>const v3 = 10;
+>
+>const obj = Object.assign({}, v1, v2, v3);
+>console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+>```
+>
+>上面代码中，`v1`、`v2`、`v3`分别是字符串、布尔值和数值，结果只有字符串合入目标对象（以字符数组的形式），数值和布尔值都会被忽略。这是因为只有字符串的包装对象，会产生可枚举属性。
+>
+>```javascript
+>Object(true) // {[[PrimitiveValue]]: true}
+>Object(10)  //  {[[PrimitiveValue]]: 10}
+>Object('abc') // {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}
+>```
+>
+>上面代码中，布尔值、数值、字符串分别转成对应的包装对象，可以看到它们的原始值都在包装对象的内部属性`[[PrimitiveValue]]`上面，这个属性是不会被 [ Object.assign() ] 拷贝的。只有字符串的包装对象，会产生可枚举的实义属性，那些属性则会被拷贝。
+>
+> [ Object.assign() ] 拷贝的属性是有限制的，只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（`enumerable: false`）。
+>
+>```javascript
+>Object.assign({b: 'c'},
+>  Object.defineProperty({}, 'invisible', {
+>    enumerable: false,
+>    value: 'hello'
+>  })
+>)
+>// { b: 'c' }
+>```
+>
+>上面代码中， [ Object.assign() ] 要拷贝的对象只有一个不可枚举属性`invisible`，这个属性并没有被拷贝进去。
+>
+>属性名为 Symbol 值的属性，也会被 [ Object.assign() ] 拷贝。
+>
+>```javascript
+>Object.assign({ a: 'b' }, { [Symbol('c')]: 'd' })
+>// { a: 'b', Symbol(c): 'd' }
+>```
+>
+
+##### b) 注意点
+
+###### ( 1 ) 浅拷贝
+
+> [ Object.assign() ] 方法实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
+>
+>```javascript
+>const obj1 = {a: {b: 1}};
+>const obj2 = Object.assign({}, obj1);
+>
+>obj1.a.b = 2;
+>obj2.a.b // 2
+>```
+>
+>上面代码中，源对象`obj1`的`a`属性的值是一个对象， [ Object.assign() ] 拷贝得到的是这个对象的引用。这个对象的任何变化，都会反映到目标对象上面。
+
+###### ( 2 ) 同名属性的替换
+
+>对于这种嵌套的对象，一旦遇到同名属性， [ Object.assign() ] 的处理方法是替换，而不是添加。
+>
+>```javascript
+>const target = { a: { b: 'c', d: 'e' } }
+>const source = { a: { b: 'hello' } }
+>Object.assign(target, source)
+>// { a: { b: 'hello' } }
+>```
+>
+>上面代码中，`target`对象的`a`属性被`source`对象的`a`属性整个替换掉了，而不会得到 **{ a: { b: 'hello', d: 'e' } }** 的结果。这通常不是开发者想要的，需要特别小心。
+>
+>一些函数库提供 [ Object.assign() ] 的定制版本（比如 Lodash 的`_.defaultsDeep()`方法），可以得到深拷贝的合并。
+
+###### ( 3 ) 数组的处理
+
+> [ Object.assign() ] 可以用来处理数组，但是会把数组视为对象。
+>
+>```javascript
+>Object.assign([1, 2, 3], [4, 5])
+>// [4, 5, 3]
+>```
+>
+>上面代码中， [ Object.assign() ] 把数组视为属性名为 0、1、2 的对象，因此源数组的 0 号属性`4`覆盖了目标数组的 0 号属性`1`。
+
+###### ( 4 ) 取值函数的处理
+
+> [ Object.assign() ] 只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。
+>
+>```javascript
+>const source = {  get foo() { return 1 }};
+>const target = {};
+>
+>Object.assign(target, source)
+>// { foo: 1 }
+>```
+>
+>上面代码中，`source`对象的`foo`属性是一个取值函数， [ Object.assign() ] 不会复制这个取值函数，只会拿到值以后，将这个值复制过去
+
+##### c) 常见用途
+
+###### ( 1 ) 为对象添加属性
+
+>```javascript
+>class Point {
+>  constructor(x, y) {   Object.assign(this, {x, y}) }
+>}
+>```
+>
+>上面方法通过 [ Object.assign() ] 方法，将`x`属性和`y`属性添加到`Point`类的对象实例。
+
+###### ( 2 ) 为对象添加方法
+
+>```javascript
+>Object.assign(SomeClass.prototype, {
+>  someMethod(arg1, arg2) {},
+>  anotherMethod() { }
+>});
+>
+>// 等同于下面的写法
+>SomeClass.prototype.someMethod = function (arg1, arg2) {};
+>SomeClass.prototype.anotherMethod = function () {};
+>```
+>
+>上面代码使用了对象属性的简洁表示法，直接将两个函数放在大括号中，再使用`assign()`方法添加到`SomeClass.prototype`之中。
+
+###### ( 3 ) 克隆对象
+
+>```javascript
+>function clone(origin) { return Object.assign({}, origin) }
+>```
+>
+>上面代码将原始对象拷贝到一个空对象，就得到了原始对象的克隆。
+>
+>不过，采用这种方法克隆，只能克隆原始对象自身的值，不能克隆它继承的值。如果想要保持继承链，可以采用下面的代码。
+>
+>```javascript
+>function clone(origin) {
+>  let originProto = Object.getPrototypeOf(origin);
+>  return Object.assign(Object.create(originProto), origin);
+>}
+>```
+>
+>[ Object.getPrototypeOf() ] 方法不懂的可以先跳过看下方,后面有其详解
+
+###### ( 4 ) 合并多个对象
+
+>将多个对象合并到某个对象。
+>
+>```javascript
+>const merge =(target, ...sources) => Object.assign(target, ...sources);
+>```
+>
+>如果希望合并后返回一个新对象，可以改写上面函数，对一个空对象合并。
+>
+>```javascript
+>const merge =(...sources) => Object.assign({}, ...sources);
+>```
+>
+
+###### ( 5 ) 为属性指定默认值
+
+>```javascript
+>const DEFAULTS = {
+>  logLevel: 0,
+>  outputFormat: 'html'
+>};
+>
+>function processContent(options) {
+>  options = Object.assign({}, DEFAULTS, options); //利用其如果有同名属性,后面属性值会覆盖前面属性值的特性实现
+>  console.log(options);
+>}
+>```
+>
+>上面代码中， [ DEFAULTS ] 对象是默认值， **options**  对象是用户提供的参数。 [ Object.assign() ] 方法将 [ DEFAULTS ] 和 **options** 合并成一个新对象，如果两者有同名属性，则 **options** 的属性值会覆盖 [ DEFAULTS ] 的属性值。
+>
+>注意，由于存在浅拷贝的问题， [ DEFAULTS ] 对象和 **options**  对象的所有属性的值，最好都是简单类型，不要指向另一个对象。否则， [ DEFAULTS ] 对象的该属性很可能不起作用。
+>
+>```javascript
+>const DEFAULTS = {
+>  url: {
+>    host: 'example.com',
+>    port: 7070
+>  },
+>};
+>function processContent(options) {
+>  options = Object.assign({}, DEFAULTS, options); //利用其如果有同名属性,后面属性值会覆盖前面属性值的特性实现
+>  console.log(options);
+>}
+>processContent({ url: {port: 8000} })
+>// {
+>//   url: {port: 8000}
+>// }
+>```
+>
+>上面代码的原意是将`url.port`改成 8000，`url.host`不变。实际结果却是`options.url`覆盖掉`DEFAULTS.url`，所以`url.host`就不存在了。
+
+####  ③ Object.getOwnPropertyDescriptors()
+
+##### a) 基本用法
+
+>ES5 的`Object.getOwnPropertyDescriptor()`方法会返回某个对象属性的描述对象（descriptor）。ES2017 引入了 [ Object.getOwnPropertyDescriptors() ] 方法，返回指定对象所有自身属性（非继承属性）的描述对象。
+>
+>```javascript
+>const obj = {
+>  foo: 123,
+>  get bar() { return 'abc' }
+>};
+>
+>Object.getOwnPropertyDescriptors(obj)
+>// { foo:
+>//    { value: 123,
+>//      writable: true,
+>//      enumerable: true,
+>//      configurable: true },
+>//   bar:
+>//    { get: [Function: get bar],
+>//      set: undefined,
+>//      enumerable: true,
+>//      configurable: true }
+>// }
+>```
+>
+>上面代码中， [ Object.getOwnPropertyDescriptors() ] 方法返回一个对象，所有原对象的属性名都是该对象的属性名，对应的属性值就是该属性的描述对象。
+
+##### b) 方法的实现
+
+>该方法的实现非常容易。
+>
+>```javascript
+>function getOwnPropertyDescriptors(obj) {
+>  const result = {};
+>  for (let key of Reflect.ownKeys(obj)) {
+>    result[key] = Object.getOwnPropertyDescriptor(obj, key);
+>  }
+>  return result;
+>}
+>```
+>
+
+##### c) 此方法引入目的与常用用法
+
+>该方法的引入目的，主要是为了解决`Object.assign()`无法正确拷贝`get`属性和`set`属性的问题。
+>
+>```javascript
+>const source = {
+>  set foo(value) {
+>    console.log(value);
+>  }
+>};
+>const target1 = {};
+>Object.assign(target1, source);
+>Object.getOwnPropertyDescriptor(target1, 'foo')
+>// { value: undefined,
+>//   writable: true,
+>//   enumerable: true,
+>//   configurable: true }
+>```
+>
+>上面代码中，`source`对象的`foo`属性的值是一个赋值函数，`Object.assign`方法将这个属性拷贝给`target1`对象，结果该属性的值变成了 **undefined** 。这是因为`Object.assign`方法总是拷贝一个属性的值，而不会拷贝它背后的赋值方法或取值方法。
+>
+>这时， [ Object.getOwnPropertyDescriptors() ] 方法配合`Object.defineProperties()`方法，就可以实现正确拷贝。
+>
+>```javascript
+>const source = {
+>  set foo(value) {
+>    console.log(value);
+>  }
+>};
+>
+>const target2 = {};
+>Object.defineProperties(target2, Object.getOwnPropertyDescriptors(source));
+>Object.getOwnPropertyDescriptor(target2, 'foo')
+>// { get: undefined,
+>//   set: [Function: set foo],
+>//   enumerable: true,
+>//   configurable: true }
+>```
+>
+>上面代码中，两个对象合并的逻辑可以写成一个函数。
+>
+>```javascript
+>const shallowMerge = (target, source) => Object.defineProperties(
+>  target,
+>  Object.getOwnPropertyDescriptors(source)
+>);
+>```
+>
+> [ Object.getOwnPropertyDescriptors() ] 方法的另一个用处，是配合`Object.create()`方法，将对象属性克隆到一个新对象。这属于浅拷贝。
+>
+>```javascript
+>const clone = Object.create(Object.getPrototypeOf(obj),
+>  Object.getOwnPropertyDescriptors(obj));
+>
+>// 或者
+>
+>const shallowClone = (obj) => Object.create(
+>  Object.getPrototypeOf(obj),
+>  Object.getOwnPropertyDescriptors(obj)
+>);
+>```
+>
+>上面代码会克隆对象`obj`。
+>
+>另外， [ Object.getOwnPropertyDescriptors() ] 方法可以实现一个对象继承另一个对象。以前，继承另一个对象，常常写成下面这样。
+>
+>```javascript
+>const obj = {
+>  __proto__: prot,
+>  foo: 123,
+>};
+>```
+>
+>ES6 规定`__proto__`只有浏览器要部署，其他环境不用部署。如果去除`__proto__`，上面代码就要改成下面这样。
+>
+>```javascript
+>const obj = Object.create(prot);
+>obj.foo = 123;
+>
+>// 或者
+>
+>const obj = Object.assign(
+>  Object.create(prot),
+>  {
+>    foo: 123,
+>  }
+>);
+>```
+>
+>有了 [ Object.getOwnPropertyDescriptors() ] ，我们就有了另一种写法。
+>
+>```javascript
+>const obj = Object.create(
+>  prot,
+>  Object.getOwnPropertyDescriptors({
+>    foo: 123,
+>  })
+>);
+>```
+>
+> [ Object.getOwnPropertyDescriptors() ] 也可以用来实现 Mixin（混入）模式。
+>
+>```javascript
+>let mix = (object) => ({
+>  with: (...mixins) => mixins.reduce(
+>    (c, mixin) => Object.create(
+>      c, Object.getOwnPropertyDescriptors(mixin)
+>    ), object)
+>});
+>
+>// multiple mixins example
+>let a = {a: 'a'};
+>let b = {b: 'b'};
+>let c = {c: 'c'};
+>let d = mix(c).with(a, b);
+>
+>d.c // "c"
+>d.b // "b"
+>d.a // "a"
+>```
+>
+>上面代码返回一个新的对象`d`，代表了对象`a`和`b`被混入了对象`c`的操作。
+>
+>出于完整性的考虑， [ Object.getOwnPropertyDescriptors() ] 进入标准以后，以后还会新增`Reflect.getOwnPropertyDescriptors()`方法。
+
 ## 8、数组的拓展
 
 ### Ⅰ- 概括与总结
@@ -3558,7 +4029,7 @@
 >-  **keys()**：返回以索引值为遍历器的对象
 >-  **values()**：返回以属性值为遍历器的对象
 >-  **entries()**：返回以索引值和属性值为遍历器的对象
->-  **数组空位**：ES6明确将数组空位转为`undefined`(空位处理规不一，建议避免出现)
+>-  **数组空位**：ES6明确将数组空位转为 **undefined** (空位处理规不一，建议避免出现)
 >
 >> **扩展运算符在数组中的应用**
 >
@@ -4065,7 +4536,7 @@
 >// [ undefined, undefined, undefined ]
 >```
 >
->上面代码中，`Array.from`返回了一个具有三个成员的数组，每个位置的值都是`undefined`。扩展运算符转换不了这个对象。
+>上面代码中，`Array.from`返回了一个具有三个成员的数组，每个位置的值都是 **undefined** 。扩展运算符转换不了这个对象。
 >
 >对于还没有部署该方法的浏览器，可以用`Array.prototype.slice`方法替代。
 >
@@ -4238,7 +4709,7 @@
 
 #### ② 数组实例的 find() 和 findIndex()
 
->数组实例的 [ find ] 方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为`true`的成员，然后返回该成员。如果没有符合条件的成员，则返回`undefined`。
+>数组实例的 [ find ] 方法，用于找出第一个符合条件的数组成员。它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为`true`的成员，然后返回该成员。如果没有符合条件的成员，则返回 **undefined** 。
 >
 >```javascript
 >[1, 4, -5, 10].find((n) => n < 0)
@@ -4282,7 +4753,7 @@
 >[NaN].findIndex(y => Object.is(NaN, y)) // 0
 >```
 >
->上面代码中， [ indexOf ] 方法无法识别数组的`NaN`成员，但是 [ findIndex] 方法可以借助`Object.is`方法做到。
+>上面代码中， [ indexOf ] 方法无法识别数组的`NaN`成员，但是 [ findIndex] 方法可以借助 [ Object.is ] 方法做到。
 
 #### ③ 数组实例的 entries()，keys() 和 values()
 

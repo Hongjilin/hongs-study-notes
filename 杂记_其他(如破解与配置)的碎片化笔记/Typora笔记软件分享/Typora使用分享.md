@@ -1,3 +1,7 @@
+
+
+本人改写的Typora主题更新于此(纵享丝滑): https://gitee.com/hongjilin/hongs--typora-theme
+
 # #说明
 
 >本人想的是方便大家,本着大家共同进步的初心,所以将本人过滤一遍后还觉得很好用的知识或者软件推荐给大家,本人基本每天都会进行笔记的更新与勘误,所以觉得有用的话给本笔记点个`star`,能及时收到笔记的更新的同时也能给予本人些许肯定,感谢不尽 [本人笔记地址](https://gitee.com/hongjilin/hongs-study-notes)

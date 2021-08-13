@@ -1,6 +1,8 @@
 # #此文件专为方便gitee网站观阅使用
 
 > 可能存在更新不及时问题,建议观看同级目录下的笔记文件
+>
+> 本人改写的Typora主题更新于此(纵享丝滑): https://gitee.com/hongjilin/hongs--typora-theme
 
 # #说明
 

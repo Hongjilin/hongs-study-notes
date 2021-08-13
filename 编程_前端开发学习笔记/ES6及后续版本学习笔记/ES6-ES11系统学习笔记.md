@@ -4115,7 +4115,7 @@
 >return Array.from(arguments, value => typeof value)
 >}
 >typesOf(null, [], NaN)
->  // ['object', 'object', 'number']
+>// ['object', 'object', 'number']
 >```
 >
 >如果`map`函数里面用到了`this`关键字，还可以传入`Array.from`的第三个参数，用来绑定`this`。
@@ -4129,13 +4129,201 @@
 >
 >上面代码中，`Array.from`的第一个参数指定了第二个参数运行的次数。这种特性可以让该方法的用法变得非常灵活。
 >
->`Array.from()`的另一个应用是，将字符串转为数组，然后返回字符串的长度。因为它能正确处理各种 Unicode 字符，可以避免 JavaScript 将大于`\uFFFF`的 Unicode 字符，算作两个字符的 bug。
+>`Array.from()`的另一个应用是: 将字符串转为数组，然后返回字符串的长度。因为它能正确处理各种 Unicode 字符，可以避免 JavaScript 将大于`\uFFFF`的 Unicode 字符，算作两个字符的 bug。
 >
 >```javascript
 >function countSymbols(string) {
 >return Array.from(string).length;
 >}
 >```
->  
+>
 
->>>>>>> ed6be77 (feat(前端-ES6及后续版本学习笔记):1.【README】更新说明文档 2.【ES6-ES11系统学习笔记-ECMASript 6新特性】更新笔记数组的拓展中的[Array.from()]相关知识点笔记)
+### Ⅳ- Array.of ( )
+
+#### ① 基本使用
+
+>[ Array.of ]方法用于将一组值，转换为数组。
+>
+>```javascript
+>Array.of(3, 11, 8) // [3,11,8]
+>Array.of(3) // [3]
+>Array.of(3).length // 1
+>```
+>
+>这个方法的主要目的，是弥补数组构造函数`Array()`的不足。因为参数个数的不同，会导致`Array()`的行为有差异。
+>
+>```javascript
+>Array() // []
+>Array(3) // [, , ,]
+>Array(3, 11, 8) // [3, 11, 8]
+>```
+>
+>上面代码中，`Array`方法没有参数、一个参数、三个参数时，返回结果都不一样。只有当参数个数不少于 2 个时，`Array()`才会返回由参数组成的新数组。参数个数只有一个时，实际上是指定数组的长度。
+>
+>[ Array.of ]基本上可以用来替代`Array()`或`new Array()`，并且不存在由于参数不同而导致的重载。它的行为非常统一。
+>
+>```javascript
+>Array.of() // []
+>Array.of(undefined) // [undefined]
+>Array.of(1) // [1]
+>Array.of(1, 2) // [1, 2]
+>```
+>
+>[ Array.of ]总是返回参数值组成的数组。如果没有参数，就返回一个空数组。
+
+#### ② 原生模拟 [ Array.of ]
+
+>`Array.of`方法可以用下面的代码模拟实现。
+>
+>```javascript
+>function ArrayOf(){
+>  return [].slice.call(arguments);
+>}
+>```
+>
+
+### Ⅴ- 数组的空位
+
+>数组的空位指，数组的某一个位置没有任何值。比如，`Array`构造函数返回的数组都是空位。
+>
+>```javascript
+>Array(3) // [, , ,]
+>```
+>
+>上面代码中，`Array(3)`返回一个具有 3 个空位的数组。
+>
+>注意，空位不是**undefined**，一个位置的值等于**undefined**，依然是有值的。`空位是没有任何值`，[ in ]运算符可以说明这一点。
+>
+>```javascript
+>0 in [undefined, undefined, undefined] // true
+>0 in [, , ,] // false
+>```
+>
+>上面代码说明，第一个数组的 0 号位置是有值的，第二个数组的 0 号位置没有值。
+>
+>ES5 对空位的处理，已经很不一致了，**大多数情况下会忽略空位**。
+>
+>- forEach(), filter(), reduce(),  every()  和 some() 都会跳过空位。
+>-  map() 会跳过空位，但会保留这个值
+>-  join()  和 toString() 会将空位视为 undefined ，而 **undefined** 和 **null**会被处理成空字符串。
+>
+>```javascript
+>// forEach方法
+>[,'a'].forEach((x,i) => console.log(i)); // 1
+>
+>// filter方法
+>['a',,'b'].filter(x => true) // ['a','b']
+>
+>// every方法
+>[,'a'].every(x => x==='a') // true
+>
+>// reduce方法
+>[1,,2].reduce((x,y) => x+y) // 3
+>
+>// some方法
+>[,'a'].some(x => x !== 'a') // false
+>
+>// map方法
+>[,'a'].map(x => 1) // [,1]
+>
+>// join方法
+>[,'a',undefined,null].join('#') // "#a##"
+>
+>// toString方法
+>[,'a',undefined,null].toString() // ",a,,"
+>```
+>
+>ES6 则是明确将空位转为 **undefined**。
+>
+>`Array.from`方法会将数组的空位，转为 **undefined**，也就是说，这个方法不会忽略空位。
+>
+>```javascript
+>Array.from(['a',,'b'])
+>// [ "a", undefined, "b" ]
+>```
+>
+>扩展运算符（`...`）也会将空位转为 **undefined**。
+>
+>```javascript
+>[...['a',,'b']]
+>// [ "a", undefined, "b" ]
+>```
+>
+>`copyWithin()`会连空位一起拷贝。
+>
+>```javascript
+>[,'a','b',,].copyWithin(2,0) // [,"a",,"a"]
+>```
+>
+>`fill()`会将空位视为正常的数组位置。
+>
+>```javascript
+>new Array(3).fill('a') // ["a","a","a"]
+>```
+>
+>`for...of`循环也会遍历空位。
+>
+>```javascript
+>let arr = [, ,];
+>for (let i of arr) {
+>  console.log(1);
+>}
+>// 1
+>// 1
+>```
+>
+>上面代码中，数组`arr`有两个空位，`for...of`并没有忽略它们。如果改成`map`方法遍历，空位是会跳过的。
+>
+>`entries()`、`keys()`、`values()`、`find()`和`findIndex()`会将空位处理成 **undefined**。
+>
+>```javascript
+>// entries()
+>[...[,'a'].entries()] // [[0,undefined], [1,"a"]]
+>
+>// keys()
+>[...[,'a'].keys()] // [0,1]
+>
+>// values()
+>[...[,'a'].values()] // [undefined,"a"]
+>
+>// find()
+>[,'a'].find(x => true) // undefined
+>
+>// findIndex()
+>[,'a'].findIndex(x => true) // 0
+>```
+>
+>由于空位的处理规则非常不统一，所以建议避免出现空位。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

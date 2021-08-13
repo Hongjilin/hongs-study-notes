@@ -1,12 +1,14 @@
+# #说明
+
 > 此笔记为 本人洪详细学习Git阶段记录笔记,本笔记将记录 较深入的学习git知识点
 >
 > 如果仅仅简单使用,可先只看(必看)本笔记的:①高层命令 ②分支部分 ③数据恢复 ④远程操作
 >
 > 但是git知识是一个整体,系统的学习下来在之后使用也能更加得心应手
 >
-> 本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`Git笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
-> ​															始于:2021-1-27    截至:2021-2-2
+> ​															始于:2021-1-27  
 
 # Git详细学习
 
@@ -407,7 +409,7 @@ git logbranch
 
 > 特别是重置部分理解即可(用到了再去查),撤销尽量可以掌握
 
-### 撤销
+### Ⅰ- 撤销
 
 #### 1、git commit --amend
 
@@ -443,7 +445,7 @@ git logbranch
 >
 >`注意`:这是一个危险的命令,这很重要.你对那个文件做的任何修改都会消失--你只是拷贝了另一个文件(原来版本的文件)来覆盖它.除非你确实秦楚不想要那个文件了,否则不要使用这个命令
 
-### 重置reset
+### Ⅱ - 重置reset
 
 > 注意:`--hard`标记是`reset`命令唯一的`危险用法`,也是Git真正的销毁数据的几个仅有操作之一.其他任何形式的`reset`调用都可以轻松撤销,但是`--hard`选项不能,因为它强制覆盖了工作目录中的文件.
 >
@@ -451,9 +453,9 @@ git logbranch
 
 #### reset三部曲
 
->第一部:git reset --soft HEAD~(等于之前的--amend)
+>第一部:git reset --soft HEAD~(等于之前的--amend,后面如果跟随数字,就是回退几个版本,默认1个)
 >
->​	移动HEAD (但带着分支一起移动,与checkout不同(它只动HEAD))
+>​	移动HEAD (但带着分支一起移动,与checkout不同(它只动HEAD))  -->相当于回到你没有 [ commit ]的时候,代码仍在
 >
 >第二部:git reset --mixed HEAD~
 >
@@ -461,7 +463,73 @@ git logbranch
 >
 >第三部:git reset --hard HEAD~
 >
->​	移动HEAD 并且动了了暂存区 动了工作目录
+>​	移动HEAD 并且动了了暂存区 动了工作目录 ( 你的提交的代码也会没掉 )
+
+### Ⅲ -  错误的git push提交成功后如何撤销回退
+
+>我们在使用Git进行版本控制时，有可能会出现这种情况。git push后发现提交的内容不是想要的，这时候我们怎么做呢，提交上去的内容是没有删除按钮的（比如github，或码云）。所以我们需要一些手段将提交上去内容撤销下来。
+>
+>而要撤销,就要用到上面所学的 `git reset`
+
+#### 1、错误场景示范
+
+>Ⅰ- 当我撰写 [ commit ] 信息没注意到,以为是对的时候直接提交 --> 因为本人提交笔记时喜欢按 [ ↑ ] 找到之前的提交信息进行修改
+>
+><img src="A_Git详细学习笔记中的图片/image-20210813153403664.png" alt="image-20210813153403664" style="zoom:67%;" /> 
+>
+>Ⅱ- 此时可以看到,错误的 [ commit ] 已经提交了 (当然,适用场景不只是commit ,也可错误代码之类的)
+>
+>![image-20210813155746112](A_Git详细学习笔记中的图片/image-20210813155746112.png) 
+
+#### 2、回退操作
+
+>咱们操作稳重一点,使用git reset --soft HEAD~就好了(如果回退后代码也不想要,可以用`git stash`,暂存,达到代码也回退的效果)
+
+##### ① git reflog
+
+>commits，它在git中扮演了一个重要角色，我们平常用的一些操作git clone ,git commit 都会产生commits，通俗的讲这个就是版本号，但是git reset并不会产生commits（不是不会产生，而是会产生 但是都是一样的），我们可以先看看自己项目中的commits，使用如下命令:`git reflog`
+>
+>![image-20210813154309057](A_Git详细学习笔记中的图片/image-20210813154309057.png) 
+
+##### ②  git  reset --soft HEAD~
+
+>运行此代码后,我们的 [ HEAD ] 指向了上一个 [ commits ]
+>
+>![image-20210813154448889](A_Git详细学习笔记中的图片/image-20210813154448889.png) 
+
+##### ③  查看缓存
+
+> * 此时你可以用`stash staus`查看,会发现,之前提交的代码已经放回缓存区了
+>
+> * 如果你不想要此次提交所有代码,可以使用`git stash` ,然后再去清空即可(当然,本人此处还是需要的,所以要留下)
+>
+>   ![image-20210813154839981](A_Git详细学习笔记中的图片/image-20210813154839981.png)
+
+##### ④ 重新撰写 [ commit ]信息
+
+>![image-20210813154928064](A_Git详细学习笔记中的图片/image-20210813154928064.png) 
+
+##### ⑤ 强制提交
+
+>如果你重新撰写 [ commit ] 后马上重新push,你会发现无法提交: 因为我们当前落后远程一个版本!
+>
+>所以此时直接强制提交即可,就能覆盖远程提交记录
+>
+>>`git push -f`
+>
+>![image-20210813155049169](A_Git详细学习笔记中的图片/image-20210813155049169.png) 
+
+#### 3、成功展示
+
+>* 在网站工作台首页能看到已经将更改后的 [ coommit ] 强制推送上来了
+>
+>  也许你会奇怪:为啥工作台上还能看到? 其实已经删了!!!你看下方
+>
+>![image-20210813155614570](A_Git详细学习笔记中的图片/image-20210813155614570.png) 
+>
+>* 但是你查看提交记录,会发现之前错误的commit已经被覆盖
+>
+><img src="A_Git详细学习笔记中的图片/image-20210813155339300.png" alt="image-20210813155339300" style="zoom:80%;" />
 
 ## 九、数据恢复
 

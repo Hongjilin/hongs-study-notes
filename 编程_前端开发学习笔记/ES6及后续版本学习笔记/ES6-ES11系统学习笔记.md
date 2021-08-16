@@ -409,7 +409,7 @@
 >- 解构默认值生效条件：属性值严格等于 **undefined** 
 >- 解构遵循匹配模式
 >- 解构不成功时变量的值等于 **undefined** 
->-  **undefined** 和`null`无法转为对象, 因此无法进行解构
+>-  **undefined** 和 **null** 无法转为对象, 因此无法进行解构
 >
 >下一节为字符串的拓展概括  -->[点我传送](#4、字符串的拓展)
 
@@ -521,7 +521,7 @@
 >let [x = 1] = [null];//x = null
 >```
 >
->上面代码中, 如果一个数组成员是`null`, 默认值就不会生效, 因为`null`不严格等于 **undefined** 。
+>上面代码中, 如果一个数组成员是 **null** , 默认值就不会生效, 因为 **null** 不严格等于 **undefined** 。
 >
 >如果默认值是一个表达式, 那么这个表达式是惰性求值的, 即只有在用到的时候, 才会求值。
 >
@@ -723,7 +723,7 @@
 >var {x = 3} = {x: null};//x == null
 >```
 >
->上面代码中, 属性`x`等于`null`, 因为`null`与 **undefined** 不严格相等, 所以是个有效的赋值, 导致默认值`3`不会生效。-->[原因上面讲过](#② 默认值)
+>上面代码中, 属性`x`等于 **null** , 因为 **null** 与 **undefined** 不严格相等, 所以是个有效的赋值, 导致默认值`3`不会生效。-->[原因上面讲过](#② 默认值)
 
 #### ③ 注意点
 
@@ -797,7 +797,7 @@
 >
 >上面代码中, 数值和布尔值的包装对象都有`toString`属性, 因此变量`s`都能取到值。
 >
->解构赋值的规则是, 只要等号右边的值不是对象或数组, 就先将其转为对象。由于 **undefined** 和`null`无法转为对象, 所以对它们进行解构赋值, 都会报错。
+>解构赋值的规则是, 只要等号右边的值不是对象或数组, 就先将其转为对象。由于 **undefined** 和 **null** 无法转为对象, 所以对它们进行解构赋值, 都会报错。
 >
 >```javascript
 >let { prop: x } = undefined; // TypeError
@@ -1738,7 +1738,7 @@
 >
 >上面代码中, 有默认值的参数都不是尾参数。这时, 无法只省略该参数, 而不省略它后面的参数, 除非显式输入 **undefined** 。
 >
->如果传入 **undefined** , 将触发该参数等于默认值, `null`则没有这个效果。
+>如果传入 **undefined** , 将触发该参数等于默认值,  **null** 则没有这个效果。
 >
 >```javascript
 >function foo(x = 5, y = 6) { console.log(x, y); }
@@ -1746,7 +1746,7 @@
 >// 5 null
 >```
 >
->上面代码中, `x`参数对应 **undefined** , 结果触发了默认值, `y`参数等于`null`, 就没有触发默认值。
+>上面代码中, `x`参数对应 **undefined** , 结果触发了默认值, `y`参数等于 **null** , 就没有触发默认值。
 
 #### ④ 函数的 length 属性
 
@@ -3311,7 +3311,7 @@
 >
 >上面代码中, 变量 [ z ] 是解构赋值所在的对象。它获取等号右边的所有尚未读取的键（`a`和`b`）, 将它们连同值一起拷贝过来。
 >
->由于解构赋值要求等号右边是一个对象, 所以如果等号右边是 **undefined** 或`null`, 就会报错, 因为它们无法转为对象。
+>由于解构赋值要求等号右边是一个对象, 所以如果等号右边是 **undefined** 或 **null** , 就会报错, 因为它们无法转为对象。
 >
 >```javascript
 >let { ...z } = null; // 运行时错误
@@ -3474,7 +3474,7 @@
 >)
 >```
 >
->上面代码中, 写法一的`__proto__`属性在非浏览器的环境不一定部署, 因此推荐使用写法二和写法三。
+>上面代码中, 写法一的 [  [ `__proto__` ]  ] 属性在非浏览器的环境不一定部署, 因此推荐使用写法二和写法三。
 >
 >扩展运算符可以用于合并两个对象。
 >
@@ -3542,7 +3542,7 @@
 
 ### Ⅶ -  对象的新增方法
 
-> 本来不想将这些新增方法摘录举例至此,但后面开发(源码学习)过程中发现这些方法应用频繁,所以还是罗列出来,
+> 本来不想将这些新增方法`摘录`举例至此,但后面开发(源码学习)过程中发现这些方法应用频繁,所以还是罗列出来,
 >
 > 同时并不止是es6部分,而是将ES系列常用的都列举于此,此部分相对容易混淆,可以先看一遍,在自己开发过程使用到的时候再去巩固及加深理解
 
@@ -3631,14 +3631,14 @@
 >typeof Object.assign(2) // "object"
 >```
 >
->由于 **undefined** 和`null`无法转成对象，所以如果它们作为参数，就会报错。
+>由于 **undefined** 和 **null** 无法转成对象，所以如果它们作为参数，就会报错。
 >
 >```javascript
 >Object.assign(undefined) // 报错
 >Object.assign(null) // 报错
 >```
 >
->如果非对象参数出现在源对象的位置（即非首参数），那么处理规则有所不同。首先，这些参数都会转成对象，如果无法转成对象，就会跳过。这意味着，如果 **undefined** 和`null`不在首参数，就不会报错。
+>如果非对象参数出现在源对象的位置（即非首参数），那么处理规则有所不同。首先，这些参数都会转成对象，如果无法转成对象，就会跳过。这意味着，如果 **undefined** 和 **null** 不在首参数，就不会报错。
 >
 >```javascript
 >let obj = {a: 1};
@@ -3843,7 +3843,9 @@
 >
 >上面代码的原意是将`url.port`改成 8000，`url.host`不变。实际结果却是`options.url`覆盖掉`DEFAULTS.url`，所以`url.host`就不存在了。
 
-####  ③ Object.getOwnPropertyDescriptors()
+####  ③ getOwnPropertyDescriptors()
+
+> 此方法在开发前期基本很少用到,在源码阅读的时候比较容易遇到
 
 ##### a) 基本用法
 
@@ -3975,7 +3977,7 @@
 >};
 >```
 >
->ES6 规定`__proto__`只有浏览器要部署，其他环境不用部署。如果去除`__proto__`，上面代码就要改成下面这样。
+>ES6 规定 [  [ `__proto__` ]  ] 只有浏览器要部署，其他环境不用部署。如果去除 [  [ `__proto__` ]  ] ，上面代码就要改成下面这样。
 >
 >```javascript
 >//该Object.create()方法创建一个新对象，使用现有对象作为新创建对象的原型( proto )。
@@ -4027,6 +4029,354 @@
 >上面代码返回一个新的对象`d`，代表了对象`a`和`b`被混入了对象`c`的操作。
 >
 >出于完整性的考虑， [ Object.getOwnPropertyDescriptors() ] 进入标准以后，以后还会新增`Reflect.getOwnPropertyDescriptors()`方法。
+
+#### ④   [ `__proto__` ]  属性及其读、写操作
+
+>JavaScript 语言的对象继承是通过原型链实现的。ES6 提供了更多原型对象的操作方法。
+
+##### a)   [ `__proto__` ]  属性
+
+> [  `__proto__`  ] 属性（前后各两个下划线），用来读取或设置当前对象的原型对象（prototype）。目前，所有浏览器（包括 IE11）都部署了这个属性。
+>
+>```javascript
+>// es5 的写法
+>const obj = {
+>  method: function() { ... }
+>};
+>obj.__proto__ = someOtherObj;
+>
+>// es6 的写法
+>var obj = Object.create(someOtherObj);
+>obj.method = function() { ... };
+>```
+>
+>该属性没有写入 ES6 的正文，而是写入了附录，原因是  [ `__proto__` ]  前后的双下划线，说明它本质上是一个**内部属性**，而不是一个正式的对外的 API，只是由于浏览器广泛支持，才被加入了 ES6。标准明确规定，只有浏览器必须部署这个属性，其他运行环境不一定需要部署，而且新的代码最好认为这个属性是不存在的。因此，无论从语义的角度，还是从兼容性的角度，都不要使用这个属性，而是使用下面的[ Object.setPrototypeOf() ]（`写操作`）、[ Object.getPrototypeOf() ]（`读操作`）、`Object.create()`（生成操作）代替。
+>
+>实现上， [  `__proto__`  ] 调用的是`Object.prototype.__proto__`，具体实现如下。
+>
+>```javascript
+>Object.defineProperty(Object.prototype, '__proto__', {
+>  get() {
+>    let _thisObj = Object(this);
+>    return Object.getPrototypeOf(_thisObj);
+>  },
+>  set(proto) {
+>    if (this === undefined || this === null) throw new TypeError();
+>    if (!isObject(this))  return undefined;
+>    if (!isObject(proto)) return undefined;
+>    let status = Reflect.setPrototypeOf(this, proto);
+>    if (!status)  throw new TypeError();
+>  },
+>});
+>
+>function isObject(value) {
+>  return Object(value) === value;
+>}
+>```
+>
+>如果一个对象本身部署了 [  [ `__proto__` ]  ] 属性，该属性的值就是对象的原型。
+>
+>```javascript
+>Object.getPrototypeOf({ __proto__: null })
+>// null
+>```
+>
+
+##### b) Object.setPrototypeOf()  -->写操作
+
+> [ Object.setPrototypeOf() ] 方法的作用与 [ `__proto__` ] 相同，用来设置一个对象的原型对象（prototype），返回参数对象本身。它是 ES6 正式推荐的设置原型对象的方法。
+>
+>```javascript
+>// 格式
+>Object.setPrototypeOf(object, prototype)
+>
+>// 用法
+>const o = Object.setPrototypeOf({}, null);
+>```
+>
+>该方法等同于下面的函数。
+>
+>```javascript
+>function setPrototypeOf(obj, proto) {
+>  obj.__proto__ = proto;
+>  return obj;
+>}
+>```
+>
+>下面是一个例子。
+>
+>```javascript
+>let proto = {};
+>let obj = { x: 10 };
+>Object.setPrototypeOf(obj, proto);
+>
+>proto.y = 20;
+>proto.z = 40;
+>
+>obj.x // 10
+>obj.y // 20
+>obj.z // 40
+>```
+>
+>上面代码将`proto`对象设为`obj`对象的原型，所以从`obj`对象可以读取`proto`对象的属性。
+>
+>如果第一个参数不是对象，会自动转为对象。但是由于返回的还是第一个参数，所以这个操作不会产生任何效果。
+>
+>```javascript
+>Object.setPrototypeOf(1, {}) === 1 // true
+>Object.setPrototypeOf('foo', {}) === 'foo' // true
+>Object.setPrototypeOf(true, {}) === true // true
+>```
+>
+>由于 **undefined** 和 **null** 无法转为对象，所以如果第一个参数是 **undefined** 或 **null** ，就会报错。
+>
+>```javascript
+>Object.setPrototypeOf(undefined, {})
+>// TypeError: Object.setPrototypeOf called on null or undefined
+>
+>Object.setPrototypeOf(null, {})
+>// TypeError: Object.setPrototypeOf called on null or undefined
+>```
+>
+
+##### c) Object.getPrototypeOf()
+
+>该方法与 [ Object.setPrototypeOf() ] 方法配套，用于读取一个对象的原型对象。
+>
+>```javascript
+>Object.getPrototypeOf(obj);
+>```
+>
+>下面是一个例子。
+>
+>```javascript
+>function Rectangle() {}
+>const rec = new Rectangle();
+>
+>Object.getPrototypeOf(rec) === Rectangle.prototype// true
+>Object.setPrototypeOf(rec, Object.prototype);
+>Object.getPrototypeOf(rec) === Rectangle.prototype// false
+>```
+>
+>如果参数不是对象，会被自动转为对象。
+>
+>```javascript
+>// 等同于 Object.getPrototypeOf(Number(1))
+>Object.getPrototypeOf(1)
+>// Number {[[PrimitiveValue]]: 0}
+>
+>// 等同于 Object.getPrototypeOf(String('foo'))
+>Object.getPrototypeOf('foo')
+>// String {length: 0, [[PrimitiveValue]]: ""}
+>
+>// 等同于 Object.getPrototypeOf(Boolean(true))
+>Object.getPrototypeOf(true)
+>// Boolean {[[PrimitiveValue]]: false}
+>
+>Object.getPrototypeOf(1) === Number.prototype // true
+>Object.getPrototypeOf('foo') === String.prototype // true
+>Object.getPrototypeOf(true) === Boolean.prototype // true
+>```
+>
+>如果参数是 **undefined** 或 **null** ，它们无法转为对象，所以会报错。
+>
+>```javascript
+>Object.getPrototypeOf(null)
+>// TypeError: Cannot convert undefined or null to object
+>
+>Object.getPrototypeOf(undefined)
+>// TypeError: Cannot convert undefined or null to object
+>```
+>
+
+#### ⑤  对象的keys()、values()、entries() 方法
+
+> 这三个方法不得不说挺常用的,所以此处虽不是ES6的,但仍然在此处先给出 --> 推测有的同学会只看ES6部分就不继续看了:dog:
+
+##### a) Object.keys()
+
+>ES5 引入了`Object.keys`方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。
+>
+>```javascript
+>var obj = { foo: 'bar', baz: 42 };
+>Object.keys(obj)
+>// ["foo", "baz"]
+>```
+>
+>ES2017 [引入](https://github.com/tc39/proposal-object-values-entries)了跟`Object.keys`配套的 [ Object.values() ] 和 [ Object.entries() ] ，作为遍历一个对象的补充手段，供`for...of`循环使用。
+>
+>```javascript
+>let {keys, values, entries} = Object;
+>let obj = { a: 1, b: 2, c: 3 };
+>
+>for (let key of keys(obj)) {  console.log(key); // 'a', 'b', 'c'}
+>for (let value of values(obj)) { console.log(value); // 1, 2, 3}
+>for (let [key, value] of entries(obj)) { console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]}
+>```
+>
+
+##### b) Object.values()
+
+> [ Object.values() ] 方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。
+>
+>```javascript
+>const obj = { foo: 'bar', baz: 42 };
+>Object.values(obj)
+>// ["bar", 42]
+>```
+>
+>返回数组的成员顺序，与本章的《属性的遍历》部分介绍的排列规则一致。
+>
+>```javascript
+>const obj = { 100: 'a', 2: 'b', 7: 'c' };
+>Object.values(obj)
+>// ["b", "c", "a"]
+>```
+>
+>上面代码中，属性名为数值的属性，是按照数值大小，从小到大遍历的，因此返回的顺序是`b`、`c`、`a`。
+>
+> [ Object.values() ] 只返回对象自身的可遍历属性。
+>
+>```javascript
+>const obj = Object.create({}, {p: {value: 42}});
+>Object.values(obj) // []
+>```
+>
+>上面代码中， [ Object.create() ] 方法的第二个参数添加的对象属性（属性`p`），如果不显式声明，默认是不可遍历的，因为`p`的属性描述对象的`enumerable`默认是`false`， [ Object.values() ] 不会返回这个属性。只要把`enumerable`改成`true`， [ Object.values() ] 就会返回属性`p`的值。
+>
+>```javascript
+>const obj = Object.create({}, {p:
+>  {
+>    value: 42,
+>    enumerable: true
+>  }
+>});
+>Object.values(obj) // [42]
+>```
+>
+> [ Object.values() ] 会过滤属性名为 Symbol 值的属性。
+>
+>```javascript
+>Object.values({ [Symbol()]: 123, foo: 'abc' });
+>// ['abc']
+>```
+>
+>如果 [ Object.values() ] 方法的参数是一个字符串，会返回各个字符组成的一个数组。
+>
+>```javascript
+>Object.values('foo')
+>// ['f', 'o', 'o']
+>```
+>
+>上面代码中，字符串会先转成一个类似数组的对象。字符串的每个字符，就是该对象的一个属性。因此， [ Object.values() ] 返回每个属性的键值，就是各个字符组成的一个数组。
+>
+>如果参数不是对象， [ Object.values() ] 会先将其转为对象。由于数值和布尔值的包装对象，都不会为实例添加非继承的属性。所以， [ Object.values() ] 会返回空数组。
+>
+>```javascript
+>Object.values(42) // []
+>Object.values(true) // []
+>```
+>
+
+##### c) Object.entries()
+
+> [ Object.entries() ] 方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。
+>
+>```javascript
+>const obj = { foo: 'bar', baz: 42 };
+>Object.entries(obj)
+>// [ ["foo", "bar"], ["baz", 42] ]
+>```
+>
+>除了返回值不一样，该方法的行为与 [ Object.values() ] 基本一致。
+>
+>如果原对象的属性名是一个 Symbol 值，该属性会被忽略。
+>
+>```javascript
+>Object.entries({ [Symbol()]: 123, foo: 'abc' });
+>// [ [ 'foo', 'abc' ] ]
+>```
+>
+>上面代码中，原对象有两个属性， [ Object.entries() ] 只输出属性名非 Symbol 值的属性。将来可能会有`Reflect.ownEntries()`方法，返回对象自身的所有属性。
+>
+> [ Object.entries() ] 的基本用途是遍历对象的属性。
+>
+>```javascript
+>let obj = { one: 1, two: 2 };
+>for (let [k, v] of Object.entries(obj)) {
+>  console.log(
+>    `${JSON.stringify(k)}: ${JSON.stringify(v)}`
+>  );
+>}
+>// "one": 1
+>// "two": 2
+>```
+>
+> [ Object.entries() ] 方法的另一个用处是，将对象转为真正的`Map`结构。
+>
+>```javascript
+>const obj = { foo: 'bar', baz: 42 };
+>const map = new Map(Object.entries(obj));
+>map // Map { foo: "bar", baz: 42 }
+>```
+>
+>自己实现 [ Object.entries() ] 方法，非常简单。
+>
+>```javascript
+>// Generator函数的版本
+>function* entries(obj) {
+>  for (let key of Object.keys(obj)) {
+>    yield [key, obj[key]];
+>  }
+>}
+>
+>// 非Generator函数的版本
+>function entries(obj) {
+>  let arr = [];
+>  for (let key of Object.keys(obj)) {
+>    arr.push([key, obj[key]]);
+>  }
+>  return arr;
+>}
+>```
+>
+
+#### ⑥ Object.fromEntries()
+
+>`Object.fromEntries()`方法是 [ Object.entries() ] 的逆操作，用于将一个键值对数组转为对象。
+>
+>```javascript
+>Object.fromEntries([
+>  ['foo', 'bar'],
+>  ['baz', 42]
+>])
+>// { foo: "bar", baz: 42 }
+>```
+>
+>该方法的主要目的，是将键值对的数据结构还原为对象，因此特别适合将 Map 结构转为对象。
+>
+>```javascript
+>// 例一
+>const entries = new Map([
+>  ['foo', 'bar'],
+>  ['baz', 42]
+>]);
+>
+>Object.fromEntries(entries)
+>// { foo: "bar", baz: 42 }
+>
+>// 例二
+>const map = new Map().set('foo', true).set('bar', false);
+>Object.fromEntries(map)
+>// { foo: true, bar: false }
+>```
+>
+>该方法的一个用处是配合`URLSearchParams`对象，将查询字符串转为对象。
+>
+>```javascript
+>Object.fromEntries(new URLSearchParams('foo=bar&baz=qux'))
+>// { foo: "bar", baz: "qux" }
+>```
 
 ## 8、数组的拓展
 

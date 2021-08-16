@@ -3542,9 +3542,9 @@
 
 ### Ⅶ -  对象的新增方法
 
-> 本来不想将这些新增方法摘录举例至此,但后面开发过程中发现这些方法应用频繁,所以还是罗列出来,
+> 本来不想将这些新增方法摘录举例至此,但后面开发(源码学习)过程中发现这些方法应用频繁,所以还是罗列出来,
 >
-> 同时并不止是es6部分,而是将ES系列常用的都列举于此
+> 同时并不止是es6部分,而是将ES系列常用的都列举于此,此部分相对容易混淆,可以先看一遍,在自己开发过程使用到的时候再去巩固及加深理解
 
 #### ① Object.is()
 
@@ -3789,7 +3789,7 @@
 >}
 >```
 >
->[ Object.getPrototypeOf() ] 方法不懂的可以先跳过看下方,后面有其详解
+>[ Object.getPrototypeOf() ] 方法:返回指定对象的原型（内部`[[Prototype]]`属性的值）。
 
 ###### ( 4 ) 合并多个对象
 
@@ -3847,7 +3847,7 @@
 
 ##### a) 基本用法
 
->ES5 的`Object.getOwnPropertyDescriptor()`方法会返回某个对象属性的描述对象（descriptor）。ES2017 引入了 [ Object.getOwnPropertyDescriptors() ] 方法，返回指定对象所有自身属性（非继承属性）的描述对象。
+>ES5 的`Object.getOwnPropertyDescriptor()`方法用来获取一个对象的所有自身属性的描述符。。ES2017 引入了 [ Object.getOwnPropertyDescriptors() ] 方法，返回指定对象所有自身属性（非继承属性）的描述对象。
 >
 >```javascript
 >const obj = {
@@ -3877,27 +3877,31 @@
 >
 >```javascript
 >function getOwnPropertyDescriptors(obj) {
->  const result = {};
->  for (let key of Reflect.ownKeys(obj)) {
->    result[key] = Object.getOwnPropertyDescriptor(obj, key);
->  }
->  return result;
+>const result = {};
+>//静态方法 Reflect.ownKeys() 返回一个由目标对象自身的属性键组成的数组。
+>for (let key of Reflect.ownKeys(obj)) {
+>result[key] = Object.getOwnPropertyDescriptor(obj, key);
+>}
+>return result;
 >}
 >```
 >
 
 ##### c) 此方法引入目的与常用用法
 
+###### ( 1 ) 解决 [ Object.assign() ] 无法正确拷贝 [ get ] 属性和 [set ] 属性的问题。
+
 >该方法的引入目的，主要是为了解决`Object.assign()`无法正确拷贝`get`属性和`set`属性的问题。
 >
 >```javascript
 >const source = {
->  set foo(value) {
->    console.log(value);
->  }
+>set foo(value) {
+>console.log(value);
+>}
 >};
 >const target1 = {};
->Object.assign(target1, source);
+>Object.assign(target1, source);  //结果该属性的值变成了 undefined 。
+>//此时获取其属性信息进行查看
 >Object.getOwnPropertyDescriptor(target1, 'foo')
 >// { value: undefined,
 >//   writable: true,
@@ -3911,13 +3915,16 @@
 >
 >```javascript
 >const source = {
->  set foo(value) {
->    console.log(value);
->  }
+>set foo(value) {
+>console.log(value);
+>}
 >};
 >
 >const target2 = {};
+>//1. Object.defineProperties()方法直接在一个对象上定义新的属性或修改现有属性，并返回该对象。
+>//2. 先将[source]属性获取出来,配合 [ Object.defineProperties() ]方法实现正确拷贝
 >Object.defineProperties(target2, Object.getOwnPropertyDescriptors(source));
+>//此时再次获取其属性信息进行查看
 >Object.getOwnPropertyDescriptor(target2, 'foo')
 >// { get: undefined,
 >//   set: [Function: set foo],
@@ -3928,50 +3935,58 @@
 >上面代码中，两个对象合并的逻辑可以写成一个函数。
 >
 >```javascript
+>//其实就是用[ Object.defineProperties() ]方法返回的数据再用 [Object.defineProperties()]方法进行修改或定义属性
 >const shallowMerge = (target, source) => Object.defineProperties(
->  target,
->  Object.getOwnPropertyDescriptors(source)
+>target,
+>Object.getOwnPropertyDescriptors(source)
 >);
 >```
 >
-> [ Object.getOwnPropertyDescriptors() ] 方法的另一个用处，是配合`Object.create()`方法，将对象属性克隆到一个新对象。这属于浅拷贝。
+
+###### ( 2 ) 将对象属性克隆到一个新对象  --> `浅拷贝`
+
+>[ Object.getOwnPropertyDescriptors() ] 方法的另一个用处，是配合`Object.create()`方法，将对象属性克隆到一个新对象。这属于浅拷贝。
 >
 >```javascript
+>//该Object.create()方法创建一个新对象，使用现有对象作为新创建对象的原型( proto )。
+>//Object.getPrototypeOf() 方法返回指定对象的原型（内部[[Prototype]]属性的值）。
 >const clone = Object.create(Object.getPrototypeOf(obj),
->  Object.getOwnPropertyDescriptors(obj));
+>Object.getOwnPropertyDescriptors(obj));
 >
->// 或者
+>// 或者 -->本质上一摸一样,只是用了箭头函数的方式写了,更简洁明了
 >
 >const shallowClone = (obj) => Object.create(
->  Object.getPrototypeOf(obj),
->  Object.getOwnPropertyDescriptors(obj)
+>Object.getPrototypeOf(obj),
+>Object.getOwnPropertyDescriptors(obj)
 >);
 >```
 >
 >上面代码会克隆对象`obj`。
+
+###### ( 3 ) 继承对象
+
 >
 >另外， [ Object.getOwnPropertyDescriptors() ] 方法可以实现一个对象继承另一个对象。以前，继承另一个对象，常常写成下面这样。
 >
 >```javascript
 >const obj = {
->  __proto__: prot,
->  foo: 123,
+>__proto__: prot,
+>foo: 123,
 >};
 >```
 >
 >ES6 规定`__proto__`只有浏览器要部署，其他环境不用部署。如果去除`__proto__`，上面代码就要改成下面这样。
 >
 >```javascript
+>//该Object.create()方法创建一个新对象，使用现有对象作为新创建对象的原型( proto )。
 >const obj = Object.create(prot);
 >obj.foo = 123;
 >
 >// 或者
 >
 >const obj = Object.assign(
->  Object.create(prot),
->  {
->    foo: 123,
->  }
+>Object.create(prot),
+>{foo: 123}
 >);
 >```
 >
@@ -3979,21 +3994,23 @@
 >
 >```javascript
 >const obj = Object.create(
->  prot,
->  Object.getOwnPropertyDescriptors({
->    foo: 123,
->  })
+>prot,
+>//获取对象原型属性
+>Object.getOwnPropertyDescriptors({foo: 123})
 >);
 >```
 >
-> [ Object.getOwnPropertyDescriptors() ] 也可以用来实现 Mixin（混入）模式。
+
+###### ( 4 ) 实现 Mixin（混入）模式
+
+>[ Object.getOwnPropertyDescriptors() ] 也可以用来实现 Mixin（混入）模式。
 >
 >```javascript
 >let mix = (object) => ({
->  with: (...mixins) => mixins.reduce(
->    (c, mixin) => Object.create(
->      c, Object.getOwnPropertyDescriptors(mixin)
->    ), object)
+>with: (...mixins) => mixins.reduce(
+>(c, mixin) => Object.create(
+>c, Object.getOwnPropertyDescriptors(mixin)
+>), object)
 >});
 >
 >// multiple mixins example

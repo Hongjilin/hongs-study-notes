@@ -4380,22 +4380,28 @@
 
 ## 8、数组的拓展
 
+> 对于前端而言,数组的操作是最频繁的,因为从服务端获取到的基本都是数组格式数据,其中方法最好是认真掌握
+
 ### Ⅰ- 概括与总结
 
 >> **新增的拓展**
 >
 >-  **扩展运算符(...)**：转换数组为用逗号分隔的参数序列(`[...arr]`，相当于`rest/spread参数`的逆运算)
->- **Array.from()**：转换具有 [ Iterator接口 ] 的数据结构为真正数组，返回新数组
->  1. 类数组对象：`包含length的对象`、`Arguments对象`、`NodeList对象`
->  2. 可遍历对象：`String`、`Set结构`、`Map结构`、`Generator函数`
+>-  **Array.from()**：转换具有 [ Iterator接口 ] 的数据结构为真正数组，返回新数组
+>   1. 类数组对象：`包含length的对象`、`Arguments对象`、`NodeList对象`
+>   2. 可遍历对象：`String`、`Set结构`、`Map结构`、`Generator函数`
+>
 >-  **Array.of()**：转换一组值为真正数组，返回新数组
->-  **copyWithin()**：把指定位置的成员复制到其他位置，返回原数组
->-  **find()**：返回第一个符合条件的成员
->-  **findIndex()**：返回第一个符合条件的成员索引值
->-  **fill()**：根据指定值填充整个数组，返回原数组
->-  **keys()**：返回以索引值为遍历器的对象
->-  **values()**：返回以属性值为遍历器的对象
->-  **entries()**：返回以索引值和属性值为遍历器的对象
+>-  **实例方法**
+>   1. **copyWithin()**：把指定位置的成员复制到其他位置，返回原数组
+>   2. **find()**：返回第一个符合条件的成员
+>   3. **findIndex()**：返回第一个符合条件的成员索引值
+>   4. **fill()**：根据指定值填充整个数组，返回原数组
+>   5. **keys()**：返回以索引值为遍历器的对象
+>   6. **values()**：返回以属性值为遍历器的对象
+>   7. **entries()**：返回以索引值和属性值为遍历器的对象
+>   8. **其他**:毕竟只是概述,不过多列举,详细看下方
+>-  **其他常用方法**:此处将数组常用方法在下方详细部分列出 (不仅是ES6)
 >-  **数组空位**：ES6明确将数组空位转为 **undefined** (空位处理规不一，建议避免出现)
 >
 >> **扩展运算符在数组中的应用**
@@ -5022,7 +5028,7 @@
 
 ### Ⅴ- 数组的实例方法
 
-> 所谓实例方法,简单来说就是实例化后可以用 `[数组].方法名()`的方式调用的一类方法
+> 所谓实例方法,简单来说就是实例化后可以用 `[数组].方法名()`的方式调用的一类方法,其中有几个很常用,可以重点理解
 
 #### ①  数组实例的 copyWithin()
 
@@ -5268,6 +5274,138 @@
 >
 > [ flatMap() ] 方法还可以有第二个参数，用来绑定遍历函数里面的`this`。
 
+#### ⑥ 数组实例的 filter() -->`常用`
+
+> `此方法非常常用`,一定要掌握的
+>
+> `filter()` 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 不会改变原有数组
+
+##### a) 筛选对象数组中符合条件的
+
+>```js
+>const Arr = [
+>  { look: '帅', name: '@hongjilin'},
+>  { look: '很帅', name: '努力学习的汪'}
+>]
+>console.log(Arr.filter(item => item.name === '努力学习的汪' )) //{ look: '很帅', name: '努力学习的汪' }
+>```
+
+##### b) 筛选对象数组中不符合条件的
+
+>同样操作上面的数组
+>
+>```js
+>console.log(Arr.filter(item => item.look !== '很帅' )) //{ look: '帅', name: '@hongjilin'}
+>```
+
+##### c) 去除数组中的空字符串、undefined、null
+
+>```js
+>const undefinedArr = ['这是undefined数组','2',undefined, '努力学习的汪',undefined]
+>const nullArr = ['这是null数组','2',null, '努力学习的汪',null]
+>const stringArr = ['这是空字符串数组','2','', '努力学习的汪',''] //空字符串里面不能包含空格
+>let newArr =[] //定义一个新数组来测试承接
+>//过滤 undefined
+>newArr= undefinedArr.filter(item => item) 
+>console.log(newArr)  //log: ["这是undefined数组", "2", "努力学习的汪"]
+>//过滤 null
+>newArr = nullArr.filter(item => item)
+>console.log(newArr) //log: ["这是null数组", "2", "努力学习的汪"]
+>//过滤空字符串
+> newArr = stringArr.filter(item => item)
+>console.log(newArr) //log: ["这是空字符串数组", "2", "努力学习的汪"]
+>```
+
+##### d) 筛选字符串、数字数组符合条件项
+
+>其实与上方对象数组筛选差不多,但稍微还是有所差别,举例出来,方便理解
+>
+>```js
+>const numberArr = [20,30,50, 96,50]
+>const stringArr = ['10','12','23','44','42']
+>let newArr = []
+>//筛选数组中符合条件项
+>newArr= numberArr.filter(item => item>40)  
+>console.log(newArr)   //log: [50, 96, 50]
+>//过滤字符串数组符合条件项
+>//item.indexOf('2')是查找字符串中含有['2']的下标,当不含有时,返回-1
+>newArr = stringArr.filter(item => item.indexOf('2')<0) 
+>console.log(newArr)   //log: ["10", "44"]
+>```
+
+##### e) 数组去重
+
+>可以利用 [ filter ] 方法实现去重,当然去重方式非常多,这里也是一种思路
+>
+>```js
+>const arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];
+>let arr2 = arr.filter((x, index,self)=>self.indexOf(x)===index)  
+>console.log(arr2); //[1, 2, 3, 4, 5, 6, 7, 8, 0, 56]
+>```
+>
+>这里列一个ES6提供的去重新方法 
+>
+>```js
+>//具体详情在下方 [Set] 相关知识点笔记中会给出
+>const arr=[1,2,1,'1',null,null,undefined,undefined,NaN,NaN]
+>let res=Array.from(new Set(arr));//{1,2,"1",null,undefined,NaN}
+>//or
+>let newarr=[...new Set(arr)]
+>```
+
+#### ⑦ 数组实例的 map() -->`常用`
+
+>定义：对数组中的每个元素进行处理，得到新的数组；
+>
+>特点：不改变原有数据的结构和数据
+
+##### a) 常用方法举例
+
+>```js
+>const array = [1, 3, 6, 9];
+>const newArray = array.map( value => value + 1 ); //此处用的箭头函数写法,看不懂的要回头看前方函数部分
+>console.log(newArray); //log: [2, 4, 7, 10]
+>console.log(array);    //log: [1, 3, 6, 9]
+>```
+
+##### b) 类似方法
+
+>类似效果实现方法： for in , for , foreach
+>
+>```js
+>const array = [1, 3, 6, 9];
+>
+>const newArray2 = [];
+>for (var i in array) { newArray2.push(array[i] + 1)}
+>const newArray3 = [];
+>for (var i = 0; i < array.length; i++) { newArray3.push(array[i] + 1)}
+>const newArray4 = [];
+>array.forEach(function (key) { newArray4.push(key * key)})
+> 
+>console.log(newArray2); //log: [2, 4, 7, 10]
+>console.log(newArray3); //log: [2, 4, 7, 10]
+>console.log(newArray4); //log: [1, 9, 36, 81]
+>console.log(array);		//log: [1, 3, 6, 9]
+>```
+>
+>与上述方法的区别:
+>
+>* .map()方法使用return，进行回调；其他方法可不需要。
+>* .map()方法直接对数组的每个元素进行操作，返回相同数组长度的数组；其他方法可扩展数组的长度。
+>* .map() 不会对空数组进行检测。
+
+##### c) 与 filter() 区别
+
+> 主要就是 [ filter() ] 用作筛选,并不会对数组中元素进行处理,只会根据匹配条件返回数组中符合条件元素;
+>
+> [ map() ] 常用作将符合条件的元素进行加工,再返回出去的场景
+
+#### ⑧ 数组实例的 some() 、every()
+
+> **some()** : 方法测试数组中是不是至少有1个元素通过了被提供的函数测试。它返回的是一个Boolean类型的值。
+>
+> **every()**: 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值。
+
 ### Ⅵ - 数组的空位
 
 >数组的空位指，数组的某一个位置没有任何值。比如，`Array`构造函数返回的数组都是空位。
@@ -5383,7 +5521,42 @@
 
 ### Ⅶ - Array.prototype.sort() 的排序稳定性
 
-
+>排序稳定性（stable sorting）是排序算法的重要属性，指的是排序关键字相同的项目，排序前后的顺序不变。
+>
+>```javascript
+>const arr = [
+>  'peach',
+>  'straw',
+>  'apple',
+>  'spork'
+>];
+>
+>const stableSorting = (s1, s2) => {
+>  if (s1[0] < s2[0]) return -1;
+>  return 1;
+>};
+>
+>arr.sort(stableSorting)
+>// ["apple", "peach", "straw", "spork"]
+>```
+>
+>上面代码对数组`arr`按照首字母进行排序。排序结果中，`straw`在`spork`的前面，跟原始顺序一致，所以排序算法`stableSorting`是稳定排序。
+>
+>```javascript
+>const unstableSorting = (s1, s2) => {
+>  if (s1[0] <= s2[0]) return -1;
+>  return 1;
+>};
+>
+>arr.sort(unstableSorting)
+>// ["apple", "peach", "spork", "straw"]
+>```
+>
+>上面代码中，排序结果是`spork`在`straw`前面，跟原始顺序相反，所以排序算法`unstableSorting`是不稳定的。
+>
+>常见的排序算法之中，插入排序、合并排序、冒泡排序等都是稳定的，堆排序、快速排序等是不稳定的。不稳定排序的主要缺点是，多重排序时可能会产生问题。假设有一个姓和名的列表，要求按照“姓氏为主要关键字，名字为次要关键字”进行排序。开发者可能会先按名字排序，再按姓氏进行排序。如果排序算法是稳定的，这样就可以达到“先姓氏，后名字”的排序效果。如果是不稳定的，就不行。
+>
+>早先的 ECMAScript 没有规定，`Array.prototype.sort()`的默认排序算法是否稳定，留给浏览器自己决定，这导致某些实现是不稳定的。[ES2019](https://github.com/tc39/ecma262/pull/1340) 明确规定，`Array.prototype.sort()`的默认排序算法必须稳定。这个规定已经做到了，现在 JavaScript 各个主要实现的默认排序算法都是稳定的。
 
 
 

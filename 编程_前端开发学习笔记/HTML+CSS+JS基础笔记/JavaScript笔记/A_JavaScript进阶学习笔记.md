@@ -29,6 +29,8 @@
 >5. null: null  -->使用`typeof`时返回`object`
 >6. [symbol](https://developer.mozilla.org/zh-CN/docs/Glossary/Symbol) ([ECMAScript](https://developer.mozilla.org/zh-CN/docs/Glossary/ECMAScript) 2016新增)。 -->Symbol 是 [基本数据类型](https://developer.mozilla.org/zh-CN/docs/Glossary/Primitive) 的一种，[`Symbol`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Symbol) 对象是 Symbol原始值的[封装 (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Wrapper) 。
 >7. [bigint](https://developer.mozilla.org/zh-CN/docs/Glossary/BigInt)，  -->**BigInt** 是一种数字类型的数据，它可以表示任意精度格式的整数。
+>
+>加上下方的 [ 对象 ] 类型,目前 javaScript 有八种数据类型
 
 ### Ⅱ-对象(引用)类型
 
@@ -1542,14 +1544,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                     
+>                         
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->                     
+>                         
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1562,14 +1564,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                     
+>                         
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->                         
+>                             
 >     ```
 >
 >2. 模块调用

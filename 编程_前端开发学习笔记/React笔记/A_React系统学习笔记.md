@@ -3334,13 +3334,47 @@ updateTodo = (id,done)=>{
 >   }
 >   ```
 
+## 3、父组件调用子组件方法
 
+### ①  场景描述
 
+> 当本人要封装一个关于绑定手机号的组件并应用于项目中, 但是到整体表单校验时 (我需要知道手机号列是否进行了修改),以此来判断是否发送修改请求
+>
+> 因为 [手机列] 的相关校验写在封装的方法中,在父组件需要调用一次其校验方式,得到其校验结果 
+>
+> <img src="A_React系统学习笔记中的图片/image-20210820184059775.png" alt="image-20210820184059775" style="zoom:80%;" />   
 
+### ② 使用hooks的-- [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)，[useRef](https://reactjs.org/docs/hooks-reference.html#useref)
 
-
-
-
+>```jsx
+>//父组件代码
+>import React, { FC, useEffect, useRef } from 'react';
+>import MyPhoneInput from '~/components/my-phone-input'; //引入子组件
+>const ChannelEdit: FC<IProps> = (props) => {
+>  const childRef = useRef(); //useRef
+>  const checkSubmit = () => childRef?.current?.checkSubmit(); //调用子组件的方法
+>  return(
+>     <MyPhoneInput  cRef={childRef} />  
+> )    
+>}
+>```
+>
+>```jsx
+>//子组件代码
+>import React, { useEffect, useState, useImperativeHandle } from 'react';
+>const SuperPhoneInput = (props) => {
+>  useImperativeHandle(cRef, () => ({
+>    checkSubmit,
+>  }));
+>//需要在父组件调用的 子组件方法 
+>const checkSubmit = () => {
+>    let tels = [];
+>    let ischange = false;
+> 	//..... 各种操作,然后返回结果给父组件
+>    return { ischange, tels };
+>  };  
+>}
+>```
 
 
 

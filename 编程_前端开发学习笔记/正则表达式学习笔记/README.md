@@ -1,3 +1,11 @@
+# #此文件为方便gitee网站观阅使用专门创建
+
+> 可能存在更新不及时问题,建议观看同级目录下的笔记文件
+>
+> 截取上方`正则学习笔记`部分知识点复制至此,方便网站阅读
+>
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+
 # #说明
 
 >正则可以说是操作 [ 字符串 ] 最强大的工具了,没有之一,特别是在进行爬虫技术或 前端字符串处理时简直必备技能,然鹅正则总是学了忘、忘了学,用时还需要去百度翻资料,也是严重影响了工作效率,所以我也认真查阅许多资料认真学习梳理成此笔记.
@@ -6,7 +14,6 @@
 >
 >查阅的资料或博客:[[comer的60分钟正则从入门到深入](https://segmentfault.com/a/1190000013075245)]、[[Vincent Ko的可能是最好的正则表达式的教程笔记了吧...](https://juejin.cn/post/6844903648309297166)]、[gitHub的[learn-regex](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)]、[阮一峰的ES6文档](https://www.jb51.net/tools/zhengze.html)、[deerchao的正则表达式30分钟入门教程](https://www.jb51.net/tools/zhengze.html) 
 >
->除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # 一、正则基础概述
 

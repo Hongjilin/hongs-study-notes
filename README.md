@@ -92,9 +92,9 @@
 >> 此笔记是记录Chrome相关知识, 如:[Chrome扩展程序资料摘录及开发笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记/Chrome扩展程序资料摘录及开发笔记)、[Chrome_DevTools调试工具使用详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记/Chrome_DevTools调试工具使用详解笔记) 等
 >由于网上该部分知识的资料十分零散, 基本都是各位程序员前辈用爱发电`碎片化`地发出自己的经验使用(并且很多示例版本已经相对此时落后, 特别是部分相对少用的面板基本没有资料, 一个面板就查阅了五六篇博客...), 所以学的也是磕磕绊绊艰难的很, 所以我就有意的学习并梳理出一份相对全面且利于自己后续查阅补充的笔记
 >
->18. [正则表达式收录笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%94%B6%E5%BD%95%E7%AC%94%E8%AE%B0)
+>18. **[正则表达式学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/正则表达式学习笔记)**
 >
->> 此处会收录开发中遇到的正则, 方便自己后续开发查阅使用
+>> 正则可以说是操作 [ 字符串 ] 最强大的工具了, 没有之一, 特别是在进行 爬虫技术或 前端字符串处理 时简直必备技能, 然鹅正则总是学了忘、忘了学, 用时还需要去百度翻资料, 也是严重影响了工作效率, 所以我也认真查阅许多资料认真学习梳理成此笔记.
 >
 >19. 其他待更新
 

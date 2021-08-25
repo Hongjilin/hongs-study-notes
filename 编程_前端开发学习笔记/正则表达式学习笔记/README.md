@@ -14,7 +14,7 @@
 >
 >在此我会尽量详细地对查阅的资料进行摘录梳理并加入自己理解,相信看完这个笔记后同学们能快速掌握或者定位知识点
 >
->查阅的资料或博客:[[comer的60分钟正则从入门到深入](https://segmentfault.com/a/1190000013075245)]、[[Vincent Ko的可能是最好的正则表达式的教程笔记了吧...](https://juejin.cn/post/6844903648309297166)]、[gitHub的[learn-regex](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)]、[阮一峰的ES6文档](https://www.jb51.net/tools/zhengze.html)、[deerchao的正则表达式30分钟入门教程](https://www.jb51.net/tools/zhengze.html) 、博客园的 [只争朝夕，不负韶华的正则常用的六种方法](https://home.cnblogs.com/u/aidixie/)
+>查阅的资料或博客:[【韩顺平讲Java】Java 正则表达式专题 -正则 正则表达式 元字符 限定符 Pattern Matcher 分组 捕获 反向引用等](https://www.bilibili.com/video/BV1Eq4y1E79W?share_source=copy_web) ;[[comer的60分钟正则从入门到深入](https://segmentfault.com/a/1190000013075245)]、[[Vincent Ko的可能是最好的正则表达式的教程笔记了吧...](https://juejin.cn/post/6844903648309297166)]、[gitHub的[learn-regex](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)]、[阮一峰的ES6文档](https://www.jb51.net/tools/zhengze.html)、[deerchao的正则表达式30分钟入门教程](https://www.jb51.net/tools/zhengze.html) 、博客园的 [只争朝夕，不负韶华的正则常用的六种方法](https://home.cnblogs.com/u/aidixie/)
 >
 
 # 一、正则基础概述

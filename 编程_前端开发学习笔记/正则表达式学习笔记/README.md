@@ -591,4 +591,39 @@
 >
 >![image-20210825144416801](正则学习笔记中的图片/image-20210825144416801.png)
 
+# 七、常用正则收录
+
+## Ⅰ-正则表达式只保留数字
+
+>1. 正则代码
+>
+>  ```jsx
+>str=str.replaceAll("[^0-9]", "");//此表达式匹配错误
+>str=str.replace(/\D/g,''); //正确	
+>  ```
+>
+>2. 调用代码示例
+>
+>  ```jsx
+>onChange={(e)=> store.changeSearchParamsValue('storeId')(e.target.value.replace(/\D/g,''))} 
+>@action changeSearchNumberParamsValue = (type) => (value) => {
+>    //this.searchParams[type] = value.replace(/\D/g,''); 外面限制好后传入
+>     this.searchParams[type] = value;
+>  };
+>  ```
+>
+>3. 实现效果
+>
+>  > 输入非数字内容则无法键入(替换为空)
+
+## Ⅱ-限制不能为空以及中文
+
+>```jsx
+>str=str.replace(/\s/g, '').replace(/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi, '');
+>```
+
+
+
+
+
 # ** `更多请看上方具体笔记内容` **

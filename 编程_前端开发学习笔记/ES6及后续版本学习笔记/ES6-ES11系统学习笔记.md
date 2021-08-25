@@ -5560,9 +5560,7 @@
 
 ## 9、正则的拓展
 
-> 正则是本人看的时候最头疼的,主要还是当初学校学习正则相关知识点时没认真听
->
-> 事实证明出来混迟早要还的,前端的正则应用还是很广泛的,虽说可以不懂的百度,但是一些特定的正则还是需要自己写,所以听一句劝,好好补!!
+> 对于正则基础笔记本人也有进行详细且系统的梳理,需要的可以去看看       -->  **[正则表达式学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/正则表达式学习笔记)** 
 
 ### Ⅰ- 概括与总结
 
@@ -5589,7 +5587,7 @@
 
 >在 ES5 中，`RegExp`构造函数的参数有两种情况。
 >
->第一种情况是，参数是字符串，这时第二个参数表示正则表达式的修饰符（flag）。
+>第一种情况是，参数是字符串，这时第二个参数表示正则表达式的修饰符（flag 标志）。
 >
 >```javascript
 >var regex = new RegExp('xyz', 'i');
@@ -5621,7 +5619,200 @@
 >
 >上面代码中，原有正则对象的修饰符是`ig`，它会被第二个参数`i`覆盖。
 
+### Ⅲ -  字符串的正则方法
 
+>字符串对象共有 4 个方法，可以使用正则表达式：`match()`、`replace()`、`search()`和`split()`。
+>
+>ES6 将这 4 个方法，在语言内部全部调用`RegExp`的实例方法，从而做到所有与正则相关的方法，全都定义在`RegExp`对象上。
+>
+>- [ String.prototype.match ] 调用 `RegExp.prototype[Symbol.match]`
+>- [ String.prototype.replace ]  调用 `RegExp.prototype[Symbol.replace]`
+>- [ String.prototype.search ]  调用 `RegExp.prototype[Symbol.search]`
+>- [ String.prototype.split ]  调用 `RegExp.prototype[Symbol.split]`
+
+### Ⅳ -  u 修饰符
+
+>ES6 对正则表达式添加了`u`修饰符，含义为“Unicode 模式”，用来正确处理大于`\uFFFF`的 Unicode 字符。也就是说，会正确处理四个字节的 UTF-16 编码。
+>
+>```javascript
+>/^\uD83D/u.test('\uD83D\uDC2A') // false
+>/^\uD83D/.test('\uD83D\uDC2A') // true
+>```
+>
+>上面代码中，`\uD83D\uDC2A`是一个四个字节的 UTF-16 编码，代表一个字符。但是，ES5 不支持四个字节的 UTF-16 编码，会将其识别为两个字符，导致第二行代码结果为`true`。加了`u`修饰符以后，ES6 就会识别其为一个字符，所以第一行代码结果为`false`。
+>
+>一旦加上`u`修饰符号，就会修改下面这些正则表达式的行为:
+
+#### ① 点字符
+
+>点（`.`）字符在正则表达式中，含义是除了换行符以外的任意单个字符。对于码点大于`0xFFFF`的 Unicode 字符，点字符不能识别，必须加上`u`修饰符。
+>
+>```javascript
+>var s = '𠮷';
+>/^.$/.test(s) // false
+>/^.$/u.test(s) // true
+>```
+>
+>上面代码表示，如果不添加`u`修饰符，正则表达式就会认为字符串为两个字符，从而匹配失败。
+
+#### ② Unicode 字符表示法
+
+>ES6 新增了使用大括号表示 Unicode 字符，这种表示法在正则表达式中必须加上`u`修饰符，才能识别当中的大括号，否则会被解读为量词。
+>
+>```javascript
+>/\u{61}/.test('a') // false
+>/\u{61}/u.test('a') // true
+>/\u{20BB7}/u.test('𠮷') // true
+>```
+>
+>上面代码表示，如果不加`u`修饰符，正则表达式无法识别`\u{61}`这种表示法，只会认为这匹配 61 个连续的`u`。
+
+#### ③ 量词
+
+>使用`u`修饰符后，所有量词都会正确识别码点大于`0xFFFF`的 Unicode 字符。
+>
+>```javascript
+>/a{2}/.test('aa') // true
+>/a{2}/u.test('aa') // true
+>/𠮷{2}/.test('𠮷𠮷') // false
+>/𠮷{2}/u.test('𠮷𠮷') // true
+>```
+>
+
+#### ④ 预定义模式
+
+>`u`修饰符也影响到预定义模式，能否正确识别码点大于`0xFFFF`的 Unicode 字符。
+>
+>```javascript
+>/^\S$/.test('𠮷') // false
+>/^\S$/u.test('𠮷') // true
+>```
+>
+>上面代码的`\S`是预定义模式，匹配所有非空白字符。只有加了`u`修饰符，它才能正确匹配码点大于`0xFFFF`的 Unicode 字符。
+>
+>利用这一点，可以写出一个正确返回字符串长度的函数。
+>
+>```javascript
+>function codePointLength(text) {
+>  var result = text.match(/[\s\S]/gu);
+>  return result ? result.length : 0;
+>}
+>var s = '𠮷𠮷';
+>s.length // 4
+>codePointLength(s) // 2
+>```
+>
+
+#### ⑤ i 修饰符
+
+>有些 Unicode 字符的编码不同，但是字型很相近，比如，`\u004B`与`\u212A`都是大写的`K`。
+>
+>```javascript
+>/[a-z]/i.test('\u212A') // false
+>/[a-z]/iu.test('\u212A') // true
+>```
+>
+>上面代码中，不加`u`修饰符，就无法识别非规范的`K`字符。
+
+#### ⑥ 转义
+
+>没有`u`修饰符的情况下，正则中没有定义的转义（如逗号的转义`\,`）无效，而在`u`模式会报错。
+>
+>```javascript
+>/\,/ // /\,/
+>/\,/u // 报错
+>```
+>
+>上面代码中，没有`u`修饰符时，逗号前面的反斜杠是无效的，加了`u`修饰符就报错。
+
+#### ⑦ RegExp.prototype.unicode 属性 
+
+>正则实例对象新增`unicode`属性，表示是否设置了`u`修饰符。
+>
+>```javascript
+>const r1 = /hello/;
+>const r2 = /hello/u;
+>
+>r1.unicode // false
+>r2.unicode // true
+>```
+>
+>上面代码中，正则表达式是否设置了`u`修饰符，可以从`unicode`属性看出来。
+
+### Ⅴ -  y 修饰符
+
+#### ① 正常使用举例说明
+
+>除了`u`修饰符，ES6 还为正则表达式添加了`y`修饰符，叫做“粘连”（sticky）修饰符。实际上相当于默认加了一个`^`
+>
+>`y`修饰符的作用与`g`修饰符类似，也是全局匹配，后一次匹配都从上一次匹配成功的下一个位置开始。不同之处在于，`g`修饰符只要剩余位置中存在匹配就可，而`y`修饰符确保匹配必须从剩余的第一个位置开始，这也就是“粘连”的涵义。
+>
+>```javascript
+>var s = 'aaa_aa_a';
+>var r1 = /a+/g;
+>var r2 = /a+/y;
+>
+>r1.exec(s) // ["aaa"]  -->此时剩余字符串[_aa_a]
+>r2.exec(s) // ["aaa"]  -->此时剩余字符串[_aa_a]
+>
+>r1.exec(s) // ["aa"]
+>r2.exec(s) // null     -->y必须从第一个位置开始匹配,实际上相当于默认加了一个`^`,所以匹配不到
+>```
+>
+>上面代码有两个正则表达式，一个使用`g`修饰符，另一个使用`y`修饰符。这两个正则表达式各执行了两次，第一次执行的时候，两者行为相同，剩余字符串都是`_aa_a`。由于`g`修饰没有位置要求，所以第二次执行会返回结果，而`y`修饰符要求匹配必须从头部开始，所以返回`null`。
+>
+>如果改一下正则表达式，保证每次都能头部匹配，`y`修饰符就会返回结果了。
+>
+>```javascript
+>var s = 'aaa_aa_a';
+>var r = /a+_/y;
+>
+>r.exec(s) // ["aaa_"]
+>r.exec(s) // ["aa_"]
+>```
+>
+>上面代码每次匹配，都是从剩余字符串的头部开始。
+
+#### ② 使用`lastIndex`属性进行说明
+
+>使用`lastIndex`属性，可以更好地说明`y`修饰符。
+>
+>```javascript
+>const REGEX = /a/g;
+>// 指定从2号位置（y）开始匹配
+>REGEX.lastIndex = 2;
+>// 匹配成功
+>const match = REGEX.exec('xaya');
+>// 在3号位置匹配成功
+>match.index // 3
+>// 下一次匹配从4号位开始
+>REGEX.lastIndex // 4
+>// 4号位开始匹配失败
+>REGEX.exec('xaya') // null
+>```
+>
+>上面代码中，`lastIndex`属性指定每次搜索的开始位置，`g`修饰符从这个位置开始向后搜索，直到发现匹配为止。
+>
+>`y`修饰符同样遵守`lastIndex`属性，但是要求必须在`lastIndex`指定的位置发现匹配。
+>
+>```javascript
+>const REGEX = /a/y;
+>
+>// 指定从2号位置开始匹配
+>REGEX.lastIndex = 2;
+>
+>// 不是粘连，匹配失败
+>REGEX.exec('xaya') // null
+>
+>// 指定从3号位置开始匹配
+>REGEX.lastIndex = 3;
+>
+>// 3号位置是粘连，匹配成功
+>const match = REGEX.exec('xaya');
+>match.index // 3
+>REGEX.lastIndex // 4
+>```
+>
 
 
 

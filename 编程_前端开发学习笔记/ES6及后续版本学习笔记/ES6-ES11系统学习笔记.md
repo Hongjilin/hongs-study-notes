@@ -6330,4 +6330,137 @@
 > Number(sym) // TypeError
 > sym + 2 // TypeError
 > ```
+
+### Ⅲ - Symbol.prototype.description
+
+>创建 Symbol 的时候，可以添加一个描述。
+>
+>```javascript
+>const sym = Symbol('努力学习的汪');
+>```
+>
+>上面代码中，`sym`的描述就是字符串`努力学习的汪`。
+>
+>但是，读取这个描述需要将 Symbol 显式转为字符串，即下面的写法。
+>
+>```javascript
+>const sym = Symbol('努力学习的汪');
+>
+>String(sym) // "Symbol(努力学习的汪)"
+>sym.toString() // "Symbol(努力学习的汪)"
+>```
+>
+>上面的用法不是很方便。[ES2019](https://github.com/tc39/proposal-Symbol-description) 提供了一个实例属性`description`，直接返回 Symbol 的描述。
+>
+>```javascript
+>const sym = Symbol('努力学习的汪');
+>sym.description // "努力学习的汪"
+>```
+>
+>![image-20210826183246668](ES6及后续版本学习笔记中的图片/image-20210826183246668.png) 
+
+### Ⅳ - 作为属性名的 Symbol
+
+#### ① 举个栗子:
+
+>由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+>
+>```javascript
+>let mySymbol = Symbol();
+>
+>// 第一种写法
+>let a = {};
+>a[mySymbol] = 'Hello!';
+>
+>// 第二种写法
+>let a = {
+>  [mySymbol]: 'Hello!'
+>};
+>
+>// 第三种写法
+>let a = {};
+>Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+>
+>// 以上写法都得到同样结果
+>a[mySymbol] // "Hello!"
+>```
+>
+>上面代码通过方括号结构和`Object.defineProperty`，将对象的属性名指定为一个 Symbol 值。
+>
+
+#### ② 不能用点运算符
+
+>注意，Symbol 值作为对象属性名时，不能用点运算符。
+>
+>```javascript
+>const mySymbol = Symbol();
+>const a = {};
+>//不可这样用,这样用就没效果了
+>a.mySymbol = '努力学习的汪!'; //因为点运算符后面总是字符串，所以不会读取`mySymbol`作为标识名所指代的那个值，导致`a`的属性名实际上是一个字符串，而不是一个 Symbol 值。
+>a[mySymbol] // undefined
+>a['mySymbol'] // "努力学习的汪!"
+>```
+>
+>![image-20210826183751378](ES6及后续版本学习笔记中的图片/image-20210826183751378.png) 
+>
+>上面代码中，因为点运算符后面总是字符串，所以不会读取`mySymbol`作为标识名所指代的那个值，导致`a`的属性名实际上是一个字符串，而不是一个 Symbol 值。
+>
+>同理，在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中。
+>
+>```javascript
+>let s = Symbol();
+>let obj = {
+>[s]: function (arg) { ... }
+>};
+>obj[s](123);
+>```
+>
+>上面代码中，如果`s`不放在方括号中，该属性的键名就是字符串`s`，而不是`s`所代表的那个 Symbol 值。
+>
+>采用增强的对象写法，上面代码的`obj`对象可以写得更简洁一些。
+>
+>```javascript
+>let obj = {
+>[s](arg) { ... }
+>};
+>```
+>
+
+#### ③ Symbol 类型用于定义常量
+
+>Symbol 类型还可以用于定义一组常量，保证这组常量的值都是不相等的。
+>
+>```javascript
+>const log = {};
+>
+>log.levels = {
+>DEBUG: Symbol('debug'),
+>INFO: Symbol('info'),
+>WARN: Symbol('warn')
+>};
+>console.log(log.levels.DEBUG, 'debug message');
+>console.log(log.levels.INFO, 'info message');
+>```
+>
+>下面是另外一个例子。
+>
+>```javascript
+>const COLOR_RED    = Symbol();
+>const COLOR_GREEN  = Symbol();
+>
+>function getComplement(color) {
+>switch (color) {
+>case COLOR_RED:
+>return COLOR_GREEN;
+>case COLOR_GREEN:
+>return COLOR_RED;
+>default:
+>throw new Error('Undefined color');
+>}
+>}
+>```
+>
+>常量使用 Symbol 值最大的好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的`switch`语句会按设计的方式工作。
+>
+>还有一点需要注意，Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。
 >

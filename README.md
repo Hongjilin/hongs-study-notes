@@ -49,7 +49,7 @@
 >4. **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
 >
 >> 该笔记中有相关学习资料摘录: [阮一峰的ES6文档](http://www.ruanyifeng.com/blog/2014/04/ecmascript_6_primer.html), 
->>
+>
 >> 然后有本人对 [ ES系列 ] 整体的学习笔记心得、知识点梳理以及实践过程的问题解决等
 >
 >5. [Ajax、Axios学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Ajax、Axios学习笔记)
@@ -79,7 +79,7 @@
 >
 >13. [Mobx学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Mobx学习笔记)
 >
-> > Mobx:*`简单，可扩展的状态管理`*, 可以代替react中的`redux`状态管理器.就如vuex于vue一般
+>> Mobx:*`简单，可扩展的状态管理`*, 可以代替react中的`redux`状态管理器.就如vuex于vue一般
 >
 >14. [TypeScrip笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScrip%E7%AC%94%E8%AE%B0)
 >
@@ -95,6 +95,10 @@
 >18. **[正则表达式学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/正则表达式学习笔记)**
 >
 >> 正则可以说是操作 [ 字符串 ] 最强大的工具了, 没有之一, 特别是在进行 爬虫技术或 前端字符串处理 时简直必备技能, 然鹅正则总是学了忘、忘了学, 用时还需要去百度翻资料, 也是严重影响了工作效率, 所以我也认真查阅许多资料认真学习梳理成此笔记.
+>
+>19. **[A_前端工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 
+>
+>>`工欲善其事, 必先利其器`,工具是我们开发人员每天接触最多的,用好工具能极大提高我们开发速度,所以此目录将收录前端开发所用到的工具学习梳理笔记,如: **[VSCode笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode笔记)** 、 **[Chrome_DevTools调试工具使用详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/Chrome_DevTools调试工具使用详解笔记)** 等...
 >
 >19. 其他待更新
 

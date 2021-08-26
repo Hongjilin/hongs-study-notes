@@ -26,7 +26,7 @@
 >
 >7. [Vue框架笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Vue%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88/)
 >
-> > 此处即本人对于`Vue`框架的学习笔记,目前有`VUE2.x`版本学习笔记,之后会补充`vue3.0`等,因为目前阶段本人学习使用的是`react`,此处笔记暂缓
+>> 此处即本人对于`Vue`框架的学习笔记,目前有`VUE2.x`版本学习笔记,之后会补充`vue3.0`等,因为目前阶段本人学习使用的是`react`,此处笔记暂缓
 >
 >8. [微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
 >
@@ -38,16 +38,16 @@
 >
 >11. [前端UI库使用记录笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/前端UI库使用记录笔记)
 >
-> > 本笔记主要记录工作中项目中遇到关于各种UI库的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
-> > 当然,更多的是官方中没有但是业务中会遇到的各种细节,是自己自学过程难以接触或者容易忽略的,分享出来也有利于大家补缺
+>> 本笔记主要记录工作中项目中遇到关于各种UI库的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
+>> 当然,更多的是官方中没有但是业务中会遇到的各种细节,是自己自学过程难以接触或者容易忽略的,分享出来也有利于大家补缺
 >
 >12. [Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)
 >
->   > Git详细系统的学习笔记、提交规范、工作流、实际遇到的问题与解决等笔记归纳于此
+>  > Git详细系统的学习笔记、提交规范、工作流、实际遇到的问题与解决等笔记归纳于此
 >
 >13. [Mobx学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Mobx学习笔记)
 >
->    > Mobx:*`简单，可扩展的状态管理`*,可以代替react中的`redux`状态管理器.就如vuex于vue一般
+>   > Mobx:*`简单，可扩展的状态管理`*,可以代替react中的`redux`状态管理器.就如vuex于vue一般
 >
 >14. [TypeScrip笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TypeScrip%E7%AC%94%E8%AE%B0)
 >
@@ -64,4 +64,9 @@
 >
 >> 正则可以说是操作 [ 字符串 ] 最强大的工具了, 没有之一, 特别是在进行 爬虫技术或 前端字符串处理 时简直必备技能, 然鹅正则总是学了忘、忘了学, 用时还需要去百度翻资料, 也是严重影响了工作效率, 所以我也认真查阅许多资料认真学习梳理成此笔记.
 >
->19. 其他待更新
+>19. **[A_前端工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 
+>
+>    >`工欲善其事, 必先利其器`,工具是我们开发人员每天接触最多的,用好工具能极大提高我们开发速度,所以此目录将收录前端开发所用到的工具学习梳理笔记,如: **[VSCode笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode笔记)** 、 **[Chrome_DevTools调试工具使用详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/Chrome_DevTools调试工具使用详解笔记)** 等...
+>
+>20. 其他待更新
+

@@ -2,7 +2,7 @@
 
 >本笔记是本人`ES6-ES11系统学习笔记`,将ES系列全部梳理一遍,包括新特性等
 >
->观阅或查阅的资料:[[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)]、[[`尚硅谷Web前端ES6教程, 涵盖ES6-ES11`](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、[[`JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)`](https://juejin.cn/user/2330620350432110)]
+>观阅或查阅的资料:[[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/)
 >
 >笔记中每部分都会首先给出[`概括总结`],总结概括此部分知识点,然后再于下方给出`部分常用重点`知识点详解
 >
@@ -6174,3 +6174,160 @@
 >// 转为数组的方法二
 >Array.from(string.matchAll(regex))
 >```
+
+## 10、Symbol
+
+### Ⅰ- 概述与总结
+
+>ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法（mixin 模式），新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入`Symbol`的原因。
+>
+>ES6 引入了一种新的原始数据类型`Symbol`，表示独一无二的值。它是 JavaScript 语言的`第七种数据类型`，前六种是：`undefined`、`null`、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+>
+>1. 定义：独一无二的值,类似于一种标识唯一性的ID
+>2. 声明：`const set = Symbol(str)`
+>3. 入参：字符串(可选)
+>4. 方法：
+>   - **Symbol()**：创建以参数作为描述的`Symbol值`(不登记在全局环境)
+>   - **Symbol.for()**：创建以参数作为描述的`Symbol值`，如存在此参数则返回原有的`Symbol值`(先搜索后创建，登记在全局环境)
+>   - **Symbol.keyFor()**：返回已登记的`Symbol值`的描述(只能返回`Symbol.for()`的`key`)
+>   - **Object.getOwnPropertySymbols()**：返回对象中所有用作属性名的`Symbol值`的数组
+>5. 内置
+>   - **Symbol.hasInstance**：指向一个内部方法，当其他对象使用`instanceof运算符`判断是否为此对象的实例时会调用此方法
+>   - **Symbol.isConcatSpreadable**：指向一个布尔，定义对象用于`Array.prototype.concat()`时是否可展开
+>   - **Symbol.species**：指向一个构造函数，当实例对象使用自身构造函数时会调用指定的构造函数
+>   - **Symbol.match**：指向一个函数，当实例对象被`String.prototype.match()`调用时会重新定义`match()`的行为
+>   - **Symbol.replace**：指向一个函数，当实例对象被`String.prototype.replace()`调用时会重新定义`replace()`的行为
+>   - **Symbol.search**：指向一个函数，当实例对象被`String.prototype.search()`调用时会重新定义`search()`的行为
+>   - **Symbol.split**：指向一个函数，当实例对象被`String.prototype.split()`调用时会重新定义`split()`的行为
+>   - **Symbol.iterator**：指向一个默认遍历器方法，当实例对象执行`for-of`时会调用指定的默认遍历器
+>   - **Symbol.toPrimitive**：指向一个函数，当实例对象被转为原始类型的值时会返回此对象对应的原始类型值
+>   - **Symbol.toStringTag**：指向一个函数，当实例对象被`Object.prototype.toString()`调用时其返回值会出现在`toString()`返回的字符串之中表示对象的类型
+>   - **Symbol.unscopables**：指向一个对象，指定使用`with`时哪些属性会被`with环境`排除
+>
+>> 数据类型
+>
+>- **Undefined**
+>- **Null**
+>- **String**
+>- **Number**
+>- **Boolean**
+>- **Object**(包含`Array`、`Function`、`Date`、`RegExp`、`Error`)
+>- **Symbol**
+>- [bigint](https://developer.mozilla.org/zh-CN/docs/Glossary/BigInt)，  -->**BigInt** 是一种数字类型的数据
+>
+>> 应用场景
+>
+>1. 唯一化对象属性名：属性名属于Symbol类型，就都是独一无二的，可保证不会与其他属性名产生冲突
+>
+>2. 消除`魔术字符串`：在代码中多次出现且与代码形成强耦合的某一个具体的字符串或数值
+>
+>   - 魔术字符串指的是，在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，改由含义清晰的变量代替。
+>
+>   - ```js
+>     function getResults(param{
+>     	if(param == 'name'){}
+>     }
+>     // 函数中赋值 'name',所以 'name' 这个字符串就是魔术字符串
+>     getResults('name')
+>     ```
+>
+>     
+>
+>3. 遍历属性名：无法通过`for-in`、`for-of`、`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回，只能通过`Object.getOwnPropertySymbols`返回
+>
+>4. 启用模块的Singleton模式：调用一个类在任何时候返回同一个实例(`window`和`global`)，使用`Symbol.for()`来模拟全局的`Singleton模式`
+>
+>> 重点难点
+>
+>- `Symbol()`生成一个原始类型的值不是对象，因此`Symbol()`前不能使用`new命令`
+>- `Symbol()`参数表示对当前`Symbol值`的描述，相同参数的`Symbol()`返回值不相等
+>- `Symbol值`不能与其他类型的值进行运算
+>- `Symbol值`可通过`String()`或`toString()`显式转为字符串
+>- `Symbol值`作为对象属性名时，此属性是公开属性，但不是私有属性
+>- `Symbol值`作为对象属性名时，只能用方括号运算符(`[]`)读取，不能用点运算符(`.`)读取
+>- `Symbol值`作为对象属性名时，不会被常规方法遍历得到，可利用此特性为对象定义`非私有但又只用于内部的方法`
+
+### Ⅱ - 举个简单的例子
+
+> Symbol 值通过`Symbol`函数生成。这就是说，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。凡是属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。
+>
+> 注意，`Symbol`函数前不能使用`new`命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。也就是说，由于 Symbol 值不是对象，所以不能添加属性。基本上，它是一种`类似于字符串的数据类型`。
+>
+> `Symbol`函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。
+>
+> ```javascript
+> let s1 = Symbol('努力学习的汪');
+> let s2 = Symbol('hongjilin');
+> 
+> s1 // Symbol(努力学习的汪)  注意:此处是 Symbol 值
+> s2 // Symbol(hongjilin)
+> 
+> s1.toString() // "Symbol(努力学习的汪)" 注意 此处是字符串
+> s2.toString() // "Symbol(hongjilin)"
+> ```
+>
+> ![image-20210826181302853](ES6-ES11系统学习笔记中的图片/image-20210826181302853.png)  
+>
+> 上面代码中，`s1`和`s2`是两个 Symbol 值。如果不加参数，它们在控制台的输出都是`Symbol()`，不利于区分。有了参数以后，就等于为它们加上了描述，输出的时候就能够分清，到底是哪一个值。
+>
+> 如果 Symbol 的参数是一个对象，就会调用该对象的`toString`方法，将其转为字符串，然后才生成一个 Symbol 值。
+>
+> ```javascript
+> const obj = {
+>   toString() {
+>     return 'abc';
+>   }
+> };
+> const sym = Symbol(obj);
+> sym // Symbol(abc)  --> [ Symbol 值 ]
+> ```
+>
+> 注意，`Symbol`函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的`Symbol`函数的返回值是不相等的。
+>
+> ```javascript
+> // 没有参数的情况
+> let s1 = Symbol();
+> let s2 = Symbol();
+> s1 === s2 // false
+> 
+> // 有参数的情况
+> let s1 = Symbol('努力学习的汪');
+> let s2 = Symbol('努力学习的汪');
+> s1 === s2 // false
+> ```
+>
+> ![image-20210826181625657](ES6-ES11系统学习笔记中的图片/image-20210826181625657.png) 
+>
+> 上面代码中，`s1`和`s2`都是`Symbol`函数的返回值，而且参数相同，但是它们是不相等的。
+>
+> Symbol 值不能与其他类型的值进行运算，会报错。
+>
+> ```javascript
+> let sym = Symbol('My symbol');
+> "your symbol is " + sym
+> // TypeError: can't convert symbol to string
+> `your symbol is ${sym}`
+> // TypeError: can't convert symbol to string
+> ```
+>
+> 但是，Symbol 值可以显式转为字符串。
+>
+> ```javascript
+> let sym = Symbol('My symbol');
+> 
+> String(sym) // 'Symbol(My symbol)'
+> sym.toString() // 'Symbol(My symbol)'
+> ```
+>
+> 另外，Symbol 值也可以转为布尔值，但是不能转为数值。
+>
+> ```javascript
+> let sym = Symbol();
+> Boolean(sym) // true
+> !sym  // false
+> 
+> if (sym) {}
+> Number(sym) // TypeError
+> sym + 2 // TypeError
+> ```
+>

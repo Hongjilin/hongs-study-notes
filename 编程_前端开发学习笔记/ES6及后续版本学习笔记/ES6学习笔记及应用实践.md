@@ -42,7 +42,7 @@
 >   ```js
 >   map接受一个函数作为参数，不改变原来的数组，只是返回一个全新的数组
 >   var arr = [1,2,3,4,5]
->    var arr1 = arr.map(item => item = 2)// 输出[1,1,1,1,1]
+>    var arr1 = arr.map(item => item = 2)// 输出[2, 2, 2, 2, 2]
 >   ```
 >
 >3. reduce

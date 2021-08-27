@@ -5,6 +5,10 @@
 > 只截取了上方部分笔记的部分知识点至此,方便网站阅读
 >
 > 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+>
+> ------
+>
+> 
 
 # #说明
 
@@ -13,7 +17,6 @@
 >仅本人洪用作Promise知识点补缺及系统学习记录使用
 >
 >此部分知识为学习axios预备知识,预备知识链:[ajax](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E3%80%81Axios%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0) --> [promise](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0) --> [axios](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E3%80%81Axios%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)  --> [react](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/React%E7%AC%94%E8%AE%B0)/[vue](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Vue%E7%AC%94%E8%AE%B0%E6%95%B4%E5%90%88)
->
 
 # 一、Promise的理解与使用
 
@@ -1520,59 +1523,126 @@ Promise.race = function (promises) {
 >
 >说明:
 >
->	1. JS中用来存储待执行回调函数的队列包含2个不同特定的列队
-> 	2. `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
-> 	3. `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
-> 	4. JS执行时会区别这2个队列:
-> 	 	1. JS执行引擎首先必须执行所有的`初始化同步任务`代码
-> 	 	2. 每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
+>1. JS中用来存储待执行回调函数的队列包含2个不同特定的列队
+>    - `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
+>    - `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
+> 2. JS执行时会区别这2个队列:
+>      - JS执行引擎首先必须执行所有的`初始化同步任务`代码
+>      - 每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
 
 ## Ⅱ-代码与示例
 
-> 5. 代码示例
+>你需要一些栗子来帮助验证自己的想法是否正确,尽量先不看结果去自己思考下打印结果顺序
+
+### 1、代码示例:
+
+#### a) 首先给出注释的栗子举一个
+
+> 此处会给出每个打印放入什么队列,加深你的印象
 >
->    ```js
->    setTimeout(() => { 
->          console.log('timeout callback1（）')//立即放入宏队列
->          Promise.resolve(3).then(
->            value => { 
->              console.log('Promise onResolved3()', value)//当这个宏任务执行后 立马放入微队列,所以这个微任务执行完后下个宏任务才能执行 
->            }
->          )
->        }, 0)
->    
->        setTimeout(() => { 
->          console.log('timeout callback2（）') //立即放入宏队列,
->        }, 0)
->    
->        Promise.resolve(1).then(
->          value => { 
->            console.log('Promise onResolved1()', value)//立即放入微队列
->            setTimeout(() => {
->              console.log('timeout callback3（）', value) //立即放入宏任务
->            }, 0)
->          }
->        )
->    
->        Promise.resolve(2).then(
->          value => { 
->            console.log('Promise onResolved2()', value)//立即放入微队列
->          }
->        )
->    console.log('同步代码') //同步代码立即执行
->    ```
+> ```js
+> setTimeout(() => { 
+>       console.log('timeout callback1（）')//立即放入宏队列
+>       Promise.resolve(3).then(
+>         value => { 
+>           console.log('Promise onResolved3()', value)//当这个宏任务执行后 立马放入微队列,所以这个微任务执行完后下个宏任务才能执行 
+>         }
+>       )
+>     }, 0)
+> 
+>     setTimeout(() => { 
+>       console.log('timeout callback2（）') //立即放入宏队列,
+>     }, 0)
+> 
+>     Promise.resolve(1).then(
+>       value => { 
+>         console.log('Promise onResolved1()', value)//立即放入微队列
+>         setTimeout(() => {
+>           console.log('timeout callback3（）', value) //立即放入宏任务
+>         }, 0)
+>       }
+>     )
+> 
+>     Promise.resolve(2).then(
+>       value => { 
+>         console.log('Promise onResolved2()', value)//立即放入微队列
+>       }
+>     )
+> console.log('同步代码') //同步代码立即执行
+> ```
 >
-> 6. 结果
+> 结果放在下方,就怕你不小心瞄到
+
+#### b) 尝试自己思考下
+
+>尝试自己脑海中用自己理解 '运行' 一下, 然后把结果写下来,再去下面结果做对比
 >
->    ```js
->     '同步代码',
->      'Promise onResolved1()',
->      'Promise onResolved2()',
->      'timeout callback1（）',
->      'Promise onResolved3()',
->      'timeout callback2（）',
->      'timeout callback3（）'
->    ```
+>```js
+>setTimeout(() => console.log('代码开始执行'),0)
+>new Promise((resolve,reject) => {
+>  console.log('开始for循环');
+>  for(let i=0;i<10000;i++){
+>    i == 99 && resolve()
+>  }
+>}).then(() => console.log('执行then函数'))
+>console.log('代码执行结束');
+>```
 
 
+
+### 2、示例结果:
+
+#### a) 第一个栗子的结果
+
+>```js
+> '同步代码',
+>  'Promise onResolved1()',
+>  'Promise onResolved2()',
+>  'timeout callback1（）',
+>  'Promise onResolved3()',
+>  'timeout callback2（）',
+>  'timeout callback3（）'
+>```
+
+#### b) 第二个栗子的结果
+
+>![image-20210827094130354](A_Promise系统学习笔记中的图片/image-20210827094130354.png)
+>
+>PS: 可以忽略`undefined`这个打印结果, 因为这会加重我们对于宏任务与微任务的理解负担.
+>
+>当然人都是会好奇的,没有打破砂锅问到底的精神呢也当不了一个好程序员,那我就在下方额外给出解释
+
+# 五、对浏览器console控制台输出undefined的分析
+
+## Ⅰ- 出现场景
+
+>![image-20210827095144833](A_Promise系统学习笔记中的图片/image-20210827095144833.png)
+
+## Ⅱ - 尝试输入其他内容进行分析
+
+>![image-20210827095702736](A_Promise系统学习笔记中的图片/image-20210827095702736.png)
+>
+>那么做个合理推测: 应该是在控制台输入的内容,它的 `返回值` 会显示出来,这让我们不禁想到JS的 [ **eval()** ]
+
+## Ⅲ - eval（string） 
+
+>其作用是将 接收的 string 字符串作为参数，对其进行JavaScript 表达式或语句 计算，返回得到的值；
+>
+>如果是没有返回值的表达式或语句，则会返回 undefined ；
+>
+>如果没有合法的表达式和语句，则会抛出 SyntaxError 异常 。
+>
+>于是我们可以猜测Console控制台的实质 就是 调用了eval（）函数
+
+## Ⅳ - 验证一下
+
+>![image-20210827100156570](A_Promise系统学习笔记中的图片/image-20210827100156570.png) 
+>
+>大家都是聪明人,看到这个结果应该就不用我组织语言来解释了吧 
+
+## Ⅴ -  分析其在宏任务与微任务的打印顺序
+
+>首先看图:![image-20210827094130354](A_Promise系统学习笔记中的图片/image-20210827094130354.png) 
+>
+>可以看到 [ undefined ] 实在微任务完成后,宏任务执行前 打印
 

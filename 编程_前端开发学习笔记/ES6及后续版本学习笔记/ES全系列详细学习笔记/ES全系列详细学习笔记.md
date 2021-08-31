@@ -7437,8 +7437,8 @@
 >
 >```javascript
 >const map = new Map([
->  ['name', '努力学习的汪'],
->  ['title', 'Author']
+>['name', '努力学习的汪'],
+>['title', 'Author']
 >]);
 >map.size // 2
 >map.has('name') // true
@@ -7453,12 +7453,12 @@
 >
 >```javascript
 >const items = [
->  ['name', '努力学习的汪'],
->  ['title', 'Author']
+>['name', '努力学习的汪'],
+>['title', 'Author']
 >];
 >const map = new Map();
 >items.forEach(
->  ([key, value]) => map.set(key, value)
+>([key, value]) => map.set(key, value)
 >);
 >```
 >
@@ -7466,19 +7466,23 @@
 >
 >```javascript
 >const set = new Set([
->  ['foo', 1],
->  ['bar', 2]
+>['name', '努力学习的汪'],
+>['bar', 2]
 >]);
 >const m1 = new Map(set);
->m1.get('foo') // 1
+>console.log(m1)              //Map(2) {"name" => "努力学习的汪", "bar" => 2}
+>console.log(m1.get('name'))  //努力学习的汪
 >
 >const m2 = new Map([['baz', 3]]);
+>console.log(m2)				//Map(1) {"baz" => 3}
+>
 >const m3 = new Map(m2);
->m3.get('baz') // 3
+>console.log(m3) 			//Map(1) {"baz" => 3}
 >```
 >
->上面代码中，我们分别使用 Set 对象和 Map 对象，当作`Map`构造函数的参数，结果都生成了新的 Map 对象。
+>![image-20210831095025529](ES全系列详细学习笔记中的图片/image-20210831095025529.png) 
 >
+>上面代码中，我们分别使用 Set 对象和 Map 对象，当作`Map`构造函数的参数，结果都生成了新的 Map 对象。
 
 #### ③ 对同一个键多次赋值，后面的值将覆盖前面的值
 
@@ -7486,21 +7490,16 @@
 >
 >```javascript
 >const map = new Map();
->
->map
->.set(1, 'aaa')
->.set(1, 'bbb');
->
->map.get(1) // "bbb"
+>map.set(1, 'hongjilin').set(1, '努力学习的汪');
+>console.log(map) //Map(1) {1 => "努力学习的汪"}
 >```
 >
->上面代码对键`1`连续赋值两次，后一次的值覆盖前一次的值。
+>![image-20210831094538046](ES全系列详细学习笔记中的图片/image-20210831094538046.png) 上面代码对键`1`连续赋值两次，后一次的值覆盖前一次的值。
 >
 >如果读取一个未知的键，则返回`undefined`。
 >
 >```javascript
->new Map().get('asfddfsasadf')
->// undefined
+>new Map().get('随便输入的键值')  // undefined
 >```
 >
 
@@ -7510,9 +7509,9 @@
 >
 >```javascript
 >const map = new Map();
->
->map.set(['a'], 555);
->map.get(['a']) // undefined
+>//实际上下方两个 ['name'] 是不同实例,相当于只是语法糖 ['name'] == 等同 ==> new Array('name')
+>map.set(['name'], '努力学习的汪'); 
+>map.get(['name']) // undefined
 >```
 >
 >上面代码的`set`和`get`方法，表面是针对同一个键，但实际上这是两个不同的数组实例，内存地址是不一样的，因此`get`方法无法读取该键，返回`undefined`。
@@ -7521,21 +7520,18 @@
 >
 >```javascript
 >const map = new Map();
->
->const k1 = ['a'];
->const k2 = ['a'];
->
->map
->.set(k1, 111)
->.set(k2, 222);
->
->map.get(k1) // 111
->map.get(k2) // 222
+>const k1 = ['name'];   //实际上相当于是语法糖 ['name'] == 等同 ==> new Array('name')
+>const k2 = ['name'];
+>map.set(k1, 111).set(k2, 222);
+>console.log(map)  // Map(2) {Array(1) => 111, Array(1) => 222}
+>console.log(map.get(k1),map.get(k2))  // 111 222
 >```
 >
->上面代码中，变量`k1`和`k2`的值是一样的，但是它们在 Map 结构中被视为两个键。
+>![image-20210831095859490](ES全系列详细学习笔记中的图片/image-20210831095859490.png) 
 >
->由上可知，Map 的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。
+> 上面代码中，变量 [ k1 ] 和 [ k2 ] 的值是一样的，但是它们在 Map 结构中被视为两个键。
+>
+>由上可知，`Map 的键实际上是跟内存地址绑定的`，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。
 >
 >如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键，比如`0`和`-0`就是一个键，布尔值`true`和字符串`true`则是两个不同的键。另外，`undefined`和`null`也是两个不同的键。虽然`NaN`不严格相等于自身，但 Map 将其视为同一个键。
 >
@@ -7557,3 +7553,326 @@
 >map.get(NaN) // 123
 >```
 
+### Ⅲ -  实例的属性和操作方法
+
+> Map 结构的实例有以下属性和操作方法。 
+
+#### ① size 属性
+
+>`size`属性返回 Map 结构的成员总数。
+>
+>```javascript
+>const map = new Map();
+>map.set('handsome', true);
+>map.set('name', '努力学习的汪');
+>map.size // 2
+>```
+>
+
+#### ② Map.prototype.set(key, value)
+
+>`set`方法设置键名`key`对应的键值为`value`，然后返回整个 Map 结构。如果`key`已经有值，则键值会被更新，否则就新生成该键。
+>
+>```javascript
+>const m = new Map();
+>m.set('age', 18)        // 键是字符串
+>m.set(666, '努力学习的汪')     // 键是数值
+>m.set(undefined, 'xxxx')    // 键是 undefined
+>console.log(m)  //Map(3) {"age" => 18, 666 => "努力学习的汪", undefined => "xxxx"}
+>```
+>
+>`set`方法返回的是当前的`Map`对象，因此可以采用链式写法。
+>
+>```javascript
+>let map = new Map().set(1, '努力').set(2, '学习').set(3, '的汪');
+>console.log(map)    //Map(3) {1 => "努力", 2 => "学习", 3 => "的汪"}
+>```
+>
+>![image-20210831101956692](ES全系列详细学习笔记中的图片/image-20210831101956692.png) 
+
+#### ③  Map.prototype.get(key)
+
+>`get`方法读取`key`对应的键值，如果找不到`key`，返回`undefined`。
+>
+>```javascript
+>const m = new Map();
+>const hello = function() {console.log('Learn ES6')};
+>const name = {name : "hongjilin"}
+>m.set(hello, '你好 ES6') // 键是函数
+>m.set(name, '努力学习的汪') // 键是对象
+>m.set('name','字符串名字') // 键是字符串
+>
+>console.log("键是函数:",m.get(hello),";键是对象:",m.get(name),";键是字符串:",m.get('name'))
+>console.log('找不到的键',m.get('找不到的键'))
+>```
+>
+>![image-20210831102632292](ES全系列详细学习笔记中的图片/image-20210831102632292.png) 
+
+#### ④ Map.prototype.has(key)
+
+>`has`方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+>
+>```javascript
+>const m = new Map();
+>m.set('age', 18)        // 键是字符串
+>m.set(666, '努力学习的汪')     // 键是数值
+>m.set(undefined, 'xxxx')    // 键是 undefined
+>
+>console.log(m.has('age'))   // true
+>console.log(m.has(666))		  // true
+>console.log(m.has(undefined))    // true
+>console.log(m.has('不存在的键'))  // false
+>```
+>
+
+#### ⑤ Map.prototype.delete(key)
+
+>`delete`方法删除某个键，返回`true`。如果删除失败，返回`false`。
+>
+>```javascript
+>const m = new Map();
+>m.set(undefined, 'undefined!');
+>console.log(m,m.has(undefined)) // Map(1) {undefined => "undefined!"} true
+>
+>m.delete(undefined)
+>console.log(m,m.has(undefined)) // Map(0) {} false
+>```
+>
+
+#### ⑥ Map.prototype.clear()
+
+>`clear`方法清除所有成员，没有返回值。
+>
+>```javascript
+>let map = new Map();
+>map.set('name', '努力学习的汪').set('handsome', true);
+>
+>console.log(map) // Map(2) {"name" => "努力学习的汪", "handsome" => true}
+>map.clear()
+>console.log(map) // Map(0) {}
+>```
+>
+
+### Ⅳ -  遍历方法
+
+>Map 结构原生提供三个遍历器生成函数和一个遍历方法。
+>
+>- `Map.prototype.keys()`：返回键名的遍历器。
+>- `Map.prototype.values()`：返回键值的遍历器。
+>- `Map.prototype.entries()`：返回所有成员的遍历器。
+>- `Map.prototype.forEach()`：遍历 Map 的所有成员。
+
+#### ① Map 的遍历顺序就是插入顺序
+
+>需要特别注意的是，Map 的遍历顺序就是插入顺序。
+>
+>```javascript
+>const map = new Map([
+>  ['name', '努力学习的汪'],
+>  ['handsome',  'yes'],
+>]);
+>console.log('------------- keys() ---------------')
+>for (let key of map.keys()) { console.log(key) }
+>console.log('------------- values() ---------------')
+>for (let value of map.values()) { console.log(value) }
+>console.log('------------- entries() ---------------')
+>for (let item of map.entries()) { console.log(item[0], item[1]) }
+>// 或者
+>for (let [key, value] of map.entries()) { console.log(key, value) }
+>// 等同于使用map.entries()
+>for (let [key, value] of map) { console.log(key, value) }
+>```
+>
+>![image-20210831104307237](ES全系列详细学习笔记中的图片/image-20210831104307237.png)  上面代码最后的那个例子，表示 Map 结构的默认遍历器接口（`Symbol.iterator`属性)，就是`entries`方法。
+>
+>```javascript
+>map[Symbol.iterator] === map.entries  // true
+>```
+>
+
+#### ② Map 结构转为数组结构
+
+>Map 结构转为数组结构，比较快速的方法是使用扩展运算符（`...`）。
+>
+>```javascript
+>const map = new Map([ [1, 'one'],[2, 'two'],[3, 'three'] ]);
+>console.log([...map.keys()])// [1, 2, 3]
+>console.log([...map.values()])// ['one', 'two', 'three']
+>console.log([...map.entries()])// [[1,'one'], [2, 'two'], [3, 'three']]
+>console.log([...map])// [[1,'one'], [2, 'two'], [3, 'three']]
+>```
+>
+>结合数组的`map`方法、`filter`方法，可以实现 Map 的遍历和过滤（Map 本身没有`map`和`filter`方法）。
+>
+>```javascript
+>const map = new Map().set(1, 'a').set(2, 'b').set(3, 'c');
+>
+>const map1 = new Map( [...map].filter(([k, v]) => k < 3) );
+>console.log(map1) // Map(2) {1 => "a", 2 => "b"}
+>
+>const map2 = new Map( [...map].map(([k, v]) => [k * 2, '*' + v]) );
+>console.log(map2) //Map(3) {2 => "*a", 4 => "*b", 6 => "*c"}
+>```
+>
+
+#### ③ Map 的  `forEach()`  方法
+
+>Map 还有一个`forEach`方法，与数组的`forEach`方法类似，也可以实现遍历。
+>
+>```javascript
+>map.forEach(function(value, key, map) {
+>  console.log("Key: %s, Value: %s", key, value);
+>});
+>```
+>
+>`forEach`方法还可以接受第二个参数，用来绑定`this`。下面举个栗子说明:
+>
+>```javascript
+>const map = new Map().set('name', '努力学习的汪').set('handsome', true).set(3, '不读书');
+>const reporter = {
+>  report: function(key, value) { console.log("Key: %s, Value: %s", key, value);}
+>};
+>//第二个参数绑定后,可以通过this取得其内部属性方法
+>map.forEach(function(value, key, map) {this.report(key, value); }, reporter);
+>//不绑定示例  报错!!
+>map.forEach(function(value, key, map) {this.report(key, value); });
+>```
+>
+>![image-20210831105438551](ES全系列详细学习笔记中的图片/image-20210831105438551.png) 上面代码中，`forEach`方法的回调函数的`this`，就指向`reporter`。
+
+### Ⅴ - 与其他数据结构的互相转换
+
+#### ① Map 转为数组
+
+>前面已经提过，Map 转为数组最方便的方法，就是使用扩展运算符（`...`）。
+>
+>```javascript
+>const myMap = new Map().set(true, 1).set({name: '对象'}, ['这是数组']);
+>console.log([...myMap])
+>//[ [true, 1] , [{name: "对象"},["这是数组"]]  ]  ==>数组内部两个二维数组
+>```
+>
+> ![image-20210831110044997](ES全系列详细学习笔记中的图片/image-20210831110044997.png)  
+
+#### ② 数组 转为 Map
+
+>将数组传入 Map 构造函数，就可以转为 Map。
+>
+>```javascript
+>new Map().set(true, 1).set({name: '对象'}, ['这是数组']);
+>```
+>
+>![image-20210831110236279](ES全系列详细学习笔记中的图片/image-20210831110236279.png) 
+
+#### ③ Map 转为对象
+
+>如果所有 Map 的键都是字符串，它可以无损地转为对象。
+>
+>```javascript
+>function strMapToObj(strMap) {
+>  let obj = Object.create(null); //创建一个空对象
+>  for (let [k,v] of strMap) {  obj[k] = v } //循环遍历并给空对象赋值
+>  return obj;  //最后将加工好的对象返回出去
+>}
+>//字符串的键转对象
+>const myMap = new Map().set('name', '努力学习的汪').set('handsome', true);
+>console.log(strMapToObj(myMap))
+>//其他转对象
+>const testMap =strMapToObj( new Map()
+>.set(document.querySelector('div'), '文档对象').set(true, '布尔值').set(123,"数值") )//转为对象时都转为了字符串形式
+>console.log(testMap)
+>```
+>
+>如果有非字符串的键名，那么这个键名会被转成字符串，再作为对象的键名。
+>
+>![image-20210831111717060](ES全系列详细学习笔记中的图片/image-20210831111717060.png)
+>
+>当然,如果你像是布尔值或者数值 如输入时直接 testMap[true] 也能获得结果,因为有`隐式转换`,这就涉及JS基础了
+
+#### ④ 对象转为 Map
+
+>对象转为 Map 可以通过`Object.entries()`。
+>
+>```javascript
+>let obj = {'name':'努力学习的汪', 'handsome':true};
+>//其实就是通过[Object.entries()]将对象转化为数组,再通过Map()构造函数转化为Map
+>let map = new Map(Object.entries(obj)); // Map(2) {"name" => "努力学习的汪", "handsome" => true}
+>```
+>
+>此外，也可以自己实现一个转换函数。
+>
+>```javascript
+>function objToStrMap(obj) {
+>  let strMap = new Map();  // 定义一个空的Map
+>  for (let k of Object.keys(obj)) {  strMap.set(k, obj[k]) } //通过循环将对象内容取出并加入Map中
+>  return strMap;   //最后返回
+>}
+>//调用
+>objToStrMap({'name':'努力学习的汪', 'handsome':true})// Map(2) {"name" => "努力学习的汪", "handsome" => true}
+>```
+>
+
+#### ⑤ Map 转为 JSON
+
+##### a) Map 的键名都是字符串
+
+>Map 转为 JSON 要区分两种情况。一种情况是，Map 的键名都是字符串，这时可以选择转为对象 JSON。
+>
+>```javascript
+> //Map转对象 函数
+>const strMapToObj=(strMap)=> {
+>  let obj = Object.create(null);
+>  for (let [k,v] of strMap) {obj[k] = v;}
+>  return obj;
+>}
+>//对象转JSON 函数
+>const strMapToJson=(strMap)=>  JSON.stringify(strMapToObj(strMap));
+>let myMap = new Map().set('name', '努力学习的汪').set('handsome', true);
+>
+>console.log(strMapToObj(myMap))  //调用map转对象,查看效果
+>console.log(strMapToJson(myMap))  //调用map转对象 对象转JSON 方法
+>```
+>
+>![image-20210831114712158](ES全系列详细学习笔记中的图片/image-20210831114712158.png) 
+
+##### b)  Map 的键名有非字符串
+
+>另一种情况是，Map 的键名有非字符串，这时可以选择转为数组 JSON。
+>
+>```javascript
+>//Map转JSON函数
+>const mapToArrayJson=(map)=> JSON.stringify([...map]) 
+>let myMap = new Map().set(true, 1).set({name: '对象'}, ['这是数组']);
+>
+>console.log([...myMap]) //查看点运算符解构转换后结果
+>console.log(mapToArrayJson(myMap)) //调用转换函数
+>```
+>
+>![image-20210831115125771](ES全系列详细学习笔记中的图片/image-20210831115125771.png) 
+
+##### ⑥ JSON 转为 Map
+
+>JSON 转为 Map，正常情况下，所有键名都是字符串。
+>
+>```javascript
+>function objToStrMap(obj) {
+>  let strMap = new Map();  // 定义一个空的Map
+>  for (let k of Object.keys(obj)) {  strMap.set(k, obj[k]) } //通过循环将对象内容取出并加入Map中
+>  return strMap;   //最后返回
+>}
+>const jsonToStrMap=(jsonStr) => objToStrMap(JSON.parse(jsonStr));
+>
+>console.log(jsonToStrMap('{"name":"努力学习的汪","handsome":true}'))
+>//log: Map(2) {"name" => "努力学习的汪", "handsome" => true}
+>```
+>
+>但是，有一种特殊情况，整个 JSON 就是一个数组，且每个数组成员本身，又是一个有两个成员的数组。这时，它可以一一对应地转为 Map。这往往是 Map 转为数组 JSON 的逆操作。
+>
+>```javascript
+>const  jsonToMap=(jsonStr) => {
+>  return new Map(JSON.parse(jsonStr));
+>}
+>
+>jsonToMap('[[true,1],[{"name":"对象"},["这是数组"]]]')
+>```
+>

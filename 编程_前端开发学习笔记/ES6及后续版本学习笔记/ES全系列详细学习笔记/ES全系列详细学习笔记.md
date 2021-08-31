@@ -7850,7 +7850,7 @@
 >
 >![image-20210831115125771](ES全系列详细学习笔记中的图片/image-20210831115125771.png) 
 
-##### ⑥ JSON 转为 Map
+#### ⑥ JSON 转为 Map
 
 >JSON 转为 Map，正常情况下，所有键名都是字符串。
 >
@@ -7869,10 +7869,68 @@
 >但是，有一种特殊情况，整个 JSON 就是一个数组，且每个数组成员本身，又是一个有两个成员的数组。这时，它可以一一对应地转为 Map。这往往是 Map 转为数组 JSON 的逆操作。
 >
 >```javascript
->const  jsonToMap=(jsonStr) => {
->  return new Map(JSON.parse(jsonStr));
->}
->
+>const  jsonToMap = (jsonStr) =>  new Map(JSON.parse(jsonStr));
 >jsonToMap('[[true,1],[{"name":"对象"},["这是数组"]]]')
 >```
 >
+>![image-20210831115700778](ES全系列详细学习笔记中的图片/image-20210831115700778.png) 
+
+#### ⑦ WeakMap
+
+> 此处知识点本人较少用到,就暂不整理,留后续补充
+
+### Ⅵ - map()方法：
+
+>**map(): 映射，即原数组映射成一个新的数组**--> `非常常用`
+>
+>map方法接受一个新参数，这个参数就是将原数组变成新数组的映射关系。
+>
+>```javascript
+>const fun1=(arr)=>{
+> let array = [];
+>  arr.map( item =>  array.push(item*item) );
+>  console.log(array);
+>}
+>const fun2=(arr)=>{
+> var array = [];
+>  arr.map( function(item){ array.push(item*item) });
+>  console.log(array);
+>}
+>
+>var arr1 = [5,2,1,3,4];
+>fun1(arr1);    //[25, 4, 1, 9, 16]
+>var arr2 = [1,2,3,4,5];
+>fun1(arr2);   // [1, 4, 9, 16, 25]
+>var arr3 = [3,4,5,1,2,6];
+>fun2(arr3);   //[9, 16, 25, 1, 4, 36] 
+>```
+>
+>在实际的应用中，我们可以通过map方法得到某一个对象数组中特定属性的值
+>
+>```javascript
+>const obj = [
+>  {name:'努力学习的汪',age:18,sex:'男'},
+>  {name:'hongjilin',age:88,sex:'男'},
+>  {name:'帅小伙',age:66,sex:'女'},
+>]
+>const getter=(obj)=>{ obj.map( item => {  console.log(item.name) })}
+>getter(obj);
+>```
+>
+>![image-20210831181721474](ES全系列详细学习笔记中的图片/image-20210831181721474.png)  
+>
+>map方法的作用不难理解，即“映射”，也就是原数组被“映射”成对应新数组。下面这个例子是数值项求平方：
+>
+>```javascript
+>const data = [1, 2, 3, 4];
+>const arrayOfSquares = data.map((item)=> item * item);
+>console.log(arrayOfSquares); // 1, 4, 9, 16
+>
+>//callback需要有return值，如果没有，就像下面这样：
+>var data1 = [1, 2, 3, 4];
+>var arrayOfSquares1 = data.map(function() {});
+>console.log(arrayOfSquares1)//数组所有项都被映射成了undefined：
+>```
+>
+>![image-20210831181951620](ES全系列详细学习笔记中的图片/image-20210831181951620.png) 
+

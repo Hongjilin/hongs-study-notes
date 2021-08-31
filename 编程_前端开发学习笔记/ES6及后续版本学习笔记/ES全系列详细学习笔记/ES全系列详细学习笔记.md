@@ -69,9 +69,9 @@
 
 # 二、ECMASript 6 新特性
 
-> 想要查看更权威的官方ES6文档,可以看阮一峰的ES6文档,本人当初对其进行了摘录放至此处方便查阅-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
+> 想要查看更权威的官方ES6文档,可以看阮一峰的ES6文档,本人当初对其进行了摘录放至此处方便查阅,也是就此资料入门ES6的-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
 >
-> 此处ES6部分笔记主要为:`查阅的资料博客整合摘录(阮一峰的ES6文档)`,加上学习ES6时的笔记、个人心得体会以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
+> 此处ES6部分笔记主要为:`查阅的资料博客整合摘录(阮一峰的ES6文档)`,加上学习ES6时的笔记、个人心得体会、知识点概述与总结以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
 
 ## 1、ES6更新的内容概括
 
@@ -7334,6 +7334,30 @@
 >
 >上面代码保证了`Foo`的实例方法，只能在`Foo`的实例上调用。这里使用 WeakSet 的好处是，`foos`对实例的引用，不会被计入内存回收机制，所以删除实例的时候，不用考虑`foos`，也不会出现内存泄漏。
 
+### Ⅶ - 做个题目吧
+
+>光说不练假把式,试着回答几个问题检测下是否理解Set 数据结构
+
+### ① 代码阅读题1:
+
+> ```js
+> let s = new Set();
+> s.add([1]);
+> s.add([1]);
+> console.log(s.size);
+> ```
+>
+> **问：打印出来的size的值是多少？**
+>
+> 答：2，两个[1]定义的是两个不同的数组，在内存中的存储地址不同，所以是不同的值
+
+### ② 代码阅读题2:
+
+>```js
+>var str='abstract';
+>console.log(new Set([...str]).size);//6  重复的无法加入
+>```
+
 ## 12、Map 数据结构
 
 ### Ⅰ - 概括与总结
@@ -7934,3 +7958,72 @@
 >
 >![image-20210831181951620](ES全系列详细学习笔记中的图片/image-20210831181951620.png) 
 
+### Ⅶ - 做个题目吧
+
+> 光说不练假把式,试着回答几个问题检测下是否理解 Mep 数据结构
+
+### ① 代码阅读题
+
+>```js
+>let map = new Map();
+>map.set([1],"ES6系列");
+>let con = map.get([1]);
+>console.log(con);
+>```
+>
+>**问：打印出来的变量con的值是多少，为什么？**
+>
+>> 答：undefined。因为set的时候用的数组[1]和get的时候用的数组[1]是分别两个不同的数组，只不过它们元素都是1。它们是分别定义的两个数组，并不是同一个值。
+>
+>**如果想达到预期的效果，你要保证get的时候和set的时候用同一个数组。比如：**
+>
+>```js
+>let map = new Map();
+>let arr = [1];
+>map.set(arr,"ES6系列");
+>let con = map.get(arr);
+>console.log(con); //ES6系列
+>```
+
+## 13、Proxy
+
+### Ⅰ - 概述与总结
+
+>- 定义：修改某些操作的默认行为
+>- 声明：`const proxy = new Proxy(target, handler)`
+>- 入参
+>  - **target**：拦截的目标对象
+>  - **handler**：定制拦截行为
+>- 方法
+>  - **Proxy.revocable()**：返回可取消的Proxy实例(返回`{ proxy, revoke }`，通过revoke()取消代理)
+>- 拦截方式
+>  - **get()**：拦截对象属性读取
+>  - **set()**：拦截对象属性设置，返回布尔
+>  - **has()**：拦截对象属性检查`k in obj`，返回布尔
+>  - **deleteProperty()**：拦截对象属性删除`delete obj[k]`，返回布尔
+>  - **defineProperty()**：拦截对象属性定义`Object.defineProperty()`、`Object.defineProperties()`，返回布尔
+>  - **ownKeys()**：拦截对象属性遍历`for-in`、`Object.keys()`、`Object.getOwnPropertyNames()`、`Object.getOwnPropertySymbols()`，返回数组
+>  - **getOwnPropertyDescriptor()**：拦截对象属性描述读取`Object.getOwnPropertyDescriptor()`，返回对象
+>  - **getPrototypeOf()**：拦截对象原型读取`instanceof`、`Object.getPrototypeOf()`、`Object.prototype.__proto__`、`Object.prototype.isPrototypeOf()`、`Reflect.getPrototypeOf()`，返回对象
+>  - **setPrototypeOf()**：拦截对象原型设置`Object.setPrototypeOf()`，返回布尔
+>  - **isExtensible()**：拦截对象是否可扩展读取`Object.isExtensible()`，返回布尔
+>  - **preventExtensions()**：拦截对象不可扩展设置`Object.preventExtensions()`，返回布尔
+>  - **apply()**：拦截Proxy实例作为函数调用`proxy()`、`proxy.apply()`、`proxy.call()`
+>  - **construct()**：拦截Proxy实例作为构造函数调用`new proxy()`
+>
+>> 应用场景
+>
+>- `Proxy.revocable()`：不允许直接访问对象，必须通过代理访问，一旦访问结束就收回代理权不允许再次访问
+>- `get()`：读取未知属性报错、读取数组负数索引的值、封装链式操作、生成DOM嵌套节点
+>- `set()`：数据绑定(Vue数据绑定实现原理)、确保属性值设置符合要求、防止内部属性被外部读写
+>- `has()`：隐藏内部属性不被发现、排除不符合属性条件的对象
+>- `deleteProperty()`：保护内部属性不被删除
+>- `defineProperty()`：阻止属性被外部定义
+>- `ownKeys()`：保护内部属性不被遍历
+>
+>> 重点难点
+>
+>- 要使`Proxy`起作用，必须针对`实例`进行操作，而不是针对`目标对象`进行操作
+>- 没有设置任何拦截时，等同于`直接通向原对象`
+>- 属性被定义为`不可读写/扩展/配置/枚举`时，使用拦截方法会报错
+>- 代理下的目标对象，内部`this`指向`Proxy代理`

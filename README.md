@@ -29,7 +29,7 @@
 > 建议使用或者阅读本人笔记时`使用Typora笔记软件打开使用`, 因为本人就是用该软件进行笔记撰写, 很多地方都是按照在该软件中看到的模样进行笔记排版, 使用后你会发现`新世界`的。而且这个软件真的我觉得是最适合程序员的笔记软件了, 没有之一
 > 本人[杂记-Typora使用笔记分享](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E6%9D%82%E8%AE%B0_%E5%85%B6%E4%BB%96(%E5%A6%82%E7%A0%B4%E8%A7%A3%E4%B8%8E%E9%85%8D%E7%BD%AE)%E7%9A%84%E7%A2%8E%E7%89%87%E5%8C%96%E7%AC%94%E8%AE%B0/Typora%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB/Typora%E4%BD%BF%E7%94%A8%E5%88%86%E4%BA%AB.md), 在里面我会进行大致使用方法, 使用后本笔记展示效果截图等
 >
-> ![](README中的图片/使用Typora打开笔记展示1.gif)
+> ![](杂记_其他(如破解与配置)的碎片化笔记/Typora笔记软件分享/Typora使用分享中的图片/使用Typora打开笔记展示1.gif)
 >
 > 如果使用本笔记, 请注明[出处](https://gitee.com/hongjilin)谢谢, 基本纯手敲不容易
 >

@@ -8181,13 +8181,11 @@
 
 #### ① get()
 
-##### a) 定义
-
 >**get(target, propKey, receiver)**：拦截对象属性的读取，比如`proxy.foo`和`proxy['foo']`. 
 >
 >`get`方法用于拦截某个属性的读取操作，可以接受三个参数，依次为目标对象、属性名和 proxy 实例本身（严格地说，是操作行为所针对的对象），其中最后一个参数可选。
 
-##### b) 举个栗子
+##### a) 举个栗子
 
 >```javascript
 >const person = { name: "努力学习的汪" };
@@ -8207,7 +8205,7 @@
 >
 > 上面代码表示，如果访问目标对象不存在的属性，会抛出一个错误。如果没有这个拦截函数，访问不存在的属性，只会返回`undefined`。
 
-##### c) get() 方法可以继承
+##### b) get() 方法可以继承
 
 >`get`方法可以继承。此处用上方用过的一个例子来说明
 >
@@ -8227,7 +8225,7 @@
 >> - `obj`对象本身并有 [ name ] 属性,当访问 [ name ] 属性时,因为对象本身有,就不会去其原型上找,所以不会触发拦截
 >> - `obj`对象本身并没有 [ xxx ] 属性，所以根据原型链，会在`proxy`对象上读取该属性，导致被拦截。
 
-##### d) 实现数组读取负数的索引
+##### c) 实现数组读取负数的索引
 
 >下面的例子使用`get`拦截，实现数组读取负数的索引。
 >
@@ -8257,7 +8255,7 @@
 >
 >上面代码中，数组的位置参数是`-1`，就会输出数组的倒数第一个成员。
 
-##### e)  实现属性的链式操作
+##### d)  实现属性的链式操作
 
 >利用 Proxy，可以将读取属性的操作（`get`），转变为执行某个函数，从而实现属性的链式操作。
 >
@@ -8295,7 +8293,7 @@
 >
 >对于某些刚入坑的同学来说可能会比较绕,所以我尽量多的给出了注释,如果还不能理解也多看几遍,以后在学习数据结构与算法的时候就会觉得这里很简单了
 
-##### f) 实现生成各种 DOM 节点的通用函数
+##### e) 实现生成各种 DOM 节点的通用函数
 
 >```javascript
 >const dom = new Proxy({}, {
@@ -8331,15 +8329,15 @@
 >
 >![image-20210901184714299](ES全系列详细学习笔记中的图片/image-20210901184714299.png) 
 
-##### g) get() 的第三个参数
+##### f) get() 的第三个参数
 
 >下面是一个`get`方法的第三个参数的例子，它总是指向原始的读操作所在的那个对象，一般情况下就是 Proxy 实例。
 >
 >```javascript
 >const proxy = new Proxy({}, {
->  get: function(target, key, receiver) {
->    return receiver;
->  }
+>get: function(target, key, receiver) {
+>return receiver;
+>}
 >});
 >proxy.getReceiver === proxy // true
 >```
@@ -8348,9 +8346,9 @@
 >
 >```javascript
 >const proxy = new Proxy({}, {
->  get: function(target, key, receiver) {
->    return receiver;
->  }
+>get: function(target, key, receiver) {
+>return receiver;
+>}
 >});
 >const d = Object.create(proxy);
 >d.a === d // true
@@ -8362,22 +8360,129 @@
 >
 >```javascript
 >const target = Object.defineProperties({}, {
->  obj: {
->    name: '努力学习的汪',
->    handsome: true,
->    configurable: false
->  },
+> obj: {
+> 	name: '努力学习的汪',
+>	handsome: true,
+>     //configurable:默认为 false 只有设为 true 该属性可能的类型可以被改变，该属性可以从中删除。
+>	configurable: false  
+> },
 >});
 >const handler = {
->  get(target, propKey) {
->    return 'abc';
->  }
+>get(target, propKey) {
+>return '不想学习';
+>}
 >};
 >const proxy = new Proxy(target, handler);
 >proxy.obj
->// TypeError: Invariant check failed
+>//TypeError: 'get' on proxy: property 'obj' is a read-only and non-configurable data property on the proxy target but the proxy did not return its actual value (expected 'undefined' but got '不想学习')
 >```
 >
 
+#### ② set()
 
+>`set`方法用来拦截某个属性的赋值操作，可以接受四个参数，依次为目标对象、属性名、属性值和 Proxy 实例本身，其中最后一个参数可选。
+
+##### a) 举个栗子
+
+>假定`Person`对象有一个`age`属性，该属性应该是一个不大于 200 的整数，那么可以使用`Proxy`拦截进而保证`age`的属性值符合要求。
+>
+>```javascript
+>let validator = {
+>  set: function(obj, prop, value) {
+>    if (prop === 'age') { //对于设置 [age] 的操作进行拦截
+>      if (!Number.isInteger(value))  throw new TypeError('年龄不是一个整数');
+>      if (value > 200)  throw new RangeError('你在修仙吗?');
+>    }
+>    // 对于满足条件的 age 属性以及其他属性，直接保存
+>    obj[prop] = value;
+>  }
+>};
+>
+>let person = new Proxy({}, validator);
+>
+>person.age = 99;
+>console.log('写入年龄99岁:',person)
+>person.name = '努力学习的汪'  
+>console.log('写入名字:',person)
+>person.age = 300 // 报错
+>person.age = '寿元无限' // 报错
+>```
+>
+>![image-20210902152109632](ES全系列详细学习笔记中的图片/image-20210902152109632.png) 上面代码中，由于设置了存值函数`set`，任何不符合要求的`age`属性赋值，都会抛出一个错误，这是数据验证的一种实现方法。利用`set`方法，还可以数据绑定，即每当对象发生变化时，会自动更新 DOM。
+
+##### b) 做到防止内部属性被外部读写
+
+>有时，我们会在对象上面设置内部属性，属性名的第一个字符使用下划线开头，表示这些属性不应该被外部使用。结合`get`和`set`方法，就可以做到防止这些内部属性被外部读写。
+>
+>```javascript
+>const handler = {
+>  get (target, key) {
+>    invariant(key, 'get'); //将传入的属性名当作参数传给函数
+>    return target[key];
+>  },
+>  set (target, key, value) {
+>    invariant(key, 'set');
+>    target[key] = value;
+>    return true;
+>  }
+>};
+>function invariant (key, action) {
+>    //当传入的 [属性名] 第一位字符是 '_' 时抛出错误
+>  if (key[0] === '_')   throw new Error(`对私有属性 [${key}] 进行 [${action}] 操作是无效的 `);
+>}
+>const target = {};
+>const proxy = new Proxy(target, handler);
+>proxy._prop  //报错: 对私有属性 [_prop] 进行 [get] 操作是无效的 
+>proxy._prop = 'c' //报错 : 对私有属性 [_prop] 进行 [set] 操作是无效的 
+>proxy.name = '努力学习的汪'//正常的
+>console.log(proxy.name)  //正常的
+>```
+>
+>![image-20210902153407195](ES全系列详细学习笔记中的图片/image-20210902153407195.png)
+>
+>上面代码中，只要读写的属性名的第一个字符是下划线，一律抛出错误，从而达到禁止读写内部属性的目的。
+
+##### c) 举个关于第四个参数的栗子
+
+>下面是`set`方法第四个参数的例子。
+>
+>```javascript
+>const handler = {
+>  set: function(obj, prop, value, receiver) {//拦截写入方法 将本身实例挂载在传入的属性名
+>    obj[prop] = receiver; //效果:不论写入什么,赋值上去的都是本身实例.主要就是给你做例子用,这种写法开发中不会用到
+>  }
+>};
+>const proxy = new Proxy({}, handler);
+>proxy.name = '努力学习的汪';
+>console.log(proxy)
+>proxy.name === proxy // true
+>```
+>
+>![image-20210902154217329](ES全系列详细学习笔记中的图片/image-20210902154217329.png) 
+>
+>上面代码中，`set`方法的第四个参数`receiver`，指的是原始的操作行为所在的那个对象，一般情况下是`proxy`实例本身，请看下面的例子。
+>
+>```javascript
+>const handler = {
+>  set: function(obj, prop, value, receiver) {
+>    obj[prop] = receiver; //当触发属性写入操作时,将本身proxy实例写入属性中
+>  }
+>};
+>const proxy = new Proxy({}, handler);
+>const myObj = {};
+>const testObj = {}
+>//Object.setPrototypeOf() 方法一个指定的对象的原型（即设置，内部[[Prototype]]属性）到另一个对象或  null。
+>Object.setPrototypeOf(myObj, proxy); //将proxy指定为 myObj 的原型对象
+>
+>myObj.name = '努力学习的汪';
+>testObj.name = '对比:努力学习的汪'
+>console.log( '绑定原型的:',myObj, ' ;没有绑定proxy原型的:',testObj)
+>myObj.name === myObj // true
+>```
+>
+>![image-20210902155654217](ES全系列详细学习笔记中的图片/image-20210902155654217.png) 分析一下上面代码:
+>
+>>- 设置`myObj.name`属性的值时，`myObj`并没有 [ name ] 属性，因此引擎会到`myObj`的原型链去找 [ name ] 属性。
+>>- `myObj`的原型对象`proxy`是一个 Proxy 实例，设置它的 [ name ] 属性会触发`set`方法。
+>>- 这时，第四个参数`receiver`就指向原始赋值行为所在的对象`myObj`。
 

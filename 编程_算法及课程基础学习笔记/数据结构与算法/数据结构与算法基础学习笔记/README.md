@@ -10,4 +10,7 @@
 
 >1. 本笔记为观看青岛大学-王卓老师的: [数据结构与算法基础](https://www.bilibili.com/video/BV1nJ411V7bd?share_source=copy_web) 、以及其他相关博客与资料进行整理记录,里面加了大量个人对于这门课程的注解/图解与理解,欢迎大家指出不足之处,我也会及时进行校正
 >2. 先学理论基础,再去学进阶,数据结构与算法是座难啃的大山,不要急,慢工出细活
->3. 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+>
+>* 课程老师使用C语言,我推荐可以用VSCode进行编译运行 **[win10上使用VSCode编译运行和调试C与C++](https://gitee.com/hongjilin/hongs-study-notes/tree/master/杂记_其他(如破解与配置)的碎片化笔记/win10上使用VSCode编译运行和调试C与C++)**
+>* 当然,也可以直接下载 [dev-CPP](https://pan.baidu.com/s/1CaZ2mDo3Q89u6OA3WJFAAw) 提取码:h123
+

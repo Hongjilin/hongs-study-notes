@@ -6,11 +6,11 @@
 
 ## #目录
 
->1. [阶段面试题整理]()
+>1. **[各阶段面试题复习整理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/各阶段面试题复习整理)** 
 >
->   >本笔记是每次准备面试时,对于自己对当前能力阶段的面试题梳理与归纳
+>   >此笔记准备将每次准备面试时,对于自己当前能力阶段的面试题进行梳理与归纳
 >
->2. [JavaScript题目]()
+>2. **[JavaScript专项练习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/JavaScript专项练习)** 
 >
 >   > 关于JavaScript的专项练习
 

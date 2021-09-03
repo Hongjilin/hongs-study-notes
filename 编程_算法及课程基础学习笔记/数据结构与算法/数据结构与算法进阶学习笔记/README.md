@@ -1,13 +1,21 @@
-#说明
+# #此文件为方便gitee网站观阅使用专门创建
+
+> 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
+>
+> 只截取了上方`数据结构与算法进阶学习笔记`部分笔记的部分知识点至此,方便网站阅读
+>
+> `基础掌握后就需要结合实例进行巩固理解,此处选择用Java语言作为笔记中例子实现语言,前端的同学不用慌,这边用到的就是Java基础,只要你有学前端ES6的class知识点,栗子中的代码基本与JS一摸一样`
+>
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+
+# #说明
 
 >1. 本笔记为观看B站的: [`尚硅谷Java数据结构与java算法（Java数据结构与算法）`](https://www.bilibili.com/video/BV1E4411H73v?share_source=copy_web) 、其他多个相关博客与资料进行整理记录,里面加了大量个人对于这门课程的注解/图解与理解,欢迎大家指出不足之处,我也会及时进行校正
->2. 本人目前岗位为前端,但有较好的java基础,所以选定该学习视频,学习过程笔记也会使用`java语言进行demo实现`,毕竟是概念部分还是跟紧老师学习,但用的都是基础语法,js与java其实都差不多并不会影响理解,甚至这部分代码js写法与java相差无几。
+>2. 本人目前岗位为前端,但有较好的java基础,所以选定该学习视频,学习过程笔记也会使用`Java语言进行demo实现`,毕竟是概念部分还是跟紧老师学习,但用的都是基础语法,js与java其实都差不多并不会影响理解,甚至这部分代码js写法与java相差无几。
 >3. 不过在随后`leetCode`部分,我将会用`java`与`javaScript`两种语言分别实现与记录,所以前后端的同学都将是可以看得懂的
 >4. 个人跟随课程进程编写出的相关练习也会上传在此笔记同级文件目录下
 >5. 数据结构与算法吃透比学完更重要,要确保吸收知识点且不影响工作的前提下,预计学习过程将持续几个月。但也坚信慢工出细活,形成的笔记以及知识体系也会更详细完整
->6. 本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)、[`数据结构与算法学习笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95)、[`LeetCode笔记`](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E7%AE%97%E6%B3%95%E5%8F%8A%E8%AF%BE%E7%A8%8B%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/LeetCode)
 >
->​												记录时间:2020/4/12启
 
 # #目录(`更新中`)
 
@@ -83,13 +91,13 @@
 >
 >3)在三根柱子之间一次只能移动一个圆盘
 >
->![image-20210409183612161](A_数据结构与算法学习笔记中的图片/image-20210409183612161.png)
+>![image-20210409183612161](数据结构与算法进阶学习笔记中的图片/image-20210409183612161.png)
 
 #### Ⅲ-八皇后问题:
 
 >八皇后问题，是一个古老而著名的问题，是回溯算法的典型案例。该问题是国际西洋棋棋手马克斯·贝瑟尔于 1848 年提出：在 8×8 格的国际象棋上摆放八个皇后，使其不能互相攻击，即：任意两个皇后都不能处于同一行、 同一列或同一斜线上，问有多少种摆法。【92】=> `分治算法`
 >
->![image-20210409183704191](A_数据结构与算法学习笔记中的图片/image-20210409183704191.png)
+>![image-20210409183704191](数据结构与算法进阶学习笔记中的图片/image-20210409183704191.png)
 
 #### Ⅳ-马踏棋盘算法
 
@@ -101,13 +109,13 @@
 >
 >4) 会使用到图的`深度优化遍历算法(DFS) + 贪心算法优化`
 >
->![image-20210409183820014](A_数据结构与算法学习笔记中的图片/image-20210409183820014.png)
+>![image-20210409183820014](数据结构与算法进阶学习笔记中的图片/image-20210409183820014.png)
 
 ### 4、几个实际编程中遇到的问题
 
 #### Ⅰ-字符串替换问题
 
->![image-20210409184136272](A_数据结构与算法学习笔记中的图片/image-20210409184136272.png)
+>![image-20210409184136272](数据结构与算法进阶学习笔记中的图片/image-20210409184136272.png)
 
 
 
@@ -119,7 +127,7 @@
 >
 >2) 读取文件-》稀疏数组-》二维数组 -》 棋盘 【接上局】
 >
->![image-20210409184239439](A_数据结构与算法学习笔记中的图片/image-20210409184239439.png)
+>![image-20210409184239439](数据结构与算法进阶学习笔记中的图片/image-20210409184239439.png)
 
 
 
@@ -145,7 +153,7 @@
 >
 >4) 八皇后问题 => `回溯`
 >
->![image-20210409184435397](A_数据结构与算法学习笔记中的图片/image-20210409184435397.png)
+>![image-20210409184435397](数据结构与算法进阶学习笔记中的图片/image-20210409184435397.png)
 
 
 
@@ -157,7 +165,7 @@
 
 > 需求举例:编写的五子棋程序中，有存盘退出和续上盘的功能
 >
-> ![image-20210409185126535](A_数据结构与算法学习笔记中的图片/image-20210409185126535.png)
+> ![image-20210409185126535](数据结构与算法进阶学习笔记中的图片/image-20210409185126535.png)
 >
 > 分析:因为该二维数组的很多值是默认值 0, 因此记录了`很多没有意义的数据.->稀疏数组`。
 
@@ -169,7 +177,7 @@
 >
 >2) 把具有不同值的元素的行列及值记录在一个小规模的数组中，从而`缩小程序的规模`
 >
->![image-20210409185325615](A_数据结构与算法学习笔记中的图片/image-20210409185325615.png)
+>![image-20210409185325615](数据结构与算法进阶学习笔记中的图片/image-20210409185325615.png) 
 
 #### Ⅲ-应用实例
 
@@ -179,7 +187,7 @@
 >
 >3) 整体思路分析
 >
->![image-20210409185404472](A_数据结构与算法学习笔记中的图片/image-20210409185404472.png)
+>![image-20210409185404472](数据结构与算法进阶学习笔记中的图片/image-20210409185404472.png)
 >
 >4) 代码实现
 >
@@ -263,7 +271,7 @@
 >
 >2) 遵循先入先出的原则。即：先存入队列的数据，要先取出。后存入的要后取出
 >
->![image-20210413170353329](A_数据结构与算法学习笔记中的图片/image-20210413170353329.png)
+>![image-20210413170353329](数据结构与算法进阶学习笔记中的图片/image-20210413170353329.png) 
 
 #### Ⅱ-数组模拟队列
 
@@ -273,142 +281,142 @@
 >
 >3. 当我们将数据存入队列时称为”addQueue”，addQueue 的处理需要有两个步骤：思路分析:
 >
->   1) 将尾指针往后移：rear+1 , 当 front == rear 【空】 
->
->   2) 若尾指针 rear 小于队列的最大下标 maxSize-1，则将数据存入 rear 所指的数组元素中，否则无法存入数据
+>   >  - 将尾指针往后移：rear+1 , 当 front == rear 【空】 
+>   >
+>   >  - 若尾指针 rear 小于队列的最大下标 maxSize-1，则将数据存入 rear 所指的数组元素中，否则无法存入数据
 >
 >4. `注意`:front并没有直接指向数据,而是数据前一位,所以当你要用front读取队列头时需要`front+1`
 >
 >5. 代码实现
 >
->   ```java
->   package com.queue;
->   import java.util.Scanner;
->   
->   public class ArrayQueueDemo {
->       public static void main(String[] args) {
->           //创建一个队列
->           ArrayQueue queue = new ArrayQueue(3);
->           char key = ' ';//接受用户输入
->           Scanner scanner = new Scanner(System.in);
->           boolean loop = true;
->           //输出一个菜单
->           while (loop) {
->               System.out.println("s(show):显示队列");
->               System.out.println("e(exit):退出程序");
->               System.out.println("a(add):添加数据到队列");
->               System.out.println("g(get):从队列取出数据");
->               System.out.println("h(head):查看队列头的数据");
->               key = scanner.next().charAt(0);//接受一个字符
->               switch (key) {
->                   case 's':
->                       queue.showQueue();
->                       break;
->                   case 'a':
->                       System.out.println("输入一个数字");
->                       int value = scanner.nextInt(); //不用再new一个新得scanner
->                       queue.addQueue(value);
->                       break;
->                   case 'g':
->                       try {
->                           int res = queue.getQueue();
->                           System.out.printf("取出的数据是%d\n", res);
->                       } catch (Exception e) {
->                           System.out.println(e.getMessage());
->                       }
->   
->                       break;
->                   case 'h':
->                       try {
->                           int head = queue.headQueue();
->                           System.out.printf("表头是%d\n", head);
->                       } catch (Exception e) {
->                           System.out.println(e.getMessage());
->                       }
->                       break;
->                   default:
->                       scanner.close();//关闭不释放会有异常
->                       loop = false;
->                       break;
->               }
->           }
->           System.out.println("程序退出");
->       }
->   }
->   
->   //使用数组模拟队列-编写一个ArrayQueue类
->   class ArrayQueue {
->       private int maxSize;//表示数组的最大容量
->       private int front; //队列头
->       private int rear;//队列尾
->       private int[] arr; //该数据用于存放数据,模拟队列
->   
->       //创建队列的构造器
->       public ArrayQueue(int arrMaxSize) {
->           maxSize = arrMaxSize;
->           arr = new int[maxSize];
->           front = -1;//指向队列头部,分析出front是只想队列头的前一个位置
->           rear = -1;//指向队列尾部,只想队列尾部数据(即队列最后一个数据)
->       }
->   
->       //1. 判断队列是否满
->       public boolean isFull() {
->           return rear == maxSize - 1; //当队列为指向数组最后一位时就是队列满
->       }
->   
->       //2. 判断队列是否为空
->       public boolean isEmpty() {
->           return rear == front; //当队列头与尾部相等时,说明该队列没有值了
->       }
->   
->       //3. 添加数据到队列
->       public void addQueue(int n) {
->           //判断队列是否满
->           if (isFull()) {
->               System.out.println("队列满,不能加入数据~~~~~~");
->               return;
->           }
->           rear++; //让rear 往后移动一位
->           arr[rear] = n; //以后移后的rear作为数组下标进行赋值
->       }
->   
->       //4. 获取队列的数据,出队列
->       public int getQueue() {
->           //判断队列是否为空//抛出异常
->           if (isEmpty()) throw new RuntimeException("队列为空,不能取数据");
->           front++; //front后移 出队列
->           return arr[front];
->       }
->   
->       //5. 显示队列的所有数据
->       public void showQueue() {
->           //遍历
->           if (isEmpty()) {
->               System.out.println("队列空的 没有数据");
->               return;
->           }
->           for (int i = 0; i < arr.length; i++) {
->               System.out.printf("arr[%d]=%d\n", i, arr[i]);
->           }
->       }
->   
->       //显示队列的头数据,注意不是取出数据
->       public int headQueue() {
->           //判断
->           if (isEmpty())  throw new RuntimeException("队列空的,没有数据~~~~");
->           return arr[front + 1]; //front并没有直接指向数据,而是数据前一位,所以需要+1
->       }
->   
->   }
->   ```
+>  ```java
+>  package com.queue;
+>  import java.util.Scanner;
+>
+>  public class ArrayQueueDemo {
+>      public static void main(String[] args) {
+>          //创建一个队列
+>          ArrayQueue queue = new ArrayQueue(3);
+>          char key = ' ';//接受用户输入
+>          Scanner scanner = new Scanner(System.in);
+>          boolean loop = true;
+>          //输出一个菜单
+>          while (loop) {
+>              System.out.println("s(show):显示队列");
+>              System.out.println("e(exit):退出程序");
+>              System.out.println("a(add):添加数据到队列");
+>              System.out.println("g(get):从队列取出数据");
+>              System.out.println("h(head):查看队列头的数据");
+>              key = scanner.next().charAt(0);//接受一个字符
+>              switch (key) {
+>                  case 's':
+>                      queue.showQueue();
+>                      break;
+>                  case 'a':
+>                      System.out.println("输入一个数字");
+>                      int value = scanner.nextInt(); //不用再new一个新得scanner
+>                      queue.addQueue(value);
+>                      break;
+>                  case 'g':
+>                      try {
+>                          int res = queue.getQueue();
+>                          System.out.printf("取出的数据是%d\n", res);
+>                      } catch (Exception e) {
+>                          System.out.println(e.getMessage());
+>                      }
+>
+>                      break;
+>                  case 'h':
+>                      try {
+>                          int head = queue.headQueue();
+>                          System.out.printf("表头是%d\n", head);
+>                      } catch (Exception e) {
+>                          System.out.println(e.getMessage());
+>                      }
+>                      break;
+>                  default:
+>                      scanner.close();//关闭不释放会有异常
+>                      loop = false;
+>                      break;
+>              }
+>          }
+>          System.out.println("程序退出");
+>      }
+>  }
+>
+>  //使用数组模拟队列-编写一个ArrayQueue类
+>  class ArrayQueue {
+>      private int maxSize;//表示数组的最大容量
+>      private int front; //队列头
+>      private int rear;//队列尾
+>      private int[] arr; //该数据用于存放数据,模拟队列
+>
+>      //创建队列的构造器
+>      public ArrayQueue(int arrMaxSize) {
+>          maxSize = arrMaxSize;
+>          arr = new int[maxSize];
+>          front = -1;//指向队列头部,分析出front是只想队列头的前一个位置
+>          rear = -1;//指向队列尾部,只想队列尾部数据(即队列最后一个数据)
+>      }
+>
+>      //1. 判断队列是否满
+>      public boolean isFull() {
+>          return rear == maxSize - 1; //当队列为指向数组最后一位时就是队列满
+>      }
+>
+>      //2. 判断队列是否为空
+>      public boolean isEmpty() {
+>          return rear == front; //当队列头与尾部相等时,说明该队列没有值了
+>      }
+>
+>      //3. 添加数据到队列
+>      public void addQueue(int n) {
+>          //判断队列是否满
+>          if (isFull()) {
+>              System.out.println("队列满,不能加入数据~~~~~~");
+>              return;
+>          }
+>          rear++; //让rear 往后移动一位
+>          arr[rear] = n; //以后移后的rear作为数组下标进行赋值
+>      }
+>
+>      //4. 获取队列的数据,出队列
+>      public int getQueue() {
+>          //判断队列是否为空//抛出异常
+>          if (isEmpty()) throw new RuntimeException("队列为空,不能取数据");
+>          front++; //front后移 出队列
+>          return arr[front];
+>      }
+>
+>      //5. 显示队列的所有数据
+>      public void showQueue() {
+>          //遍历
+>          if (isEmpty()) {
+>              System.out.println("队列空的 没有数据");
+>              return;
+>          }
+>          for (int i = 0; i < arr.length; i++) {
+>              System.out.printf("arr[%d]=%d\n", i, arr[i]);
+>          }
+>      }
+>
+>      //显示队列的头数据,注意不是取出数据
+>      public int headQueue() {
+>          //判断
+>          if (isEmpty())  throw new RuntimeException("队列空的,没有数据~~~~");
+>          return arr[front + 1]; //front并没有直接指向数据,而是数据前一位,所以需要+1
+>      }
+>
+>  }
+>  ```
 >
 >6. 问题分析与优化方向:
 >
->   1) 目前数组使用一次就不能用， 没有达到复用的效果.
+>  1) 目前数组使用一次就不能用， 没有达到复用的效果.
 >
->   ​	`原因`:取出数据时是将列表头(`front++`)向后移动,导致队列前面的空间并没有被释放,如上图第三个队列示例图 
+>  ​	`原因`:取出数据时是将列表头(`front++`)向后移动,导致队列前面的空间并没有被释放,如上图第三个队列示例图 
 >
->   2) 将这个数组使用算法，改进成一个环形的队列 取模：%
+>  2) 将这个数组使用算法，改进成一个环形的队列 取模：%
 
 #### Ⅲ-数组模拟环形队列思路分析
 
@@ -422,11 +430,11 @@
 >
 >   3. 思路分析示例图3-2-3-1
 >
->      ![image-20210413180656594](A_数据结构与算法学习笔记中的图片/image-20210413180656594.png)
+>      ![image-20210413180656594](数据结构与算法进阶学习笔记中的图片/image-20210413180656594.png)
 >
 >3. 环形队列示例图
 >
->   ![image-20210413180729037](A_数据结构与算法学习笔记中的图片/image-20210413180729037.png)
+>   ![image-20210413180729037](数据结构与算法进阶学习笔记中的图片/image-20210413180729037.png)
 
 #### Ⅳ-个人对于环形队列的理解与总结
 
@@ -434,29 +442,29 @@
 >
 >1. `rear`初始化为0:因为当队列为空时,`rear`队列尾应是指向`-1`位置,因为整个队列是空的
 >
->   所以符合调整:rear指向队列的最后一个元素的后一个位置,可以留出一个空间作为约定(用来`判断是队空还是队满`)
+>   > 所以符合调整:rear指向队列的最后一个元素的后一个位置,可以留出一个空间作为约定(用来`判断是队空还是队满`)
 >
 >2. `front`初始化为0:因为要指向队列第一个位置,所以为0
 >
->3. 队列满条件:`(rear+1)%maxSize==front`-->原理如环形队列示例图
+>3. 队列满条件:`(rear+1)%maxSize==front`-->原理如上方环形队列示例图
 >
->   当`(rear+1)%maxSize==front`时,队列情况如环形队列示例图右边部分 -->例: (4+1)%10==5
+>   >当`(rear+1)%maxSize==front`时,队列情况如环形队列示例图右边部分 -->例: (4+1)%10==5
 >
 >4. 队列为空`rear==front`:假使你队列曾经加到8个数据,所以你`rear==8`,但当你将队列一个一个取出时front发生如下变化:`front==0-->front++*n-->front==8`,所以当front==rear==8时,就可以判断队列为空
 >
 >5. 队列的有效数据个数:`(rear+maxSize-font)%maxSize` -->
 >
->   1)提出疑惑:为什么要先加`maxSize`-->可能出现队尾rear小于队首front的情况
+>> 提出疑惑:为什么要先加`maxSize`-->可能出现队尾rear小于队首front的情况
 >
->    通过这个环形队列图(里面数字是`数组下标`不是数据)你应该可以很容易理解:假使队列长8、队尾在2的位置、队首在6的位置
+>   通过这个环形队列图(里面数字是`数组下标`不是数据)你应该可以很容易理解:假使队列长8、队尾在2的位置、队首在6的位置
 >
-> ​	解决:如图所示
+>​	解决:如图所示
 >
->   ![image-20210413184647572](A_数据结构与算法学习笔记中的图片/image-20210413184647572.png)
+>  ![image-20210413184647572](数据结构与算法进阶学习笔记中的图片/image-20210413184647572.png)
 >
->   2)再次提出疑惑:老铁!!!我看图上`6~2`,甚至还用手指去数,明明就是五个数据啊!为什么还能算成`4`?
+>> 再次提出疑惑:老铁!!!我看图上`6~2`,甚至还用手指去数,明明就是五个数据啊!为什么还能算成`4`?
 >
-> ​	解:注意`rear`的定义:rear指向队列的最后一个元素的后一个位置,所以这时候最后一个队列数据是在`1`的位置,所以`6~1`是4位
+>​	解:注意`rear`的定义:rear指向队列的最后一个元素的后一个位置,所以这时候最后一个队列数据是在`1`的位置,所以`6~1`是4位
 
 #### Ⅴ-环形队列代码实现
 
@@ -579,29 +587,30 @@
 
 ### 1、链表(Linked List)介绍
 
-> 1) 链表是以节点的方式来存储,是链式存储 
+> 1. 链表是以节点的方式来存储,是链式存储 
 >
-> 2) 每一个结点包含 data 域、next 域。其中 next 域存放的是下一个结点的地址(双向链表还有一个`prev`)
+> 2. 每一个结点包含 data 域、next 域。其中 next 域存放的是下一个结点的地址(双向链表还有一个`prev`)
 >
-> 3) 如图：发现链表的各个节点不一定是连续存储. 
+> 3. 如图：发现链表的各个节点不一定是连续存储. 
 >
-> ​	![image-20210416104152170](A_数据结构与算法学习笔记中的图片/image-20210416104152170.png)
+>    > ​	![image-20210416104152170](数据结构与算法进阶学习笔记中的图片/image-20210416104152170.png) 
 >
-> 4) 链表分带头节点的链表和没有头节点的链表，根据实际的需求来确定
+> 4. 链表分带头节点的链表和没有头节点的链表，根据实际的需求来确定
 >
-> 5) 单链表(带头结点) 逻辑结构示意图如下
+> 5. 单链表(带头结点) 逻辑结构示意图如下
 >
-> ​	<img src="A_数据结构与算法学习笔记中的图片/单链表结构示例图.png" alt="单链表结构示例图" style="zoom:50%;" />
+>    ><img src="数据结构与算法进阶学习笔记中的图片/单链表结构示例图.png" alt="单链表结构示例图" style="zoom:50%;" /> 
 >
-> 6) 代码描述节点:
+> 6. 代码描述节点:
 >
-> 1. ```java
->    public ListNode{
->        public int age;				// 本结点的信息	
->        public String name;
->        public ListNode next; 		// 下一个结点的地址
->    }
->    ```
+>    >```java
+>    >public ListNode{
+>    >    public int age;				// 本结点的信息	
+>    >    public String name;
+>    >    public ListNode next; 		// 下一个结点的地址
+>    >}
+>    >```
+>
 
 ### 2、单链表的应用实例
 
@@ -611,14 +620,14 @@
 
 > 1. 思路分析示意图:
 >
->    ![image-20210416104715422](A_数据结构与算法学习笔记中的图片/image-20210416104715422.png)
+>    ![image-20210416104715422](数据结构与算法进阶学习笔记中的图片/image-20210416104715422.png)
 >
 > 2. 演示最基础的链表插入:`插入到链表的最后面`,不考虑顺序
 >
->    1. 首先我们需要创建一个头结点，该结点的作用就是表示单链表的头，如果没有头结点，我们是无法知道链表的首个结点是谁、在哪；
->    2. 单链表是单向的，所以我们需要从头结点开始遍历整个链表直到末尾，然后增加结点到链表的末尾；
->    3. 需要注意的是，头结点是万万不能乱动的，所以我们最好将头结点复制到一个临时结点变量中，对临时变量进行遍历。
->       
+>    >- 首先我们需要创建一个头结点，该结点的作用就是表示单链表的头，如果没有头结点，我们是无法知道链表的首个结点是谁、在哪；
+>    >- 单链表是单向的，所以我们需要从头结点开始遍历整个链表直到末尾，然后增加结点到链表的末尾；
+>    >- 需要注意的是，头结点是万万不能乱动的，所以我们最好将头结点复制到一个临时结点变量中，对临时变量进行遍历。
+>
 >
 > 3. 代码示例:
 >
@@ -645,7 +654,7 @@
 >            singleLinkedList.list();
 >        }
 >    }
->    
+>          
 >    //一、定义一个HeroNode,每个HeroNode对象就是一个节点
 >    class HeroNode {
 >        public int no;
@@ -663,7 +672,7 @@
 >        public String toString() {
 >            return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickname + "]";
 >        }
->    
+>          
 >    }
 >    //二、定义SingleLinkedList管理我们的英雄
 >    class SingleLinkedList {
@@ -673,7 +682,7 @@
 >        public HeroNode getHead() {
 >            return head;
 >        }
->    
+>          
 >        /**
 >         * 3. 添加节点到单链表后
 >         * 思路:不考虑编号顺序,直接插入到链表最后
@@ -694,7 +703,7 @@
 >            //将最后这个节点的next指向新的节点
 >            temp.next = heroNode;
 >        }
->    
+>          
 >        //4. 显示链表[遍历]
 >        public void list() {
 >            //判断链表是否为空
@@ -713,7 +722,7 @@
 >            }
 >        }
 >    }
->    
+>          
 >    ```
 
 #### Ⅱ-添加方法二:根据排名将英雄插入到指定位置
@@ -722,132 +731,135 @@
 >
 >2. 思路分析示意图:
 >
->  ![image-20210416115735161](A_数据结构与算法学习笔记中的图片/image-20210416115735161.png)
+>   > ![image-20210416115735161](数据结构与算法进阶学习笔记中的图片/image-20210416115735161.png) 
 >
 >3. 代码中实例场景示例图:
 >
->![image-20210416115627100](A_数据结构与算法学习笔记中的图片/单链表添加代码中实例场景示例图.png)
+>   >![image-20210416115627100](数据结构与算法进阶学习笔记中的图片/单链表添加代码中实例场景示例图.png) 
 >
 >4. 思路分析:
->   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
->   2. 如果出现某个结点（假设是 A 结点）的下一个结点（假设是 B 结点）的编号大于待插入结点的情况，那么就首先将 B 结点记录在待插入的结点中，然后再将这个待插入结点插入到 A 结点之后；
->   3. 如果遍历到了链表末尾还没找到编号更大的，就直接插入到末尾即可。
+>
+>   >  - 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   >  - 如果出现某个结点（假设是 A 结点）的下一个结点（假设是 B 结点）的编号大于待插入结点的情况，那么就首先将 B 结点记录在待插入的结点中，然后再将这个待插入结点插入到 A 结点之后；
+>   >  - 如果遍历到了链表末尾还没找到编号更大的，就直接插入到末尾即可。
 >
 >5. 代码实现:(只是将第一方法代码示例中的`add()`替换未`addByOrder`)
 >
->  ```java
->      public void addByOrder(HeroNode heroNode) {
->      /*因为head节点是不能动的,动了的话链表就找不到入口或者找错路口,所以我们需要一个辅助遍历
->         因为单链表,所以我们找的temp 必须为于添加位置的前一个节点,否则插入不了*/
->          HeroNode temp = head;
->          boolean flag = false; //flag标识添加的编号是否存在,默认为false
->          while (true) {
->              if (temp.next == null) break;//说明temp已经在链表的最后,就在链表插入(此时temp已经在链表尾部了)
->              if (temp.next.no > heroNode.no) break;//说明位置已经找到,就在temp的后面插入
->              else if (temp.next.no == heroNode.no) {//说明希望添加的heroNode编号已经存在
->                  flag = true;
->                  break;
->              }
->              temp = temp.next;//temp后移,直到找到符合上面条件为止
->          }
->          if (flag) System.out.printf("准备插入的英雄的编号%d已经存在了,不能加入\n", heroNode.no);
->          else {
->              //将heroNode插入到链表的temp后面
->              heroNode.next = temp.next;
->              temp.next = heroNode;
->          }
->      }
+> ```java
+>     public void addByOrder(HeroNode heroNode) {
+>     /*因为head节点是不能动的,动了的话链表就找不到入口或者找错路口,所以我们需要一个辅助遍历
+>        因为单链表,所以我们找的temp 必须为于添加位置的前一个节点,否则插入不了*/
+>         HeroNode temp = head;
+>         boolean flag = false; //flag标识添加的编号是否存在,默认为false
+>         while (true) {
+>             if (temp.next == null) break;//说明temp已经在链表的最后,就在链表插入(此时temp已经在链表尾部了)
+>             if (temp.next.no > heroNode.no) break;//说明位置已经找到,就在temp的后面插入
+>             else if (temp.next.no == heroNode.no) {//说明希望添加的heroNode编号已经存在
+>                 flag = true;
+>                 break;
+>             }
+>             temp = temp.next;//temp后移,直到找到符合上面条件为止
+>         }
+>         if (flag) System.out.printf("准备插入的英雄的编号%d已经存在了,不能加入\n", heroNode.no);
+>         else {
+>             //将heroNode插入到链表的temp后面
+>             heroNode.next = temp.next;
+>             temp.next = heroNode;
+>         }
+>     }
 >
->  -------------- main()中调用  ------------------------
->   singleLinkedList.addByOrder(hero2);
->   singleLinkedList.addByOrder(hero4);
->   singleLinkedList.addByOrder(hero4);
->  ```
+> -------------- main()中调用  ------------------------
+>  singleLinkedList.addByOrder(hero2);
+>  singleLinkedList.addByOrder(hero4);
+>  singleLinkedList.addByOrder(hero4);
+> ```
 >
 
 #### Ⅲ-修改节点
 
 >1. 思路(1) 先找到该节点，通过遍历，(2) temp.name = newHeroNode.name ; temp.nickname= newHeroNode.nickname
->   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
->   2. 遍历过程中，比对每个结点的编号与要更新的结点的编号是否一致，如果一致则说明找到了要更新的结点。接着将找到的结点中的数据替换成要更新的数据即可；
->   3. 如果遍历结束还没找到对应编号的结点，说明链表中不存在这个结点；
->      
+>
+>   >  - 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   >  - 遍历过程中，比对每个结点的编号与要更新的结点的编号是否一致，如果一致则说明找到了要更新的结点。接着将找到的结点中的数据替换成要更新的数据即可；
+>   >  - 如果遍历结束还没找到对应编号的结点，说明链表中不存在这个结点；
+>
 >2. 代码实现
 >
->  ```java
->    //5. 修改节点信息,根据no编号来修改,即no编号不能改
->      public void update(HeroNode newHeroNode) {
->          if (head.next == null) {
->              System.out.println("链表为空");
->              return;
->          }
->          ;
->          //定义一个辅助变量
->          HeroNode temp = head;
->          boolean flag = false;
->          //找到需要修改的节点,根据no编号
->          while (true) {
->              if (temp == null) break; //表示当前到链表尾端
->              if (temp.no == newHeroNode.no) {//表示找到该节点了
->                  flag = true;
->                  break;
->              }
->              temp = temp.next;
->          }
->          if (flag) {//根据flag可以判断是否找到要修改的节点
->              temp.name = newHeroNode.name;
->              temp.nickname = newHeroNode.nickname;
->          } else System.out.printf("没有找到编号%d的阶段,不能进行修改\n", newHeroNode.no);
->      }
->  ----------------- main()调用测试 ----------------------------------------
->    //测试修改节点的代码
->          HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
->          singleLinkedList.update(newHeroNode);
->          System.out.println("测试修改后的");
->          singleLinkedList.list();    
->  ```
+> ```java
+>   //5. 修改节点信息,根据no编号来修改,即no编号不能改
+>     public void update(HeroNode newHeroNode) {
+>         if (head.next == null) {
+>             System.out.println("链表为空");
+>             return;
+>         }
+>         ;
+>         //定义一个辅助变量
+>         HeroNode temp = head;
+>         boolean flag = false;
+>         //找到需要修改的节点,根据no编号
+>         while (true) {
+>             if (temp == null) break; //表示当前到链表尾端
+>             if (temp.no == newHeroNode.no) {//表示找到该节点了
+>                 flag = true;
+>                 break;
+>             }
+>             temp = temp.next;
+>         }
+>         if (flag) {//根据flag可以判断是否找到要修改的节点
+>             temp.name = newHeroNode.name;
+>             temp.nickname = newHeroNode.nickname;
+>         } else System.out.printf("没有找到编号%d的阶段,不能进行修改\n", newHeroNode.no);
+>     }
+> ----------------- main()调用测试 ----------------------------------------
+>   //测试修改节点的代码
+>         HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
+>         singleLinkedList.update(newHeroNode);
+>         System.out.println("测试修改后的");
+>         singleLinkedList.list();    
+> ```
 
 #### Ⅳ-删除节点
 
->1. 思路分析图
+>1. 思路分析:
 >
->  ![image-20210416140539441](A_数据结构与算法学习笔记中的图片/image-20210416140539441.png)
+>   >![image-20210416140539441](数据结构与算法进阶学习笔记中的图片/image-20210416140539441.png)
+>   >
+>   >- 其实就是方法二中`实例场景示例图`的逆推
+>   >  - 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
+>   >  - 如果 遍历到某个结点的编号与要查找的给定的编号相同，那么就找到了结点；
+>   >  - 如果遍历结束还没找到，说明该编号不在链表的结点中。
 >
->2. 其实就是方法二中`实例场景示例图`的逆推
->   1. 首先还是要创建一个头结点，然后拷贝一个头结点作为辅助变量，使用辅助变量来遍历整个链表；
->   2. 如果 遍历到某个结点的编号与要查找的给定的编号相同，那么就找到了结点；
->   3. 如果遍历结束还没找到，说明该编号不在链表的结点中。
->3. 代码示例
+>2. 代码示例
 >
->  ```java
->     //6. 删除节点1.head不能动,所以需要一个temp辅助节点找到待删除节点前的一个节点
->      //         2.我们比较时,时temp.next.no和待删除节点的no比较
->      public void del(int no) {
->          if (head.next == null) {
->              System.out.println("链表为空");
->              return;
->          }
->          HeroNode temp = head;
->          boolean flag = false;
->          while (true) {
->              if (temp.next == null) break;//说明到了链表的最后
->              if (temp.next.no == no) {
->                  //表示找到了待删除节点的前一个节点temp
->                  flag = true;
->                  break;
->              }
->              temp=temp.next;//temp后移,遍历
->          }
->          if (flag) temp.next=temp.next.next; //如果找到,进行删除
->          else System.out.printf("要删除的%d节点不存在\n",no);
->      }
->  ----------------- main()调用 ------------------------------
->     //删除一个节点
->      singleLinkedList.del(1);
->      singleLinkedList.del(4);
->      System.out.println("删除后的链表情况~~");
->      singleLinkedList.list();
->  ```
+> ```java
+>    //6. 删除节点1.head不能动,所以需要一个temp辅助节点找到待删除节点前的一个节点
+>     //         2.我们比较时,时temp.next.no和待删除节点的no比较
+>     public void del(int no) {
+>         if (head.next == null) {
+>             System.out.println("链表为空");
+>             return;
+>         }
+>         HeroNode temp = head;
+>         boolean flag = false;
+>         while (true) {
+>             if (temp.next == null) break;//说明到了链表的最后
+>             if (temp.next.no == no) {
+>                 //表示找到了待删除节点的前一个节点temp
+>                 flag = true;
+>                 break;
+>             }
+>             temp=temp.next;//temp后移,遍历
+>         }
+>         if (flag) temp.next=temp.next.next; //如果找到,进行删除
+>         else System.out.printf("要删除的%d节点不存在\n",no);
+>     }
+> ----------------- main()调用 ------------------------------
+>    //删除一个节点
+>     singleLinkedList.del(1);
+>     singleLinkedList.del(4);
+>     System.out.println("删除后的链表情况~~");
+>     singleLinkedList.list();
+> ```
 
 #### Ⅴ-全部代码
 
@@ -1084,119 +1096,120 @@
 
 >1. 思路分析:
 >
->   1)编写一个方法，接收head节点，同时接收一个K
->
->   2)K表示是倒数第K个节点
->
->   3)先把链表从头到尾遍历，得到链表的总的长度 getLength
->
->   4)得到size 后，我们从链表的第一个开始遍历 (size-K)个，就可以得到
->
->   5)如果找到了，则返回该节点，否则返回nulll
+>>  1)编写一个方法，接收head节点，同时接收一个K
+>>
+>>  2)K表示是倒数第K个节点
+>>
+>>  3)先把链表从头到尾遍历，得到链表的总的长度 getLength
+>>
+>>  4)得到size 后，我们从链表的第一个开始遍历 (size-K)个，就可以得到
+>>
+>>  5)如果找到了，则返回该节点，否则返回null
 >
 >2. 代码示例:
 >
->   ```java
->       /**2.查找单链表中的倒数第k个结点
->        * @param head 要进行查找的单向链表
->        * @param K 传入倒数第几位 数字
->        * @return 该位置的节点
->        */
->       public static HeroNode findLastIndexNode(HeroNode head, int K) {
->           if (head.next == null) return null; //空链表,无法找到
->           //1. 获得链表的长度(总个数)
->           int size = getLength(head);
->           //2. 做一个K的校验,明显K不能为负数以及大于总长度
->           if (K <= 0 || K > size) return null;
->           //3. 定义给辅助变量
->           HeroNode cur = head.next;
->           //4. 遍历 倒数第K个节点 就是`size-K`的位置
->           for (int i = 0; i < (size - K); i++) {
->               cur = cur.next; //cur后移到符合条件的位置
->           }
->           return cur;
->       }
->   -----------------main()调用  ---------------------------
->    //测试一下看看是否得到了倒数第K个节点
->    HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 2);
->    System.out.println("res=" + res);
->   ```
+>  ```java
+>      /**2.查找单链表中的倒数第k个结点
+>       * @param head 要进行查找的单向链表
+>       * @param K 传入倒数第几位 数字
+>       * @return 该位置的节点
+>       */
+>      public static HeroNode findLastIndexNode(HeroNode head, int K) {
+>          if (head.next == null) return null; //空链表,无法找到
+>          //1. 获得链表的长度(总个数)
+>          int size = getLength(head);
+>          //2. 做一个K的校验,明显K不能为负数以及大于总长度
+>          if (K <= 0 || K > size) return null;
+>          //3. 定义给辅助变量
+>          HeroNode cur = head.next;
+>          //4. 遍历 倒数第K个节点 就是`size-K`的位置
+>          for (int i = 0; i < (size - K); i++) {
+>              cur = cur.next; //cur后移到符合条件的位置
+>          }
+>          return cur;
+>      }
+>  -----------------main()调用  ---------------------------
+>   //测试一下看看是否得到了倒数第K个节点
+>   HeroNode res = findLastIndexNode(singleLinkedList.getHead(), 2);
+>   System.out.println("res=" + res);
+>  ```
 
 #### Ⅲ-单链表的反转【腾讯面试题，有点难度】
 
 >1. 解决这个问题的核心就是`头插法`。
 >
->    1. 首先创建一个临时头结点用于记录反转过程中的链表；
->   2. 遍历单链表，每遍历到一个有效结点，就让该有效结点指向临时头结点指向的结点；
->    3. 临时头结点再指向该有效结点，
->   4. 原单链表遍历结束之后，再让原头结点指向临时头结点指向的结点。
->    5. 图片示例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="A_数据结构与算法学习笔记中的图片/头插法进行反转链表.gif" style="zoom: 33%;" />
+>   >- 首先创建一个临时头结点用于记录反转过程中的链表；
+>   >  - 遍历单链表，每遍历到一个有效结点，就让该有效结点指向临时头结点指向的结点；
+>   >   - 临时头结点再指向该有效结点，
+>   >  - 原单链表遍历结束之后，再让原头结点指向临时头结点指向的结点。
 >
-> 2. 具体举例图解![image-20210416164158096](A_数据结构与算法学习笔记中的图片/单链表的反转实例场景示例图.png)
+>   5. 图片示例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="数据结构与算法进阶学习笔记中的图片/头插法进行反转链表.gif" style="zoom: 33%;" />
 >
-> 3. 代码实现:
+>2. 具体举例图解![image-20210416164158096](数据结构与算法进阶学习笔记中的图片/单链表的反转实例场景示例图.png)
 >
->      1. 实现方法一:
+>4. 代码实现:
+>
+>     > 实现方法一:
+>
+>  ```java
+>      /**
+>         * 3.单链表的反转【腾讯面试题，有点难度】
+>         * @param head 传入需要进行反转的单链表
+>         */
+>        public static void reverseLinkedHead(HeroNode head) {
+>             //1. 当链表为空或者只有一个节点时候,直接返回,无需反转
+>            if (head.next == null || head.next.next == null) return;
+>             //2. 定义一个辅助的指针遍历,帮助我们遍历原来的链表
+>             HeroNode cur = head.next;
+>             //3. 定义一个next,辅助变量,来指向当前节点[cur]的下一个节点,用来进行位置互换
+>             HeroNode next = null;
+>             //4. 初始化一个新的头节点,用来暂时存放反转链表
+>             HeroNode reverseHead = new HeroNode(0, "", "");
+>             //5. 遍历原来的链表,每遍历一个节点,就将其取出,并放在新的链表reverseHead的最前端
+>             while (cur != null) {//当当前节点 为空时退出累计遍历
+>                 next = cur.next; //先暂时保存当前节点的下一个节点,后面换完位置后需要复原cur的下一位,否则无法遍历
+>                 cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
+>                 reverseHead.next = cur;//将cur链接到新的链表上
+>                 cur = next;//让cur后移
+>             }
+>             //遍历结束,将head.next指向reverseHead.next 接管链表,实现单链表的反转
+>             head.next = reverseHead.next;
+>         }
+>     -----------------main()调用  ---------------------------
+>        //7. 测试一下单链表的反转功能
+>     	System.out.println("原来链表的情况~~");
+>     	singleLinkedList.list();
+>     	System.out.println("反转单链表~~");
+>     	reverseLinkedHead(singleLinkedList.getHead());
+>     	singleLinkedList.list();
+>  ```
+>
+>> 实现方法二(只是写法改变,但代码显得更容易理解):
 >
 >   ```java
->       /**
->          * 3.单链表的反转【腾讯面试题，有点难度】
->          * @param head 传入需要进行反转的单链表
->          */
->         public static void reverseLinkedHead(HeroNode head) {
->              //1. 当链表为空或者只有一个节点时候,直接返回,无需反转
->             if (head.next == null || head.next.next == null) return;
->              //2. 定义一个辅助的指针遍历,帮助我们遍历原来的链表
->              HeroNode cur = head.next;
->              //3. 定义一个next,辅助变量,来指向当前节点[cur]的下一个节点,用来进行位置互换
->              HeroNode next = null;
->              //4. 初始化一个新的头节点,用来暂时存放反转链表
->              HeroNode reverseHead = new HeroNode(0, "", "");
->              //5. 遍历原来的链表,每遍历一个节点,就将其取出,并放在新的链表reverseHead的最前端
->              while (cur != null) {//当当前节点 为空时退出累计遍历
->                  next = cur.next; //先暂时保存当前节点的下一个节点,后面换完位置后需要复原cur的下一位,否则无法遍历
->                  cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
->                  reverseHead.next = cur;//将cur链接到新的链表上
->                  cur = next;//让cur后移
->              }
->              //遍历结束,将head.next指向reverseHead.next 接管链表,实现单链表的反转
->              head.next = reverseHead.next;
->          }
->      -----------------main()调用  ---------------------------
->         //7. 测试一下单链表的反转功能
->      	System.out.println("原来链表的情况~~");
->      	singleLinkedList.list();
->      	System.out.println("反转单链表~~");
->      	reverseLinkedHead(singleLinkedList.getHead());
->      	singleLinkedList.list();
->   ```
-> 
->      1. 实现方法二(只是写法改变,但代码显得更容易理解):
-> 
->    ```java
->    /**
->     * 单链表的反转
->     */
->    public SingleLinkedList reverse() {
->       SingleLinkedList linkedList = new SingleLinkedList();
->        // 遍历待反转的链表，将结点依次添加到新链表
+>   /**
+>    * 单链表的反转
+>    */
+>   public SingleLinkedList reverse() {
+>      SingleLinkedList linkedList = new SingleLinkedList();
+>       // 遍历待反转的链表，将结点依次添加到新链表
+>      Node tmp = head;
+>       while (tmp.next != null) {
+>           linkedList.addFirst(tmp.next.item);
+>           tmp = tmp.next;
+>       }
+>       return linkedList;
+>   }
+>   public boolean addFirst(Integer item) {
+>       Node newNode = new Node(item, null);
+>       // tmp 指向头结点
 >       Node tmp = head;
->        while (tmp.next != null) {
->            linkedList.addFirst(tmp.next.item);
->            tmp = tmp.next;
->        }
->        return linkedList;
->    }
->    public boolean addFirst(Integer item) {
->        Node newNode = new Node(item, null);
->        // tmp 指向头结点
->        Node tmp = head;
->        newNode.next = tmp.next;
->        tmp.next = newNode;
->        return true;
->    }
->    ```
-> 
+>       newNode.next = tmp.next;
+>       tmp.next = newNode;
+>       return true;
+>   }
+>   ```
+>
 
 #### Ⅳ-从尾到头打印单链表
 
@@ -1204,7 +1217,7 @@
 >
 >2. `栈方法`
 >
->   1. 思路分析图解:![image-20210416171953411](A_数据结构与算法学习笔记中的图片/image-20210416171953411.png)
+>   1. 思路分析图解:![image-20210416171953411](数据结构与算法进阶学习笔记中的图片/image-20210416171953411.png)
 >
 >   2. 代码示例:
 >
@@ -1236,7 +1249,7 @@
 >
 >3. `递归方式`
 >
->   1. 图例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="A_数据结构与算法学习笔记中的图片/递归方式实现单向链表逆序打印示例图.gif" alt="递归方式实现单向链表逆序打印示例图" style="zoom: 33%;" />
+>   1. 图例(该动图取自[RonzL](https://blog.csdn.net/zhuxian1277)的博客):<img src="数据结构与算法进阶学习笔记中的图片/递归方式实现单向链表逆序打印示例图.gif" alt="递归方式实现单向链表逆序打印示例图" style="zoom: 33%;" />
 >
 >   2. 代码实现:
 >
@@ -1252,7 +1265,7 @@
 >          }
 >          System.out.println(node);
 >      }
->      
+>                          
 >      ```
 
 
@@ -1348,7 +1361,7 @@
 >
 >2. 使用双向链表实现水浒传英雄增删改查思路图:
 >
->   ![image-20210419144659899](A_数据结构与算法学习笔记中的图片/双向链表实例思路图.png)
+>   ![image-20210419144659899](数据结构与算法进阶学习笔记中的图片/双向链表实例思路图.png)
 >
 >3. 删除部分代码实现:
 >
@@ -1568,22 +1581,23 @@
 
 >1. 管理单向链表相较于双向链表的缺点分析
 >
->   1) ① 单链表只有一个指向下一结点的指针，也就是只能next; ② 双链表除了有一个指向下一结点的指针外，还有一个指向前一结点的指针，可以通过prev()快速找到前一结点，顾名思义，单链表只能单向读取
->
->   2) 单向链表不能自我删除，需要靠辅助节点 ，而双向链表则可以自我删除，所以前面我们单链表删除时节点，总是找到 temp,temp 是待删除节点的前一个节点,双向链表则是可以直接将temp指向要删除的节点
+>   >  - ① 单链表只有一个指向下一结点的指针，也就是只能next; ② 双链表除了有一个指向下一结点的指针外，还有一个指向前一结点的指针，可以通过prev()快速找到前一结点，顾名思义，单链表只能单向读取
+>   >
+>   >  - 单向链表不能自我删除，需要靠辅助节点 ，而双向链表则可以自我删除，所以前面我们单链表删除时节点，总是找到 temp,temp 是待删除节点的前一个节点,双向链表则是可以直接将temp指向要删除的节点
 >
 >2. 双链表具有以下优点:
 >
->   1. 删除单链表中的某个结点时，一定要得到待删除结点的前驱，得到该前驱有两种方法，第一种方法是在定位待删除结点的同时一路保存当前结点的前驱。第二种方法是在定位到待删除结点之后，重新从单链表表头开始来定位前驱。尽管通常会采用方法一。但其实这两种方法的效率是一样
->   2. 查找时也一样，我们可以借用二分法的思路，从head（首节点）向后查找操作和last（尾节点）向前查找操作同步进行，这样双链表的效率可以提高一倍
+>   >  - 删除单链表中的某个结点时，一定要得到待删除结点的前驱，得到该前驱有两种方法，第一种方法是在定位待删除结点的同时一路保存当前结点的前驱。第二种方法是在定位到待删除结点之后，重新从单链表表头开始来定位前驱。尽管通常会采用方法一。但其实这两种方法的效率是一样
+>   >  - 查找时也一样，我们可以借用二分法的思路，从head（首节点）向后查找操作和last（尾节点）向前查找操作同步进行，这样双链表的效率可以提高一倍
 >
 >3. `面试官`：从你的描述来看，双链表的在查找、删除的时候可以利用二分法的思想去实现,但是为什么目前市场应用上`单链表的应用要比双链表的应用要广泛`的多呢?
 >
->   > 从存储结构来看，每个双链表的节点要比单链表的节点多一个指针，而长度为n就需要 n*length（这个指针的length在32位系统中是4字节，在64位系统中是8个字节） 的空间，这在一些追求时间效率不高应用下并不适应，因为它占用空间大于单链表所占用的空间；这时设计者就会采用以时间换空间的做法，这时一种工程总体上的衡量。
+>   >从存储结构来看，每个双链表的节点要比单链表的节点多一个指针，而长度为n就需要 n*length（这个指针的length在32位系统中是4字节，在64位系统中是8个字节） 的空间，这在一些追求时间效率不高应用下并不适应，因为它占用空间大于单链表所占用的空间；这时设计者就会采用以时间换空间的做法，这时一种工程总体上的衡量。
 >
 >4. 结构对比图
 >
->   ![image-20210419144142974](A_数据结构与算法学习笔记中的图片/单向链表与双向链表结构对比图.png)
+>   >  ![image-20210419144142974](数据结构与算法进阶学习笔记中的图片/单向链表与双向链表结构对比图.png) 
+>
 
 ### 6、单链表之`约瑟夫问题`
 
@@ -1591,13 +1605,14 @@
 
 >1. `约瑟夫`（ *Josephu* ） 问题是一个非常著名的有趣的题目。问题具体描述如下：
 >
->   设编号分别为1、2、3… n 的 n 个人围坐一圈，约定编号为 k（1≤k≤n）的人从 1 开始报数，数到 m 的那个人出列。出列的人的下一位又从 1 开始报数，数到 m 的那个人继续出列。以此类推，直到所有人都出列为止，由此产生一个出队编号的序列，这个序列也就是约瑟夫问题的解。
+>> 设编号分别为1、2、3… n 的 n 个人围坐一圈，约定编号为 k（1≤k≤n）的人从 1 开始报数，数到 m 的那个人出列。出列的人的下一位又从 1 开始报数，数到 m 的那个人继续出列。以此类推，直到所有人都出列为止，由此产生一个出队编号的序列，这个序列也就是约瑟夫问题的解。
 >
 >2. 下面将用一个动图来描述一下这个问题
 >
->   假设有 4 个人围坐一圈，约定编号为 1 的人开始报数，数到 3 的那个出列。最后产生的出队编号的序列将会是：3、2、4、1。
+>   >假设有 4 个人围坐一圈，约定编号为 1 的人开始报数，数到 3 的那个出列。最后产生的出队编号的序列将会是：3、2、4、1。
+>   >
+>   >  <img src="数据结构与算法进阶学习笔记中的图片/约瑟夫问题动态图解.gif" style="zoom: 25%;" /> 
 >
->   <img src="A_数据结构与算法学习笔记中的图片/约瑟夫问题动态图解.gif" style="zoom: 25%;" />
 
 #### Ⅱ-老师给的思路实现
 
@@ -1605,11 +1620,11 @@
 >
 >2. 约瑟夫问题-创建环形链表的思路图解
 >
->   ![image-20210420142532651](A_数据结构与算法学习笔记中的图片/image-20210420142532651.png)
+>   ![image-20210420142532651](数据结构与算法进阶学习笔记中的图片/image-20210420142532651.png)
 >
 >3. 约瑟夫问题-小孩出圈的思路分析图
 >
->   ![image-20210420142614947](A_数据结构与算法学习笔记中的图片/image-20210420142614947.png)
+>   ![image-20210420142614947](数据结构与算法进阶学习笔记中的图片/image-20210420142614947.png)
 >
 >4. 代码实现:
 >
@@ -1752,163 +1767,163 @@
 >
 >1. 思路解析:
 >
->     1. 首先要确定解决问题的核心思想：`使用一个不带头结点的循环(环形)链表来处理该问题`。
->
->     2. 假设每个结点代表一个人，那么一个由 n 个结点组成的循环链表就相当于是 n 个人围成的一个圈。那么约瑟夫问题以环形链表的形式来描述就是如下情景：
->
->        首先使用 n 个结点构成一个单向循环链表，然后由第 k 个结点起从 1 开始计数，当计到 m 时，从链表中删除对应结点；接着从被删除结点的下一个结点开始从 1 计数，当计到 m 时，继续从链表中删除。依次循环往复，直到链表中的所有结点都被删除为止。
->
->     3. 那么对于这个单向循环链表形式下的约瑟夫问题，我们如何解决呢？
->
->        1) 我们可以引入一个辅助指针 helperNode，这个指针总是指向待删除结点的前一个结点。为什么这个辅助指针要指向待删除结点的前一个结点，而不是指向自身呢？
->
->        2) 因为我们的目的是要删除当前计数为 m 的结点，但是受限于单向链表的特性（如果要删除单链表的某个结点，必须要知道该结点的前一个结点），我们无法让结点自己删除自己。鉴于这个特性，我们必须要引入一个辅助指针来记录当前正在计数的结点的前一个结点，这样才能符合删除条件的结点从链表中删除。
+>    >1. 首先要确定解决问题的核心思想：`使用一个不带头结点的循环(环形)链表来处理该问题`。
+>    >
+>    >2. 假设每个结点代表一个人，那么一个由 n 个结点组成的循环链表就相当于是 n 个人围成的一个圈。那么约瑟夫问题以环形链表的形式来描述就是如下情景：
+>    >
+>    >   > 首先使用 n 个结点构成一个单向循环链表，然后由第 k 个结点起从 1 开始计数，当计到 m 时，从链表中删除对应结点；接着从被删除结点的下一个结点开始从 1 计数，当计到 m 时，继续从链表中删除。依次循环往复，直到链表中的所有结点都被删除为止。
+>    >
+>    >3. 那么对于这个单向循环链表形式下的约瑟夫问题，我们如何解决呢？
+>    >
+>    >   - 我们可以引入一个辅助指针 helperNode，这个指针总是指向待删除结点的前一个结点。为什么这个辅助指针要指向待删除结点的前一个结点，而不是指向自身呢？
+>    >
+>    >   - 因为我们的目的是要删除当前计数为 m 的结点，但是受限于单向链表的特性（如果要删除单链表的某个结点，必须要知道该结点的前一个结点），我们无法让结点自己删除自己。鉴于这个特性，我们必须要引入一个辅助指针来记录当前正在计数的结点的前一个结点，这样才能符合删除条件的结点从链表中删除。
 >
 >2. 引入这个辅助指针之后，具体的操作思路如下:
 >
->     1. 每一轮计数开始时，总让辅助指针 helperNode 初始指向本轮第一个计数的结点；
->     2. 从第一个计数的结点开始计数至 m，实际上是向后移动了 m-1 个结点。由于辅助指针总是指向待删除结点的前一个结点，因此让需要让辅助指从第一个计数结点后移 m-2 个结点；
->     3. 辅助指针移动到待删除结点的前一个结点之后，只需要让辅助指针指向待删除的结点的下一个结点即可完成删除操作；
->     4. 依次循环往复，直至只剩最后一个结点；
->     5. 对于环形链表判断是否只有最后一个结点，只需要判断辅助指针指向的结点是否是辅助指针指向的结点的下一个结点即可。
+>    >1. 每一轮计数开始时，总让辅助指针 helperNode 初始指向本轮第一个计数的结点；
+>    >2. 从第一个计数的结点开始计数至 m，实际上是向后移动了 m-1 个结点。由于辅助指针总是指向待删除结点的前一个结点，因此让需要让辅助指从第一个计数结点后移 m-2 个结点；
+>    >3. 辅助指针移动到待删除结点的前一个结点之后，只需要让辅助指针指向待删除的结点的下一个结点即可完成删除操作；
+>    >4. 依次循环往复，直至只剩最后一个结点；
+>    >5. 对于环形链表判断是否只有最后一个结点，只需要判断辅助指针指向的结点是否是辅助指针指向的结点的下一个结点即可。
 >
 >3. 上面的思路可以用下面一个动图来描述:
 >
->  <img src="A_数据结构与算法学习笔记中的图片/约瑟夫问题思路分析图2.gif" style="zoom:25%;" />
+> <img src="数据结构与算法进阶学习笔记中的图片/约瑟夫问题思路分析图2.gif" style="zoom:25%;" />
 >
 >4. 代码实现:
 >
->  ```java
->  package com.linkedlist.doublelinked;
->  /**
->   * 课程外思路实现
->   */
->  public class DoubleLinkedListDemo2 {
->      public static void main(String[] args) {
->          // 构造测试数据
->          HeroNode node_1 = new HeroNode(1, "宋江", "及时雨");
->          HeroNode node_2 = new HeroNode(2, "卢俊义", "玉麒麟");
->          HeroNode node_3 = new HeroNode(3, "吴用", "智多星");
->          HeroNode node_4 = new HeroNode(4, "公孙胜", "入云龙");
->          HeroNode node_5 = new HeroNode(5, "洪吉林", "码农");
->          HeroNode node_6 = new HeroNode(6, "努力学习的汪", "学习狗");
+> ```java
+> package com.linkedlist.doublelinked;
+> /**
+>  * 课程外思路实现
+>  */
+> public class DoubleLinkedListDemo2 {
+>     public static void main(String[] args) {
+>         // 构造测试数据
+>         HeroNode node_1 = new HeroNode(1, "宋江", "及时雨");
+>         HeroNode node_2 = new HeroNode(2, "卢俊义", "玉麒麟");
+>         HeroNode node_3 = new HeroNode(3, "吴用", "智多星");
+>         HeroNode node_4 = new HeroNode(4, "公孙胜", "入云龙");
+>         HeroNode node_5 = new HeroNode(5, "洪吉林", "码农");
+>         HeroNode node_6 = new HeroNode(6, "努力学习的汪", "学习狗");
 >
->          System.out.println("===============向环形链表中插入结点==================");
->          HeroNode first = insertCircleList(null, node_1);
->          first = insertCircleList(first, node_2);
->          first = insertCircleList(first, node_3);
->          first = insertCircleList(first, node_4);
->          first = insertCircleList(first, node_5);
->          first = insertCircleList(first, node_6);
->          showList(first);
+>         System.out.println("===============向环形链表中插入结点==================");
+>         HeroNode first = insertCircleList(null, node_1);
+>         first = insertCircleList(first, node_2);
+>         first = insertCircleList(first, node_3);
+>         first = insertCircleList(first, node_4);
+>         first = insertCircleList(first, node_5);
+>         first = insertCircleList(first, node_6);
+>         showList(first);
 >
->          System.out.println("===============约瑟夫游戏开始===============");
->          // 从第 1 个结点开始计数，每次计 3 个数。
->          josepfuGame(first, 1, 3);
+>         System.out.println("===============约瑟夫游戏开始===============");
+>         // 从第 1 个结点开始计数，每次计 3 个数。
+>         josepfuGame(first, 1, 3);
 >
->      }
+>     }
 >
->      /**
->       * @Description 1. 约瑟夫游戏开始
->       * @Param [first, k, m]   头节点,从第 k 个人开始数，每次数 m 个
->       */
->      public static void josepfuGame(HeroNode first, int k, int m) {
->          if (first == null) {
->              System.out.println("链表为空！");
->              return;
->          }
->          HeroNode helperNode = first;
->          // 首先要移动到第 k 个结点，此时辅助指针初始指向第一个计数的结点
->          for (int i = 1; i < k; i++) {
->              helperNode = helperNode.next;
->          }
->          while (helperNode.next.getNo() != helperNode.getNo()) {
->              // 报数， m 个数也就是相当于向后移动 m-1 次，也就是要把第 m-1 个结点去掉
->              // 由于单链表的特点，要去掉第 m-1 个结点，肯定是要让指针前一个结点，即第(m-2)个结点
->              for (int j = 0; j < m - 2; j++) {  // 让指针后移 m-2 个结点
->                  helperNode = helperNode.next;
->              }
->              System.out.println(helperNode.next + "退出链表了!");
->              // 删除结点
->              helperNode.next = helperNode.next.next;
->              // 因为下一轮要从刚刚去掉的结点的后面一个结点开始计数了，所以需要让辅助指针初始指向下一轮第一个计数的结点
->              helperNode = helperNode.next;
->          }
->          System.out.println(helperNode + "退出链表了!");
->      }
+>     /**
+>      * @Description 1. 约瑟夫游戏开始
+>      * @Param [first, k, m]   头节点,从第 k 个人开始数，每次数 m 个
+>      */
+>     public static void josepfuGame(HeroNode first, int k, int m) {
+>         if (first == null) {
+>             System.out.println("链表为空！");
+>             return;
+>         }
+>         HeroNode helperNode = first;
+>         // 首先要移动到第 k 个结点，此时辅助指针初始指向第一个计数的结点
+>         for (int i = 1; i < k; i++) {
+>             helperNode = helperNode.next;
+>         }
+>         while (helperNode.next.getNo() != helperNode.getNo()) {
+>             // 报数， m 个数也就是相当于向后移动 m-1 次，也就是要把第 m-1 个结点去掉
+>             // 由于单链表的特点，要去掉第 m-1 个结点，肯定是要让指针前一个结点，即第(m-2)个结点
+>             for (int j = 0; j < m - 2; j++) {  // 让指针后移 m-2 个结点
+>                 helperNode = helperNode.next;
+>             }
+>             System.out.println(helperNode.next + "退出链表了!");
+>             // 删除结点
+>             helperNode.next = helperNode.next.next;
+>             // 因为下一轮要从刚刚去掉的结点的后面一个结点开始计数了，所以需要让辅助指针初始指向下一轮第一个计数的结点
+>             helperNode = helperNode.next;
+>         }
+>         System.out.println(helperNode + "退出链表了!");
+>     }
 >
->      /**
->       * @Description 2. 插入结点到环形链表中，用于构造环形链表
->       */
->      public static HeroNode insertCircleList(HeroNode first, HeroNode node) {
->          // 判断链表是不是为空，如果为空，就直接插入
->          if (first == null) {
->              first = node;
->              // 因为要环形链表，而且只有一个结点，所以要我指向我自己
->              first.next = node;
->          } else {
->              // 如果环形链表不为空
->              HeroNode tempNode = first;
->              while (true) {
->                  // 如果到了环形链表的最后一个元素
->                  if (tempNode.next.getNo() == first.getNo()) {
->                      tempNode.next = node;
->                      // 因为是环形链表，所以最后一个结点还要指向第一个结点
->                      node.next = first;
->                      break;
->                  }
->                  tempNode = tempNode.next;
->              }
->          }
->          return first;
->      }
+>     /**
+>      * @Description 2. 插入结点到环形链表中，用于构造环形链表
+>      */
+>     public static HeroNode insertCircleList(HeroNode first, HeroNode node) {
+>         // 判断链表是不是为空，如果为空，就直接插入
+>         if (first == null) {
+>             first = node;
+>             // 因为要环形链表，而且只有一个结点，所以要我指向我自己
+>             first.next = node;
+>         } else {
+>             // 如果环形链表不为空
+>             HeroNode tempNode = first;
+>             while (true) {
+>                 // 如果到了环形链表的最后一个元素
+>                 if (tempNode.next.getNo() == first.getNo()) {
+>                     tempNode.next = node;
+>                     // 因为是环形链表，所以最后一个结点还要指向第一个结点
+>                     node.next = first;
+>                     break;
+>                 }
+>                 tempNode = tempNode.next;
+>             }
+>         }
+>         return first;
+>     }
 >
->      /**
->       * @Description 3. 打印单向环形链表
->       */
->      public static void showList(HeroNode first) {
->          if (first == null) {
->              System.out.println("链表为空！");
->              return;
->          }
->          HeroNode tempNode = first;
->          while (true) {
->              if (tempNode.next.getNo() == first.getNo()) {
->                  System.out.println(tempNode);
->                  break;
->              }
->              System.out.println(tempNode);
->              tempNode = tempNode.next;
->          }
->      }
+>     /**
+>      * @Description 3. 打印单向环形链表
+>      */
+>     public static void showList(HeroNode first) {
+>         if (first == null) {
+>             System.out.println("链表为空！");
+>             return;
+>         }
+>         HeroNode tempNode = first;
+>         while (true) {
+>             if (tempNode.next.getNo() == first.getNo()) {
+>                 System.out.println(tempNode);
+>                 break;
+>             }
+>             System.out.println(tempNode);
+>             tempNode = tempNode.next;
+>         }
+>     }
 >
->  }
+> }
 >
 >
->  class HeroNode {
->      private int no;             // 本节点数据
->      private String name;
->      private String nickName;
->      public HeroNode next;       // 指向下一个节点
+> class HeroNode {
+>     private int no;             // 本节点数据
+>     private String name;
+>     private String nickName;
+>     public HeroNode next;       // 指向下一个节点
 >
->      public HeroNode(int no, String name, String nickName) {
->          this.no = no;
->          this.name = name;
->          this.nickName = nickName;
->      }
+>     public HeroNode(int no, String name, String nickName) {
+>         this.no = no;
+>         this.name = name;
+>         this.nickName = nickName;
+>     }
 >
->      public int getNo() {
->          return no;
->      }
+>     public int getNo() {
+>         return no;
+>     }
 >
->      //为了显示方法,我们重新toString
->      @Override
->      public String toString() {
->          return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickName + "]";
->      }
->  }
+>     //为了显示方法,我们重新toString
+>     @Override
+>     public String toString() {
+>         return "HeroNode[no=" + no + ",name=" + name + ",nickname=" + nickName + "]";
+>     }
+> }
 >
->  ```
+> ```
 
 
 
@@ -1928,7 +1943,7 @@
 >
 >5) 图解方式说明`出栈(pop)和入栈(push)`的概念
 >
->​	![image-20210426093842922](A_数据结构与算法学习笔记中的图片/image-20210426093842922.png)
+>​	![image-20210426093842922](数据结构与算法进阶学习笔记中的图片/image-20210426093842922.png)
 
 #### Ⅱ-栈的应用场景
 
@@ -2072,29 +2087,28 @@
 >
 >3. 如果要实现一个计算器，可以按照以下思路：
 >
->   1) 初始化两个栈，一个作为符号栈、一个作为数字栈；
->
->   2) 通过一个索引 index，来从左至右遍历中缀表达式；
->
->   3) 如果遍历到的是一个数字，就直接入数字栈；
->
->   4) 如果遍历到的是一个符号：
->
->   ​	① 如果当前符号栈为空，就直接入符号栈；
->
->   ​	② 如果符号栈有操作符，就进行比较：
->
->   ​		1. 若当前的操作符优先级小于或等于栈顶的操作符，就从数字栈中 pop 出两个数，再从符号栈中 pop 出一个符号进行运算。运算得到的结果 push 入数字栈中，然后将当前的操作符入符号栈；
->
->   ​		2. 若当前的操作符优先级大于栈顶的操作符，就直接入符号栈；
->
->   5) 中缀表达式遍历完毕之后，就依次从数字栈和符号栈中 pop 出相应的数和符号，对他们进行运算；
->
->   6) 最后在数字栈中将只剩下一个数字，这个数字就是表达式的结果。
+>   >  - 初始化两个栈，一个作为符号栈、一个作为数字栈；
+>   >
+>   >  - 通过一个索引 index，来从左至右遍历中缀表达式；
+>   >
+>   >  - 如果遍历到的是一个数字，就直接入数字栈；
+>   >
+>   >  - 如果遍历到的是一个符号：
+>   >
+>   >  ​	① 如果当前符号栈为空，就直接入符号栈；
+>   >
+>   >  ​	② 如果符号栈有操作符，就进行比较：
+>   >
+>   >>1.  若当前的操作符优先级小于或等于栈顶的操作符，就从数字栈中 pop 出两个数，再从符号栈中 pop 出一个符号进行运算。运算得到的结果 push 入数字栈中，然后将当前的操作符入符号栈；
+>   >>2. 若当前的操作符优先级大于栈顶的操作符，就直接入符号栈；
+>   >
+>   >  - 中缀表达式遍历完毕之后，就依次从数字栈和符号栈中 pop 出相应的数和符号，对他们进行运算；
+>   >
+>   >  - 最后在数字栈中将只剩下一个数字，这个数字就是表达式的结果。
 >
 >4. 思路分析图:
 >
->   ![image-20210426144425068](A_数据结构与算法学习笔记中的图片/image-20210426144425068.png)
+>  ![image-20210426144425068](数据结构与算法进阶学习笔记中的图片/image-20210426144425068.png)
 
 #### Ⅱ-代码实现:
 
@@ -2265,6 +2279,22 @@
 >    }
 >}
 >```
+
+### 4、前缀、中缀、后缀表达式
+
+>刚刚说到那个中缀计算器的 时候可能就有同学要问了,什么是中缀?那么带着疑惑来学习,我就将其知识点在此处记录
+
+#### Ⅰ - 定义与举栗
+
+>它们都是对表达式的记法，因此也被称为前缀记法、中缀记法和后缀记法。它们之间的区别在于运算符相对与操作数的位置不同：前缀表达式的运算符位于与其相关的操作数之前；中缀和后缀同理。
+>
+>(3 + 4) × 5 - 6 就是中缀表达式
+>\- × + 3 4 5 6 前缀表达式
+>3 4 + 5 × 6 - 后缀表达式
+
+
+
+
 
 
 

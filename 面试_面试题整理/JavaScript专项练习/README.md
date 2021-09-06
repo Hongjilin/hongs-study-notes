@@ -259,7 +259,9 @@
 >
 >>除了Oject,其他的全选
 
-# 四、类型转换相关
+# 四、运算符、类型转换 相关
+
+> 此部分相关知识点不懂得可以尝试百度 [ js Operators logical ] 关键词了解详情
 
 ## Ⅰ- 单选题
 
@@ -307,6 +309,47 @@
 >
 >![image-20210906101415830](JavaScript专项练习中的图片/image-20210906101415830.png) 
 
+### 2、以下哪个表达式的值为true？
+
+>```js
+>'1' === 1
+>isNaN(1/0)
+>1 in [1]
+>1 && 2 > 1
+>```
+>
+>##### 知识点梳理
+>
+>>1. 考查函数的优先级  -->  [可以点我传送](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+>>
+>>2. `isNaN()` 函数用来确定一个值是否为[NaN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/NaN) 
+>>
+>>3. 考察对于逻辑符 “&&”和‘||’ 的理解:
+>>
+>>   > ![image-20210906135057894](JavaScript专项练习中的图片/image-20210906135057894.png) 
+>
+>##### 答案解析
+>
+>1. A选项，'1'是字符串string，1是数字number。类型不一样，===下比较返回false。
+>
+>2. B选项。
+>
+>   >- 任何数值除以0都会导致错误而终止程序执行。但是在 JavaScript 中，**会返回出特殊的值**，因此不会影响程序的执行。
+>   >- 比0大的数除以0，则会得到无穷大，所以 js 用 `Infinity` 来显示出来。
+>   >- 也就是1/0得到的是Infinity。isNaN(1/0)返回的是false。但是isNaN(0/0)返回的就是true
+>
+>3. C选项。
+>
+>   >- in操作符，对于数组属性需要指定数字形式的**索引值**来表示数组的属性名称（固有属性除外，如length）。
+>   >- 所以说在这里，1 in [1]并不是表示数字1在不在数组里。而是表示数组中含不含有1这个索引index值。
+>   >- 数组长度为1，所以只含有的index值为0，这个表达式返回fasle。
+>
+>4. D选项。
+>
+>   > * 1 && 2 > 1，先判断右边的表达式，2>1返回true。1 && true返回的结果也是true。
+
+
+
 ## Ⅱ- 不定项选择题
 
 ### 1、 以下哪些表达式的值为 0 ？
@@ -339,3 +382,100 @@
 >     | 第一次回调 | 0（设置的初始值） | 1            | 0            | [1,2,-3] | 0-1         | -1     |
 >     | 第二次回调 | -1                | 2            | 1            | [1,2,-3] | (0-1)-2     | -3     |
 >     | 第三次回调 | -3                | -3           | 2            | [1,2,-3] | ((0-1)-2)-3 | 0      |
+
+# 五、方法理解相关
+
+## Ⅰ- 单选题
+
+### 1、 下列代码中 hasOwnProperty 的作用是？
+
+>```js
+>var obj={}
+>obj.hasOwnProperty("val")
+>//下面是选项
+>判断obj对象是否具有val属性
+>判断obj对象是否具有val的值
+>判断obj的原型对象是否具有val的属性
+>判断obj的原型对象是否具有val的值
+>```
+>
+>##### 知识点梳理
+>
+>>**[hasOwnProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)：** 是用来判断一个对象是否有你给出名称的属性或对象。不过需要注意的是，此方法无法检查该对象的原型链中是否具有该属性，该属性必须是对象本身的一个成员。
+>>
+>>**isPrototypeOf :** 是用来判断要检查其原型链的对象是否存在于指定对象实例中，是则返回true，否则返回false。
+>
+>##### 答案解析
+>
+>> 选择A
+
+# 六、this指向相关
+
+> 此处知识点不懂的可以看本人 [JS进阶笔记函数的this部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A4-%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this),本人给出了详细的笔记梳理
+
+## Ⅰ- 单选题
+
+>```js
+>var user = {
+>count : 1,
+>getCount: function(){
+>return this.count;
+>}
+>}
+>var func = user.getCount
+>console.log(func())
+>//以下是选项
+>this.count
+>1
+>报错
+>undefined
+>```
+>
+>##### 知识点梳理
+>
+>1. 调用对象未声明的属性会返回 undefined
+>
+>   >   ```js
+>   >   const user={};
+>   >   console.log(user.name);//undefined
+>   >   ```
+>
+>2. 使用未赋值只声明的基本数据类型会返回 undefined
+>
+>   >   ```js
+>   >   const one;
+>   >   console.log(one);//undefined
+>   >   ```
+>
+>3. 使用未声明的变量会报错
+>
+>   >   ```js
+>   >   console.log(two);// Uncaught ReferenceError: two is not defined
+>   >   ```
+>
+>4. this对象在运行的时候是基于 **函数执行的环境** 绑定的：在全局环境中this等于window，而函数被作为某个对象的方法调用时，this等于那个对象。
+>
+>##### 答案解析
+>
+>1. 在本题中，this指向的是window,window对象已经自动被浏览器声明了，只是还没有声明count属性，所以也是undifned
+>
+>2. 可能有小伙伴会问:这个this不是应该指向user吗？想问下为啥指向window呢？
+>
+>  >因为func=user.getCount只是保存了getCount函数，并没有执行，该函数是在console里面执行，func()就相当于user.getCount()，一看是像user调用，其实func()就相当于一个全局的函数，实际上是window.func() ,也就是window.user.getCount()  
+>
+>3. 综上所述可以得知,结果为undefined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

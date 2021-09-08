@@ -414,9 +414,9 @@
 >var b="false";
 >var c="";
 >function assert(aVar){
->   if(aVar) alert(true);
->   else  alert(false);
->  }
+>if(aVar) alert(true);
+>else  alert(false);
+>}
 >assert(a);
 >assert(b);
 >assert(c);
@@ -431,23 +431,112 @@
 >
 >- `if(condition)`  的condition求值结果若非布尔值，ECMAScript会自动调用Boolean()转换函数将结果转换为布尔值。转换规则为：
 >
->  > | 数据类型  | 转换为true     | 转换为false |
->  > | --------- | -------------- | ----------- |
->  > | boolean   | true           | false       |
->  > | String    | 任何非空字符串 | 空字符串    |
->  > | Number    | 任何非零数字值 | 0和NaN      |
->  > | Object    | 任何对象       | null        |
->  > | Undefined |                | undefined   |
+> > | 数据类型  | 转换为true     | 转换为false |
+> > | --------- | -------------- | ----------- |
+> > | boolean   | true           | false       |
+> > | String    | 任何非空字符串 | 空字符串    |
+> > | Number    | 任何非零数字值 | 0和NaN      |
+> > | Object    | 任何对象       | null        |
+> > | Undefined |                | undefined   |
 >
 >- JavaScript里面的六种假值：false、0、''''、undefined、null、NaN
 >
 >##### 答案解析:
 >
->> 此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
+>>此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
 >>
->> 变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
+>>变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
 >>
->> 所以选择B
+>>所以选择B
+
+### 4、JavaScript定义var a="30",var b=8,则执行a%b会得到 ?
+
+>```js
+>//以下是选项
+>undefined
+>6
+>"6"
+>null
+>```
+>
+>##### 知识点梳理
+>
+>>* 运算中，如果是数字与字符串的加法运算，那么数字会被转化为字符串，进行字符串拼接 其他运算的时候，字符串会被转化为数字，然后进行运算
+>>* % --> 余数指整数除法中被除数未被除尽部分，且余数的取值范围为0到除数之间（不包括除数）的整数。
+>
+>##### 答案解析
+>
+>> 30/8得3余6 所以答案是B
+
+### 5、下面结果为真的表达式是：
+
+>```js
+>null instanceof Object
+>null === undefined
+>null == undefined
+>NaN == NaN
+>```
+>
+>##### 知识点梳理
+>
+>1. **instanceof**运算符希望左操作数是一个对象，右操作数表示对象的类（初始化对象的构造函数）。如果左侧的对象是右侧对象的实例，返回true，否则返回false。 
+>   - 例如：计算o instanceof f   首先计算f.prototype，然后在原型链中查找o，找到返回true 
+>2. **===**严格相等运算符：首先计算其操作数的值，然后比较这两个值，比较过程中没有任何类型转换 
+>3. **==**相等运算符：如果两个操作数不是同一类型，那么会尝试进行一些类型转换，然后进行比较
+>4. MDN相等性判断表格(实际上也不用去背,理解即可):
+>
+>|           | Undefined | Null    | Number                | String                        | Boolean                       | Object                        |
+>| :-------- | :-------: | ------- | --------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
+>| Undefined |  `true`   | `true`  | `false`               | `false`                       | `false`                       | `IsFalsy(B)`                  |
+>| Null      |  `true`   | `true`  | `false`               | `false`                       | `false`                       | `IsFalsy(B)`                  |
+>| Number    |  `false`  | `false` | `A === B`             | `A === ToNumber(B)`           | `A=== ToNumber(B)`            | `A== ToPrimitive(B)`          |
+>| String    |  `false`  | `false` | `ToNumber(A) === B`   | `A === B`                     | `ToNumber(A) === ToNumber(B)` | `ToPrimitive(B) == A`         |
+>| Boolean   |  `false`  | `false` | `ToNumber(A) === B`   | `ToNumber(A) === ToNumber(B)` | `A === B`                     | ToNumber(A) == ToPrimitive(B) |
+>| Object    |   false   | false   | `ToPrimitive(A) == B` | `ToPrimitive(A) == B`         | ToPrimitive(A) == ToNumber(B) | `A === B`                     |
+>
+>##### 答案解析
+>
+>1. null instanceof Object: false
+>   - 此处可能有同学会提出疑惑:在js中 typeof null会返回object,那为什么**null instanceof Object 会返回 false**?
+>   - 我的理解是：null的类型是object，这是由于历史原因造成的。1995年的 JavaScript 语言第一版，只设计了五种数据类型（对象、整数、浮点数、字符串和布尔值），没考虑null，只把它当作object的一种特殊值。因此null并不是Object实例化的对象，再后来null独立出来，作为一种单独的数据类型，为了兼容以前的代码，typeof null返回object就没法改变了
+>2. B与C选项
+>   -  null和undefined是不同的，但它们都表示“值的空缺”，判断相等运算符“==”**两者是相等的者往往可以互换，因此==运算符认为两者是相等的**,如果要进行正确判断要使用严格相等运算符“===”来区分它们。
+>3. D选项
+>   - NaN表示非数字值,是一个不确定数,所以NaN不能等于NaN
+>   - 特殊之处：它和任何值都不相等，包括自身。
+>   - 判断NaN的方法：**x!=x返回true**
+>4. 所以选择C
+
+### 6、下面程序的显示结果是?
+
+>```js
+>var x = new Boolean(false);
+>if (x) {
+>  alert('hi'); 
+>}
+>var y = Boolean(0);
+>if (y) {
+>  alert('hello');  
+>}
+>```
+>
+>##### 知识点梳理
+>
+>1. 详情可以查阅[MDN的Boolean相关资料](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
+>2. 注意点: 要分清 **new Boolean()** 与 **Boolean()**的区别:
+>   - ![image-20210908112451290](JavaScript专项练习中的图片/image-20210908112451290.png) 
+>   -  **任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）包括 `布尔对象`
+>
+>##### 答案解析:
+>
+>>1. if(x) 这里期望 x 是一个布尔类型的原始值，而 x 是一个对象，**任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）。      
+>>2. 题目的第二部分，一定要注意 **y = Boolean(0)**，**而不是 y = new Boolean(0)。**
+>>   - 这两个有很大区别，用 new 调用构造函数会新建一个布尔对象，此处没有加 new，进行的是显示类型转换，
+>>   - 正如上述第一条所说，0 转换布尔，结果为 false，所以此时 y 的值就是 false。
+>>   - 如果加了 new，那么 y 就是一个 Boolean 类型的对象，执行 if(y) 时，对象转布尔，始终是 true，所以结果会与不加 new 的时候相反。
+>>3. 所以会打印 'hi'
+
+
 
 
 
@@ -619,7 +708,54 @@
 >
 >5. 所以选择ABD
 
-# 七、拓充知识点
+# 七、闭包相关
+
+> 此部分知识点如果不够梳理,可以看本人JS笔记中对于  [闭包的详细描述](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#5%E9%97%AD%E5%8C%85)  
+
+## Ⅰ - 单选题
+
+### 1、下面这个JS程序的输出是什么：
+
+>```js
+>function Foo() {
+>var i = 0;
+>return function() {
+>   console.log(i++);
+>}
+>}
+>var f1 = Foo(), f2 = Foo();
+>f1();
+>f1();
+>f2();
+>//以下是选项
+>0 1 0
+>0 1 2
+>0 0 0
+>0 0 2
+>```
+>
+>##### 知识点梳理
+>
+>1. Function是引用类型：保存在堆中，变量f1,f2是保存在栈中； 
+>2. 闭包：一个函数（产生新的作用域）定义的局部变量、子函数的作用域在函数内， 但是一旦离开了这个函数，局部变量就无法访问   -->  [关于闭包详细笔记请看](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#5%E9%97%AD%E5%8C%85)  
+>3. 作用域:篇幅较长,所以放一个索引,需要的同学可以去查阅 -->  [作用域相关知识点笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#3%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE)
+>4. 运算符: i++与++i的区别:
+>
+>![image-20210908105359459](JavaScript专项练习中的图片/image-20210908105359459.png) 
+>
+>##### 答案解析
+>
+>>var f1, f2=Foo()中，先执行Foo():i=0 ; return返回一个函数给f1、f2
+>>
+>>* 第一次f1() :   (f1指向子函数 :**f1()=function(){console.log(i++)},**  因为子函数没有定义i，所以向上找到父函数定义的 i:   )并执行子函数 输出i=0,再自加 i =1(覆盖了父函数Foo 的 i值);
+>>* 第二次f1() :   执行的是子函数 **Function(){console.log(i++)}**,输出的是父函数 的 i=1,再自加 i =2;
+>>* 第一次f2() :  此处同**第一次f1()**,不同的是 f2指向堆中一个新的对象 function(){ ...},所以此i非彼i,输出i=0;如果如果再次f2(),那么和第二次f1(),一样输出i=1; 
+>>* 所以答案为0 1 0
+>
+
+
+
+# 八、拓充知识点
 
 ## Ⅰ- 单选题
 
@@ -673,9 +809,8 @@
 >
 >##### 答案解析:
 >
->> css是一种**层叠样式表**,所以不算
+>> css是一种**层叠样式表**,所以不算 , 答案只有JavaScript.    
 >>
->> 答案只有JavaScript.    
 
 
 

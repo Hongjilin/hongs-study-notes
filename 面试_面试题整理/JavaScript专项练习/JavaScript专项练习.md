@@ -623,6 +623,29 @@
 >
 >> E
 
+### 3、setTimeout(“go()”, 10);表示的意思是()
+
+>```js
+>间隔10秒后，go()函数执行一次
+>go()函数持续调用10次
+>间隔10毫秒后，go()函数执行一次
+>间隔10分钟后，go()函数执行一次
+>```
+>
+>##### 知识点梳理
+>
+>* setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。 
+>* setTimeout() 是属于 window 的方法，该方法用于在指定的毫秒数后调用函数或计算表达式。
+>* JavaScript中setInterval和setTimeout第一个参数加与不加引号的区别? -->
+>
+>##### 答案解析
+>
+>> 首先 setTimeout 是超时方法,所以排除B选项,其次第二个参数单位是毫秒,所以排除A、D项
+>>
+>> 所以选择C
+
+
+
 # 六、this指向相关
 
 > 此处知识点不懂的可以看本人 [JS进阶笔记函数的this部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A4-%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this),本人给出了详细的笔记梳理

@@ -114,6 +114,41 @@
 >>```
 >
 
+### 4、关于下述代码所实现的功能，以下说法正确的是:
+
+>```html
+><div>
+> <input type="button" id ="button1" value="1" onclick="moveBtn(this);">
+> <input type="button" id ="button2" value="2" />
+> </div>
+> <script type="text/javascript">
+> function moveBtn(obj) {
+> var clone = obj.cloneNode(true);
+> var parent = obj.parentNode;
+> parent.appendChild(clone);
+> parent.removeChild(obj);
+> }
+> </script>
+>//下面是选项
+>鼠标单击Button1后将Button1链接到Button2的后面
+>鼠标单击Button1后将Button1移动到Button2的后面
+>鼠标单击Button1后将Button2移动到Button1的后面
+>鼠标单击Button1后将Button2链接到Button1的后面
+>```
+>
+>##### 答案解析
+>
+>>```js
+>>var clone = obj.cloneNode(true); // 复制一个button1结点
+>>var parent = obj.parentNode; // 找到button1的父节点
+>>parent.appendChild(clone); // 将复制的结点加入到父节点，也就是button1的复制结点现在在button2后面了
+>>parent.removeChild(obj); // 移除原来的button1
+>>```
+>>
+>>最终达到的效果 : 就是把button1结点移到button2结点后面
+
+
+
 ## Ⅱ - 不定项选择
 
 ### 1、在一个块元素中，存在了很多的行元素，现在要求，将这些行元素中，只要有显示“叮咚”的行元素全部删除
@@ -141,6 +176,43 @@
 >
 >> * P、div标签是块级元素,所以错
 >> * 答案选择AD
+
+### 2、页面有一个按钮button id为 buttonx，通过原生的js如何禁用？(IE 考虑IE 8.0以上版本)
+
+>```html
+><body>
+>  <button id="button1">禁用1</button>
+>  <button id="button2">禁用2</button>
+>  <button id="button3">禁用3</button>
+>  <button id="button4">禁用4</button>
+>  <button id="button5">禁用5</button>
+>  <button id="button6">禁用6</button>
+></body>
+><script>
+>  //下面是选项    
+>  document.getElementById("button1").readOnly = true;
+>  document.getElementById("button2").setAttribute('readOnly', 'true');
+>  document.getElementById("button3").disabled = true;
+>  document.getElementById("button4").disabled = false; //使用此方法设置 disabled 为false
+>  document.getElementById("button5").setAttribute('disabled', 'true');
+>  document.getElementById("button6").setAttribute('disabled', false); //使用 setAttribute 方法设置 disabled 为false
+></script>
+>```
+>
+>##### 知识点梳理
+>
+>>* disabled和readOnly都是表单的公有属性， readOnly是只读， disabled是禁用。
+>>* 同时 Readonly 只针对 input(text/password)  和 textarea 有效
+>>* 只要设置了 [disabled] 属性不论什么值都会禁用,包括 **false**,页面似乎只在乎是否有这个属性 而不在乎其值
+>>* 小知识点：setArrtibute在ie7以前是不能通过style和class设置属性的
+>>*  **[JavaScript专项练习]()**
+>
+>##### 答案解析
+>
+>>* 同时 Readonly 只针对 input(text/password)  和 textarea 有效,所以排除A、B项
+>>* 其余项看下方图解
+>>
+>>![image-20210909195142924](JavaScript专项练习中的图片/image-20210909195142924.png) 
 
 # 二、正则相关
 
@@ -636,15 +708,51 @@
 >
 >* setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。 
 >* setTimeout() 是属于 window 的方法，该方法用于在指定的毫秒数后调用函数或计算表达式。
->* JavaScript中setInterval和setTimeout第一个参数加与不加引号的区别? -->
+>* JavaScript中setInterval和setTimeout第一个参数加与不加引号的区别? --> [不知道的点我传送](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0/setInterval%E5%92%8CsetTimeout%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E5%8A%A0%E4%B8%8E%E4%B8%8D%E5%8A%A0%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB.md)
 >
 >##### 答案解析
 >
->> 首先 setTimeout 是超时方法,所以排除B选项,其次第二个参数单位是毫秒,所以排除A、D项
->>
->> 所以选择C
+>> * 首先 setTimeout 是超时方法,所以排除B选项,其次第二个参数单位是毫秒,所以排除A、D项,所以选择C
+>> * 个人认为其实答案可能稍微有点不严谨,换成:**10ms后把执行这个方法的任务推入到宏任务队列中**,可能更好些
+>> * 对于宏任务与微任务不理解的同学可以看这里 --> [宏任务( macro task )与微任务( micro task )](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A2-%E5%AE%8F%E4%BB%BB%E5%8A%A1macro-task%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1micro-task)
 
+## Ⅱ - 不定项选择
 
+### 1、下面哪些方式在同一个窗口下能够检测一个js对象是数组类型？
+
+>```js
+>Array.isArray()
+>instanceof
+>typeof
+>Object.prototype.toString.call()
+>```
+>
+>##### 知识点梳理
+>
+>>* **Array.isArray()** 用于确定传递的值是否是一个 [Array](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)。
+>>* **instanceof** 运算符用来判断一个构造函数的prototype属性所指向的对象是否存在另外一个要检测对象的原型链上.其内部机制是通过判断对象的原型链中是不是能找到类型的 prototype 。
+>>* **typeof** 操作符返回一个字符串，表示未经计算的操作数的类型。
+>>* **Object.prototype.toString.call()** 常用于判断浏览器内置对象。 
+>
+>##### 答案解析
+>
+>1. A选项没啥好说的,原生支持的方法
+>
+>   > ![image-20210909195908190](JavaScript专项练习中的图片/image-20210909195908190.png) 
+>
+>2. B选项 **instanceof** 运算符返回一个布尔值，表示对象是否为某个构造函数的实例,这时可能就有同学要提出疑问了:
+>
+>   - 我用这个方法,似乎无法分辨数组与对象的区别啊, arr instanceof Array/Object 似乎都会返回 **true** !这不是不严谨吗?
+>   - 注意审题:检测一个JS对象是数组类型,既定的事实是我们当前是一个对象,然后要判断它是否为数组,不懂直接看图解 
+>   - ![image-20210909202222992](JavaScript专项练习中的图片/image-20210909202222992.png)
+>
+>3. C选项 **typeof** 能判断类型有：number、string、boolean、symbol、undefined、function； 
+>
+>   -  **object、array、null**的变量都返回 object,所以错
+>
+>4. D选项直接上图
+>
+>   ![image-20210909203353878](JavaScript专项练习中的图片/image-20210909203353878.png) 
 
 # 六、this指向相关
 
@@ -776,9 +884,82 @@
 >>* 所以答案为0 1 0
 >
 
+# 八、ES系列相关
+
+> 关于ES系列详细笔记可以看这里  --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
+
+## Ⅰ - 单选题
+
+### 1、以下符合 ES6 写法的有：
+
+>```js
+>/*-------A-----*/
+>class Foo
+>{
+>	constructor() {return Object.create(null);}
+>}
+>Foo()
+>/*-------B-----*/
+>var m=1;
+>export m;
+>/*-------C-----*/
+>export var firstName=’Michael’;
+>/*-------D-----*/
+>在A模块中 export{ readFile } 后
+>在B模块中 import readFile from 'A' 可以获取到 readFile
+>```
+>
+>##### 知识梳理
+>
+>> * 详细知识点主要在ES6的  导入导出 class相关部分,查阅详情请看 --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
+>> * constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有 **constructor** 方法，如果没有显式定义，一个空的 **constructor** 被默认添加。
+>
+>##### 答案解析
+>
+>1. A: FOO是一个类, 类必须使用new调用，否则会报错。这是它跟普通构造函数的一个主要区别，后者不用new也可以执行。
+>
+>2. B: **export** 命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。
+>
+>  - 错误写法:
+>
+>    >```js
+>    >// 报错
+>    >export 1;
+>    >// 报错
+>    >var m = 1;
+>    >export m;
+>    >```
+>    >
+>    >上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出 1，第二种写法通过变量m，还是直接输出 1。1只是一个值，不是接口
+>
+>  - 正确写法:
+>
+>    >```js
+>    >// 写法一
+>    >export var m = 1;
+>    >// 写法二
+>    >var m = 1;
+>    >export {m};
+>    >// 写法三
+>    >var n = 1;
+>    >export {n as m};
+>    >```
+>
+>3. C: 正确项
+>
+>4. D: A模块对外暴露了一个对象，引入的时候需要使用解构赋值
+>
+>  - >```js
+>    >在A模块中 export{ readFile } 后
+>    >在B模块中 import { readFile } from 'A' 可以才获取到 readFile
+>    >//或者使用默认导入的方式
+>    >在A模块中 export default  readFile  后
+>    >在B模块中 import  readFile  from 'A' 可以才获取到 readFile
+>    >```
 
 
-# 八、拓充知识点
+
+# 九、拓充知识点
 
 ## Ⅰ- 单选题
 

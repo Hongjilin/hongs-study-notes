@@ -147,6 +147,66 @@
 >>
 >>最终达到的效果 : 就是把button1结点移到button2结点后面
 
+### 5、el 是一个id="id1"的div元素，以下哪行代码会执行失败
+
+>```js
+>el.className='aaa'
+>el.tagName='p'
+>el.innerHTML=''
+>el.id='id2'
+>```
+>
+>##### 知识梳理及答案解析
+>
+>1. className 属性**设置或返回**元素的 class 属性。
+>   - 获取属性值：HTMLElementObject.className；
+>   - 设置属性值：HTMLElementObject.className=*classname* 
+>2. tagName 属性返回元素的标签名。HTML 返回 tagName 属性的值是大写的。
+>   - 读取方法: element.tagName()
+>   - 但是要注意:**tagName是只读的，不能修改**,所以可以判断此处错了
+>3. innerHTML 属性**设置或返回**表格行的开始和结束标签之间的 HTML。
+>   - 设置方法: HTMLElementObject.innerHTML=text 
+>4. id 属性设置或者返回元素的 id。
+>   - 设置方法HTMLElementObject.id=id
+>
+>##### 新的疑惑提出
+>
+>在验证 **选项D** 时发现了一个很有意思的事情,直接上代码,猜一下下面打印的结果
+>
+>>```html
+>><body>
+>>  <div id="id1">xxx</div>
+>></body>
+>><script>
+>>  let el = document.querySelector('#id1')
+>>  console.log(el)
+>>  el.id = 'id2'
+>>  console.log(el)
+>>  el.id = 'id4'
+>>  console.log(el)
+>>  setTimeout(() => {
+>>    el.id = 'id3'
+>>    console.log(el)
+>>  }, 1000)
+>></script>
+>>```
+>>
+>>![image-20210910185337657](JavaScript专项练习中的图片/image-20210910185337657.png) 
+>
+>是不是有点奇怪,这里有两个疑惑点:为何前面三个都是**id4** ,如果是因为改到引用的问题,为何第四个是 **id3**?
+>
+>1. 首先先解答为何加在延时器中的 **id3** 可以正常打印出来?
+>
+>   - 定时器会将代码推入宏任务中,待前方同步任务执行完成后在运行,所以即便它也是改到了**el**, 但前方的打印输出已经执行完毕了,就不会对控制台前面三个产生影响
+>
+>2. 为什么前面三个打印会按照最后一次修改为准呢?不是说同步吗?那即便改到了 **el** 应该不会影响到修改前的console.log(),难道console.log()是异步的?
+>
+>   - console.log()是异步的吗?  详情请看本人笔记,这个能解释为何会引发这种问题  --> [点我跳转]()
+>
+>   - 当你用调试工具打断点后,实际上发现会是正常的
+>
+>     ![image-20210910190905653](JavaScript专项练习中的图片/image-20210910190905653.png)
+
 
 
 ## Ⅱ - 不定项选择
@@ -645,6 +705,51 @@
 >     | 第二次回调 | -1                | 2            | 1            | [1,2,-3] | (0-1)-2     | -3     |
 >     | 第三次回调 | -3                | -3           | 2            | [1,2,-3] | ((0-1)-2)-3 | 0      |
 
+## Ⅲ - 填空题
+
+> 如果要看更多JS面试题目可以点这里  --> **[JavaScript专项练习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/JavaScript专项练习)**
+
+### 1、求下方打印结果 ()
+
+>```js
+>var a = 18;
+>var b = "努力学习的汪";
+>var c = false;
+>var d = a && b || c ? c || b ? a : c && b : a ;
+>console.log(d)
+>```
+>
+>##### 知识点梳理以及答案解析
+>
+>1. **&& 运算符的优先级高于 ||，而 || 的优先级又高于?** : 
+>
+>  - 所以我们对它进行第一次分解：**`((a && b) || c) ? (c || b) ? a : (c && b) : a`**
+>
+>2. **? : 是右关联**
+>
+>  - 例如: a ? b : c ? d : e  --> a ? b : (c ? d : e)
+>  - 所以进一步对上方进行分解 : **`((a && b) || c) ? ((c || b) ? a : (c && b)) : a`**
+>
+>3.  **对于&&来说，如果条件判断结果为true就会返回第二个操作数的值，如果为false就会返回第一个操作数的值**
+>
+>  - 此知识点在本人笔记 [JS中的逻辑运算符详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/JS中的逻辑运算符详解笔记.md) 部分已经给出了详细解释
+>  - 所以对上方式子进行初步运算后可以得出: **`c ? ((c || b) ? a : c) : a`**  
+>
+>4. **对于 || 来说，如果条件判断结果为true就会返回第一个操作数的值，如果为false就会返回第二个操作数的值；**
+>
+>  - 此知识点在本人笔记 [JS中的逻辑运算符详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/JS中的逻辑运算符详解笔记.md) 部分已经给出了详细解释
+>  - 所以对上方式子进行初步运算后可以得出: **`c ? (b ? a : c) : a`**
+>
+>5. 此时结果就非常明了了,下面给出结果变化
+>
+>  -  **`c ? (b ? a : c) : a`** ==> false ? ( "努力学习的汪" ? 18 : false) : 18
+>  -  经过隐式转换后 : **false ? (true ? 18: false) : 18**
+>  -  三元运算符可知,当**?**前为**false**,返回**:**后方的值 所以结果为`18`
+
+
+
+
+
 # 五、API方法理解相关
 
 > 此部分主要还是靠死记硬背了
@@ -715,6 +820,27 @@
 >> * 首先 setTimeout 是超时方法,所以排除B选项,其次第二个参数单位是毫秒,所以排除A、D项,所以选择C
 >> * 个人认为其实答案可能稍微有点不严谨,换成:**10ms后把执行这个方法的任务推入到宏任务队列中**,可能更好些
 >> * 对于宏任务与微任务不理解的同学可以看这里 --> [宏任务( macro task )与微任务( micro task )](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A2-%E5%AE%8F%E4%BB%BB%E5%8A%A1macro-task%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1micro-task)
+
+### 4、下面哪个选项中的对象与浏览列表有关（ ）
+
+>```js
+>window,location
+>location,history
+>navigator,window
+>historylist,location
+>```
+>
+>##### 知识点梳理以及解析
+>
+>>* 往上找了一圈,对于浏览器列表具体定义并没有找到,但是觉得应该指的是 **JS的BOM对象**
+>>* ![image-20210910180517691](JavaScript专项练习中的图片/image-20210910180517691.png) 
+>>*  所以符合条件的为B选项
+
+
+
+
+
+
 
 ## Ⅱ - 不定项选择
 
@@ -957,9 +1083,41 @@
 >    >在B模块中 import  readFile  from 'A' 可以才获取到 readFile
 >    >```
 
+# 九、原型、原型链相关
+
+## Ⅰ - 单选题
+
+### 1、下方x的值是?
+
+>```js
+>function A() {
+>    this.do=function() {return 'foo';};
+>}
+>A.prototype=function() {
+>    this.do=function() {return 'bar'};
+>};
+>var x=new A().do();
+>```
+>
+>##### 知识点梳理
+>
+>* 原型与原型链相关知识点,此部分不太熟悉的同学可以看本人笔记 -->  **[JavaScript进阶笔记的原型链部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记#1原型与原型链)** 
+>
+>* **重写原型对象会切断现有原型与任何之前已经存在的实例之间的联系，他们引用的仍然是实例化时的原型**, 这部分比较绕,可以看图例,这部分比较绕,可以看图例
+>
+>  > ![image-20210910170331780](JavaScript专项练习中的图片/image-20210910170331780.png) 
+>
+>* 题目中重写方式其实是还是很奇怪的,通常我们都是 **A.prototype.do=function() {  }** 这样修改原型**对象**的,而不是直接将原型给直接赋成函数
+>
+>##### 答案解析
+>
+>1. 实际上本题的答案跟上方是否重写没有很大关系,因为首先调用时会先在自身实例上找方法,恰好本身就有 **do** 方法,所以本身就不会再往原型上找了,所以可以直接得到答案是 `foo`
+>2. 但也是恰好是因为实例上有此属性方法(do),那如果没有呢?那他就会往上的原形对象找,但此时原型对象已经被赋值为一个函数,所以会找不到然后报错.
+>3. 如果想要调用 prototype 上写的方法 应该这样调用 **new A.prototype().do()**
 
 
-# 九、拓充知识点
+
+# 十、拓充知识点
 
 ## Ⅰ- 单选题
 

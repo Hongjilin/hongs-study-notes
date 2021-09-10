@@ -114,6 +114,101 @@
 >>```
 >
 
+### 4、关于下述代码所实现的功能，以下说法正确的是:
+
+>```html
+><div>
+> <input type="button" id ="button1" value="1" onclick="moveBtn(this);">
+> <input type="button" id ="button2" value="2" />
+> </div>
+> <script type="text/javascript">
+> function moveBtn(obj) {
+> var clone = obj.cloneNode(true);
+> var parent = obj.parentNode;
+> parent.appendChild(clone);
+> parent.removeChild(obj);
+> }
+> </script>
+>//下面是选项
+>鼠标单击Button1后将Button1链接到Button2的后面
+>鼠标单击Button1后将Button1移动到Button2的后面
+>鼠标单击Button1后将Button2移动到Button1的后面
+>鼠标单击Button1后将Button2链接到Button1的后面
+>```
+>
+>##### 答案解析
+>
+>>```js
+>>var clone = obj.cloneNode(true); // 复制一个button1结点
+>>var parent = obj.parentNode; // 找到button1的父节点
+>>parent.appendChild(clone); // 将复制的结点加入到父节点，也就是button1的复制结点现在在button2后面了
+>>parent.removeChild(obj); // 移除原来的button1
+>>```
+>>
+>>最终达到的效果 : 就是把button1结点移到button2结点后面
+
+### 5、el 是一个id="id1"的div元素，以下哪行代码会执行失败
+
+>```js
+>el.className='aaa'
+>el.tagName='p'
+>el.innerHTML=''
+>el.id='id2'
+>```
+>
+>##### 知识梳理及答案解析
+>
+>1. className 属性**设置或返回**元素的 class 属性。
+>   - 获取属性值：HTMLElementObject.className；
+>   - 设置属性值：HTMLElementObject.className=*classname* 
+>2. tagName 属性返回元素的标签名。HTML 返回 tagName 属性的值是大写的。
+>   - 读取方法: element.tagName()
+>   - 但是要注意:**tagName是只读的，不能修改**,所以可以判断此处错了
+>3. innerHTML 属性**设置或返回**表格行的开始和结束标签之间的 HTML。
+>   - 设置方法: HTMLElementObject.innerHTML=text 
+>4. id 属性设置或者返回元素的 id。
+>   - 设置方法HTMLElementObject.id=id
+>
+>##### 新的疑惑提出
+>
+>在验证 **选项D** 时发现了一个很有意思的事情,直接上代码,猜一下下面打印的结果
+>
+>>```html
+>><body>
+>>  <div id="id1">xxx</div>
+>></body>
+>><script>
+>>  let el = document.querySelector('#id1')
+>>  console.log(el)
+>>  el.id = 'id2'
+>>  console.log(el)
+>>  el.id = 'id4'
+>>  console.log(el)
+>>  setTimeout(() => {
+>>    el.id = 'id3'
+>>    console.log(el)
+>>  }, 1000)
+>></script>
+>>```
+>>
+>>![image-20210910185337657](JavaScript专项练习中的图片/image-20210910185337657.png) 
+>
+>是不是有点奇怪,这里有两个疑惑点:为何前面三个都是**id4** ,如果是因为改到引用的问题,为何第四个是 **id3**?
+>
+>1. 首先先解答为何加在延时器中的 **id3** 可以正常打印出来?
+>
+>   - 定时器会将代码推入宏任务中,待前方同步任务执行完成后在运行,所以即便它也是改到了**el**, 但前方的打印输出已经执行完毕了,就不会对控制台前面三个产生影响
+>
+>2. 为什么前面三个打印会按照最后一次修改为准呢?不是说同步吗?那即便改到了 **el** 应该不会影响到修改前的console.log(),难道console.log()是异步的?
+>
+>   - console.log()是异步的吗?  详情请看本人笔记,这个能解释为何会引发这种问题  --> [点我跳转]()
+>
+>   - 当你用调试工具打断点后,实际上发现会是正常的
+>
+>     ![image-20210910190905653](JavaScript专项练习中的图片/image-20210910190905653.png)
+
+
+
 ## Ⅱ - 不定项选择
 
 ### 1、在一个块元素中，存在了很多的行元素，现在要求，将这些行元素中，只要有显示“叮咚”的行元素全部删除
@@ -141,6 +236,43 @@
 >
 >> * P、div标签是块级元素,所以错
 >> * 答案选择AD
+
+### 2、页面有一个按钮button id为 buttonx，通过原生的js如何禁用？(IE 考虑IE 8.0以上版本)
+
+>```html
+><body>
+>  <button id="button1">禁用1</button>
+>  <button id="button2">禁用2</button>
+>  <button id="button3">禁用3</button>
+>  <button id="button4">禁用4</button>
+>  <button id="button5">禁用5</button>
+>  <button id="button6">禁用6</button>
+></body>
+><script>
+>  //下面是选项    
+>  document.getElementById("button1").readOnly = true;
+>  document.getElementById("button2").setAttribute('readOnly', 'true');
+>  document.getElementById("button3").disabled = true;
+>  document.getElementById("button4").disabled = false; //使用此方法设置 disabled 为false
+>  document.getElementById("button5").setAttribute('disabled', 'true');
+>  document.getElementById("button6").setAttribute('disabled', false); //使用 setAttribute 方法设置 disabled 为false
+></script>
+>```
+>
+>##### 知识点梳理
+>
+>>* disabled和readOnly都是表单的公有属性， readOnly是只读， disabled是禁用。
+>>* 同时 Readonly 只针对 input(text/password)  和 textarea 有效
+>>* 只要设置了 [disabled] 属性不论什么值都会禁用,包括 **false**,页面似乎只在乎是否有这个属性 而不在乎其值
+>>* 小知识点：setArrtibute在ie7以前是不能通过style和class设置属性的
+>>*  **[JavaScript专项练习]()**
+>
+>##### 答案解析
+>
+>>* 同时 Readonly 只针对 input(text/password)  和 textarea 有效,所以排除A、B项
+>>* 其余项看下方图解
+>>
+>>![image-20210909195142924](JavaScript专项练习中的图片/image-20210909195142924.png) 
 
 # 二、正则相关
 
@@ -414,9 +546,9 @@
 >var b="false";
 >var c="";
 >function assert(aVar){
->   if(aVar) alert(true);
->   else  alert(false);
->  }
+>if(aVar) alert(true);
+>else  alert(false);
+>}
 >assert(a);
 >assert(b);
 >assert(c);
@@ -431,23 +563,112 @@
 >
 >- `if(condition)`  的condition求值结果若非布尔值，ECMAScript会自动调用Boolean()转换函数将结果转换为布尔值。转换规则为：
 >
->  > | 数据类型  | 转换为true     | 转换为false |
->  > | --------- | -------------- | ----------- |
->  > | boolean   | true           | false       |
->  > | String    | 任何非空字符串 | 空字符串    |
->  > | Number    | 任何非零数字值 | 0和NaN      |
->  > | Object    | 任何对象       | null        |
->  > | Undefined |                | undefined   |
+> > | 数据类型  | 转换为true     | 转换为false |
+> > | --------- | -------------- | ----------- |
+> > | boolean   | true           | false       |
+> > | String    | 任何非空字符串 | 空字符串    |
+> > | Number    | 任何非零数字值 | 0和NaN      |
+> > | Object    | 任何对象       | null        |
+> > | Undefined |                | undefined   |
 >
 >- JavaScript里面的六种假值：false、0、''''、undefined、null、NaN
 >
 >##### 答案解析:
 >
->> 此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
+>>此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
 >>
->> 变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
+>>变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
 >>
->> 所以选择B
+>>所以选择B
+
+### 4、JavaScript定义var a="30",var b=8,则执行a%b会得到 ?
+
+>```js
+>//以下是选项
+>undefined
+>6
+>"6"
+>null
+>```
+>
+>##### 知识点梳理
+>
+>>* 运算中，如果是数字与字符串的加法运算，那么数字会被转化为字符串，进行字符串拼接 其他运算的时候，字符串会被转化为数字，然后进行运算
+>>* % --> 余数指整数除法中被除数未被除尽部分，且余数的取值范围为0到除数之间（不包括除数）的整数。
+>
+>##### 答案解析
+>
+>> 30/8得3余6 所以答案是B
+
+### 5、下面结果为真的表达式是：
+
+>```js
+>null instanceof Object
+>null === undefined
+>null == undefined
+>NaN == NaN
+>```
+>
+>##### 知识点梳理
+>
+>1. **instanceof**运算符希望左操作数是一个对象，右操作数表示对象的类（初始化对象的构造函数）。如果左侧的对象是右侧对象的实例，返回true，否则返回false。 
+>   - 例如：计算o instanceof f   首先计算f.prototype，然后在原型链中查找o，找到返回true 
+>2. **===**严格相等运算符：首先计算其操作数的值，然后比较这两个值，比较过程中没有任何类型转换 
+>3. **==**相等运算符：如果两个操作数不是同一类型，那么会尝试进行一些类型转换，然后进行比较
+>4. MDN相等性判断表格(实际上也不用去背,理解即可):
+>
+>|           | Undefined | Null    | Number                | String                        | Boolean                       | Object                        |
+>| :-------- | :-------: | ------- | --------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
+>| Undefined |  `true`   | `true`  | `false`               | `false`                       | `false`                       | `IsFalsy(B)`                  |
+>| Null      |  `true`   | `true`  | `false`               | `false`                       | `false`                       | `IsFalsy(B)`                  |
+>| Number    |  `false`  | `false` | `A === B`             | `A === ToNumber(B)`           | `A=== ToNumber(B)`            | `A== ToPrimitive(B)`          |
+>| String    |  `false`  | `false` | `ToNumber(A) === B`   | `A === B`                     | `ToNumber(A) === ToNumber(B)` | `ToPrimitive(B) == A`         |
+>| Boolean   |  `false`  | `false` | `ToNumber(A) === B`   | `ToNumber(A) === ToNumber(B)` | `A === B`                     | ToNumber(A) == ToPrimitive(B) |
+>| Object    |   false   | false   | `ToPrimitive(A) == B` | `ToPrimitive(A) == B`         | ToPrimitive(A) == ToNumber(B) | `A === B`                     |
+>
+>##### 答案解析
+>
+>1. null instanceof Object: false
+>   - 此处可能有同学会提出疑惑:在js中 typeof null会返回object,那为什么**null instanceof Object 会返回 false**?
+>   - 我的理解是：null的类型是object，这是由于历史原因造成的。1995年的 JavaScript 语言第一版，只设计了五种数据类型（对象、整数、浮点数、字符串和布尔值），没考虑null，只把它当作object的一种特殊值。因此null并不是Object实例化的对象，再后来null独立出来，作为一种单独的数据类型，为了兼容以前的代码，typeof null返回object就没法改变了
+>2. B与C选项
+>   -  null和undefined是不同的，但它们都表示“值的空缺”，判断相等运算符“==”**两者是相等的者往往可以互换，因此==运算符认为两者是相等的**,如果要进行正确判断要使用严格相等运算符“===”来区分它们。
+>3. D选项
+>   - NaN表示非数字值,是一个不确定数,所以NaN不能等于NaN
+>   - 特殊之处：它和任何值都不相等，包括自身。
+>   - 判断NaN的方法：**x!=x返回true**
+>4. 所以选择C
+
+### 6、下面程序的显示结果是?
+
+>```js
+>var x = new Boolean(false);
+>if (x) {
+>  alert('hi'); 
+>}
+>var y = Boolean(0);
+>if (y) {
+>  alert('hello');  
+>}
+>```
+>
+>##### 知识点梳理
+>
+>1. 详情可以查阅[MDN的Boolean相关资料](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
+>2. 注意点: 要分清 **new Boolean()** 与 **Boolean()**的区别:
+>   - ![image-20210908112451290](JavaScript专项练习中的图片/image-20210908112451290.png) 
+>   -  **任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）包括 `布尔对象`
+>
+>##### 答案解析:
+>
+>>1. if(x) 这里期望 x 是一个布尔类型的原始值，而 x 是一个对象，**任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）。      
+>>2. 题目的第二部分，一定要注意 **y = Boolean(0)**，**而不是 y = new Boolean(0)。**
+>>   - 这两个有很大区别，用 new 调用构造函数会新建一个布尔对象，此处没有加 new，进行的是显示类型转换，
+>>   - 正如上述第一条所说，0 转换布尔，结果为 false，所以此时 y 的值就是 false。
+>>   - 如果加了 new，那么 y 就是一个 Boolean 类型的对象，执行 if(y) 时，对象转布尔，始终是 true，所以结果会与不加 new 的时候相反。
+>>3. 所以会打印 'hi'
+
+
 
 
 
@@ -483,6 +704,51 @@
 >     | 第一次回调 | 0（设置的初始值） | 1            | 0            | [1,2,-3] | 0-1         | -1     |
 >     | 第二次回调 | -1                | 2            | 1            | [1,2,-3] | (0-1)-2     | -3     |
 >     | 第三次回调 | -3                | -3           | 2            | [1,2,-3] | ((0-1)-2)-3 | 0      |
+
+## Ⅲ - 填空题
+
+> 如果要看更多JS面试题目可以点这里  --> **[JavaScript专项练习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/JavaScript专项练习)**
+
+### 1、求下方打印结果 ()
+
+>```js
+>var a = 18;
+>var b = "努力学习的汪";
+>var c = false;
+>var d = a && b || c ? c || b ? a : c && b : a ;
+>console.log(d)
+>```
+>
+>##### 知识点梳理以及答案解析
+>
+>1. **&& 运算符的优先级高于 ||，而 || 的优先级又高于?** : 
+>
+>  - 所以我们对它进行第一次分解：**`((a && b) || c) ? (c || b) ? a : (c && b) : a`**
+>
+>2. **? : 是右关联**
+>
+>  - 例如: a ? b : c ? d : e  --> a ? b : (c ? d : e)
+>  - 所以进一步对上方进行分解 : **`((a && b) || c) ? ((c || b) ? a : (c && b)) : a`**
+>
+>3.  **对于&&来说，如果条件判断结果为true就会返回第二个操作数的值，如果为false就会返回第一个操作数的值**
+>
+>  - 此知识点在本人笔记 [JS中的逻辑运算符详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/JS中的逻辑运算符详解笔记.md) 部分已经给出了详细解释
+>  - 所以对上方式子进行初步运算后可以得出: **`c ? ((c || b) ? a : c) : a`**  
+>
+>4. **对于 || 来说，如果条件判断结果为true就会返回第一个操作数的值，如果为false就会返回第二个操作数的值；**
+>
+>  - 此知识点在本人笔记 [JS中的逻辑运算符详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/JS中的逻辑运算符详解笔记.md) 部分已经给出了详细解释
+>  - 所以对上方式子进行初步运算后可以得出: **`c ? (b ? a : c) : a`**
+>
+>5. 此时结果就非常明了了,下面给出结果变化
+>
+>  -  **`c ? (b ? a : c) : a`** ==> false ? ( "努力学习的汪" ? 18 : false) : 18
+>  -  经过隐式转换后 : **false ? (true ? 18: false) : 18**
+>  -  三元运算符可知,当**?**前为**false**,返回**:**后方的值 所以结果为`18`
+
+
+
+
 
 # 五、API方法理解相关
 
@@ -533,6 +799,86 @@
 >##### 答案解析
 >
 >> E
+
+### 3、setTimeout(“go()”, 10);表示的意思是()
+
+>```js
+>间隔10秒后，go()函数执行一次
+>go()函数持续调用10次
+>间隔10毫秒后，go()函数执行一次
+>间隔10分钟后，go()函数执行一次
+>```
+>
+>##### 知识点梳理
+>
+>* setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。 
+>* setTimeout() 是属于 window 的方法，该方法用于在指定的毫秒数后调用函数或计算表达式。
+>* JavaScript中setInterval和setTimeout第一个参数加与不加引号的区别? --> [不知道的点我传送](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0/setInterval%E5%92%8CsetTimeout%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%E5%8A%A0%E4%B8%8E%E4%B8%8D%E5%8A%A0%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB.md)
+>
+>##### 答案解析
+>
+>> * 首先 setTimeout 是超时方法,所以排除B选项,其次第二个参数单位是毫秒,所以排除A、D项,所以选择C
+>> * 个人认为其实答案可能稍微有点不严谨,换成:**10ms后把执行这个方法的任务推入到宏任务队列中**,可能更好些
+>> * 对于宏任务与微任务不理解的同学可以看这里 --> [宏任务( macro task )与微任务( micro task )](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A2-%E5%AE%8F%E4%BB%BB%E5%8A%A1macro-task%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1micro-task)
+
+### 4、下面哪个选项中的对象与浏览列表有关（ ）
+
+>```js
+>window,location
+>location,history
+>navigator,window
+>historylist,location
+>```
+>
+>##### 知识点梳理以及解析
+>
+>>* 往上找了一圈,对于浏览器列表具体定义并没有找到,但是觉得应该指的是 **JS的BOM对象**
+>>* ![image-20210910180517691](JavaScript专项练习中的图片/image-20210910180517691.png) 
+>>*  所以符合条件的为B选项
+
+
+
+
+
+
+
+## Ⅱ - 不定项选择
+
+### 1、下面哪些方式在同一个窗口下能够检测一个js对象是数组类型？
+
+>```js
+>Array.isArray()
+>instanceof
+>typeof
+>Object.prototype.toString.call()
+>```
+>
+>##### 知识点梳理
+>
+>>* **Array.isArray()** 用于确定传递的值是否是一个 [Array](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)。
+>>* **instanceof** 运算符用来判断一个构造函数的prototype属性所指向的对象是否存在另外一个要检测对象的原型链上.其内部机制是通过判断对象的原型链中是不是能找到类型的 prototype 。
+>>* **typeof** 操作符返回一个字符串，表示未经计算的操作数的类型。
+>>* **Object.prototype.toString.call()** 常用于判断浏览器内置对象。 
+>
+>##### 答案解析
+>
+>1. A选项没啥好说的,原生支持的方法
+>
+>   > ![image-20210909195908190](JavaScript专项练习中的图片/image-20210909195908190.png) 
+>
+>2. B选项 **instanceof** 运算符返回一个布尔值，表示对象是否为某个构造函数的实例,这时可能就有同学要提出疑问了:
+>
+>   - 我用这个方法,似乎无法分辨数组与对象的区别啊, arr instanceof Array/Object 似乎都会返回 **true** !这不是不严谨吗?
+>   - 注意审题:检测一个JS对象是数组类型,既定的事实是我们当前是一个对象,然后要判断它是否为数组,不懂直接看图解 
+>   - ![image-20210909202222992](JavaScript专项练习中的图片/image-20210909202222992.png)
+>
+>3. C选项 **typeof** 能判断类型有：number、string、boolean、symbol、undefined、function； 
+>
+>   -  **object、array、null**的变量都返回 object,所以错
+>
+>4. D选项直接上图
+>
+>   ![image-20210909203353878](JavaScript专项练习中的图片/image-20210909203353878.png) 
 
 # 六、this指向相关
 
@@ -619,7 +965,159 @@
 >
 >5. 所以选择ABD
 
-# 七、拓充知识点
+# 七、闭包相关
+
+> 此部分知识点如果不够梳理,可以看本人JS笔记中对于  [闭包的详细描述](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#5%E9%97%AD%E5%8C%85)  
+
+## Ⅰ - 单选题
+
+### 1、下面这个JS程序的输出是什么：
+
+>```js
+>function Foo() {
+>var i = 0;
+>return function() {
+>   console.log(i++);
+>}
+>}
+>var f1 = Foo(), f2 = Foo();
+>f1();
+>f1();
+>f2();
+>//以下是选项
+>0 1 0
+>0 1 2
+>0 0 0
+>0 0 2
+>```
+>
+>##### 知识点梳理
+>
+>1. Function是引用类型：保存在堆中，变量f1,f2是保存在栈中； 
+>2. 闭包：一个函数（产生新的作用域）定义的局部变量、子函数的作用域在函数内， 但是一旦离开了这个函数，局部变量就无法访问   -->  [关于闭包详细笔记请看](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#5%E9%97%AD%E5%8C%85)  
+>3. 作用域:篇幅较长,所以放一个索引,需要的同学可以去查阅 -->  [作用域相关知识点笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#3%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE)
+>4. 运算符: i++与++i的区别:
+>
+>![image-20210908105359459](JavaScript专项练习中的图片/image-20210908105359459.png) 
+>
+>##### 答案解析
+>
+>>var f1, f2=Foo()中，先执行Foo():i=0 ; return返回一个函数给f1、f2
+>>
+>>* 第一次f1() :   (f1指向子函数 :**f1()=function(){console.log(i++)},**  因为子函数没有定义i，所以向上找到父函数定义的 i:   )并执行子函数 输出i=0,再自加 i =1(覆盖了父函数Foo 的 i值);
+>>* 第二次f1() :   执行的是子函数 **Function(){console.log(i++)}**,输出的是父函数 的 i=1,再自加 i =2;
+>>* 第一次f2() :  此处同**第一次f1()**,不同的是 f2指向堆中一个新的对象 function(){ ...},所以此i非彼i,输出i=0;如果如果再次f2(),那么和第二次f1(),一样输出i=1; 
+>>* 所以答案为0 1 0
+>
+
+# 八、ES系列相关
+
+> 关于ES系列详细笔记可以看这里  --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
+
+## Ⅰ - 单选题
+
+### 1、以下符合 ES6 写法的有：
+
+>```js
+>/*-------A-----*/
+>class Foo
+>{
+>	constructor() {return Object.create(null);}
+>}
+>Foo()
+>/*-------B-----*/
+>var m=1;
+>export m;
+>/*-------C-----*/
+>export var firstName=’Michael’;
+>/*-------D-----*/
+>在A模块中 export{ readFile } 后
+>在B模块中 import readFile from 'A' 可以获取到 readFile
+>```
+>
+>##### 知识梳理
+>
+>> * 详细知识点主要在ES6的  导入导出 class相关部分,查阅详情请看 --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
+>> * constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有 **constructor** 方法，如果没有显式定义，一个空的 **constructor** 被默认添加。
+>
+>##### 答案解析
+>
+>1. A: FOO是一个类, 类必须使用new调用，否则会报错。这是它跟普通构造函数的一个主要区别，后者不用new也可以执行。
+>
+>2. B: **export** 命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。
+>
+>  - 错误写法:
+>
+>    >```js
+>    >// 报错
+>    >export 1;
+>    >// 报错
+>    >var m = 1;
+>    >export m;
+>    >```
+>    >
+>    >上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出 1，第二种写法通过变量m，还是直接输出 1。1只是一个值，不是接口
+>
+>  - 正确写法:
+>
+>    >```js
+>    >// 写法一
+>    >export var m = 1;
+>    >// 写法二
+>    >var m = 1;
+>    >export {m};
+>    >// 写法三
+>    >var n = 1;
+>    >export {n as m};
+>    >```
+>
+>3. C: 正确项
+>
+>4. D: A模块对外暴露了一个对象，引入的时候需要使用解构赋值
+>
+>  - >```js
+>    >在A模块中 export{ readFile } 后
+>    >在B模块中 import { readFile } from 'A' 可以才获取到 readFile
+>    >//或者使用默认导入的方式
+>    >在A模块中 export default  readFile  后
+>    >在B模块中 import  readFile  from 'A' 可以才获取到 readFile
+>    >```
+
+# 九、原型、原型链相关
+
+## Ⅰ - 单选题
+
+### 1、下方x的值是?
+
+>```js
+>function A() {
+>    this.do=function() {return 'foo';};
+>}
+>A.prototype=function() {
+>    this.do=function() {return 'bar'};
+>};
+>var x=new A().do();
+>```
+>
+>##### 知识点梳理
+>
+>* 原型与原型链相关知识点,此部分不太熟悉的同学可以看本人笔记 -->  **[JavaScript进阶笔记的原型链部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记#1原型与原型链)** 
+>
+>* **重写原型对象会切断现有原型与任何之前已经存在的实例之间的联系，他们引用的仍然是实例化时的原型**, 这部分比较绕,可以看图例,这部分比较绕,可以看图例
+>
+>  > ![image-20210910170331780](JavaScript专项练习中的图片/image-20210910170331780.png) 
+>
+>* 题目中重写方式其实是还是很奇怪的,通常我们都是 **A.prototype.do=function() {  }** 这样修改原型**对象**的,而不是直接将原型给直接赋成函数
+>
+>##### 答案解析
+>
+>1. 实际上本题的答案跟上方是否重写没有很大关系,因为首先调用时会先在自身实例上找方法,恰好本身就有 **do** 方法,所以本身就不会再往原型上找了,所以可以直接得到答案是 `foo`
+>2. 但也是恰好是因为实例上有此属性方法(do),那如果没有呢?那他就会往上的原形对象找,但此时原型对象已经被赋值为一个函数,所以会找不到然后报错.
+>3. 如果想要调用 prototype 上写的方法 应该这样调用 **new A.prototype().do()**
+
+
+
+# 十、拓充知识点
 
 ## Ⅰ- 单选题
 
@@ -673,9 +1171,8 @@
 >
 >##### 答案解析:
 >
->> css是一种**层叠样式表**,所以不算
+>> css是一种**层叠样式表**,所以不算 , 答案只有JavaScript.    
 >>
->> 答案只有JavaScript.    
 
 
 

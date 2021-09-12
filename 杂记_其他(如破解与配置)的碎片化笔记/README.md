@@ -24,7 +24,7 @@
 >
 > 8. [好的网站Mark.md](https://gitee.com/hongjilin/hongs-study-notes/blob/master/杂记_其他(如破解与配置)的碎片化笔记/好的网站Mark.md)
 >
-> 9. 其他
+> 9. 其他不列举了,直接看文件目录吧
 
 
 

@@ -102,7 +102,7 @@
 >
 >19. **[A_前端工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 
 >
->>`工欲善其事, 必先利其器`,工具是我们开发人员每天接触最多的,用好工具能极大提高我们开发速度,所以此目录将收录前端开发所用到的工具学习梳理笔记,如: **[VSCode笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode笔记)** 、 **[Chrome_DevTools调试工具使用详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/Chrome_DevTools调试工具使用详解笔记)** 等...
+>>`工欲善其事, 必先利其器`,工具是我们开发人员每天接触最多的,用好工具能极大提高我们开发速度,所以此目录将收录前端开发所用到的工具学习梳理笔记,如: **[VSCode笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode笔记)** 、 **[Chrome_DevTools调试工具使用详解笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/Chrome_DevTools调试工具使用详解笔记)** 、**[本人浏览器收藏夹公开分享](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/本人浏览器收藏夹公开分享)**等...
 >
 >19. 其他待更新
 
@@ -187,17 +187,22 @@
 
 >本笔记将记录本人以及朋友备战的面试题、面试过程遇到的面试题、觉得有用的面试题, 以不同时期作为分类
 >
->1. [前端-实习生阶段面试题](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E9%9D%A2%E8%AF%95_%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/%E9%9D%A2%E5%90%91%E5%AE%9E%E4%B9%A0%E7%94%9F%E9%98%B6%E6%AE%B5(vue%E6%8A%80%E6%9C%AF%E6%A0%88)_2020-10%E6%9C%88%E6%95%B4%E7%90%86)
->2. 其他待更新
+>1. **[各阶段面试题复习整理](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/各阶段面试题复习整理)**
+>
+>   >此笔记准备将每次准备面试时,对于自己当前能力阶段的面试题进行梳理与归纳
+>
+>2. **[JavaScript专项练习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/JavaScript专项练习)**
+>
+>   >关于JavaScript的专项练习
 
 ##### Ⅶ-[提升_自我提升学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/提升_自我提升学习笔记)
 
-> 这是本人自我提升学习笔记, 无关编程, 所以此部分笔记只是了上传小部分
+> 这是本人自我提升学习笔记, 无关编程, 所以此部分笔记只是了上传小部分,只是本人一些闲余笔记,请忽略
 
 
 
 #### 提交标准
-> 1. 本人自2021年1月后创建本笔记仓库, 每次push都会commit标注好学习的信息, 笔记将按照以下标准进行记录
+> 1. 本人自 **2021年1月后创建本笔记仓库**, 每次push都会commit标注好学习的信息, 笔记将按照以下标准进行记录
 >
 >    - 先根据笔记类型(前端、后台、其他等类型)进行分类 
 >    - 仓库网络图: https://gitee.com/hongjilin/hongs-study-notes/graph/master
@@ -223,7 +228,7 @@
 >    //着重备注主要更新知识点、其次会备注次要更新、小修小补可能会忽略备注
 >    ```
 >
->    这样就可以根据提交信息追朔具体笔记的更新信息了, 该提交标准将开始于2021年5月中旬实行
+>    这样就可以根据提交信息追朔具体笔记的更新信息了, 该提交标准将于 **2021年5月中旬开始实行**
 
 #### 个人总结
 > 目前本人目前在`初入工作`阶段:前端岗位, `目前`更新的大部分知识点笔记会是`前端`所涉及知识笔记还有少部分其他知识mark.不过, 前后端很多知识都是相通的, 这个笔记我觉得还是很有必要分享出来, 之后随着学习深入如java或者go也将会涉及记录.
@@ -234,5 +239,5 @@
 >
 > 而本人对于编程学习心得分享就是:先`know how`再`know why` --> 顾名思义就是: 先知道怎么用怎么做, 再去考虑原理, 逆推回去.主要先学习思维与解决问题的方式, 我喜欢从大局上俯瞰整个知识体系, 然后再去根据自己建立的知识体系查缺补漏补足基础.当然每个人有自己的学习方式, 欢迎交流
 >
-> 加油, 打工人!
+> 加油, 打工人! 加油, 新生代农民工!!
 

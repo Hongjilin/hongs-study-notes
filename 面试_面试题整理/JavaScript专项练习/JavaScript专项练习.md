@@ -201,7 +201,7 @@
 >
 >2. 为什么前面三个打印会按照最后一次修改为准呢?不是说同步吗?那即便改到了 **el** 应该不会影响到修改前的console.log(),难道console.log()是异步的?
 >
->   - console.log()是异步的吗?  详情请看本人笔记,这个能解释为何会引发这种问题  --> [点我跳转]()
+>   - console.log()是异步的吗?  详情请看本人笔记,这个能解释为何会引发这种问题  --> [Chrome的JavaScript控制台是否懒惰评估数组中处理](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/Chrome的JavaScript控制台是否懒惰评估数组中处理.md)
 >
 >   - 当你用调试工具打断点后,实际上发现会是正常的,这就很有意思了,不过好像也并没有什么大的影响
 >

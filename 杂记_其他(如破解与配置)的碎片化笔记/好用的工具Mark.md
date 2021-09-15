@@ -68,3 +68,11 @@
 >
 >[视频介绍](https://www.bilibili.com/video/BV1kv411B7j5/) 下载地址:[插件](https://gitee.com/CrapApi/resources/blob/master/Postwoman%E6%8F%92%E4%BB%B6/postwoman.v.1.1.7.zip)
 
+
+
+## 7、Infinity新标签页浏览器插件
+
+>一款好看且带跨浏览器云同步的新标签页,可以收录整合你喜欢的一些网站,非常好用,强烈推荐
+>
+>可以直接浏览器拓展商店直接下载
+

@@ -431,9 +431,16 @@ git logbranch
 
 #### 2、git reset 
 
->命令:`git reset HEAD 文件名`
+>1. 一般我们写完代码后,是这样提交的:
+>   - git add . //添加追踪所有文件
+>   - git commit -m "feat(前端-Git学习详细笔记):更新撤销commit操作" //添加commit提交信息
+>2. 但是commit写完提交信息后,突然想到还有一个地方代码没改到/保存,如果放到下一个commit却不合适(同一个功能修改,分成两个commit),原因详见下方的 [版本控制工具的使用基本原则](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#Ⅳ-版本控制工具的使用基本原则) 
+>3. 执行此命令命令:`git reset --soft HEAD^`
+>   - HEAD^的意思是上一个版本，也可以写成HEAD~1
+>   - 如果你进行了2次commit，想都撤回，可以使用HEAD~2
+>   - 详见下方 [reset三部曲](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#reset三部曲)
 >
->作用:将文件从`暂存区中撤回`到工作目录中
+>作用:将文件从`暂存区中撤回`到工作目录中(仅仅是撤回commit操作，你写的代码仍然保留)
 
 #### 3、git checkout
 
@@ -1424,6 +1431,19 @@ Git 可以支持很多不同的工作流程：长期分支、功能分支、合�
 >3. 截图示例
 >
 >   > ![Git 切换远程仓库地址](A_Git详细学习笔记中的图片/Git切换远程仓库地址.png)
+
+## 10、如何撤销 commit 提交
+
+>1. 一般我们写完代码后,是这样提交的:
+>   - git add . //添加追踪所有文件
+>   - git commit -m "feat(前端-Git学习详细笔记):更新撤销commit操作" //添加commit提交信息
+>2. 但是commit写完提交信息后,突然想到还有一个地方代码没改到/保存,如果放到下一个commit却不合适(同一个功能修改,分成两个commit),原因详见上方的 [版本控制工具的使用基本原则](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#Ⅳ-版本控制工具的使用基本原则) 
+>3. 执行此命令命令:`git reset --soft HEAD^`
+>   - HEAD^的意思是上一个版本，也可以写成HEAD~1
+>   - 如果你进行了2次commit，想都撤回，可以使用HEAD~2
+>   - 详见 [reset三部曲](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#reset三部曲)
+>
+>作用:将文件从`暂存区中撤回`到工作目录中(仅仅是撤回commit操作，你写的代码仍然保留)
 
 
 

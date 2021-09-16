@@ -2,7 +2,7 @@
 
 > 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
-> 此部分截取上方`A_Git详细学习笔记`部分笔记复制至此,方便网站阅读
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -12,7 +12,6 @@
 >
 > 但是git知识是一个整体,系统的学习下来在之后使用也能更加得心应手
 >
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # Git详细学习
 
@@ -431,9 +430,16 @@ git logbranch
 
 #### 2、git reset 
 
->命令:`git reset HEAD 文件名`
+>1. 一般我们写完代码后,是这样提交的:
+>   - git add . //添加追踪所有文件
+>   - git commit -m "feat(前端-Git学习详细笔记):更新撤销commit操作" //添加commit提交信息
+>2. 但是commit写完提交信息后,突然想到还有一个地方代码没改到/保存,如果放到下一个commit却不合适(同一个功能修改,分成两个commit),原因详见下方的 [版本控制工具的使用基本原则](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#Ⅳ-版本控制工具的使用基本原则) 
+>3. 执行此命令命令:`git reset --soft HEAD^`
+>   - HEAD^的意思是上一个版本，也可以写成HEAD~1
+>   - 如果你进行了2次commit，想都撤回，可以使用HEAD~2
+>   - 详见下方 [reset三部曲](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#reset三部曲)
 >
->作用:将文件从`暂存区中撤回`到工作目录中
+>作用:将文件从`暂存区中撤回`到工作目录中(仅仅是撤回commit操作，你写的代码仍然保留)
 
 #### 3、git checkout
 
@@ -1393,3 +1399,56 @@ Git 可以支持很多不同的工作流程：长期分支、功能分支、合�
 >   >```sh
 >   >[gui]encoding=utf-8
 >   >```
+
+## 9、Git 切换远程仓库地址
+
+>在公司开发中,也许会遇到公司项目地址迁移的问题(本人就遇到了) : 比如从码云gitee上将项目迁移到gitLab上,那么我们本地怎么切换远程仓库地址呢? 很简单!
+>
+>1. 切换远程仓库地址
+>
+>   - **方式一：修改远程仓库地址**
+>
+>     ```sh
+>     git remote set-url origin URL #更换远程仓库地址，URL为新地址。一步到胃
+>     ```
+>
+>   - **方式二：先删除远程仓库地址，然后再添加**
+>
+>     ```sh
+>     git remote rm origin #删除现有远程仓库
+>     git remote add origin url #添加新远程仓库
+>     ```
+>
+>2. 查看远程仓库地址
+>
+>   > 没错,改完了,很简单是吧,但是你怎么确定自己是否修改成功了呢?
+>   >
+>   > ```sh
+>   > git remote -v  #查看远程仓库的地址
+>   > ```
+>
+>3. 截图示例
+>
+>   > ![Git 切换远程仓库地址](A_Git详细学习笔记中的图片/Git切换远程仓库地址.png)
+
+## 10、如何撤销 commit 提交
+
+>1. 一般我们写完代码后,是这样提交的:
+>   - git add . //添加追踪所有文件
+>   - git commit -m "feat(前端-Git学习详细笔记):更新撤销commit操作" //添加commit提交信息
+>2. 但是commit写完提交信息后,突然想到还有一个地方代码没改到/保存,如果放到下一个commit却不合适(同一个功能修改,分成两个commit),原因详见上方的 [版本控制工具的使用基本原则](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#Ⅳ-版本控制工具的使用基本原则) 
+>3. 执行此命令命令:`git reset --soft HEAD^`
+>   - HEAD^的意思是上一个版本，也可以写成HEAD~1
+>   - 如果你进行了2次commit，想都撤回，可以使用HEAD~2
+>   - 详见 [reset三部曲](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#reset三部曲)
+>
+>作用:将文件从`暂存区中撤回`到工作目录中(仅仅是撤回commit操作，你写的代码仍然保留)
+
+
+
+
+
+
+
+
+

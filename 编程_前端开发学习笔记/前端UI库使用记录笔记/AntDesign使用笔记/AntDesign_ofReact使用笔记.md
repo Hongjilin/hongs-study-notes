@@ -423,7 +423,40 @@
 >* 定义一个 **state**,但不再使用 **defaultValue** 方法,而是直接将 **value绑定state**,初始化给默认值也直接修改state即可
 >* 如果你的输入框在 **From** 表单中 ,那么你可以在初始化生命周期(或useEffect) 中 调用 **from.setFieldsValue({...})**,相当于在每次重绘时都进行一次初始值写入
 
+## 2、Select 选择器
 
+#### Ⅰ - filterOption 筛选下拉项自定义筛选条件
+
+>  **filterOption** :是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 true，反之则返回 false
+>
+> 注意:要配合 **showSearch** 一起使用,首先要支持搜索 然后用
+
+##### a) 使用场景
+
+>一般常见场景来说,我们可以只通过  **showSearch为true** 的方式做到输入内容关联下拉项,但是某些场景就需要配合 **filterOption**使用了
+>
+>* 当我们进行搜索的内容不是 **Option** 项中绑定的 **value**, 而是它的 **children** 值呢? 比如你value绑定的是订单id  而 **children** 则是显示时展示的 订单名称
+>* 那么这时候单单使用 **showSearch** 就不足以完成我们的需求了:我们输入订单名称去关联搜索下面下拉项订单名称
+
+##### b) 使用示例
+
+>```tsx
+><Select
+>  placeholder="请输入或下拉选择IP名称"
+>  showSearch
+>  //动态搜索Option的值 而不是value中的值
+>  //正则:当 inputValue 包含于 option 时返回true
+>  filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
+>>>
+>   {nameList?.map(item => (//下拉项value绑定id  展示却展示名称
+>      <Option key={item?.id} value={item?.id}>
+>        {item?.proxy_name} 
+>      </Option>
+>   ))}
+></Select>
+>```
+>
+>![image-20210916142227728](AntDesign_ofReact使用笔记中的图片/image-20210916142227728.png) 
 
 # 二、数据展示
 

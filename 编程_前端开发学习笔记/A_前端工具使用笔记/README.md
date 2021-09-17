@@ -2,7 +2,7 @@
 
 > `工欲善其事, 必先利其器`,工具是我们开发人员每天接触最多的,用好工具能极大提高我们开发速度,所以此目录将收录前端开发所用到的工具学习梳理笔记
 >
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、 **[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
 
 # #目录
@@ -24,8 +24,14 @@
 >3、**[本人浏览器收藏夹公开分享](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/本人浏览器收藏夹公开分享)**
 >
 >>收藏夹分享的想法还是来自于曾经听过一句让我感触很深的话:`学到的就要教人 得到的就要给人`--当初刚入大学没有像现在那么多的资源, 当时的我想学编程, 问一位学长的时候竟然连一个`ajax`知识点都敝帚自珍, 给人讲解的时候还专门避开我, 就因为那个同学`拜师`于他....随后磕磕碰碰得到的学习资料总是不成体系或者有所残缺, 导致我大一大二时间大部分荒废在了寻找学习资料中, 直到后来B站的学习视频逐渐变多、网上也有越来越多的人将学习资料共享出来, 我也得益于此开始走上了编程之路。所以我也自己所学知识沉淀分享出去, 希望多少能帮到别人.
->>
+>
 >>收藏夹梳理的想法得益于B站的一个UP主: JSpang ,这个UP就分享过他的收藏夹. 我在借鉴了他的想法后梳理结合了自己的收藏夹,整理并分享自己的收藏夹,同学们可以直接将这个收藏夹导入文件直接导入自己的浏览器中
->>
+>
 >>此导入文件会随着本人技术进步不断更新,相信到某一天会成为一个很有借鉴意义的收藏目录. 本人目前是前端, 此文件对于前端的同学帮助可能较大, 但是本人也有兼修服务端(后续能力提升后会考虑新增服务端收录),所以对于服务端的效果也能起到不错的借鉴意义
+>
+>4、**[VSCode使用Git可视化管理源代码笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode使用Git可视化管理源代码笔记)** 
+>
+>>* 随着VS Code的功能和插件的不断强大和完善，它已经成为了我们日常开发中一个必不可缺的伙伴了
+>>* 在分支错综复杂的情况,就比如出现冲突，使用传统 **CLI** 解决冲突、观察分支和分支合并关系是不清晰的
+>>* 与其使用各种GUI工具,不如直接使用VSCode自带的源代码管理,更加方便,毕竟VSCode受众面最多
 

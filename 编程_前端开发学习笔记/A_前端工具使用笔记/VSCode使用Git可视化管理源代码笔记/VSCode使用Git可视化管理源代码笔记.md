@@ -2,11 +2,17 @@
 
 >随着VS Code的功能和插件的不断强大和完善，它已经成为了我们日常开发中一个必不可缺的伙伴了,这篇笔记主要学习记录VS Code如何使用Git可视化管理我们的程序源代码
 >
->查阅借鉴的资料:CSDN[徐余人](https://blog.csdn.net/zhaojun666)的[VScode的源代码管理简易使用](https://blog.csdn.net/zhaojun666/article/details/106163505) 博客园[allenxt](https://home.cnblogs.com/u/allenxt/)的[vs code 使用Git进行源代码管理](https://www.cnblogs.com/allenxt/p/8473686.html); 简书[broccoli_d39c](https://www.jianshu.com/u/bb8ffcaec19b)的[vscode源代码管理器（git可视化操作）](https://www.jianshu.com/p/ef0438a8b941); 腾讯云追逐时光者的[VS Code使用Git可视化管理源代码详细教程](https://cloud.tencent.com/developer/article/1793472) ; 知乎[我想飞](https://www.zhihu.com/people/xdbcb8)的[Visual Studio Code第二弹：Vscode与Git的完美结合](https://zhuanlan.zhihu.com/p/34753075);程序员宅基地的[vscode 侧边栏源代码管理不见了](https://www.cxyzjd.com/article/z591102/107707197)
+>查阅借鉴的资料:CSDN[徐余人](https://blog.csdn.net/zhaojun666)的[VScode的源代码管理简易使用](https://blog.csdn.net/zhaojun666/article/details/106163505) 博客园[allenxt](https://home.cnblogs.com/u/allenxt/)的[vs code 使用Git进行源代码管理](https://www.cnblogs.com/allenxt/p/8473686.html)、[git fatal: refusing to merge unrelated histories错误（git本地库与远程库历史不相关）](https://www.cnblogs.com/fei-yu9999/p/15115889.html); 简书[broccoli_d39c](https://www.jianshu.com/u/bb8ffcaec19b)的[vscode源代码管理器（git可视化操作）](https://www.jianshu.com/p/ef0438a8b941)、[如何利用VSCode优雅的使用Git提交至GitHub](https://www.jianshu.com/p/154322554d9d); 腾讯云追逐时光者的[VS Code使用Git可视化管理源代码详细教程](https://cloud.tencent.com/developer/article/1793472) ; 知乎[我想飞](https://www.zhihu.com/people/xdbcb8)的[Visual Studio Code第二弹：Vscode与Git的完美结合](https://zhuanlan.zhihu.com/p/34753075);程序员宅基地的[vscode 侧边栏源代码管理不见了](https://www.cxyzjd.com/article/z591102/107707197);[要推送当前分支并将远程分支设置为上游，请使用git push--set upstream origin master](https://www.5axxw.com/questions/content/pjdw93)
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
 >想看GIT基础的同学可以看这里 :  **[Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)** 
+>
+>想看VSCode使用学习笔记的同学看这里 : **[VSCode笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记/VSCode笔记)** 
+
+# #目录
+
+>[TOC]
 
 # 一、CLI 与 GUI
 
@@ -57,7 +63,7 @@
 
 ## Ⅲ - 取舍
 
->对于 **GUI** 和 **CLI **的取舍问题其实并不是非黑即白的,主要看个人看法与习惯
+>对于 **GUI** 和 **CLI** 的取舍问题其实并不是非黑即白的,主要看个人看法与习惯
 >
 >* 有人更倾向于使用CLI操作(比如本人):但是在查看分支、合并等相关信息的场景上,我仍是会专门学习并使用GUI来操作
 >* 有人觉得开发中大多都是简单的重复操作(如 pull push)等,那么直接用GUI进行日常大部分命令键入是没问题的
@@ -128,17 +134,9 @@
 >
 >![image-20210916175300146](VSCode使用Git可视化管理源代码笔记中的图片/image-20210916175300146.png) 
 
-# 四、进行Git操作
+# 四、进行Git操作 
 
-## Ⅰ - 查看、切换分支
-
->VSCode中操作:
->
->![image-20210916180315705](VSCode使用Git可视化管理源代码笔记中的图片/image-20210916180315705.png) 
->
->Git命令行操作 :  **[Git学习笔记的分支部分知识点笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#六分支)** 
-
-## Ⅱ - 克隆仓库
+## Ⅰ - 克隆仓库
 
 >1. VSCode打开一个空的文件夹,点击 **左侧弹簧 --> 克隆储存库**
 >
@@ -150,14 +148,7 @@
 >
 >然后输入要克隆的仓库地址,之后操作就与命令行无异,不懂得可以看本人git笔记 :  **[Git学习笔记的克隆操作部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#1将本地已有的一个项目上传到新建的git仓库的方法)** 
 
-## Ⅲ - 查看分支之间的差异
-
->1. 首先你要安装 **GitLens ** 插件
->2. 安装后左侧出现分支图标,点击进入就能查看
->
-> ![image-20210916183227838](VSCode使用Git可视化管理源代码笔记中的图片/image-20210916183650066.png)
-
-## Ⅳ - 实际工作开发四步曲(添、提、拉、推):
+## Ⅱ - 实际工作开发四步曲(添、提、拉、推)
 
 ### 1、首先要明白四步曲分别是哪四步，其作用分别是什么？
 
@@ -176,4 +167,207 @@
 
 >此处实际上做的是执行命令 [ **git commit -m '提交信息'** ] ,注意,此处的提交还是操作本地文件,并没有推送至远端
 >
+>![image-20210917114331450](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917114331450.png) 
+
+### 4、撤销上次提交
+
+>撤销上次提交且将其放至暂存区中
 >
+>![image-20210917144918633](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917144918633.png) 
+>
+>实际上相当于 **CLI** 命令:[ `git reset --soft HEAD^` ]
+>
+>详情可以看本人GIT笔记中 : **[撤销与重置部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记#八撤销与重置)** 
+
+### 5、推与拉 同步远端操作
+
+>点击上面 **...** 就能出现下拉选项框
+>
+>![image-20210917114838890](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917114838890.png)
+>
+>验证
+>
+>![image-20210917115030332](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917115030332.png)  
+
+
+
+## Ⅲ - 分支操作
+
+### 1、查看分支、切换分支
+
+>![image-20210917143949557](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917143949557.png)  
+>
+
+### 2、创建分支
+
+>在上面查看、切换分支的操作基础上,点击创建新分支  **这里打错字了,应该是 hotfix ,但是截图不好修改,就将错就错了**
+>
+>![image-20210917144259926](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917144259926.png) 
+
+### 3、推送分支及其修改至远端
+
+>其实就跟普通的 **push** 操作无异,就重复操作上面,就不赘述直接上结果 [Ⅱ - 实际工作开发四步曲(添、提、拉、推)](#Ⅱ - 实际工作开发四步曲(添、提、拉、推))
+>
+>![image-20210917145359612](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917145359612.png) 
+>
+>切换到hotfix查看,内容修改成功
+>
+>![image-20210917145437061](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917145437061.png)  
+
+### 4、合并分支
+
+#### ① 合并操作
+
+>当我们 **hotfix-9.17分支** 开发完成了,需要将其合并到 **master** 分支中,首先我们需要切换到 **master** 分支上,这点原因就不用我赘述了吧,如果不懂的去看看我的GIT学习笔记再来
+>
+>![image-20210917152753243](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917152753243.png) 
+
+#### ② 可能出现的问题
+
+###### a) 问题描述
+
+>这个并不是必现的,也不是VSCode才会出现的问题,而是合并时都可能出现的问题
+>
+>![image-20210917152837343](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917152837343.png)  
+
+##### b) 解决
+
+>### fatal: refusing to merge unrelated histories  --> 致命的:拒绝合并不相关的历史。
+>
+>字面意思可见是历史原因不和造成的。
+>
+>原因是远程库和本地库两个分支是两个不同的版本，具有不同的提交历史，所以存在矛盾。
+>
+>解决办法：把两段不相干的 分支进行强行合并。输入后再次进行合并操作就可以了
+>
+>```sh
+>$git pull origin master --allow-unrelated-histories
+>```
+
+##### c) 成功
+
+>可以看到已经合并成功了,master分支的内容已经合并了hotfix分支的内容
+>
+>![image-20210917153235096](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917153235096.png) 
+
+## Ⅳ - 冲突与解决
+
+> 上述合并中之所以没有发生冲突,是因为hotfix是基于master分支创建,然后进行更改,然后master并没有进行修改,所以hotfix并不会与master发生冲突( **冲突对比的是更改的部分** )
+
+### 1、 模拟冲突
+
+>在master与hotfix修改同一处,再合并就能模拟冲突了
+
+#### ① 分别在两个分支对同一文件进行修改并提交到暂存区
+
+> ![image-20210917154550169](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917154550169.png) 
+
+#### ② 将 **hotfix-9.17** 分支并入 **master** 分支
+
+>![image-20210917154824921](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917154824921.png) 
+
+#### ③ 出现冲突
+
+>![image-20210917155223694](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917155223694.png)
+
+### 2、 冲突发生的判断基准
+
+>我们可以看到 **operate** 因为master与hotfix-9.17分支都发生了变更,所以git并不知道该听谁的,所以给你保留下来
+>
+>而 **name** 属性因为只有master分支进行了修改,hotfix-9.17没发生变更,所以git会保留变更,不会产生冲突
+
+### 3、 冲突解决
+
+#### ① 手动进入文件决定冲突保留部分
+
+>![image-20210917155828696](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917155828696.png) 
+>
+>* **采用当前更改** :保留被合并的分支的更改 --> 此处是 `master` 分支
+>
+>  > ![image-20210917160117287](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917160117287.png) 
+>
+>* **采用传入的更改** : 保留合并进来的分支的更白 --> 此处是 `hotfix-9.17` 分支
+>
+>  > ![image-20210917160059159](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917160059159.png) 
+>
+>* **保留双方的更改** : 就是双方的变更都保留
+>
+>  > ![image-20210917160033549](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917160033549.png) 
+>
+>* **比较变更**:就是对比双方变更记录
+>
+>  > ![image-20210917160227135](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917160227135.png) 
+
+#### ② 解决后标记解决且进行提交
+
+> **CLI**操作中用 **git add .** 标记解决,VSCode中同样点击 **+** 号标记解决,随后直接 推送远端即可
+>
+>![image-20210917160908071](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917160908071.png) 
+
+#### ③ 冲突解决成功
+
+>可以看到,合并、冲突解决并提交成功:
+>
+>![image-20210917161255015](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917161255015.png) 
+>
+> master上查看文件修改也是正确的![image-20210917161303263](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917161303263.png) 
+
+
+
+## Ⅴ - VSCode初始化仓库以及关联到远程仓库
+
+> 也可以直接 **克隆仓库** ,克隆仓库操作在上面已经给出
+
+### 1、操作
+
+>在最后我还是用了 **CLI** 实在是说真的,很多操作还是直接命令行方便
+>
+>![image-20210917134424781](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917134424781.png)
+
+### 2、第一次执行push时报错
+
+>在上图的 **CLI** 命令行操作进行远程推送时报错,这是为什么?
+>
+>```sh
+>To push the current branch and set the remote as upstream, use
+>    git push --set-upstream origin master
+>```
+>
+>* **CL** 其实做的已经仁至义尽了,这里已经提示你要输入的正确命令行,这是使用GUI难以比拟的优势
+>* 当您使用 **git push** 时，意味着您正试图将本地存储库上载到托管在网上某处的远程存储库，它可以是github、gitlab等。
+>* 为了将您的代码上传到远程存储库，您需要设置一个上游，也就是说，设置一个位置来推送您的存储库。您可以通过添加远程存储库的URL来实现这一点。
+
+### 3、成功
+
+>推送后,可以直接上远程仓库网站查看
+>
+>![image-20210917134559319](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917134559319.png) 
+
+# 五、查看历史差异
+
+## Ⅰ -  查看分支之间的差异
+
+>1. 首先你要安装 **GitLens ** 拓展插件, 安装后左侧会出现如图选项
+>2. 安装后左侧出现分支图标,点击进入就能查看
+>
+>![image-20210916183227838](VSCode使用Git可视化管理源代码笔记中的图片/image-20210916183650066.png)
+
+## Ⅱ -  VSCode Git提交修改历史记录查看
+
+>首先你要安装 **Git History** 或者 **Git Graph** 拓展插件
+
+### 1、 查看分支 (GUI界面)
+
+>首先你要安装 **Git History** 或者 **Git Graph** 拓展插件,才能有左侧两个按钮
+>
+>![image-20210917162800755](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917162800755.png) 
+
+### 2、 查看某文件历史修改记录
+
+>![image-20210917163625790](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917163625790.png)
+
+### 3、查看文件修改时间线对比文件修改内容：
+
+>选中某一文件后,展开其时间线,双击某一 **commit** 可以查看前后文件提交差异
+>
+>![image-20210917164716480](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917164716480.png) 

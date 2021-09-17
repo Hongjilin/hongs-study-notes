@@ -4,11 +4,8 @@
 >
 >本笔记主要记录工作中项目中遇到的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
 >
->此笔记持续更新
+>除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)
->
->ps:下方给出的解决代码只会展示本效果所需必要代码,其余代码不展示出来-->`必须代码上都有相应注释`
 
 # #目录
 
@@ -874,10 +871,6 @@
 >
 >   于此问题完美解决了
 
-
-
-
-
 ### Ⅵ-table排序对比大小相关
 
 >antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
@@ -940,6 +933,29 @@
 >  ![image-20210715153029004](AntDesign_ofReact使用笔记中的图片/image-20210715153029004.png)
 >
 >`注意`:排序返回应为`正负数[如1、-1]`而不是`boolean`类型
+
+### Ⅶ  -  以其他列作为本列展示筛选条件
+
+>1. 举个实际场景:
+>
+>   - 当我需要根据 [**is_dynamic**] 字段判断 本列展示的是 [**IP名称**] 还是 [**IP地址**] 时
+>
+>2. api概述: 列的 **render()** 方法自动接受两个参数 
+>
+>   - 第一个参数: **daraIndex** 中绑定字段的值
+>   - 第二个参数: 本行数据所有属性名与值
+>
+>3. 代码实现与截图
+>
+>   - 实现方法1:row含有本行所有字段
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件3.png)
+>
+>   - 实现方法2:其实就是换个写法
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件2.png)
+
+
 
 
 
@@ -1052,24 +1068,3 @@
 >5. 效果展示:
 >
 >   ![Tree选中效果](AntDesign_ofReact使用笔记中的图片/Tree选中效果.gif) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

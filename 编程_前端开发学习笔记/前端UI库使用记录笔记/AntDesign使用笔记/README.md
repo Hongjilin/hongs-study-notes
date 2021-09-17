@@ -2,7 +2,7 @@
 
 > 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
-> `只截取了部分笔记至此,方便网站阅读`
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -10,19 +10,6 @@
 >
 >本笔记主要记录工作中项目中遇到的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
 >
->此笔记持续更新
->
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)
-
-# #说明
-
->`antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。也是是本人目前实习公司所用框架技术之一
->
->本笔记主要记录工作中项目中遇到的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
->
->此笔记持续更新
->
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)
 
 # #目录
 
@@ -40,7 +27,9 @@
 
 ## 1、From表单
 
-### Ⅰ-限制表单中输入框不能为空以及中文
+> 许多数据录入是与From表单相结合的
+
+### Ⅰ- 限制表单中输入框不能为空以及中文
 
 >1. 通过[`From.Item`](https://ant.design/components/form-cn/#Form.Item) 中的 `normalize`属性进行处理对value的处理:组件获取值后进行转换，再放入 Form 中。不支持异步
 >
@@ -48,80 +37,80 @@
 >
 >3. 代码示例
 >
->  ```jsx
-><Form form={form} onFinish={handleFinish}>
-><Item
->    label="密码"
->     name="password"
->     rules={[{ required: true, message: '密码不能为空' }]}
->     //密码框不允许为空格,且不允许输入中文
->     normalize={(value) => value.replace(/\s/g, '').replace(/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi, '')
->     }
->   >
->     <Input.Password
->       placeholder="请输入密码"
->       autoComplete="new-password"
->     />
->   </Item>
-> </From>
->  ```
+>   ```jsx
+>   <Form form={form} onFinish={handleFinish}>
+>   <Item
+>       label="密码"
+>        name="password"
+>        rules={[{ required: true, message: '密码不能为空' }]}
+>        //密码框不允许为空格,且不允许输入中文
+>        normalize={(value) => value.replace(/\s/g, '').replace(/[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi, '')
+>        }
+>      >
+>        <Input.Password
+>          placeholder="请输入密码"
+>          autoComplete="new-password"
+>        />
+>      </Item>
+>    </From>
+>   ```
 
-### Ⅱ-自定义校验
+### Ⅱ - 自定义校验
 
 >1. 详见[`Rule`](https://ant.design/components/form-cn/#Rule)属性中自定义`validator`
 >
 >2. 通常用作用户名等校验
 >
-> ```jsx
-><Form form={form} onFinish={handleFinish}>
->    <Item
->      label="用户名"
->      name="username"
->      validateTrigger="onBlur"
->      normalize={(value) => value.replace(/\s/g, '')}
->      rules={[
->       //此处message为空字符串是为了防止下方自定义校验返回的字符串重叠    
->       { required: true, message: '' },
->        {
->          validator: async (_, value) => {
->              //如果是修改时,可以用这句话,当你内容没改变时,不进行校验
->              if (editData.name === value) return; 
->              //判断空以及输入空字符串的报错
->              if (value == null || value.trim() == '') return Promise.reject("用户名不能为空");
->              //请求接口,查询通过上述两个校验后的字符串是否与数据库中重复,如果重复,则提示用户名已存在
->              const res: IResult<IExist> = await ChannelApi.isUserExist( value );
->              if (res?.data.status) return Promise.reject('用户名已存在');
->              else  return Promise.resolve(); 
+>  ```jsx
+>  <Form form={form} onFinish={handleFinish}>
+>      <Item
+>        label="用户名"
+>        name="username"
+>        validateTrigger="onBlur"
+>        normalize={(value) => value.replace(/\s/g, '')}
+>        rules={[
+>         //此处message为空字符串是为了防止下方自定义校验返回的字符串重叠    
+>         { required: true, message: '' },
+>          {
+>            validator: async (_, value) => {
+>                //如果是修改时,可以用这句话,当你内容没改变时,不进行校验
+>                if (editData.name === value) return; 
+>                //判断空以及输入空字符串的报错
+>                if (value == null || value.trim() == '') return Promise.reject("用户名不能为空");
+>                //请求接口,查询通过上述两个校验后的字符串是否与数据库中重复,如果重复,则提示用户名已存在
+>                const res: IResult<IExist> = await ChannelApi.isUserExist( value );
+>                if (res?.data.status) return Promise.reject('用户名已存在');
+>                else  return Promise.resolve(); 
+>            },
 >          },
->        },
->      ]}
->    >
->      <Input placeholder="请输入用户名" />
->    </Item>
-> </From>
-> ```
+>        ]}
+>      >
+>        <Input placeholder="请输入用户名" />
+>      </Item>
+>   </From>
+>  ```
 >
 >3. 通常用作必须字段校验(不进行数据库查询)
 >
->  ```jsx
->  <Item
->    label="必填项"
->    name="incomeType"
->    rules={[
->      { required: true, message: '' },
->      {
->        validator: async (_, value) => {
->          if (value == null || value.trim() == '') 
->            return Promise.reject('必填项不能为空');
->        },
->      },
->    ]}
->  >
->    <Input.TextArea placeholder="请输入必填项信息" />
->  </Item>
->  ```
+>   ```jsx
+>     <Item
+>       label="必填项"
+>       name="incomeType"
+>       rules={[
+>         { required: true, message: '' },
+>         {
+>           validator: async (_, value) => {
+>             if (value == null || value.trim() == '') 
+>               return Promise.reject('必填项不能为空');
+>           },
+>         },
+>       ]}
+>     >
+>       <Input.TextArea placeholder="请输入必填项信息" />
+>     </Item>
+>   ```
 
-### Ⅲ-表单中动态修改数字输入框的value
+### Ⅲ - 表单中动态修改数字输入框的value
 
 >1. 出现场景:在 第一次对[`InputNumber`](https://ant.design/components/input-number-cn/#API)组件输入0时，就自动填充为设置的`min`了，这时我的需求是改成输入框失去焦点时再自动填充为min
 >
@@ -129,181 +118,181 @@
 >
 >3. 代码示例
 >
->  ```jsx
->   //最小折扣,用于动态改变最小折扣
->    const [min, setMin] = useState(0);
->
->  <Form form={form} onFinish={handleFinish}>
->    <Item
->        label="折扣数"
->        name="discount"
->        rules={[{ required: true, message: '推荐码折扣不能为空' }]}
->      >
->        <InputNumber
->          style={{ width: '100%' }}
->          placeholder={DISCOUNT_TIP}
->          // min={0.9}
->          min={min}
->         max={1}
->          step={0.01}
->          precision={2}
->          // 第一次输入推荐码折扣，输入0，就自动填充为0.9了，建议改成输入框失去焦点时再自动填充为0.9
->          //所以取消默认min,通过动态添加min实现第一次不会自动填充,唯有失去焦点时才会执行
->          onBlur={(e) => {
->            if (Number(e.target.value) < 0.9) form.setFieldsValue({ discount: 0.9 })
->            setMin(0.9)
->          }}
->        />
->      </Item>
->   </From>
->  ```
+>   ```jsx
+>    //最小折扣,用于动态改变最小折扣
+>     const [min, setMin] = useState(0);
+>   
+>   <Form form={form} onFinish={handleFinish}>
+>     <Item
+>         label="折扣数"
+>         name="discount"
+>         rules={[{ required: true, message: '推荐码折扣不能为空' }]}
+>       >
+>         <InputNumber
+>           style={{ width: '100%' }}
+>           placeholder={DISCOUNT_TIP}
+>           // min={0.9}
+>           min={min}
+>          max={1}
+>           step={0.01}
+>           precision={2}
+>           // 第一次输入推荐码折扣，输入0，就自动填充为0.9了，建议改成输入框失去焦点时再自动填充为0.9
+>           //所以取消默认min,通过动态添加min实现第一次不会自动填充,唯有失去焦点时才会执行
+>           onBlur={(e) => {
+>             if (Number(e.target.value) < 0.9) form.setFieldsValue({ discount: 0.9 })
+>             setMin(0.9)
+>           }}
+>         />
+>       </Item>
+>    </From>
+>   ```
 
-### Ⅳ-限制表单中输入框-不能只输入纯空格以及为空(保留value中间空格)
+### Ⅳ - 限制表单中输入框-不能只输入纯空格以及为空(保留value中间空格)
 
 >1. 出现场景:详见截图
 >
-><img src="AntDesign_ofReact使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
+> <img src="AntDesign_ofReact使用笔记中的图片/image-20210519174400852.png" alt="image-20210519174400852" style="zoom:80%;" />
 >
 >2. 代码示例:此处指举例第一个输入框,并在里面进行注释
 >
->```jsx
->  <Form {...FORM_LAYOUT} form={form} onFinish={handleFinish}>
->          <Item
->            label="xxx名"
->            name="name"
->            validateTrigger="onBlur"
->            // normalize={(value) => value.replace(/\s/g, '')} //此行代码是直接限制无法输入空格,不符需求所以废弃
->            rules={[
->              //1. 此处message要置空,因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
->              //2. 为何保留此处? 需要输入框前有*提示必填 如果不是必填项就不需要
->              { required: true, message: '' },
->              {
->                validator: async (_, value) => {
->                  //此行是去除前后空格后为空字符串或者直接为空的话返回 不能为空提示
->                  if (value == null ||value.trim() == '') { 
->                    return Promise.reject('xxx名不能为空');
->                  } else {
->                    const res: IResult<IExist> = await ChannelApi.isChannelExist(
->                      value
->                    );
->                    if (res?.data.status) {
->                      return Promise.reject('xxx名已存在');
->                    } else {
->                      return Promise.resolve();
->                    }
->                  }
->                },
->              },
->            ]}
->          >
->            <Input placeholder="请输入渠道商名" />
->          </Item>
->    	 //不是必须项的对比
->      	 <Item label="联系人" name="contactName">
->            <Input placeholder="请输入联系人" />
->          </Item>
-></Form>
->```
+> ```jsx
+>   <Form {...FORM_LAYOUT} form={form} onFinish={handleFinish}>
+>           <Item
+>             label="xxx名"
+>             name="name"
+>             validateTrigger="onBlur"
+>             // normalize={(value) => value.replace(/\s/g, '')} //此行代码是直接限制无法输入空格,不符需求所以废弃
+>             rules={[
+>               //1. 此处message要置空,因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
+>               //2. 为何保留此处? 需要输入框前有*提示必填 如果不是必填项就不需要
+>               { required: true, message: '' },
+>               {
+>                 validator: async (_, value) => {
+>                   //此行是去除前后空格后为空字符串或者直接为空的话返回 不能为空提示
+>                   if (value == null ||value.trim() == '') { 
+>                     return Promise.reject('xxx名不能为空');
+>                   } else {
+>                     const res: IResult<IExist> = await ChannelApi.isChannelExist(
+>                       value
+>                     );
+>                     if (res?.data.status) {
+>                       return Promise.reject('xxx名已存在');
+>                     } else {
+>                       return Promise.resolve();
+>                     }
+>                   }
+>                 },
+>               },
+>             ]}
+>           >
+>             <Input placeholder="请输入渠道商名" />
+>           </Item>
+>     	 //不是必须项的对比
+>       	 <Item label="联系人" name="contactName">
+>             <Input placeholder="请输入联系人" />
+>           </Item>
+> </Form>
+> ```
 >
 >3. 解析
 >
->   1. `rules`中`message`为什么要置空?
+>    1. `rules`中`message`为什么要置空?
 >
->      因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
+>       因为下方`value == null `就是为空提示,不置空会出现提示两遍的错误
 >
->   2. 为什么下方`validator`中已经给出为空提示,为何还要保留`  { required: true, message: '' }`?
+>    2. 为什么下方`validator`中已经给出为空提示,为何还要保留`  { required: true, message: '' }`?
 >
->      因为需要输入框前有*提示必填 如果不是必填项就不需要,此项会给你增加`*`号标识
+>       因为需要输入框前有*提示必填 如果不是必填项就不需要,此项会给你增加`*`号标识
+>       
+>    3. 为何不直接给输入内容`.trim()`去除前后空格?
 >
->   3. 为何不直接给输入内容`.trim()`去除前后空格?
->
->      因为输入监听导师value是单次输入,需要你在后面提交时将参数进行一次trim()去除前后空格
+>       因为输入监听导师value是单次输入,需要你在后面提交时将参数进行一次trim()去除前后空格
 
-### Ⅴ- 实现嵌套结构-多类型输入效果
+### Ⅴ -  实现嵌套结构-多类型输入效果
 
 >1. 需求场景:当要求通过下拉框切换后面输入框类别,同时后面的输入框绑定的值不同(与文档中给出的不同:文档中后续输入框时同一个,只是简单时输入框组合)
 >
 >2. 需求示例截图
 >
->  ![image-20210705164549793](AntDesign_ofReact使用笔记中的图片/image-20210705164549793.png)
+>   ![image-20210705164549793](AntDesign_ofReact使用笔记中的图片/image-20210705164549793.png)
 >
 >3. 实现思路:
 >
->  - `Form.Item`中再嵌套`Form.Item`,然后将各自规则分开写(不能写在`父item`中).分别绑定不同变量名,通过选择的类型切换渲染后面的`Form.Item`
->  - 在取数据时,可以判断其中一个变量为空时进行对另一个变量的数据(如果不渲染Form.Item,其绑定的变量为undefined),如此就能实现此需求
->  - 此处记录主要起到借鉴作用,我感觉应有更好的写法,但是暂时没想出,同学们如果有好写法希望可以提出交流
+>   - `Form.Item`中再嵌套`Form.Item`,然后将各自规则分开写(不能写在`父item`中).分别绑定不同变量名,通过选择的类型切换渲染后面的`Form.Item`
+>   - 在取数据时,可以判断其中一个变量为空时进行对另一个变量的数据(如果不渲染Form.Item,其绑定的变量为undefined),如此就能实现此需求
+>   - 此处记录主要起到借鉴作用,我感觉应有更好的写法,但是暂时没想出,同学们如果有好写法希望可以提出交流
 >
 >4. 解决代码:
 >
->  ```jsx
->  <Form.Item {...formItemLayout} label="公司">
->        <Select
->          defaultValue="0"
->          style={{ width: 120 }}
->          onChange={(v) => setinputType(v)}
->        >
->          <Option value="0">公司名</Option>
->          <Option value="1">公司ID</Option>
->        </Select>
->        {/* 当前方选择框选择公司ID输入时,渲染输入公司ID
->            当前方选择框选择公司名输入时,渲染请选择可见公司 */}
->        {inputType != '0' ? (
->          <Form.Item
->            {...formItemLayout}
->            //此处name需要绑定不同变量名,否则会导致与下方`选择可见公司`选择框变量互相污染
->            name="company_inputIds"
->            noStyle
->            rules={[{ required: true, message: '输入公司ID' }]}
->          >
->            {/*  此处使用antd自带下拉框   */}
->            <Select
->              mode="tags"
->              value={showCompanyIDList}
->              onChange={(val) => changeCompanyIds(val)}
->              showArrow={true}
->              placeholder="输入公司ID"
->              style={{ minWidth: 250, maxWidth: 350 }}
->              tokenSeparators={[',']}
->            />
->          </Form.Item>
->        ) : (
->          //此处调用公用组件
->          <Form.Item
->            {...formItemLayout}
->            name="company_ids"
->            noStyle
->            rules={[{ required: true, message: '请选择指定公司' }]}
->          >
->            <SuperSelect
->              value={showCompanyList}
->              placeholder="请选择可见公司"
->              loading={companyLoading}
->              options={companyList}
->              showArrow={true}
->              onChange={(val) => {
->                companyListChange(val);
->              }}
->              getData={() => {
->                getCompanyList();
->              }}
->              onSearch={onSearchCompany}
->            />{' '}
->          </Form.Item>
->        )}
->      </Form.Item>
-> ---------------------------------  数据处理 ----------------------------------------------------  
->   const params = {
->      //当 `company_ids`为空时,取`company_inputIds`的值(反之相反),然后将值转为字符串形式(以,隔开)
->      company_ids:
->        data?.company_ids?.length > 0
->          ? data?.company_ids?.map((value) => value.key).join(',')
->          : !toJS(data?.company_inputIds)
->            ? undefined
->            : data?.company_inputIds?.toString(),
->    };
->  ```
+>   ```jsx
+>     <Form.Item {...formItemLayout} label="公司">
+>           <Select
+>             defaultValue="0"
+>             style={{ width: 120 }}
+>             onChange={(v) => setinputType(v)}
+>           >
+>             <Option value="0">公司名</Option>
+>             <Option value="1">公司ID</Option>
+>           </Select>
+>           {/* 当前方选择框选择公司ID输入时,渲染输入公司ID
+>               当前方选择框选择公司名输入时,渲染请选择可见公司 */}
+>           {inputType != '0' ? (
+>             <Form.Item
+>               {...formItemLayout}
+>               //此处name需要绑定不同变量名,否则会导致与下方`选择可见公司`选择框变量互相污染
+>               name="company_inputIds"
+>               noStyle
+>               rules={[{ required: true, message: '输入公司ID' }]}
+>             >
+>               {/*  此处使用antd自带下拉框   */}
+>               <Select
+>                 mode="tags"
+>                 value={showCompanyIDList}
+>                 onChange={(val) => changeCompanyIds(val)}
+>                 showArrow={true}
+>                 placeholder="输入公司ID"
+>                 style={{ minWidth: 250, maxWidth: 350 }}
+>                 tokenSeparators={[',']}
+>               />
+>             </Form.Item>
+>           ) : (
+>             //此处调用公用组件
+>             <Form.Item
+>               {...formItemLayout}
+>               name="company_ids"
+>               noStyle
+>               rules={[{ required: true, message: '请选择指定公司' }]}
+>             >
+>               <SuperSelect
+>                 value={showCompanyList}
+>                 placeholder="请选择可见公司"
+>                 loading={companyLoading}
+>                 options={companyList}
+>                 showArrow={true}
+>                 onChange={(val) => {
+>                   companyListChange(val);
+>                 }}
+>                 getData={() => {
+>                   getCompanyList();
+>                 }}
+>                 onSearch={onSearchCompany}
+>               />{' '}
+>             </Form.Item>
+>           )}
+>         </Form.Item>
+>    ---------------------------------  数据处理 ----------------------------------------------------  
+>      const params = {
+>         //当 `company_ids`为空时,取`company_inputIds`的值(反之相反),然后将值转为字符串形式(以,隔开)
+>         company_ids:
+>           data?.company_ids?.length > 0
+>             ? data?.company_ids?.map((value) => value.key).join(',')
+>             : !toJS(data?.company_inputIds)
+>               ? undefined
+>               : data?.company_inputIds?.toString(),
+>       };
+>   ```
 
-### Ⅵ-实现From中使用富文本编辑器
+### Ⅵ - 实现From中使用富文本编辑器
 
 >1. 需求场景:当你的表单提交中有富文本编辑器,且你要将其变为受控组件时
 >
@@ -396,13 +385,85 @@
 >
 >4. 富文本编辑器官网  -->[点我跳转](https://www.wangeditor.com/)
 
+### Ⅶ -  给表单中输入框(其他如选择框)等赋初始值
 
+> 此处拿 **inputNumber** 作为例子
 
+#### a) 我们的错误做法
 
+>我们从官方文档中可以知道,设置默认值有一个专门的API: **defaultValue** --> 初次渲染时会进行赋初始值,且`只会执行一次`,但是在某些场景下,却发现  **defaultValue**  并不能完成我们预期的初始化操作,此处举一例本人开发中遇到的场景:
+>
+>当我们需要写一个 **inputNumber** 同时设置其 **最大值(max)、最小值(min)、初始值(defaultValue)** ,通常我们是这样做的
+>
+>- 这三个值绑定的都是可改变的state
+>- 在页面加载初始化函数中调用接口从而获取这三个值 
+>- 获取到值后state改变,重新渲染页面,将这三个值渲染到页面上
+
+#### b) 这时候问题来了:
+
+>- 首先一种情况:你会发现你使用 **inputNumber** 给的初始值并不是绑定的state的最新值,更像是初始化定义时的值(定义state时没给初始值就是undefined)
+>- 另一种情况:也就是在  **inputNumber** 中出现的 --> 输入框的默认值会是最小值 or 最大值
+
+#### c) 问题
+
+##### ① 为何设置的默认值不是最新的state
+
+>当你 **初始值(defaultValue)** 绑定的值需要从**异步接口中获取**那么实际上我们页面不会等到请求结束才渲染,而是先渲染页面(此时就运行了 **defaultValue)**这个API了),等到接口返回将**state**修改了再重新渲染绑定这些state部分的页面元素 那么即使后面接口获得数据改变了这个值,页面也只会渲染刚开始的值
+
+##### ② 为何 inputNumber 默认值会成为最大值 or 最小值
+
+>其实在上面的问题解析中就知道了, **初始值(defaultValue)** 只会渲染一次,不论你一开始 **state** 给定的值是0(防止错误)、正常的值甚至是直接不给初始化(就默认为undefined),实际上他都是只有初次渲染时生效,你可以理解为实际上页面可能进行了不止一次渲染
+>
+>* 第一次渲染: 此时页面不管你state是否还要改变,就当前给定的 **最大值(max)、最小值(min)、初始值(defaultValue)** 渲染到页面上,此时 **初始值(defaultValue)** 是生效的
+>* 再渲染:当 **最大值(max)、最小值(min)、初始值(defaultValue)** 绑定的state发生改变时(实际上就是请求的接口数据返回了),**初始值(defaultValue)**因为再第一次渲染中已经调用过一次,所以无法再给这个 **inputNumber** 设置初始值了,这时如果你第一次的 **初始值** 超出当前最大值、最小值范围时,就会被最大值最小值限制
+
+#### d) 解决方案
+
+>实际上有很多解决方案,这里列举一两个
+>
+>* 定义一个 **state**,但不再使用 **defaultValue** 方法,而是直接将 **value绑定state**,初始化给默认值也直接修改state即可
+>* 如果你的输入框在 **From** 表单中 ,那么你可以在初始化生命周期(或useEffect) 中 调用 **from.setFieldsValue({...})**,相当于在每次重绘时都进行一次初始值写入
+
+## 2、Select 选择器
+
+#### Ⅰ - filterOption 筛选下拉项自定义筛选条件
+
+>  **filterOption** :是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 true，反之则返回 false
+>
+> 注意:要配合 **showSearch** 一起使用,首先要支持搜索 然后用
+
+##### a) 使用场景
+
+>一般常见场景来说,我们可以只通过  **showSearch为true** 的方式做到输入内容关联下拉项,但是某些场景就需要配合 **filterOption**使用了
+>
+>* 当我们进行搜索的内容不是 **Option** 项中绑定的 **value**, 而是它的 **children** 值呢? 比如你value绑定的是订单id  而 **children** 则是显示时展示的 订单名称
+>* 那么这时候单单使用 **showSearch** 就不足以完成我们的需求了:我们输入订单名称去关联搜索下面下拉项订单名称
+
+##### b) 使用示例
+
+>```tsx
+><Select
+>  placeholder="请输入或下拉选择IP名称"
+>  showSearch
+>  //动态搜索Option的值 而不是value中的值
+>  //正则:当 inputValue 包含于 option 时返回true
+>  filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
+>>>
+>   {nameList?.map(item => (//下拉项value绑定id  展示却展示名称
+>      <Option key={item?.id} value={item?.id}>
+>        {item?.proxy_name} 
+>      </Option>
+>   ))}
+></Select>
+>```
+>
+>![image-20210916142227728](AntDesign_ofReact使用笔记中的图片/image-20210916142227728.png) 
 
 # 二、数据展示
 
 ## 1、[Table表格](https://ant.design/components/table-cn/)
+
+> 基本前端大部分页面数据展示都是使用`Table`进行展示
 
 ### Ⅰ-列表渲染映射文字
 
@@ -410,49 +471,49 @@
 >
 >2. 代码示例1:
 >
->  ```jsx
-><Table>
->      <Column
->        title="状态"
->        dataIndex="status"
->        render={(data) => {
->          const text = {
->            0: '已绑定',
->            1: '未绑定',
->            2: '已删除',
->          };
->          return text[data];
->        }}
->      />
-></Table>
->  ```
+>   ```jsx
+>   <Table>
+>         <Column
+>           title="状态"
+>           dataIndex="status"
+>           render={(data) => {
+>             const text = {
+>               0: '已绑定',
+>               1: '未绑定',
+>               2: '已删除',
+>             };
+>             return text[data];
+>           }}
+>         />
+>   </Table>
+>   ```
 >
 >3. 代码示例2,写法不同效果相同,下面是本人喜欢的写法:
 >
->  ```jsx
->  /**       数据字典 company-const.ts   **/
->  const SHOPSTATUSDICT = {
->    0: '已删除',
->    1: '正常',
->    2: '未绑定IP',
->  };
->  export{ SHOPSTATUSDICT }
->
->  /**      页面调用出        */
->  import { SHOPSTATUSDICT } from '../common/company-const'//导入数据字典
->  const columns = [ {
->        title: '状态',
->        dataIndex: 'status',
->        ellipsis: true,  
->        render: text=>SHOPSTATUSDICT[text]//进行状态数据映射
->      },]
->
->    return (
->      <Fragment>
->        <Table columns={columns} />
->      </Fragment>
->    );
->  ```
+>   ```jsx
+>   /**       数据字典 company-const.ts   **/
+>   const SHOPSTATUSDICT = {
+>     0: '已删除',
+>     1: '正常',
+>     2: '未绑定IP',
+>   };
+>   export{ SHOPSTATUSDICT }
+>   
+>   /**      页面调用出        */
+>   import { SHOPSTATUSDICT } from '../common/company-const'//导入数据字典
+>   const columns = [ {
+>         title: '状态',
+>         dataIndex: 'status',
+>         ellipsis: true,  
+>         render: text=>SHOPSTATUSDICT[text]//进行状态数据映射
+>       },]
+>   
+>     return (
+>       <Fragment>
+>         <Table columns={columns} />
+>       </Fragment>
+>     );
+>   ```
 
 ### Ⅱ-列表渲染映射-小数转百分比
 
@@ -462,55 +523,140 @@
 >
 >3. 代码示例:
 >
->  4. 转换函数代码
+>   1. 转换函数代码
 >
->     ```jsx
->       /**   * 将小数转化为百分比   * @param point    * @returns    */toPercent=(point:number)=>{    //判断是否为空,如果为空不做处理 -->此处如果为空要转换成0,将此行代码下移一位即可 	if(!!!point) return point    //服务端可能传来的数据是字符串,转换一下     point=Number(point)    if (point==0)   return 0;    let str=Number(point*100).toFixed()+"%";    return str;  }
->     ```
->
->  5. 列表table组件代码 
->
->     ```jsx
->       //写法一  <Table>  <Column title="抽成比例" dataIndex="rate"        //将小数转换成百分比,当为数字时,进行转换         render={(data) => (typeof data =='number')?  tool.toPercent(data):data }   />  </Table>  //写法二   const columns = [ {        title: '抽成比例',        dataIndex: 'rate',        width: 150,        ellipsis: true,        //将小数转换成百分比        render: data => tool.toPercent(data)    },];  <Table columns={columns}></Table>
->     ```
->
->6. 如果对于`if(!!!point) `此行代码不懂的同学可以看本人在js笔记中的[`js中为什么需要!!?`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/(html+css+js)零散笔记,待梳理/JavaScript笔记(零散待梳理)/js中为什么需要!!？.md)部分
+>      ```jsx
+>        /**
+>         * 将小数转化为百分比
+>         * @param point 
+>         * @returns 
+>         */
+>      toPercent=(point:number)=>{
+>          //判断是否为空,如果为空不做处理 -->此处如果为空要转换成0,将此行代码下移一位即可
+>       	if(!!!point) return point
+>          //服务端可能传来的数据是字符串,转换一下
+>           point=Number(point)
+>          if (point==0)   return 0;
+>          let str=Number(point*100).toFixed()+"%";
+>          return str;
+>        }
+>      ```
+>   
+>   2. 列表table组件代码 
+>   
+>      ```jsx
+>        //写法一
+>        <Table>
+>        <Column title="抽成比例" dataIndex="rate"
+>              //将小数转换成百分比,当为数字时,进行转换
+>               render={(data) => (typeof data =='number')?  tool.toPercent(data):data }
+>         />
+>        </Table>
+>      
+>        //写法二
+>         const columns = [ {
+>              title: '抽成比例',
+>              dataIndex: 'rate',
+>              width: 150,
+>              ellipsis: true,
+>              //将小数转换成百分比
+>              render: data => tool.toPercent(data) 
+>      
+>         },];
+>        <Table columns={columns}></Table>
+>      ```
+>   
+>4. 如果对于`if(!!!point) `此行代码不懂的同学可以看本人在js笔记中的[`js中为什么需要!!?`](https://gitee.com/hongjilin/hongs-study-notes/blob/master/编程_前端开发学习笔记/(html+css+js)零散笔记,待梳理/JavaScript笔记(零散待梳理)/js中为什么需要!!？.md)部分
 
 ### Ⅲ-表格列固定
 
 >1. 需求场景:当你的列表过长时,使用滚轮进行拖动会导致用户体验感较差,这时就需要进行表格列固定
 >
->  2. 未使用时效果
+>   1. 未使用时效果
 >
->     <img src="AntDesign_ofReact使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
+>      <img src="AntDesign_ofReact使用笔记中的图片/image-20210519180836289.png" alt="image-20210519180836289" style="zoom:80%;" />
 >
->           2. 使用后效果
+>         2. 使用后效果
 >
->     <img src="AntDesign_ofReact使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
+>      <img src="AntDesign_ofReact使用笔记中的图片/image-20210519180215667.png" alt="image-20210519180215667" style="zoom:80%;" />
 >
->       `ps`:截图中展示的都是开发中的`测试假数据`
+>        `ps`:截图中展示的都是开发中的`测试假数据`
 >
->3. 代码示例:只给出必要部分
+> 2. 代码示例:只给出必要部分
 >
->   1. css样式代码(需要给定`width`,否则无法生效,给定高度,防止超出)
+>     1. css样式代码(需要给定`width`,否则无法生效,给定高度,防止超出)
 >
->      ```scss
->      .tableWidth{  width: 1600px;  height: calc(100% - 48px);  :global {    .ant-table-wrapper,    .ant-spin-nested-loading,    .ant-spin-container,    .ant-table-container {      height: 100%;    }    .ant-table {      height: calc(100% - 48px);    }    .ant-table-pagination.ant-pagination,    div.ant-typography,    .ant-typography p {      margin-bottom: 0;    }  }}
->      ```
+>        ```scss
+>        .tableWidth{
+>          width: 1600px;
+>          height: calc(100% - 48px);
+>          :global {
+>            .ant-table-wrapper,
+>            .ant-spin-nested-loading,
+>            .ant-spin-container,
+>            .ant-table-container {
+>              height: 100%;
+>            }
+>            .ant-table {
+>              height: calc(100% - 48px);
+>            }
+>            .ant-table-pagination.ant-pagination,
+>            div.ant-typography,
+>            .ant-typography p {
+>              margin-bottom: 0;
+>            }
+>          }
+>        }
+>        ```
 >
->   2. js调用代码示例1
+>    2. js调用代码示例1
 >
->      ```jsx
->       const columns = [  {      title: '公司ID',        fixed: 'left',  //这就是固定在左边写法      dataIndex: 'companyId',      width: 150,      ellipsis: true,    }, ]return (    <Table      className={` ${style.tableWidth}`}      columns={columns}      scroll={{ x: 600 }}      />  );
->      ```
+>       ```jsx
+>        const columns = [
+>         {
+>             title: '公司ID',  
+>             fixed: 'left',  //这就是固定在左边写法
+>             dataIndex: 'companyId',
+>             width: 150,
+>             ellipsis: true,
+>           },
+>        ]
+>       return (
+>           <Table
+>             className={` ${style.tableWidth}`}
+>             columns={columns}
+>             scroll={{ x: 600 }}  
+>           />
+>         );
+>       ```
 >
->   3. js调用2:(都可实现,效果一样)
+>    3. js调用2:(都可实现,效果一样)
 >
->      ```jsx
->       const columns = [    {    title: '名称',    dataIndex: 'name',    width: 150,    fixed: 'left' as const,  }, {    title: '操作',    dataIndex: 'agentId',    width: 400,    fixed: 'right' as const,  } ]return (    <div className={style.tableWidth}>      <Table        scroll={{ x: 600, y: 'calc(100% - 48px)' }}        columns={columns}      />    </div>  );
->      ```
+>       ```jsx
+>        const columns = [
+>           {
+>           title: '名称',
+>           dataIndex: 'name',
+>           width: 150,
+>           fixed: 'left' as const,
+>         }, {
+>           title: '操作',
+>           dataIndex: 'agentId',
+>           width: 400,
+>           fixed: 'right' as const,
+>         }
+>        ]
+>       return (
+>           <div className={style.tableWidth}>
+>             <Table
+>               scroll={{ x: 600, y: 'calc(100% - 48px)' }}
+>               columns={columns}
+>             />
+>           </div>
+>         );
+>       ```
 >
->4. 注意:需要给定宽度,不然不会生效
+>3. 注意:需要给定宽度,不然不会生效
 
 ### Ⅳ-列表内容超出隐藏且悬停显示全
 
@@ -518,17 +664,35 @@
 >
 >1. 需求场景:当我的列表内容过多使得表格撑开,导致整个表格样式与希望效果不符合时,我希望能将其超出隐藏,并能悬停显示全部信息
 >
->  <img src="AntDesign_ofReact使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
+>   <img src="AntDesign_ofReact使用笔记中的图片/image-20210520160244113.png" alt="image-20210520160244113" style="zoom: 67%;" />
 >
 >2. 代码实现
 >
->  ```jsx
->import { Tooltip } from 'antd';const columns=[  { title: '渠道商账号', dataIndex: 'username',  width: 150,  onCell: () => {    return {      style: {        maxWidth: 180,        overflow: 'hidden',        whiteSpace: 'nowrap',        textOverflow:'ellipsis',        cursor:'pointer'      }    }  },   //此处引入用作悬停显示全  render: (text) => <Tooltip placement="topLeft" title={text}>{text}</Tooltip>},]
->  ```
+>   ```jsx
+>   import { Tooltip } from 'antd';
+>   const columns=[
+>     { title: '渠道商账号', dataIndex: 'username',
+>     width: 150,
+>     onCell: () => {
+>       return {
+>         style: {
+>           maxWidth: 180,
+>           overflow: 'hidden',
+>           whiteSpace: 'nowrap',
+>           textOverflow:'ellipsis',
+>           cursor:'pointer'
+>         }
+>       }
+>     },
+>      //此处引入用作悬停显示全
+>     render: (text) => <Tooltip placement="topLeft" title={text}>{text}</Tooltip>
+>   },
+>   ]
+>   ```
 >
 >3. 效果实现图
 >
->  <img src="AntDesign_ofReact使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
+>   <img src="AntDesign_ofReact使用笔记中的图片/image-20210520161131163.png" alt="image-20210520161131163" style="zoom:67%;" />
 
 ### Ⅴ-Table表中使用气泡提示Tooltip
 
@@ -536,50 +700,50 @@
 
 >1. 需求场景:当你的产品要你实现这个效果时
 >
->  ![image-20210617185457284](AntDesign_ofReact使用笔记中的图片/image-20210617185457284.png)
+>   ![image-20210617185457284](AntDesign_ofReact使用笔记中的图片/image-20210617185457284.png)
 >
 >2. 代码实现:直接在title中写即可
 >
->  ```tsx
->  import React, { Component } from 'react';
->  import { Table, Button, Modal, Typography } from 'antd';
->  import { QuestionCircleOutlined } from '@ant-design/icons';
->  import { Tooltip } from 'antd';
->  interface IProps {
->    store: Store;
->  }
->
->  const ManageTable = (props: IProps) => {
->    const { store } = props;
->    const columns = [
->      {
->        dataIndex: 'monthCount',
->        ellipsis: true,
->       //效果实现就在这行
->        title: 
->        <div> 本月新增付费IP数&nbsp;
->            <Tooltip placement='top' title='仅为当前月新增付费IP数'>
->                <QuestionCircleOutlined />
->            </Tooltip>
->        </div>,
->      },
->
->    ];
->    return (
->      <Table
->        rowKey={(record, index) => record.id || index}
->        className="table-box"
->        columns={columns}
->      />
->    );
->  };
->
->  export default observer(ManageTable);
->  ```
+>   ```tsx
+>   import React, { Component } from 'react';
+>   import { Table, Button, Modal, Typography } from 'antd';
+>   import { QuestionCircleOutlined } from '@ant-design/icons';
+>   import { Tooltip } from 'antd';
+>   interface IProps {
+>     store: Store;
+>   }
+>   
+>   const ManageTable = (props: IProps) => {
+>     const { store } = props;
+>     const columns = [
+>       {
+>         dataIndex: 'monthCount',
+>         ellipsis: true,
+>        //效果实现就在这行
+>         title: 
+>         <div> 本月新增付费IP数&nbsp;
+>             <Tooltip placement='top' title='仅为当前月新增付费IP数'>
+>                 <QuestionCircleOutlined />
+>             </Tooltip>
+>         </div>,
+>       },
+>   
+>     ];
+>     return (
+>       <Table
+>         rowKey={(record, index) => record.id || index}
+>         className="table-box"
+>         columns={columns}
+>       />
+>     );
+>   };
+>   
+>   export default observer(ManageTable);
+>   ```
 >
 >3. 效果展示
 >
->  ![image-20210617185606230](AntDesign_ofReact使用笔记中的图片/image-20210617185606230.png)
+>   ![image-20210617185606230](AntDesign_ofReact使用笔记中的图片/image-20210617185606230.png)
 
 #### ②*列表中正常使用气泡提示Tooltip*
 
@@ -587,131 +751,129 @@
 >
 >2. 代码示例:---在`columns`的render中使用
 >
->  ```tsx
-> const columns = [ {
->      title: '列名',
->      dataIndex: '属性名',
->      render: (text, record) => (
->        <Tooltip placement="top" title={text}>
->          <a onClick={() => showModal(true, record.id, text)}>{text}</a>
->        </Tooltip>
->      ),
->    },
-> ]
->  ```
+>   ```tsx
+>    const columns = [ {
+>         title: '列名',
+>         dataIndex: '属性名',
+>         render: (text, record) => (
+>           <Tooltip placement="top" title={text}>
+>             <a onClick={() => showModal(true, record.id, text)}>{text}</a>
+>           </Tooltip>
+>         ),
+>       },
+>    ]
+>   ```
 >
 >3. 实现效果
 >
->  ![image-20210708114340551](AntDesign_ofReact使用笔记中的图片/image-20210708114340551.png) 
+>   ![image-20210708114340551](AntDesign_ofReact使用笔记中的图片/image-20210708114340551.png) 
 
 #### ③ *列表中使用[Tooltip]组件却出现两个提示*的问题解决
 
 >1. 问题场景:当你想为表格中超出隐藏文字部分加气泡提示时却发现出现两个提示
 >
->  - 问题代码:
+>   - 问题代码:
 >
->    - ```tsx
->      <Column
->        title="支付宝账户"
->        dataIndex="zfb_account_name"
->        ellipsis
->        width={120}
->         render={text => (
->          <Tooltip  placement="top" title={text}>
->          {/* {text} //此处直接将内容数据返回出去渲染 */}
->           {`这是返回出去列表渲染的:${text}`}
->           </Tooltip>   
->        )}
->      />
->      ```
+>     - ```tsx
+>       <Column
+>         title="支付宝账户"
+>         dataIndex="zfb_account_name"
+>         ellipsis
+>         width={120}
+>          render={text => (
+>           <Tooltip  placement="top" title={text}>
+>           {/* {text} //此处直接将内容数据返回出去渲染 */}
+>            {`这是返回出去列表渲染的:${text}`}
+>            </Tooltip>   
+>         )}
+>       />
+>       ```
 >
+>       
 >
->
->  - 问题截图与分析:
->    ![image-20210712161809111](AntDesign_ofReact使用笔记中的图片/image-20210712161809111.png) .
+>   - 问题截图与分析:
+>     ![image-20210712161809111](AntDesign_ofReact使用笔记中的图片/image-20210712161809111.png) .
 >
 >2. 问题分析:
 >
->  - 在`render()`中返回如果是纯文本,会被[Table]自动渲染成白色气泡提示,但此提示不符合我们自己的需求(无法复制、不够美观)
+>   - 在`render()`中返回如果是纯文本,会被[Table]自动渲染成白色气泡提示,但此提示不符合我们自己的需求(无法复制、不够美观)
 >
->  - 所以我们返回给`render()`的可以是自己定义的`DOM`.但是此处也会引出一个新的问题,看下方-->
+>   - 所以我们返回给`render()`的可以是自己定义的`DOM`.但是此处也会引出一个新的问题,看下方-->
 >
->    - 初次改进代码:
+>     - 初次改进代码:
 >
->      ```jsx
->      -----------------------修改后出现问题的代码------------------------------------;
->      <Column
->        title="支付宝账户"
->        dataIndex="zfb_account_name"
->        ellipsis
->        width={120}
->         render={text => (
->          <Tooltip  placement="top" title={text}>
->          {/* {text} //此处直接将内容数据返回出去渲染 */}
->           <div>{`这是返回出去列表渲染的:${text}`}</div> 
->           </Tooltip>   
->        )}
->      />
->      ```
+>       ```jsx
+>       -----------------------修改后出现问题的代码------------------------------------;
+>       <Column
+>         title="支付宝账户"
+>         dataIndex="zfb_account_name"
+>         ellipsis
+>         width={120}
+>          render={text => (
+>           <Tooltip  placement="top" title={text}>
+>           {/* {text} //此处直接将内容数据返回出去渲染 */}
+>            <div>{`这是返回出去列表渲染的:${text}`}</div> 
+>            </Tooltip>   
+>         )}
+>       />
+>       ```
 >
->    - 初次改进效果:
->      ![image-20210712162540686](AntDesign_ofReact使用笔记中的图片/image-20210712162540686.png).
+>     - 初次改进效果:
+>       ![image-20210712162540686](AntDesign_ofReact使用笔记中的图片/image-20210712162540686.png).
 >
->  - 可以看出虽然解决了`双气泡提示`的问题,但也引出了一个新问题::返回的新的DOM它不受前方`ellipsis`属性影响,虽然气泡提示成功变为只有一个,但是下方文本仍然超出,怎么办?
+>   - 可以看出虽然解决了`双气泡提示`的问题,但也引出了一个新问题::返回的新的DOM它不受前方`ellipsis`属性影响,虽然气泡提示成功变为只有一个,但是下方文本仍然超出,怎么办?
 >
 >3. 最正确写法(数组写法也一样,自行转换下即可):
 >
->  - 代码
+>   - 代码
 >
->    ```tsx
->    -----------------------  正确写法1:给dom加以下样式 -----------------------------------;
->    //tsx
->    <Column
->      title="支付宝账户"
->      dataIndex="zfb_account_name"
->     // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
->      width={120}
->       render={text => (
->      <Tooltip  placement="top" title={text}>
->        {/* {text} //此处直接将内容数据返回出去渲染 */}
->         <div className={style.text}>{`这是返回出去列表渲染的:${text}`}</div>
->      </Tooltip>   
->      )}
->    />
->    //scss
->      .text {
->        white-space: nowrap;
->        overflow: hidden;
->        text-overflow: ellipsis;
->      }
->    -----------------------  正确写法2:直接将写成内联样式(不推荐) -----------------------------------;
->    
->    <Column
->      title="支付宝账户"
->      dataIndex="zfb_account_name"
->     // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
->      width={120}
->       render={text => (
->      <Tooltip  placement="top" title={text}>
->        <div style={{
->          overflow: 'hidden',
->          whiteSpace: 'nowrap',
->          textOverflow: 'ellipsis',
->        }}>{text}</div>
->     </Tooltip> 
->      )}
->    />
->    ```
+>     ```tsx
+>     -----------------------  正确写法1:给dom加以下样式 -----------------------------------;
+>     //tsx
+>     <Column
+>       title="支付宝账户"
+>       dataIndex="zfb_account_name"
+>      // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>       width={120}
+>        render={text => (
+>       <Tooltip  placement="top" title={text}>
+>         {/* {text} //此处直接将内容数据返回出去渲染 */}
+>          <div className={style.text}>{`这是返回出去列表渲染的:${text}`}</div>
+>       </Tooltip>   
+>       )}
+>     />
+>     //scss
+>       .text {
+>         white-space: nowrap;
+>         overflow: hidden;
+>         text-overflow: ellipsis;
+>       }
+>     -----------------------  正确写法2:直接将写成内联样式(不推荐) -----------------------------------;
+>     
+>     <Column
+>       title="支付宝账户"
+>       dataIndex="zfb_account_name"
+>      // ellipsis 此属性无法影响到render返回出来的dom节点,无用了,去除
+>       width={120}
+>        render={text => (
+>       <Tooltip  placement="top" title={text}>
+>         <div style={{
+>           overflow: 'hidden',
+>           whiteSpace: 'nowrap',
+>           textOverflow: 'ellipsis',
+>         }}>{text}</div>
+>      </Tooltip> 
+>       )}
+>     />
+>     ```
 >
->  - 效果截图:
+>   - 效果截图:
 >
->    ![image-20210712163609695](AntDesign_ofReact使用笔记中的图片/image-20210712163609695.png) 
+>     ![image-20210712163609695](AntDesign_ofReact使用笔记中的图片/image-20210712163609695.png) 
 >
+>   
 >
->
->  于此问题完美解决了
-
-
+>   于此问题完美解决了
 
 ### Ⅵ-table排序对比大小相关
 
@@ -725,29 +887,29 @@
 >
 >2. 代码实现与截图
 >
->```tsx
->  //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
->{
->      title: '采集结束时间',
->      dataIndex: 'end_time',
->      key: 'end_time',
->      sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
-> },
-> -----------------封装与调用--------------------------
->工具函数抽出:
->/**
->  * 时间列表排序方法
->  * 可以更换a,b顺序,做到初次为逆序还是正序排序
->  * @param a 包含时间属性的对象a
->  * @param b 包含时间属性的对象b
->  * @param type 作为排序依据的时间属性名字
->  * @returns number 利用正负数进行判断
->  */
-> timeSorter = (a:object, b:object):Function => (type):number => new Date(a[type]).getTime() - new Date(b[type]).getTime()
+> ```tsx
+>   //此处贴士:antd第一次点击逆序第二次正序第三次是回复到默认,依次循环
+> {
+>       title: '采集结束时间',
+>       dataIndex: 'end_time',
+>       key: 'end_time',
+>       sorter: (a, b) => new Date(a.end_time).getTime() - new Date(b.end_time).getTime()
+>  },
+>  -----------------封装与调用--------------------------
+> 工具函数抽出:
+> /**
+>   * 时间列表排序方法
+>   * 可以更换a,b顺序,做到初次为逆序还是正序排序
+>   * @param a 包含时间属性的对象a
+>   * @param b 包含时间属性的对象b
+>   * @param type 作为排序依据的时间属性名字
+>   * @returns number 利用正负数进行判断
+>   */
+>  timeSorter = (a:object, b:object):Function => (type):number => new Date(a[type]).getTime() - new Date(b[type]).getTime()
 >
->//此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
->调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
->```
+> //此处b-a(看自己需求)原因为要符合服务端给定的数据,服务端给的数据默认越以前的时间在前面,防止第一次看上去无效
+> 调用: sorter: (a, b) => tool.timeSorter(b, a)('start_time')
+> ```
 >
 >![image-20210630115858466](AntDesign_ofReact使用笔记中的图片/image-20210630115858466.png)
 
@@ -757,24 +919,47 @@
 >
 >2. 代码实现与截图
 >
-> ```tsx
->   -----------------封装与调用--------------------------
->  工具函数抽出:
->   /**
->    * 通用对比法
->    * @param a 包含要对比属性的对象a
->    * @param b 包含要对比属性的对象b
->    *  @param type 作为排序依据的属性名字
->    * @returns boolean
->    */
->   //commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]  -->错误,返回应为1或者-1
->   commonSorter = (a:object, b:object):Function=> (type):number  => a[type] > b[type] ? 1 : -1
-> sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
-> ```
+>  ```tsx
+>    -----------------封装与调用--------------------------
+>   工具函数抽出:
+>    /**
+>     * 通用对比法
+>     * @param a 包含要对比属性的对象a
+>     * @param b 包含要对比属性的对象b
+>     *  @param type 作为排序依据的属性名字
+>     * @returns boolean
+>     */
+>    //commonSorter = (a:object, b:object):Function=> (type):boolean  => a[type] > b[type]  -->错误,返回应为1或者-1
+>    commonSorter = (a:object, b:object):Function=> (type):number  => a[type] > b[type] ? 1 : -1
+>  sorter={(a: object, b: object) => tool.commonSorter(a, b)('url')}
+>  ```
 >
 >  ![image-20210715153029004](AntDesign_ofReact使用笔记中的图片/image-20210715153029004.png)
 >
 >`注意`:排序返回应为`正负数[如1、-1]`而不是`boolean`类型
+
+### Ⅶ  -  以其他列作为本列展示筛选条件
+
+>1. 举个实际场景:
+>
+>   - 当我需要根据 [**is_dynamic**] 字段判断 本列展示的是 [**IP名称**] 还是 [**IP地址**] 时
+>
+>2. api概述: 列的 **render()** 方法自动接受两个参数 
+>
+>   - 第一个参数: **daraIndex** 中绑定字段的值
+>   - 第二个参数: 本行数据所有属性名与值
+>
+>3. 代码实现与截图
+>
+>   - 实现方法1:row含有本行所有字段
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件3.png)
+>
+>   - 实现方法2:其实就是换个写法
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件2.png)
+
+
 
 
 
@@ -887,48 +1072,3 @@
 >5. 效果展示:
 >
 >   ![Tree选中效果](AntDesign_ofReact使用笔记中的图片/Tree选中效果.gif) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

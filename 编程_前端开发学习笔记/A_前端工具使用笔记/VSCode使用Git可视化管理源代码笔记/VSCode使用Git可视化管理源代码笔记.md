@@ -5,6 +5,8 @@
 >查阅借鉴的资料:CSDN[徐余人](https://blog.csdn.net/zhaojun666)的[VScode的源代码管理简易使用](https://blog.csdn.net/zhaojun666/article/details/106163505) 博客园[allenxt](https://home.cnblogs.com/u/allenxt/)的[vs code 使用Git进行源代码管理](https://www.cnblogs.com/allenxt/p/8473686.html); 简书[broccoli_d39c](https://www.jianshu.com/u/bb8ffcaec19b)的[vscode源代码管理器（git可视化操作）](https://www.jianshu.com/p/ef0438a8b941); 腾讯云追逐时光者的[VS Code使用Git可视化管理源代码详细教程](https://cloud.tencent.com/developer/article/1793472) ; 知乎[我想飞](https://www.zhihu.com/people/xdbcb8)的[Visual Studio Code第二弹：Vscode与Git的完美结合](https://zhuanlan.zhihu.com/p/34753075);程序员宅基地的[vscode 侧边栏源代码管理不见了](https://www.cxyzjd.com/article/z591102/107707197)
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+>
+>想看GIT基础的同学可以看这里 :  **[Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)** 
 
 # 一、CLI 与 GUI
 
@@ -154,3 +156,24 @@
 >2. 安装后左侧出现分支图标,点击进入就能查看
 >
 > ![image-20210916183227838](VSCode使用Git可视化管理源代码笔记中的图片/image-20210916183650066.png)
+
+## Ⅳ - 实际工作开发四步曲(添、提、拉、推):
+
+### 1、首先要明白四步曲分别是哪四步，其作用分别是什么？
+
+>* 添：将修改的内容添加到本地暂存区,实际上就是命令 [ **git add .** ]
+>* 提：将本地暂存区中的内容提交到本地代码库,实际上就是命令 [ **git commit -m '提交信息'** ] 
+>* 拉：同步，拉取远程代码库中的内容，在多人协同开发中十分的重要，因为假如事先没有同步更新到最新版本有可能会覆盖别人修改的东西，假如拉取后有冲突直接使用VS Code解决冲突即可,实际上就是命令 [ **git pull** ] 
+>* 推：将本地代码库中的内容推送到远程代码仓库,实际上就是命令 [ **git push** ]
+
+### 2、添加暂存、撤销暂存
+
+>首先点击 [**弹簧图标**],进入源代码管理界面,当你仓库进行了修改的时候会出现下面内容
+>
+>![image-20210917113546148](VSCode使用Git可视化管理源代码笔记中的图片/image-20210917113546148.png) 
+
+### 3、提交至本地代码库
+
+>此处实际上做的是执行命令 [ **git commit -m '提交信息'** ] ,注意,此处的提交还是操作本地文件,并没有推送至远端
+>
+>

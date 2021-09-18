@@ -1010,6 +1010,16 @@
 >>* 所以答案为0 1 0
 >
 
+### 2、下面的输出结果是?
+
+>```js
+>(function() {
+>      var a = b = 5;
+>  })();   
+>console.log(b);
+>console.log(a);
+>```
+
 # 八、ES系列相关
 
 > 关于ES系列详细笔记可以看这里  --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 

@@ -885,6 +885,24 @@
 >
 >   ![image-20210909203353878](JavaScript专项练习中的图片/image-20210909203353878.png) 
 
+### 2、对于代码 var a = 10.42; 取出 a 的整数部分，以下代码哪些是正确的？
+
+>```js
+>parseInt(a);
+>Math.floor(a);
+>Math.ceil(a);
+>a.split('.')[0];
+>```
+>
+>##### 答案解析
+>
+>>1.  A. parseInt转换为整数，默认为10进制，结果为10 
+>>2.  B. floor向下取整，结果为10 
+>>3. C. ceil向上取整，结果为11 
+>>4.  D. split操作数必须为**正则或字符串**，结果为TypeError
+>>   - 这是String方法
+>>   - 如果想正确修改需要这样调用: String.prototype.split.call(a,'.')[0]
+
 # 六、this指向相关
 
 > 此处知识点不懂的可以看本人 [JS进阶笔记函数的this部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A4-%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this),本人给出了详细的笔记梳理
@@ -1045,8 +1063,8 @@
 >>     //所以就相当于
 >>     (function(){
 >>         window.b = 5; 
->>         var a = b; //当前作用域下找不到 [ b ] 就会一层层网上找,直到找到最顶层对象 [ window.b]
->>     })(); 
+>>         var a = b; //当前作用域下找不到 [ b ] 就会一层层往上找,直到找到最顶层对象 [ window.b]
+>>     })(); wang
 >>     console.log(b); //5
 >>     console.log(a); //报错,因为找不到  -->原因是考点二
 >>     ```
@@ -1174,7 +1192,62 @@
 >2. 但也是恰好是因为实例上有此属性方法(do),那如果没有呢?那他就会往上的原形对象找,但此时原型对象已经被赋值为一个函数,所以会找不到然后报错.
 >3. 如果想要调用 prototype 上写的方法 应该这样调用 **new A.prototype().do()**
 
+### 2、以下代码执行后，a.x 和 b.x 的结果分别是？  
 
+>```js
+>function A(x){
+>	this.x = x;
+>}
+>A.prototype.x = 1; 
+>
+>function B(x){
+>	this.x = x;
+>}
+>B.prototype = new A(); 
+>var a = new A(2), b = new B(3);
+>delete b.x; 
+>console.log(a.x,b.x)
+>//以下是选项
+>2, 3
+>2, 1
+>2, undefined
+>其他几项都不对
+>```
+>
+>##### 知识点梳理
+>
+>>* 原型与原型链相关知识点,此部分不太熟悉的同学可以看本人笔记 -->  **[JavaScript进阶笔记的原型链部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记#1原型与原型链)** 
+>>* 如果有x但是没有赋值，则是undefined,相当于x=undefined. 就不会进入原型链
+>
+>##### 答案解析
+>
+>>```js
+>>function A(x){
+>>	this.x = x;
+>>}
+>>A.prototype.x = 1; //将A原型上的x设置为1
+>>
+>>function B(x){
+>>	this.x = x;
+>>}
+>>B.prototype = new A(); //将B原型上的x设置为 A的一种object. 所以B实例出来object的prototype就是{x:undefined}
+>>var a = new A(2),//a.x首先要在自己的构造函数中查找，没有采取原型上找，这里有this.x = x.所以a.x = 2;
+>>    b = new B(3);//此时 b.x = 3 ;但是因为上面[B.prototype = new A()],所以形成原型链,其父级prototype={x:undefined}
+>>delete b.x; //删除实例b上的[x]属性,但是delete只能删除自己的x不能删除父级的x. 
+>>console.log(a.x,b.x)
+>>```
+>>
+>>* **var a = new A(2)** 很容易理解,就是 a.x==2
+>>* 看上面代码可以得知,在进行到 **b = new B(3)** 这步的时候 b的原型 **prototype={x:undefined}**
+>>* delete b.x; 删除实例b上的[x]属性,但是delete只能删除自己的x不能删除父级的x. 所以我们查看b.x时会走到b的原型上就是 **{x:undefined}** 这里也是很容易踩到的陷阱,只要有这个属性,即便是undefined也不会在往上找了
+>
+>##### 陷阱:
+>
+>>选择 **2, 1** 选项的同学就是踩到陷阱咯
+>>
+>>* B的prototype=new A(), 想错的可能都认为构造函数的 [ **x **] 没有传值进去,**this.x**赋值为**undefined**, 所以还会去A的prototype原型上找,找到 x = 1  --> `错误`
+>>* 实际上是:如果构造函数 **没有x** 才会去原型下找
+>>* 如果有x但是没有赋值，则是undefined,相当于x=undefined. 就不会进入原型链了
 
 # 十、拓充知识点
 

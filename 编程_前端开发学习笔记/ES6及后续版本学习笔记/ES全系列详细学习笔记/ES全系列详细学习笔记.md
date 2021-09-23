@@ -7988,6 +7988,10 @@
 ## 13、Proxy
 
 > 很重要的知识点,也许你初入前端的时候会用的比较少,但是在后面进阶开发中此知识点是绕不过的
+>
+> 嗯,如果你是Vue前端工程师,那这个就更要掌握了,毕竟Vue3.x双向绑定就是用这个知识点实现的
+>
+> 下面我也会用Proxy自己模拟实现一个数据双向绑定
 
 ### Ⅰ - 概括与总结
 
@@ -8485,4 +8489,392 @@
 >>- 设置`myObj.name`属性的值时，`myObj`并没有 [ name ] 属性，因此引擎会到`myObj`的原型链去找 [ name ] 属性。
 >>- `myObj`的原型对象`proxy`是一个 Proxy 实例，设置它的 [ name ] 属性会触发`set`方法。
 >>- 这时，第四个参数`receiver`就指向原始赋值行为所在的对象`myObj`。
+
+#### ③ apply()
+
+>`apply`方法拦截函数的调用、`call`和`apply`操作。
+>
+>`apply`方法可以接受三个参数，分别是目标对象、目标对象的上下文对象（`this`）和目标对象的参数数组。
+>
+>```javascript
+>const handler = {
+>  apply (target, ctx, args) {
+>    return Reflect.apply(...arguments);  //对于此方法不懂的可以看下方章节 [Reflect]
+>  }
+>};
+>```
+>
+
+##### a) 举个栗子
+
+>```javascript
+>const target = function () { return '我是 target'; };
+>const handler = {
+>  apply: function () {
+>    return '我是 proxy';
+>  }
+>};
+>
+>const p = new Proxy(target, handler);
+>p()
+>// "我是 proxy"
+>```
+>
+>上面代码中，变量`p`是 Proxy 的实例，当它作为函数调用时[`p()`]，就会被`apply`方法拦截，返回一个字符串。
+
+##### b) 举两个栗子
+
+>```javascript
+>const twice = {
+>  apply (target, ctx, args) {
+>    return Reflect.apply(...arguments) * 2;
+>  }
+>};
+>function sum (left, right) {
+>  return left + right;
+>};
+>const proxy = new Proxy(sum, twice);
+>proxy(1, 2) // 6
+>proxy.call(null, 5, 6) // 22
+>proxy.apply(null, [7, 8]) // 30
+>```
+>
+>上面代码中，每当执行`proxy`函数（直接调用或`call`和`apply`调用），就会被`apply`方法拦截。
+>
+>另外，直接调用`Reflect.apply`方法，也会被拦截。
+>
+>```javascript
+>Reflect.apply(proxy, null, [9, 10]) // 38
+>```
+>
+
+#### ④ has()
+
+>`has()`方法用来拦截`HasProperty`操作，即判断对象是否具有某个属性时，这个方法会生效。典型的操作就是`in`运算符。
+>
+>`has()`方法可以接受两个参数，分别是目标对象、需查询的属性名。
+
+##### a) 举个栗子
+
+>下面的例子使用`has()`方法隐藏某些属性，不被`in`运算符发现。
+>
+>```javascript
+>var handler = {
+>  has (target, key) {
+>    if (key[0] === '_')   return false;
+>    return key in target;
+>  }
+>};
+>var target = { _prop: '隐藏属性', prop: '正常属性' };
+>var proxy = new Proxy(target, handler);
+>'_prop' in proxy // false
+>```
+>
+>上面代码中，如果原对象的属性名的第一个字符是下划线，`proxy.has()`就会返回`false`，从而不会被`in`运算符发现。
+
+##### b) 当原对象不可配置或者禁止扩展时, `has()` 会报错
+
+>如果原对象不可配置或者禁止扩展，这时`has()`拦截会报错。
+>
+>```javascript
+>var obj = { a: 10 };
+>Object.preventExtensions(obj); //设置为不可配置
+>
+>var p = new Proxy(obj, {
+>  has: function(target, prop) { return false  }
+>});
+>
+>'a' in p // TypeError is thrown
+>```
+>
+>上面代码中，`obj`对象禁止扩展，结果使用`has`拦截就会报错。也就是说，如果某个属性不可配置（或者目标对象不可扩展），则`has()`方法就不得“隐藏”（即返回`false`）目标对象的该属性。
+>
+>值得注意的是，`has()`方法拦截的是`HasProperty`操作，而不是`HasOwnProperty`操作，即`has()`方法不判断一个属性是对象自身的属性，还是继承的属性。
+
+##### c) `has()` 拦截对 `for...in` 循环不生效
+
+>另外，虽然`for...in`循环也用到了`in`运算符，但是`has()`拦截对`for...in`循环不生效。
+>
+>```javascript
+>let stu1 = {name: 'hongjilin', score: 89};
+>let stu2 = {name: '努力学习的汪', score: 149};
+>
+>let handler = {
+>  has(target, prop) {
+>    if (prop === 'score' && target[prop] < 90) {
+>      console.log(`${target.name} 不及格`);
+>      return false;
+>    }
+>    return prop in target;
+>  }
+>}
+>
+>let oproxy1 = new Proxy(stu1, handler);
+>let oproxy2 = new Proxy(stu2, handler);
+>
+>'score' in oproxy1
+>//hongjilin 不及格
+>//false
+>
+>'score' in oproxy2   //true
+>
+>for (let a in oproxy1) {
+>  console.log(oproxy1[a]); //hongjilin   // 89
+>}
+>
+>for (let b in oproxy2) {
+>  console.log(oproxy2[b]); //努力学习的汪 // 149
+>}
+>```
+>
+>上面代码中，`has()`拦截只对`in`运算符生效，对`for...in`循环不生效，导致不符合要求的属性没有被`for...in`循环所排除。
+
+#### ⑤ construct()
+
+>`construct()`方法用于拦截`new`命令，下面是拦截对象的写法。
+>
+>```javascript
+>const handler = {
+>  construct (target, args, newTarget) {
+>    return new target(...args);
+>  }
+>};
+>```
+>
+
+##### a) construct() 的三个参数
+
+>`construct()`方法可以接受三个参数。
+>
+>- `target`：目标对象。
+>- `args`：构造函数的参数数组。
+>- `newTarget`：创造实例对象时，`new`命令作用的构造函数（下面例子的`p`）。
+>
+>```javascript
+>const p = new Proxy(function () {}, {
+>  construct: function(target, args) {
+>    console.log('构造函数的参数数组: '+args,'构造函数的参数转字符串: '+args.join(', ')); //打印其传入参数
+>    return { value: args[0] * 2 };  //将传入参数的第一个参数乘2 返回
+>  }
+>});
+>new p(9,66)
+>//构造函数的参数数组: 9,66 构造函数的参数转字符串: 9, 66
+>//{value: 18}
+>```
+>
+>![image-20210923165830708](ES全系列详细学习笔记中的图片/image-20210923165830708.png) 
+
+##### b) construct() 方法返回的必须是一个对象，否则会报错
+
+>`construct()`方法返回的必须是一个对象，否则会报错。
+>
+>```javascript
+>const p = new Proxy(function() {}, {
+>  construct: function(target, argumentsList) { return '努力学习的汪' }
+>});
+>
+>new p() // 报错
+>```
+>
+>![image-20210923170059451](ES全系列详细学习笔记中的图片/image-20210923170059451.png) 
+
+##### c) construct() 的目标对象必须是函数
+
+>由于`construct()`拦截的是构造函数，所以它的目标对象必须是函数，否则就会报错。
+>
+>```javascript
+>const p = new Proxy({}, { //此处第一个参数设置为对象
+>  construct: function(target, argumentsList) {  return {} }
+>});
+>new p() // 报错
+>```
+>
+>上面例子中，拦截的目标对象不是一个函数，而是一个对象（`new Proxy()`的第一个参数），导致报错。
+>
+>![image-20210923171049824](ES全系列详细学习笔记中的图片/image-20210923171049824.png) 
+
+##### d) 方法中的`this`指向的是`handler`，而不是实例对象
+
+>注意，`construct()`方法中的`this`指向的是`handler`，而不是实例对象。
+>
+>```javascript
+>const handler = {
+>  construct: function(target, args) {
+>    console.log('this指向: ',this ); // this指向:  {construct: ƒ}
+>    console.log("this是否指向handler: ",this === handler ); //this是否指向handler:  true
+>    return new target(...args);
+>  }
+>}
+>let p = new Proxy(function () {}, handler);
+>new p() 
+>```
+>
+>![image-20210923171637969](ES全系列详细学习笔记中的图片/image-20210923171637969.png) 
+
+#### ⑥ deleteProperty()
+
+>`deleteProperty`方法用于拦截`delete`操作，如果这个方法抛出错误或者返回`false`，当前属性就无法被`delete`命令删除。
+>
+>```javascript
+>var handler = {
+>  deleteProperty (target, key) {
+>    deleteHandler(key, 'delete'); //调用自定义抛出异常方法
+>    delete target[key]; //如果上面方法中没有抛出异常才可走到此处,这里进行删除
+>    return true;
+>  }
+>};
+>//拦截 [ delete ] 时调用的方法,当为私有属性时,抛出异常
+>function deleteHandler (key, action) {
+>  if (key[0] === '_') throw new Error(`无效的动作尝试: ${action} , 私有属性 "${key}" 是不可删除的 `);
+>}
+>
+>var target = { _name: '努力学习的汪' };//声明一个对象,有私有属性 [ _name ]
+>var proxy = new Proxy(target, handler);
+>delete proxy._name  //进行删除私有属性操作
+>//Uncaught Error: 无效的动作尝试: delete , 私有属性 "_name" 是不可删除的 
+>```
+>
+>上面代码中，`deleteProperty`方法拦截了`delete`操作符，删除第一个字符为下划线的属性会报错。
+>
+>注意，目标对象自身的不可配置（configurable）的属性，不能被`deleteProperty`方法删除，否则报错 
+>
+>![image-20210923172813525](ES全系列详细学习笔记中的图片/image-20210923172813525.png) 
+
+#### ⑦ defineProperty()
+
+>`defineProperty()`方法拦截了`Object.defineProperty()`操作。
+>
+>**Object.defineProperty() 方法**: 会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>
+>```javascript
+>let handler = {
+>  defineProperty (target, key, descriptor) {
+>    return true
+>  }
+>};
+>let target = {};
+>let proxy = new Proxy(target, handler);
+>proxy.name = '努力学习的汪' ;
+>proxy.age = 99 ;
+>console.log(proxy)
+>```
+>
+>实际上,你只要使用了  **defineProperty** 方法拦截了,就会导致添加新属性失败,(返回的 布尔值 其实只是用来提示的,与是否能添加新属性无关)
+>
+>![image-20210923174252622](ES全系列详细学习笔记中的图片/image-20210923174252622.png) 
+>
+>注意，如果目标对象不可扩展（non-extensible），则`defineProperty()`不能增加目标对象上不存在的属性，否则会报错。另外，如果目标对象的某个属性不可写（writable）或不可配置（configurable），则`defineProperty()`方法不得改变这两个设置。
+
+#### ⑧ getOwnPropertyDescriptor()
+
+>`getOwnPropertyDescriptor()`方法拦截`Object.getOwnPropertyDescriptor()`，返回一个属性描述对象或者`undefined`。
+>
+>**Object.getOwnPropertyDescriptor() 方法**: 返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+>
+>```javascript
+>const handler = {
+>  getOwnPropertyDescriptor (target, key) {
+>    if (key[0] === '_')  return; //如果为私有属性,则返回undefined
+>    return Object.getOwnPropertyDescriptor(target, key); //不是私有属性就正常返回
+>  }
+>};
+>const target = { _name: '努力学习的汪', age: 18 };
+>const proxy = new Proxy(target, handler);
+>
+>console.log(Object.getOwnPropertyDescriptor(proxy, 'sex')) //对象本身就没这个属性,所以返回 undefined
+>console.log(Object.getOwnPropertyDescriptor(proxy, '_name'))//私有属性,被拦截,所以得到    undefined
+>console.log(Object.getOwnPropertyDescriptor(proxy, 'age'))  //对象本身有此属性且不是私有属性,正常返回  {value: 18, writable: true, enumerable: true, configurable: true}
+>```
+>
+>上面代码中，`handler.getOwnPropertyDescriptor()`方法对于第一个字符为下划线的属性名会返回`undefined`。
+>
+>![image-20210923174907011](ES全系列详细学习笔记中的图片/image-20210923174907011.png) 
+
+#### ⑨ getPrototypeOf()
+
+>`getPrototypeOf()`方法主要用来拦截获取对象原型。具体来说，拦截下面这些操作。
+>
+>- `Object.prototype.__proto__`
+>- `Object.prototype.isPrototypeOf()`
+>- `Object.getPrototypeOf()`
+>- `Reflect.getPrototypeOf()`
+>- `instanceof`
+
+##### a) 举个栗子
+
+>```javascript
+>const proto = {};
+>const p = new Proxy({}, {
+>  getPrototypeOf(target) {  return proto; } //拦截:不论如何都返回空对象
+>});
+>Object.getPrototypeOf(p) === proto // true
+>```
+>
+>上面代码中，`getPrototypeOf()`方法拦截`Object.getPrototypeOf()`，返回`proto`对象。
+>
+>注意，`getPrototypeOf()`方法的返回值必须是 **对象或者null**，否则报错。另外，如果目标对象不可扩展（non-extensible）， `getPrototypeOf()`方法必须返回目标对象的原型对象
+
+#### ⑩ isExtensible()
+
+>`isExtensible()`方法拦截`Object.isExtensible()`操作。
+>
+>**Object.isExtensible() 方法:** 判断一个对象是否是可扩展的（是否可以在它上面添加新的属性）
+>
+>```javascript
+>var p = new Proxy({}, {
+>  isExtensible: function(target) {
+>    console.log("拦截:全部变为可拓展");
+>    return true;
+>  }
+>});
+>
+>Object.isExtensible(p)
+>//拦截:全部变为可拓展
+>//true
+>```
+>
+>上面代码设置了`isExtensible()`方法，在调用`Object.isExtensible` 时会打印字符串 [拦截:全部变为可拓展]。
+>
+>注意，该方法只能返回布尔值，否则返回值会被自动转为布尔值。
+>
+>这个方法有一个强限制，它的返回值必须与目标对象的`isExtensible`属性保持一致，否则就会抛出错误。
+>
+>```javascript
+>Object.isExtensible(proxy) === Object.isExtensible(target)
+>```
+>
+
+##### a) 举个栗子
+
+>![image-20210923180130237](ES全系列详细学习笔记中的图片/image-20210923180130237.png) 
+>
+>这边就是本身可拓展,却设置为false, 所以报错.具体使用场景比较特殊,就不列举了
+
+#### ⑩① ownKeys()
+
+>`ownKeys()`方法用来拦截对象自身属性的读取操作。具体来说，拦截以下操作。
+>
+>- `Object.getOwnPropertyNames()`
+>- `Object.getOwnPropertySymbols()`
+>- `Object.keys()`
+>- `for...in`循环
+
+##### a) 举个栗子
+
+>```javascript
+>let target = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  cm: 180
+>};
+>
+>let handler = {
+>  ownKeys(target) { return ['name'] }
+>};
+>
+>let proxy = new Proxy(target, handler);
+>console.log(Object.keys(proxy)) //name
+>```
+>
+>上面代码拦截了对于`target`对象的`Object.keys()`操作，只返回 [ name ] 、[ age ]、[ cm ] 三个属性之中的 [ age ] 属性。
 

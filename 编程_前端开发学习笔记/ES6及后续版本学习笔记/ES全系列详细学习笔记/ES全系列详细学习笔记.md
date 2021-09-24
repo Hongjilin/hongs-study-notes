@@ -2926,8 +2926,8 @@
 >1. 描述: `自身`、`可继承`、`可枚举`、`非枚举`、`Symbol`
 >2. 遍历
 >   - `for-in`: 遍历对象`自身可继承可枚举`属性
->   - `Object.keys()`: 返回对象`自身可枚举`属性键 [ key ] 组成的数组
->   - `Object.getOwnPropertyNames()`: 返回对象`自身非Symbol`属性键 [ key ] 组成的数组
+>   -  [Object.keys()] : 返回对象`自身可枚举`属性键 [ key ] 组成的数组
+>   -  [Object.getOwnPropertyNames()] : 返回对象`自身非Symbol`属性键 [ key ] 组成的数组
 >   - `Object.getOwnPropertySymbols()`: 返回对象`自身Symbol`属性键 [ key ] 组成的数组
 >   - `Reflect.ownKeys()`: 返回对象`自身全部`属性键 [ key ] 组成的数组
 >3. 规则
@@ -6233,7 +6233,7 @@
 >    getResults('努力学习的汪')
 >    ```
 >
->3. 遍历属性名: 无法通过`for-in`、`for-of`、`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回，只能通过`Object.getOwnPropertySymbols`返回
+>3. 遍历属性名: 无法通过`for-in`、`for-of`、 [Object.keys()] 、 [Object.getOwnPropertyNames()] 、`JSON.stringify()`返回，只能通过`Object.getOwnPropertySymbols`返回
 >
 >4. 启用模块的Singleton模式: 调用一个类在任何时候返回同一个实例(`window`和`global`)，使用`Symbol.for()`来模拟全局的`Singleton模式`
 >
@@ -6512,7 +6512,7 @@
 
 #### ①  概念引出
 
->Symbol 作为属性名，遍历对象的时候，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回. 
+>Symbol 作为属性名，遍历对象的时候，该属性不会出现在`for...in`、`for...of`循环中，也不会被 [Object.keys()] 、 [Object.getOwnPropertyNames()] 、`JSON.stringify()`返回. 
 >
 >但是，它也不是私有属性，有一个`Object.getOwnPropertySymbols()`方法，可以获取指定对象的所有 Symbol 属性名. 该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值. 
 >
@@ -6557,7 +6557,7 @@
 >console.log(PropertySymbols)
 >```
 >
->![image-20210830141637812](ES全系列详细学习笔记中的图片/image-20210830141637812.png) 上面代码中，使用`for...in`循环和`Object.getOwnPropertyNames()`方法都得不到 Symbol 键名，需要使用`Object.getOwnPropertySymbols()`方法. 
+>![image-20210830141637812](ES全系列详细学习笔记中的图片/image-20210830141637812.png) 上面代码中，使用`for...in`循环和 [Object.getOwnPropertyNames()] 方法都得不到 Symbol 键名，需要使用`Object.getOwnPropertySymbols()`方法. 
 >
 
 #### ③ 获取所有类型的键名
@@ -8009,7 +8009,7 @@
 >- **set(target, propKey, value, receiver)**：拦截对象属性的设置，比如`proxy.foo = v`或`proxy['foo'] = v`，返回一个布尔值. 
 >- **has(target, propKey)**：拦截`propKey in proxy`的操作，返回一个布尔值. 
 >- **deleteProperty(target, propKey)**：拦截`delete proxy[propKey]`的操作，返回一个布尔值. 
->- **ownKeys(target)**：拦截`Object.getOwnPropertyNames(proxy)`、`Object.getOwnPropertySymbols(proxy)`、`Object.keys(proxy)`、`for...in`循环，返回一个数组. 该方法返回目标对象所有自身的属性的属性名，而`Object.keys()`的返回结果仅包括目标对象自身的可遍历属性. 
+>- **ownKeys(target)**：拦截`Object.getOwnPropertyNames(proxy)`、`Object.getOwnPropertySymbols(proxy)`、`Object.keys(proxy)`、`for...in`循环，返回一个数组. 该方法返回目标对象所有自身的属性的属性名，而 [Object.keys()] 的返回结果仅包括目标对象自身的可遍历属性. 
 >- **getOwnPropertyDescriptor(target, propKey)**：拦截`Object.getOwnPropertyDescriptor(proxy, propKey)`，返回属性的描述对象. 
 >- **defineProperty(target, propKey, propDesc)**：拦截`Object.defineProperty(proxy, propKey, propDesc）`、`Object.defineProperties(proxy, propDescs)`，返回一个布尔值. 
 >- **preventExtensions(target)**：拦截`Object.preventExtensions(proxy)`，返回一个布尔值. 
@@ -8027,7 +8027,7 @@
 >- `has()`: 隐藏内部属性不被发现、排除不符合属性条件的对象
 >- `deleteProperty()`: 保护内部属性不被删除
 >- `defineProperty()`: 阻止属性被外部定义
->- `ownKeys()`: 保护内部属性不被遍历
+>-  [ownKeys()] : 保护内部属性不被遍历
 >
 >> 重点难点
 >
@@ -8852,14 +8852,14 @@
 
 #### ⑩① ownKeys()
 
->`ownKeys()`方法用来拦截对象自身属性的读取操作。具体来说，拦截以下操作。
+> [ownKeys()] 方法用来拦截对象自身属性的读取操作。具体来说，拦截以下操作。
 >
->- `Object.getOwnPropertyNames()`
+>-  [Object.getOwnPropertyNames()] 
 >- `Object.getOwnPropertySymbols()`
->- `Object.keys()`
+>-  [Object.keys()] 
 >- `for...in`循环
 
-##### a) 举个栗子
+##### a) 举个 拦截 [Object.keys()]  的栗子
 
 >```javascript
 >let target = {
@@ -8876,5 +8876,237 @@
 >console.log(Object.keys(proxy)) //name
 >```
 >
->上面代码拦截了对于`target`对象的`Object.keys()`操作，只返回 [ name ] 、[ age ]、[ cm ] 三个属性之中的 [ age ] 属性。
+>上面代码拦截了对于`target`对象的 [Object.keys()] 操作，只返回 [ name ] 、[ age ]、[ cm ] 三个属性之中的 [ age ] 属性。
 
+##### b) 举个 拦截 [Object.keys()] 中第一个字符为下划线的属性名 的栗子
+
+>```js
+>let target = {
+>  _name: '努力学习的汪',
+>  _age: 99,
+>  age: 18
+>};
+>
+>let handler = {
+>  ownKeys (target) {
+>     //筛选不是以下划线开头的属性名(私有属性)
+>    return Reflect.ownKeys(target).filter(key => key[0] !== '_');
+>  }
+>};
+>
+>let proxy = new Proxy(target, handler);
+>for (let key of Object.keys(proxy)) {
+>  console.log(target[key]);
+>}
+>// 只输出 18
+>```
+>
+> [Object.keys()] 本来应是都能输出,但是经过拦截后,开头为下划线的属性被过滤不进行输出,就纸打印了 18
+
+##### c) 使用 [Object.keys()] 方法时，有三类属性会被 [ownKeys()] 方法自动过滤
+
+>注意，使用 [Object.keys()] 方法时，有三类属性会被 [ownKeys()] 方法自动过滤，不会返回。
+>
+>- 目标对象上不存在的属性
+>- 属性名为 Symbol 值
+>- 不可遍历（`enumerable`）的属性
+>
+>```javascript
+>//1. 定义原对象
+>let target = { 
+>  a: 1,
+>  b: 2,
+>  c: 3,
+>  [Symbol.for('name')]: '努力学习的汪',
+>};
+>//2. 定义 不可遍历（`enumerable`）的属性 对照组数据
+>//Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>Object.defineProperty(target, 'key', {
+>  enumerable: false, //当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+>  configurable: true,
+>  writable: true,
+>  value: '这是测试不可遍历属性'
+>});
+>Object.defineProperty(target, 'test', {
+>  enumerable: true, 
+>  configurable: true,
+>  writable: true,
+>  value: '出现在枚举中'
+>});
+>//3. 定义拦截
+>let handler = {
+>  ownKeys(target) { return ['a', 'd', Symbol.for('name'), 'key' , 'test']; }
+>};
+>let proxy = new Proxy(target, handler);
+>
+>Object.keys(proxy) //['a', 'test']
+>```
+>
+>上面代码中， [ownKeys()] 方法之中，显式返回不存在的属性（`d`）、Symbol 值（`Symbol.for('secret')`）、不可遍历的属性（`key`），结果都被自动过滤掉。
+>
+>![image-20210924155428555](ES全系列详细学习笔记中的图片/image-20210924155428555.png) 
+
+##### d)  [ownKeys()] 方法还可以拦截 [Object.getOwnPropertyNames()] 
+
+>**Object.getOwnPropertyNames():** 方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。
+>
+>```js
+>const p = new Proxy({}, {
+>  ownKeys: function(target) {
+>    return ['a', 'b', 'c'];
+>  }
+>});
+>Object.getOwnPropertyNames(p)
+>// [ 'a', 'b', 'c' ]
+>```
+
+##### e) `for...in`循环也受到 [ownKeys()] 方法的拦截。
+
+>```javascript
+>const obj = { name: '努力学习的汪' };
+>const proxy = new Proxy(obj, {
+>  ownKeys: function () {
+>    return ['a', 'b'];
+>  }
+>});
+>
+>for (let key in proxy) {
+>  console.log(key); // 没有任何输出
+>}
+>```
+>
+>上面代码中， [ownKeys()] 指定只返回`a`和`b`属性，由于`obj`没有这两个属性，因此`for...in`循环不会有任何输出。
+
+##### f)  [ownKeys()] 方法返回的数组成员，只能是字符串或 Symbol 值
+
+> [ownKeys()] 方法返回的数组成员，只能是字符串或 Symbol 值。如果有其他类型的值，或者返回的根本不是数组，就会报错。
+>
+>```javascript
+>var obj = {};
+>var p = new Proxy(obj, {
+>  ownKeys: function(target) {
+>    return [123, true, undefined, null, {}, []];
+>  }
+>});
+>for (let key in p) {
+>  console.log(key); // 报错
+>}
+>```
+>
+>上面代码中， [ownKeys()] 方法虽然返回一个数组，但是每一个数组成员都不是字符串或 Symbol 值，因此就报错了。
+>
+>![image-20210924160251672](ES全系列详细学习笔记中的图片/image-20210924160251672.png) 
+
+##### g) 如果目标对象自身包含不可配置的属性，则该属性必须被 [ownKeys()] 方法返回，否则报错
+
+>如果目标对象自身包含不可配置的属性，则该属性必须被 [ownKeys()] 方法返回，否则报错。
+>
+>```javascript
+>const obj = {};
+>Object.defineProperty(obj, 'name', {
+>  configurable: false, //当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。
+>  enumerable: true,
+>  value: '努力学习的汪' }
+>);
+>
+>const getName = new Proxy(obj, {
+>  ownKeys: function(target) {  return ['name']  }
+>});
+>const getB = new Proxy(obj, {
+>  ownKeys: function(target) {  return ['b']  }
+>});
+>//前面说过,也能拦截此方法
+>console.log(Object.getOwnPropertyNames(getName)) // ['name']
+>console.log(Object.getOwnPropertyNames(getB))    // 报错
+>```
+>
+>上面代码中，`obj`对象的`name`属性是不可配置的，这时 [ownKeys()] 方法返回的数组之中，必须包含`name`，否则会报错
+>
+>![image-20210924160738101](ES全系列详细学习笔记中的图片/image-20210924160738101.png) 
+
+##### h) 如果目标对象是不可扩展的（non-extensible），这时 [ownKeys()] 方法返回的数组之中，必须包含原对象的所有属性，且不能包含多余的属性，否则报错
+
+>另外，如果目标对象是不可扩展的（non-extensible），这时 [ownKeys()] 方法返回的数组之中，必须包含原对象的所有属性，且不能包含多余的属性，否则报错。
+>
+>```javascript
+>const obj = { name:"努力学习的汪" };
+>//Object.preventExtensions()方法让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+>Object.preventExtensions(obj); //不可拓展
+>const p = new Proxy(obj, {
+>  ownKeys: function(target) { return ['name', 'age'] }
+>});
+>
+>Object.getOwnPropertyNames(p)
+>//报错 Uncaught TypeError: 'ownKeys' on proxy: trap returned extra keys but proxy target is non-extensible
+>```
+>
+>上面代码中，`obj`对象是不可扩展的，这时 [ownKeys()] 方法返回的数组之中，包含了`obj`对象的多余属性`b`，所以导致了报错。
+>
+>![image-20210924161052315](ES全系列详细学习笔记中的图片/image-20210924161052315.png) 
+
+#### ⑩② preventExtensions()
+
+>`preventExtensions()`方法拦截`Object.preventExtensions()`。该方法必须返回一个布尔值，否则会被自动转为布尔值。
+>
+>**Object.preventExtensions()方法:** 让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+
+##### a) 限制
+
+>这个方法有一个限制，只有目标对象不可扩展时（即`Object.isExtensible(proxy)`为`false`），`proxy.preventExtensions`才能返回`true`，否则会报错。
+>
+>```javascript
+>var proxy = new Proxy({}, {
+>  preventExtensions: function(target) {  return true }
+>});
+>Object.preventExtensions(proxy)
+>//VM2320:4 Uncaught TypeError: 'preventExtensions' on proxy: trap returned truish but the proxy target is extensible
+>```
+>
+>上面代码中，`proxy.preventExtensions()`方法返回`true`，但这时`Object.isExtensible(proxy)`会返回`true`，因此报错。
+>
+>![image-20210924161839936](ES全系列详细学习笔记中的图片/image-20210924161839936.png) 
+
+##### b) 解决
+
+>为了防止出现这个问题，通常要在`proxy.preventExtensions()`方法里面，调用一次`Object.preventExtensions()`。
+>
+>```javascript
+>const proxy = new Proxy({}, {
+>  preventExtensions: function(target) {
+>    console.log('回调');
+>    Object.preventExtensions(target);
+>    return true;
+>  }
+>});
+>
+>Object.preventExtensions(proxy)
+>// "called"
+>// Proxy {}
+>```
+>
+>![image-20210924161941463](ES全系列详细学习笔记中的图片/image-20210924161941463.png) 
+
+#### ⑩③ setPrototypeOf()
+
+>`setPrototypeOf()`方法主要用来拦截`Object.setPrototypeOf()`方法。
+>
+>**Object.setPrototypeOf()** 方法设置一个指定的对象的原型 ( 即, 内部[[Prototype]]属性）到另一个对象或  [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null)。
+>
+>下面是一个例子。
+>
+>```javascript
+>var handler = {
+>  setPrototypeOf (target, proto) {
+>    throw new Error('禁止更改原型');
+>  }
+>};
+>var proto = {};
+>var target = function () {};
+>var proxy = new Proxy(target, handler);
+>Object.setPrototypeOf(proxy, proto);
+>// Error: 禁止更改原型
+>```
+>
+>上面代码中，只要修改`target`的原型对象，就会报错。
+>
+>注意，该方法只能返回布尔值，否则会被自动转为布尔值。另外，如果目标对象不可扩展（non-extensible），`setPrototypeOf()`方法不得改变目标对象的原型。

@@ -6385,7 +6385,7 @@
 >a[mySymbol] // "Hello!"
 >```
 >
->上面代码通过方括号结构和`Object.defineProperty`，将对象的属性名指定为一个 Symbol 值. 
+>上面代码通过方括号结构和 [ Object.defineProperty ] ，将对象的属性名指定为一个 Symbol 值. 
 >
 
 #### ② 不能用点运算符
@@ -8031,7 +8031,7 @@
 >
 >> 重点难点
 >
->- 要使`Proxy`起作用，必须针对`实例`进行操作，而不是针对`目标对象`进行操作
+>- 要使 [ Proxy ] 起作用，必须针对`实例`进行操作，而不是针对`目标对象`进行操作
 >- 没有设置任何拦截时，等同于`直接通向原对象`
 >- 属性被定义为`不可读写/扩展/配置/枚举`时，使用拦截方法会报错
 >- 代理下的目标对象，内部`this`指向`Proxy代理`
@@ -8081,7 +8081,7 @@
 >var proxy = new Proxy(target, handler);
 >```
 >
->Proxy 对象的所有用法，都是上面这种形式，不同的只是`handler`参数的写法. 其中，`new Proxy()`表示生成一个`Proxy`实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为. 
+>Proxy 对象的所有用法，都是上面这种形式，不同的只是`handler`参数的写法. 其中，`new Proxy()`表示生成一个 [ Proxy ] 实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为. 
 
 #### ② 举个拦截读取属性行为的栗子
 
@@ -8095,9 +8095,9 @@
 >console.log(proxy.a) //由于[读] 操作已经被拦截,所有 [读] 操作都返回的是 '努力学习的汪'
 >```
 >
->![image-20210901151222628](ES全系列详细学习笔记中的图片/image-20210901151222628.png) 上面代码中，作为构造函数，`Proxy`接受两个参数 : 
+>![image-20210901151222628](ES全系列详细学习笔记中的图片/image-20210901151222628.png) 上面代码中，作为构造函数， [ Proxy ] 接受两个参数 : 
 >
->- 第一个参数是所要代理的目标对象（上例是一个空对象)，即如果没有`Proxy`的介入，操作原来要访问的就是这个对象；
+>- 第一个参数是所要代理的目标对象（上例是一个空对象)，即如果没有 [ Proxy ] 的介入，操作原来要访问的就是这个对象；
 >
 >- 第二个参数是一个配置对象，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作:
 >
@@ -8109,7 +8109,7 @@
 
 #### ③ 没有设置任何拦截 等同 直接通向原对象. 
 
->注意，要使得`Proxy`起作用，必须针对`Proxy`实例（上例是`proxy`对象）进行操作，而不是针对目标对象（上例是空对象）进行操作. 
+>注意，要使得 [ Proxy ] 起作用，必须针对 [ Proxy ] 实例（上例是`proxy`对象）进行操作，而不是针对目标对象（上例是空对象）进行操作. 
 >
 >如果`handler`没有设置任何拦截，那就等同于直接通向原对象. 
 >
@@ -8388,7 +8388,7 @@
 
 ##### a) 举个栗子
 
->假定`Person`对象有一个`age`属性，该属性应该是一个不大于 200 的整数，那么可以使用`Proxy`拦截进而保证`age`的属性值符合要求。
+>假定`Person`对象有一个`age`属性，该属性应该是一个不大于 200 的整数，那么可以使用 [ Proxy ] 拦截进而保证`age`的属性值符合要求。
 >
 >```javascript
 >let validator = {
@@ -9127,7 +9127,7 @@
 >proxy.name // TypeError: Revoked
 >```
 >
->`Proxy.revocable()`方法返回一个对象，该对象的`proxy`属性是`Proxy`实例，`revoke`属性是一个函数，可以取消`Proxy`实例。上面代码中，当执行`revoke`函数之后，再访问`Proxy`实例，就会抛出一个错误。
+>`Proxy.revocable()`方法返回一个对象，该对象的`proxy`属性是 [ Proxy ] 实例，`revoke`属性是一个函数，可以取消 [ Proxy ] 实例。上面代码中，当执行`revoke`函数之后，再访问 [ Proxy ] 实例，就会抛出一个错误。
 >
 >`Proxy.revocable()`的一个使用场景是，目标对象不允许直接访问，必须通过代理访问，一旦访问结束，就收回代理权，不允许再次访问。
 >
@@ -9255,11 +9255,11 @@
 
 ### Ⅶ - Proxy模拟实现VUE数据双向绑定
 
-> `Proxy`就像一个代理器,当有人对目标对象进行处理(set、has、get 等等操作)的时候它会首先经过它，这时我们可以使用代码进行处理，此时`Proxy`相当于一个中介或者叫代理人,它经常被用于代理模式中,可以做字段验证、缓存代理、访问控制等等。
+>  [ Proxy ] 就像一个代理器,当有人对目标对象进行处理(set、has、get 等等操作)的时候它会首先经过它，这时我们可以使用代码进行处理，此时 [ Proxy ] 相当于一个中介或者叫代理人,它经常被用于代理模式中,可以做字段验证、缓存代理、访问控制等等。
 
-#### ① `Object.defineProperty`
+#### ①  [ Object.defineProperty ] 
 
->众所周知，`vue`使用了`Object.defineProperty`来做数据劫持，它是利用劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作
+>众所周知，`vue`使用了 [ Object.defineProperty ] 来做数据劫持，它是利用劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作
 >
 >```js
 >const obj = { a: 1 }
@@ -9273,7 +9273,7 @@
 >})
 >```
 
-#### ② 与`Object.defineProperty`相比，`Proxy`的优势
+#### ② 与 [ Object.defineProperty ] 相比， [ Proxy ] 的优势
 
 >1. 数组作为特殊的对象，但Object.defineProperty无法监听数组变化。
 >
@@ -9449,4 +9449,127 @@
 >  data.$watch('text', content => p.innerHTML = content.a)
 >
 >  ```
+
+## 14、Reflect
+
+> 在前方我们在描述其他知识点时,我们有用到 **Reflect** 这个API, 当时我们
+
+### Ⅰ - 概述与总结
+
+>  **Reflect**  对象与 [ Proxy ] 对象一样，也是 ES6 为了操作对象而提供的新 API。  **Reflect**  对象的设计目的有这样几个。
+>
+>1.  将`Object`对象的一些明显属于语言内部的方法（比如 [ Object.defineProperty ] ），放到  **Reflect**  对象上。现阶段，某些方法同时在`Object`和  **Reflect**  对象上部署，未来的新方法将只部署在  **Reflect**  对象上。也就是说，从  **Reflect**  对象上可以拿到语言内部的方法
+>
+>2. 修改某些`Object`方法的返回结果，让其变得更合理。比如， [Object.defineProperty(obj, name, desc)] 在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
+>
+>   >```js
+>   >// 老写法: 因为会抛出异常错误,所以必须用 try..catch() 去承接错误
+>   >try {
+>   >  Object.defineProperty(target, property, attributes);
+>   >  // success
+>   >} catch (e) {
+>   >  // 这里承接抛出的错误
+>   >}
+>   >
+>   >// 新写法
+>   >if (Reflect.defineProperty(target, property, attributes)) {
+>   >  // success
+>   >} else {
+>   >  // failure
+>   >}
+>   >```
+>
+>3. 让`Object`操作都变成函数行为。某些`Object`操作是命令式，比如`name in obj`和`delete obj[name]`，而`Reflect.has(obj, name)`和`Reflect.deleteProperty(obj, name)`让它们变成了函数行为。
+>
+>   >```js
+>   >// 老写法
+>   >'assign' in Object // true
+>   >
+>   >// 新写法
+>   >Reflect.has(Object, 'assign') // true
+>   >```
+>
+>4.  **Reflect**对象的方法与`Proxy`对象的方法一一对应，只要是`Proxy`对象的方法，就能在 **Reflect**对象上找到对应的方法。这就让`Proxy`对象可以方便地调用对应的 **Reflect**方法，完成默认行为，作为修改行为的基础。也就是说，不管`Proxy`怎么修改默认行为，你总可以在 **Reflect**上获取默认行为。
+>
+>   >```js
+>   >Proxy(target, {
+>   >  set: function(target, name, value, receiver) {
+>   >    var success = Reflect.set(target, name, value, receiver);
+>   >    if (success) {
+>   >      console.log('property ' + name + ' on ' + target + ' set to ' + value);
+>   >    }
+>   >    return success;
+>   >  }
+>   >});
+>   >```
+>
+>上面代码中，每一个`Proxy`对象的拦截操作（`get`、`delete`、`has`），内部都调用对应的 **Reflect** 方法，保证原生行为能够正常执行。添加的工作，就是将每一个操作输出一行日志。
+>
+>有了 **Reflect** 对象以后，很多操作会更易读。
+>
+>```javascript
+>// 老写法
+>Function.prototype.apply.call(Math.floor, undefined, [1.75]) // 1
+>
+>// 新写法
+>Reflect.apply(Math.floor, undefined, [1.75]) // 1
+>```
+>
+
+#### ① 设计目的
+
+>- 将`Object`属于`语言内部的方法`放到  **Reflect**  上
+>- 将某些Object方法报错情况改成返回`false`
+>- 让`Object操作`变成`函数行为`
+>-  [ Proxy ] 与  **Reflect**  相辅相成
+
+#### ②废弃方法
+
+>- `Object.defineProperty()` => `Reflect.defineProperty()`
+>- `Object.getOwnPropertyDescriptor()` => `Reflect.getOwnPropertyDescriptor()`
+
+#### ③ 重点难点
+
+>- `Proxy方法`和`Reflect方法`一一对应
+>-  [ Proxy ] 和  **Reflect**  联合使用，前者负责`拦截赋值操作`，后者负责`完成赋值操作`
+
+#### ④ 方法
+
+>- **get()**：返回对象属性
+>- **set()**：设置对象属性，返回布尔
+>- **has()**：检查对象属性，返回布尔
+>- **deleteProperty()**：删除对象属性，返回布尔
+>- **defineProperty()**：定义对象属性，返回布尔
+>- **ownKeys()**：遍历对象属性，返回数组(`Object.getOwnPropertyNames()`+`Object.getOwnPropertySymbols()`)
+>- **getOwnPropertyDescriptor()**：返回对象属性描述，返回对象
+>- **getPrototypeOf()**：返回对象原型，返回对象
+>- **setPrototypeOf()**：设置对象原型，返回布尔
+>- **isExtensible()**：返回对象是否可扩展，返回布尔
+>- **preventExtensions()**：设置对象不可扩展，返回布尔
+>- **apply()**：绑定this后执行指定函数
+>- **construct()**：调用构造函数创建实例
+
+#### ⑤ 数据绑定：观察者模式
+
+> [ Proxy ] 和  **Reflect**  联合使用，前者负责`拦截赋值操作`，后者负责`完成赋值操作`, 相辅相成,下面举个栗子
+>
+>```js
+>const observerQueue = new Set();
+>const observe = fn => observerQueue.add(fn);
+>const observable = obj => new Proxy(obj, {
+>    set(tgt, key, val, receiver) {
+>        const result = Reflect.set(tgt, key, val, receiver);
+>        observerQueue.forEach(v => v());
+>        return result;
+>    }
+>});
+>
+>const person = observable({ age: 66, name: "hongjilin" });
+>const print = () => console.log(`${person.name} is ${person.age} years old`); 
+>observe(print); //进行监听
+>
+>person.name = "努力学习的汪";
+>```
+>
+>![image-20210924194108853](ES全系列详细学习笔记中的图片/image-20210924194108853.png) 
 

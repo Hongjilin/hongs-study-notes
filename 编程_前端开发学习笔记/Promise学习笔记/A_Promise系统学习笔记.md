@@ -10,7 +10,6 @@
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
->​										记录时间:2021-3-10晚启  截至3/16学完(周末休息)
 
 # #目录
 
@@ -24,11 +23,9 @@
 >
 >通俗讲，`Promise是一个许诺、承诺`,是对未来事情的承诺，承诺不一定能完成，但是无论是否能完成都会有一个结果。
 >
->​	Pending  正在做。。。
->
->​	Resolved 完成这个承诺
->
->​	Rejected 这个承诺没有完成，失败了
+>* Pending  正在做。。。
+>* Resolved 完成这个承诺
+>* Rejected 这个承诺没有完成，失败了
 >
 >​	Promise 用来预定一个不一定能完成的任务，要么成功，要么失败
 >
@@ -275,7 +272,9 @@ mineReadFile('./resource/content.txt').then(value => {
 
 
 
-## 3、Promise中的常用API
+## 3、Promise中的常用 API 概述
+
+> 此处列举几个最常用的API的概述,如果想看详细描述的可以继续往下看下方的  **Promise方法的具体使用** 描述
 
 #### 	Ⅰ- Promise 构造函数: Promise (excutor) {}
 
@@ -359,7 +358,238 @@ mineReadFile('./resource/content.txt').then(value => {
 
 
 
-## 4、Promise的几个关键问题
+## 4、Promise API 用法详解
+
+>ES6 规定，`Promise`对象是一个构造函数，用来生成`Promise`实例。
+
+### Ⅰ -  基本用法
+
+#### ①  举个创造 Promise 实例的栗子
+
+> 下面代码创造了一个`Promise`实例。
+>
+> ```javascript
+> const promise = new Promise(function(resolve, reject) {
+>   if (/* 异步操作成功 */)  resolve(value); //将该 Promise 修改为成功且返回
+>    else  reject(error); //将该 Promise 修改为失败且返回
+> });
+> ```
+>
+> `Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。
+>
+> `resolve`函数的作用是，将`Promise`对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+
+#### ② 使用 [ then ] 方法分别指定 成功/失败 的回调
+
+>`Promise`实例生成以后，可以用 [ then() ] 方法分别指定`resolved`状态和`rejected`状态的回调函数。
+>
+>```javascript
+>promise.then(function(value) {
+>  // 当promise状态返回为resolve 时会执行的回调函数
+>}, function(error) {
+>  // 当promise状态返回为rejected 时会执行的回调函数
+>});
+>```
+>
+>  [ then ] 方法可以接受两个回调函数作为参数。第一个回调函数是`Promise`对象的状态变为`resolved`时调用，第二个回调函数是`Promise`对象的状态变为`rejected`时调用。其中，**第二个函数是可选的，不一定要提供**。这两个函数都接受`Promise`对象传出的值作为参数。
+
+#### ③ 举个 Promise 对象的简单栗子
+
+>下面是一个`Promise`对象的简单例子。
+>
+>> setTimeout的第三个参数是给第一个函数的参数，而且是先于第一个参数(即回调函数)执行的 
+>
+>```javascript
+>function timeout(ms) { //声明一个方法, 传入的 参数ms 为延时器时间
+>  return new Promise((resolve, reject) => {
+>    //这行代码实际效果: 当 [ms] 毫秒后 执行 resolve('努力学习的汪')
+>    setTimeout(resolve, ms, '努力学习的汪'); 
+>  });
+>}
+>
+>timeout(1000).then((value) => {  console.log(value) });
+>//打印结果 : 努力学习的汪
+>```
+>
+>上面代码中，`timeout`方法返回一个`Promise`实例，表示一段时间以后才会发生的结果。过了指定的时间（`ms`参数）以后，`Promise`实例的状态变为`resolved`，就会触发`then`方法绑定的回调函数。
+
+#### ④ Promise 新建后就会立即执行
+
+>```javascript
+>let promise = new Promise(function(resolve, reject) {
+>  console.log('Promise');
+>  resolve();
+>});
+>
+>promise.then(function() {
+>  console.log('resolved.');
+>});
+>
+>console.log('Hi!');
+>
+>// Promise
+>// Hi!
+>// resolved //可以发现,明明then是在 Hi 前面,却最后打印
+>```
+>
+>上面代码中，Promise 新建后立即执行，所以首先输出的是`Promise`。然后，`then`方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以`resolved`最后输出。
+>
+>实际上,这个运行结果相关知识点是 [ [宏任务与微任务](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0#%E5%9B%9B%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1) ] ,单独梳理在下方.这里可以先初步理解为: 
+>
+>1. JS是单线程的,至上往下运行,在声明 **Promise** 时实际上已经执行到了内部方法
+>
+>2. 为何 resolve() 运行后没有立即打印?
+>
+>   - JS中用来存储待执行回调函数的队列包含2个不同特定的列队
+>
+>     > `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
+>     >
+>     > `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
+>
+>   - JS执行时会区别这2个队列:
+>
+>     >JS执行引擎首先必须执行所有的`初始化同步任务`代码
+>     >
+>     >每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
+
+#### ⑤ 举个异步加载图片的栗子
+
+>```javascript
+>function loadImageAsync(url) {
+>  return new Promise(function(resolve, reject) {
+>    const image = new Image();
+>
+>    image.onload = function() {
+>      console.log('图片加载成功')
+>      resolve(image);
+>    };
+>
+>    image.onerror = function() {
+>      reject(new Error(`无法从 ${url} 中加载图片` ));
+>    };
+>    image.src = url;
+>  });
+>}
+>loadImageAsync('正确的url') //打印图片加载成功
+>loadImageAsync('错误的url') //抛出异常
+>
+>```
+>
+>上面代码中，使用`Promise`包装了一个图片加载的异步操作。如果加载成功，就调用`resolve`方法，否则就调用`reject`方法。
+>
+>![image-20210926180306961](A_Promise系统学习笔记中的图片/image-20210926180306961.png) 
+
+#### ⑥ 举个用`Promise`对象实现的 Ajax 操作的栗子
+
+>Ajax知识点不懂的同学要去补一下: 这里可以看本人梳理的ajax笔记 --> [点我跳转](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E3%80%81Axios%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0) 
+>
+>```javascript
+>const getJSON = function(url) {
+>  const promise = new Promise(function(resolve, reject){
+>    const handler = function() {
+>      if (this.readyState !== 4)  return; //当readyState 为4 时直接返回,不修改 promise 状态
+>      if (this.status === 200) resolve(this.response); //返回状态为 200 时将状态修改为成功,且将响应内容返回
+>       else  reject(new Error(this.statusText)); //失败时抛出异常
+>    };
+>    const client = new XMLHttpRequest(); //实例化xml实例
+>    client.open("GET", url); //下面这几行都是对xml实例进行配置,不懂的同学要去补一下ajax知识点
+>    client.onreadystatechange = handler;
+>    client.responseType = "json";
+>    client.setRequestHeader("Accept", "application/json");
+>    client.send();
+>  });
+>  return promise;
+>};
+>
+>getJSON("./hong.json").then(function(json) {
+>  console.log('Contents: ' , json);
+>}, function(error) {
+>  console.error('出错了', error);
+>});
+>```
+>
+>上面代码中，`getJSON`是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个`Promise`对象。需要注意的是，在`getJSON`内部，`resolve`函数和`reject`函数调用时，都带有参数。
+>
+>![image-20210926182129672](A_Promise系统学习笔记中的图片/image-20210926182129672.png)
+>
+>> 小贴士:此处可能有同学想尝试却发现读取本地文件会有跨域问题,这边教一下你们
+>>
+>> ![image-20210926182506259](A_Promise系统学习笔记中的图片/image-20210926182506259.png) 
+
+#### ⑦  resolve()  的参数可以是另一个 Promise 实例
+
+>如果调用`resolve`函数和`reject`函数时带有参数，那么它们的参数会被传递给回调函数。`reject`函数的参数通常是`Error`对象的实例，表示抛出的错误；`resolve`函数的参数除了正常的值以外，还可能是另一个 Promise 实例，比如像下面这样。
+>
+>```javascript
+>const p1 = new Promise(function (resolve, reject) {});
+>
+>const p2 = new Promise(function (resolve, reject) { resolve(p1) })
+>```
+>
+>上面代码中，`p1`和`p2`都是 Promise 的实例，但是`p2`的`resolve`方法将`p1`作为参数，即一个异步操作的结果是返回另一个异步操作。
+>
+>注意，这时`p1`的状态就会传递给`p2`，也就是说，`p1`的状态决定了`p2`的状态。如果`p1`的状态是`pending`，那么`p2`的回调函数就会等待`p1`的状态改变；如果`p1`的状态已经是`resolved`或者`rejected`，那么`p2`的回调函数将会立刻执行。
+>
+>```javascript
+>const p1 = new Promise(function (resolve, reject) {
+>  setTimeout(() => reject(new Error('p1的状态改为错误')), 0)
+>})
+>
+>const p2 = new Promise(function (resolve, reject) {
+>  setTimeout(() => resolve(p1), 3000) //将p1 传给p2
+>})
+>
+>p2.then(result => console.log(result),result=>console.log('失败'))
+>  .catch(error => console.log('catch异常捕获:'+error))
+>//首先报错
+>//运行三秒后打印: 失败
+>```
+>
+>##### 上面代码运行后执行效果:
+>
+>* 首先马上会打印一个报错 : "Uncaught (in promise) Error: p1的状态改为错误" (红色报错)
+>* 然后等3秒后再打印:  '失败'
+>* 注意: 如果 **p2.then()** 中没有写 **reject** 回调函数(第二个参数),则会被 **catch** 捕获,变为`catch异常捕获:Error: p1的状态改为错误`
+>
+>##### 解释:
+>
+>>* 首先前面说过,promise定义时就会立即执行,所以刚开始就运行了 **p1 的reject()**,所以直接控制台报错了
+>>* `resolve`方法返回的是`p1`。由于`p2`返回的是另一个 Promise，导致`p2`自己的状态无效了，由`p1`的状态决定`p2`的状态
+>>* 总结来说,promise返回promise这种嵌套形式,将由最内层的promise决定外层的状态
+
+#### ⑧ 调用`resolve`或`reject`并不会终结 Promise 的参数函数的执行
+
+>调用`resolve`或`reject`并不会终结 Promise 的参数函数的执行。
+>
+>```javascript
+>new Promise((resolve, reject) => {
+>  resolve(1);
+>  console.log(2);
+>}).then(r => {
+>  console.log(r);
+>});
+>// 2
+>// 1
+>```
+>
+>上面代码中，调用`resolve(1)`以后，后面的`console.log(2)`还是会执行，并且会首先打印出来。这是因为立即 resolved 的 Promise 是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。
+
+#### ⑨ 记得在修改状态前加return 
+
+>一般来说，调用`resolve`或`reject`以后，Promise 的使命就完成了，后继操作应该放到`then`方法里面，而不应该直接写在`resolve`或`reject`的后面。所以，最好在它们前面加上`return`语句，这样就不会有意外。
+>
+>```javascript
+>new Promise((resolve, reject) => {
+>  return resolve(1);
+>  // 后面的语句不会执行
+>  console.log(2);
+>})
+>```
+>
+
+
+
+## 5、Promise的几个关键问题
 
 #### Ⅰ-如何改变 promise 的状态?
 
@@ -374,11 +604,11 @@ mineReadFile('./resource/content.txt').then(value => {
 >当 promise `改变为对应状态时`都会调用,改变状态后,多个回调函数都会调用,并不会自动停止
 >
 >```js
-> let p = new Promise((resolve, reject) => {  resolve('OK');});
->        ///指定回调 - 1
->        p.then(value => {  console.log(value); });
->        //指定回调 - 2
->        p.then(value => { alert(value);});
+>let p = new Promise((resolve, reject) => {  resolve('OK');});
+>   ///指定回调 - 1
+>   p.then(value => {  console.log(value); });
+>   //指定回调 - 2
+>   p.then(value => { alert(value);});
 >```
 
 #### Ⅲ- 改变 promise 状态和指定回调函数谁先谁后?
@@ -402,16 +632,16 @@ mineReadFile('./resource/content.txt').then(value => {
 >​	② 如果先改变的状态, 那当指定回调时, 回调函数就会调用, 得到数据
 >
 >```js
->    let p = new Promise((resolve, reject) => {
->      //异步写法,这样写会先指定回调,再改变状态
->      setTimeout(() => {resolve('OK'); }, 1000);
->      //这是同步写法,这样写会先改变状态,再指定回调
->      resolve('OK'); 
->    });
->    p.then(value => {console.log(value);}, reason => {})
+>let p = new Promise((resolve, reject) => {
+> //异步写法,这样写会先指定回调,再改变状态
+> setTimeout(() => {resolve('OK'); }, 1000);
+> //这是同步写法,这样写会先改变状态,再指定回调
+> resolve('OK'); 
+>});
+>p.then(value => {console.log(value);}, reason => {})
 >```
 >
-> (4) 个人理解--结合源码
+>(4) 个人理解--结合源码
 >
 >​	源码中,promise的状态是通过一个`默认为padding`的变量进行判断,所以当你`resolve/reject`延时(异步导致当then加载时,状态还未修改)后,这时直接进行p.then()会发现,目前状态还是`进行中`,所以只是这样导致只有同步操作才能成功.
 >
@@ -432,24 +662,24 @@ mineReadFile('./resource/content.txt').then(value => {
 >​	③ 如果返回的是另一个新 promise, 此 promise 的结果就会成为新 promise 的结果
 >
 >```js
->  let p = new Promise((resolve, reject) => {
->      resolve('ok');
->    });
->    //执行 then 方法
->    let result = p.then(value => {
->      console.log(value);
->      // 1. 抛出错误 ,变为 rejected
->      throw '出了问题';
->      // 2. 返回结果是非 Promise 类型的对象,新 promise 变为 resolved
->      return 521;
->      // 3. 返回结果是 Promise 对象,此 promise 的结果就会成为新 promise 的结果
->      return new Promise((resolve, reject) => {
->        // resolve('success');
->        reject('error');
->      });
->    }, reason => {
->      console.warn(reason);
->    });
+>let p = new Promise((resolve, reject) => {
+> resolve('ok');
+>});
+>//执行 then 方法
+>let result = p.then(value => {
+> console.log(value);
+> // 1. 抛出错误 ,变为 rejected
+> throw '出了问题';
+> // 2. 返回结果是非 Promise 类型的对象,新 promise 变为 resolved
+> return 521;
+> // 3. 返回结果是 Promise 对象,此 promise 的结果就会成为新 promise 的结果
+> return new Promise((resolve, reject) => {
+>   // resolve('success');
+>   reject('error');
+> });
+>}, reason => {
+> console.warn(reason);
+>});
 >```
 
 #### Ⅴ- promise 如何串连多个操作任务?
@@ -459,12 +689,12 @@ mineReadFile('./resource/content.txt').then(value => {
 >(2) 通过 then 的链式调用串连多个同步/异步任务,这样就能用`then()`将多个同步或异步操作串联成一个同步队列
 >
 >```js
-> <script>
->   let p = new Promise((resolve, reject) => { setTimeout(() => {resolve('OK'); }, 1000); });
->   p.then(value => {return new Promise((resolve, reject) => { resolve("success"); });})
->    .then(value => {console.log(value);})
->    .then(value => { console.log(value);})
->  </script>
+><script>
+>let p = new Promise((resolve, reject) => { setTimeout(() => {resolve('OK'); }, 1000); });
+>p.then(value => {return new Promise((resolve, reject) => { resolve("success"); });})
+>.then(value => {console.log(value);})
+>.then(value => { console.log(value);})
+></script>
 >```
 
 #### Ⅵ-promise 异常传透?
@@ -484,16 +714,79 @@ mineReadFile('./resource/content.txt').then(value => {
 >(2) 办法: 在回调函数中返回一个 `pendding` 状态的`promise 对象`
 >
 >```js
-> <script>
->    let p = new Promise((resolve, reject) => {setTimeout(() => { resolve('OK');}, 1000);});
->    p.then(value => {return new Promise(() => {});})//有且只有这一个方式
->    .then(value => { console.log(222);})
->    .then(value => { console.log(333);})
->    .catch(reason => {console.warn(reason);});
->  </script>
+><script>
+>let p = new Promise((resolve, reject) => {setTimeout(() => { resolve('OK');}, 1000);});
+>p.then(value => {return new Promise(() => {});})//有且只有这一个方式
+>.then(value => { console.log(222);})
+>.then(value => { console.log(333);})
+>.catch(reason => {console.warn(reason);});
+></script>
 >```
 
+------
 
+
+
+## 6、 Promise的实际应用
+
+> 举两个栗子
+
+### Ⅰ - 加载图片
+
+>我们可以将图片的加载写成一个`Promise`，一旦加载完成，`Promise`的状态就发生变化。
+>
+>```javascript
+>const preloadImage = function (path) {
+>  return new Promise(function (resolve, reject) {
+>    const image = new Image();
+>    image.onload  = resolve;
+>    image.onerror = reject;
+>    image.src = path;
+>  });
+>};
+>```
+>
+
+### Ⅱ - Generator 函数与 Promise 的结合
+
+>使用 Generator 函数管理流程，遇到异步操作的时候，通常返回一个`Promise`对象。
+>
+>```javascript
+>function getFoo () {
+>  return new Promise(function (resolve, reject){
+>    resolve('foo');
+>  });
+>}
+>
+>const g = function* () {
+>  try {
+>    const foo = yield getFoo();
+>    console.log(foo);
+>  } catch (e) {
+>    console.log(e);
+>  }
+>};
+>
+>function run (generator) {
+>  const it = generator();
+>
+>  function go(result) {
+>    if (result.done) return result.value;
+>
+>    return result.value.then(function (value) {
+>      return go(it.next(value));
+>    }, function (error) {
+>      return go(it.throw(error));
+>    });
+>  }
+>
+>  go(it.next());
+>}
+>
+>run(g);
+>```
+>
+>上面代码的 Generator 函数`g`之中，有一个异步操作`getFoo`，它返回的就是一个`Promise`对象。函数`run`用来处理这个`Promise`对象，并调用下一个`next`方法。
 
 # 二、自定义Promise手写
 
@@ -784,7 +1077,7 @@ Promise.prototype.then = function(onResolved, onRejected){
 
 ###  8 - 同步任务 then 返回结果
 
->1. 在之前的then运行结果中得知,我们使用`then`后的返回结果是其回调函数的返回结果,而我们需要的返回结果是一个新的promise对象
+>1. 在之前的then运行结果中得知,我们使用  [ then ] 后的返回结果是其回调函数的返回结果,而我们需要的返回结果是一个新的promise对象
 >
 >   解:所以我们在then中`return new Promise()`,使其得到的是一个新的promise对象
 >

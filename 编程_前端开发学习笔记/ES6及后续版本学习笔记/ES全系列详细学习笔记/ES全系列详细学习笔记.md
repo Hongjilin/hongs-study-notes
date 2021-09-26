@@ -10035,9 +10035,7 @@
 >  age: 18
 >});
 >
->function print() {
->  console.log(`${person.name} 今年 ${person.age} 岁了`)
->}
+>function print() { console.log(`${person.name} 今年 ${person.age} 岁了`) }
 >
 >observe(print); //监听  这个方法定义实现放在下方
 >person.name = '努力学习的汪';
@@ -10062,3 +10060,11 @@
 >```
 >
 >上面代码中，先定义了一个`Set`集合，所有观察者函数都放进这个集合。然后，`observable`函数返回原始对象的代理，拦截赋值操作。拦截函数`set`之中，会自动执行所有观察者。
+>
+>![image-20210926165622747](ES全系列详细学习笔记中的图片/image-20210926165622747.png) 
+
+## 15、Promise
+
+>此知识点因为 **很重要** 且篇幅很长的缘故,专门抽成单独的知识点笔记,放至外层笔记目录 [前端 - Promise学习笔记]
+>
+>可以单独查阅或者直接点我传送 --> **[Promise学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Promise学习笔记)** 

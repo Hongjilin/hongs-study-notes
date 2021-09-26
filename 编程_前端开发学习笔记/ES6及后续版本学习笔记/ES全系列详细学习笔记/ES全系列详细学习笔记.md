@@ -7987,7 +7987,7 @@
 
 ## 13、Proxy
 
-> 很重要的知识点,也许你初入前端的时候会用的比较少,但是在后面进阶开发中此知识点是绕不过的
+> 很重要的知识点,也许你初入前端的时候会用的比较少,但是在后面进阶开发中此知识点是绕不过的,这知识点常与下方 **Reflect** 搭配使用
 >
 > 嗯,如果你是Vue前端工程师,那这个就更要掌握了,毕竟Vue3.x双向绑定就是用这个知识点实现的
 >
@@ -8051,7 +8051,7 @@
 >   //拦截的对象,传入的对象属性,整个proxy对象
 >  get: function (target, propKey, receiver) {
 >    console.log(`getting ${propKey}!`);
->     //`Reflect.get`方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`. 
+>     // [ Reflect.get ] 方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`. 
 >    return Reflect.get(target, propKey, receiver);  //详见下方Reflect一章,但此处不深究
 >  },
 >  set: function (target, propKey, value, receiver) {
@@ -8346,7 +8346,7 @@
 >proxy.getReceiver === proxy // true
 >```
 >
->上面代码中，`proxy`对象的`getReceiver`属性是由`proxy`对象提供的，所以`receiver`指向`proxy`对象。
+>上面代码中，`proxy`对象的`getReceiver`属性是由`proxy`对象提供的，所以  [ receiver ] 指向`proxy`对象。
 >
 >```javascript
 >const proxy = new Proxy({}, {
@@ -8358,7 +8358,7 @@
 >d.a === d // true
 >```
 >
->上面代码中，`d`对象本身没有`a`属性，所以读取`d.a`的时候，会去`d`的原型`proxy`对象找。这时，`receiver`就指向`d`，代表原始的读操作所在的那个对象。
+>上面代码中，`d`对象本身没有`a`属性，所以读取`d.a`的时候，会去`d`的原型`proxy`对象找。这时，  [ receiver ] 就指向`d`，代表原始的读操作所在的那个对象。
 >
 >如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则通过 Proxy 对象访问该属性会报错。
 >
@@ -8464,7 +8464,7 @@
 >
 >![image-20210902154217329](ES全系列详细学习笔记中的图片/image-20210902154217329.png) 
 >
->上面代码中，`set`方法的第四个参数`receiver`，指的是原始的操作行为所在的那个对象，一般情况下是`proxy`实例本身，请看下面的例子。
+>上面代码中，`set`方法的第四个参数  [ receiver ] ，指的是原始的操作行为所在的那个对象，一般情况下是`proxy`实例本身，请看下面的例子。
 >
 >```javascript
 >const handler = {
@@ -8488,7 +8488,7 @@
 >
 >>- 设置`myObj.name`属性的值时，`myObj`并没有 [ name ] 属性，因此引擎会到`myObj`的原型链去找 [ name ] 属性。
 >>- `myObj`的原型对象`proxy`是一个 Proxy 实例，设置它的 [ name ] 属性会触发`set`方法。
->>- 这时，第四个参数`receiver`就指向原始赋值行为所在的对象`myObj`。
+>>- 这时，第四个参数  [ receiver ] 就指向原始赋值行为所在的对象`myObj`。
 
 #### ③ apply()
 
@@ -9426,7 +9426,7 @@
 >      new Watcher(this, key, cb)
 >    }
 >    $proxy(key) {
->      Reflect.defineProperty(this, key, {
+>      Reflect.defineProperty(this, key, { //此处API不懂的可以看下方下个知识点
 >        configurable: true,
 >        enumerable: true,
 >        get: () => this.$data[key],
@@ -9458,9 +9458,9 @@
 
 >  **Reflect**  对象与 [ Proxy ] 对象一样，也是 ES6 为了操作对象而提供的新 API。  **Reflect**  对象的设计目的有这样几个。
 >
->1.  将`Object`对象的一些明显属于语言内部的方法（比如 [ Object.defineProperty ] ），放到  **Reflect**  对象上。现阶段，某些方法同时在`Object`和  **Reflect**  对象上部署，未来的新方法将只部署在  **Reflect**  对象上。也就是说，从  **Reflect**  对象上可以拿到语言内部的方法
+>  1.  将`Object`对象的一些明显属于语言内部的方法（比如 [ Object.defineProperty ] ），放到  **Reflect**  对象上。现阶段，某些方法同时在`Object`和  **Reflect**  对象上部署，未来的新方法将只部署在  **Reflect**  对象上。也就是说，从  **Reflect**  对象上可以拿到语言内部的方法
 >
->2. 修改某些`Object`方法的返回结果，让其变得更合理。比如， [Object.defineProperty(obj, name, desc)] 在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
+>  2. 修改某些`Object`方法的返回结果，让其变得更合理。比如， [Object.defineProperty(obj, name, desc)] 在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
 >
 >   >```js
 >   >// 老写法: 因为会抛出异常错误,所以必须用 try..catch() 去承接错误
@@ -9479,7 +9479,7 @@
 >   >}
 >   >```
 >
->3. 让`Object`操作都变成函数行为。某些`Object`操作是命令式，比如`name in obj`和`delete obj[name]`，而`Reflect.has(obj, name)`和`Reflect.deleteProperty(obj, name)`让它们变成了函数行为。
+>  3. 让`Object`操作都变成函数行为。某些`Object`操作是命令式，比如`name in obj`和`delete obj[name]`，而`Reflect.has(obj, name)`和`Reflect.deleteProperty(obj, name)`让它们变成了函数行为。
 >
 >   >```js
 >   >// 老写法
@@ -9489,31 +9489,29 @@
 >   >Reflect.has(Object, 'assign') // true
 >   >```
 >
->4.  **Reflect**对象的方法与`Proxy`对象的方法一一对应，只要是`Proxy`对象的方法，就能在 **Reflect**对象上找到对应的方法。这就让`Proxy`对象可以方便地调用对应的 **Reflect**方法，完成默认行为，作为修改行为的基础。也就是说，不管`Proxy`怎么修改默认行为，你总可以在 **Reflect**上获取默认行为。
+>  4.  **Reflect** 对象的方法与 [Proxy] 对象的方法一一对应，只要是 [Proxy] 对象的方法，就能在 **Reflect** 对象上找到对应的方法。这就让 [Proxy] 对象可以方便地调用对应的 **Reflect** 方法，完成默认行为，作为修改行为的基础。也就是说，不管 [Proxy] 怎么修改默认行为，你总可以在 **Reflect** 上获取默认行为。
 >
 >   >```js
 >   >Proxy(target, {
->   >  set: function(target, name, value, receiver) {
->   >    var success = Reflect.set(target, name, value, receiver);
->   >    if (success) {
->   >      console.log('property ' + name + ' on ' + target + ' set to ' + value);
->   >    }
->   >    return success;
->   >  }
+>   >set: function(target, name, value, receiver) {
+>   >const success = Reflect.set(target, name, value, receiver);
+>   >if (success)  console.log('在属性:' + name + ' 上 ' + target + ' 写入 ' + value);
+>   >return success;
+>   >}
 >   >});
 >   >```
+>   >
+>   >上面代码中，每一个 [Proxy] 对象的拦截操作（`get`、`delete`、`has`），内部都调用对应的 **Reflect** 方法，保证原生行为能够正常执行。添加的工作，就是将每一个操作输出一行日志。
 >
->上面代码中，每一个`Proxy`对象的拦截操作（`get`、`delete`、`has`），内部都调用对应的 **Reflect** 方法，保证原生行为能够正常执行。添加的工作，就是将每一个操作输出一行日志。
+>  有了 **Reflect** 对象以后，很多操作会更易读。
 >
->有了 **Reflect** 对象以后，很多操作会更易读。
->
->```javascript
->// 老写法
->Function.prototype.apply.call(Math.floor, undefined, [1.75]) // 1
->
->// 新写法
->Reflect.apply(Math.floor, undefined, [1.75]) // 1
->```
+>  ```javascript
+>  // 老写法
+>  Function.prototype.apply.call(Math.floor, undefined, [1.75]) // 1
+>  
+>  // 新写法
+>  Reflect.apply(Math.floor, undefined, [1.75]) // 1
+>  ```
 >
 
 #### ① 设计目的
@@ -9535,6 +9533,8 @@
 
 #### ④ 方法
 
+>下面这些方法的作用，大部分与`Object`对象的同名方法的作用都是相同的，而且它与`Proxy`对象的方法是一一对应的。下面是对它们的解释。
+>
 >- **get()**：返回对象属性
 >- **set()**：设置对象属性，返回布尔
 >- **has()**：检查对象属性，返回布尔
@@ -9548,6 +9548,8 @@
 >- **preventExtensions()**：设置对象不可扩展，返回布尔
 >- **apply()**：绑定this后执行指定函数
 >- **construct()**：调用构造函数创建实例
+>
+>![image-20210926095039091](ES全系列详细学习笔记中的图片/image-20210926095039091.png) 
 
 #### ⑤ 数据绑定：观察者模式
 
@@ -9573,3 +9575,159 @@
 >
 >![image-20210924194108853](ES全系列详细学习笔记中的图片/image-20210924194108853.png) 
 
+### Ⅱ - 方法详解
+
+#### ① Reflect.get(target, name, receiver)
+
+> [ Reflect.get ] 方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`。
+>
+>```javascript
+>const myObject = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  get msg() {
+>    return this.name + "现在" +this.age + "岁";
+>  },
+>}
+>console.log(Reflect.get(myObject, 'name'))// 努力学习的汪
+>console.log(Reflect.get(myObject, 'age') ) // 99
+>console.log(Reflect.get(myObject, 'msg'))  // 努力学习的汪现在99岁
+>```
+>
+
+##### a) 如果`name`属性部署了读取函数（getter），则读取函数的 `this` 绑定   [ receiver ] 
+
+>如果`name`属性部署了读取函数（getter），则读取函数的`this`绑定  [ receiver ] 
+>
+>```javascript
+>const myObject = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  get msg() {
+>    return this.name + "现在" +this.age + "岁";
+>  },
+>}
+>
+>const myReceiverObject = {
+>  name: 'hongjilin',
+>  age: 18,
+>};
+>
+>Reflect.get(myObject, 'msg', myReceiverObject) //'hongjilin现在18岁'
+>```
+>
+
+##### b) 如果第一个参数不是对象， [ Reflect.get ] 方法会报错。
+
+>```javascript
+>Reflect.get(1, 'name') // 报错
+>Reflect.get(false, 'name') // 报错
+>```
+
+#### ② Reflect.set(target, name, value, receiver)
+
+##### a) `Reflect.set`方法设置`target`对象的`name`属性等于`value`
+
+>```javascript
+>const myObject = {
+>  name: 'hongjilin',
+>  set setName(value) {
+>    return this.name = value;
+>  },
+>}
+>
+>console.log(myObject.name) // hongjilin
+>
+>Reflect.set(myObject, 'name', '努力学习的汪');
+>console.log(myObject.name) // 努力学习的汪
+>
+>Reflect.set(myObject, 'setName','调用setName写入名字')
+>console.log(myObject.name) // 调用setName写入名字
+>```
+>
+
+##### b) 如果`name`属性设置了赋值函数，则赋值函数的`this`绑定  [ receiver ] 。
+
+>```js
+>const myObject = {
+>  name: 'hongjilin',
+>  set setName(value) {
+>    return this.name = value;
+>  },
+>}
+>
+>const myReceiverObject = {
+>  name: '这是 myReceiverObject 的 name',
+>};
+>
+>Reflect.set(myObject, 'name', '努力学习的汪', myReceiverObject);
+>console.log(myObject.name) // hongjilin
+>console.log(myReceiverObject.name) // 努力学习的汪  
+>```
+>
+> 可以看到 [ **myReceiverObject** ] 被修改了
+
+##### c) 如果 `Proxy`对象和 `Reflect`对象联合使用注意事项
+
+>注意，如果 `Proxy`对象和 `Reflect`对象联合使用，前者拦截赋值操作，后者完成赋值的默认行为，而且传入了  [ receiver ] ，那么`Reflect.set`会触发`Proxy.defineProperty`拦截。
+>
+>>知识点回顾:
+>>
+>>* **handler.defineProperty()** : 用于拦截对对象的 [`Object.defineProperty()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 操作
+>>* **Object.defineProperty()** : 会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>
+>```javascript
+>let p = { name: 'hongjilin' };
+>
+>let handler = {
+>  set(target, key, value, receiver) {
+>    console.log('拦截 set 操作');
+>    Reflect.set(target, key, value, receiver)
+>  },
+>  defineProperty(target, key, attribute) {
+>    console.log('触发 defineProperty');
+>    Reflect.defineProperty(target, key, attribute);
+>  }
+>};
+>
+>let obj = new Proxy(p, handler);
+>obj.name = '努力学习的汪';
+>// 拦截 set 操作
+>// 触发 defineProperty
+>```
+>
+>上面代码中， **Proxy.set** 拦截里面使用了`Reflect.set`，而且传入了  [ receiver ] ，导致触发`Proxy.defineProperty`拦截。
+>
+>>* 这是因为 **Proxy.set** 的  [ receiver ] 参数总是指向当前的 `Proxy`实例（即上例的`obj`）
+>>* 而`Reflect.set`一旦传入  [ receiver ] , 就会将属性赋值到  [ receiver ] 上面(即`obj`), 导致触发`defineProperty`拦截
+>>* 如果`Reflect.set`没有传入  [ receiver ] ，那么就不会触发`defineProperty`拦截。
+>
+>```javascript
+>let p = { name: 'hongjilin' };
+>
+>let handler = {
+>  set(target, key, value, receiver) {
+>    console.log('拦截 set 操作');
+>    Reflect.set(target, key, value) // 差异:此处没有传入receiver
+>  },
+>  defineProperty(target, key, attribute) {
+>    console.log('触发 defineProperty');
+>    Reflect.defineProperty(target, key, attribute);
+>  }
+>};
+>
+>let obj = new Proxy(p, handler);
+>obj.name = '努力学习的汪';
+>// 拦截 set 操作 -->不会触发 defineProperty
+>```
+>
+
+##### d) 如果第一个参数不是对象， [ Reflect.get ] 方法会报错。
+
+>```javascript
+>Reflect.set(1, 'name',{}) // 报错 
+>Reflect.set(false, 'name','xx') // 报错
+>//Uncaught TypeError: Reflect.set called on non-object
+>```
+
+#### ③ 

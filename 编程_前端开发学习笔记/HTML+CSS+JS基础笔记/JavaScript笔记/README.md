@@ -5,6 +5,8 @@
 > 截取了上方了`A_JavaScript进阶学习笔记`的部分知识点至此,方便网站阅读	
 >
 > 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+>
+> 此处强烈建议同学们学完 **JavaScript** 不要急着去学 **NodeJS** 或者 **VUE** 框架 ,一定要先学 **`ES系列`** 现在基本上都用的ES6以及后续写法开发了, 你不学基本上也是看不懂别人代码的, 这已经成了前端基本功了 --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
 
 # #说明
 
@@ -14,9 +16,6 @@
 >
 > 此笔记为实习工作半年后发觉之前学习JavaScript不够系统全面,或者说当初只是囫囵吞枣,首先并没有系统学习javaScript,其次没有较为深入的学习进阶知识,只是知道`怎么做,而不知道为什么`(当然这也符合本人学习节奏,先`know how`再`know why`)
 >
-> 本人[全部笔记地址分享](https://gitee.com/hongjilin/hongs-study-notes),亦是持续更新笔记
->
-> ​											                     		--始于2021年7月 `更新完毕`
 
 # 一、javaScript基础总结
 
@@ -1545,14 +1544,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                                   
+>                                       
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->                                   
+>                                       
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1565,14 +1564,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                                   
+>                                       
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->                                       
+>                                           
 >     ```
 >
 >2. 模块调用

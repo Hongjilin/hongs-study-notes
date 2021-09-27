@@ -326,11 +326,11 @@ mineReadFile('./resource/content.txt').then(value => {
 >说明: 返回一个新的 promise, 只有所有的 promise `都成功才成功`, 只要有一 个失败了就直接失败
 >
 >```js
->  		let p1 = new Promise((resolve, reject) => { resolve('OK');  })
->        let p2 = Promise.reject('Error');
->        let p3 = Promise.resolve('Oh Yeah')
->        const result = Promise.all([p1, p2, p3]);
->  		 console.log(result);
+>  let p1 = new Promise((resolve, reject) => { resolve('成功');  })
+>     let p2 = Promise.reject('错误错误错误');
+>     let p3 = Promise.resolve('也是成功')
+>     const result = Promise.all([p1, p2, p3]);
+>  console.log(result);
 >```
 
 #### Ⅶ-Promise.race 方法: (promises) => {}
@@ -588,7 +588,7 @@ mineReadFile('./resource/content.txt').then(value => {
 >
 >有同学可能就会问了,不加感觉也没啥事啊,反正我在这个函数体内就是要做这些操作,放在 `resolve/reject`前后好像都不影响啊! 这里我给举个实际场景
 
-##### a) 不加 return 导致的错误场景举例
+##### a) 不加 return 导致的错误场景举🌰
 
 >一般来说,错误发生在 Promise 内,是不会传到外部的,只会在 Promise 内部消化,详见下方API详解部分的 [②Promise.prototype.catch()](#② Promise.prototype.catch())
 >
@@ -912,16 +912,315 @@ mineReadFile('./resource/content.txt').then(value => {
 >```
 >
 >上面代码中，第二个`catch()`方法用来捕获前一个`catch()`方法抛出的错误。
+
+#### ③ Promise.prototype.finally()
+
+>`finally()`方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 `ES2018` 引入标准的。
 >
+>```javascript
+>promise
+>.then(result => {···})
+>.catch(error => {···})
+>.finally(() => {···});
+>```
+>
+>上面代码中，不管`promise`最后的状态，在执行完`then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数。
+>
+>>* `finally`方法的回调函数不接受任何参数，
+>>* 这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。
+>>* 这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
+
+##### a) `finally`本质上是`then`方法的特例
+
+>```javascript
+>promise
+>.finally(() => {});
+>
+>// 等同于
+>promise
+>.then(
+>  result =>  result ,
+>  error =>  throw error
+>);
+>```
+>
+>上面代码中，如果不使用`finally`方法，同样的语句需要为成功和失败两种情况各写一次。有了`finally`方法，则只需要写一次。
+
+##### b) 它的实现
+
+>它的实现也很简单。
+>
+>```javascript
+>Promise.prototype.finally = function (callback) {
+>  let P = this.constructor;
+>  return this.then(
+>    value  => P.resolve(callback()).then(() => value),
+>    reason => P.resolve(callback()).then(() => { throw reason })
+>  );
+>};
+>```
+>
+>上面代码中，不管前面的 Promise 是`fulfilled`还是`rejected`，都会执行回调函数`callback`。
+>
+>从上面的实现还可以看到，`finally`方法总是会返回原来的值(传入什么即传出什么)
+>
+>```javascript
+>// resolve 的值是 undefined
+>Promise.resolve(2).then(() => {}, () => {})
+>
+>// resolve 的值是 2
+>Promise.resolve(2).finally(() => {})
+>
+>// reject 的值是 undefined
+>Promise.reject(3).then(() => {}, () => {})
+>
+>// reject 的值是 3
+>Promise.reject(3).finally(() => {})
+>```
+>
+>![image-20210927135255264](A_Promise系统学习笔记中的图片/image-20210927135255264.png) 
+
+#### ④ Promise.all()
+
+>`Promise.all()`方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
+>
+>```javascript
+>const p = Promise.all([p1, p2, p3]);
+>```
+>
+>>* `Promise.all()`方法接受一个数组作为参数，
+>>* `p1`、`p2`、`p3`都是 Promise 实例，如果不是，就会先调用下面讲到的`Promise.resolve`方法，将参数转为 Promise 实例，再进一步处理。
+>>* 另外，`Promise.all()`方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。
+
+##### a) 返回的状态由什么决定?
+
+>`p`的状态由`p1`、`p2`、`p3`决定，分成两种情况。
+>
+>>1. 只有`p1`、`p2`、`p3`的状态都变成`fulfilled`，`p`的状态才会变成`fulfilled`，此时`p1`、`p2`、`p3`的返回值组成一个数组，传递给`p`的回调函数。
+>>2. 只要`p1`、`p2`、`p3`之中有一个被`rejected`，`p`的状态就变成`rejected`，此时第一个被`reject`的实例的返回值，会传递给`p`的回调函数。
+>
+>###### 下面是一个具体的例子。
+>
+>```javascript
+>// 生成一个Promise对象的数组
+>const promises = ['hong', 1, 2, 3, 4, 5].map(item {
+>  return getJSON( item+'.json');
+>});
+>
+>Promise.all(promises).then(function (posts) {
+>  // ...
+>}).catch(function(reason){
+>  // ...
+>});
+>```
+>
+>上面代码中，`promises`是包含 6 个 Promise 实例的数组，只有这 6 个实例的状态 **都** 变成`fulfilled`，或者**其中有一个变为`rejected`**，才会调用`Promise.all`方法后面的回调函数。
+>
+>###### 下面是另一个例子
+>
+>```javascript
+>const databasePromise = connectDatabase(); //假设定义了一个异步方法,此方法能拿到你需要的所有数据
+>
+>const booksPromise = databasePromise     //定义一个方法,在 databasePromise() 执行后寻找其内部书本信息
+>  .then(findAllBooks);
+>
+>const userPromise = databasePromise    //定义一个方法,在 databasePromise() 执行后寻找其内部当前用户信息
+>  .then(getCurrentUser);
+>
+>Promise.all([
+>  booksPromise,
+>  userPromise
+>])
+>.then(([books, user]) => pickTopRecommendations(books, user));
+>```
+>
+>上面代码中，`booksPromise`和`userPromise`是两个异步操作，只有等到它们的结果都返回了，才会触发`pickTopRecommendations`这个回调函数。
+
+##### b) 如果参数中的Promise实例定义了自己的catch方法 ?
+
+>注意，如果作为参数的 Promise 实例，自己定义了`catch`方法，那么它一旦被`rejected`，并不会触发`Promise.all()`的`catch`方法。
+>
+>```javascript
+>//定义一个状态将为成功的的promise
+>const p1 = new Promise((resolve, reject) => { resolve('hello')})
+>.then(result => result)
+>.catch(e => e);
+>
+>//定义一个将抛出错误的promise
+>const p2 = new Promise((resolve, reject) => { throw new Error('报错了') })
+>.then(result => result)
+>.catch(e =>{
+>    console.log('p2自己的catch捕获: ', e)
+>    return e; //异常获取后原样返回,不做修改
+>});
+>
+>//调用 Promise.all 方法
+>Promise.all([p1, p2])
+>.then(result => console.log(' Promise.all 方法中的成功回调: ', result))
+>.catch(e => console.log(" Promise.all 方法中的catch", e));
+>
+>//p2自己的catch捕获:  Error: 报错了
+>// Promise.all 方法中的成功回调:  (2) ['hello', Error: 报错了]
+>```
+>
+>上面代码中，
+>
+>>* `p1`会`resolved`，`p2`首先会`rejected`
+>>* 但是`p2`有自己的`catch`方法，该方法返回的是一个新的 Promise 实例，`p2`指向的实际上是这个实例。
+>>* 该实例执行完`catch`方法后，也会变成`resolved`，导致`Promise.all()`方法参数里面的两个实例都会`resolved`
+>>* 因此会调用`then`方法指定的回调函数，而不会调用`catch`方法指定的回调函数
+
+##### c)  如果参数中的Promise实例 `没有` 定义自己的catch方法 ?
+
+>如果`p2`没有自己的`catch`方法，就会调用`Promise.all()`的`catch`方法。
+>
+>```javascript
+>//定义一个状态将为成功的的promise
+>const p1 = new Promise((resolve, reject) => { resolve('hello')})
+>.then(result => result)
+>
+>//定义一个将抛出错误的promise
+>const p2 = new Promise((resolve, reject) => { throw new Error('报错了') })
+>.then(result => result)
+>
+>//调用 Promise.all 方法
+>Promise.all([p1, p2])
+>.then(result => console.log(' Promise.all 方法中的成功回调: ', result))
+>.catch(e => console.log(" Promise.all 方法中的catch", e));
+>
+>// Promise.all 方法中的catch Error: 报错了
+>```
 >
 
+#### ⑤ Promise.race()
 
+>`Promise.race()`方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
+>
+>```javascript
+>const p = Promise.race([p1, p2, p3]);
+>```
+>
+>上面代码中，只要`p1`、`p2`、`p3`之中有一个实例率先改变状态，`p`的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给`p`的回调函数。
+>
+>`Promise.race()`方法的参数与`Promise.all()`方法一样，如果不是 Promise 实例，就会先调用下面讲到的`Promise.resolve()`方法，将参数转为 Promise 实例，再进一步处理。
 
+##### a) 举个简单的🌰
 
+>如p1延时,开启了异步,内部正常是同步进行,所以`p2>p3>p1`,结果是`P2`
+>
+>```js
+>let p1 = new Promise((resolve, reject) => {
+> setTimeout(() => {
+>   resolve('OK');
+> }, 1000);
+>})
+>let p2 = Promise.resolve('Success');
+>let p3 = Promise.resolve('Oh Yeah');
+>//调用
+>const result = Promise.race([p1, p2, p3]);
+>console.log(result);
+>```
 
+##### b) 举个应用实🌰
 
+>下面是一个例子，如果指定时间内没有获得结果，就将 Promise 的状态变为`reject`，否则变为`resolve`。
+>
+>```javascript
+>const p = Promise.race([
+>  fetch('https://gitee.com/hongjilin'),
+>  new Promise(function (resolve, reject) {
+>    setTimeout(() => reject(new Error('请求超时!!!!')), 5000)
+>  })
+>]);
+>
+>p
+>.then(console.log)
+>.catch(console.error);
+>```
+>
+>上面代码中，如果 5 秒之内`fetch`方法无法返回结果，变量`p`的状态就会变为`rejected`，从而触发`catch`方法指定的回调函数。
+>
+>是不是很好用又简单
 
+#### ⑥ Promise.allSettled()
 
+>`Promise.allSettled()`方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。
+>
+>**只有等到所有这些参数实例都返回结果**，不管是`fulfilled`还是`rejected`，包装实例才会结束。
+>
+>该方法由 [ES2020](https://github.com/tc39/proposal-promise-allSettled) 引入。
+
+##### a) 举个简单的🌰
+
+>```javascript
+>const promises = [
+>  fetch('https://gitee.com/hongjilin'),
+>  fetch('https://github.com/Hongjilin'),
+>  fetch('./hong.json'),
+>];
+>loading = true; //请求前将 loading 改为true ; 页面出现滚动加载图标蒙层
+>await Promise.allSettled(promises);
+>loading = false;
+>```
+>
+>上面代码对服务器发出三个请求，等到三个请求都结束，不管请求成功还是失败，加载的滚动图标就会消失。
+
+##### b)  该方法返回的新的 Promise 实例，一旦结束，状态总是`fulfilled`，不会变成`rejected`
+
+>该方法返回的新的 Promise 实例，一旦结束，状态总是`fulfilled`，不会变成`rejected`。状态变成`fulfilled`后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入`Promise.allSettled()`的 Promise 实例。
+>
+>```javascript
+>const resolved = Promise.resolve('返回成功状态的promise');
+>const rejected = Promise.reject('返回失败状态的promise');
+>
+>const allSettledPromise = Promise.allSettled([resolved, rejected]);
+>// Promise.allSettled 得到的新实例状态只会是 `fulfilled`
+>allSettledPromise.then(function (results) {
+>  console.log(results); //注意,这是 `fulfilled` 的回调函数,只有其状态为成功才能进到这里
+>});
+>/*
+> [
+>	{ "status": "fulfilled", "value": "返回成功状态的promise" },
+>	{ "status": "rejected", "reason": "返回失败状态的promise" }
+> ]
+>*/
+>```
+>
+>>* `Promise.allSettled()`的返回值`allSettledPromise`，状态只可能变成`fulfilled`(注意,是 **allSettledPromise** 的状态,而不是内部的promise实例)
+>>* 它的监听函数接收到的参数是数组`results`。该数组的每个成员都是一个对象，对应的是传入`Promise.allSettled()`的 Promise 实例。
+>>* 每个对象都有`status`属性，该属性的值只可能是字符串`fulfilled`或字符串`rejected`。
+>>* `fulfilled`时，对象有`value`属性，`rejected`时有`reason`属性，对应两种状态的返回值。
+
+##### c) 举个返回值用法的🌰
+
+>```javascript
+>const promises = [ fetch('./hong.json'), fetch('https://gitee.com/hongjilin') ];
+>const results = await Promise.allSettled(promises);
+>
+>// 过滤出成功的请求
+>const successfulPromises = results.filter(item => item.status === 'fulfilled');
+>
+>// 过滤出失败的请求，并取得它们的失败原因
+>const errors = results
+>  .filter(p => p.status === 'rejected')
+>  .map(p => p.reason);
+>```
+>
+>有时候，我们不关心异步操作的结果，只关心这些操作有没有结束。这时，`Promise.allSettled()`方法就很有用。如果没有这个方法，想要确保所有操作都结束，就很麻烦。`Promise.all()`方法无法做到这一点。
+>
+>```javascript
+>const urls = [ 'https://gitee.com/hongjilin' ,'https://github.com/Hongjilin'];
+>const requests = urls.map(x => fetch(x));
+>//举例用 Promise.all 尝试实现,很明显,难以实现
+>try {
+>  await Promise.all(requests);
+>  console.log('所有请求都成功。');
+>} catch {
+>  console.log('至少一个请求失败，其他请求可能还没结束。');
+>}
+>```
+>
+>上面代码中，`Promise.all()`无法确定所有请求都结束。想要达到这个目的，写起来很麻烦，有了`Promise.allSettled()`，这就很容易了
 
 
 

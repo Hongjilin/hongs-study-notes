@@ -1,8 +1,8 @@
 # 洪jl学习笔记
 
-> #### 此笔记也会不定时地同步到GitHub上
+> ## `最新笔记将在码云更新,但GitHub也会频繁但不定时地同步`
 >
-> #### 用GitHub的同学点这里 : https://github.com/Hongjilin
+> ## gitee地址: https://gitee.com/hongjilin
 
 #### 笔记介绍
 > 这是 [***<u>@hongjilin</u>***](https://gitee.com/hongjilin) 的学习笔记与各种学习资料笔记整合, 有些部分引用已经记不清了(因为记笔记的初衷是为了方便自己查阅)。不过如今大部分笔记都标注了出处以及从何处进行学习, 大家可以根据我的标注查找到相对应的学习资料

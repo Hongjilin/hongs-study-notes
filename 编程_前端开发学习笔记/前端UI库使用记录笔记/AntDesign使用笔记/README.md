@@ -1,14 +1,10 @@
-# #此文件为方便gitee网站观阅使用专门创建
-
-> 此笔记文件于某一时间截取复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
->
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
-
 # #说明
 
 >`antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。也是是本人目前实习公司所用框架技术之一
 >
 >本笔记主要记录工作中项目中遇到的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
+>
+>除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
 
 # #目录
@@ -426,7 +422,7 @@
 
 ## 2、Select 选择器
 
-#### Ⅰ - filterOption 筛选下拉项自定义筛选条件
+### Ⅰ - filterOption 筛选下拉项自定义筛选条件
 
 >  **filterOption** :是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 true，反之则返回 false
 >
@@ -448,7 +444,7 @@
 >  //动态搜索Option的值 而不是value中的值
 >  //正则:当 inputValue 包含于 option 时返回true
 >  filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
->>>
+>>>>
 >   {nameList?.map(item => (//下拉项value绑定id  展示却展示名称
 >      <Option key={item?.id} value={item?.id}>
 >        {item?.proxy_name} 
@@ -458,6 +454,76 @@
 >```
 >
 >![image-20210916142227728](AntDesign_ofReact使用笔记中的图片/image-20210916142227728.png) 
+
+### Ⅱ - 自定义添加下拉项
+
+>```tsx
+>const [form] = Form.useForm();
+>const [initsPlatforms, setInitsPlatforms] = useState([]); //总的下拉列表
+>const [newPlatforms, setNewPlatforms] = useState(''); //新增内容输入框绑定数据
+>//自定义平台输入框数据绑定
+>const onChangeName = (event) => {
+>if (event?.target?.value?.trim()?.length != 0) setNewPlatforms(event.target.value);
+>  else setNewPlatforms(undefined);
+>    };
+>    //自定义平台的添加操作
+>  const addItem = (type) => {
+>  //如果为空字符串或者为undefined 则直接中断
+>  if (!newPlatforms || newPlatforms.trim().length == 0) return;
+>    //将添加标签输入框的内容加入 下拉列表中
+>    setInitsPlatforms([...initsPlatforms, newPlatforms]);
+>     //本人用的from提交,这行代码是将自定义平台直接加到选中框中
+>    form.setFieldsValue({
+>      [type]: [...form.getFieldValue(type), newPlatforms],
+>    });
+>     
+>    setNewPlatforms('');
+>      };         
+>    /********************* RreatNode ***********************************/
+>  <Form.Item label="常见可用平台" name="yes_platforms">
+><Select
+>placeholder="请输入或下拉选择IP名称"
+>  showSearch
+>    mode="multiple"
+>    //动态搜索Option的值 而不是value中的值
+>    //正则:当 inputValue 包含于 option 时返回true
+>    filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
+>    dropdownRender={(menu) => (
+>     <div>
+>       {menu}
+>        <Divider style={{ margin: '4px 0' }} />
+>        <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
+>          <Input style={{ flex: 'auto' }} value={newPlatforms} onChange={onChangeName} />
+>          <a
+>            style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
+>            onClick={() => addItem('yes_platforms')}
+>          >
+>            <PlusOutlined /> 添加自定义平台
+>          </a>
+>        </div>
+>      </div>
+>     )}
+>      >
+>    {initsPlatforms?.map((
+>  item //下拉项value绑定id  展示却展示名称
+>    ) => (
+>      <Option key={item} value={item}>
+>       {item}
+>      </Option>
+>     ))}
+>     </Select>
+>    </Form.Item>
+>  ```
+>
+>###### 效果展示
+>
+>![image-20210928120121096](AntDesign_ofReact使用笔记中的图片/image-20210928120121096.png) 
+
+
+
+
+
+
 
 # 二、数据展示
 
@@ -959,6 +1025,8 @@
 >
 >     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件2.png)
 
+
+
 ## 2、Tree 树形控件
 
 > [官方文档部分](https://ant.design/components/tree-cn/)
@@ -1068,3 +1136,34 @@
 >5. 效果展示:
 >
 >   ![Tree选中效果](AntDesign_ofReact使用笔记中的图片/Tree选中效果.gif) 
+
+## 3、Tooltip文字提示
+
+### Ⅰ - 自定义悬停提示
+
+>一般我们的悬停提示就是直接将数据赋值到 [title] 上,但是目前遇到一个需求,是要求悬停提示需要换行、指定行带颜色
+>
+>实际上 [ title ] 可以接受参数是一个ReactNode 即直接一个节点
+>
+>```tsx
+><Tooltip title={this.remarksNode(remarks, remarks_v5, yes_platforms, no_platforms)}>
+>        <p className={style.remarks}>{data}</p>
+></Tooltip>
+>// 生成ReactNode 函数
+>const remarksNode = (remarks, remarks_v5, yes_platforms, no_platforms) => {
+>    return (
+>      <div className={style.zz}>
+>        <span>3版本提示语:</span>
+>        <span>{remarks}</span>
+>        <span> 5版本提示语:</span>
+>        <span> {remarks_v5}</span>
+>        <span>常见可用平台: {yes_platforms?.toString()}</span>
+>        <span style={{color:'red'}}>不推荐使用平台: {no_platforms?.toString()}</span>
+>      </div>
+>    );
+>  };
+>```
+>
+>###### 效果展示
+>
+>![image-20210928105404801](AntDesign_ofReact使用笔记中的图片/image-20210928105404801.png)

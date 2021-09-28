@@ -4,7 +4,7 @@
 >
 > 此部分截取自上面`微信小程序学习笔记`的部分知识点笔记,属于小程序基础学习部分,复制至此方便阅读
 >
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -595,7 +595,7 @@
 >           {{item}}
 >         </view>
 >         等同于
->                                     
+>                                           
 >         <view wx:for="{{[1,2,3] + ' '}}">
 >           {{item}}
 >         </view>
@@ -1687,7 +1687,7 @@
 >        Component({
 >          externalClasses: ['my-class']
 >        })
->                                                                             
+>                                                                                
 >        <!-- 组件 custom-component.wxml 如何引用 -->
 >        <custom-component class="my-class">这段文本的颜色由组件外的 class 决定</custom-component>                                 
 >        ```
@@ -1702,7 +1702,7 @@
 >      <custom-component my-class="large-text" />
 >      <!-- 以下写法需要基础库版本 2.7.1 以上  注意 这只是一个组件传入两个类名,而不是分别创建两个组件-->
 >      <custom-component my-class="red-text large-text" />
->                                                                                                                         
+>                                                                                                                              
 >      ------------ 样式类声明 页面.wxss ---------------------------------
 >      .red-text {
 >        color: red;
@@ -1957,7 +1957,7 @@
 >
 >       ```js
 >         let con  //用来保存this指向
->                                                                                           
+>                                                                                                 
 >         Page({
 >           //1. 生命周期函数中保存this指向
 >         onLoad: function (options) {
@@ -1970,7 +1970,7 @@
 >             title:  !con.data.collected ? '进行收藏' : '取消收藏',
 >           })
 >           if (!result.confirm) return;
->                                                                                           
+>                                                                                                 
 >           let postCollected = con.data._postCollected //将当前data中(相当于之前本地缓存的postCollected)拉去下来,防止被覆盖
 >           postCollected[con.data._pid] = !con.data.collected
 >           con.setData({

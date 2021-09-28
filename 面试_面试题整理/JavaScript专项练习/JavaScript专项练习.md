@@ -1,3 +1,8 @@
+# #说明
+
+>本人对于所遇面试题进行了详细的知识点拆解与梳理,在此分享给大家,有错欢迎指出讨论,求共同进步 --> **[JavaScript专项练习](https://gitee.com/hongjilin/hongs-study-notes/tree/master/面试_面试题整理/JavaScript专项练习)**
+>除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+
 # 一、DOM操作相关
 
 ## Ⅰ- 单选题
@@ -386,14 +391,14 @@
 >##### 答案解析:
 >
 >>以下给出实际解析后代码
->>
->>```js
->>var a = function (){} //函数提升,优先级高于变量提升,所以即便在变量后面声明,仍然顶在变量前方
->>var a;    //这边不是因为什么之后重声明才变为number，是因为变量赋值才变的
->>a = 10;   //如果有多个var a ,那a的类型最后就会是最后赋值操作的参数类型。  
->>console.log(typeof a)
->>```
->>
+>
+>```js
+>var a = function (){} //函数提升,优先级高于变量提升,所以即便在变量后面声明,仍然顶在变量前方
+>var a;    //这边不是因为什么之后重声明才变为number，是因为变量赋值才变的
+>a = 10;   //如果有多个var a ,那a的类型最后就会是最后赋值操作的参数类型。  
+>console.log(typeof a)
+>```
+>
 >>所以可以明显知道,答案会是number
 
 ## Ⅱ - 不定项选择题
@@ -472,18 +477,23 @@
 >##### 知识点梳理:
 >
 >>此题考察类型转换，三元运算符先**分清是非**，再决定今后该走哪条路，“==”运算符比较 会 **"更喜欢"** 用Number类型来进行比较
->>
->>1. **== 运算符（两个操作数的类型不相同时）**
->>   - 如果一个值是null，另一个值是undefined，则它们相等
->>   - 如果一个值是数字，另一个值是字符串，先将字符串转换为数学，然后使用转换后的值进行比较。
->>   - 如果其中一个值是true，则将其转换为1再进行比较。如果其中的一个值是false，则将其转换为0再进行比较。
->>   - 如果一个值是对象，另一个值是数字或字符串，则将对象转换为原始值，再进行比较。
->>2. **对象到数字的转换**
->>   - 如果对象具有valueOf()方法，后者返回一个原始值，则JavaScript将这个原始值转换为数字（如果需要的话）并返回一个数字。
->>   - 否则，如果对象具有toString()方法，后者返回一个原始值，则JavaScript将其转换并返回。（对象的toString()方法返回一个字符串直接量（之前所说的原始值），JavaScript将这个字符串转换为数字类型，并返回这个数字）。
->>   - 否则，JavaScript抛出一个类型错误异常。
->>3. **空数组转换为数字0**
->>   - 数组继承了默认的valueOf()方法，这个方法返回一个对象而不是一个原始值，因此，数组到数学的转换则调用toString()方法。空数组转换为空字符串，空字符串转换为数字0.
+>
+>1. **== 运算符（两个操作数的类型不相同时）**
+>
+>  - 如果一个值是null，另一个值是undefined，则它们相等
+>  - 如果一个值是数字，另一个值是字符串，先将字符串转换为数学，然后使用转换后的值进行比较。
+>  - 如果其中一个值是true，则将其转换为1再进行比较。如果其中的一个值是false，则将其转换为0再进行比较。
+>  - 如果一个值是对象，另一个值是数字或字符串，则将对象转换为原始值，再进行比较。
+>
+>2. **对象到数字的转换**
+>
+>  - 如果对象具有valueOf()方法，后者返回一个原始值，则JavaScript将这个原始值转换为数字（如果需要的话）并返回一个数字。
+>  - 否则，如果对象具有toString()方法，后者返回一个原始值，则JavaScript将其转换并返回。（对象的toString()方法返回一个字符串直接量（之前所说的原始值），JavaScript将这个字符串转换为数字类型，并返回这个数字）。
+>  - 否则，JavaScript抛出一个类型错误异常。
+>
+>3. **空数组转换为数字0**
+>
+>  - 数组继承了默认的valueOf()方法，这个方法返回一个对象而不是一个原始值，因此，数组到数学的转换则调用toString()方法。空数组转换为空字符串，空字符串转换为数字0.
 >
 >##### 答案解析
 >
@@ -575,11 +585,11 @@
 >
 >##### 答案解析:
 >
->>此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
->>
->>变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
->>
->>所以选择B
+>此题会错应该主要就是被误导了,题中 "undefined","false" 是字符串!!!
+>
+>变量abc都是字符串型的变量，而不是真正的undefined和false，在判断里都会被认为是真值，显示true，只有空串为false
+>
+>所以选择B
 
 ### 4、JavaScript定义var a="30",var b=8,则执行a%b会得到 ?
 
@@ -644,11 +654,11 @@
 >```js
 >var x = new Boolean(false);
 >if (x) {
->  alert('hi'); 
+>alert('hi'); 
 >}
 >var y = Boolean(0);
 >if (y) {
->  alert('hello');  
+>alert('hello');  
 >}
 >```
 >
@@ -656,17 +666,19 @@
 >
 >1. 详情可以查阅[MDN的Boolean相关资料](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 >2. 注意点: 要分清 **new Boolean()** 与 **Boolean()**的区别:
->   - ![image-20210908112451290](JavaScript专项练习中的图片/image-20210908112451290.png) 
->   -  **任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）包括 `布尔对象`
+>  - ![image-20210908112451290](JavaScript专项练习中的图片/image-20210908112451290.png) 
+>  -  **任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）包括 `布尔对象`
 >
 >##### 答案解析:
 >
->>1. if(x) 这里期望 x 是一个布尔类型的原始值，而 x 是一个对象，**任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）。      
->>2. 题目的第二部分，一定要注意 **y = Boolean(0)**，**而不是 y = new Boolean(0)。**
->>   - 这两个有很大区别，用 new 调用构造函数会新建一个布尔对象，此处没有加 new，进行的是显示类型转换，
->>   - 正如上述第一条所说，0 转换布尔，结果为 false，所以此时 y 的值就是 false。
->>   - 如果加了 new，那么 y 就是一个 Boolean 类型的对象，执行 if(y) 时，对象转布尔，始终是 true，所以结果会与不加 new 的时候相反。
->>3. 所以会打印 'hi'
+>1. if(x) 这里期望 x 是一个布尔类型的原始值，而 x 是一个对象，**任何对象转为布尔值，都为得到 true**（**切记！在 JS 中，只有 0，-0，NaN，""，null，undefined 这六个值转布尔值时，结果为 false**）。      
+>2. 题目的第二部分，一定要注意 **y = Boolean(0)**，**而不是 y = new Boolean(0)。**
+>
+>  - 这两个有很大区别，用 new 调用构造函数会新建一个布尔对象，此处没有加 new，进行的是显示类型转换，
+>  - 正如上述第一条所说，0 转换布尔，结果为 false，所以此时 y 的值就是 false。
+>  - 如果加了 new，那么 y 就是一个 Boolean 类型的对象，执行 if(y) 时，对象转布尔，始终是 true，所以结果会与不加 new 的时候相反。
+>
+>3. 所以会打印 'hi'
 
 
 
@@ -880,6 +892,24 @@
 >
 >   ![image-20210909203353878](JavaScript专项练习中的图片/image-20210909203353878.png) 
 
+### 2、对于代码 var a = 10.42; 取出 a 的整数部分，以下代码哪些是正确的？
+
+>```js
+>parseInt(a);
+>Math.floor(a);
+>Math.ceil(a);
+>a.split('.')[0];
+>```
+>
+>##### 答案解析
+>
+>>1.  A. parseInt转换为整数，默认为10进制，结果为10 
+>>2.  B. floor向下取整，结果为10 
+>>3. C. ceil向上取整，结果为11 
+>>4.  D. split操作数必须为**正则或字符串**，结果为TypeError
+>>   - 这是String方法
+>>   - 如果想正确修改需要这样调用: String.prototype.split.call(a,'.')[0]
+
 # 六、this指向相关
 
 > 此处知识点不懂的可以看本人 [JS进阶笔记函数的this部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#%E2%85%A4-%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84this),本人给出了详细的笔记梳理
@@ -977,7 +1007,7 @@
 >function Foo() {
 >var i = 0;
 >return function() {
->   console.log(i++);
+>console.log(i++);
 >}
 >}
 >var f1 = Foo(), f2 = Foo();
@@ -1003,12 +1033,65 @@
 >##### 答案解析
 >
 >>var f1, f2=Foo()中，先执行Foo():i=0 ; return返回一个函数给f1、f2
->>
->>* 第一次f1() :   (f1指向子函数 :**f1()=function(){console.log(i++)},**  因为子函数没有定义i，所以向上找到父函数定义的 i:   )并执行子函数 输出i=0,再自加 i =1(覆盖了父函数Foo 的 i值);
->>* 第二次f1() :   执行的是子函数 **Function(){console.log(i++)}**,输出的是父函数 的 i=1,再自加 i =2;
->>* 第一次f2() :  此处同**第一次f1()**,不同的是 f2指向堆中一个新的对象 function(){ ...},所以此i非彼i,输出i=0;如果如果再次f2(),那么和第二次f1(),一样输出i=1; 
->>* 所以答案为0 1 0
 >
+>* 第一次f1() :   (f1指向子函数 :**f1()=function(){console.log(i++)},**  因为子函数没有定义i，所以向上找到父函数定义的 i:   )并执行子函数 输出i=0,再自加 i =1(覆盖了父函数Foo 的 i值);
+>* 第二次f1() :   执行的是子函数 **Function(){console.log(i++)}**,输出的是父函数 的 i=1,再自加 i =2;
+>* 第一次f2() :  此处同**第一次f1()**,不同的是 f2指向堆中一个新的对象 function(){ ...},所以此i非彼i,输出i=0;如果如果再次f2(),那么和第二次f1(),一样输出i=1; 
+>* 所以答案为0 1 0
+
+### 2、下面的输出结果是?
+
+>```js
+>(function() {
+> var a = b = 5;
+>})();   
+>console.log(b);
+>console.log(a);
+>```
+>
+>##### 知识梳理
+>
+>> * 连续的赋值运算符表达式，是从右往左
+>> * JS声明变量与不声明变量直接使用的区别 -->  **[点我传送 ](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记/JS声明变量与不声明变量直接使用的区别.md)** 
+>> * 闭包、自执行函数相关知识点   -->  [关于闭包详细笔记请看](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0#5%E9%97%AD%E5%8C%85)  
+>
+>##### 答案解析
+>
+>1. 考点一: JS声明变量与不声明变量直接使用的区别
+>
+>   - ```js
+>     var a = b = 5 //相当于拆解成  ==> b = 5; var a = b; 
+>     ```
+>
+>   - **b = 5** 前面没有var，相当于声明为全局变量（这种方式在严格模式下会报错，此题不考虑)
+>
+>   - ```js
+>     //所以就相当于
+>     (function(){
+>         window.b = 5; 
+>         var a = b; //当前作用域下找不到 [ b ] 就会一层层往上找,直到找到最顶层对象 [ window.b]
+>     })(); wang
+>     console.log(b); //5
+>     console.log(a); //报错,因为找不到  -->原因是考点二
+>     ```
+>
+>2. 考点二:闭包知识点相关
+>
+>   而这里a因为是在函数内，所以函数运行后会自动销毁变量 [ a ] ;所以在外部打印 [ a ] 时找不到此变量,在window上也找不到,就报错了
+>
+>3. 陷阱:
+>
+>   - 在函数表达式中有两个赋值，但a是用关键字var 来声明的，这意味着a是局部变量，而b则被赋予为全局变量。
+>
+>   - 它并没有使用 **严格模式(use  strict)**。在函数里面，如果启用了严格模式，代码就会报错：“Uncaught ReferenceError: b is not  defined”。请记住，严格模式需要你显式地引用全局作用域，代码应该写成
+>
+>     ```js
+>     (function() {
+>     'use strict';
+>     var a = window.b = 5;
+>     })();
+>     console.log(b);
+>     ```
 
 # 八、ES系列相关
 
@@ -1114,6 +1197,65 @@
 >1. 实际上本题的答案跟上方是否重写没有很大关系,因为首先调用时会先在自身实例上找方法,恰好本身就有 **do** 方法,所以本身就不会再往原型上找了,所以可以直接得到答案是 `foo`
 >2. 但也是恰好是因为实例上有此属性方法(do),那如果没有呢?那他就会往上的原形对象找,但此时原型对象已经被赋值为一个函数,所以会找不到然后报错.
 >3. 如果想要调用 prototype 上写的方法 应该这样调用 **new A.prototype().do()**
+
+### 2、以下代码执行后，a.x 和 b.x 的结果分别是？  
+
+>```js
+>function A(x){
+>	this.x = x;
+>}
+>A.prototype.x = 1; 
+>
+>function B(x){
+>	this.x = x;
+>}
+>B.prototype = new A(); 
+>var a = new A(2), b = new B(3);
+>delete b.x; 
+>console.log(a.x,b.x)
+>//以下是选项
+>2, 3
+>2, 1
+>2, undefined
+>其他几项都不对
+>```
+>
+>##### 知识点梳理
+>
+>>* 原型与原型链相关知识点,此部分不太熟悉的同学可以看本人笔记 -->  **[JavaScript进阶笔记的原型链部分](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记#1原型与原型链)** 
+>>* 如果有x但是没有赋值，则是undefined,相当于x=undefined. 就不会进入原型链
+>
+>##### 答案解析
+>
+>>```js
+>>function A(x){
+>>	this.x = x;
+>>}
+>>A.prototype.x = 1; //将A原型上的x设置为1
+>
+>>function B(x){
+>>	this.x = x;
+>>}
+>>B.prototype = new A(); //将B原型上的x设置为 A的一种object. 所以B实例出来object的prototype就是{x:undefined}
+>>var a = new A(2),//a.x首先要在自己的构造函数中查找，没有采取原型上找，这里有this.x = x.所以a.x = 2;
+>>b = new B(3);//此时 b.x = 3 ;但是因为上面[B.prototype = new A()],所以形成原型链,其父级prototype={x:undefined}
+>>delete b.x; //删除实例b上的[x]属性,但是delete只能删除自己的x不能删除父级的x. 
+>>console.log(a.x,b.x)
+>>
+>>```
+>
+>>* **var a = new A(2)** 很容易理解,就是 a.x==2
+>>* 看上面代码可以得知,在进行到 **b = new B(3)** 这步的时候 b的原型 **prototype={x:undefined}**
+>>* delete b.x; 删除实例b上的[x]属性,但是delete只能删除自己的x不能删除父级的x. 所以我们查看b.x时会走到b的原型上就是 **{x:undefined}** 这里也是很容易踩到的陷阱,只要有这个属性,即便是undefined也不会在往上找了
+>
+>##### 陷阱:
+>
+>>选择 **2, 1** 选项的同学就是踩到陷阱咯
+>
+>>* B的prototype=new A(), 想错的可能都认为构造函数的 [ **x **] 没有传值进去,**this.x**赋值为**undefined**, 所以还会去A的prototype原型上找,找到 x = 1  --> `错误`
+>>* 实际上是:如果构造函数 **没有x** 才会去原型下找
+>>* 如果有x但是没有赋值，则是undefined,相当于x=undefined. 就不会进入原型链了
+
 
 
 

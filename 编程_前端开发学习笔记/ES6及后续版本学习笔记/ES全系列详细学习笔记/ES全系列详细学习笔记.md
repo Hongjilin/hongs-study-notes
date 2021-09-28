@@ -2,13 +2,13 @@
 
 >本笔记是本人`ES全系统详细学习笔记`,将ES系列全部梳理一遍,包括新特性等,后续ES系列也会不间断的补充至此笔记中
 >
->观阅或查阅的资料:[[阮一峰的ES6文档](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/);博客园的[JavaScript ES6 Symbol.hasInstance的理解. ](https://www.cnblogs.com/waitforyou/p/7080591.html)
+>观阅或查阅的资料:[[阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/);博客园的[JavaScript ES6 Symbol.hasInstance的理解. ](https://www.cnblogs.com/waitforyou/p/7080591.html)
 >
 >笔记中每部分都会首先给出[`概括总结`],总结概括此部分知识点,然后再于下方给出`部分常用重点`知识点详解
 >
 >必要的预备前置知识点:  [JavaScript基础以及进阶知识点](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记) -->其中 [ 进阶 ] 笔记部分需要重点掌握
 >
->除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
+>除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #目录
 
@@ -69,9 +69,9 @@
 
 # 二、ECMASript 6 新特性
 
-> 想要查看更权威的官方ES6文档,可以看阮一峰的ES6文档,本人当初对其进行了摘录放至此处方便查阅,也是就此资料入门ES6的-->**[ES6资料文档摘录](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记/ES6资料文档摘录)** 
+> 想要查看更权威的官方ES6文档,可以看 [阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)
 >
-> 此处ES6部分笔记主要为:`查阅的资料博客整合摘录(阮一峰的ES6文档)`,加上学习ES6时的笔记、个人心得体会、知识点概述与总结以及在相当一段工作时间中觉得常用或者是需要重点学习的理解整合
+> 此部分将记录由 **ES6提出以及后续补充的** ,但不仅限于 ES6新增内容, 比如 **Promise**是ES6提出的,但是例如`Promise.allSettled()` 该方法由 [ES2020](https://github.com/tc39/proposal-promise-allSettled) 引入,我仍然会收录在此部分笔记而不是记录在**ES11**新特性中
 
 ## 1、ES6更新的内容概括
 
@@ -1049,7 +1049,7 @@
 ### Ⅰ-概括总结
 
 >-  **Unicode表示法**: `大括号包含`表示Unicode字符(`\u{0xXX}`或`\u{0XXX}`)
->-  **字符串遍历**: 可通过`for-of`遍历字符串
+>-  **字符串遍历**: 可通过 [ for-of ] 遍历字符串
 >-  **字符串模板**: 可单行可多行可插入变量的增强版字符串
 >-  **标签模板**: 函数参数的特殊调用
 >-  **String.raw()**: 返回把字符串所有变量替换且对斜杠进行转义的结果
@@ -2925,9 +2925,9 @@
 >
 >1. 描述: `自身`、`可继承`、`可枚举`、`非枚举`、`Symbol`
 >2. 遍历
->   - `for-in`: 遍历对象`自身可继承可枚举`属性
->   - `Object.keys()`: 返回对象`自身可枚举`属性键 [ key ] 组成的数组
->   - `Object.getOwnPropertyNames()`: 返回对象`自身非Symbol`属性键 [ key ] 组成的数组
+>   -  [ for-in ] : 遍历对象`自身可继承可枚举`属性
+>   -  [Object.keys()] : 返回对象`自身可枚举`属性键 [ key ] 组成的数组
+>   -  [Object.getOwnPropertyNames()] : 返回对象`自身非Symbol`属性键 [ key ] 组成的数组
 >   - `Object.getOwnPropertySymbols()`: 返回对象`自身Symbol`属性键 [ key ] 组成的数组
 >   - `Reflect.ownKeys()`: 返回对象`自身全部`属性键 [ key ] 组成的数组
 >3. 规则
@@ -3150,7 +3150,7 @@
 
 #### ① 可枚举性
 
->对象的每个属性都有一个描述对象（Descriptor）, 用来控制该属性的行为. `Object.getOwnPropertyDescriptor`方法可以获取该属性的描述对象.   -->[详见,点我传送](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor)
+>对象的每个属性都有一个描述对象（Descriptor）, 用来控制该属性的行为.   [ Object.getOwnPropertyDescriptor ] 方法可以获取该属性的描述对象.   -->[详见,点我传送](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor)
 >
 >```javascript
 >let obj = { foo: 123 };
@@ -3849,7 +3849,7 @@
 
 ##### a) 基本用法
 
->ES5 的`Object.getOwnPropertyDescriptor()`方法用来获取一个对象的所有自身属性的描述符. . ES2017 引入了 [ Object.getOwnPropertyDescriptors() ] 方法，返回指定对象所有自身属性（非继承属性）的描述对象. 
+>ES5 的  [ Object.getOwnPropertyDescriptor() ] 方法用来获取一个对象的所有自身属性的描述符. . ES2017 引入了 [ Object.getOwnPropertyDescriptors() ] 方法，返回指定对象所有自身属性（非继承属性）的描述对象. 
 >
 >```javascript
 >const obj = {
@@ -4418,7 +4418,7 @@
 >
 >> **重点难点**
 >
->- 使用[ keys() ]、[ values() ]、[ entries() ]返回的遍历器对象，可用`for-of`自动遍历或`next()`手动遍历
+>- 使用[ keys() ]、[ values() ]、[ entries() ]返回的遍历器对象，可用 [ for-of ] 自动遍历或`next()`手动遍历
 
 ### Ⅱ - 扩展运算符
 
@@ -4898,8 +4898,6 @@
 
 #### ③ 不适用场景
 
->
->
 >扩展运算符背后调用的是遍历器接口（`Symbol.iterator`），如果一个对象没有部署这个接口，就无法转换. 
 >
 >`Array.from`方法还支持类似数组的对象. 所谓类似数组的对象，本质特征只有一点，即必须有`length`属性. 因此，任何有`length`属性的对象，都可以通过`Array.from`方法转为数组，而此时扩展运算符就无法转换. 
@@ -6201,7 +6199,7 @@
 >  - **Symbol.replace**: 指向一个函数，当实例对象被`String.prototype.replace()`调用时会重新定义`replace()`的行为
 >  - **Symbol.search**: 指向一个函数，当实例对象被`String.prototype.search()`调用时会重新定义`search()`的行为
 >  - **Symbol.split**: 指向一个函数，当实例对象被`String.prototype.split()`调用时会重新定义`split()`的行为
->  - **Symbol.iterator**: 指向一个默认遍历器方法，当实例对象执行`for-of`时会调用指定的默认遍历器
+>  - **Symbol.iterator**: 指向一个默认遍历器方法，当实例对象执行 [ for-of ] 时会调用指定的默认遍历器
 >  - **Symbol.toPrimitive**: 指向一个函数，当实例对象被转为原始类型的值时会返回此对象对应的原始类型值
 >  - **Symbol.toStringTag**: 指向一个函数，当实例对象被`Object.prototype.toString()`调用时其返回值会出现在`toString()`返回的字符串之中表示对象的类型
 >  - **Symbol.unscopables**: 指向一个对象，指定使用`with`时哪些属性会被`with环境`排除
@@ -6233,7 +6231,7 @@
 >    getResults('努力学习的汪')
 >    ```
 >
->3. 遍历属性名: 无法通过`for-in`、`for-of`、`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回，只能通过`Object.getOwnPropertySymbols`返回
+>3. 遍历属性名: 无法通过 [ for-in ] 、 [ for-of ] 、 [Object.keys()] 、 [Object.getOwnPropertyNames()] 、`JSON.stringify()`返回，只能通过`Object.getOwnPropertySymbols`返回
 >
 >4. 启用模块的Singleton模式: 调用一个类在任何时候返回同一个实例(`window`和`global`)，使用`Symbol.for()`来模拟全局的`Singleton模式`
 >
@@ -6385,7 +6383,7 @@
 >a[mySymbol] // "Hello!"
 >```
 >
->上面代码通过方括号结构和`Object.defineProperty`，将对象的属性名指定为一个 Symbol 值. 
+>上面代码通过方括号结构和 [ Object.defineProperty ] ，将对象的属性名指定为一个 Symbol 值. 
 >
 
 #### ② 不能用点运算符
@@ -6401,7 +6399,7 @@
 >a['mySymbol'] // "努力学习的汪!"  -->此处就是字符串作为key名进行读取
 >```
 >
->![image-20210826183751378](ES全系列详细学习笔记中的图片/image-20210826183751378.png) 
+>![image-20210826183751378](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210826183751378.png) 
 >
 >上面代码中，因为点运算符后面总是字符串，所以不会读取`mySymbol`作为标识名所指代的那个值，导致`a`的属性名实际上是一个字符串，而不是一个 Symbol 值. 
 >
@@ -6512,7 +6510,7 @@
 
 #### ①  概念引出
 
->Symbol 作为属性名，遍历对象的时候，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回. 
+>Symbol 作为属性名，遍历对象的时候，该属性不会出现在`for...in`、`for...of`循环中，也不会被 [Object.keys()] 、 [Object.getOwnPropertyNames()] 、`JSON.stringify()`返回. 
 >
 >但是，它也不是私有属性，有一个`Object.getOwnPropertySymbols()`方法，可以获取指定对象的所有 Symbol 属性名. 该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值. 
 >
@@ -6557,7 +6555,7 @@
 >console.log(PropertySymbols)
 >```
 >
->![image-20210830141637812](ES全系列详细学习笔记中的图片/image-20210830141637812.png) 上面代码中，使用`for...in`循环和`Object.getOwnPropertyNames()`方法都得不到 Symbol 键名，需要使用`Object.getOwnPropertySymbols()`方法. 
+>![image-20210830141637812](ES全系列详细学习笔记中的图片/image-20210830141637812.png) 上面代码中，使用`for...in`循环和 [Object.getOwnPropertyNames()] 方法都得不到 Symbol 键名，需要使用`Object.getOwnPropertySymbols()`方法. 
 >
 
 #### ③ 获取所有类型的键名
@@ -7987,7 +7985,11 @@
 
 ## 13、Proxy
 
-> 很重要的知识点,也许你初入前端的时候会用的比较少,但是在后面进阶开发中此知识点是绕不过的
+> 很重要的知识点,也许你初入前端的时候会用的比较少,但是在后面进阶开发中此知识点是绕不过的,这知识点常与下方 **Reflect** 搭配使用
+>
+> 嗯,如果你是Vue前端工程师,那这个就更要掌握了,毕竟Vue3.x双向绑定就是用这个知识点实现的
+>
+> 下面我也会用Proxy自己模拟实现一个数据双向绑定
 
 ### Ⅰ - 概括与总结
 
@@ -8005,7 +8007,7 @@
 >- **set(target, propKey, value, receiver)**：拦截对象属性的设置，比如`proxy.foo = v`或`proxy['foo'] = v`，返回一个布尔值. 
 >- **has(target, propKey)**：拦截`propKey in proxy`的操作，返回一个布尔值. 
 >- **deleteProperty(target, propKey)**：拦截`delete proxy[propKey]`的操作，返回一个布尔值. 
->- **ownKeys(target)**：拦截`Object.getOwnPropertyNames(proxy)`、`Object.getOwnPropertySymbols(proxy)`、`Object.keys(proxy)`、`for...in`循环，返回一个数组. 该方法返回目标对象所有自身的属性的属性名，而`Object.keys()`的返回结果仅包括目标对象自身的可遍历属性. 
+>- **ownKeys(target)**：拦截`Object.getOwnPropertyNames(proxy)`、`Object.getOwnPropertySymbols(proxy)`、`Object.keys(proxy)`、`for...in`循环，返回一个数组. 该方法返回目标对象所有自身的属性的属性名，而 [Object.keys()] 的返回结果仅包括目标对象自身的可遍历属性. 
 >- **getOwnPropertyDescriptor(target, propKey)**：拦截`Object.getOwnPropertyDescriptor(proxy, propKey)`，返回属性的描述对象. 
 >- **defineProperty(target, propKey, propDesc)**：拦截`Object.defineProperty(proxy, propKey, propDesc）`、`Object.defineProperties(proxy, propDescs)`，返回一个布尔值. 
 >- **preventExtensions(target)**：拦截`Object.preventExtensions(proxy)`，返回一个布尔值. 
@@ -8023,11 +8025,11 @@
 >- `has()`: 隐藏内部属性不被发现、排除不符合属性条件的对象
 >- `deleteProperty()`: 保护内部属性不被删除
 >- `defineProperty()`: 阻止属性被外部定义
->- `ownKeys()`: 保护内部属性不被遍历
+>-  [ownKeys()] : 保护内部属性不被遍历
 >
 >> 重点难点
 >
->- 要使`Proxy`起作用，必须针对`实例`进行操作，而不是针对`目标对象`进行操作
+>- 要使 [ Proxy ] 起作用，必须针对`实例`进行操作，而不是针对`目标对象`进行操作
 >- 没有设置任何拦截时，等同于`直接通向原对象`
 >- 属性被定义为`不可读写/扩展/配置/枚举`时，使用拦截方法会报错
 >- 代理下的目标对象，内部`this`指向`Proxy代理`
@@ -8047,7 +8049,7 @@
 >   //拦截的对象,传入的对象属性,整个proxy对象
 >  get: function (target, propKey, receiver) {
 >    console.log(`getting ${propKey}!`);
->     //`Reflect.get`方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`. 
+>     // [ Reflect.get ] 方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`. 
 >    return Reflect.get(target, propKey, receiver);  //详见下方Reflect一章,但此处不深究
 >  },
 >  set: function (target, propKey, value, receiver) {
@@ -8077,7 +8079,7 @@
 >var proxy = new Proxy(target, handler);
 >```
 >
->Proxy 对象的所有用法，都是上面这种形式，不同的只是`handler`参数的写法. 其中，`new Proxy()`表示生成一个`Proxy`实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为. 
+>Proxy 对象的所有用法，都是上面这种形式，不同的只是`handler`参数的写法. 其中，`new Proxy()`表示生成一个 [ Proxy ] 实例，`target`参数表示所要拦截的目标对象，`handler`参数也是一个对象，用来定制拦截行为. 
 
 #### ② 举个拦截读取属性行为的栗子
 
@@ -8091,9 +8093,9 @@
 >console.log(proxy.a) //由于[读] 操作已经被拦截,所有 [读] 操作都返回的是 '努力学习的汪'
 >```
 >
->![image-20210901151222628](ES全系列详细学习笔记中的图片/image-20210901151222628.png) 上面代码中，作为构造函数，`Proxy`接受两个参数 : 
+>![image-20210901151222628](ES全系列详细学习笔记中的图片/image-20210901151222628.png) 上面代码中，作为构造函数， [ Proxy ] 接受两个参数 : 
 >
->- 第一个参数是所要代理的目标对象（上例是一个空对象)，即如果没有`Proxy`的介入，操作原来要访问的就是这个对象；
+>- 第一个参数是所要代理的目标对象（上例是一个空对象)，即如果没有 [ Proxy ] 的介入，操作原来要访问的就是这个对象；
 >
 >- 第二个参数是一个配置对象，对于每一个被代理的操作，需要提供一个对应的处理函数，该函数将拦截对应的操作:
 >
@@ -8105,7 +8107,7 @@
 
 #### ③ 没有设置任何拦截 等同 直接通向原对象. 
 
->注意，要使得`Proxy`起作用，必须针对`Proxy`实例（上例是`proxy`对象）进行操作，而不是针对目标对象（上例是空对象）进行操作. 
+>注意，要使得 [ Proxy ] 起作用，必须针对 [ Proxy ] 实例（上例是`proxy`对象）进行操作，而不是针对目标对象（上例是空对象）进行操作. 
 >
 >如果`handler`没有设置任何拦截，那就等同于直接通向原对象. 
 >
@@ -8342,7 +8344,7 @@
 >proxy.getReceiver === proxy // true
 >```
 >
->上面代码中，`proxy`对象的`getReceiver`属性是由`proxy`对象提供的，所以`receiver`指向`proxy`对象。
+>上面代码中，`proxy`对象的`getReceiver`属性是由`proxy`对象提供的，所以  [ receiver ] 指向`proxy`对象。
 >
 >```javascript
 >const proxy = new Proxy({}, {
@@ -8354,7 +8356,7 @@
 >d.a === d // true
 >```
 >
->上面代码中，`d`对象本身没有`a`属性，所以读取`d.a`的时候，会去`d`的原型`proxy`对象找。这时，`receiver`就指向`d`，代表原始的读操作所在的那个对象。
+>上面代码中，`d`对象本身没有`a`属性，所以读取`d.a`的时候，会去`d`的原型`proxy`对象找。这时，  [ receiver ] 就指向`d`，代表原始的读操作所在的那个对象。
 >
 >如果一个属性不可配置（configurable）且不可写（writable），则 Proxy 不能修改该属性，否则通过 Proxy 对象访问该属性会报错。
 >
@@ -8384,7 +8386,7 @@
 
 ##### a) 举个栗子
 
->假定`Person`对象有一个`age`属性，该属性应该是一个不大于 200 的整数，那么可以使用`Proxy`拦截进而保证`age`的属性值符合要求。
+>假定`Person`对象有一个`age`属性，该属性应该是一个不大于 200 的整数，那么可以使用 [ Proxy ] 拦截进而保证`age`的属性值符合要求。
 >
 >```javascript
 >let validator = {
@@ -8460,7 +8462,7 @@
 >
 >![image-20210902154217329](ES全系列详细学习笔记中的图片/image-20210902154217329.png) 
 >
->上面代码中，`set`方法的第四个参数`receiver`，指的是原始的操作行为所在的那个对象，一般情况下是`proxy`实例本身，请看下面的例子。
+>上面代码中，`set`方法的第四个参数  [ receiver ] ，指的是原始的操作行为所在的那个对象，一般情况下是`proxy`实例本身，请看下面的例子。
 >
 >```javascript
 >const handler = {
@@ -8484,5 +8486,3636 @@
 >
 >>- 设置`myObj.name`属性的值时，`myObj`并没有 [ name ] 属性，因此引擎会到`myObj`的原型链去找 [ name ] 属性。
 >>- `myObj`的原型对象`proxy`是一个 Proxy 实例，设置它的 [ name ] 属性会触发`set`方法。
->>- 这时，第四个参数`receiver`就指向原始赋值行为所在的对象`myObj`。
+>>- 这时，第四个参数  [ receiver ] 就指向原始赋值行为所在的对象`myObj`。
 
+#### ③ apply()
+
+>`apply`方法拦截函数的调用、`call`和`apply`操作。
+>
+>`apply`方法可以接受三个参数，分别是目标对象、目标对象的上下文对象（`this`）和目标对象的参数数组。
+>
+>```javascript
+>const handler = {
+>  apply (target, ctx, args) {
+>    return Reflect.apply(...arguments);  //对于此方法不懂的可以看下方章节 [Reflect]
+>  }
+>};
+>```
+>
+
+##### a) 举个栗子
+
+>```javascript
+>const target = function () { return '我是 target'; };
+>const handler = {
+>  apply: function () {
+>    return '我是 proxy';
+>  }
+>};
+>
+>const p = new Proxy(target, handler);
+>p()
+>// "我是 proxy"
+>```
+>
+>上面代码中，变量`p`是 Proxy 的实例，当它作为函数调用时[`p()`]，就会被`apply`方法拦截，返回一个字符串。
+
+##### b) 举两个栗子
+
+>```javascript
+>const twice = {
+>  apply (target, ctx, args) {
+>    return Reflect.apply(...arguments) * 2;
+>  }
+>};
+>function sum (left, right) {
+>  return left + right;
+>};
+>const proxy = new Proxy(sum, twice);
+>proxy(1, 2) // 6
+>proxy.call(null, 5, 6) // 22
+>proxy.apply(null, [7, 8]) // 30
+>```
+>
+>上面代码中，每当执行`proxy`函数（直接调用或`call`和`apply`调用），就会被`apply`方法拦截。
+>
+>另外，直接调用`Reflect.apply`方法，也会被拦截。
+>
+>```javascript
+>Reflect.apply(proxy, null, [9, 10]) // 38
+>```
+>
+
+#### ④ has()
+
+>`has()`方法用来拦截`HasProperty`操作，即判断对象是否具有某个属性时，这个方法会生效。典型的操作就是`in`运算符。
+>
+>`has()`方法可以接受两个参数，分别是目标对象、需查询的属性名。
+
+##### a) 举个栗子
+
+>下面的例子使用`has()`方法隐藏某些属性，不被`in`运算符发现。
+>
+>```javascript
+>var handler = {
+>  has (target, key) {
+>    if (key[0] === '_')   return false;
+>    return key in target;
+>  }
+>};
+>var target = { _prop: '隐藏属性', prop: '正常属性' };
+>var proxy = new Proxy(target, handler);
+>'_prop' in proxy // false
+>```
+>
+>上面代码中，如果原对象的属性名的第一个字符是下划线，`proxy.has()`就会返回`false`，从而不会被`in`运算符发现。
+
+##### b) 当原对象不可配置或者禁止扩展时, `has()` 会报错
+
+>如果原对象不可配置或者禁止扩展，这时`has()`拦截会报错。
+>
+>```javascript
+>var obj = { a: 10 };
+>Object.preventExtensions(obj); //设置为不可配置
+>
+>var p = new Proxy(obj, {
+>  has: function(target, prop) { return false  }
+>});
+>
+>'a' in p // TypeError is thrown
+>```
+>
+>上面代码中，`obj`对象禁止扩展，结果使用`has`拦截就会报错。也就是说，如果某个属性不可配置（或者目标对象不可扩展），则`has()`方法就不得“隐藏”（即返回`false`）目标对象的该属性。
+>
+>值得注意的是，`has()`方法拦截的是`HasProperty`操作，而不是`HasOwnProperty`操作，即`has()`方法不判断一个属性是对象自身的属性，还是继承的属性。
+
+##### c) `has()` 拦截对 `for...in` 循环不生效
+
+>另外，虽然`for...in`循环也用到了`in`运算符，但是`has()`拦截对`for...in`循环不生效。
+>
+>```javascript
+>let stu1 = {name: 'hongjilin', score: 89};
+>let stu2 = {name: '努力学习的汪', score: 149};
+>
+>let handler = {
+>  has(target, prop) {
+>    if (prop === 'score' && target[prop] < 90) {
+>      console.log(`${target.name} 不及格`);
+>      return false;
+>    }
+>    return prop in target;
+>  }
+>}
+>
+>let oproxy1 = new Proxy(stu1, handler);
+>let oproxy2 = new Proxy(stu2, handler);
+>
+>'score' in oproxy1
+>//hongjilin 不及格
+>//false
+>
+>'score' in oproxy2   //true
+>
+>for (let a in oproxy1) {
+>  console.log(oproxy1[a]); //hongjilin   // 89
+>}
+>
+>for (let b in oproxy2) {
+>  console.log(oproxy2[b]); //努力学习的汪 // 149
+>}
+>```
+>
+>上面代码中，`has()`拦截只对`in`运算符生效，对`for...in`循环不生效，导致不符合要求的属性没有被`for...in`循环所排除。
+
+#### ⑤ construct()
+
+>`construct()`方法用于拦截`new`命令，下面是拦截对象的写法。
+>
+>```javascript
+>const handler = {
+>  construct (target, args, newTarget) {
+>    return new target(...args);
+>  }
+>};
+>```
+>
+
+##### a) construct() 的三个参数
+
+>`construct()`方法可以接受三个参数。
+>
+>- `target`：目标对象。
+>- `args`：构造函数的参数数组。
+>- `newTarget`：创造实例对象时，`new`命令作用的构造函数（下面例子的`p`）。
+>
+>```javascript
+>const p = new Proxy(function () {}, {
+>  construct: function(target, args) {
+>    console.log('构造函数的参数数组: '+args,'构造函数的参数转字符串: '+args.join(', ')); //打印其传入参数
+>    return { value: args[0] * 2 };  //将传入参数的第一个参数乘2 返回
+>  }
+>});
+>new p(9,66)
+>//构造函数的参数数组: 9,66 构造函数的参数转字符串: 9, 66
+>//{value: 18}
+>```
+>
+>![image-20210923165830708](ES全系列详细学习笔记中的图片/image-20210923165830708.png) 
+
+##### b) construct() 方法返回的必须是一个对象，否则会报错
+
+>`construct()`方法返回的必须是一个对象，否则会报错。
+>
+>```javascript
+>const p = new Proxy(function() {}, {
+>  construct: function(target, argumentsList) { return '努力学习的汪' }
+>});
+>
+>new p() // 报错
+>```
+>
+>![image-20210923170059451](ES全系列详细学习笔记中的图片/image-20210923170059451.png) 
+
+##### c) construct() 的目标对象必须是函数
+
+>由于`construct()`拦截的是构造函数，所以它的目标对象必须是函数，否则就会报错。
+>
+>```javascript
+>const p = new Proxy({}, { //此处第一个参数设置为对象
+>  construct: function(target, argumentsList) {  return {} }
+>});
+>new p() // 报错
+>```
+>
+>上面例子中，拦截的目标对象不是一个函数，而是一个对象（`new Proxy()`的第一个参数），导致报错。
+>
+>![image-20210923171049824](ES全系列详细学习笔记中的图片/image-20210923171049824.png) 
+
+##### d) 方法中的`this`指向的是`handler`，而不是实例对象
+
+>注意，`construct()`方法中的`this`指向的是`handler`，而不是实例对象。
+>
+>```javascript
+>const handler = {
+>  construct: function(target, args) {
+>    console.log('this指向: ',this ); // this指向:  {construct: ƒ}
+>    console.log("this是否指向handler: ",this === handler ); //this是否指向handler:  true
+>    return new target(...args);
+>  }
+>}
+>let p = new Proxy(function () {}, handler);
+>new p() 
+>```
+>
+>![image-20210923171637969](ES全系列详细学习笔记中的图片/image-20210923171637969.png) 
+
+#### ⑥ deleteProperty()
+
+>`deleteProperty`方法用于拦截`delete`操作，如果这个方法抛出错误或者返回`false`，当前属性就无法被`delete`命令删除。
+>
+>```javascript
+>var handler = {
+>  deleteProperty (target, key) {
+>    deleteHandler(key, 'delete'); //调用自定义抛出异常方法
+>    delete target[key]; //如果上面方法中没有抛出异常才可走到此处,这里进行删除
+>    return true;
+>  }
+>};
+>//拦截 [ delete ] 时调用的方法,当为私有属性时,抛出异常
+>function deleteHandler (key, action) {
+>  if (key[0] === '_') throw new Error(`无效的动作尝试: ${action} , 私有属性 "${key}" 是不可删除的 `);
+>}
+>
+>var target = { _name: '努力学习的汪' };//声明一个对象,有私有属性 [ _name ]
+>var proxy = new Proxy(target, handler);
+>delete proxy._name  //进行删除私有属性操作
+>//Uncaught Error: 无效的动作尝试: delete , 私有属性 "_name" 是不可删除的 
+>```
+>
+>上面代码中，`deleteProperty`方法拦截了`delete`操作符，删除第一个字符为下划线的属性会报错。
+>
+>注意，目标对象自身的不可配置（configurable）的属性，不能被`deleteProperty`方法删除，否则报错 
+>
+>![image-20210923172813525](ES全系列详细学习笔记中的图片/image-20210923172813525.png) 
+
+#### ⑦ defineProperty()
+
+>`defineProperty()`方法拦截了  [ Object.defineProperty() ] 操作。
+>
+>**Object.defineProperty() 方法**: 会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>
+>```javascript
+>let handler = {
+>  defineProperty (target, key, descriptor) {
+>    return true
+>  }
+>};
+>let target = {};
+>let proxy = new Proxy(target, handler);
+>proxy.name = '努力学习的汪' ;
+>proxy.age = 99 ;
+>console.log(proxy)
+>```
+>
+>实际上,你只要使用了  **defineProperty** 方法拦截了,就会导致添加新属性失败,(返回的 布尔值 其实只是用来提示的,与是否能添加新属性无关)
+>
+>![image-20210923174252622](ES全系列详细学习笔记中的图片/image-20210923174252622.png) 
+>
+>注意，如果目标对象不可扩展（non-extensible），则`defineProperty()`不能增加目标对象上不存在的属性，否则会报错。另外，如果目标对象的某个属性不可写（writable）或不可配置（configurable），则`defineProperty()`方法不得改变这两个设置。
+
+#### ⑧ getOwnPropertyDescriptor()
+
+>`getOwnPropertyDescriptor()`方法拦截  [ Object.getOwnPropertyDescriptor() ] ，返回一个属性描述对象或者`undefined`。
+>
+>**Object.getOwnPropertyDescriptor() 方法**: 返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+>
+>```javascript
+>const handler = {
+>  getOwnPropertyDescriptor (target, key) {
+>    if (key[0] === '_')  return; //如果为私有属性,则返回undefined
+>    return Object.getOwnPropertyDescriptor(target, key); //不是私有属性就正常返回
+>  }
+>};
+>const target = { _name: '努力学习的汪', age: 18 };
+>const proxy = new Proxy(target, handler);
+>
+>console.log(Object.getOwnPropertyDescriptor(proxy, 'sex')) //对象本身就没这个属性,所以返回 undefined
+>console.log(Object.getOwnPropertyDescriptor(proxy, '_name'))//私有属性,被拦截,所以得到    undefined
+>console.log(Object.getOwnPropertyDescriptor(proxy, 'age'))  //对象本身有此属性且不是私有属性,正常返回  {value: 18, writable: true, enumerable: true, configurable: true}
+>```
+>
+>上面代码中，`handler.getOwnPropertyDescriptor()`方法对于第一个字符为下划线的属性名会返回`undefined`。
+>
+>![image-20210923174907011](ES全系列详细学习笔记中的图片/image-20210923174907011.png) 
+
+#### ⑨ getPrototypeOf()
+
+>`getPrototypeOf()`方法主要用来拦截获取对象原型。具体来说，拦截下面这些操作。
+>
+>- `Object.prototype.__proto__`
+>- `Object.prototype.isPrototypeOf()`
+>- `Object.getPrototypeOf()`
+>- `Reflect.getPrototypeOf()`
+>- `instanceof`
+
+##### a) 举个栗子
+
+>```javascript
+>const proto = {};
+>const p = new Proxy({}, {
+>  getPrototypeOf(target) {  return proto; } //拦截:不论如何都返回空对象
+>});
+>Object.getPrototypeOf(p) === proto // true
+>```
+>
+>上面代码中，`getPrototypeOf()`方法拦截`Object.getPrototypeOf()`，返回`proto`对象。
+>
+>注意，`getPrototypeOf()`方法的返回值必须是 **对象或者null**，否则报错。另外，如果目标对象不可扩展（non-extensible）， `getPrototypeOf()`方法必须返回目标对象的原型对象
+
+#### ⑩ isExtensible()
+
+>`isExtensible()`方法拦截`Object.isExtensible()`操作。
+>
+>**Object.isExtensible() 方法:** 判断一个对象是否是可扩展的（是否可以在它上面添加新的属性）
+>
+>```javascript
+>var p = new Proxy({}, {
+>  isExtensible: function(target) {
+>    console.log("拦截:全部变为可拓展");
+>    return true;
+>  }
+>});
+>
+>Object.isExtensible(p)
+>//拦截:全部变为可拓展
+>//true
+>```
+>
+>上面代码设置了`isExtensible()`方法，在调用`Object.isExtensible` 时会打印字符串 [拦截:全部变为可拓展]。
+>
+>注意，该方法只能返回布尔值，否则返回值会被自动转为布尔值。
+>
+>这个方法有一个强限制，它的返回值必须与目标对象的`isExtensible`属性保持一致，否则就会抛出错误。
+>
+>```javascript
+>Object.isExtensible(proxy) === Object.isExtensible(target)
+>```
+>
+
+##### a) 举个栗子
+
+>![image-20210923180130237](ES全系列详细学习笔记中的图片/image-20210923180130237.png) 
+>
+>这边就是本身可拓展,却设置为false, 所以报错.具体使用场景比较特殊,就不列举了
+
+#### ⑩① ownKeys()
+
+> [ownKeys()] 方法用来拦截对象自身属性的读取操作。具体来说，拦截以下操作。
+>
+>-  [Object.getOwnPropertyNames()] 
+>- `Object.getOwnPropertySymbols()`
+>-  [Object.keys()] 
+>- `for...in`循环
+
+##### a) 举个 拦截 [Object.keys()]  的栗子
+
+>```javascript
+>let target = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  cm: 180
+>};
+>
+>let handler = {
+>  ownKeys(target) { return ['name'] }
+>};
+>
+>let proxy = new Proxy(target, handler);
+>console.log(Object.keys(proxy)) //name
+>```
+>
+>上面代码拦截了对于`target`对象的 [Object.keys()] 操作，只返回 [ name ] 、[ age ]、[ cm ] 三个属性之中的 [ age ] 属性。
+
+##### b) 举个 拦截 [Object.keys()] 中第一个字符为下划线的属性名 的栗子
+
+>```js
+>let target = {
+>  _name: '努力学习的汪',
+>  _age: 99,
+>  age: 18
+>};
+>
+>let handler = {
+>  ownKeys (target) {
+>     //筛选不是以下划线开头的属性名(私有属性)
+>    return Reflect.ownKeys(target).filter(key => key[0] !== '_');
+>  }
+>};
+>
+>let proxy = new Proxy(target, handler);
+>for (let key of Object.keys(proxy)) {
+>  console.log(target[key]);
+>}
+>// 只输出 18
+>```
+>
+> [Object.keys()] 本来应是都能输出,但是经过拦截后,开头为下划线的属性被过滤不进行输出,就纸打印了 18
+
+##### c) 使用 [Object.keys()] 方法时，有三类属性会被 [ownKeys()] 方法自动过滤
+
+>注意，使用 [Object.keys()] 方法时，有三类属性会被 [ownKeys()] 方法自动过滤，不会返回。
+>
+>- 目标对象上不存在的属性
+>- 属性名为 Symbol 值
+>- 不可遍历（`enumerable`）的属性
+>
+>```javascript
+>//1. 定义原对象
+>let target = { 
+>  a: 1,
+>  b: 2,
+>  c: 3,
+>  [Symbol.for('name')]: '努力学习的汪',
+>};
+>//2. 定义 不可遍历（`enumerable`）的属性 对照组数据
+>//Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>Object.defineProperty(target, 'key', {
+>  enumerable: false, //当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+>  configurable: true,
+>  writable: true,
+>  value: '这是测试不可遍历属性'
+>});
+>Object.defineProperty(target, 'test', {
+>  enumerable: true, 
+>  configurable: true,
+>  writable: true,
+>  value: '出现在枚举中'
+>});
+>//3. 定义拦截
+>let handler = {
+>  ownKeys(target) { return ['a', 'd', Symbol.for('name'), 'key' , 'test']; }
+>};
+>let proxy = new Proxy(target, handler);
+>
+>Object.keys(proxy) //['a', 'test']
+>```
+>
+>上面代码中， [ownKeys()] 方法之中，显式返回不存在的属性（`d`）、Symbol 值（`Symbol.for('secret')`）、不可遍历的属性（`key`），结果都被自动过滤掉。
+>
+>![image-20210924155428555](ES全系列详细学习笔记中的图片/image-20210924155428555.png) 
+
+##### d)  [ownKeys()] 方法还可以拦截 [Object.getOwnPropertyNames()] 
+
+>**Object.getOwnPropertyNames():** 方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。
+>
+>```js
+>const p = new Proxy({}, {
+>  ownKeys: function(target) {
+>    return ['a', 'b', 'c'];
+>  }
+>});
+>Object.getOwnPropertyNames(p)
+>// [ 'a', 'b', 'c' ]
+>```
+
+##### e) `for...in`循环也受到 [ownKeys()] 方法的拦截。
+
+>```javascript
+>const obj = { name: '努力学习的汪' };
+>const proxy = new Proxy(obj, {
+>  ownKeys: function () {
+>    return ['a', 'b'];
+>  }
+>});
+>
+>for (let key in proxy) {
+>  console.log(key); // 没有任何输出
+>}
+>```
+>
+>上面代码中， [ownKeys()] 指定只返回`a`和`b`属性，由于`obj`没有这两个属性，因此`for...in`循环不会有任何输出。
+
+##### f)  [ownKeys()] 方法返回的数组成员，只能是字符串或 Symbol 值
+
+> [ownKeys()] 方法返回的数组成员，只能是字符串或 Symbol 值。如果有其他类型的值，或者返回的根本不是数组，就会报错。
+>
+>```javascript
+>var obj = {};
+>var p = new Proxy(obj, {
+>  ownKeys: function(target) {
+>    return [123, true, undefined, null, {}, []];
+>  }
+>});
+>for (let key in p) {
+>  console.log(key); // 报错
+>}
+>```
+>
+>上面代码中， [ownKeys()] 方法虽然返回一个数组，但是每一个数组成员都不是字符串或 Symbol 值，因此就报错了。
+>
+>![image-20210924160251672](ES全系列详细学习笔记中的图片/image-20210924160251672.png) 
+
+##### g) 如果目标对象自身包含不可配置的属性，则该属性必须被 [ownKeys()] 方法返回，否则报错
+
+>如果目标对象自身包含不可配置的属性，则该属性必须被 [ownKeys()] 方法返回，否则报错。
+>
+>```javascript
+>const obj = {};
+>Object.defineProperty(obj, 'name', {
+>  configurable: false, //当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。
+>  enumerable: true,
+>  value: '努力学习的汪' }
+>);
+>
+>const getName = new Proxy(obj, {
+>  ownKeys: function(target) {  return ['name']  }
+>});
+>const getB = new Proxy(obj, {
+>  ownKeys: function(target) {  return ['b']  }
+>});
+>//前面说过,也能拦截此方法
+>console.log(Object.getOwnPropertyNames(getName)) // ['name']
+>console.log(Object.getOwnPropertyNames(getB))    // 报错
+>```
+>
+>上面代码中，`obj`对象的`name`属性是不可配置的，这时 [ownKeys()] 方法返回的数组之中，必须包含`name`，否则会报错
+>
+>![image-20210924160738101](ES全系列详细学习笔记中的图片/image-20210924160738101.png) 
+
+##### h) 如果目标对象是不可扩展的（non-extensible），这时 [ownKeys()] 方法返回的数组之中，必须包含原对象的所有属性，且不能包含多余的属性，否则报错
+
+>另外，如果目标对象是不可扩展的（non-extensible），这时 [ownKeys()] 方法返回的数组之中，必须包含原对象的所有属性，且不能包含多余的属性，否则报错。
+>
+>```javascript
+>const obj = { name:"努力学习的汪" };
+>//Object.preventExtensions()方法让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+>Object.preventExtensions(obj); //不可拓展
+>const p = new Proxy(obj, {
+>  ownKeys: function(target) { return ['name', 'age'] }
+>});
+>
+>Object.getOwnPropertyNames(p)
+>//报错 Uncaught TypeError: 'ownKeys' on proxy: trap returned extra keys but proxy target is non-extensible
+>```
+>
+>上面代码中，`obj`对象是不可扩展的，这时 [ownKeys()] 方法返回的数组之中，包含了`obj`对象的多余属性`b`，所以导致了报错。
+>
+>![image-20210924161052315](ES全系列详细学习笔记中的图片/image-20210924161052315.png) 
+
+#### ⑩② preventExtensions()
+
+>`preventExtensions()`方法拦截`Object.preventExtensions()`。该方法必须返回一个布尔值，否则会被自动转为布尔值。
+>
+>**Object.preventExtensions()方法:** 让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+
+##### a) 限制
+
+>这个方法有一个限制，只有目标对象不可扩展时（即`Object.isExtensible(proxy)`为`false`），`proxy.preventExtensions`才能返回`true`，否则会报错。
+>
+>```javascript
+>var proxy = new Proxy({}, {
+>  preventExtensions: function(target) {  return true }
+>});
+>Object.preventExtensions(proxy)
+>//VM2320:4 Uncaught TypeError: 'preventExtensions' on proxy: trap returned truish but the proxy target is extensible
+>```
+>
+>上面代码中，`proxy.preventExtensions()`方法返回`true`，但这时`Object.isExtensible(proxy)`会返回`true`，因此报错。
+>
+>![image-20210924161839936](ES全系列详细学习笔记中的图片/image-20210924161839936.png) 
+
+##### b) 解决
+
+>为了防止出现这个问题，通常要在`proxy.preventExtensions()`方法里面，调用一次`Object.preventExtensions()`。
+>
+>```javascript
+>const proxy = new Proxy({}, {
+>  preventExtensions: function(target) {
+>    console.log('回调');
+>    Object.preventExtensions(target);
+>    return true;
+>  }
+>});
+>
+>Object.preventExtensions(proxy)
+>// "called"
+>// Proxy {}
+>```
+>
+>![image-20210924161941463](ES全系列详细学习笔记中的图片/image-20210924161941463.png) 
+
+#### ⑩③ setPrototypeOf()
+
+>`setPrototypeOf()`方法主要用来拦截`Object.setPrototypeOf()`方法。
+>
+>**Object.setPrototypeOf()** 方法设置一个指定的对象的原型 ( 即, 内部[[Prototype]]属性）到另一个对象或  [`null`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null)。
+>
+>下面是一个例子。
+>
+>```javascript
+>var handler = {
+>  setPrototypeOf (target, proto) {
+>    throw new Error('禁止更改原型');
+>  }
+>};
+>var proto = {};
+>var target = function () {};
+>var proxy = new Proxy(target, handler);
+>Object.setPrototypeOf(proxy, proto);
+>// Error: 禁止更改原型
+>```
+>
+>上面代码中，只要修改`target`的原型对象，就会报错。
+>
+>注意，该方法只能返回布尔值，否则会被自动转为布尔值。另外，如果目标对象不可扩展（non-extensible），`setPrototypeOf()`方法不得改变目标对象的原型。
+
+### Ⅳ  - Proxy.revocable() 可取消的Proxy实例
+
+>Proxy.revocable()`方法返回一个可取消的 Proxy 实例。
+>
+>```javascript
+>let target = {};
+>let handler = {};
+>let {proxy, revoke} = Proxy.revocable(target, handler);
+>
+>proxy.name = '努力学习的汪';
+>proxy.name // 努力学习的汪
+>
+>revoke();
+>proxy.name // TypeError: Revoked
+>```
+>
+>`Proxy.revocable()`方法返回一个对象，该对象的`proxy`属性是 [ Proxy ] 实例，`revoke`属性是一个函数，可以取消 [ Proxy ] 实例。上面代码中，当执行`revoke`函数之后，再访问 [ Proxy ] 实例，就会抛出一个错误。
+>
+>`Proxy.revocable()`的一个使用场景是，目标对象不允许直接访问，必须通过代理访问，一旦访问结束，就收回代理权，不允许再次访问。
+>
+>![image-20210924174228432](ES全系列详细学习笔记中的图片/image-20210924174228432.png) 
+
+### Ⅴ - this 问题
+
+>虽然 Proxy 可以代理针对目标对象的访问，但它不是目标对象的透明代理，即不做任何拦截的情况下，也无法保证与目标对象的行为一致。主要原因就是在 Proxy 代理的情况下，目标对象内部的`this`关键字会指向 Proxy 代理。
+>
+>```javascript
+>const target = {
+>  m: function () {
+>    console.log(this === proxy); //打印this执行是否指向 proxy
+>  }
+>};
+>const handler = {};
+>const proxy = new Proxy(target, handler);
+>
+>target.m() // false
+>proxy.m()  // true
+>```
+>
+>上面代码中，一旦`proxy`代理`target`，`target.m()`内部的`this`就是指向`proxy`，而不是`target`。
+
+#### ① 举个栗子
+
+>下面是一个例子，由于`this`指向的变化，导致 Proxy 无法代理目标对象。
+>
+>```javascript
+>const _name = new WeakMap();
+>class Person {
+>  constructor(name) { _name.set(this, name) }
+>  get name() { return _name.get(this) }
+>}
+>
+>const hong = new Person('努力学习的汪');
+>console.log(hong.name ) //努力学习的汪
+>
+>const proxy = new Proxy(hong, {});
+>console.log(proxy.name ) //undefined
+>```
+>
+>上面代码中，目标对象`hong`的`name`属性，实际保存在外部`WeakMap`对象`_name`上面，通过`this`键区分。由于通过`proxy.name`访问时，`this`指向`proxy`，导致无法取到值，所以返回`undefined`。
+
+#### ② 无法某些原生对象的内部属性
+
+>有些原生对象的内部属性，只有通过正确的`this`才能拿到，所以 Proxy 也无法代理这些原生对象的属性。
+>
+>```javascript
+>const target = new Date();
+>const handler = {};
+>const proxy = new Proxy(target, handler);
+>
+>proxy.getDate();
+>// TypeError: this is not a Date object.
+>```
+>
+>上面代码中，`getDate()`方法只能在`Date`对象实例上面拿到，如果`this`不是`Date`对象实例就会报错。这时，`this`绑定原始对象，就可以解决这个问题。
+>
+>```js
+>const target = new Date('2021-11-11');
+>const handler = {
+>  get(target, prop) {
+>    if (prop === 'getDate') {
+>      return target.getDate.bind(target);
+>    }
+>    return Reflect.get(target, prop);
+>  }
+>};
+>const proxy = new Proxy(target, handler);
+>
+>proxy.getDate() //11
+>```
+
+#### ③ Proxy 拦截函数内部的`this`，指向的是`handler`对象。
+
+>Proxy 拦截函数内部的`this`，指向的是`handler`对象。
+>
+>```javascript
+>const handler = {
+>  get: function (target, key, receiver) {
+>    console.log("此时this === handler:",this === handler);
+>    return `拦截get: [${key}] 属性` ;
+>  },
+>  set: function (target, key, value) {
+>    console.log("此时this === handler:",this === handler);
+>    target[key] = value;
+>    return `拦截set: [${key}] 属性`;
+>  }
+>};
+>const proxy = new Proxy({}, handler);
+>
+>proxy.name
+>proxy.name = '努力学习的汪'
+>```
+>
+>上面例子中，`get()`和`set()`拦截函数内部的`this`，指向的都是`handler`对象。
+>
+>![image-20210924180414812](ES全系列详细学习笔记中的图片/image-20210924180414812.png) 
+
+### Ⅵ - 应用: Web 服务的客户端
+
+>Proxy 对象可以拦截目标对象的任意属性，这使得它很合适用来写 Web 服务的客户端。
+>
+>```javascript
+>const service = createWebService('https://gitee.com/hongjilin');
+>service.employees().then(json => {
+> ......
+>});
+>```
+>
+>上面代码新建了一个 Web 服务的接口，这个接口返回各种数据。Proxy 可以拦截这个对象的任意属性，所以不用为每一种数据写一个适配方法，只要写一个 Proxy 拦截就可以了。
+>
+>```javascript
+>function createWebService(baseUrl) {
+>  return new Proxy({}, {
+>    get(target, propKey, receiver) {
+>      return () => httpGet(baseUrl + '/' + propKey);
+>    }
+>  });
+>}
+>```
+>
+>同理，Proxy 也可以用来实现数据库的 ORM 层。
+
+### Ⅶ - Proxy模拟实现VUE数据双向绑定
+
+>  [ Proxy ] 就像一个代理器,当有人对目标对象进行处理(set、has、get 等等操作)的时候它会首先经过它，这时我们可以使用代码进行处理，此时 [ Proxy ] 相当于一个中介或者叫代理人,它经常被用于代理模式中,可以做字段验证、缓存代理、访问控制等等。
+
+#### ①  [ Object.defineProperty ] 
+
+>众所周知，`vue`使用了 [ Object.defineProperty ] 来做数据劫持，它是利用劫持对象的访问器,在属性值发生变化时我们可以获取变化,从而进行进一步操作
+>
+>```js
+>const obj = { a: 1 }
+>Object.defineProperty(obj, 'a', {
+>get: function() {
+>console.log('get val')
+>},
+>set: function(newVal) {
+>console.log('set val:' + newVal)
+>}
+>})
+>```
+
+#### ② 与 [ Object.defineProperty ] 相比， [ Proxy ] 的优势
+
+>1. 数组作为特殊的对象，但Object.defineProperty无法监听数组变化。
+>
+>2. Object.defineProperty只能劫持对象的属性,因此我们需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历,显然能劫持一个完整的对象是更好的选择。
+>
+>3. Proxy 有多达 13 种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是Object.defineProperty不具备的。
+>
+>4. Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而Object.defineProperty只能遍历对象属性直接修改
+>
+>5. Proxy作为新标准将受到浏览器厂商重点持续的性能优化
+
+#### ③ 手写双向绑定代码
+
+>1. 简单实现双向绑定
+>
+>  ```js
+>  --------------------  html  ----------------------------
+>    <input id="input_el" oninput="inputHandle(this)" type="text">
+>    <br />
+>    <div id="show_el"></div>
+>  -------------------  js ------------------------------
+>  <script>
+>    proxy_bind = (traget) => {
+>      return new Proxy(traget, {
+>        get(obj, name) {
+>          console.log("获取")
+>          //如果传入的key并没有,则赋初始值
+>          if (!obj[name]) obj[name] = ""
+>          //根据传入的key进行相应属性返回
+>          return obj[name]
+>        },
+>        //拦截的对象,拦截对象的值,传入要修改的值,(第四个参数通常不用,返回整个Proxy对象)
+>        set(obj, name, val) {
+>          console.log("写入")
+>          obj[name] = val
+>          //将输入狂内容即修改的proxy对象属性渲染到页面节点上
+>          document.querySelector("#show_el").innerHTML = obj[name]
+>          return;
+>        }
+>      })
+>    }
+>    inputHandle = (e) => {
+>      //将输入框的值赋值给proxy对象的value属性上，此处触发proxy的`set（）`
+>      obj_bind.value = e.value
+>    }
+>
+>    let obj = {
+>      a: "2",
+>      b: 3,
+>      value: "默认值"
+>    }
+>    let obj_bind = proxy_bind(obj)
+>    //自闭合，如果前面没有加分号 会导致压缩式合并到前面去就会报错，以防万一加分号，此处触发proxy的`get（）`
+>    ;
+>    (function () {
+>      document.querySelector("#show_el").innerHTML = obj_bind.value
+>      document.querySelector("#input_el").value = obj_bind.value
+>    })()
+>  </script>
+>  ```
+>
+>2. 模拟vue实现完整双向绑定实现
+>
+>  ```js
+>  --------------------  html  ----------------------------
+>  <div>
+>    <p>请输入:</p>
+>    <input type="text" id="input">
+>    <p id="p"></p>
+>  </div>
+>  -------------------  js ------------------------------
+>  class Watcher {
+>    constructor(vm, key, callback) {
+>      this.vm = vm
+>      this.callback = callback
+>      this.key = key // 被订阅的数据
+>      this.val = this.get() // 维护更新之前的数据
+>      vm.$data = this.createProxy(vm.$data)
+>    }
+>
+>    update(newVal) {
+>      this.callback(newVal)
+>    }
+>    get() {
+>      const val = this.vm.$data[this.key]
+>      return val
+>    }
+>    createProxy(data) {
+>      let _this = this
+>      let handler = {
+>        get(target, property) {
+>          return Reflect.get(target, property)
+>        },
+>        set(target, property, value) {
+>          let res = null
+>          if (target[property] != value) {
+>            const isOk = Reflect.set(target, property, value)
+>            if (_this.key === property) {
+>              // 同一层级
+>              res = value
+>            } else {
+>              res = _this.get()
+>              console.log(res)
+>            }
+>            _this.callback(res)
+>            return isOk
+>          }
+>        }
+>      }
+>
+>      return toDeepProxy(data, handler)
+>
+>      function toDeepProxy(object, handler) {
+>        if (!isPureObject(object)) addSubProxy(object, handler)
+>        return new Proxy(object, handler)
+>
+>        function addSubProxy(object, handler) {
+>          for (let prop in object) {
+>            if (typeof object[prop] == 'object') {
+>              if (!isPureObject(object[prop])) addSubProxy(object[prop], handler)
+>              object[prop] = new Proxy(object[prop], handler)
+>            }
+>          }
+>          object = new Proxy(object, handler)
+>        }
+>
+>        function isPureObject(object) {
+>          if (typeof object !== 'object') {
+>            return false
+>          } else {
+>            for (let prop in object) {
+>              if (typeof object[prop] == 'object') {
+>                return false
+>              }
+>            }
+>          }
+>          return true
+>        }
+>      }
+>    }
+>  }
+>
+>  class Vue {
+>    constructor(data) {
+>      // 将所有data最外层属性代理到实例上
+>      this.$data = data
+>      Object.keys(data).forEach(key => this.$proxy(key))
+>    }
+>    $watch(key, cb) {
+>      new Watcher(this, key, cb)
+>    }
+>    $proxy(key) {
+>      Reflect.defineProperty(this, key, { //此处API不懂的可以看下方下个知识点
+>        configurable: true,
+>        enumerable: true,
+>        get: () => this.$data[key],
+>        set: val => {
+>          this._data[key] = val
+>        }
+>      })
+>    }
+>  }
+>
+>  const p = document.getElementById('p')
+>  const input = document.getElementById('input')
+>
+>  const data = new Vue({ text: { a: '' } })
+>
+>  input.addEventListener('keyup', function(e) {
+>    data.text.a = e.target.value
+>  })
+>
+>  data.$watch('text', content => p.innerHTML = content.a)
+>
+>  ```
+
+## 14、Reflect
+
+> 在前方我们在描述 [ Proxy ] 知识点时,我们有用到 **Reflect** 这个API
+>
+> 实际上你可以认为 **Reflect** 就是将 **Object** 上的部分内部方法移到上面,让我们的JS编码更规范、清晰明了
+
+### Ⅰ - 概述与总结
+
+>  **Reflect**  对象与 [ Proxy ] 对象一样，也是 ES6 为了操作对象而提供的新 API。  **Reflect**  对象的设计目的有这样几个。
+>
+>  1.  将`Object`对象的一些明显属于语言内部的方法（比如 [ Object.defineProperty ] ），放到  **Reflect**  对象上。现阶段，某些方法同时在`Object`和  **Reflect**  对象上部署，未来的新方法将只部署在  **Reflect**  对象上。也就是说，从  **Reflect**  对象上可以拿到语言内部的方法
+>
+>  2. 修改某些`Object`方法的返回结果，让其变得更合理。比如， [Object.defineProperty(obj, name, desc)] 在无法定义属性时，会抛出一个错误，而`Reflect.defineProperty(obj, name, desc)`则会返回`false`。
+>
+>   >```js
+>   >// 老写法: 因为会抛出异常错误,所以必须用 try..catch() 去承接错误
+>   >try {
+>   >  Object.defineProperty(target, property, attributes);
+>   >  // success
+>   >} catch (e) {
+>   >  // 这里承接抛出的错误
+>   >}
+>   >
+>   >// 新写法
+>   >if (Reflect.defineProperty(target, property, attributes)) {
+>   >  // success
+>   >} else {
+>   >  // failure
+>   >}
+>   >```
+>
+>  3. 让`Object`操作都变成函数行为。某些`Object`操作是命令式，比如`name in obj`和`delete obj[name]`，而`Reflect.has(obj, name)`和`Reflect.deleteProperty(obj, name)`让它们变成了函数行为。
+>
+>   >```js
+>   >// 老写法
+>   >'assign' in Object // true
+>   >
+>   >// 新写法
+>   >Reflect.has(Object, 'assign') // true
+>   >```
+>
+>  4.  **Reflect** 对象的方法与 [Proxy] 对象的方法一一对应，只要是 [Proxy] 对象的方法，就能在 **Reflect** 对象上找到对应的方法。这就让 [Proxy] 对象可以方便地调用对应的 **Reflect** 方法，完成默认行为，作为修改行为的基础。也就是说，不管 [Proxy] 怎么修改默认行为，你总可以在 **Reflect** 上获取默认行为。
+>
+>   >```js
+>   >Proxy(target, {
+>   >set: function(target, name, value, receiver) {
+>   >const success = Reflect.set(target, name, value, receiver);
+>   >if (success)  console.log('在属性:' + name + ' 上 ' + target + ' 写入 ' + value);
+>   >return success;
+>   >}
+>   >});
+>   >```
+>   >
+>   >上面代码中，每一个 [Proxy] 对象的拦截操作（`get`、`delete`、`has`），内部都调用对应的 **Reflect** 方法，保证原生行为能够正常执行。添加的工作，就是将每一个操作输出一行日志。
+>
+>  有了 **Reflect** 对象以后，很多操作会更易读。
+>
+>  ```javascript
+>  // 老写法
+>  Function.prototype.apply.call(Math.floor, undefined, [1.75]) // 1
+>  
+>  // 新写法
+>  Reflect.apply(Math.floor, undefined, [1.75]) // 1
+>  ```
+>
+
+#### ① 设计目的
+
+>- 将`Object`属于`语言内部的方法`放到  **Reflect**  上
+>- 将某些Object方法报错情况改成返回`false`
+>- 让`Object操作`变成`函数行为`
+>-  [ Proxy ] 与  **Reflect**  相辅相成
+
+#### ②废弃方法
+
+>-   [ Object.defineProperty() ]  =>   [ Reflect.defineProperty() ] 
+>-   [ Object.getOwnPropertyDescriptor() ]  =>   [ Reflect.getOwnPropertyDescriptor() ] 
+
+#### ③ 重点难点
+
+>- `Proxy方法`和`Reflect方法`一一对应
+>-  [ Proxy ] 和  **Reflect**  联合使用，前者负责`拦截赋值操作`，后者负责`完成赋值操作`
+
+#### ④ 方法
+
+>下面这些方法的作用，大部分与`Object`对象的同名方法的作用都是相同的，而且它与`Proxy`对象的方法是一一对应的。下面是对它们的解释。
+>
+>- **get()**：返回对象属性
+>- **set()**：设置对象属性，返回布尔
+>- **has()**：检查对象属性，返回布尔
+>- **deleteProperty()**：删除对象属性，返回布尔
+>- **defineProperty()**：定义对象属性，返回布尔
+>- **ownKeys()**：遍历对象属性，返回数组(`Object.getOwnPropertyNames()`+`Object.getOwnPropertySymbols()`)
+>- **getOwnPropertyDescriptor()**：返回对象属性描述，返回对象
+>- **getPrototypeOf()**：返回对象原型，返回对象
+>- **setPrototypeOf()**：设置对象原型，返回布尔
+>- **isExtensible()**：返回对象是否可扩展，返回布尔
+>- **preventExtensions()**：设置对象不可扩展，返回布尔
+>- **apply()**：绑定this后执行指定函数
+>- **construct()**：调用构造函数创建实例
+>
+>![image-20210926095039091](ES全系列详细学习笔记中的图片/image-20210926095039091.png) 
+
+#### ⑤ 数据绑定：观察者模式
+
+> [ Proxy ] 和  **Reflect**  联合使用，前者负责`拦截赋值操作`，后者负责`完成赋值操作`, 相辅相成,下面举个栗子
+>
+>```js
+>const observerQueue = new Set();
+>const observe = fn => observerQueue.add(fn);
+>const observable = obj => new Proxy(obj, {
+>    set(tgt, key, val, receiver) {
+>        const result = Reflect.set(tgt, key, val, receiver);
+>        observerQueue.forEach(v => v());
+>        return result;
+>    }
+>});
+>
+>const person = observable({ age: 66, name: "hongjilin" });
+>const print = () => console.log(`${person.name} is ${person.age} years old`); 
+>observe(print); //进行监听
+>
+>person.name = "努力学习的汪";
+>```
+>
+>![image-20210924194108853](ES全系列详细学习笔记中的图片/image-20210924194108853.png) 
+
+### Ⅱ - 方法详解
+
+#### ① Reflect.get(target, name, receiver)
+
+> [ Reflect.get ] 方法查找并返回`target`对象的`name`属性，如果没有该属性，则返回`undefined`。
+>
+>```javascript
+>const myObject = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  get msg() {
+>    return this.name + "现在" +this.age + "岁";
+>  },
+>}
+>console.log(Reflect.get(myObject, 'name'))// 努力学习的汪
+>console.log(Reflect.get(myObject, 'age') ) // 99
+>console.log(Reflect.get(myObject, 'msg'))  // 努力学习的汪现在99岁
+>```
+>
+
+##### a) 如果`name`属性部署了读取函数（getter），则读取函数的 `this` 绑定   [ receiver ] 
+
+>如果`name`属性部署了读取函数（getter），则读取函数的`this`绑定  [ receiver ] 
+>
+>```javascript
+>const myObject = {
+>  name: '努力学习的汪',
+>  age: 99,
+>  get msg() {
+>    return this.name + "现在" +this.age + "岁";
+>  },
+>}
+>
+>const myReceiverObject = {
+>  name: 'hongjilin',
+>  age: 18,
+>};
+>
+>Reflect.get(myObject, 'msg', myReceiverObject) //'hongjilin现在18岁'
+>```
+>
+
+##### b) 如果第一个参数不是对象， [ Reflect.get ] 方法会报错。
+
+>```javascript
+>Reflect.get(1, 'name') // 报错
+>Reflect.get(false, 'name') // 报错
+>```
+
+#### ② Reflect.set(target, name, value, receiver)
+
+##### a) `Reflect.set`方法设置`target`对象的`name`属性等于`value`
+
+>```javascript
+>const myObject = {
+>  name: 'hongjilin',
+>  set setName(value) {
+>    return this.name = value;
+>  },
+>}
+>
+>console.log(myObject.name) // hongjilin
+>
+>Reflect.set(myObject, 'name', '努力学习的汪');
+>console.log(myObject.name) // 努力学习的汪
+>
+>Reflect.set(myObject, 'setName','调用setName写入名字')
+>console.log(myObject.name) // 调用setName写入名字
+>```
+>
+
+##### b) 如果`name`属性设置了赋值函数，则赋值函数的`this`绑定  [ receiver ] 。
+
+>```js
+>const myObject = {
+>  name: 'hongjilin',
+>  set setName(value) {
+>    return this.name = value;
+>  },
+>}
+>
+>const myReceiverObject = {
+>  name: '这是 myReceiverObject 的 name',
+>};
+>
+>Reflect.set(myObject, 'name', '努力学习的汪', myReceiverObject);
+>console.log(myObject.name) // hongjilin
+>console.log(myReceiverObject.name) // 努力学习的汪  
+>```
+>
+> 可以看到 [ **myReceiverObject** ] 被修改了
+
+##### c) 如果 `Proxy`对象和 `Reflect`对象联合使用注意事项
+
+>注意，如果 `Proxy`对象和 `Reflect`对象联合使用，前者拦截赋值操作，后者完成赋值的默认行为，而且传入了  [ receiver ] ，那么`Reflect.set`会触发  [ Proxy.defineProperty ] 拦截。
+>
+>>知识点回顾:
+>>
+>>* **handler.defineProperty()** : 用于拦截对对象的 [`Object.defineProperty()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 操作
+>>* **Object.defineProperty()** : 会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>
+>```javascript
+>let p = { name: 'hongjilin' };
+>
+>let handler = {
+>  set(target, key, value, receiver) {
+>    console.log('拦截 set 操作');
+>    Reflect.set(target, key, value, receiver)
+>  },
+>  defineProperty(target, key, attribute) {
+>    console.log('触发 defineProperty');
+>    Reflect.defineProperty(target, key, attribute);
+>  }
+>};
+>
+>let obj = new Proxy(p, handler);
+>obj.name = '努力学习的汪';
+>// 拦截 set 操作
+>// 触发 defineProperty
+>```
+>
+>上面代码中， **Proxy.set** 拦截里面使用了`Reflect.set`，而且传入了  [ receiver ] ，导致触发  [ Proxy.defineProperty ] 拦截。
+>
+>>* 这是因为 **Proxy.set** 的  [ receiver ] 参数总是指向当前的 `Proxy`实例（即上例的`obj`）
+>>* 而`Reflect.set`一旦传入  [ receiver ] , 就会将属性赋值到  [ receiver ] 上面(即`obj`), 导致触发`defineProperty`拦截
+>>* 如果`Reflect.set`没有传入  [ receiver ] ，那么就不会触发`defineProperty`拦截。
+>
+>```javascript
+>let p = { name: 'hongjilin' };
+>
+>let handler = {
+>  set(target, key, value, receiver) {
+>    console.log('拦截 set 操作');
+>    Reflect.set(target, key, value) // 差异:此处没有传入receiver
+>  },
+>  defineProperty(target, key, attribute) {
+>    console.log('触发 defineProperty');
+>    Reflect.defineProperty(target, key, attribute);
+>  }
+>};
+>
+>let obj = new Proxy(p, handler);
+>obj.name = '努力学习的汪';
+>// 拦截 set 操作 -->不会触发 defineProperty
+>```
+>
+
+##### d) 如果第一个参数不是对象， [ Reflect.get ] 方法会报错。
+
+>```javascript
+>Reflect.set(1, 'name',{}) // 报错 
+>Reflect.set(false, 'name','xx') // 报错
+>//Uncaught TypeError: Reflect.set called on non-object
+>```
+
+#### ③ Reflect.has(obj, name)
+
+>`Reflect.has`方法对应`name in obj`里面的`in`运算符。
+>
+>```javascript
+>const myObject = { name: '努力学习的汪' };
+>
+>// 旧写法
+>'name' in myObject // true
+>
+>// 新写法
+>Reflect.has(myObject, 'name') // true
+>```
+>
+>如果`Reflect.has()`方法的第一个参数不是对象，会报错。
+
+#### ④ Reflect.deleteProperty(obj, name)
+
+>`Reflect.deleteProperty`方法等同于`delete obj[name]`，用于删除对象的属性。
+>
+>```javascript
+>const myObj = { name: '努力学习的汪' };
+>
+>// 旧写法
+>delete myObj.name;
+>
+>// 新写法
+>Reflect.deleteProperty(myObj, 'name');
+>```
+>
+>该方法返回一个布尔值。如果删除成功，或者被删除的属性不存在，返回`true`；删除失败，被删除的属性依然存在，返回`false`。
+>
+>如果`Reflect.deleteProperty()`方法的第一个参数不是对象，会报错。
+
+#### ⑤ Reflect.construct(target, args)
+
+>`Reflect.construct`方法等同于`new target(...args)`，这提供了一种不使用`new`，来调用构造函数的方法。
+>
+>```javascript
+>function Greeting(name) {
+>  this.name = name;
+>}
+>
+>// new 的写法
+>const instance = new Greeting('努力学习的汪');
+>
+>// Reflect.construct 的写法
+>const instance = Reflect.construct(Greeting, ['努力学习的汪']);
+>```
+>
+>如果`Reflect.construct()`方法的第一个参数不是函数，会报错。
+
+#### ⑥ Reflect.getPrototypeOf(obj)
+
+>`Reflect.getPrototypeOf`方法用于读取对象的`__proto__`属性，对应`Object.getPrototypeOf(obj)`。
+>
+>```javascript
+>const myObj = new FancyThing();
+>
+>// 旧写法
+>Object.getPrototypeOf(myObj) === FancyThing.prototype;
+>
+>// 新写法
+>Reflect.getPrototypeOf(myObj) === FancyThing.prototype;
+>```
+>
+>`Reflect.getPrototypeOf`和`Object.getPrototypeOf`的一个区别是，如果参数不是对象，`Object.getPrototypeOf`会将这个参数转为对象，然后再运行，而`Reflect.getPrototypeOf`会报错。
+>
+>```javascript
+>Object.getPrototypeOf(1) // Number {[[PrimitiveValue]]: 0}
+>Reflect.getPrototypeOf(1) // 报错
+>```
+>
+
+#### ⑦ Reflect.setPrototypeOf(obj, newProto)
+
+>`Reflect.setPrototypeOf`方法用于设置目标对象的原型（prototype），对应`Object.setPrototypeOf(obj, newProto)`方法。它返回一个布尔值，表示是否设置成功。
+>
+>```javascript
+>const myObj = {};
+>
+>// 旧写法
+>Object.setPrototypeOf(myObj, Array.prototype);
+>
+>// 新写法
+>Reflect.setPrototypeOf(myObj, Array.prototype);
+>
+>myObj.length // 0
+>```
+>
+
+##### a) 如果无法设置目标对象的原型时
+
+>如果无法设置目标对象的原型（比如，目标对象禁止扩展），`Reflect.setPrototypeOf`方法返回`false`。
+>
+>```javascript
+>Reflect.setPrototypeOf({}, null)
+>// true
+>Reflect.setPrototypeOf(Object.freeze({}), null)
+>// false
+>```
+>
+
+##### b) 第一个参数不是对象时
+
+>如果第一个参数不是对象，`Object.setPrototypeOf`会返回第一个参数本身，而`Reflect.setPrototypeOf`会报错。
+>
+>```javascript
+>Object.setPrototypeOf(1, {})
+>// 1
+>
+>Reflect.setPrototypeOf(1, {})
+>// TypeError: Reflect.setPrototypeOf called on non-object
+>```
+>
+
+##### c) 如果第一个参数是`undefined`或`null`时
+
+>如果第一个参数是`undefined`或`null`，`Object.setPrototypeOf`和`Reflect.setPrototypeOf`都会报错。
+>
+>```javascript
+>Object.setPrototypeOf(null, {})
+>// TypeError: Object.setPrototypeOf called on null or undefined
+>
+>Reflect.setPrototypeOf(null, {})
+>// TypeError: Reflect.setPrototypeOf called on non-object
+>```
+>
+
+#### ⑧ Reflect.apply(func, thisArg, args)
+
+>`Reflect.apply`方法等同于`Function.prototype.apply.call(func, thisArg, args)`，用于绑定`this`对象后执行给定函数。
+>
+>一般来说，如果要绑定一个函数的`this`对象，可以这样写`fn.apply(obj, args)`，但是如果函数定义了自己的`apply`方法，就只能写成`Function.prototype.apply.call(fn, obj, args)`，采用`Reflect`对象可以简化这种操作。
+>
+>```javascript
+>const ages = [11, 33, 12, 54, 18, 96];
+>
+>// 旧写法
+>const youngest = Math.min.apply(Math, ages);
+>const oldest = Math.max.apply(Math, ages);
+>const type = Object.prototype.toString.call(youngest);
+>
+>// 新写法
+>const youngest = Reflect.apply(Math.min, Math, ages);
+>const oldest = Reflect.apply(Math.max, Math, ages);
+>const type = Reflect.apply(Object.prototype.toString, youngest, []);
+>```
+>
+
+#### ⑨ Reflect.defineProperty(target, propertyKey, attributes)
+
+>  [ Reflect.defineProperty ] 方法基本等同于`Object.defineProperty`，用来为对象定义属性。未来，后者会被逐渐废除，请从现在开始就使用  [ Reflect.defineProperty ] 代替它。
+>
+>```javascript
+>function MyDate() {}
+>
+>// 旧写法
+>Object.defineProperty(MyDate, 'now', {
+>  value: () => Date.now()
+>});
+>
+>// 新写法
+>Reflect.defineProperty(MyDate, 'now', {
+>  value: () => Date.now()
+>});
+>```
+>
+>如果  [ Reflect.defineProperty ] 的第一个参数不是对象，就会抛出错误，比如`Reflect.defineProperty(18, 'age')`
+
+##### a) 可以与  [ Proxy.defineProperty ] 配合使用
+
+>这个方法可以与  [ Proxy.defineProperty ] 配合使用。
+>
+>```javascript
+>const p = new Proxy({}, {
+>  defineProperty(target, prop, descriptor) {
+>    console.log(descriptor); //此处拦截后 进行一次打印
+>    return Reflect.defineProperty(target, prop, descriptor);
+>  }
+>});
+>
+>p.name = '努力学习的汪';// {value: '努力学习的汪', writable: true, enumerable: true, configurable: true}
+>p.name // '努力学习的汪'
+>```
+>
+>上面代码中，  [ Proxy.defineProperty ] 对属性赋值设置了拦截，然后使用  [ Reflect.defineProperty ] 完成了赋值,这样就能不影响原来赋值效果的同时还能进行拦截处理
+
+#### ⑩ Reflect.getOwnPropertyDescriptor(target, propertyKey)
+
+>  [ Reflect.getOwnPropertyDescriptor ] 基本等同于  [ Object.getOwnPropertyDescriptor ] ，用于得到指定属性的描述对象，将来会替代掉后者。
+>
+>> **Object.getOwnPropertyDescriptor()方法**: 返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+>>
+>> **Object.defineProperty()** 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+>
+>```javascript
+>var myObject = {};
+>Object.defineProperty(myObject, 'name', {
+>  value: true, //该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。
+>  enumerable: false, //当且仅当该属性的 enumerable 键值为 true 时，该属性才会出现在对象的枚举属性中。
+>});
+>
+>// 旧写法
+>var theDescriptor = Object.getOwnPropertyDescriptor(myObject, 'name');
+>
+>// 新写法
+>var theDescriptor1 = Reflect.getOwnPropertyDescriptor(myObject, 'name');
+>```
+>
+>  [ Reflect.getOwnPropertyDescriptor ] 和  [ Object.getOwnPropertyDescriptor ] 的一个区别是，如果第一个参数不是对象
+>
+>* [ Object.getOwnPropertyDescriptor(99, 'age') ]不报错，返回`undefined`
+>* 而 [ Reflect.getOwnPropertyDescriptor(99, 'age') ] 会抛出错误，表示参数非法。
+
+#### ⑩① Reflect.isExtensible (target)
+
+>`Reflect.isExtensible`方法对应`Object.isExtensible`，返回一个布尔值，表示当前对象是否可扩展。
+>
+>```javascript
+>const myObject = {};
+>
+>// 旧写法
+>Object.isExtensible(myObject) // true
+>
+>// 新写法
+>Reflect.isExtensible(myObject) // true
+>```
+>
+>如果参数不是对象，`Object.isExtensible`会返回`false`，因为非对象本来就是不可扩展的，而`Reflect.isExtensible`会报错。
+>
+>```javascript
+>Object.isExtensible(1) // false
+>Reflect.isExtensible(1) // 报错
+>```
+>
+
+#### ⑩② Reflect.preventExtensions(target)
+
+>`Reflect.preventExtensions`对应`Object.preventExtensions`方法，用于让一个对象变为不可扩展。它返回一个布尔值，表示是否操作成功。
+>
+>```javascript
+>var myObject = {};
+>
+>// 旧写法
+>Object.preventExtensions(myObject) // Object {}
+>
+>// 新写法
+>Reflect.preventExtensions(myObject) // true
+>```
+>
+>如果参数不是对象，`Object.preventExtensions`在 ES5 环境报错，在 ES6 环境返回传入的参数，而`Reflect.preventExtensions`会报错。
+>
+>```javascript
+>// ES5 环境
+>Object.preventExtensions(1) // 报错
+>
+>// ES6 环境
+>Object.preventExtensions(1) // 1
+>
+>// 新写法
+>Reflect.preventExtensions(1) // 报错
+>```
+>
+
+#### ⑩③ Reflect.ownKeys (target
+
+>`Reflect.ownKeys`方法用于返回对象的所有属性，基本等同于`Object.getOwnPropertyNames`与`Object.getOwnPropertySymbols`之和。
+>
+>```javascript
+>var myObject = {
+>  foo: 1,
+>  bar: 2,
+>  [Symbol.for('baz')]: 3,
+>  [Symbol.for('bing')]: 4,
+>};
+>
+>// 旧写法
+>Object.getOwnPropertyNames(myObject)
+>// ['foo', 'bar']
+>
+>Object.getOwnPropertySymbols(myObject)
+>//[Symbol(baz), Symbol(bing)]
+>
+>// 新写法
+>Reflect.ownKeys(myObject)
+>// ['foo', 'bar', Symbol(baz), Symbol(bing)]
+>```
+>
+>如果`Reflect.ownKeys()`方法的第一个参数不是对象，会报错。
+
+### Ⅲ - 应用: 配合 Proxy 实现观察者模式
+
+>实际上与上方[ Proxy ] 模拟实现Vue数据双向绑定一样,这里按照 阮一峰ES6 教程中的示例代码  实现
+>
+>观察者模式（Observer mode）指的是函数自动观察数据对象，一旦对象有变化，函数就会自动执行。
+>
+>```javascript
+>const person = observable({
+>  name: 'hongjilin',
+>  age: 18
+>});
+>
+>function print() { console.log(`${person.name} 今年 ${person.age} 岁了`) }
+>
+>observe(print); //监听  这个方法定义实现放在下方
+>person.name = '努力学习的汪';
+>person.age = 99;
+>```
+>
+>上面代码中，数据对象`person`是观察目标，函数`print`是观察者。一旦数据对象发生变化，`print`就会自动执行。
+>
+>下面，使用 Proxy 写一个观察者模式的最简单实现，即实现`observable`和`observe`这两个函数。思路是`observable`函数返回一个原始对象的 Proxy 代理，拦截赋值操作，触发充当观察者的各个函数。
+>
+>```javascript
+>const queuedObservers = new Set();
+>
+>const observe = fn => queuedObservers.add(fn);
+>const observable = obj => new Proxy(obj, {set});
+>
+>function set(target, key, value, receiver) {
+>  const result = Reflect.set(target, key, value, receiver);
+>  queuedObservers.forEach(observer => observer());
+>  return result;
+>}
+>```
+>
+>上面代码中，先定义了一个`Set`集合，所有观察者函数都放进这个集合。然后，`observable`函数返回原始对象的代理，拦截赋值操作。拦截函数`set`之中，会自动执行所有观察者。
+>
+>![image-20210926165622747](ES全系列详细学习笔记中的图片/image-20210926165622747.png) 
+
+
+
+## 15、Iterator 和 for…of 循环
+
+>这个知识点就属于,貌似你不学也不影响基本编程开发的类型,但当你编程开发了一段时间后这东西似乎又无处不在地存在于我们 JavaScript 的每个部分
+>
+>起码在我初学前端时这部分是直接跳过不学的,也是到现在才回头来补充学习,
+
+### Ⅰ- 概述与总结
+
+>1. 定义：为各种不同的数据结构提供统一的访问机制
+>2. 原理：创建一个指针指向首个成员，按照次序使用`next()`指向下一个成员，直接到结束位置(数据结构只要部署`Iterator接口`就可完成遍历操作)
+>3. 作用
+>   - 为各种数据结构提供一个统一的简便的访问接口
+>   - 使得数据结构成员能够按某种次序排列
+>   - ES6创造了新的遍历命令 [ for-of ] ，`Iterator接口`主要供 [ for-of ] 消费
+>4. 形式： [ for-of ] (自动去寻找Iterator接口)
+>5. 数据结构
+>   - 集合：`Array`、`Object`、`Set`、`Map`
+>   - 原生具备接口的数据结构：`String`、`Array`、`Set`、`Map`、`TypedArray`、`Arguments`、`NodeList`
+>6. 部署：默认部署在`Symbol.iterator`(具备此属性被认为`可遍历的iterable`)
+>7. 遍历器对象
+>   - **next()**：下一步操作，返回`{ done, value }`(必须部署)
+>   - **return()**： [ for-of ] 提前退出调用，返回`{ done: true }`
+>   - **throw()**：不使用，配合`Generator函数`使用
+>
+>> ###### For...Of 循环
+>
+>1. 定义：调用`Iterator接口`产生遍历器对象( [ for-of ] 内部调用数据结构的`Symbol.iterator()`)
+>
+>2. 遍历字符串： [ for-in ] 获取`索引`， [ for-of ] 获取`值`(可识别32位UTF-16字符)
+>
+>3. 遍历数组： [ for-in ] 获取`索引`， [ for-of ] 获取`值`
+>
+>4. 遍历对象： [ for-in ] 获取`键`， [ for-of ] 需自行部署
+>
+>5. 遍历Set： [ for-of ] 获取`值` => `for (const v of set)`
+>
+>6. 遍历Map： [ for-of ] 获取`键值对` =>  `for (const [k, v] of map)`
+>
+>7. 遍历类数组：`包含length的对象`、`Arguments对象`、`NodeList对象`(无`Iterator接口的类数组`可用`Array.from()`转换)
+>
+>8. 计算生成数据结构：`Array`、`Set`、`Map`
+>
+>   >- **keys()**：返回遍历器对象，遍历所有的键
+>   >- **values()**：返回遍历器对象，遍历所有的值
+>   >- **entries()**：返回遍历器对象，遍历所有的键值对
+>
+>9. 与 [ for-in ] 区别
+>
+>   >- 有着同 [ for-in ] 一样的简洁语法，但没有 [ for-in ] 那些缺点、
+>   >- 不同于`forEach()`，它可与`break`、`continue`和`return`配合使用
+>   >- 提供遍历所有数据结构的统一操作接口
+>
+>> ###### 应用场景
+>
+>1. 改写具有`Iterator接口`的数据结构的`Symbol.iterator`
+>2. 解构赋值：对Set进行解构
+>3. 扩展运算符：将部署`Iterator接口`的数据结构转为数组
+>4. yield*：`yield*`后跟一个可遍历的数据结构，会调用其遍历器接口
+>5. 接受数组作为参数的函数： [ for-of ] 、`Array.from()`、`new Set()`、`new WeakSet()`、`new Map()`、`new WeakMap()`、`Promise.all()`、`Promise.race()`
+
+### Ⅱ - Iterator（遍历器）的概念
+
+>##### 提出原因:
+>
+>* JavaScript 原有的表示“集合”的数据结构，主要是数组(`Array`)和对象(`Object`)
+>* ES6 又添加了`Map`和`Set`。这样就有了四种数据集合，用户还可以组合使用它们，定义自己的数据结构，比如数组的成员是`Map`，`Map`的成员是对象。
+>* 这样就需要一种统一的接口机制，来处理所有不同的数据结构。
+>
+>遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）。
+>
+
+#### ① Iterator 的作用有三个
+
+>* 一是为各种数据结构，提供一个统一的、简便的访问接口；
+>* 二是使得数据结构的成员能够按某种次序排列；
+>* 三是 ES6 创造了一种新的遍历命令`for...of`循环，Iterator 接口主要供`for...of`消费
+
+#### ② Iterator 的遍历过程
+
+>（1）创建一个指针对象，指向当前数据结构的起始位置。也就是说，遍历器对象本质上，就是一个指针对象。
+>
+>（2）第一次调用指针对象的`next`方法，可以将指针指向数据结构的第一个成员。
+>
+>（3）第二次调用指针对象的`next`方法，指针就指向数据结构的第二个成员。
+>
+>（4）不断调用指针对象的`next`方法，直到它指向数据结构的结束位置。
+>
+>每一次调用`next`方法，都会返回数据结构的当前成员的信息。具体来说，就是返回一个包含`value`和`done`两个属性的对象。其中，`value`属性是当前成员的值，`done`属性是一个布尔值，表示遍历是否结束。
+
+#### ③ 模拟`next`方法返回值的🌰
+
+>```javascript
+>function makeIterator(array) {
+>  let nextIndex = 0; //定义初始下标为 0
+>  return {
+>    next: function() {
+>      return nextIndex < array.length ? 
+>        {value: array[nextIndex++], done: false} ://当 当前下标小于数组总长度时,返回当前下标数据
+>        {value: undefined, done: true};  //当 当前下标大于等于数组总长度时,返回 undefined
+>    }
+>  };
+>}
+>
+>const it = makeIterator(['努力学习的汪', 'hongjilin']);
+>it.next() // { value: "努力学习的汪", done: false }
+>it.next() // { value: "hongjilin", done: false }
+>it.next() // { value: undefined, done: true }  -->可以根据 done 设置是否能继续遍历
+>```
+>
+>上面代码定义了一个`makeIterator`函数，它是一个遍历器生成函数，作用就是返回一个遍历器对象。对数组`['努力学习的汪', 'hongjilin']`执行这个函数，就会返回该数组的遍历器对象（即指针对象）`it`。
+>
+>* 指针对象的`next`方法，用来移动指针。
+>* 开始时，指针指向数组的开始位置。然后，每次调用`next`方法，指针就会指向数组的下一个成员。第一次调用，指向`'努力学习的汪'`；第二次调用，指向`hongjilin`。
+>* `next`方法返回一个对象，表示当前数据成员的信息。
+>* 这个对象具有`value`和`done`两个属性，`value`属性返回当前位置的成员，`done`属性是一个布尔值，表示遍历是否结束，即是否还有必要再一次调用`next`方法。
+>
+>> 总之，调用指针对象的`next`方法，就可以遍历事先给定的数据结构。
+>
+>对于遍历器对象来说，`done: false`和`value: undefined`属性都是可以省略的，因此上面的`makeIterator`函数可以简写成下面的形式。
+>
+>```javascript
+>function makeIterator(array) {
+>  var nextIndex = 0;
+>  return {
+>    next: function() {
+>      return nextIndex < array.length ?
+>        {value: array[nextIndex++]} :
+>        {done: true};
+>    }
+>  };
+>}
+>```
+>
+>由于 Iterator 只是把接口规格加到数据结构之上，所以，遍历器与它所遍历的那个数据结构，实际上是分开的，完全可以写出没有对应数据结构的遍历器对象，或者说用遍历器对象模拟出数据结构。
+
+#### ④ 无限运行的遍历器对象的🌰
+
+>```javascript
+>function idMaker() {
+>  let index = 0;
+>  return {
+>    next: function() { return {value: index++, done: false}}
+>  };
+>}
+>
+>const it = idMaker();
+>let values=[]
+>for (i = 0; i < 100; i++) { 
+>   values.push(it.next().value )
+> }
+>values  //[1, 2, 3 ... 98, 99]
+>```
+>
+>上面的例子中，遍历器生成函数`idMaker`，返回一个遍历器对象（即指针对象）。但是并没有对应的数据结构，或者说，遍历器对象自己描述了一个数据结构出来。
+
+#### ⑤ 遍历器接口(Iterable)、指针对象(Iterator)和`next`方法返回值的规格以TS写法描述
+
+>```ts
+>interface Iterable {
+>  [Symbol.iterator]() : Iterator,
+>}
+>
+>interface Iterator {
+>  next(value?: any) : IterationResult,
+>}
+>
+>interface IterationResult {
+>  value: any,
+>  done: boolean,
+>}
+>```
+
+### Ⅲ - 默认 Iterator 接口
+
+>Iterator 接口的目的，就是为所有数据结构，提供了一种统一的访问机制，即`for...of`循环（详见下文）。当使用`for...of`循环遍历某种数据结构时，该循环会自动去寻找 Iterator 接口。
+>
+>> ###### **一种数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable）**
+>
+>* ES6 规定，默认的 Iterator 接口部署在数据结构的`Symbol.iterator`属性，或者说，一个数据结构只要具有`Symbol.iterator`属性，就可以认为是“可遍历的”（iterable）。
+>* `Symbol.iterator`属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。至于属性名`Symbol.iterator`，它是一个表达式，返回`Symbol`对象的`iterator`属性，这是一个预定义好的、类型为 Symbol 的特殊值，所以要放在方括号内(在前面 **Symbol、Map、Set** 章节中有说过)
+>* **Symbol.iterator**: 指向一个默认遍历器方法，当实例对象执行 [ for-of ] 时会调用指定的默认遍历器
+>
+>```javascript
+>const obj = {
+>  [Symbol.iterator] : function () {
+>    return {
+>      next: function () { return { value: '努力学习的汪',  done: true}  }
+>    };
+>  }
+>};
+>```
+>
+>上面代码中，对象`obj`是可遍历的（iterable），因为具有`Symbol.iterator`属性。执行这个属性，会返回一个遍历器对象。该对象的根本特征就是具有`next`方法。每次调用`next`方法，都会返回一个代表当前成员的信息对象，具有`value`和`done`两个属性。
+
+#### ① 怎样算是部署了遍历器接口 ? 
+
+>ES6 的有些数据结构原生具备 Iterator 接口（比如数组），即不用任何处理，就可以被`for...of`循环遍历。原因在于，这些数据结构原生部署了`Symbol.iterator`属性（详见下文），另外一些数据结构没有（比如对象）。凡是部署了`Symbol.iterator`属性的数据结构，就称为部署了遍历器接口。调用这个接口，就会返回一个遍历器对象。
+
+#### ② 原生具备 Iterator 接口的数据结构如下:
+
+>- Array
+>- Map
+>- Set
+>- String
+>- TypedArray
+>- 函数的 arguments 对象
+>- NodeList 对象
+>
+>对于原生部署 Iterator 接口的数据结构，不用自己写遍历器生成函数，`for...of`循环会自动遍历它们。除此之外，其他数据结构（主要是对象）的 Iterator 接口，都需要自己在`Symbol.iterator`属性上面部署，这样才会被`for...of`循环遍历
+
+#### ③ 举个数组的`Symbol.iterator`属性的🌰
+
+>```javascript
+>let arr = ['努力学习的汪', 'hongjilin', '不想学习了我头秃了'];
+>let iter = arr[Symbol.iterator]();
+>
+>iter.next() // { value: '努力学习的汪', done: false }
+>iter.next() // { value: 'hongjilin', done: false }
+>iter.next() // { value: '不想学习了我头秃了', done: false }
+>iter.next() // { value: undefined, done: true }
+>```
+>
+>上面代码中，变量`arr`是一个数组，原生就具有遍历器接口，部署在`arr`的`Symbol.iterator`属性上面。所以，调用这个属性，就得到遍历器对象。
+
+#### ④ 对象为何没有默认部署 Iterator 接口 ?
+
+>对象（Object）之所以没有默认部署 Iterator 接口，是因为对象的哪个属性先遍历，哪个属性后遍历是不确定的，需要开发者手动指定。本质上，遍历器是一种线性处理，对于任何非线性的数据结构，部署遍历器接口，就等于部署一种线性转换。不过，严格地说，对象部署遍历器接口并不是很必要，因为这时对象实际上被当作 Map 结构使用，ES5 没有 Map 结构，而 ES6 原生提供了。
+>
+>一个对象如果要具备可被`for...of`循环调用的 Iterator 接口，就必须在`Symbol.iterator`的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）。
+>
+>```javascript
+>class RangeIterator {
+>  constructor(start, stop) {
+>    this.value = start;
+>    this.stop = stop;
+>  }
+>
+>  [Symbol.iterator]() { return this; }
+>
+>  next() {
+>    var value = this.value;
+>    if (value < this.stop) {
+>      this.value++;
+>      return {done: false, value: value};
+>    }
+>    return {done: true, value: undefined};
+>  }
+>}
+>
+>function range(start, stop) {
+>  return new RangeIterator(start, stop);
+>}
+>
+>for (var value of range(0, 3)) {
+>  console.log(value); // 0, 1, 2
+>}
+>```
+>
+>上面代码是一个类部署 Iterator 接口的写法。`Symbol.iterator`属性对应一个函数，执行后返回当前对象的遍历器对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 16、Promise
+
+>此知识点因为 **很重要** ,此处将只列出 ES6 中关于Promise的用法详解,像是 **自定义Promise手撕代码** 、**Promise+ async +await**、**Promise的宏任务与微任务** ....等等都不会在此处记载
+>
+>更多完整关于Promise的知识点可以看这里 --> **[Promise学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Promise学习笔记)** 
+
+### 一、Promise的理解与使用
+
+>1、概念:
+>
+>​	Promise是`异步编程的一种解决方案`，比传统的解决方案——回调函数和事件——更合理和更强大。所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。
+>
+>通俗讲，`Promise是一个许诺、承诺`,是对未来事情的承诺，承诺不一定能完成，但是无论是否能完成都会有一个结果。
+>
+>* Pending  正在做。。。
+>* Resolved 完成这个承诺
+>* Rejected 这个承诺没有完成，失败了
+>
+>​	Promise 用来预定一个不一定能完成的任务，要么成功，要么失败
+>
+>​	在具体的程序中具体的体现，通常用来封装一个异步任务，提供承诺结果
+>
+>Promise 是异步编程的一种解决方案，`主要用来解决回调地狱的问题，可以有效的减少回调嵌套`。真正解决需要`配合async/await`
+>
+>2、特点:
+>
+>​	(1)对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称Fulfilled）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。
+>
+>​	(2)一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从Pending变为Resolved和从Pending变为Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。
+>
+>3、缺点:
+>
+>​	(1)无法取消Promise，一旦新建它就会立即执行，无法中途取消。和一般的对象不一样，无需调用。
+>
+>​	(2)如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
+>
+>​	(3)当处于Pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）
+
+------
+
+### 1、Promise是什么?
+
+##### Ⅰ-理解
+
+>1. 抽象表达:  
+>
+>​	1) Promise 是一门新的技术(ES6 规范) 
+>
+>​	2)Promise 是 JS 中`进行异步编程`的新解决方案 备注：旧方案是单纯使用回调函数
+>
+>2. 具体表达: 
+>
+>    1) 从语法上来说: Promise 是一个`构造函数`
+>
+>    2) 从功能上来说: promise 对象用来封装一个异步操作并可以获取其成功/ 失败的结果值
+
+##### Ⅱ-promise 的状态
+
+###### 	a) promise 的状态
+
+>实例对象中的一个属性 『PromiseState』
+>
+>* pending  未决定的
+>* resolved / fullfilled  成功
+>* rejected  失败
+
+###### 	b) promise 的状态改变
+
+>1. pending 变为 resolved 
+>
+>2. pending 变为 rejected
+>
+>  说明: `只有这 2 种`, 且一个 promise 对象`只能改变一次` 无论变为成功还是失败, 都会有一个结果数据 成功的结果数据一般称为 value, 失败的结果数据一般称为 reason
+
+##### Ⅲ-promise的基本流程
+
+>![Promise系统学习_promise工作流程](../../Promise学习笔记/A_Promise系统学习笔记中的图片/Promise系统学习_promise工作流程.png)
+
+##### Ⅳ-promise的基本使用
+
+###### 1.使用 promise 封装基于定时器的异步
+
+```js
+<script >
+  function doDelay(time) {
+    // 1. 创建 promise 对象(pending 状态), 指定执行器函数
+    return new Promise((resolve, reject) => {
+      // 2. 在执行器函数中启动异步任务
+      console.log('启动异步任务')
+      setTimeout(() => {
+        console.log('延迟任务开始执行...')
+        const time = Date.now() // 假设: 时间为奇数代表成功, 为偶数代表失败
+        if (time % 2 === 1) { // 成功了
+          // 3. 1. 如果成功了, 调用 resolve()并传入成功的 value
+          resolve('成功的数据 ' + time)
+        } else { // 失败了
+          // 3.2. 如果失败了, 调用 reject()并传入失败的 reason
+          reject('失败的数据 ' + time)
+        }
+      }, time)
+    })
+  }
+const promise = doDelay(2000)
+promise.then(// promise 指定成功或失败的回调函数来获取成功的 vlaue 或失败的 reason
+    value => {// 成功的回调函数 onResolved, 得到成功的 vlaue
+      console.log('成功的 value: ', value)
+    },
+    reason => { // 失败的回调函数 onRejected, 得到失败的 reason
+      console.log('失败的 reason: ', reason)
+    },
+  ) <
+  /script>
+```
+
+###### 2.使用 promise 封装 ajax 异步请求
+
+```js
+<script >
+  /*
+  可复用的发 ajax 请求的函数: xhr + promise
+  */
+  function promiseAjax(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4) return
+        const {
+          status,
+          response
+        } = xhr
+        // 请求成功, 调用 resolve(value)
+        if (status >= 200 && status < 300) {
+          resolve(JSON.parse(response))
+        } else { // 请求失败, 调用 reject(reason)
+          reject(new Error('请求失败: status: ' + status))
+        }
+      }
+      xhr.open("GET", url)
+      xhr.send()
+    })
+  }
+promiseAjax('https://api.apiopen.top2/getJoke?page=1&count=2&type=vid
+    eo ')
+    .then(
+      data => {
+        console.log('显示成功数据', data)
+      },
+      error => {
+        alert(error.message)
+      }
+    ) </script>
+```
+
+###### 3.fs模块使用Promise
+
+```js
+const fs = require('fs');
+
+//回调函数 形式----------------------------------------------------
+ fs.readFile('./resource/content.txt', (err, data) => {
+     // 如果出错 则抛出错误
+     if(err)  throw err;
+     //输出文件内容
+     console.log(data.toString());
+ });
+
+//Promise 形式-----------------------------------------------------------
+/**
+ * 封装一个函数 mineReadFile 读取文件内容
+ * 参数:  path  文件路径
+ * 返回:  promise 对象
+ */
+function mineReadFile(path){
+    return new Promise((resolve, reject) => {
+        //读取文件
+        require('fs').readFile(path, (err, data) =>{
+            //判断
+            if(err) reject(err);
+            //成功
+            resolve(data);
+        });
+    });
+}
+
+mineReadFile('./resource/content.txt')
+.then(value=>{
+    //输出文件内容
+    console.log(value.toString());
+}, reason=>{
+    console.log(reason);
+});
+
+```
+
+###### 4.异常穿透
+
+> 可以在每个then()的第二个回调函数中进行err处理,也可以利用异常穿透特性,到最后用`catch`去承接统一处理,两者一起用时,前者会生效(因为err已经将其处理,就不会再往下穿透)而走不到后面的catch
+>
+> 在每个.then()中我可以将数据再次传出给下一个then()
+
+```js
+mineReadFile('./11.txt').then(result=>{
+  console.log(result.toString())
+  return result
+},err=>console.log(err))
+.then(data=>console.log(data,"2222222"))
+.catch(err=>console.log("这是catch的"))
+```
+
+###### 5.`util.promisify方法`
+
+>可以将函数直接变成promise的封装方式,不用再去手动封装
+
+```js
+//引入 util 模块
+const util = require('util');
+//引入 fs 模块
+const fs = require('fs');
+//返回一个新的函数
+let mineReadFile = util.promisify(fs.readFile);
+
+mineReadFile('./resource/content.txt').then(value => {
+  console.log(value.toString());
+});
+```
+
+------
+
+
+
+### 2、为什么要用Promise?
+
+#### Ⅰ-指定回调函数的方式更加灵活
+
+>1. 旧的: 必须在启动异步任务前指定 
+>2. promise: 启动异步任务 => 返回promie对象 => 给promise对象绑定回调函 数(甚至可以在异步任务结束后指定/多个)
+
+#### Ⅱ-支持链式调用, 可以解决回调地狱问题
+
+##### 	1、什么是回调地狱
+
+>回调函数嵌套调用, 外部回调函数异步执行的结果是嵌套的回调执行的条件
+>
+>![Promise系统学习_回调地狱](ES全系列详细学习笔记中的图片/Promise系统学习_回调地狱.jpg)
+
+##### 	2、回调地狱的缺点?
+
+>不便于阅读 不便于异常处理
+
+##### 	3、解决方案?
+
+> promise `链式调用`,
+>
+> 用来解决回调地狱问题，但是`只是简单的改变格式`，并没有彻底解决上面的问题真正要解决上述问题，一定要利用promise再加上await和async关键字实现异步传同步
+
+##### 	4、终极解决方案?
+
+> promise +async/await
+
+------
+
+
+
+### 3、Promise中的常用 API 概述
+
+> 此处列举几个最常用的API的概述,如果想看详细描述的可以继续往下看下方的  **Promise方法的具体使用** 描述
+
+#### 	Ⅰ- Promise 构造函数: Promise (excutor) {}
+
+>(1) executor 函数: 执行器 (resolve, reject) => {}
+>
+>(2) resolve 函数: 内部定义成功时我们调用的函数 value => {} 
+>
+>(3) reject 函数: 内部定义失败时我们调用的函数 reason => {} 
+>
+>说明: executor 会在 Promise 内部立即`同步调用`,异步操作在执行器中执行,换话说Promise支持同步也支持异步操作
+
+#### 	Ⅱ-Promise.prototype.then 方法: (onResolved, onRejected) => {}
+
+>(1) onResolved 函数: 成功的回调函数 (value) => {} 
+>
+>(2) onRejected 函数: 失败的回调函数 (reason) => {} 
+>
+>说明: 指定用于得到成功 value 的成功回调和用于得到失败 reason 的失败回调 返回一个新的 promise 对象
+
+#### 	 Ⅲ-Promise.prototype.catch 方法: (onRejected) => {}
+
+>(1) onRejected 函数: 失败的回调函数 (reason) => {}
+>
+>说明: then()的语法糖, 相当于: then(undefined, onRejected)
+>
+>(2) 异常穿透使用:当运行到最后,没被处理的所有异常错误都会进入这个方法的回调函数中	
+
+#### 	Ⅳ-Promise.resolve 方法: (value) => {}
+
+>(1) value: 成功的数据或 promise 对象 
+>
+>说明: 返回一个成功/失败的 promise 对象,直接改变promise状态
+>
+>```js
+>	let p3 = Promise.reject(new Promise((resolve, reject) => {  resolve('OK'); }));      
+>	console.log(p3);
+>```
+
+#### 	Ⅴ-Promise.reject 方法: (reason) => {}
+
+>(1) reason: 失败的原因 
+>
+>说明: 返回一个失败的 promise 对象,直接改变promise状态,`代码示例同上`
+
+#### Ⅵ-Promise.all 方法: (promises) => {}
+
+>promises: 包含 n 个 promise 的数组 
+>
+>说明: 返回一个新的 promise, 只有所有的 promise `都成功才成功`, 只要有一 个失败了就直接失败
+>
+>```js
+>let p1 = new Promise((resolve, reject) => { resolve('成功');  })
+>let p2 = Promise.reject('错误错误错误');
+>let p3 = Promise.resolve('也是成功')
+>const result = Promise.all([p1, p2, p3]);
+>console.log(result);
+>```
+
+#### Ⅶ-Promise.race 方法: (promises) => {}
+
+>(1) promises: 包含 n 个 promise 的数组 
+>
+>说明: 返回一个新的 promise, `第一个完成`的 promise 的结果状态就是最终的结果状态,
+>
+>如p1延时,开启了异步,内部正常是同步进行,所以`p2>p3>p1`,结果是`P2`
+>
+>```js
+>let p1 = new Promise((resolve, reject) => {
+> setTimeout(() => {
+>   resolve('OK');
+> }, 1000);
+>})
+>let p2 = Promise.resolve('Success');
+>let p3 = Promise.resolve('Oh Yeah');
+>//调用
+>const result = Promise.race([p1, p2, p3]);
+>console.log(result);
+>```
+
+------
+
+
+
+### 4、Promise的几个关键问题
+
+#### Ⅰ-如何改变 promise 的状态?
+
+>(1) resolve(value): 如果当前是 pending 就会变为 resolved 
+>
+>(2) reject(reason): 如果当前是 pending 就会变为 rejected 
+>
+>(3) 抛出异常: 如果当前是 pending 就会变为 rejected
+
+#### Ⅱ-一个 promise 指定多个成功/失败回调函数, 都会调用吗?
+
+>当 promise `改变为对应状态时`都会调用,改变状态后,多个回调函数都会调用,并不会自动停止
+>
+>```js
+>let p = new Promise((resolve, reject) => {  resolve('OK');});
+>///指定回调 - 1
+>p.then(value => {  console.log(value); });
+>//指定回调 - 2
+>p.then(value => { alert(value);});
+>```
+
+#### Ⅲ- 改变 promise 状态和指定回调函数谁先谁后?
+
+>(1) 都有可能, 正常情况下是先指定回调再改变状态, 但也可以先改状态再指定回调 
+>
+>​	先指定回调再改变状态(`异步`):先指定回调--> 再改变状态 -->改变状态后才进入异步队列执行回调函数
+>
+>​	先改状态再指定回调(`同步`):改变状态 -->指定回调 `并马上执行`回调
+>
+>(2) 如何先改状态再`指定`回调?   -->注意:指定并不是执行
+>
+>​	① 在执行器中直接调用 resolve()/reject() -->即,不使用定时器等方法,执行器内直接同步操作 
+>
+>​	② 延迟更长时间才调用 then() 	-->即,在`.then()`这个方法外再包一层例如延时器这种方法
+>
+>(3) 什么时候才能得到数据? 
+>
+>​	① 如果先指定的回调, 那当状态发生改变时, 回调函数就会调用, 得到数据 
+>
+>​	② 如果先改变的状态, 那当指定回调时, 回调函数就会调用, 得到数据
+>
+>```js
+>let p = new Promise((resolve, reject) => {
+>//异步写法,这样写会先指定回调,再改变状态
+>setTimeout(() => {resolve('OK'); }, 1000);
+>//这是同步写法,这样写会先改变状态,再指定回调
+>resolve('OK'); 
+>});
+>p.then(value => {console.log(value);}, reason => {})
+>```
+>
+>(4) 个人理解--结合源码
+>
+>​	源码中,promise的状态是通过一个`默认为padding`的变量进行判断,所以当你`resolve/reject`延时(异步导致当then加载时,状态还未修改)后,这时直接进行p.then()会发现,目前状态还是`进行中`,所以只是这样导致只有同步操作才能成功.
+>
+>​	所以promise将传入的`回调函数`拷贝到promise对象实例上,然后在`resolve/reject`的执行过程中再进行调用,达到异步的目的
+>
+>​	具体代码实现看下方自定义promise
+
+#### Ⅳ-promise.then()返回的新 promise 的结果状态由什么决定?
+
+>(1) 简单表达: 由 then()指定的回调函数执行的结果决定 
+>
+>(2) 详细表达: 
+>
+>​	① 如果抛出异常, 新 promise 变为 rejected, reason 为抛出的异常 
+>
+>​	② 如果返回的是非 promise 的任意值, 新 promise 变为 resolved, value 为返回的值 
+>
+>​	③ 如果返回的是另一个新 promise, 此 promise 的结果就会成为新 promise 的结果
+>
+>```js
+>let p = new Promise((resolve, reject) => {
+>resolve('ok');
+>});
+>//执行 then 方法
+>let result = p.then(value => {
+>console.log(value);
+>// 1. 抛出错误 ,变为 rejected
+>throw '出了问题';
+>// 2. 返回结果是非 Promise 类型的对象,新 promise 变为 resolved
+>return 521;
+>// 3. 返回结果是 Promise 对象,此 promise 的结果就会成为新 promise 的结果
+>return new Promise((resolve, reject) => {
+>// resolve('success');
+>reject('error');
+>});
+>}, reason => {
+>console.warn(reason);
+>});
+>```
+
+#### Ⅴ- promise 如何串连多个操作任务?
+
+>(1) promise 的 then()返回一个新的 promise, 可以开成 then()的链式调用 
+>
+>(2) 通过 then 的链式调用串连多个同步/异步任务,这样就能用`then()`将多个同步或异步操作串联成一个同步队列
+>
+>```js
+><script>
+>let p = new Promise((resolve, reject) => { setTimeout(() => {resolve('OK'); }, 1000); });
+>p.then(value => {return new Promise((resolve, reject) => { resolve("success"); });})
+>.then(value => {console.log(value);})
+>.then(value => { console.log(value);})
+></script>
+>```
+
+#### Ⅵ-promise 异常传透?
+
+
+>* 当使用 promise 的 then 链式调用时, 可以在最后指定失败的回调
+>* 前面任何操作出了异常, 都会传到最后失败的回调中处理
+>
+>```javascript
+>getJSON('./hong.json')
+>   .then(function(posts) { throw new Error('抛出异常') })
+>	.then(res=>console.log(res),e=>console.log('被then的错误回调捕获',e) )
+>   .catch(function(error) {
+>		 // 处理 getJSON 和 前一个回调函数运行时发生的错误
+> 		console.log('错误捕获: ', error);
+>	});
+>//执行结果: 被then的错误回调捕获 Error: 抛出异常
+>
+>/******************** 利用异常穿透 ****************************************/
+>getJSON('./hong.json')
+>   .then(function(posts) { throw new Error('抛出异常') })
+>	.then(res=>console.log(res) ) //此处差异,不指定 reject 回调,利用异常穿透传到最后
+>   .catch(function(error) {
+> 		console.log('错误捕获: ', error);
+>	});
+>//执行结果:  错误捕获:  Error: 抛出异常
+>```
+>
+>注:可以在每个then()的第二个回调函数中进行err处理,也可以利用异常穿透特性,到最后用`catch`去承接统一处理,两者一起用时,前者会生效(因为err已经将其处理,就不会再往下穿透)而走不到后面的catch![image-20210927105504988](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210927105504988.png)
+
+#### Ⅶ- 中断 promise 链?
+
+>在`关键问题2`中,可以得知,当promise状态改变时,他的链式调用都会生效,那如果我们有这个一个实际需求:我们有5个then(),但其中有条件判断,如当我符合或者不符合第三个then条件时,要直接中断链式调用,不再走下面的then,该如何?
+>
+>(1) 当使用 promise 的 then 链式调用时, 在中间中断, 不再调用后面的回调函数 
+>
+>(2) 办法: 在回调函数中返回一个 `pendding` 状态的`promise 对象`
+>
+>```js
+><script>
+>let p = new Promise((resolve, reject) => {setTimeout(() => { resolve('OK');}, 1000);});
+>p.then(value => {return new Promise(() => {});})//有且只有这一个方式
+>.then(value => { console.log(222);})
+>.then(value => { console.log(333);})
+>.catch(reason => {console.warn(reason);});
+></script>
+>```
+
+------
+
+
+
+### 5、 Promise的实际应用
+
+> 举两个栗子
+
+#### Ⅰ - 加载图片
+
+>我们可以将图片的加载写成一个`Promise`，一旦加载完成，`Promise`的状态就发生变化。
+>
+>```javascript
+>const preloadImage = function (path) {
+>return new Promise(function (resolve, reject) {
+>const image = new Image();
+>image.onload  = resolve;
+>image.onerror = reject;
+>image.src = path;
+>});
+>};
+>```
+
+#### Ⅱ - Generator 函数与 Promise 的结合
+
+>使用 Generator 函数管理流程，遇到异步操作的时候，通常返回一个`Promise`对象。
+>
+>```javascript
+>function getFoo () {
+>return new Promise(function (resolve, reject){
+>resolve('foo');
+>});
+>}
+>
+>const g = function* () {
+>try {
+>const foo = yield getFoo();
+>console.log(foo);
+>} catch (e) {
+>console.log(e);
+>}
+>};
+>
+>function run (generator) {
+>const it = generator();
+>
+>function go(result) {
+>if (result.done) return result.value;
+>
+>return result.value.then(function (value) {
+> return go(it.next(value));
+>}, function (error) {
+> return go(it.throw(error));
+>});
+>}
+>
+>go(it.next());
+>}
+>
+>run(g);
+>```
+>
+>上面代码的 Generator 函数`g`之中，有一个异步操作`getFoo`，它返回的就是一个`Promise`对象。函数`run`用来处理这个`Promise`对象，并调用下一个`next`方法。
+
+------
+
+### 二、Promise API 用法详解
+
+>ES6 规定，`Promise`对象是一个构造函数，用来生成`Promise`实例。
+>
+>此部分是对于 **Promise API 用法的详解** ,尽量详细地列举其常见用法,所以篇幅较长
+
+### Ⅰ -  基本用法
+
+#### ①  举个创造 Promise 实例的栗子
+
+> 下面代码创造了一个`Promise`实例。
+>
+> ```javascript
+> const promise = new Promise(function(resolve, reject) {
+> if (/* 异步操作成功 */)  resolve(value); //将该 Promise 修改为成功且返回
+> else  reject(error); //将该 Promise 修改为失败且返回
+> });
+> ```
+>
+> `Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。它们是两个函数，由 JavaScript 引擎提供，不用自己部署。
+>
+> `resolve`函数的作用是，将`Promise`对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。
+
+#### ② 使用 [ then ] 方法分别指定 成功/失败 的回调
+
+>`Promise`实例生成以后，可以用 [ then() ] 方法分别指定`resolved`状态和`rejected`状态的回调函数。
+>
+>```javascript
+>promise.then(function(value) {
+>// 当promise状态返回为resolve 时会执行的回调函数
+>}, function(error) {
+>// 当promise状态返回为rejected 时会执行的回调函数
+>});
+>```
+>
+>[ then ] 方法可以接受两个回调函数作为参数。第一个回调函数是`Promise`对象的状态变为`resolved`时调用，第二个回调函数是`Promise`对象的状态变为`rejected`时调用。其中，**第二个函数是可选的，不一定要提供**。这两个函数都接受`Promise`对象传出的值作为参数。
+
+#### ③ 举个 Promise 对象的简单栗子
+
+>下面是一个`Promise`对象的简单例子。
+>
+>> setTimeout的第三个参数是给第一个函数的参数，而且是先于第一个参数(即回调函数)执行的 
+>
+>```javascript
+>function timeout(ms) { //声明一个方法, 传入的 参数ms 为延时器时间
+>return new Promise((resolve, reject) => {
+>  //这行代码实际效果: 当 [ms] 毫秒后 执行 resolve('努力学习的汪')
+>  setTimeout(resolve, ms, '努力学习的汪'); 
+>});
+>}
+>
+>timeout(1000).then((value) => {  console.log(value) });
+>//打印结果 : 努力学习的汪
+>```
+>
+>上面代码中，`timeout`方法返回一个`Promise`实例，表示一段时间以后才会发生的结果。过了指定的时间（`ms`参数）以后，`Promise`实例的状态变为`resolved`，就会触发`then`方法绑定的回调函数。
+
+#### ④ Promise 新建后就会立即执行
+
+>```javascript
+>let promise = new Promise(function(resolve, reject) {
+>console.log('Promise');
+>resolve();
+>});
+>
+>promise.then(function() {
+>console.log('resolved.');
+>});
+>
+>console.log('Hi!');
+>
+>// Promise
+>// Hi!
+>// resolved //可以发现,明明then是在 Hi 前面,却最后打印
+>```
+>
+>上面代码中，Promise 新建后立即执行，所以首先输出的是`Promise`。然后，`then`方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以`resolved`最后输出。
+>
+>实际上,这个运行结果相关知识点是 [ [宏任务与微任务](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0#%E5%9B%9B%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1) ] ,单独梳理在下方.这里可以先初步理解为: 
+>
+>1. JS是单线程的,至上往下运行,在声明 **Promise** 时实际上已经执行到了内部方法
+>
+>2. 为何 resolve() 运行后没有立即打印?
+>
+> - JS中用来存储待执行回调函数的队列包含2个不同特定的列队
+>
+>   > `宏队列`:用来保存待执行的宏任务(回调),比如:`定时器`回调/ajax回调/dom事件回调
+>   >
+>   > `微队列`:用来保存待执行的微任务(回调),比如:`Promise`的回调/muntation回调
+>
+> - JS执行时会区别这2个队列:
+>
+>   >JS执行引擎首先必须执行所有的`初始化同步任务`代码
+>   >
+>   >每次准备取出第一个`宏任务执行前`,都要将所有的`微任务`一个一个取出来执行
+
+#### ⑤ 举个异步加载图片的栗子
+
+>```javascript
+>function loadImageAsync(url) {
+>return new Promise(function(resolve, reject) {
+>const image = new Image();
+>
+>image.onload = function() {
+>console.log('图片加载成功')
+>resolve(image);
+>};
+>
+>image.onerror = function() {
+>reject(new Error(`无法从 ${url} 中加载图片` ));
+>};
+>image.src = url;
+>});
+>}
+>loadImageAsync('正确的url') //打印图片加载成功
+>loadImageAsync('错误的url') //抛出异常
+>
+>```
+>
+>上面代码中，使用`Promise`包装了一个图片加载的异步操作。如果加载成功，就调用`resolve`方法，否则就调用`reject`方法。
+>
+>![image-20210926180306961](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210926180306961.png) 
+
+#### ⑥ 举个用`Promise`对象实现的 Ajax 操作的栗子
+
+>Ajax知识点不懂的同学要去补一下: 这里可以看本人梳理的ajax笔记 --> [点我跳转](https://gitee.com/hongjilin/hongs-study-notes/tree/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E3%80%81Axios%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0) 
+>
+>```javascript
+>const getJSON = function(url) {
+>const promise = new Promise(function(resolve, reject){
+>const handler = function() {
+>if (this.readyState !== 4)  return; //当readyState 为4 时直接返回,不修改 promise 状态
+>if (this.status === 200) resolve(this.response); //返回状态为 200 时将状态修改为成功,且将响应内容返回
+>else  reject(new Error(this.statusText)); //失败时抛出异常
+>};
+>const client = new XMLHttpRequest(); //实例化xml实例
+>client.open("GET", url); //下面这几行都是对xml实例进行配置,不懂的同学要去补一下ajax知识点
+>client.onreadystatechange = handler;
+>client.responseType = "json";
+>client.setRequestHeader("Accept", "application/json");
+>client.send();
+>});
+>return promise;
+>};
+>
+>getJSON("./hong.json").then(function(json) {
+>console.log('Contents: ' , json);
+>}, function(error) {
+>console.error('出错了', error);
+>});
+>```
+>
+>上面代码中，`getJSON`是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个`Promise`对象。需要注意的是，在`getJSON`内部，`resolve`函数和`reject`函数调用时，都带有参数。
+>
+>![image-20210926182129672](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210926182129672.png)
+>
+>> 小贴士:此处可能有同学想尝试却发现读取本地文件会有跨域问题,这边教一下你们
+>
+>> ![image-20210926182506259](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210926182506259.png) 
+
+#### ⑦  resolve()  的参数可以是另一个 Promise 实例
+
+>如果调用`resolve`函数和`reject`函数时带有参数，那么它们的参数会被传递给回调函数。`reject`函数的参数通常是`Error`对象的实例，表示抛出的错误；`resolve`函数的参数除了正常的值以外，还可能是另一个 Promise 实例，比如像下面这样。
+>
+>```javascript
+>const p1 = new Promise(function (resolve, reject) {});
+>
+>const p2 = new Promise(function (resolve, reject) { resolve(p1) })
+>```
+>
+>上面代码中，`p1`和`p2`都是 Promise 的实例，但是`p2`的`resolve`方法将`p1`作为参数，即一个异步操作的结果是返回另一个异步操作。
+>
+>注意，这时`p1`的状态就会传递给`p2`，也就是说，`p1`的状态决定了`p2`的状态。如果`p1`的状态是`pending`，那么`p2`的回调函数就会等待`p1`的状态改变；如果`p1`的状态已经是`resolved`或者`rejected`，那么`p2`的回调函数将会立刻执行。
+>
+>```javascript
+>const p1 = new Promise(function (resolve, reject) {
+>setTimeout(() => reject(new Error('p1的状态改为错误')), 0)
+>})
+>
+>const p2 = new Promise(function (resolve, reject) {
+>setTimeout(() => resolve(p1), 3000) //将p1 传给p2
+>})
+>
+>p2.then(result => console.log(result),result=>console.log('失败'))
+>.catch(error => console.log('catch异常捕获:'+error))
+>//首先报错
+>//运行三秒后打印: 失败
+>```
+>
+>##### 上面代码运行后执行效果:
+>
+>* 首先马上会打印一个报错 : "Uncaught (in promise) Error: p1的状态改为错误" (红色报错)
+>* 然后等3秒后再打印:  '失败'
+>* 注意: 如果 **p2.then()** 中没有写 **reject** 回调函数(第二个参数),则会被 **catch** 捕获,变为`catch异常捕获:Error: p1的状态改为错误`
+>
+>##### 解释:
+>
+>>* 首先前面说过,promise定义时就会立即执行,所以刚开始就运行了 **p1 的reject()**,所以直接控制台报错了
+>>* `resolve`方法返回的是`p1`。由于`p2`返回的是另一个 Promise，导致`p2`自己的状态无效了，由`p1`的状态决定`p2`的状态
+>>* 总结来说,promise返回promise这种嵌套形式,将由最内层的promise决定外层的状态
+
+#### ⑧ 调用`resolve`或`reject`并不会终结 Promise 的参数函数的执行
+
+>调用`resolve`或`reject`并不会终结 Promise 的参数函数的执行。
+>
+>```javascript
+>new Promise((resolve, reject) => {
+>resolve(1);
+>console.log(2);
+>}).then(r => {
+>console.log(r);
+>});
+>// 2
+>// 1
+>```
+>
+>上面代码中，调用`resolve(1)`以后，后面的`console.log(2)`还是会执行，并且会首先打印出来。这是因为立即 resolved 的 Promise 是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。
+
+#### ⑨ 建议在修改状态函数前加return 
+
+>一般来说，调用`resolve`或`reject`以后，Promise 的使命就完成了，后继操作应该放到`then`方法里面，而不应该直接写在`resolve`或`reject`的后面。所以，最好在它们前面加上`return`语句，这样就不会有意外。
+>
+>```javascript
+>new Promise((resolve, reject) => {
+>return resolve(1);
+>// 后面的语句不会执行
+>console.log(2);
+>})
+>```
+>
+>有同学可能就会问了,不加感觉也没啥事啊,反正我在这个函数体内就是要做这些操作,放在 `resolve/reject`前后好像都不影响啊! 这里我给举个实际场景
+
+##### a) 不加 return 导致的错误场景举🌰
+
+>一般来说,错误发生在 Promise 内,是不会传到外部的,只会在 Promise 内部消化,详见下方API详解部分的 [②Promise.prototype.catch()](#② Promise.prototype.catch())
+>
+>```javascript
+>const promise = new Promise(function (resolve, reject) {
+>resolve('成功了'); //如果你加了 return , 函数执行到此步就停止了
+>setTimeout(function () { throw new Error('错误错误!!!!!') }, 0)
+>});
+>promise.then(function (value) { console.log(value) });
+>// ok
+>// Uncaught Error: 错误错误!!!!
+>```
+>
+>上面代码中，Promise 指定在下一轮“事件循环”再抛出错误。到了那个时候，Promise 的运行已经结束了，所以这个错误是在 Promise 函数体外抛出的，会冒泡到最外层，成了未捕获的错误。
+
+### Ⅱ -  API 用法详解
+
+> 此处将对于所有API进行详细剖析,参照资料为 [阮一峰的ES6日志]()
+
+#### ① Promise.prototype.then()
+
+>Promise 实例具有`then`方法，也就是说，`then`方法是定义在原型对象`Promise.prototype`上的。它的作用是为 Promise 实例添加状态改变时的回调函数。前面说过，`then`方法的第一个参数是`resolved`状态的回调函数，第二个参数（可选）是`rejected`状态的回调函数。
+
+##### a) `then`方法返回的是一个新的`Promise`实例
+
+>`then`方法返回的是一个新的`Promise`实例（注意，不是原来那个`Promise`实例）。因此可以采用链式写法，即`then`方法后面再调用另一个`then`方法。
+>
+>```javascript
+>getJSON("./hong.json").then(function(json) {
+>return json.name;
+>}).then(function(name) {
+>console.log(`My name is ${name}` )
+>});
+>```
+>
+>上面的代码使用`then`方法，依次指定了两个回调函数。第一个回调函数完成以后，会将返回结果作为参数，传入第二个回调函数。
+
+##### b) 采用链式的`then`, 会等待前一个Promise状态发生改变才会被调用
+
+>采用链式的`then`，可以指定一组按照次序调用的回调函数。这时，前一个回调函数，有可能返回的还是一个`Promise`对象（即有异步操作），这时后一个回调函数，就会等待该`Promise`对象的状态发生变化，才会被调用。
+>
+>```javascript
+>getJSON("./hong.json")
+>.then(function(json) {  return getJSON(json.name)})
+>.then(
+>function (name) { console.log("resolved: My name is ", name)}, 
+>function (err){ console.log("rejected: ", err)}
+>);
+>```
+>
+>上面代码中，第一个`then`方法指定的回调函数，返回的是另一个`Promise`对象。这时，第二个`then`方法指定的回调函数，就会等待这个新的`Promise`对象状态发生变化。如果变为`resolved`，就调用第一个回调函数，如果状态变为`rejected`，就调用第二个回调函数。
+
+##### c) 使用箭头函数简写
+
+>如果采用箭头函数，上面的代码可以写得更简洁 (实际代码中基本都是这样写了)
+>
+>```js
+>getJSON("./hong.json")
+>.then(json => getJSON(json.name) )
+>.then(
+>	  name => console.log("resolved: My name is ", name), 
+>err => console.log("rejected: ", err)
+>);
+>```
+
+
+
+#### ② Promise.prototype.catch()
+
+>`Promise.prototype.catch()`方法是`.then(null, rejection)`或`.then(undefined, rejection)`的别名，用于指定发生错误时的回调函数。
+
+##### a) 基本用法
+
+>```javascript
+>getJSON('./hong.json')
+>.then(function(posts) {})
+>.catch(function(error) {
+>		// 处理 getJSON 和 前一个回调函数运行时发生的错误
+>		console.log('发生错误！', error);
+>	 });
+>```
+>
+>上面代码中，`getJSON()`方法返回一个 Promise 对象
+>
+>>* 如果该对象状态变为`resolved`，则会调用`then()`方法指定的回调函数；
+>>* 如果异步操作抛出错误，状态就会变为`rejected`，就会调用`catch()`方法指定的回调函数，处理这个错误
+>>* 另外，`then()`方法指定的回调函数，如果运行中抛出错误，也会被`catch()`方法捕获。
+>>* 被 catch 方法捕获的前提是前方的 then() 方法中没有对 `rejected` 进行捕获处理(即没有写reject回调函数)
+>
+>```js
+>p.then((val) => console.log('指定成功回调:', val))
+>.catch((err) => console.log('在catch中进行 rejected 的处理', err));
+>// 等同于
+>p.then((val) => console.log('指定成功回调:', val))
+>.then(null, (err) => console.log("等同于另起一个then,只指定 rejected 的处理", err));
+>```
+
+##### b)  `reject()`方法的作用，等同于抛出错误
+
+>```javascript
+>const promise = new Promise(function(resolve, reject) {
+>throw new Error('直接抛出错误');
+>});
+>promise.catch(function(error) {
+>console.log('异常捕获: ',error);
+>});
+>//异常捕获:  Error: 直接抛出错误
+>```
+>
+>上面代码中，`promise`抛出一个错误，就被`catch()`方法指定的回调函数捕获。注意，上面的写法与下面两种写法是等价的。
+>
+>```javascript
+>/******************  写法一 ***************************************/
+>const promise = new Promise(function(resolve, reject) {
+>try {
+>throw new Error('直接抛出错误');
+>} catch(e) {
+>console.log('进入catch,然后再用 reject(e)抛出 ')
+>reject(e) 
+>}
+>});
+>promise.catch(function(error) {
+>console.log(error);
+>});
+>//进入catch,然后再用 reject(e)抛出 
+>//Error: 直接抛出错误
+>
+>/******************  写法二 ***************************************/
+>const promise1 = new Promise(function(resolve, reject) {
+>reject(new Error('使用 reject() 抛出错误'));
+>});
+>promise1.catch(function(error) {
+>console.log(error);
+>});
+>//Error: 使用 reject() 抛出错误
+>```
+>
+>比较上面两种写法，可以发现`reject()`方法的作用，等同于抛出错误,所以不必用try..catch()去承接后再去抛出了
+
+##### c) 如果 Promise 状态已经被修改，再抛出错误是无效的
+
+>```javascript
+>const promise = new Promise(function(resolve, reject) {
+>resolve('成功了'); //换成 reject('成功了') 结果也是一样的
+>throw new Error('成功后扔抛出异常');
+>});
+>promise
+>.then(function(value) { console.log(value) })
+>.catch(function(error) { console.log(error) });
+>// 成功了
+>```
+>
+>上面代码中，Promise 在`resolve/reject`语句后面，再抛出错误，不会被捕获，等于没有抛出。因为 Promise 的状态一旦改变，就永久保持该状态，不会再变了(前面有说过)
+
+##### d) Promise 对象的错误具有 “冒泡” 性质
+
+>Promise 对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个`catch`语句捕获。
+>
+>```javascript
+>getJSON('./hong.json') //第一个promise
+>.then(function(post) { //第二个promise
+>		 return getJSON(post.commentURL)
+>	})
+>.then(function(comments) { //第三个promise
+>	})
+>.catch(function(error) {
+>		// 处理前面三个Promise产生的错误
+>	});
+>```
+>
+>上面代码中，一共有三个 Promise 对象(**then返回的仍可能是一个Promise对象**)：一个由`getJSON()`产生，两个由`then()`产生。它们之中任何一个抛出的错误，都会被最后一个`catch()`捕获。
+>
+>也是因为这个特性,有了 **异常穿透问题** 
+
+##### e) 异常穿透问题
+
+>* 当使用 promise 的 then 链式调用时, 可以在最后指定失败的回调
+>* 前面任何操作出了异常, 都会传到最后失败的回调中处理
+>
+>```javascript
+>getJSON('./hong.json')
+> .then(function(posts) { throw new Error('抛出异常') })
+>	.then(res=>console.log(res),e=>console.log('被then的错误回调捕获',e) )
+> .catch(function(error) {
+>		 // 处理 getJSON 和 前一个回调函数运行时发生的错误
+>		console.log('错误捕获: ', error);
+>	});
+>//执行结果: 被then的错误回调捕获 Error: 抛出异常
+>
+>/******************** 利用异常穿透 ****************************************/
+>getJSON('./hong.json')
+> .then(function(posts) { throw new Error('抛出异常') })
+>	.then(res=>console.log(res) ) //此处差异,不指定 reject 回调,利用异常穿透传到最后
+> .catch(function(error) {
+>		console.log('错误捕获: ', error);
+>	});
+>//执行结果:  错误捕获:  Error: 抛出异常
+>```
+>
+>注:可以在每个then()的第二个回调函数中进行err处理,也可以利用异常穿透特性,到最后用`catch`去承接统一处理,两者一起用时,前者会生效(因为err已经将其处理,就不会再往下穿透)而走不到后面的catch![image-20210927105504988](../../Promise学习笔记/A_Promise系统学习笔记中的图片/image-20210927105504988.png)
+
+##### f) 建议使用 catch() 进行异常处理
+
+>一般来说，不要在`then()`方法里面定义 Reject 状态的回调函数（即`then`的第二个参数），总是使用`catch`方法。
+>
+>```javascript
+>// bad
+>promise
+>.then(
+>data=> console.log('成功',data),
+>err=>console.log('失败了',err)
+>	);
+>/********* 好的写法 ********************/
+>promise
+>.then( data=> console.log('成功',data)) //只指定成功回调
+>.catch( err=>console.log('失败了',err));
+>```
+>
+>上面代码中，第二种写法要好于第一种写法:
+>
+>* 理由是第二种写法可以捕获前面`then`方法执行中的错误
+>* 也更接近同步的写法（`try/catch`）
+>* 因此, 建议总是使用`catch()`方法，而不使用`then()`方法的第二个参数。
+
+##### g) 与传统 `try/catch` 代码块的差异
+
+>跟传统的`try/catch`代码块不同的是，如果没有使用`catch()`方法指定错误处理的回调函数，Promise 对象抛出的错误不会传递到外层代码，即不会有任何反应。
+>
+>```javascript
+>const someAsyncThing = function() {
+>return new Promise(function(resolve, reject) {
+>// 下面一行会报错，因为hong 没有声明
+>resolve( hong );
+>});
+>};
+>//Promise 的 then() 处理,但不处理异常
+>someAsyncThing().then(function() { console.log('只指定成功回调,不处理异常错误') });
+>
+>setTimeout(() => { console.log('努力学习的汪') }, 2000);
+>// Uncaught (in promise) ReferenceError: hong is not defined
+>// 努力学习的汪
+>```
+>
+>上面代码中，`someAsyncThing()`函数产生的 Promise 对象，内部有语法错误。
+>
+>>* 浏览器运行到这一行，会打印出错误提示`Uncaught (in promise) ReferenceError: hong is not defined`
+>>* 但是不会退出进程、终止脚本执行, 2 秒之后还是会输出`努力学习的汪`。
+>>* 这就是说，Promise 内部的错误不会影响到 Promise 外部的代码，通俗的说法就是“Promise 会吃掉错误”。
+
+##### h) catch()方法后还能跟 then() 方法
+
+>一般总是建议，Promise 对象后面要跟`catch()`方法，这样可以处理 Promise 内部发生的错误。`catch()`方法返回的还是一个 Promise 对象，因此后面还可以接着调用`then()`方法。
+>
+>```javascript
+>const someAsyncThing = function() {
+>return new Promise(function(resolve, reject) {
+>// 下面一行会报错，因为 hong 没有声明
+>resolve( hong );
+>});
+>};
+>
+>someAsyncThing()
+>.catch(function(error) {  console.log('捉到错误咯:', error)})
+>.then(function() { console.log('错误捕获后我还要浪') });
+>//捉到错误咯: ReferenceError: hong is not defined
+>//错误捕获后我还要浪
+>```
+>
+>上面代码运行完`catch()`方法指定的回调函数，会接着运行后面那个`then()`方法指定的回调函数。
+>
+>如果没有报错，则会跳过`catch()`方法。
+>
+>```js
+>Promise.resolve('硬是成功了')
+>.catch(function(error) { console.log('捉错误', error) })
+>.then(v => console.log('catch后面的then: ',v) );
+>//catch后面的then:  硬是成功了
+>```
+>
+>上面的代码因为没有报错，跳过了`catch()`方法，直接执行后面的`then()`方法。此时，要是`then()`方法里面报错，就与前面的`catch()`无关了。
+
+##### i) `catch()`方法之中，还能再抛出错误
+
+>`catch()`方法之中，还能再抛出错误。
+>
+>```javascript
+>const someAsyncThing = function() {
+>return new Promise(function(resolve, reject) {
+>// 下面一行会报错，因为 hong 没有声明
+>resolve( hong );
+>});
+>};
+>
+>someAsyncThing()
+>.then(() =>  someOtherAsyncThing()) 
+>.catch(function(error) {
+>		 console.log('ctach:', error);
+>		 // 下面一行会报错，因为 sum 没有声明
+>		  sum ++;
+>	})
+>.then(function() { console.log('捕获后的then()')});
+>
+>// ctach: [ReferenceError: hong is not defined]
+>// Uncaught (in promise) ReferenceError: sum is not defined
+>```
+>
+>上面代码中，`catch()`方法抛出一个错误，因为后面没有别的`catch()`方法了，导致这个错误不会被捕获，也不会传递到外层。如果改写一下，结果就不一样了。
+>
+>```javascript
+>someAsyncThing().then(function() {
+>return someOtherAsyncThing();
+>}).catch(function(error) {
+>console.log('catch: ', error);
+>// 下面一行会报错，因为 sum 没有声明
+>sum ++;
+>}).catch(function(error) {
+>console.log('catch()后的catch: ', error);
+>});
+>//catch:  ReferenceError: hong is not defined
+>//catch()后的catch:  ReferenceError: sum is not defined
+>```
+>
+>上面代码中，第二个`catch()`方法用来捕获前一个`catch()`方法抛出的错误。
+
+#### ③ Promise.prototype.finally()
+
+>`finally()`方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。该方法是 `ES2018` 引入标准的。
+>
+>```javascript
+>promise
+>.then(result => {···})
+>.catch(error => {···})
+>.finally(() => {···});
+>```
+>
+>上面代码中，不管`promise`最后的状态，在执行完`then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数。
+>
+>>* `finally`方法的回调函数不接受任何参数，
+>>* 这意味着没有办法知道，前面的 Promise 状态到底是`fulfilled`还是`rejected`。
+>>* 这表明，`finally`方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。
+
+##### a) `finally`本质上是`then`方法的特例
+
+>```javascript
+>promise
+>.finally(() => {});
+>
+>// 等同于
+>promise
+>.then(
+>result =>  result ,
+>error =>  throw error
+>);
+>```
+>
+>上面代码中，如果不使用`finally`方法，同样的语句需要为成功和失败两种情况各写一次。有了`finally`方法，则只需要写一次。
+
+##### b) 它的实现
+
+>它的实现也很简单。
+>
+>```javascript
+>Promise.prototype.finally = function (callback) {
+>let P = this.constructor;
+>return this.then(
+>value  => P.resolve(callback()).then(() => value),
+>reason => P.resolve(callback()).then(() => { throw reason })
+>);
+>};
+>```
+>
+>上面代码中，不管前面的 Promise 是`fulfilled`还是`rejected`，都会执行回调函数`callback`。
+>
+>从上面的实现还可以看到，`finally`方法总是会返回原来的值(传入什么即传出什么)
+>
+>```javascript
+>// resolve 的值是 undefined
+>Promise.resolve(2).then(() => {}, () => {})
+>
+>// resolve 的值是 2
+>Promise.resolve(2).finally(() => {})
+>
+>// reject 的值是 undefined
+>Promise.reject(3).then(() => {}, () => {})
+>
+>// reject 的值是 3
+>Promise.reject(3).finally(() => {})
+>```
+>
+>![image-20210927135255264](ES全系列详细学习笔记中的图片/image-20210927135255264.png) 
+
+#### ④ Promise.all()
+
+>`Promise.all()`方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。
+>
+>```javascript
+>const p = Promise.all([p1, p2, p3]);
+>```
+>
+>>* `Promise.all()`方法接受一个数组作为参数，
+>>* `p1`、`p2`、`p3`都是 Promise 实例，如果不是，就会先调用下面讲到的`Promise.resolve`方法，将参数转为 Promise 实例，再进一步处理。
+>>* 另外，`Promise.all()`方法的参数可以不是数组，但必须具有 Iterator 接口，且返回的每个成员都是 Promise 实例。
+
+##### a) 返回的状态由什么决定?
+
+>`p`的状态由`p1`、`p2`、`p3`决定，分成两种情况。
+>
+>>1. 只有`p1`、`p2`、`p3`的状态都变成`fulfilled`，`p`的状态才会变成`fulfilled`，此时`p1`、`p2`、`p3`的返回值组成一个数组，传递给`p`的回调函数。
+>>2. 只要`p1`、`p2`、`p3`之中有一个被`rejected`，`p`的状态就变成`rejected`，此时第一个被`reject`的实例的返回值，会传递给`p`的回调函数。
+>
+>###### 下面是一个具体的例子。
+>
+>```javascript
+>// 生成一个Promise对象的数组
+>const promises = ['hong', 1, 2, 3, 4, 5].map(item {
+>return getJSON( item+'.json');
+>});
+>
+>Promise.all(promises).then(function (posts) {
+>// ...
+>}).catch(function(reason){
+>// ...
+>});
+>```
+>
+>上面代码中，`promises`是包含 6 个 Promise 实例的数组，只有这 6 个实例的状态 **都** 变成`fulfilled`，或者**其中有一个变为`rejected`**，才会调用`Promise.all`方法后面的回调函数。
+>
+>###### 下面是另一个例子
+>
+>```javascript
+>const databasePromise = connectDatabase(); //假设定义了一个异步方法,此方法能拿到你需要的所有数据
+>
+>const booksPromise = databasePromise     //定义一个方法,在 databasePromise() 执行后寻找其内部书本信息
+>.then(findAllBooks);
+>
+>const userPromise = databasePromise    //定义一个方法,在 databasePromise() 执行后寻找其内部当前用户信息
+>.then(getCurrentUser);
+>
+>Promise.all([
+>booksPromise,
+>userPromise
+>])
+>.then(([books, user]) => pickTopRecommendations(books, user));
+>```
+>
+>上面代码中，`booksPromise`和`userPromise`是两个异步操作，只有等到它们的结果都返回了，才会触发`pickTopRecommendations`这个回调函数。
+
+##### b) 如果参数中的Promise实例定义了自己的catch方法 ?
+
+>注意，如果作为参数的 Promise 实例，自己定义了`catch`方法，那么它一旦被`rejected`，并不会触发`Promise.all()`的`catch`方法。
+>
+>```javascript
+>//定义一个状态将为成功的的promise
+>const p1 = new Promise((resolve, reject) => { resolve('hello')})
+>.then(result => result)
+>.catch(e => e);
+>
+>//定义一个将抛出错误的promise
+>const p2 = new Promise((resolve, reject) => { throw new Error('报错了') })
+>.then(result => result)
+>.catch(e =>{
+>console.log('p2自己的catch捕获: ', e)
+>return e; //异常获取后原样返回,不做修改
+>});
+>
+>//调用 Promise.all 方法
+>Promise.all([p1, p2])
+>.then(result => console.log(' Promise.all 方法中的成功回调: ', result))
+>.catch(e => console.log(" Promise.all 方法中的catch", e));
+>
+>//p2自己的catch捕获:  Error: 报错了
+>// Promise.all 方法中的成功回调:  (2) ['hello', Error: 报错了]
+>```
+>
+>上面代码中，
+>
+>>* `p1`会`resolved`，`p2`首先会`rejected`
+>>* 但是`p2`有自己的`catch`方法，该方法返回的是一个新的 Promise 实例，`p2`指向的实际上是这个实例。
+>>* 该实例执行完`catch`方法后，也会变成`resolved`，导致`Promise.all()`方法参数里面的两个实例都会`resolved`
+>>* 因此会调用`then`方法指定的回调函数，而不会调用`catch`方法指定的回调函数
+
+##### c)  如果参数中的Promise实例 `没有` 定义自己的catch方法 ?
+
+>如果`p2`没有自己的`catch`方法，就会调用`Promise.all()`的`catch`方法。
+>
+>```javascript
+>//定义一个状态将为成功的的promise
+>const p1 = new Promise((resolve, reject) => { resolve('hello')})
+>.then(result => result)
+>
+>//定义一个将抛出错误的promise
+>const p2 = new Promise((resolve, reject) => { throw new Error('报错了') })
+>.then(result => result)
+>
+>//调用 Promise.all 方法
+>Promise.all([p1, p2])
+>.then(result => console.log(' Promise.all 方法中的成功回调: ', result))
+>.catch(e => console.log(" Promise.all 方法中的catch", e));
+>
+>// Promise.all 方法中的catch Error: 报错了
+>```
+
+#### ⑤ Promise.race()
+
+>`Promise.race()`方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。
+>
+>```javascript
+>const p = Promise.race([p1, p2, p3]);
+>```
+>
+>上面代码中，只要`p1`、`p2`、`p3`之中有一个实例率先改变状态，`p`的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给`p`的回调函数。
+>
+>`Promise.race()`方法的参数与`Promise.all()`方法一样，如果不是 Promise 实例，就会先调用下面讲到的`Promise.resolve()`方法，将参数转为 Promise 实例，再进一步处理。
+
+##### a) 举个简单的🌰
+
+>如p1延时,开启了异步,内部正常是同步进行,所以`p2>p3>p1`,结果是`P2`
+>
+>```js
+>let p1 = new Promise((resolve, reject) => {
+>setTimeout(() => {
+>resolve('OK');
+>}, 1000);
+>})
+>let p2 = Promise.resolve('Success');
+>let p3 = Promise.resolve('Oh Yeah');
+>//调用
+>const result = Promise.race([p1, p2, p3]);
+>console.log(result);
+>```
+
+##### b) 举个应用实🌰
+
+>下面是一个例子，如果指定时间内没有获得结果，就将 Promise 的状态变为`reject`，否则变为`resolve`。
+>
+>```javascript
+>const p = Promise.race([
+>fetch('https://gitee.com/hongjilin'),
+>new Promise(function (resolve, reject) {
+>setTimeout(() => reject(new Error('请求超时!!!!')), 5000)
+>})
+>]);
+>
+>p
+>.then(console.log)
+>.catch(console.error);
+>```
+>
+>上面代码中，如果 5 秒之内`fetch`方法无法返回结果，变量`p`的状态就会变为`rejected`，从而触发`catch`方法指定的回调函数。
+>
+>是不是很好用又简单
+
+#### ⑥ Promise.allSettled()
+
+>`Promise.allSettled()`方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。
+>
+>**只有等到所有这些参数实例都返回结果**，不管是`fulfilled`还是`rejected`，包装实例才会结束。
+>
+>该方法由 [ES2020](https://github.com/tc39/proposal-promise-allSettled) 引入。
+
+##### a) 举个简单的🌰
+
+>```javascript
+>const promises = [
+>fetch('https://gitee.com/hongjilin'),
+>fetch('https://github.com/Hongjilin'),
+>fetch('./hong.json'),
+>];
+>loading = true; //请求前将 loading 改为true ; 页面出现滚动加载图标蒙层
+>await Promise.allSettled(promises);
+>loading = false;
+>```
+>
+>上面代码对服务器发出三个请求，等到三个请求都结束，不管请求成功还是失败，加载的滚动图标就会消失。
+
+##### b)  该方法返回的新的 Promise 实例，一旦结束，状态总是`fulfilled`，不会变成`rejected`
+
+>该方法返回的新的 Promise 实例，一旦结束，状态总是`fulfilled`，不会变成`rejected`。状态变成`fulfilled`后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入`Promise.allSettled()`的 Promise 实例。
+>
+>```javascript
+>const resolved = Promise.resolve('返回成功状态的promise');
+>const rejected = Promise.reject('返回失败状态的promise');
+>
+>const allSettledPromise = Promise.allSettled([resolved, rejected]);
+>// Promise.allSettled 得到的新实例状态只会是 `fulfilled`
+>allSettledPromise.then(function (results) {
+>console.log(results); //注意,这是 `fulfilled` 的回调函数,只有其状态为成功才能进到这里
+>});
+>/*
+>[
+>	{ "status": "fulfilled", "value": "返回成功状态的promise" },
+>	{ "status": "rejected", "reason": "返回失败状态的promise" }
+>]
+>*/
+>```
+>
+>>* `Promise.allSettled()`的返回值`allSettledPromise`，状态只可能变成`fulfilled`(注意,是 **allSettledPromise** 的状态,而不是内部的promise实例)
+>>* 它的监听函数接收到的参数是数组`results`。该数组的每个成员都是一个对象，对应的是传入`Promise.allSettled()`的 Promise 实例。
+>>* 每个对象都有`status`属性，该属性的值只可能是字符串`fulfilled`或字符串`rejected`。
+>>* `fulfilled`时，对象有`value`属性，`rejected`时有`reason`属性，对应两种状态的返回值。
+
+##### c) 举个返回值用法的🌰
+
+>```javascript
+>const promises = [ fetch('./hong.json'), fetch('https://gitee.com/hongjilin') ];
+>const results = await Promise.allSettled(promises);
+>
+>// 过滤出成功的请求
+>const successfulPromises = results.filter(item => item.status === 'fulfilled');
+>
+>// 过滤出失败的请求，并取得它们的失败原因
+>const errors = results
+>.filter(p => p.status === 'rejected')
+>.map(p => p.reason);
+>```
+>
+>有时候，我们不关心异步操作的结果，只关心这些操作有没有结束。这时，`Promise.allSettled()`方法就很有用。如果没有这个方法，想要确保所有操作都结束，就很麻烦。`Promise.all()`方法无法做到这一点。
+>
+>```javascript
+>const urls = [ 'https://gitee.com/hongjilin' ,'https://github.com/Hongjilin'];
+>const requests = urls.map(x => fetch(x));
+>//举例用 Promise.all 尝试实现,很明显,难以实现
+>try {
+>await Promise.all(requests);
+>console.log('所有请求都成功。');
+>} catch {
+>console.log('至少一个请求失败，其他请求可能还没结束。');
+>}
+>```
+>
+>上面代码中，`Promise.all()`无法确定所有请求都结束。想要达到这个目的，写起来很麻烦，有了`Promise.allSettled()`，这就很容易了
+
+#### ⑦ Promise.any()
+
+>ES2021 引入了[`Promise.any()`方法](https://github.com/tc39/proposal-promise-any)。该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。只要参数实例有一个变成`fulfilled`状态，包装实例就会变成`fulfilled`状态；如果所有参数实例都变成`rejected`状态，包装实例就会变成`rejected`状态。
+
+##### a) 与 `Promise.race()` 方法的区别
+
+>`Promise.any()`跟`Promise.race()`方法很像，只有一点不同，就是不会因为某个 Promise 变成`rejected`状态而结束。
+>
+>```javascript
+>const promises = [
+>fetch('https://gitee.com/hongjilin').then(() => 'a'),
+>fetch('https://github.com/Hongjilin').then(() => 'b'),
+>fetch('./hong.json').then(() => 'c'),
+>];
+>try {
+>const first = await Promise.any(promises);
+>console.log(first);
+>} catch (error) {
+>console.log(error);
+>}
+>```
+>
+>上面代码中，`Promise.any()`方法的参数数组包含三个 Promise 操作。其中只要有一个变成`fulfilled`，`Promise.any()`返回的 Promise 对象就变成`fulfilled`。如果所有三个操作都变成`rejected`，那么`await`命令就会抛出错误。
+
+##### b) Promise.any() 抛出的错误
+
+>`Promise.any()`抛出的错误，不是一个一般的错误，而是一个 AggregateError 实例。它相当于一个数组，每个成员对应一个被`rejected`的操作所抛出的错误。下面是 AggregateError 的实现示例。
+>
+>```javascript
+>new AggregateError() extends Array -> AggregateError
+>
+>const err = new AggregateError();
+>err.push(new Error("first error"));
+>err.push(new Error("second error"));
+>throw err;
+>```
+>
+>捕捉错误时，如果不用`try...catch`结构和 await 命令，可以像下面这样写。
+>
+>```javascript
+>Promise.any(promises).then(
+>(first) => {
+>// Any of the promises was fulfilled.
+>},
+>(error) => {
+>// All of the promises were rejected.
+>}
+>);
+>```
+
+##### c) 再举个🌰
+
+>下面是一个例子。
+>
+>```javascript
+>const resolved = Promise.resolve('成功');
+>const rejected = Promise.reject('失败了');
+>const alsoRejected = Promise.reject('太失败了');
+>
+>Promise.any([resolved, rejected, alsoRejected]).then(function (result) {
+>console.log(result); // 成功
+>});
+>
+>Promise.any([rejected, alsoRejected]).catch(function (results) {
+>console.log(results);  //AggregateError: All promises were rejected
+>});
+>```
+>
+>三个Promise中有一个为成功,则总的结果就是成功,三个中全部失败,才会变成失败
+
+#### ⑧ Promise.resolve()
+
+>有时需要将现有对象转为 Promise 对象，`Promise.resolve()`方法就起到这个作用。
+>
+>```javascript
+>const jsPromise = Promise.resolve($.ajax('https://gitee.com/hongjilin'));
+>```
+>
+>上面代码将 jQuery 生成的`deferred`对象，转为一个新的 Promise 对象。
+>
+>`Promise.resolve()`等价于下面的写法。
+>
+>```javascript
+>Promise.resolve('努力学习的汪')
+>// 等价于
+>new Promise(resolve => resolve('努力学习的汪'))
+>```
+>
+>`Promise.resolve()`方法的参数分成四种情况
+
+##### a) 参数是一个 Promise 实例
+
+> 如果参数是 Promise 实例，那么`Promise.resolve`将不做任何修改、原封不动地返回这个实例。
+
+##### **b) 参数是一个`thenable`对象**
+
+>`thenable`对象指的是具有`then`方法的对象，比如下面这个对象。
+>
+>```javascript
+>let thenable = {
+>	then: function(resolve, reject) {
+>		resolve('成功');
+>	}
+>};
+>```
+>
+>`Promise.resolve()`方法会将这个对象转为 Promise 对象，然后就立即执行`thenable`对象的`then()`方法。
+>
+>```javascript
+>let thenable = {
+>	then: function(resolve, reject) { resolve('成功') }
+>};
+>
+>let p1 = Promise.resolve(thenable);
+>p1.then(function (value) {
+>	console.log(value);  // '成功'
+>});
+>```
+>
+>上面代码中，`thenable`对象的`then()`方法执行后，对象`p1`的状态就变为`resolved`，从而立即执行最后那个`then()`方法指定的回调函数，输出 **'成功'**。 
+
+##### c) 参数不是具有`then()`方法的对象，或根本就不是对象
+
+>如果参数是一个原始值，或者是一个不具有`then()`方法的对象，则`Promise.resolve()`方法返回一个新的 Promise 对象，状态为`resolved`。
+>
+>```javascript
+>const p = Promise.resolve('努力学习的汪');
+>
+>p.then(function (s) {
+>console.log(s)
+>});
+>// 努力学习的汪
+>```
+>
+>上面代码生成一个新的 Promise 对象的实例`p`。
+>
+>>* 由于字符串 `努力学习的汪` 不属于异步操作（判断方法是字符串对象不具有 then 方法）
+>>* 返回 Promise 实例的状态从一生成就是`resolved`，所以回调函数会立即执行
+>>* `Promise.resolve()`方法的参数会同时传给回调函数作为其参数
+
+##### d) 不带有任何参数
+
+>`Promise.resolve()`方法允许调用时不带参数，直接返回一个`resolved`状态的 Promise 对象。
+>
+>所以，如果希望得到一个 Promise 对象，比较方便的方法就是直接调用`Promise.resolve()`方法。
+>
+>```javascript
+>const p = Promise.resolve();
+>
+>p.then(function () {});
+>```
+>
+>上面代码的变量`p`就是一个 Promise 对象。
+>
+>需要注意的是，立即`resolve()`的 Promise 对象，是在本轮“事件循环”（event loop）的结束时执行，而不是在下一轮“事件循环”的开始时 --> 不懂的同学请看 [JavaScript笔记中的#4事件循环模型event-loop机制](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记#4事件循环模型event-loop机制) ,本人在此有进行详细的解析
+>
+>```javascript
+>setTimeout(function () {
+>console.log('three'); //这里是新的一轮事件循环
+>}, 0);
+>
+>Promise.resolve().then(function () {
+>console.log('two'); //本轮同步代码结束后,新一轮事件循环前,就执行
+>});
+>
+>console.log('one');
+>
+>// one
+>// two
+>// three
+>```
+>
+>上面代码中，`setTimeout(fn, 0)`在下一轮“事件循环”开始时执行，`Promise.resolve()`在本轮“事件循环”结束时执行，`console.log('one')`则是立即执行，因此最先输出。
+
+#### ⑨ Promise.reject()
+
+>`Promise.reject(reason)`方法也会返回一个新的 Promise 实例，该实例的状态为`rejected`。
+>
+>```javascript
+>const p = Promise.reject('出错了');
+>// 等同于
+>const p = new Promise((resolve, reject) => reject('出错了'))
+>
+>p.then(null, function (s) {
+>console.log(s)
+>});
+>// 出错了
+>```
+>
+>上面代码生成一个 Promise 对象的实例`p`，状态为`rejected`，回调函数会立即执行。
+>
+>`Promise.reject()`方法的参数，会原封不动地作为`reject`的理由，变成后续方法的参数。
+>
+>```javascript
+>Promise.reject('出错了')
+>.catch(e => {
+>console.log(e === '出错了')
+>})
+>// true
+>```
+>
+>上面代码中，`Promise.reject()`方法的参数是一个字符串，后面`catch()`方法的参数`e`就是这个字符串。
+
+#### ⑩ Promise.try()
+
+>实际开发中，经常遇到一种情况：不知道或者不想区分，函数`f`是同步函数还是异步操作，但是想用 Promise 来处理它。因为这样就可以不管`f`是否包含异步操作，都用`then`方法指定下一步流程，用`catch`方法处理`f`抛出的错误。一般就会采用下面的写法。
+>
+>```javascript
+>Promise.resolve().then(f)
+>```
+>
+>上面的写法有一个缺点，就是如果`f`是同步函数，那么它会在本轮事件循环的末尾执行。
+>
+>```javascript
+>const f = () => console.log('now');
+>Promise.resolve().then(f);
+>console.log('next');
+>// next
+>// now
+>```
+>
+>上面代码中，函数`f`是同步的，但是用 Promise 包装了以后，就变成异步执行了。
+>
+>###### 那么有没有一种方法，让同步函数同步执行，异步函数异步执行，并且让它们具有统一的 API 呢？
+
+##### a) 写法一 : 用`async`函数来写
+
+>该知识点如果不懂的可以继续往下看,这是ES6的另外一块知识点内容
+>
+>```javascript
+>const f = () => console.log('now');
+>(async () => f())();
+>console.log('next');
+>// now
+>// next
+>```
+>
+>上面代码中，第二行是一个立即执行的匿名函数，会立即执行里面的`async`函数，因此如果`f`是同步的，就会得到同步的结果；如果`f`是异步的，就可以用`then`指定下一步，就像下面的写法。
+>
+>```javascript
+>(async () => f())()
+>.then(...)
+>```
+>
+>需要注意的是，`async () => f()`会吃掉`f()`抛出的错误。所以，如果想捕获错误，要使用`promise.catch`方法。
+>
+>```javascript
+>(async () => f())()
+>.then(...)
+>.catch(...)
+>```
+
+##### b)  写法二 : 使用`new Promise()`
+
+>```javascript
+>const f = () => console.log('now');
+>(
+>() => new Promise(
+>resolve => resolve(f())
+>)
+>)();
+>console.log('next');
+>// now
+>// next
+>```
+>
+>上面代码也是使用立即执行的匿名函数，执行`new Promise()`。这种情况下，同步函数也是同步执行的。
+
+##### c) Promise.try的引出
+
+>鉴于这是一个很常见的需求，所以现在有一个[提案](https://github.com/ljharb/proposal-promise-try)，提供`Promise.try`方法替代上面的写法。
+>
+>```javascript
+>const f = () => console.log('now');
+>Promise.try(f);
+>console.log('next');
+>// now
+>// next
+>```
+>
+>事实上，`Promise.try`存在已久，Promise 库[`Bluebird`](http://bluebirdjs.com/docs/api/promise.try.html)、[`Q`](https://github.com/kriskowal/q/wiki/API-Reference#promisefcallargs)和[`when`](https://github.com/cujojs/when/blob/master/docs/api.md#whentry)，早就提供了这个方法。
+>
+>由于`Promise.try`为所有操作提供了统一的处理机制，所以如果想用`then`方法管理流程，最好都用`Promise.try`包装一下。这样有[许多好处](http://cryto.net/~joepie91/blog/2016/05/11/what-is-promise-try-and-why-does-it-matter/)，其中一点就是可以更好地管理异常。
+>
+>```javascript
+>function getUsername(userId) {
+>return database.users.get({id: userId})
+>.then(function(user) {
+>return user.name;
+>});
+>}
+>```
+>
+>上面代码中，`database.users.get()`返回一个 Promise 对象，如果抛出异步错误，可以用`catch`方法捕获，就像下面这样写。
+>
+>```javascript
+>database.users.get({id: userId})
+>.then(...)
+>.catch(...)
+>```
+>
+>但是`database.users.get()`可能还会抛出同步错误（比如数据库连接错误，具体要看实现方法），这时你就不得不用`try...catch`去捕获。
+>
+>```javascript
+>try {
+>database.users.get({id: userId})
+>.then(...)
+>.catch(...)
+>} catch (e) {
+>// ...
+>}
+>```
+>
+>上面这样的写法就很笨拙了，这时就可以统一用`promise.catch()`捕获所有同步和异步的错误。
+>
+>```javascript
+>Promise.try(() => database.users.get({id: userId}))
+>.then(...)
+>.catch(...)
+>```
+>
+>事实上，`Promise.try`就是模拟`try`代码块，就像`promise.catch`模拟的是`catch`代码块。
+
+------
+
+### Ⅲ - 更多 Promise 知识点
+
+>此知识点因为 **很重要** ,此处将只列出ES6中关于Promise的用法详解,像是 **自定义Promise手撕代码** 、**Promise+async+await**、**Promise的宏任务与微任务** ....等等都不会在此处记载
+>
+>更多完整关于Promise的知识点可以看这里 --> **[Promise学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Promise学习笔记)** 
+
+------
+
+## 

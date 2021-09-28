@@ -1,14 +1,10 @@
-
-
 # #此文件为方便gitee网站观阅使用专门创建
 
 > 此笔记文件于某一时间复制至此,容易存在更新不及时问题,建议观看同级目录下的笔记文件
 >
 > 防止Gitee上点开加载时间过久,所以只截取了上方`VSCode的使用学习笔记`部分笔记的部分知识点至此,方便网站阅读概览,完整内容请看具体笔记
 >
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、 **[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
-
-------
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # #说明
 
@@ -17,12 +13,10 @@
 > 俗话说, `工欲善其事, 必先利其器`, 当你刚入门编程时第一件要做的就是去了解并学习编辑器的使用
 >
 > 查阅借鉴的资料: 知乎的 [King的VSCode新手入门教程](https://zhuanlan.zhihu.com/p/73577624)  、[韩骏的如何学习 Visual Studio Code？](https://zhuanlan.zhihu.com/p/162544477)、[千古壹号的第一次使用VS Code时你应该知道的一切配置](https://zhuanlan.zhihu.com/p/62913725);CSDN的 [猫科龙的「VS Code」Visual Studio Code 菜鸟教程：从入门到精通](https://blog.csdn.net/maokelong95/article/details/88805589);极客教程的 [VSCode 是什么](https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html) ;思否的 [hyangteng的宇宙最强vscode教程（基础篇）](https://segmentfault.com/a/1190000017949680); [思考问题的熊的VScode入门学习路径](https://kaopubear.top/blog/2019-09-11-howtolearnvscode/); 简书的 [破晓霜林的VsCode使用教程](https://www.jianshu.com/p/11554732b323); [VSCode 插件大全｜ VSCode 高级玩家之第二篇](https://juejin.im/post/5ea40c6751882573b219777d); [VSCode 前端必备插件, 有可能你装了却不知道如何使用？](https://juejin.im/post/5db66672f265da4d0e009aad) ;[如何让 VS Code 更好用 10 倍？这里有一份 VS Code 新手指南](https://zhuanlan.zhihu.com/p/99462672); [使用 VSCode 的一些技巧](https://mp.weixin.qq.com/s?src=11&timestamp=1591581536&ver=2387&signature=i4xLZlLe1Gkl7OiBIhPO*VSeNB5lzFgTY-dgNW9E9ZbtIAv4bnJ1RdAAZdhvDw*cg-DmMcUa-V8NSUdV-tthmXZCq3ht4edCweq6v0QxKjnh8IuAxyyh5qymdRui*8iE&new=1);[能让你开发效率翻倍的 VSCode 插件配置（上）](https://juejin.im/post/5a08d1d6f265da430f31950e);还有一部分因为VSCode在很早之前就已在使用, 当时有做部分笔记但是未注明其中引用出处(小部分), 现在也无法查找, 但本人笔记主要还是为了方便大家学习, 所以仍会把当初笔记并入, 发现出处的小伙伴可以私聊我
->
-> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、 **[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、 **[ReactHooks笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ReactHooks笔记)** 、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
-# #目录
+------
 
->[TOC]
+
 
 # 绪论
 
@@ -127,6 +121,8 @@
 >| Cmd + Shift + O           | Ctrl + shift + O       | 在当前文件的各种**方法之间**进行跳转 |                                    |
 >| Ctrl + G                  | Ctrl + G               | 跳转到指定行                         |                                    |
 >| Cmd+Shift+\               | Ctrl+Shift+\           | 跳转到匹配的括号                     |                                    |
+>| F12                       | F12                    | 跳转到变量或函数定义的快捷方法。     | 要先将光标移动到变量上             |
+>| **⌥** + **F12**           | ALT + F12              | 查看定义,不是跳转,直接出现一个框查看 |                                    |
 
 ### 3、 移动光标
 
@@ -140,18 +136,22 @@
 >| Cmd + ↑             | Ctrl + Home                      | 将光标定位到文章的第一行   |            |
 >| Cmd + ↓             | Ctrl + End                       | 将光标定位到文章的最后一行 |            |
 >| Cmd + Shift + \     |                                  | 在**代码块**之间移动光标   |            |
+>| **⌘** + **L**       | CTRL + L                         | 选中当前鼠标所在行         |            |
 
 ### 4、  编辑操作
 
->| Mac 快捷键             | Win 快捷键           | 作用                                 | 备注                                     |
->| :--------------------- | :------------------- | :----------------------------------- | :--------------------------------------- |
->| **Cmd + Enter**        | **Ctrl + Enter**     | 在当前行的下方新增一行, 然后跳至该行 | 即使`光标不在行尾`, 也能快速向下插入一行 |
->| **Cmd+Shift+Enter**    | **Ctrl+Shift+Enter** | 在当前行的上方新增一行, 然后跳至该行 | 即使`光标不在行尾`, 也能快速向上插入一行 |
->| **Option + ↑**         | **Alt + ↑**          | 将代码向上移动                       | 很常用                                   |
->| **Option + ↓**         | **Alt + ↓**          | 将代码向下移动                       | 很常用                                   |
->|                        | **Ctrl+Shift+↑/↓**   | 选中多行代码                         |                                          |
->| Option + Shift + ↑     | Alt + Shift + ↑      | 将代码向上复制                       |                                          |
->| **Option + Shift + ↓** | **Alt + Shift + ↓**  | 将代码向下复制                       | 写重复代码的利器                         |
+>| Mac 快捷键             | Win 快捷键           | 作用                                               | 备注                                                         |
+>| :--------------------- | :------------------- | :------------------------------------------------- | :----------------------------------------------------------- |
+>| **Cmd + Enter**        | **Ctrl + Enter**     | 在当前行的下方新增一行, 然后跳至该行               | 即使`光标不在行尾`, 也能快速向下插入一行                     |
+>| **Cmd+Shift+Enter**    | **Ctrl+Shift+Enter** | 在当前行的上方新增一行, 然后跳至该行               | 即使`光标不在行尾`, 也能快速向上插入一行                     |
+>| **Option + ↑**         | **Alt + ↑**          | 将代码向上移动                                     | 很常用                                                       |
+>| **Option + ↓**         | **Alt + ↓**          | 将代码向下移动                                     | 很常用                                                       |
+>|                        | **Ctrl+Shift+↑/↓**   | 选中多行代码                                       |                                                              |
+>| Option + Shift + ↑     | Alt + Shift + ↑      | 将代码向上复制                                     |                                                              |
+>| **Option + Shift + ↓** | **Alt + Shift + ↓**  | 将代码向下复制                                     | 写重复代码的利器                                             |
+>| **F2**                 | **F2**               | 选中变量名后按F2<br />代码中所有变量名都会发生改变 | 重构代码必不可少的快捷方式<br />但是要注意,此操作可能会改到同名变量 |
+>
+>
 
 ### 5、 多光标编辑
 
@@ -163,6 +163,7 @@
 >| Option + 鼠标点击任意位置 | **Alt + 鼠标点击任意位置** | 在任意位置, 同时出现光标             |                                              |
 >| Option + Shift + 鼠标拖动 | Alt + Shift + 鼠标拖动     | 在选中区域的每一行末尾, 出现光标     |                                              |
 >| Cmd + Shift + L           | Ctrl + Shift + L           | 在选中文本的所有相同内容处, 出现光标 |                                              |
+>| **⇧** +  **⌥** + **I**    | Ctrl + Shift + I           | 在所选的每一行的末尾插入光标         |                                              |
 >
 >其他的多光标编辑操作：（很重要）
 >
@@ -194,12 +195,16 @@
 
 ### 8、  搜索相关
 
->| Mac 快捷键          | Win 快捷键          | 作用                                         | 备注                     |
->| :------------------ | :------------------ | :------------------------------------------- | :----------------------- |
->| **Cmd + Shift + F** | **Ctrl + Shift +F** | 全局搜索代码 (也可以直接左侧菜单栏呼出)      | 很常用                   |
->| Cmd + P             | Ctrl + P            | 在当前的项目工程里, **全局**搜索文件名       |                          |
->| Cmd + F             | Ctrl + F            | 在当前文件中搜索代码, 光标在搜索框里         |                          |
->| Cmd + G             | F3                  | 在当前文件中搜索代码, `光标仍停留在编辑器里` | 与`Ctrl+F`就光标位置不同 |
+>| Mac 快捷键              | Win 快捷键          | 作用                                         | 备注                                                         |
+>| :---------------------- | :------------------ | :------------------------------------------- | :----------------------------------------------------------- |
+>| **Cmd + Shift + F**     | **Ctrl + Shift +F** | 全局搜索代码 (也可以直接左侧菜单栏呼出)      | 很常用                                                       |
+>| Cmd + P                 | Ctrl + P            | 在当前的项目工程里, **全局**搜索文件名       |                                                              |
+>| Cmd + F                 | Ctrl + F            | 在当前文件中搜索代码, 光标在搜索框里         |                                                              |
+>| Cmd + G                 | F3                  | 在当前文件中搜索代码, `光标仍停留在编辑器里` | 与`Ctrl+F`就光标位置不同                                     |
+>| **⇧** + **⌘**  +  **L** | CTRL + SHIFT + L    | 选中所有找到的匹配项,可以进行批量修改        |                                                              |
+>| **⌘** + **F2**          | CTRL + F2           | 选中所有匹配项                               | 有了它，甚至不必选择任何东西，<br />只需要将光标放在要选择所有出现的单词上,跟上面一致,可以批量操作 |
+>
+>
 
 ### 9、  自定义快捷键
 
@@ -208,6 +213,25 @@
 >![image-20210826142824734](VSCode的使用学习笔记中的图片/image-20210826142824734.png) 
 >
 >>快捷键速查表[官方]：<https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf>
+
+### 10、组合快捷键
+
+>这种快捷键方式想必大家基本都不知道吧,就是连续按两个快捷键出现的
+>
+>| Mac 快捷键                    | Win 快捷键                                  | 作用                       | 备注                                                         |
+>| :---------------------------- | :------------------------------------------ | :------------------------- | :----------------------------------------------------------- |
+>| **⌘** +  **K**  **⌘** + **X** | 先按**CTRL + K** 随后紧接着按 **CTRL +  X** | 裁剪尾随空格               | 即剪除本行代码后面所有空格                                   |
+>| **⌘** +  **K**  **R**         | 先按 **CTRL  +  K** 随后紧接着按 **R**      | 在资源管理器中显示活动文件 | 弹出Vscode视图显示文件<br />即打开当前文件目录<br />非常好用 |
+>| **⌘** + **K** **V**           | 先按 **CTRL +  K** 随后紧接着按 **V**       | 打开 MarkDown 侧边预览     | 对于本人习惯用VSCode管理笔记来说是非常好用的                 |
+>| **⌘** +  **K** **Z**          | 先按 **CTRL + K** 随后紧接着按 **Z**        | 切换禅模式                 | 其实就是切换为全屏且只留下活动窗口                           |
+>| **⌘** + **K** **⌘** + **F**   | 先按 **CTRL + K** 随后紧接着按 **CTRL + F** | 格式化选中代码             | 只格式化一部分代码格式                                       |
+>|                               |                                             |                            |                                                              |
+>
+>这是当你按下 **Ctrl+K** 时 **VSCode** 下方展示,没有进行计时,而是监听你按下 **Ctrl+K** 后在此按下的按键,不用按的很匆忙
+>
+>![image-20210928144629200](VSCode的使用学习笔记中的图片/image-20210928144629200.png) 
+
+
 
 ## Ⅲ -  命令面板的使用
 
@@ -330,7 +354,9 @@
 
 ### 2、Chinese (Simplified) Language Pack for Visual Studio Code
 
-> 中文包, 让软件显示为简体中文语言, 没啥好说的吧, 
+> 中文包, 让软件显示为简体中文语言, 没啥好说的吧
+>
+> 当初在学校时傻傻的觉得直接用英文用习惯了就行了,不然以后工作了别人没用中文包怎么给人调试?事实证明,出来都用的中文包,你的英文编辑器别人给你调试时反而不习惯:dog:
 
 ### 3、Live Server 
 
@@ -369,10 +395,16 @@
 >编程有三等境界：
 >
 >- 第三等境界是打日志, 这是最简单、便捷的方式, 略显低级, 一般新手或资深程序员偷懒时会用。
->
 >- 第二等境界是断点调试, 在前端、Java、PHP、iOS 开发时非常常用, 通过断点调试可以很直观地跟踪代码执行逻辑、调用栈、变量等, 是非常实用的技巧。
->
 >- 第一等境界是测试驱动开发, 在写代码之前先写测试。与第二等的断点调试刚好相反, 大部分人不是很习惯这种方式, 但在国外开发者或者敏捷爱好者看来, 这是最高效的开发方式, 在保证代码质量、重构等方面非常有帮助, 是现代编程开发必不可少的一部分。
+
+### 7、Git History 
+
+> 有些同学习惯使用编辑器中的 Git 管理工具, 而不太喜欢要打开另外一个 Git UI 工具的同学, 这一款插件满足你查询所有 Git 记录的需求。
+
+### 8、Git Graph
+
+>同上 是另一款GUI插件
 
 ## Ⅱ - 推荐的插件
 
@@ -415,13 +447,21 @@
 >
 >![image-20210802182512649](VSCode的使用学习笔记中的图片/image-20210802182512649-16299666148031.png)
 
-### 6、Git History (慎用)
+### 6、Vscode counter --> 项目代码统计
 
-> 有些同学习惯使用编辑器中的 Git 管理工具, 而不太喜欢要打开另外一个 Git UI 工具的同学, 这一款插件满足你查询所有 Git 记录的需求。
->
-> 推荐但是不要随便装,不用或者对于git不熟悉的同学就别装了,别导致提交啥的出错
+>快速统计项目中代码行数以及分类,直接拓展商店搜索安装即可
 
+#### ① 快速统计代码行数
 
+>![image-20210917181537839](VSCode的使用学习笔记中的图片/image-20210917181537839.png)
+
+#### ② 显示结果
+
+>这里用本笔记文件为例:![image-20210917181746314](VSCode的使用学习笔记中的图片/image-20210917181746314.png) 
+
+####  ③查看详情
+
+>![image-20210917182053310](VSCode的使用学习笔记中的图片/image-20210917182053310.png) 
 
 ## Ⅲ - 针对 框架 或 技术 的插件
 
@@ -620,3 +660,15 @@
 >或者直接搜索files:eol进行设置。
 >
 >![image-20210827182253221](VSCode的使用学习笔记中的图片/image-20210827182253221.png) 
+
+## Ⅴ - VSCode左侧拓展活动栏内容消失怎么办
+
+### 1、出现场景
+
+>![image-20210917173122452](VSCode的使用学习笔记中的图片/image-20210917173122452.png) 
+
+### 2、解决方式
+
+>勾选此项即可即可
+>
+>![image-20210917173336954](VSCode的使用学习笔记中的图片/image-20210917173336954.png) 

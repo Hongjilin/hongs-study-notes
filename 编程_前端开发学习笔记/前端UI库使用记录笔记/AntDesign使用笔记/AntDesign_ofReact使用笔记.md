@@ -4,11 +4,8 @@
 >
 >本笔记主要记录工作中项目中遇到的`与官方文档有差异化的` 的使用方式、或者是自己对于文档记录的组件的使用,方便自己查阅
 >
->此笔记持续更新
+>除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 >
->本人笔记地址分享:[`全部笔记`](https://gitee.com/hongjilin/hongs-study-notes)
->
->ps:下方给出的解决代码只会展示本效果所需必要代码,其余代码不展示出来-->`必须代码上都有相应注释`
 
 # #目录
 
@@ -422,6 +419,109 @@
 >
 >* 定义一个 **state**,但不再使用 **defaultValue** 方法,而是直接将 **value绑定state**,初始化给默认值也直接修改state即可
 >* 如果你的输入框在 **From** 表单中 ,那么你可以在初始化生命周期(或useEffect) 中 调用 **from.setFieldsValue({...})**,相当于在每次重绘时都进行一次初始值写入
+
+## 2、Select 选择器
+
+### Ⅰ - filterOption 筛选下拉项自定义筛选条件
+
+>  **filterOption** :是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 true，反之则返回 false
+>
+> 注意:要配合 **showSearch** 一起使用,首先要支持搜索 然后用
+
+##### a) 使用场景
+
+>一般常见场景来说,我们可以只通过  **showSearch为true** 的方式做到输入内容关联下拉项,但是某些场景就需要配合 **filterOption**使用了
+>
+>* 当我们进行搜索的内容不是 **Option** 项中绑定的 **value**, 而是它的 **children** 值呢? 比如你value绑定的是订单id  而 **children** 则是显示时展示的 订单名称
+>* 那么这时候单单使用 **showSearch** 就不足以完成我们的需求了:我们输入订单名称去关联搜索下面下拉项订单名称
+
+##### b) 使用示例
+
+>```tsx
+><Select
+>  placeholder="请输入或下拉选择IP名称"
+>  showSearch
+>  //动态搜索Option的值 而不是value中的值
+>  //正则:当 inputValue 包含于 option 时返回true
+>  filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
+>>>>
+>   {nameList?.map(item => (//下拉项value绑定id  展示却展示名称
+>      <Option key={item?.id} value={item?.id}>
+>        {item?.proxy_name} 
+>      </Option>
+>   ))}
+></Select>
+>```
+>
+>![image-20210916142227728](AntDesign_ofReact使用笔记中的图片/image-20210916142227728.png) 
+
+### Ⅱ - 自定义添加下拉项
+
+>```tsx
+>const [form] = Form.useForm();
+>const [initsPlatforms, setInitsPlatforms] = useState([]); //总的下拉列表
+>const [newPlatforms, setNewPlatforms] = useState(''); //新增内容输入框绑定数据
+>//自定义平台输入框数据绑定
+>  const onChangeName = (event) => {
+>    if (event?.target?.value?.trim()?.length != 0) setNewPlatforms(event.target.value);
+>    else setNewPlatforms(undefined);
+>  };
+>  //自定义平台的添加操作
+>  const addItem = (type) => {
+>    //如果为空字符串或者为undefined 则直接中断
+>    if (!newPlatforms || newPlatforms.trim().length == 0) return;
+>    //将添加标签输入框的内容加入 下拉列表中
+>    setInitsPlatforms([...initsPlatforms, newPlatforms]);
+>      //本人用的from提交,这行代码是将自定义平台直接加到选中框中
+>    form.setFieldsValue({
+>      [type]: [...form.getFieldValue(type), newPlatforms],
+>    });
+>      
+>    setNewPlatforms('');
+>  };         
+>/********************* RreatNode ***********************************/
+><Form.Item label="常见可用平台" name="yes_platforms">
+>  <Select
+>    placeholder="请输入或下拉选择IP名称"
+>    showSearch
+>    mode="multiple"
+>    //动态搜索Option的值 而不是value中的值
+>    //正则:当 inputValue 包含于 option 时返回true
+>    filterOption={(inputValue, option) => new RegExp(inputValue).test(option.children)}
+>    dropdownRender={(menu) => (
+>      <div>
+>        {menu}
+>        <Divider style={{ margin: '4px 0' }} />
+>        <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
+>          <Input style={{ flex: 'auto' }} value={newPlatforms} onChange={onChangeName} />
+>          <a
+>            style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
+>            onClick={() => addItem('yes_platforms')}
+>          >
+>            <PlusOutlined /> 添加自定义平台
+>          </a>
+>        </div>
+>      </div>
+>    )}
+>  >
+>    {initsPlatforms?.map((
+>      item //下拉项value绑定id  展示却展示名称
+>    ) => (
+>      <Option key={item} value={item}>
+>        {item}
+>      </Option>
+>    ))}
+>  </Select>
+></Form.Item>
+>```
+>
+>###### 效果展示
+>
+>![image-20210928120121096](AntDesign_ofReact使用笔记中的图片/image-20210928120121096.png) 
+
+
+
+
 
 
 
@@ -841,10 +941,6 @@
 >
 >   于此问题完美解决了
 
-
-
-
-
 ### Ⅵ-table排序对比大小相关
 
 >antd列表排序`第一次点击逆序第二次正序第三次是恢复到默认`,依次循环.所以每第三次点击并不是无效,而是本身需要此效果
@@ -907,6 +1003,27 @@
 >  ![image-20210715153029004](AntDesign_ofReact使用笔记中的图片/image-20210715153029004.png)
 >
 >`注意`:排序返回应为`正负数[如1、-1]`而不是`boolean`类型
+
+### Ⅶ  -  以其他列作为本列展示筛选条件
+
+>1. 举个实际场景:
+>
+>   - 当我需要根据 [**is_dynamic**] 字段判断 本列展示的是 [**IP名称**] 还是 [**IP地址**] 时
+>
+>2. api概述: 列的 **render()** 方法自动接受两个参数 
+>
+>   - 第一个参数: **daraIndex** 中绑定字段的值
+>   - 第二个参数: 本行数据所有属性名与值
+>
+>3. 代码实现与截图
+>
+>   - 实现方法1:row含有本行所有字段
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件3.png)
+>
+>   - 实现方法2:其实就是换个写法
+>
+>     > ![](AntDesign_ofReact使用笔记中的图片/列表筛选条件2.png)
 
 
 
@@ -1020,23 +1137,33 @@
 >
 >   ![Tree选中效果](AntDesign_ofReact使用笔记中的图片/Tree选中效果.gif) 
 
+## 3、Tooltip文字提示
 
+### Ⅰ - 自定义悬停提示
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+>一般我们的悬停提示就是直接将数据赋值到 [title] 上,但是目前遇到一个需求,是要求悬停提示需要换行、指定行带颜色
+>
+>实际上 [ title ] 可以接受参数是一个ReactNode 即直接一个节点
+>
+>```tsx
+><Tooltip title={this.remarksNode(remarks, remarks_v5, yes_platforms, no_platforms)}>
+>        <p className={style.remarks}>{data}</p>
+></Tooltip>
+>// 生成ReactNode 函数
+>const remarksNode = (remarks, remarks_v5, yes_platforms, no_platforms) => {
+>    return (
+>      <div className={style.zz}>
+>        <span>3版本提示语:</span>
+>        <span>{remarks}</span>
+>        <span> 5版本提示语:</span>
+>        <span> {remarks_v5}</span>
+>        <span>常见可用平台: {yes_platforms?.toString()}</span>
+>        <span style={{color:'red'}}>不推荐使用平台: {no_platforms?.toString()}</span>
+>      </div>
+>    );
+>  };
+>```
+>
+>###### 效果展示
+>
+>![image-20210928105404801](AntDesign_ofReact使用笔记中的图片/image-20210928105404801.png)

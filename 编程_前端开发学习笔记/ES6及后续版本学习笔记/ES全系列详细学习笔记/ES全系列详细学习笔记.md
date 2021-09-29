@@ -164,13 +164,19 @@
 >
 >```javascript
 >var tmp = new Date();
->
 >function f() {
->  console.log(tmp);
->  if (false) { var tmp = 'hello world'; }
+>	console.log(tmp);
+>	if (false) { var tmp = '努力学习的汪'; }
 >}
->
 >f(); // undefined
+>
+>/*********** 上面写法实际上等于这样 **********************/
+>var tmp = new Date();
+>function f() {
+>    var tmp = undefined;
+>	console.log(tmp); //所以这里打印是undefined
+>	if (false) {  tmp = '努力学习的汪'; }
+>}
 >```
 >
 >上面代码的原意是, `if`代码块的外部使用外层的`tmp`变量, 内部使用内层的`tmp`变量. 但是, 函数 [ `f` ] 执行后, 输出结果为 **undefined** , 原因在于变量提升, 导致内层的`tmp`变量覆盖了外层的`tmp`变量. 
@@ -178,9 +184,9 @@
 >第二种场景, 用来计数的循环变量泄露为全局变量. 
 >
 >```javascript
->var s = 'hello';
+>var s = '努力学习的汪';
 >for (var i = 0; i < s.length; i++) { console.log(s[i]);}
->console.log(i); // 5
+>console.log(i); // 6
 >```
 >
 >上面代码中, 变量`i`只用来控制循环, 但是循环结束后, 它并没有消失, 泄露成了全局变量. 
@@ -191,9 +197,9 @@
 >
 >```javascript
 >function f1() {
->  let n = 5;
->  if (true) { let n = 10; }
->  console.log(n); // 5
+>  	let n = 5;
+>  	if (true) { let n = 10; }
+>  	console.log(n); // 5
 >}
 >```
 >
@@ -203,8 +209,8 @@
 >
 >```javascript
 >{{{{
->  {let insane = 'Hello World'}
->  console.log(insane); // 报错 因为外层不能取到内层数据
+>  	{let insane = 'Hello World'}
+>  	console.log(insane); // 报错 因为外层不能取到内层数据
 >}}}};
 >```
 >
@@ -214,8 +220,8 @@
 >
 >```javascript
 >{{{{
->  let insane = 'Hello World';
->  {let insane = 'Hello World'}
+>  	let insane = 'Hello World';
+>  	{let insane = 'Hello World'} //可以这样命名,不会报错
 >}}}};
 >```
 >
@@ -224,14 +230,14 @@
 >```javascript
 >// IIFE 写法
 >(function () {
->  var tmp = ...;
->  ...
+>  	var tmp ;
+>       ...
 >}());
 >
 >// 块级作用域写法
 >{
->  let tmp = ...;
->  ...
+>  	let tmp ;
+>       ...
 >}
 >```
 >
@@ -245,14 +251,14 @@
 >```javascript
 >// 情况一
 >if (true) {
->  function f() {}
+>  	function f() {}
 >}
 >
 >// 情况二
 >try {
->  function f() {}
->} catch(e) {
->  // ...
+>  	function f() {}
+>	} catch(e) {
+>  	// ...
 >}
 >```
 >
@@ -263,35 +269,35 @@
 >ES6 引入了块级作用域, 明确允许在块级作用域之中声明函数. ES6 规定, 块级作用域之中, 函数声明语句的行为类似于`let`, 在块级作用域之外不可引用. 
 >
 >```javascript
->function f() { console.log('I am outside!'); }
+>function f() { console.log('我在外面!'); }
 >(function () {
->     // 重复声明一次函数f
->  if (false) { function f() { console.log('I am inside!'); }}
->  f();
+>     	// 重复声明一次函数f
+>  	if (false) { function f() { console.log('我在里面!'); }}
+>  	f();
 >}());
 >```
 >
->上面代码在 ES5 中运行, 会得到“I am inside!”, 因为在`if`内声明的函数 [ f ] 会被提升到函数头部, 实际运行的代码如下. 
+>上面代码在 ES5 中运行, 会得到“**我在里面!**”, 因为在`if`内声明的函数 [ f ] 会被提升到函数头部, 实际运行的代码如下. 
 >
 >```javascript
 >// ES5 环境
->function f() { console.log('I am outside!'); }
+>function f() { console.log('我在外面!'); }
 >(function () {
->  function f() { console.log('I am inside!'); }
->  if (false) {}
->  f();
+>  	function f() { console.log('我在里面!'); }
+>  	if (false) {}
+>  	f();
 >}());
 >```
 >
->ES6 就完全不一样了, 理论上会得到“I am outside!”. 因为块级作用域内声明的函数类似于`let`, 对作用域之外没有影响. 但是, 如果你真的在 ES6 浏览器中运行一下上面的代码, 是会报错的, 这是为什么呢？
+>ES6 就完全不一样了, 理论上会得到“**我在外面!**”. 因为块级作用域内声明的函数类似于`let`, 对作用域之外没有影响. 但是, 如果你真的在 ES6 浏览器中运行一下上面的代码, 是会报错的, 这是为什么呢？
 >
 >```javascript
 >// 浏览器的 ES6 环境
->function f() { console.log('I am outside!'); }
+>function f() { console.log('我在外面!'); }
 >(function () {
 >     // 重复声明一次函数f
->  if (false) { function f() { console.log('I am inside!'); } }
->  f();
+>  	if (false) { function f() { console.log('我在里面!'); } }
+>  	f();
 >}());
 >// Uncaught TypeError: f is not a function
 >```
@@ -310,11 +316,11 @@
 >
 >```javascript
 >// 浏览器的 ES6 环境
->function f() { console.log('I am outside!'); }
+>function f() { console.log('我在外面!'); }
 >(function () {
->  var f = undefined;
->  if (false) { function f() { console.log('I am inside!'); }}
->  f();
+>  	var f = undefined;
+>  	if (false) { function f() { console.log('我在里面!'); }}
+>  	f();
 >}());
 >// Uncaught TypeError: f is not a function
 >```
@@ -362,9 +368,8 @@
 >
 >// 报错
 >'use strict';
->if (true)
->  function f() {}
->```
+>if (true) function f() {}
+> ```
 >
 
 

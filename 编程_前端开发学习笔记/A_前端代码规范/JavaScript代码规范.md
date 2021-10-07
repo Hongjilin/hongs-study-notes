@@ -1178,12 +1178,10 @@
 >  bar,
 >  baz);
 >
->// good
+>// 好的写法
 >console.log(
 >  foo,
 >  bar,
 >  baz,
 >);
 >```
->
->

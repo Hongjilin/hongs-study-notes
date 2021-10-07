@@ -1185,3 +1185,168 @@
 >  baz,
 >);
 >```
+
+## 三、箭头函数
+
+### 1、当你必须使用匿名函数时 (当传递内联函数时)， 使用箭头函数
+
+>###### **为什么?** 
+>
+>> 它创建了一个在 `this` 上下文中执行的函数版本，它通常是你想要的，并且是一个更简洁的语法
+>
+>###### 什么情况不使用?
+>
+>> 如果你有一个相当复杂的函数，你可以把这个逻辑转移到它自己的命名函数表达式中
+>
+>```js
+>// 不推荐的写法
+>[1, 2, 3].map(function (x) {
+>  const y = x + 1;
+>  return x * y;
+>});
+>
+>// 推荐的写法
+>[1, 2, 3].map((x) => {
+>  const y = x + 1;
+>  return x * y;
+>});
+>```
+
+### 2、括号 与 return 的省略
+
+>如果函数体包含一个单独的语句，返回一个没有副作用的 [expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) ， 省略括号并使用隐式返回。否则，保留括号并使用 `return` 语句
+>
+>###### 为什么? 语法糖。 多个函数被链接在一起时，提高可读性
+>
+>```js
+>// 不推荐的写法
+>[1, 2, 3].map(number => {
+>  const nextNumber = number + 1;
+>  `A string containing the ${nextNumber}.`;
+>});
+>
+>// 推荐的写法  --> 只有一个单独的语句,可以省略return与中括号 直接返回
+>[1, 2, 3].map(number => `A string containing the ${number}.`);
+>
+>// 推荐的写法
+>[1, 2, 3].map((number) => {
+>  const nextNumber = number + 1;
+>  return `A string containing the ${nextNumber}.`;
+>});
+>
+>/*******************  返回值是一个对象时  *****************************/
+>// 推荐的写法 
+>[1, 2, 3].map((number, index) => ({
+>  [index]: number,
+>}));
+>
+>// 没有副作用的隐式返回
+>function foo(callback) {
+>  const val = callback();
+>  if (val === true) {
+>    // 如果回调返回 true 执行
+>  }
+>}
+>
+>/************** 当foo为没有返回值的函数,只是对于某变量进行处理时    ***************************/
+>let bool = false;
+>// 不推荐的写法  
+>foo(() => bool = true);
+>
+>// 推荐的写法
+>foo(() => {
+>  bool = true;
+>});
+>```
+
+### 3、如果表达式跨越多个行，用括号将其括起来，以获得更好的可读性
+
+>###### 为什么? 它清楚地显示了函数的起点和终点。
+>
+>```js
+>// 不推荐
+>['get', 'post', 'put'].map(httpMethod => Object.prototype.hasOwnProperty.call(
+>    httpMagicObjectWithAVeryLongName,
+>    httpMethod,
+>  )
+>);
+>
+>// 推荐的
+>['get', 'post', 'put'].map(httpMethod => (
+>  Object.prototype.hasOwnProperty.call(
+>    httpMagicObjectWithAVeryLongName,
+>    httpMethod,
+>  )
+>));
+>```
+
+### 4、如果你的函数只接收一个参数，则可以不用括号，省略括号
+
+>如果你的函数只接收一个参数，则可以不用括号，省略括号。 否则，为了保证清晰和一致性，需要在参数周围加上括号。 注意：总是使用括号是可以接受的
+>
+>>###### 为什么? 减少视觉上的混乱
+>
+>```js
+>// bad
+>[1, 2, 3].map((x) => x * x);
+>// bad
+>[1, 2, 3].map(x => {
+>  const y = x + 1;
+>  return x * y;
+>});
+>
+>/***************  下面是推荐的写法  ************************/
+>// good
+>[1, 2, 3].map(x => x * x);
+>
+>// good
+>[1, 2, 3].map(number => (
+>  `一个带有${number}的长字符串它太长了，以至于我们不希望它占据.map行上的空间!`
+>));
+>
+>// good
+>[1, 2, 3].map((x) => {
+>  const y = x + 1;
+>  return x * y;
+>});
+>```
+
+### 5、避免箭头函数符号 (`=>`) 和比较运算符 (`<=`, `>=`) 的混淆
+
+>也许代码运行效果是一样的,但是可阅读性完全不一样
+>
+>```js
+>// bad
+>const itemHeight = item => item.height > 256 ? item.largeSize : item.smallSize;
+>
+>// bad
+>const itemHeight = (item) => item.height > 256 ? item.largeSize : item.smallSize;
+>
+>// good
+>const itemHeight = item => (item.height > 256 ? item.largeSize : item.smallSize);
+>
+>// good
+>const itemHeight = (item) => {
+>  const { height, largeSize, smallSize } = item;
+>  return height > 256 ? largeSize : smallSize;
+>};
+>```
+
+### 6、注意带有隐式返回的箭头函数函数体的位置
+
+>```js
+>//不推荐的
+>(foo) =>  
+>  bar;
+>
+>(foo) =>
+>  (bar);
+>
+>
+>// 推荐的
+>(foo) => bar;
+>(foo) => (bar);
+>(foo) => (
+>   bar
+>)
+>```

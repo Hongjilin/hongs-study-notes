@@ -2,9 +2,9 @@
 
 >实际上,网络上关于 **JavaScript** 代码规范的好文章有很多,大家大可自行去查阅,此处将为本人梳理摘录的规范笔记,实际上会对查阅地多个资料进行摘录整合且以我的语言描述,梳理成方便本人查阅的样子, **仅供本人学习使用**.
 >
->当然,**很多资料都是英文**,如果同学们看英文资料相对吃力的话还是可以看我的笔记,本人对于自己的语言组织能力还是有点信心的.
+>当然,**很多资料都是英文且知识点繁多驳杂**,如果同学们看英文资料相对吃力或者认为资料过多无法抓住重点的话还是可以看我的笔记,本人对于自己的语言组织能力还是有点信心的.
 >
->查阅借鉴的资料: 首先分享个很多前辈推荐我去阅读学习的 **JavaScript** 代码规范文章: [clean-code-javascript ](https://github.com/ryanmcdermott/clean-code-javascript) 大家大可直接阅读这个文章; 
+>查阅借鉴的资料: 首先分享个很多前辈推荐我去阅读学习的 **JavaScript** 代码规范文章: [clean-code-javascript ](https://github.com/ryanmcdermott/clean-code-javascript) 大家大可直接阅读这个文章;  其他的资料还有 菜鸟教程的[前端JavaScript规范](https://www.runoob.com/w3cnote/javascript-guide.html);  阿里云开发者社区的[JavaScript 代码规范](https://developer.aliyun.com/article/91941); Airbnb 出品的[javascript-zh](https://github.com/BingKui/javascript-zh);  CSDN的 [JavaScript代码规范（常用](https://blog.csdn.net/wmdydxr/article/details/88993107); 
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[前端代码规范](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端代码规范)** 、**[Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -32,7 +32,150 @@
 
 ## 一、变量
 
-### 1、 使用有意义且可发音的变量名  
+### 1、const 、let相关规范
+
+#### Ⅰ - 使用  const  或者  let  来定义变量
+
+>使用 `const` 或者 `let` 来定义变量。 不这样做将创建一个全局变量。 我们希望避免污染全局命名空间。 Captain Planet 警告过我们。 eslint: [`no-undef`](https://eslint.org/docs/rules/no-undef) [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
+>
+>```js
+>// 坏的
+>superPower = new SuperPower();
+>
+>// 好的
+>const superPower = new SuperPower();
+>```
+
+#### Ⅱ - 使用  const  或者  let 声明每一个变量
+
+>* 这样更容易添加新的变量声明
+>* 而且你不必担心是使用 `;` 还是使用 `,` 或引入标点符号的差别。实际阅读时容易忽略
+>* 你可以通过 debugger 逐步查看每个声明，而不是立即跳过所有声明
+>
+>```js
+>// 坏的写法 
+>const items = getItems(),
+>      falg = true,
+>      name = '努力学习的汪';
+>// 坏的写法
+>const items = getItems(),
+>      falg = true; //此处使用了分号,实际上会导致 [ dragonball ] 并没有用const声明
+>      name = '努力学习的汪';    //变成了全局变量
+>
+>// 好的代码
+>const items = getItems();
+>const falg = true;
+>const name = '努力学习的汪';
+>```
+
+#### Ⅲ - 把  const  声明的放在一起，把  let  声明的放在一起
+
+>> ###### **为什么? 这在后边如果需要根据前边的赋值变量指定一个变量时很有用**
+>
+>```js
+>// 非常坏的 -->为什么坏前面说过了
+>let i, len, dragonball,
+>items = getItems(),
+>falg = true;
+>
+>// 坏的  --> 这样掺杂着写很容易让你混淆他们是let还是const声明的
+>let i;
+>const items = getItems();
+>let dragonball;
+>const falg = true;
+>let len;
+>
+>// 好的写法
+>const falg = true;
+>const items = getItems();
+>let dragonball;
+>let i;
+>let length;
+>```
+
+#### Ⅳ -  在你需要的使用定义变量，但是要把它们放在一个合理的地方
+
+>>###### **为什么? `let` 和 `const` 是块级作用域而不是函数作用域**
+>
+>```js
+>// 坏的 - 不必要的函数调用
+>function checkName(hasName) {
+>//实际上如果传入参数 hasName 符合条件中断了,那么这行代码毫无意义
+>const name = getName();
+>
+>if (hasName === 'test')  return false;
+>
+>if (name === 'test') {
+>this.setName('');
+>return false;
+>}
+>
+>return name;
+>}
+>
+>// 好的
+>function checkName(hasName) {
+>//如果传入的 hasName 符合要求就应该直接中断返回了,因为传参不用再进行获取
+>if (hasName === 'test') return false;
+>
+>//如果 hasName 不符合条件再运行到这里,可以保证每次走到这里,这个函数调用永远是有意义的
+>const name = getName();
+>if (name === 'test') {
+>this.setName('');
+>return false;
+>}
+>
+>return name;
+>}
+>```
+
+#### Ⅴ - 使用 `const` 定义你的所有引用；避免使用 `var`
+
+>> ###### **为什么? 这样能够确保你不能重新赋值你的引用，否则可能导致错误或者产生难以理解的代码**
+>
+>```js
+>// 不好的
+>var a = 1;
+>var b = 2;
+>
+>// 推荐的
+>const a = 1;
+>const b = 2;
+>```
+
+#### Ⅵ  - 如果你必须重新赋值你的引用， 使用 `let` 代替 `var`
+
+>> ###### **为什么? `let` 是块级作用域，而不像 `var` 是函数作用域**
+>
+>```js
+>// 不推荐的
+>var count = 1;
+>if (true) {
+>  count += 1;
+>}
+>
+>//推荐的
+>let count = 1;
+>if (true) {
+>  count += 1;
+>}
+>```
+
+#### Ⅶ - 注意，let 和 const 都是块级范围的
+
+>```js
+>// const 和 let 只存在于他们定义的块中。
+>{
+>  let a = 1;
+>  const b = 1;
+>}
+>console.log(a); // ReferenceError
+>console.log(b); // ReferenceError
+>```
+
+
+
+### 2、 使用有意义且可发音的变量名  
 
 >```js
 >//坏的
@@ -41,7 +184,7 @@
 >const currentDate = moment().format("YYYY/MM/DD");
 >```
 
-### 2、 尽量对相同类型的变量使用相同的词汇
+### 3、 尽量对相同类型的变量使用相同的词汇
 
 >```js
 >//坏的-->同样是获取用户信息,取了三种名字,这样容易造成混淆且不易理解
@@ -53,7 +196,7 @@
 >getUser();
 >```
 
-### 3、使用可搜索的名称
+### 4、使用可搜索的名称
 
 >* 我们将阅读的代码比我们编写的代码多。
 >* 重要的是我们编写的代码可读和可搜索。
@@ -69,7 +212,7 @@
 >setTimeout(blastOff, MILLISECONDS_PER_DAY); //这样我们就能很清晰地知道这串数字是什么作用了
 >```
 
-### 4、使用解释变量
+### 5、使用解释变量
 
 >###### 坏的代码
 >
@@ -99,7 +242,7 @@
 >
 >如果这个解构看不懂的回头要去学习一下 ES6 相关知识点,现在已经是必备技能了 --> **[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 
 
-### 5、避免心理映射
+### 6、避免心理映射
 
 >###### **显式优于隐式**
 >
@@ -120,7 +263,7 @@
 >});
 >```
 
-### 6、 不要添加不需要的上下文
+### 7、 不要添加不需要的上下文
 
 >**如果您的类/对象名称告诉您一些信息，请不要在您的变量名称中重复**
 >
@@ -145,7 +288,7 @@
 >}
 >```
 
-### 7、使用默认参数而不是短路或条件
+### 8、使用默认参数而不是短路或条件
 
 >默认参数通常比短路更干净。请注意，如果您使用它们，您的函数将仅提供`undefined` 参数的默认值。其他“falsy”的价值观，如`''`，`""`，`false`，`null`，`0`，和 `NaN`，不会被默认值代替。
 >
@@ -157,104 +300,6 @@
 >//好代码
 >function createMicrobrewery(name = "努力学习的汪") {
 >  const breweryName = name 
->}
->```
-
-### 8、const 、let相关规范
-
-#### Ⅰ - 使用  const  或者  let  来定义变量
-
->使用 `const` 或者 `let` 来定义变量。 不这样做将创建一个全局变量。 我们希望避免污染全局命名空间。 Captain Planet 警告过我们。 eslint: [`no-undef`](https://eslint.org/docs/rules/no-undef) [`prefer-const`](https://eslint.org/docs/rules/prefer-const)
->
->```js
->// 坏的
->superPower = new SuperPower();
->
->// 好的
->const superPower = new SuperPower();
->```
-
-#### Ⅱ - 使用  const  或者  let 声明每一个变量
-
->* 这样更容易添加新的变量声明
->* 而且你不必担心是使用 `;` 还是使用 `,` 或引入标点符号的差别。实际阅读时容易忽略
->*  你可以通过 debugger 逐步查看每个声明，而不是立即跳过所有声明
->
->```js
->// 坏的写法 
->const items = getItems(),
->       falg = true,
->       name = '努力学习的汪';
->// 坏的写法
->const items = getItems(),
->       falg = true; //此处使用了分号,实际上会导致 [ dragonball ] 并没有用const声明
->       name = '努力学习的汪';    //变成了全局变量
->
->// 好的代码
->const items = getItems();
->const falg = true;
->const name = '努力学习的汪';
->```
->
-
-#### Ⅲ - 把  const  声明的放在一起，把  let  声明的放在一起
-
->###### **为什么? 这在后边如果需要根据前边的赋值变量指定一个变量时很有用**
->
->```js
->// 非常坏的 -->为什么坏前面说过了
->let i, len, dragonball,
->    items = getItems(),
->    falg = true;
->
->// 坏的  --> 这样掺杂着写很容易让你混淆他们是let还是const声明的
->let i;
->const items = getItems();
->let dragonball;
->const falg = true;
->let len;
->
->// 好的写法
->const falg = true;
->const items = getItems();
->let dragonball;
->let i;
->let length;
->```
-
-#### Ⅳ -  在你需要的使用定义变量，但是要把它们放在一个合理的地方
-
->###### **为什么? `let` 和 `const` 是块级作用域而不是函数作用域**
->
->```js
->// 坏的 - 不必要的函数调用
->function checkName(hasName) {
->  //实际上如果传入参数 hasName 符合条件中断了,那么这行代码毫无意义
->  const name = getName();
->
->  if (hasName === 'test')  return false;
->
->  if (name === 'test') {
->    this.setName('');
->    return false;
->  }
->
->  return name;
->}
->
->// 好的
->function checkName(hasName) {
->  //如果传入的 hasName 符合要求就应该直接中断返回了,因为传参不用再进行获取
->  if (hasName === 'test') return false;
->  
->  //如果 hasName 不符合条件再运行到这里,可以保证每次走到这里,这个函数调用永远是有意义的
->  const name = getName();
->  if (name === 'test') {
->    this.setName('');
->    return false;
->  }
->
->  return name;
 >}
 >```
 
@@ -364,6 +409,8 @@
 >
 >const foo = 'superLongLongLongLongLongLongLongLongString';
 >```
+
+
 
 ------
 
@@ -1070,7 +1117,7 @@
 
 #### Ⅰ - 永远不要定义一个参数为 `arguments`
 
->永远不要定义一个参数为 `arguments`。 这将会优先于每个函数给定范围的 `arguments` 对象。
+>> ###### 永远不要定义一个参数为 `arguments`。 这将会优先于每个函数给定范围的 `arguments` 对象。
 >
 >```js
 >// bad
@@ -1082,7 +1129,7 @@
 
 #### Ⅱ - 建议不要使用 `arguments`, 而是选择使用 rest 语法 `...` 代替
 
->为什么? `...` 明确了你想要拉取什么参数。 更甚, rest 参数是一个真正的数组，而不仅仅是类数组的 `arguments` 。
+>> ###### 为什么? `...` 明确了你想要拉取什么参数。 更甚, rest 参数是一个真正的数组，而不仅仅是类数组的 `arguments` 。
 >
 >```js
 >// bad
@@ -1139,7 +1186,7 @@
 
 #### Ⅰ - 注意函数签名中的间距
 
->> 为什么? 一致性很好，在删除或添加名称时不需要添加或删除空格。
+>> ###### 为什么? 一致性很好，在删除或添加名称时不需要添加或删除空格。
 >
 >```js
 >// bad
@@ -1154,7 +1201,7 @@
 
 #### Ⅱ - 具有多行签名或者调用的函数的格式注意
 
->###### 具有多行签名或者调用的函数应该像本指南中的其他多行列表一样缩进：在一行上只有一个条目，并且每个条目最后加上逗号
+>> ###### 具有多行签名或者调用的函数应该像本指南中的其他多行列表一样缩进：在一行上只有一个条目，并且每个条目最后加上逗号
 >
 >```js
 >// bad
@@ -1216,7 +1263,7 @@
 
 >如果函数体包含一个单独的语句，返回一个没有副作用的 [expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) ， 省略括号并使用隐式返回。否则，保留括号并使用 `return` 语句
 >
->###### 为什么? 语法糖。 多个函数被链接在一起时，提高可读性
+>> ###### **为什么? 语法糖。 多个函数被链接在一起时，提高可读性**
 >
 >```js
 >// 不推荐的写法
@@ -1261,7 +1308,7 @@
 
 ### 3、如果表达式跨越多个行，用括号将其括起来，以获得更好的可读性
 
->###### 为什么? 它清楚地显示了函数的起点和终点。
+>> ###### **为什么? 它清楚地显示了函数的起点和终点**
 >
 >```js
 >// 不推荐
@@ -1284,7 +1331,7 @@
 
 >如果你的函数只接收一个参数，则可以不用括号，省略括号。 否则，为了保证清晰和一致性，需要在参数周围加上括号。 注意：总是使用括号是可以接受的
 >
->>###### 为什么? 减少视觉上的混乱
+>>###### **为什么? 减少视觉上的混乱**
 >
 >```js
 >// bad
@@ -1350,3 +1397,306 @@
 >   bar
 >)
 >```
+
+## 四、对象
+
+### 1、使用字面语法来创建对象
+
+>```js
+>// 麻烦的
+>const item = new Object();
+>
+>// 推荐的
+>const item = {};
+>```
+
+### 2、在创建具有 动态属性名称 的对象 时使用计算属性名
+
+>> ###### **为什么? 它允许你在一个地方定义对象的所有属性**
+>
+>```js
+>//声明一个能动态返回属性名的函数
+>function getKey(k) {
+>  return `这是一个动态属性名称-${k}`;
+>}
+>
+>// 不推荐的写法
+>const obj = {
+>  id: 5,
+>  name: 'hongjilin',
+>};
+>obj[getKey('handsome')] = true;
+>
+>// 推荐写法
+>const goodObj = {
+>  id: 6,
+>  name: '努力学习的汪',
+>  [getKey('handsome')]: true,
+>};
+>// {id: 6, name: '努力学习的汪', 这是一个动态属性名称-handsome: true}
+>```
+
+### 3、使用对象方法的缩写
+
+>> ###### **可以减少我们代码量的同时,也能使得我们的代码看起来更干净**
+>
+>```js
+>// 不推荐的
+>const atom = {
+>  value: 1,
+>  addValue: function (value) {
+>    return atom.value + value;
+>  },
+>};
+>
+>//推荐的
+>const atom = {
+>  value: 1,
+>  //这里可以使用缩写
+>  addValue(value) {  
+>    return atom.value + value;
+>  },
+>};
+>```
+
+### 4、对象属性值的缩写
+
+#### Ⅰ - 建议使用属性值的缩写
+
+>> ###### **为什么?  这是语法糖,它的写法和描述较短**
+>
+>```js
+>const userName = '努力学习的汪';
+>
+>// 不推荐的
+>const obj = {
+>  userName: userName,
+>};
+>
+>// 推荐的
+>const obj = {
+>  userName,
+>};
+>```
+
+#### Ⅱ - 在对象声明的时候将简写的属性放在一起
+
+>> ###### **为什么? 这样更容易的判断哪些属性使用了简写**
+>
+>```js
+>const userName = '努力学习的汪';
+>const occupation = '新生代农民工';
+>
+>// 不推荐的写法
+>const obj = {
+>  handsome: true,
+>  occupation,
+>  age: 23,
+>  sex: '男',
+>  userName,
+>};
+>
+>// 推荐的写法
+>const obj = {
+>  userName,
+>  occupation,
+>  handsome: true,
+>  age: 23,
+>  sex: '男',
+>};
+>```
+
+### 5、只使用引号标注无效标识符的属性
+
+>>###### **为什么? 总的来说，我们认为这样更容易阅读。 它提升了语法高亮显示，并且更容易通过许多 JS 引擎优化**
+>>
+>>什么是无效标识符? 像是这种带着 `-` ,这种符号的就可以说是无效标识符 
+>
+>```js
+>// 不推荐的
+>const bad = {
+>  'name': '努力学习的汪',
+>  'age': 3,
+>  'data-blah': 666,
+>};
+>
+>// 推荐的
+>const good = {
+>  name: '努力学习的汪',
+>  age: 3,
+>  'data-blah': 666,
+>};
+>```
+
+### 6、建议不要直接调用  Object.prototype 上的方法
+
+>不能直接调用 `Object.prototype` 的方法，如： `hasOwnProperty` 、 `propertyIsEnumerable` 和 `isPrototypeOf`。
+>
+>> ###### **为什么? 这些方法可能被以下问题对象的属性追踪**
+>>
+>> * 相应的有 `{ hasOwnProperty: false }` - 或者，对象是一个空对象 (`Object.create(null)`)。
+>> * 这时候基础不太好的同学可能就有点无法理解了,但是没关系,下面我会给出示例
+>
+>```js
+>// bad
+>console.log(object.hasOwnProperty(key));
+>
+>// good
+>console.log(Object.prototype.hasOwnProperty.call(object, key));
+>
+>// best
+>const has = Object.prototype.hasOwnProperty; // 在模块范围内的缓存中查找一次,然后再去调用
+>```
+>
+>###### 截图示例
+>
+>![image-20211008110248531](JavaScript代码规范中的图片/image-20211008110248531.png)
+>
+>如果说你看着截图示例还不懂 或者 说不知道为什么会出现图中的问题的话 
+>说明咱基础不够牢固哦,还是要回去补充一下JS基础,也可以看本人笔记 --> **[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**
+
+### 7、应该更倾向于用对象扩展操作符
+
+>应该更倾向于用象扩展操作符 (ES6中知识点) , 而不是用 [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) 浅拷贝一个对象。 使用对象的 rest 操作符来获得一个具有某些属性的新对象。
+>
+>```js
+>/**************  非常糟糕的  **********************/
+>const original = { a: 1, b: 2 };
+>// 变异的 `original` ಠ_ಠ; 
+>const copy = Object.assign(original, { c: 3 }); 
+>//这里删除了 copy 的 a 属性 却同时也会删除 original 的 a 属性
+>delete copy.a;   
+>
+>
+>/**************  不推荐的  **********************/
+>const original = { a: 1, b: 2 };
+>// 这里将其拷贝到一个新的空对象上
+>const copy = Object.assign({}, original, { c: 3 }); 
+>//这里删除了 copy 的 a 属性 就不会影响到  original 了; 但仍不是一个好的写法
+>delete copy.a;   
+>
+>
+>/**************   推荐的  **********************/
+>const original = { a: 1, b: 2 };
+>const copy = { ...original, c: 3 }; 
+>const { a, ...noA } = copy; 
+>```
+
+### 8、使用 getter 和 setter
+
+>###### 使用 getter 和 setter 访问对象上的数据可能比简单地查找对象上的属性更好。或许你可能会问: " Why? "
+>
+>>* 当你想在获取对象属性之外做更多的事情是,你不必查找或者更改代码中的每个访问器再执行`set`
+>>* 获取以及设置对象时更容易添加日志记录和错误处理 (在get、set方法中添加相应处理即可)
+>>* 你可以延迟加载对象的属性,比如从服务器获取它
+>
+>###### 不推荐的
+>
+>```js
+>/****************  不好的写法  ********************* */
+>function makeBankAccount() {
+>
+>  return {
+>    name: '努力学习的汪',
+>    _age: 18
+>  };
+>}
+>
+>const account = makeBankAccount();
+>//你可以随意的对于其进行修改
+>account.name = '新生代农民工';
+>
+>//你可以随意看到里面所有内容
+>console.log(account) 
+>//log :  {name: '新生代农民工', _age: 18}
+>```
+>
+>###### 推荐的写法
+>
+>```js
+>/****************  推荐的写法  ********************* */
+>function makeStudent() {
+>  //1. 定义属性
+>  let name = '努力学习的汪';
+>  //这里加下划线的意思是,这是私有变量,我不想有人能在方法外的地方直接访问的到它,主要是一个约定,提醒开发者,没有实际约束能力  
+>  let _age = 18 
+>
+>  //2. 一个'getter'方法的返回值公开想分享的属性
+>  function getName() {
+>    return name;
+>  }
+>  //也可以将不想公开的正确数据加工后再分享
+>  function getAge() {
+>    return _age - 5; //我想我应该更年轻点
+>  }
+>
+>
+>  //3. 通name过'setter'进行写入
+>  function setName(newName) {
+>    // ... 在更新名字前可以进行之前验证
+>    name = newName;
+>  }
+>//4. 将方法暴露出去
+>  return {
+>    getName,
+>    getAge,
+>    setName
+>  };
+>}
+>
+>/*****************  调用  *********************** */
+>const student = makeStudent();
+>
+>//我只能看到这个对象想暴露的, 只暴露了三个api接口,看不到里面具体属性
+>console.log(student) //  {getName: ƒ, getAge: ƒ, setName: ƒ}
+>
+>//通过 'getter' 得到暴露出来的数据
+>const { getName, getAge } = student;
+>console.log(`大家好,我是${getName()},我今年${getAge()}岁了`) // 大家好,我是努力学习的汪,我今年13岁了
+>
+>//通过 'setting' 来写入数据
+>const { setName } = student;
+>setName('新生代农民工');
+>console.log(`大家好,我是${getName()},我今年${getAge()}岁了`) //大家好,我是新生代农民工,我今年13岁了
+>```
+>
+>这里的写法就很像Java的Bean包部分写法了,学过Java的小伙伴们肯定就很熟悉了
+
+### 9、使对象具有私有成员
+
+>这可以通过闭包来实现（对于 ES5 及以下）
+>
+>```js
+>/**************  不推荐的写法  *************************/
+>const Student = function(name) {
+>  this.name = name;
+>};
+>
+>Student.prototype.getName = function getName() {
+>  return this.name;
+>};
+>
+>const hong = new Student("努力学习的汪");
+>console.log(`该学生的名字是: ${hong.getName()}`);  //该学生的名字是: 努力学习的汪
+>delete hong.name; //可以直接删除实例上的属性
+>console.log(`该学生的名字是: ${hong.getName()}`);  //该学生的名字是: undefined
+>
+>/**************  推荐的写法  *************************/
+>function makeStudent(name) {
+>  //返回的是一个对象,对象中的属性是 [ getName() ]
+>  return {
+>    // getName() 方法返回的是传入时的 name
+>    getName() {
+>      return name;
+>    }
+>  };
+>}
+>
+>const hong = makeStudent("努力学习的汪");
+>console.log(`该学生的名字是: ${hong.getName()}`);  //该学生的名字是: 努力学习的汪
+>//实际上这个栗子中的 name 是通过闭包进行了保存,并不影响取值
+>delete hong.name; 
+>console.log(`该学生的名字是: ${hong.getName()}`);  //该学生的名字是: 努力学习的汪
+>```
+>
+>

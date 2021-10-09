@@ -7,6 +7,8 @@
 ### 1、React事件绑定原理
 
 >可以去看官方解释 --> [点我传送](https://reactjs.org/docs/events.html) 
+>
+>如果对于React事件绑定原理有兴趣的同学可以看这个,写的不错 --> [`【长文慎入】一文吃透 react 事件机制原理`](https://cloud.tencent.com/developer/article/1516369)
 
 #### Ⅰ - **标准要点**
 

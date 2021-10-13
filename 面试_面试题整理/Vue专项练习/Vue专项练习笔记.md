@@ -64,7 +64,7 @@
 
 >> ###### **Vue是双向绑定 而 React是单向绑定**
 >
->它们俩主要由 **MVVM** 框架实现,在 **Vue** 中主要由三个部分组成: Model、View、 ViewModel组成. 其中 **View** 和 **Model** 不能直接进行通信, 它们通过 ViewModel 进行通信
+>在 **Vue** 中主要由三个部分组成: Model、View、 ViewModel组成. 其中 **View** 和 **Model** 不能直接进行通信, 它们通过 ViewModel 进行通信
 >
 >###### Vue中: 
 >
@@ -75,7 +75,7 @@
 >###### React中
 >
 >* react中虽然 model 和view 之间需要 setState 去手动刷新渲染 view ,所以叫单向绑定
->* 它不是MVVM模型 ,这点很重要
+>* React的官方文档说他是V层，这一点是对的，如果问他到底是属于MVC还是MVP还是MVVM，答案其实是他并不是任何一个,如果所有的逻辑写在组件内部，让VC和VM贴的更近，那就是MVVM
 
 ### Ⅳ - 组件通信的区别
 

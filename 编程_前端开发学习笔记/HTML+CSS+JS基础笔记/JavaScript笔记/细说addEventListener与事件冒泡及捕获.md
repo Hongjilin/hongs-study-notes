@@ -1,6 +1,6 @@
 ## #说明
 
->查阅借鉴的资料: 思否的[你真的理解事件冒泡和事件捕获吗？](https://segmentfault.com/a/1190000012729080) ; CSDN的 [addEventListener() 关于第三个参数](https://blog.csdn.net/zhangjing0320/article/details/80751622); MDN的 [事件介绍](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Building_blocks/Events); 知乎的 **[细说addEventListener与事件捕获、事件冒泡](https://www.imooc.com/article/9833)**
+>查阅借鉴的资料: 思否的[你真的理解事件冒泡和事件捕获吗？](https://segmentfault.com/a/1190000012729080) ; CSDN的 [addEventListener() 关于第三个参数](https://blog.csdn.net/zhangjing0320/article/details/80751622); [Javascript事件preventDefault,stopPropagation及return false的区别](https://blog.csdn.net/xingkongtianyuzhao/article/details/114433336);MDN的 [事件介绍](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Building_blocks/Events); 知乎的 **[细说addEventListener与事件捕获、事件冒泡](https://www.imooc.com/article/9833)**
 >
 >除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[前端代码规范](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端代码规范)** 、**[Git学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Git学习笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -151,7 +151,56 @@
 >
 >![image-20211025190446711](JavaScript笔记中的图片/image-20211025190446711.png) 
 
+## 7、preventDefault 及 stopPropagation函数以及`return false`的作用与区别?
 
+>实际上因为本人在实际开发中基本就没用到这两个函数,所以在一次别人问我关于这个的问题时我是一脸?
+>
+>所以我专门来学习并梳理这一块的知识点笔记
 
+### Ⅰ -  event.stopPropagation()
 
+>###### 这个函数是阻止事件冒泡:实际上在上面的内容已经解释过了,这里当作复习再叙述一遍
+>
+>>事件可以再各层级的节点中传递,不管是冒泡还是捕获,有时我们希望事件在特定节点执行完后不再传递,就可以使用 `event.stopProgation()`来阻止事件冒泡
+>
+>当然,他只会阻止事件传播,并不会阻止事件本身的默认行为(如a标签的跳转)
 
+### Ⅱ - event.preventDefault()
+
+>###### **此函数是阻止默认行为触发**,什么是默认行为?
+>
+>>即标签属性本身具备的功能,就是类似于a标签所带的href与submit所带的提交等
+>>
+>>对于默认行为,浏览器**优先执行事件函数后 再执行默认行为**
+>
+>当然,他不会阻止事件传播,所以可以两个搭配着用
+
+### Ⅲ -  return false
+
+>包含特有退出执行`return false ` 之后的所有触发事件和动作都不会被执行,有时候`return false` 可以替代`event.stopPropagation`和`event.preventDefult()`来阻止默认行为发生和冒泡
+>
+>```html
+><body>
+>    <br />
+>    <div>
+>         <a href="http://www.baidu.com">点击</a>
+>    </div>
+>    <script type="text/javascript">
+>        document.querySelector('a').onclick=function(){
+>            alert('警告');
+>            return false;
+>        }
+>    </script>
+></body>
+>```
+>
+>结果只是出现了警告的弹窗,并没有跳转到百度页面
+>
+>如果将 `retuen false` 提前到 `alert('警告')` 的前面,结果就是什么都不显示,原因是 return false 会中止事件与默认行文
+
+### Ⅳ - `return false ` 和 `event.stopPropagation`区别?
+
+>* `return false` 不仅阻止了冒泡而且还阻止了事件本身
+>* `event.stopPropagation()`只阻止了冒泡
+>
+>注意: 虽然`teturn false` 能够替代前面两个阻止默认行为和冒泡函数,但也有其他作用(比如中止循环);可能导致不可预料的结果,所以推荐还是使用前两者更好,提高代码的高效性 

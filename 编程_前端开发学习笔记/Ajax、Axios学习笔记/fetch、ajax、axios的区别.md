@@ -1,3 +1,17 @@
+## #说明
+
+>截至目前,市场上前端主流仍是axios 不论是react还是vue或是其他,大部分首推都是使用axios
+>
+>**但这是为什么呢?**
+>
+>* 换做以前的我就只会说因为axios用的人多啊.但实际上这回答更像是一种 **强辩**
+>* 直到我看到一位前辈在 [Alita社区群](https://github.com/alitajs/alita) 中回答为何 **umi4** 要考虑将支持fetch改为支持axios,并给出了相应理由及文章; 我便觉得有必要学习一下并梳理出来
+>* 当然本文写于2021年,就以此时的版本进行分析
+>
+>查阅参考的资料 : [Axios 或 fetch()：你应该使用哪个？](https://blog.logrocket.com/axios-or-fetch-api/)
+
+
+
 ## 1、ajax
 
 >本身是针对MVC的编程,不符合现在前端MVVM的浪潮
@@ -46,3 +60,103 @@
 >* 支持Promise API
 >* 客户端支持防止CSRF
 >* 提供了一些并发请求的接口
+
+
+
+## 4、为什么比起 fetch 更倾向于选择 Axios
+
+>实际上具体内容可以看这篇文章  -->  [Axios 或 fetch()：你应该使用哪个？](https://blog.logrocket.com/axios-or-fetch-api/)
+>
+>这里主要是对前辈的说的知识点进行一次梳理摘录
+
+### Ⅰ - 浏览器兼容方面
+
+> * Axios支持IE11及以上
+> * Fetch默认不支持IE,加补丁后支持IE10及以上 
+
+### Ⅱ - 请求超时
+
+>* Axios配置 timeout 选项即可
+>* Fetch可以做但是有些麻烦,传 `AbortController` 到 `signal` 选项，然后调 `.abort()` 实现 Promise 报错
+>
+>```js
+>const controller = new AbortController();
+>const options = {
+>  method: 'POST',
+>  signal: controller.signal,
+>  body: JSON.stringify({
+>    firstName: 'hong',
+>    lastName: '努力学习的汪'
+>  })
+>};  
+>const promise = fetch('/login', options);
+>const timeoutId = setTimeout(() => controller.abort(), 5000);
+>
+>promise
+>  .then(response => {/*  处理响应 */})
+>  .catch(error => console.error('timeout exceeded'));
+>```
+>
+>在上面代码中
+>
+>* 我们使用`AbortController.AbortController()`构造函数创建一个`AbortController`对象，
+>* 该构造函数允许我们稍后中止请求。 
+>* `signal`是`AbortController`的只读属性，提供了与请求通信或中止请求的方法。
+>*  如果服务器在四秒内没有响应，就会调用`controller.abort()`，并终止操作。  
+
+### Ⅲ - 请求取消
+
+>比如用户离开屏幕或者组件时会需要取消请求
+>
+>* Axios 支持,但是是基于已经撤回的提案 --> [tc39/proposal-cancelable-promises](https://github.com/tc39/proposal-cancelable-promises) 实现的
+>* fetch不支持请求取消
+
+### Ⅳ - JSON结果转换
+
+>* Axios自动转换
+>* Fetch需要多一步 :`then(res=>res.json())`
+>
+>```js
+>// axios
+>axios.get('https://gitee.com/hongjilin')
+>  .then(response => {
+>    console.log(response.data);
+>  }, error => {
+>    console.log(error);
+>  });
+>
+>// fetch()
+>fetch('https://gitee.com/hongjilin')
+>  .then(response => response.json())    // 额外多了一步
+>  .then(data => {
+>    console.log(data) 
+>  })
+>  .catch(error => console.error(error));
+>```
+
+### Ⅴ - 拦截器
+
+>* Axios支持request和respone的拦截: 请求拦截可以用于日志和权限等; 响应拦截可以用于格式化等
+>* Fetch不支持,但可以通过复写Fetch函数勉强实现
+
+### Ⅵ - CSRF保护
+
+>* Axios内置支持
+>* Fetch不支持
+
+### Ⅶ - 上传下载的进度条
+
+>都能实现
+>
+>* Axios可以通过 `FileReader`来读 `res.data` 实现,更为简单
+>* Fetch 通过 `ReadableStream` 也能做,但是麻烦些
+
+### Ⅷ - 生态
+
+>* Axios拥有很多拓展:包括测试、日志、缓存等,生态更好
+>* Fetch比较少
+
+### Ⅸ - SSR
+
+>* Axios支持Node直接使用
+>* Fetch需要借助 [matthew-andrews/isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) 或 [node-fetch/node-fetch](https://github.com/node-fetch/node-fetch) 这两个插件库使用

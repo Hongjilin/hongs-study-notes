@@ -4,7 +4,7 @@
 > * 相信大家在学习或者工作中也常常会听到一些前端安全相关的名词或者知识点,但基本都是知其名不知其所以
 > * 这里我将会学习并梳理几个常见前端安全问题,如果有错误,大家可以私信或者评论指出
 >
-> 查阅借鉴的资料: 思否的[前端安全编码规范](https://segmentfault.com/a/1190000037657222); 知乎的 [前端安全问题汇总（实战）](https://zhuanlan.zhihu.com/p/83865185); 美团技术团队的 [前端安全部分](https://tech.meituan.com/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8.html); 掘金的 [常见前端安全问题及解决方案](https://juejin.cn/post/6844903942036389895#heading-0);
+> 查阅借鉴的资料: 思否的[前端安全编码规范](https://segmentfault.com/a/1190000037657222); 知乎的 [前端安全问题汇总（实战）](https://zhuanlan.zhihu.com/p/83865185); 美团技术团队的 [前端安全部分](https://tech.meituan.com/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8.html); 掘金的 [常见前端安全问题及解决方案](https://juejin.cn/post/6844903942036389895#heading-0);CSDN的[【安全漏洞】CSRF漏洞攻击：原理、检测、防御、实践](https://blog.csdn.net/kzadmxz/article/details/92076837)
 >
 > 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
@@ -93,9 +93,29 @@
 
 >在cookie中设置**HttpOnly**属性, 使得JS脚本无法读取到cookie信息
 
+## 三、CSRF (跨站请求伪造)
 
+>1. **CSRF全称 ( Cross-Site Request Forgeries )跨站请求伪造**,跟XSS攻击一样,存在巨大的危险性
+>   - 攻击者盗用了你的身份,以你的名义发送恶意请求
+>   - 对于服务器来说这个请求完全是合法的,但是时却完成攻击者所期望的一个动作: 以你的名义发送邮件、发消息、添加系统管理员、甚至于转账、购买商品等
 
+### Ⅰ- 原理图
 
+>![image-20211102181652040](README中的图片/image-20211102181652040.png)
+>
+>上图中**网站A**就是存在CSRF漏洞的网站,**网站B**为攻击者构建的恶意网站;**User**为网站A的合法用户
+>
+>* **用户user**打开浏览器,访问受信任网站A,输入用户名和密码请求登录网站A
+>* 在用户信息通过验证后,**网站A**产生Cookie信息并返回给浏览器,此时用户登录**网站A**成功,可以正常发送请求到网站A
+>* 用户未退出网站A之前,在同一浏览器中打开一个**tab页**访问网站B
+>* **网站B**接收到用户请求后,返回一些攻击性代码,并发出一个请求要求访问第三方站点A
+>* 浏览器在接收到这些攻击性代码后,根据网站B的请求,在用户不知情的情况下携带Cookie信息,向网站A发出请求,网站A并不知道该请求其实是由B发起的,所以会**根据用户带的Cookie信息**以他的权限处理该请求,导致来自网站的恶意代码被执行
 
+### Ⅱ - CSRF与XSS的区别
 
+>###### CSRF尽管听起来很像跨站脚本(XSS),但它与XSS非常不同
+>
+>- XSS利用站点内的信任用户; 而 CSRF 则通过伪装成受信任用户的请求来利用受信任的网站
+>- 与XSS攻击相比,CSRF攻击往往不大流行(因此对其进行防范的资源也相当稀少)和难以防范,所以被认为比XSS更具危险性
 
+### Ⅲ - CSRF漏洞检测

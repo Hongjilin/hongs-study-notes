@@ -1430,25 +1430,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## React
 
-1. React生命周期以及其拼写
+>最近一年都用的React , 知识点都在脑子里,所以不复习
 
 
 
@@ -1472,27 +1456,24 @@
 >
 >>```ts
 >>interface Alarm {
->>    alert(): void;
+>>alert(): void;
 >>}
->
 >>interface Light {
->>    lightOn(): void;
->>    lightOff(): void;
+>>lightOn(): void;
+>>lightOff(): void;
 >>}
->
 >>class Car implements Alarm, Light {
 >>alert() {
->>   console.log('Car alert');
+>>console.log('Car alert');
 >>}
 >>lightOn() {
->>   console.log('Car light on');
+>>console.log('Car light on');
 >>}
 >>lightOff() {
->>   console.log('Car light off');
+>>console.log('Car light off');
 >>}
 >>}
->>
->>```
+>
 
 #### Ⅱ - 接口继承接口
 

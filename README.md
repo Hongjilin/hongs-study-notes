@@ -1,8 +1,9 @@
 # 洪jl学习笔记
 
-> #### 此笔记也会不定时地同步到GitHub上
+> #### 本人实战项目源码分享：
 >
-> #### 用GitHub的同学点这里 : https://github.com/Hongjilin
+> * **[校园疫情防控管理系统-全栈](https://gitee.com/hongjilin/Campus-epidemic-prevention-and-control-syste)** : 本人毕设项目,附带编写教程视频
+> * **[学习游戏平台](https://gitee.com/hongjilin/problem-solving-game)** : 将知识点融入游戏中、以游戏的方式进行考核检测学生知识点掌握情况;本人用来复习Vue框架的项目,目前持续更新中......
 
 #### 笔记介绍
 > 这是 [***<u>@hongjilin</u>***](https://gitee.com/hongjilin) 的学习笔记与各种学习资料笔记整合, 有些部分引用已经记不清了(因为记笔记的初衷是为了方便自己查阅)。不过如今大部分笔记都标注了出处以及从何处进行学习, 大家可以根据我的标注查找到相对应的学习资料

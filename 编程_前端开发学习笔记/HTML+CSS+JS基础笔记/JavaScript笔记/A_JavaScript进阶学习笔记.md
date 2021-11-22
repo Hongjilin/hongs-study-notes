@@ -245,26 +245,26 @@
 >  //此时a与b指向的内存已经不一样了,所以修改互不影响
 >    b.age = 14
 >    console.log(b.age, a.name, a.age) // 14 hong undefined
->    //此时其实已经重新创建了一个内存{age:15},并且将其地址赋值覆盖给a
->  //实际上传进来的obj也是拿着其key对应的地址值找内存,此时
+>    //2个引用变量指向同一个对象, 让其中一个引用变量指向另一个对象, 另一引用变量依然指向前一个对象   -->所以 a 仍是  {name: 'hong'}
 >    const fn2=(obj) => obj = {age: 15}
 >    fn2(a)
->    console.log(a.age) //15
+>    console.log(a.age) //undefined 
 >  ```
 
 #### ③ *在js调用函数时传递变量参数时, 是值传递还是引用传递*
 
 >* 理解1: 都是值(基本/地址值)传递
 >
->  * 所以实际上传进function中的参数也是拿着其存着的地址值找内存
+> * 所以实际上传进function中的参数也是拿着其存着的地址值找内存
 >
->    ```js
->    //传进来的obj存储的是a中存的地址值,所以obj==a(因为他们地址值一致,指向一致)
->      let a = {name: 'hong'}
->      const fn2=(obj) => obj = {age: 15}
->      fn2(a)
->      console.log(a.age) //15
->    ```
+>   ```js
+>   //传进来的obj存储的是a中存的地址值,所以obj==a(因为他们地址值一致,指向一致)
+>   //2个引用变量指向同一个对象, 通过一个变量修改对象内部数据, 另一个变量看到的是修改之后的数据  -->所以被进行了修改
+>     let a = {name: 'hong'}
+>     const fn2=(obj) => obj.age= 15
+>     fn2(a)
+>     console.log(a.age) //15
+>   ```
 >
 >* 理解2: 可能是值传递, 也可能是引用传递(地址值)
 
@@ -380,7 +380,7 @@
 >     // obj.test2()  不能直接, 根本就没有
 >     test2.call(obj)  // 可以让一个函数成为指定任意对象的方法进行调用
 >     console.log(obj.xxx)
->     
+>       
 >   ```
 
 ### Ⅲ-回调函数
@@ -423,7 +423,7 @@
 >       console.log(a + 3)
 >     })()
 >     console.log(a) // a is not defined
->     
+>       
 >     //此处前方为何要一个`;`-->因为自调用函数外部有一个()包裹,可能与前方以()结尾的代码被一起认为是函数调用
 >     //不加分号可能会被认为这样 console.log(a)(IIFE)
 >     ;(function () {//不会污染外部(全局)命名空间-->举例
@@ -517,16 +517,16 @@
 >3. 代码示例
 >
 >   ```js
->     
+>       
 >     // 每个函数都有一个prototype属性, 它默认指向一个Object空对象(即称为: 原型对象)
 >     console.log(Date.prototype, typeof Date.prototype)
 >     function Fun () { }
 >     console.log(Fun.prototype)  // 默认指向一个Object空对象(没有我们的属性)
->     
+>       
 >     // 原型对象中有一个属性constructor, 它指向函数对象
 >     console.log(Date.prototype.constructor===Date)
 >     console.log(Fun.prototype.constructor===Fun)
->     
+>       
 >     //给原型对象添加属性(一般是方法) ===>实例对象可以访问
 >     Fun.prototype.test = function () { console.log('test()') }
 >     var fun = new Fun()
@@ -1542,14 +1542,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                               
+>                                 
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->                               
+>                                 
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1562,14 +1562,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                               
+>                                 
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->                                   
+>                                     
 >     ```
 >
 >2. 模块调用

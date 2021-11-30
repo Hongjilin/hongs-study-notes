@@ -1,6 +1,6 @@
 # #说明
 
->本笔记借鉴资料: [`原文链接`](https://www.cnblogs.com/tourey-fatty/p/12553144.html)
+>本笔记借鉴资料: [`参考文章链接`](https://www.cnblogs.com/tourey-fatty/p/12553144.html)
 
 # #前言
 

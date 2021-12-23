@@ -1,6 +1,6 @@
-## js基础
+# #说明
 
-> **[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)** 
+>此部分知识点实际上在本人 [A_JavaScript进阶学习笔记](https://gitee.com/hongjilin/hongs-study-notes/blob/master/%E7%BC%96%E7%A8%8B_%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML+CSS+JS%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/JavaScript%E7%AC%94%E8%AE%B0/A_JavaScript%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md#%E4%BA%8C%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7) 中就有详细的记载,但现在仍单独抽出,为了是自己复习or同学们更快地找到这个知识点
 
 ### 1、原型与原型链
 

@@ -7037,6 +7037,28 @@
 >
 >![image-20210830173927525](ES全系列详细学习笔记中的图片/image-20210830173927525.png) 
 
+#### ⑤ 判断数组中是否有对象重复
+
+>```js
+> // 判断 级别与代号 是否重复,如果重复则不予通过
+> const tempLists =  [
+>     {itemLevelName:'Ⅱ',itemCode:'UT'},
+>     {itemLevelName:'Ⅰ',itemCode:'UT'},
+>     {itemLevelName:'Ⅱ',itemCode:'UT'},
+> ]
+> // 项目代号与级别名称如果都相同,则认为是重复对象
+> const tempSetArr = new Set()
+> tempLists.map(item => {
+>   // 利用Set数组的唯一性,将级别名称与代号名称拼接,加入后如果重复则不会加入
+>   tempSetArr.add(`${item.itemLevelName}${item.itemCode}`)
+> })
+> // 判断去重后的数组长度是否与当前界面上的长度一致,如果不一致,则输入的内容重复了,校验不通过
+> if (tempSetArr.size !== tempLists.length) {
+>    this.$message.error('列表不可有重复项，请修改后重新提交')
+>   return
+>  }
+>```
+
 ### Ⅲ - Set 实例的属性和方法
 
 >Set 结构的实例有以下属性. 

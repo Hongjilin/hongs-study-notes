@@ -2,7 +2,7 @@
 
 >本笔记是本人`ES全系统详细学习笔记`,将ES系列全部梳理一遍,包括新特性等,后续ES系列也会不间断的补充至此笔记中
 >
->观阅或查阅的资料:[[阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/);博客园的[JavaScript ES6 Symbol.hasInstance的理解. ](https://www.cnblogs.com/waitforyou/p/7080591.html)
+>观阅或查阅的资料:[[阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/);博客园的[JavaScript ES6 Symbol.hasInstance的理解. ](https://www.cnblogs.com/waitforyou/p/7080591.html);简书的[JS数组reduce()方法详解及高级技巧](https://www.jianshu.com/p/e375ba1cfc47)
 >
 >笔记中每部分都会首先给出[`概括总结`],总结概括此部分知识点,然后再于下方给出知识点详解
 >
@@ -61,7 +61,7 @@
 >* ES6 的版本变动内容最多, 具有里程碑意义
 >* ES6 加入许多新的语法特性, 编程实现更简单、高效
 >* ES6 是前端发展趋势, 就业必备技能
->* 实际上ES系列的知识点基本上都要掌握,才能写出逼格更高的代码:dog:
+>* 实际上ES系列的知识点基本上都要掌握(我们常说的ES6,实际上大多也泛指所有ES系列知识点),才能写出逼格更高的代码:dog:
 
 ## 4、ES6 兼容性
 
@@ -5403,7 +5403,185 @@
 >
 > [ map() ] 常用作将符合条件的元素进行加工,再返回出去的场景
 
-#### ⑧ 数组实例的 some() 、every()
+#### ⑧ 数组实例的 reduce() -->`常用`
+
+>reduce()方法可以搞定的东西，for循环，或者forEach方法有时候也可以搞定，那为啥要用reduce()？
+>
+>这个问题，之前我也想过，要说原因还真找不到,但我觉得是：**通往成功的道路有很多，但是总有一条路是最捷径的，亦或许reduce()逼格更高...**
+
+##### a) 语法
+
+>```js
+>arr.reduce(callback,[initialValue])
+>```
+>
+>`reduce`为数组中的而每一个元素一次执行回调函数,不包括数组中被删除或从未被赋值的元素,接受四个参数: 初始值(或上一次回调函数的返回值)、当前元素值、当前索引、调用reduce的数组
+>
+>1. callback(执行数组中每个值的函数,包括四个参数)
+>   - `previousValue`: 上一次调用回调返回的值,如果是第一次则为提供的初始值(initialValue)
+>   - `currentValue`: 数组中当前被处理的元素
+>   - `index`: 当前元素在数组中的索引
+>   - `array`: 调用reduce的数组
+>2. initialValue(作为第一次调用的第一个参数)
+
+##### b) 实例解析initialValue
+
+>先说得出的结论:
+>
+>1. 如果没有提供`initialValue(初始值)`,reduce会从索引1的地方开始执行callback方法,跳过第一个索引.如果提供`initialValue`,则从索引0开始
+>2. 一般来说要写上初始值更安全,否则空数组会出现报错
+
+###### (1) 举个栗子1:
+
+>```js
+>const arr = [1,2,3,4];
+>const sum = arr.reduce(function(prev,cur,index,arr){
+>	 console.log(prev,cur,index)
+>    // 每次对数据进行累加
+>	 return prev+cur   
+>})
+>console.log(arr, sum);
+>```
+>
+>我们看到,`index`(打印结果中第三位)是从**`1`**开始的,第一次的prev的值是数组的第一个值.数组长度是4,但是reduce函数循环3次
+>
+>![image-20220115142512156](ES全系列详细学习笔记的图片/image-20220115142512156.png) 
+
+###### (2) 接着看栗子2:
+
+>本质上就是加了第二个参数,赋予其默认值
+>
+>```js
+>//本质上就是加了第二个参数,赋予其默认值
+>const arr = [1,2,3,4];
+>const sum = arr.reduce(function(prev,cur,index,arr){
+>	 console.log(prev,cur,index)
+>    // 每次对数据进行累加
+>	 return prev+cur   
+>},0)
+>console.log(arr, sum);
+>```
+>
+>我们可以看到:`index`是从0开始的,第一次的eprev的值是我们设置的初始值0,数组长度是4,reduce循环4次
+>
+>![image-20220115143008922](ES全系列详细学习笔记的图片/image-20220115143008922.png) 
+
+###### (3) 结论1:
+
+>**如果没有提供`initialValue(初始值)`,reduce会从索引1的地方开始执行callback方法,跳过第一个索引.如果提供`initialValue`,则从索引0开始**
+>
+>那么有同学可能会问了:既然没给初始值,他会从索引1开始,那么如果我遍历的数组为空,那他不会报错吗?那就引出了下面的栗子3,别急我们继续往下看
+
+###### (4) 栗子3:如果数组为空?
+
+>![image-20220115144013667](ES全系列详细学习笔记的图片/image-20220115144013667.png)
+>
+>**所以一般来说我们提供初始值更安全**
+
+##### c) reduce的简单用法
+
+>最简单的就是我们常用的数组求和、乘积
+>
+>```js
+>const  arr = [1, 2, 3, 4];
+>const sum = arr.reduce((x,y)=>x+y)
+>const mul = arr.reduce((x,y)=>x*y)
+>console.log( sum ); //求和，10
+>console.log( mul ); //求乘积，24
+>```
+
+##### d) reduce的高级用法
+
+###### (1) 计算数组中每个元素出现的次数
+
+>```js
+>const names = ['Jelyn', '努力学习的汪', 'hong', '努力学习的汪', '努力学习的汪','Jelyn'];
+>
+>const nameInfo = names.reduce((pre,cur)=>{
+>  if(cur in pre){
+>     //如果当前项,是pre对象的属性key,则将其value+1
+>    pre[cur]++
+>  }else{
+>    //如果当前项不存在对象key中,则将此项作为其对象key,且给定初始值1
+>    pre[cur] = 1 
+>  }
+>  return pre
+>},{})//给定初始值空对象
+>console.log(nameInfo);//{Jelyn: 2, 努力学习的汪: 3, hong: 1}
+>```
+
+###### (2) 数组去重
+
+>* `includes()`:用来判断一个数组是否包含一个指定的值，如果是返回 true，否则false。
+>* `concat()` : 用于连接两个或多个数组;且不会更改现有数组，而是返回一个新数组，其中包含已连接数组的值。
+>
+>```js
+>const names = ['Jelyn', '努力学习的汪', 'hong', '努力学习的汪', '努力学习的汪','Jelyn'];
+>let newArr = names.reduce((pre,cur)=>{
+>    //如果 当前项不存在于 pre中
+>    if(!pre.includes(cur)){
+>    //则将 当前项并入 pre数组中
+>     return pre.concat(cur)
+>     // 也可使用push
+>    //pre.push(cur);  return pre ;
+>    }else{
+>    //如果存在于pre中,则不并入,将pre原样返回,进入下次循环
+>      return pre
+>    }
+>},[])
+>console.log(newArr);//['Jelyn', '努力学习的汪', 'hong']
+>```
+
+###### (3)  将二维数组转化成一维
+
+>首先,最简单的方法是使用上面讲过的`flat()`方法,他能拉平一层数组,但这里再写个使用reduce实现的栗子
+>
+>![image-20220115155344679](ES全系列详细学习笔记的图片/image-20220115155344679.png) 
+
+###### (4) 将多维转换成一维
+
+>与上面的一样,可以用`flat`实现,所以遇到这种情况还是用flat好
+>
+>![image-20220115155702841](ES全系列详细学习笔记的图片/image-20220115155702841.png)
+
+###### (5) 对象数组去重 -->`常用`
+
+>```js
+>const obj = {}   
+>const arr = [
+>        { id: '17011300', name: '努力学习的汪', age: '18' },
+>        { id: '170113001', name: 'Jelyn', age: '18' },
+>        { id: '17011300', name: '努力学习的汪', age: '18' },
+>        { id: '17011300', name: '努力学习的汪', age: '18' },
+>        { id: '999', name: 'hongjilin', age: '28' }
+>      ]
+>const temp = arr.reduce(function (item, next) {
+>        if (obj[next.id] && next.id) { return item } else obj[next.id] = true && item.push(next)
+>        return item
+>      }, [])
+>console.log(temp)
+>```
+>
+>###### 解析:
+>
+>1. 当首次进入时,必定为空,这时就进入了else中,在此处给这个属性加上一个value,同时将这个next存入数组中
+>2. 当后续进入时,如果 id重复,则在上轮中已经给他赋值了true,所以此处就判断到重复值,此时将item直接抛出
+>3. 当后续进入时,如果 id 不重复,就重复第一步
+>4. `&& next.id` 如果加了,则不会筛选没有 id 的数据,如果去除,则会过滤
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ⑨ 数组实例的 some() 、every()
 
 > **some()** : 方法测试数组中是不是至少有1个元素通过了被提供的函数测试. 它返回的是一个Boolean类型的值. 
 >

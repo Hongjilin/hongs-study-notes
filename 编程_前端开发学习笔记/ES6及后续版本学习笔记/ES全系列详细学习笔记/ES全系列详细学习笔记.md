@@ -5568,6 +5568,8 @@
 >2. 当后续进入时,如果 id重复,则在上轮中已经给他赋值了true,所以此处就判断到重复值,此时将item直接抛出
 >3. 当后续进入时,如果 id 不重复,就重复第一步
 >4. `&& next.id` 如果加了,则不会筛选没有 id 的数据,如果去除,则会过滤
+>
+>![image-20220115160957448](ES全系列详细学习笔记的图片/image-20220115160957448.png) 
 
 
 
@@ -13260,7 +13262,142 @@ mineReadFile('./resource/content.txt').then(value => {
 
 >`for...of`循环可以自动遍历 **Generator** 函数运行时生成的 `Iterator`
 >
+>此部分暂停,后续更新
 >
+>
+
+
+
+## 18、Async函数
+
+>ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+>
+>async 函数是什么？一句话，它就是 Generator 函数的语法糖。
+
+### Ⅰ - 概述与总结
+
+>#### 一、定义与概念
+>
+>>定义：使异步函数以同步函数的形式书写(Generator函数语法糖)
+>>
+>>原理：将`Generator函数`和自动执行器`spawn`包装在一个函数里
+>>
+>>形式：将`Generator函数`的`*`替换成`async`，将`yield`替换成`await`
+>>
+>>声明
+>>
+>>- 具名函数：`async function Func() {}`
+>>- 函数表达式：`const func = async function() {}`
+>>- 箭头函数：`const func = async() => {}`
+>>- 对象方法：`const obj = { async func() {} }`
+>>- 类方法：`class Cla { async Func() {} }`
+>>
+>>await命令：等待当前Promise对象状态变更完毕
+>>
+>>- 正常情况：后面是Promise对象则返回其结果，否则返回对应的值
+>>- 后随`Thenable对象`：将其等同于Promise对象返回其结果
+>>
+>>错误处理：将`await命令Promise对象`放到`try-catch`中(可放多个)
+>
+>###### 二、Async对Generator改进
+>
+>- 内置执行器
+>- 更好的语义
+>- 更广的适用性
+>- 返回值是Promise对象
+>
+>###### 三、应用场景
+>
+>> 按顺序(同步)完成异步操作
+>
+>###### 四、重点难点
+>
+>1. `Async函数`返回`Promise对象`，可使用`then()`添加回调函数
+>2. 内部`return返回值`会成为后续`then()`的出参
+>3. 内部抛出错误会导致返回的Promise对象变为`rejected状态`，被`catch()`接收到
+>4. 返回的Promise对象必须等到内部所有`await命令Promise对象`执行完才会发生状态改变，除非遇到`return语句`或`抛出错误`
+>5. 任何一个`await命令Promise对象`变为`rejected状态`，整个`Async函数`都会中断执行
+>6. 希望即使前一个异步操作失败也不要中断后面的异步操作
+>   - 将`await命令Promise对象`放到`try-catch`中
+>   - `await命令Promise对象`跟一个`catch()`
+>7. `await命令Promise对象`可能变为`rejected状态`，最好把其放到`try-catch`中
+>8. 多个`await命令Promise对象`若不存在继发关系，最好让它们同时触发(异步机制的存在本身就是为了提高效率)
+>9. `await命令`只能用在`Async函数`之中，否则会报错
+>10. 数组使用`forEach()`执行`async/await`会失效，可使用`for-of`和`Promise.all()`代替
+>11. 可保留运行堆栈，函数上下文随着`Async函数`的执行而存在，执行完成就消失
+
+### Ⅱ - Async是Generator 函数的语法糖
+
+#### ① 两者间区别
+
+>比如我们要实现一个依次读取两个文件的效果
+>
+>1.  Generator 函数实现
+>
+>   >```js
+>   >const gen = function* () {
+>   >  const f1 = yield readFile('/etc/test1');
+>   >  const f2 = yield readFile('/etc/test2');
+>   >  console.log(f1.toString());
+>   >  console.log(f2.toString());
+>   >};
+>   >```
+>
+>2. async实现
+>
+>   >```js
+>   >const asyncReadFile = async function () {
+>   >  const f1 = await readFile('/etc/test1');
+>   >  const f2 = await readFile('/etc/test2');
+>   >  console.log(f1.toString());
+>   >  console.log(f2.toString());
+>   >};
+>   >```
+>
+>###### 一比较我们就能发现,他们存在大量相似的地方:
+>
+>* `async`函数就是将 Generator 函数的星号（`*`）替换成`async`
+>* 将`yield`替换成`await`,仅此而已
+
+#### ②  Async函数对 Generator 函数的改进
+
+#### a)  内置执行器
+
+>Generator函数的执行必须靠执行器,所以才有了`co`模块,而`async`函数自带执行器.
+>
+>* 它不用像Generator函数需要调用`next`方法,或者用`co`模块才能真正执行得到结果
+>* 也就是说，`async`函数的执行，与普通函数一模一样，只要一行。
+
+#### b) 更好的语义
+
+>`async`和`await`,比起`*`和`yield`而言语义更清楚了:
+>
+>**`async`表示函数里有异步操作,`await`表示紧跟在后面的表达式需要等待结果**
+
+#### c) 更广的适用性
+
+>* `co`模块约定:`yield`命令后面只能是Thunk函数或Promise对象
+>* `async`与`await`: 命令后面可以是Promise对象和原始类型的值(数值、字符串和布尔值,但这时会自动转成立即`resolved`的Promise对象)
+
+#### d)返回值是Promise
+
+>`async`函数的返回值是Promise对象,这比Generator函数的返回值是Iterator对象方便多了
+>
+>* 你可以用`then`方法执行下一步操作
+>* 进一步说:`async`函数完全可以看作多个异步操作,包装成的一个Promise对象
+>* `await`命令就是内部`then`命令的语法糖
+
+### Ⅲ - 基本用法
+
+
+
+
+
+
+
+
+
+
 
 
 

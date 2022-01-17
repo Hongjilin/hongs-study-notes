@@ -5445,7 +5445,7 @@
 >
 >我们看到,`index`(打印结果中第三位)是从**`1`**开始的,第一次的prev的值是数组的第一个值.数组长度是4,但是reduce函数循环3次
 >
->![image-20220115142512156](ES全系列详细学习笔记的图片/image-20220115142512156.png) 
+>![image-20220115142512156](ES全系列详细学习笔记中的图片/image-20220115142512156.png) 
 
 ###### (2) 接着看栗子2:
 
@@ -5464,7 +5464,7 @@
 >
 >我们可以看到:`index`是从0开始的,第一次的eprev的值是我们设置的初始值0,数组长度是4,reduce循环4次
 >
->![image-20220115143008922](ES全系列详细学习笔记的图片/image-20220115143008922.png) 
+>![image-20220115143008922](ES全系列详细学习笔记中的图片/image-20220115143008922.png) 
 
 ###### (3) 结论1:
 
@@ -5474,7 +5474,7 @@
 
 ###### (4) 栗子3:如果数组为空?
 
->![image-20220115144013667](ES全系列详细学习笔记的图片/image-20220115144013667.png)
+>![image-20220115144013667](ES全系列详细学习笔记中的图片/image-20220115144013667.png)
 >
 >**所以一般来说我们提供初始值更安全**
 
@@ -5536,13 +5536,13 @@
 
 >首先,最简单的方法是使用上面讲过的`flat()`方法,他能拉平一层数组,但这里再写个使用reduce实现的栗子
 >
->![image-20220115155344679](ES全系列详细学习笔记的图片/image-20220115155344679.png) 
+>![image-20220115155344679](ES全系列详细学习笔记中的图片/image-20220115155344679.png) 
 
 ###### (4) 将多维转换成一维
 
 >与上面的一样,可以用`flat`实现,所以遇到这种情况还是用flat好
 >
->![image-20220115155702841](ES全系列详细学习笔记的图片/image-20220115155702841.png)
+>![image-20220115155702841](ES全系列详细学习笔记中的图片/image-20220115155702841.png)
 
 ###### (5) 对象数组去重 -->`常用`
 
@@ -5569,7 +5569,7 @@
 >3. 当后续进入时,如果 id 不重复,就重复第一步
 >4. `&& next.id` 如果加了,则不会筛选没有 id 的数据,如果去除,则会过滤
 >
->![image-20220115160957448](ES全系列详细学习笔记的图片/image-20220115160957448.png) 
+>![image-20220115160957448](ES全系列详细学习笔记中的图片/image-20220115160957448.png) 
 
 
 
@@ -13268,38 +13268,42 @@ mineReadFile('./resource/content.txt').then(value => {
 
 
 
-## 18、Async函数
+## 18、异步操作和Async函数
 
->ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+>异步编程对JS语言十分重要,因为语言本身的执行环境是 **单线程** 的,如果没有异步编程,很容易出现卡死、堵塞的鲜血
 >
->async 函数是什么？一句话，它就是 Generator 函数的语法糖。
+>ES6诞生以前,异步编程的方法大概分为下面四种:
+>
+>* 回调函数
+>* 事件监听
+>* 发布/订阅
+>* Promise对象
+>
+>ES6将JS异步编程带入了一个全新的阶段,ES7的`Async`函数更是提出了异步编程的一个极好的解决方案
 
 ### Ⅰ - 概述与总结
 
->#### 一、定义与概念
+>#### 一、Async的定义与概念
 >
->>定义：使异步函数以同步函数的形式书写(Generator函数语法糖)
->>
->>原理：将`Generator函数`和自动执行器`spawn`包装在一个函数里
->>
->>形式：将`Generator函数`的`*`替换成`async`，将`yield`替换成`await`
->>
->>声明
->>
+>1. 定义：使异步函数以同步函数的形式书写(Generator函数语法糖)
+>>2. 原理：将`Generator函数`和自动执行器`spawn`包装在一个函数里
+>3. 形式：将`Generator函数`的`*`替换成`async`，将`yield`替换成`await`
+>>4. 声明:
+>
 >>- 具名函数：`async function Func() {}`
->>- 函数表达式：`const func = async function() {}`
+>- 函数表达式：`const func = async function() {}`
 >>- 箭头函数：`const func = async() => {}`
->>- 对象方法：`const obj = { async func() {} }`
->>- 类方法：`class Cla { async Func() {} }`
->>
->>await命令：等待当前Promise对象状态变更完毕
->>
->>- 正常情况：后面是Promise对象则返回其结果，否则返回对应的值
->>- 后随`Thenable对象`：将其等同于Promise对象返回其结果
->>
->>错误处理：将`await命令Promise对象`放到`try-catch`中(可放多个)
+>- 对象方法：`const obj = { async func() {} }`
+>- 类方法：`class Cla { async Func() {} }`
 >
->###### 二、Async对Generator改进
+>5. await命令：等待当前Promise对象状态变更完毕
+>
+>>- 正常情况：后面是Promise对象则返回其结果，否则返回对应的值
+>- 后随`Thenable对象`：将其等同于Promise对象返回其结果
+>>
+>6. 错误处理：将`await命令Promise对象`放到`try-catch`中(可放多个)
+>
+>>###### 二、Async对Generator改进
 >
 >- 内置执行器
 >- 更好的语义
@@ -13318,68 +13322,738 @@ mineReadFile('./resource/content.txt').then(value => {
 >4. 返回的Promise对象必须等到内部所有`await命令Promise对象`执行完才会发生状态改变，除非遇到`return语句`或`抛出错误`
 >5. 任何一个`await命令Promise对象`变为`rejected状态`，整个`Async函数`都会中断执行
 >6. 希望即使前一个异步操作失败也不要中断后面的异步操作
->   - 将`await命令Promise对象`放到`try-catch`中
->   - `await命令Promise对象`跟一个`catch()`
+>  - 将`await命令Promise对象`放到`try-catch`中
+>  - `await命令Promise对象`跟一个`catch()`
 >7. `await命令Promise对象`可能变为`rejected状态`，最好把其放到`try-catch`中
->8. 多个`await命令Promise对象`若不存在继发关系，最好让它们同时触发(异步机制的存在本身就是为了提高效率)
->9. `await命令`只能用在`Async函数`之中，否则会报错
+> 8. 多个`await命令Promise对象`若不存在继发关系，最好让它们同时触发(异步机制的存在本身就是为了提高效率)
+> 9. `await命令`只能用在`Async函数`之中，否则会报错
 >10. 数组使用`forEach()`执行`async/await`会失效，可使用`for-of`和`Promise.all()`代替
 >11. 可保留运行堆栈，函数上下文随着`Async函数`的执行而存在，执行完成就消失
 
-### Ⅱ - Async是Generator 函数的语法糖
+### Ⅱ -  基本概念
 
-#### ① 两者间区别
+> 回顾一些基本概念
+
+#### ① 异步
+
+>所谓异步,简单说就是一个任务分成两段,先执行第一段,然后转而去执行更重要的其他任务,等做好了准备或者有空闲了,再来执行第二段
+>
+>>栗子:有一个任务是读取文件进行处理
+>>
+>>* 任务的第一段是向操作系统发出请求,要求读取文件,然后程序执行其他任务
+>>* 然后程序执行其他任务,等到操作系统返回了文件,我才接着执行任务的第二段(处理文件)
+>>* 这种不连续的执行就叫做异步
+>
+>相对应的,连续的执行就叫做同步,由于是连续执行,不能插入其他任务,如果 **读取文件操作** 转成同步操作的话,操作系统从硬盘读取文件的这段时间,就只能等待,造成'堵塞'
+
+#### ② 回调函数
+
+> JS语言对异步编程的实现就是 **回调函数(callback)**. 所谓回调函数:就是把任务的第二段单独写在一个函数里面,等到重新执行这个任务的时候就直接调用这个函数
+
+##### a) 举个栗子
+
+>这时Node中常见的读取文件操作函数
+>
+>```js
+>//读取文件操作
+>fs.readFile('/etc/fs', function (err, data) {
+>  if (err) throw err;
+>  console.log(data);
+>});
+>```
+>
+>###### 上面代码中:`readFile`函数的第二个参数就是回调函数,也就是任务的第二段.等到操作系统返回 `/etc/fs` 后,回调函数才会执行
+>
+>引申的问题:为什么Nodejs约定回调函数的第一个参数,必须是错误对象err(如果没有错,该参数就是null)?
+>
+>> 原因是执行分成两段,这两段之间抛出的错误,程序无法捕捉,只能当作参数传入第二段中
+
+#### ③ Promise
+
+>回调函数本身没有问题,但是他的问题出现在多个回调函数嵌套时,俗称 `回调地狱`,如同下面这样:
+>
+>![Promise系统学习_回调地狱](ES全系列详细学习笔记中的图片/Promise系统学习_回调地狱.jpg)
+>
+>而Promise的出现就是为了解决回调地狱的问题,但**只是简单的改变格式**, 并没有彻底解决上面的问题(还是会有一堆的then).真正要解决上述问题, 一定要利用promise再加上await和async关键字实现异步传同步
+>
+>具体内容更可以看本人 **[Promise学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Promise学习笔记)** 
+
+### Ⅲ -  Generator函数
+
+> 更详细的内容看上面笔记,这里做个大致回顾
+
+#### ① 协程
+
+>传统的编程语言,早有异步编程的解决方案(其实是多任务的解决方案).其中一种叫做'协程(coroutine)':意思是多个线程互相协作,完成异步任务
+>
+>协程有点像函数却又有点像线程,它的运行流程大致如下:
+>
+>* 第一步:协程A开始执行
+>* 第二步:协程A执行到一半进入暂停,执行权转移到协程B
+>* 第三步:(一段时间后)协程B交还执行权
+>* 第四步:协程A恢复执行
+>
+>上面流程的协程A就是异步任务,因为它分成两段或者多段执行
+
+##### a) 举个栗子
+
+>```js
+>function *asyncJob() {
+>  // ...其他代码
+>  var f = yield readFile(fileA);
+>  // ...其他代码
+>}
+>```
+>
+>上面代码的函数`asyncJob`是一个协程,它的奥妙就在其中的`yield`命令,它表示执行到此处执行权将交给其他协程,也就是说`yield`命令是异步两个阶段的分界线
+>
+>协程遇到`yield`命令就暂停,等到执行权返回,再从暂停的地方继续往后执行.它的最大优点就是代码的写法非常像同步操作
+
+#### ② Generator函数的ming的概念
+
+>Generator函数是协程在ES6的实现,最大的特点就是可以交出函数的执行权(即暂停执行)
+>
+>整个Generator函数就是一个封装的异步任务或者说是异步任务的容器,异步操作需要暂停的地方都用`yield`语句注明,Generator函数的执行方法如下
+>
+>```js
+>function* gen(x){
+>   return  yield x + 1;
+>}
+>
+>var g = gen(1);
+>g.next() // { value: 2, done: false }
+>g.next() // { value: undefined, done: true }
+>```
+>
+>上面代码中调用Generator函数,会返回一个内部指针(即遍历器):这是Generator函数不同于普通函数的另一个地方,即执行它不会返回结果,返回的是指针对象.调用指针g的next方法,会移动内部指针(即执行异步函数的第一段)指向第一个遇到yield语句,上例是执行到`x+1`为止
+>
+>换言之:next方法的作用是分阶段执行Generator函数,每次调用next方法,会返回一个对象表示当前阶段的信息(value属性和done属性)
+>
+>* value属性:yield语句后面表达式的值,表示当前阶段的值
+>* done属性:布尔值-->表示Generator函数是否执行完毕(即是否还有下一个阶段)
+
+#### ③ Generator函数的数据交换和错误处理
+
+>Generator函数可以在暂停执行和恢复执行,这是它能封装异步任务的根本原因
+>
+>除此之外它还有两个特性使它可以作为异步编程的完美解决方案:**函数体内外的数据交换和错误处理机制**
+>
+>* next方法返回值的value属性是Generator函数向外输出数据
+>* next方法还可以接受参数,这是向Generator函数体内输入数据
+
+##### a) 举个栗子
+
+>```js
+>function* gen(x){
+>  return yield x + 1;
+>}
+>
+>var g = gen(1);
+>g.next() // { value: 2, done: false }
+>g.next(2) // { value: 2, done: true }
+>```
+>
+>上面代码中:
+>
+>* 第一个next方法的value属性,返回表达式`x+1`的值
+>* 第二个next方法带有参数 `2`,这个参数可以传入Generator函数作为上一个阶段异步任务的返回结果,所以这一步的value属性返回的就是2,且done为true
+
+##### b) 再举个栗子
+
+>Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误。
+>
+>```js
+>function* gen(x){
+>  try {
+>    var y = yield x + 2;
+>  } catch (e){
+>    console.log(e);
+>  }
+>  return y;
+>}
+>
+>var g = gen(1);
+>g.next();
+>g.throw('出错了');
+>// 出错了
+>```
+>
+>上面代码的最后一行，Generator函数体外，使用指针对象的throw方法抛出的错误，可以被函数体内的try ...catch代码块捕获。这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的。
+
+#### ④ 异步任务的封装
+
+>下面看看如何使用 Generator 函数，执行一个真实的异步任务。
+>
+>```javascript
+>var fetch = require('node-fetch');
+>
+>function* gen(){
+>  var url = 'https://gitee.com/hongjilin';
+>  var result = yield fetch(url);
+>  console.log(result.bio);
+>}
+>```
+>
+>上面代码中，Generator函数封装了一个异步操作，该操作先读取一个远程接口，然后从JSON格式的数据解析信息。就像前面说过的，这段代码非常像同步操作，除了加上了yield命令。
+
+##### a) 执行代码的方法如下
+
+>```js
+>var g = gen();
+>var result = g.next();
+>//这里的value实际上相当于 fetch(url);
+>result.value.then(function(data){
+>  return data.json();
+>}).then(function(data){
+>  g.next(data);
+>});
+>```
+>
+>上面代码中:
+>
+>* 先执行Generator函数,获取遍历器对象,然后使用next方法(第二行),执行异步任务第一阶段
+>* 由于Fetch模块返回的是一个Promise对象,因此要用then方法调用下一个next方法
+>* 可以看到虽然Generator函数将异步操作表示的很简洁,但是流程管理却不方便(即何时执行第一阶段、何时执行第二阶段)
+
+### Ⅳ - Thunk函数
+
+>JavaScript 语言是 **`传值调用`** 
+
+#### ① 参数的求值策略
+
+>Thunk函数早在上个世纪60年代就诞生了,那时候编程语言才刚刚起步,计算机学家还在研究编译器怎么写比较好,一个争论的焦点时'**求值策略**':即函数的参数到底应该何时求值
+>
+>```js
+>const x = 1;
+>
+>function f(m){
+>  return m * 2;
+>}
+>
+>f(x + 1)
+>```
+>
+>上面代码先定义函数f,然后向它传入表达式`x+1`,请问这个表达式应该何时求值?
+
+##### a) 传值调用(call  by value)
+
+>即在进入函数体之前,就计算`x+1`的值(等于2),再将这个值传入函数f,C语言就是采用这种策略
+>
+>```js
+>f(x+1)
+>//传值调用时,两者等同
+>f(2)
+>```
+
+##### b) 传名调用(call by name)
+
+>即直接将表达式`x+1`传入函数体,只在用到它的时候求值,Haskell语言采用这种策略
+>
+>```js
+>f(x+1)
+>//传名调用时,等同下面的
+>(x+1)*2
+>```
+
+##### c) 传值和传名调用那种好?
+
+>###### 答案是各有利弊:传值调用比较简单,但是对参数求值的时候,实际上还没用到这个参数,有可能造成性能损失
+>
+>```js
+>function f(a, b){
+>  return b;
+>}
+>//这里传入的第一个参数,在实际调用中并没有使用
+>f(3 * x * x - 2 * x - 1, x);
+>```
+>
+>上面代码中,函数f的第一个参数是一个复杂的表达式,但是函数体内根本没用到,对于这个参数求值实际上是不必要的,因此有一些计算机学家倾向于'**传名求值**'-->只在执行时求值
+
+#### ② Thunk函数的含义
+
+>###### 编译器 '**`传名调用`**' 实现往往是将参数放到一个临时函数之中,再将这个临时函数传入函数体,这个临时函数就叫做Thunk函数
+>
+>```js
+>function f(m){
+>    return m * 2
+>}
+>f(x + 1)
+>//等同于下面
+>const Thunk = function (){
+>    return x + 1
+>}
+>function f(thunk){
+>    return Thunk() * 2
+>}
+>```
+>
+>上面代码中函数f的参数`x + 1`被一个自定义的`Thunk`函数替换了.凡是用到原参数的地方对`Thunk`函数求值即可,这就是Thunk函数的定义,他是'传名调用'的一种实现策略,用来替换某个表达式
+
+#### ③ JavaScript语言的Thunk函数
+
+>###### JavaScript 语言是 **`传值调用`** ,它的Thunk函数含义有所不同:
+>
+>> 在JavaScript语言中,Thunk函数替换的不是表达式,而是多参函数,将其转换成单参数的版本,且只接受回调函数作为参数
+>
+>```js
+>// 正常版本的readFile（多参数版本）
+>fs.readFile(fileName, callback);
+>
+>// Thunk版本的readFile（单参数版本）
+>const readFileThunk = Thunk(fileName);
+>readFileThunk(callback);
+>
+>const Thunk = function (fileName){
+>  return function (callback){
+>    return fs.readFile(fileName, callback);
+>  };
+>};
+>```
+>
+>上面代码中:
+>
+>* fs模块的readFie方法是一个多参数函数,两个参数分别是文件名和回调函数
+>* 经过转换器处理,他变成了一个单参数的函数,只接受回调函数作为参数,这个单参数版本就叫做Thunk函数
+
+##### a) 任何函数只要参数有回调函数就能写成Thunk形式
+
+>```js
+>// ES5版本
+>var Thunk = function(fn){
+>  return function (){
+>    var args = Array.prototype.slice.call(arguments);
+>    return function (callback){
+>      args.push(callback);
+>      return fn.apply(this, args);
+>    }
+>  };
+>};
+>
+>// ES6版本
+>var Thunk = function(fn) {
+>  return function (...args) {
+>    return function (callback) {
+>      return fn.call(this, ...args, callback);
+>    }
+>  };
+>};
+>
+>//调用栗子1
+>var readFileThunk = Thunk(fs.readFile);
+>readFileThunk(fileA)(callback);
+>//栗子2
+>function f(a, cb) {
+>  cb(a);
+>}
+>let ft = Thunk(f);
+>
+>let log = console.log.bind(console);
+>ft(1)(log) // 1
+>```
+>
+>实际上这个写法非常像`闭包`
+
+#### ④ Generator 函数的流程管理
+
+>你可能会问,Thunk函数有什么用?
+>
+>>回答就是以前确实没什么用,但是ES6有了Generator函数,Thunk函数现在可以用于Generator函数
+
+##### a) Generator可以自动执行
+
+>```js
+>function* gen() {
+>  // ...
+>}
+>
+>var g = gen();
+>var res = g.next();
+>//只要 done 不为true:即流程没有结束时,一直循环
+>while(!res.done){
+>  console.log(res.value);
+>  res = g.next();
+>}
+>```
+>
+>上面代码中,Generator函数`gen`会自动执行完所有步骤,**但是这并不适合异步操作!!!!**
+
+##### b) 异步操作解决方案
+
+>如果必须保证前一步执行完才能执行后一步,上面的自动执行就不可行,这时Thunk函数就能派上用场:以读取文件为例下面的Generator函数封装了两个异步操作
+>
+>```js
+>var fs = require('fs');
+>var thunkify = require('thunkify');
+>var readFile = thunkify(fs.readFile);
+>
+>var gen = function* (){
+>  var r1 = yield readFile('/etc/fstab');
+>  console.log(r1.toString());
+>  var r2 = yield readFile('/etc/shells');
+>  console.log(r2.toString());
+>};
+>```
+>
+>###### 上面代码中 `yield`命令用于将程序的执行权移出Generator函数,那么就需要一种方法将执行权再交还给Generator函数
+>
+>这种方法就是Thunk函数:因为它可以在回调函数里将执行权交还给Generator函数,为了便于理解我们先看如何手动执行上面这个Generator函数
+
+###### (1)  手动执行上面的Generator函数
+
+>```js
+>var g = gen();
+>
+>var r1 = g.next();
+>r1.value(function(err, data){
+>  if (err) throw err;
+>  var r2 = g.next(data);
+>    //需要调用几次,就重复几次这样的代码
+>  r2.value(function(err, data){
+>    if (err) throw err;
+>    g.next(data);
+>  });
+>});
+>```
+>
+>上面代码中，变量g是Generator函数的内部指针，表示目前执行到哪一步。next方法负责将指针移动到下一步，并返回该步的信息（value属性和done属性）。
+>
+>仔细查看上面的代码，可以发现Generator函数的执行过程，其实是将同一个回调函数，反复传入next方法的value属性。这使得我们可以用递归来自动完成这个过程,那如何实现自动递归调用呢?看下面的内容
+
+#### ⑤ Thunk函数的自动流程管理
+
+>hunk函数真正的威力，在于可以自动执行Generator函数。下面就是一个基于Thunk函数的Generator执行器。
+>
+>```javascript
+>function run(fn) {
+>  const gen = fn();
+>
+>  function next(err, data) {
+>    const result = gen.next(data);
+>    if (result.done) return;
+>    //将下一级的函数取出,随后传入 next回调函数(上面说过,单参数传入回调)
+>    result.value(next);
+>  }
+>
+>  next();
+>}
+>
+>function* g() {
+>  // ...
+>}
+>
+>run(g);
+>```
+>
+>上面代码的`run`函数，就是一个Generator函数的自动执行器
+>
+>* 内部的`next`函数就是Thunk的回调函数。
+>* `next`函数先将指针移到Generator函数的下一步（`gen.next`方法），然后判断Generator函数是否结束（`result.done`属性）
+>* 如果没结束，就将`next`函数再传入Thunk函数（`result.value`属性），否则就直接退出。
+>
+>有了这个执行器,执行Generator函数方便多了,不管内部又多少个异步操作,直接把Generator函数传入这个`run`函数即可,当然前提是:
+>
+>**每一个异步操作都要是Thunk函数,也就是说yield命令后面必须是Thunk函数**
+
+##### a) 实例
+
+>```javascript
+>var g = function* (){
+>  var f1 = yield readFile('fileA');
+>  var f2 = yield readFile('fileB');
+>  // ...
+>  var fn = yield readFile('fileN');
+>};
+>
+>run(g);
+>```
+>
+>上面代码中，函数`g`封装了`n`个异步的读取文件操作，只要执行`run`函数，这些操作就会自动完成。这样一来，异步操作不仅可以写得像同步操作，而且一行代码就可以执行。
+>
+>Thunk函数并不是Generator函数自动执行的唯一方案。因为自动执行的关键是，必须有一种机制，自动控制Generator函数的流程，接收和交还程序的执行权。回调函数可以做到这一点，Promise 对象也可以做到这一点。
+
+### Ⅴ - co模块
+
+#### ① 基本用法
+
+>co模块是一个用于Generator函数的自动执行的小工具
+>
+>比如，有一个Generator函数，用于依次读取两个文件。
+>
+>```javascript
+>var gen = function* (){
+>  var f1 = yield readFile('/etc/fstab');
+>  var f2 = yield readFile('/etc/shells');
+>  console.log(f1.toString());
+>  console.log(f2.toString());
+>};
+>```
+>
+>co模块可以让你不用编写Generator函数的执行器。
+>
+>```javascript
+>var co = require('co');
+>co(gen);
+>```
+>
+>上面代码中，Generator函数只要传入co函数，就会自动执行。
+>
+>co函数返回一个Promise对象，因此可以用then方法添加回调函数。
+>
+>```javascript
+>co(gen).then(function (){
+>  console.log('Generator 函数执行完成');
+>});
+>```
+>
+>上面代码中，等到Generator函数执行结束，就会输出一行提示。
+
+#### ② co模块的原理
+
+>###### 为什么co可以自动执行Generator函数?
+>
+>> 前面说过Generator就是一个异步操作的容器,它的自动执行需要一种机制,当异步操作有了结果能够自动交回执行权
+>
+>两种方法可以做到这一点
+>
+>1. 回调函数: 将异步操作包装成Thunk函数,在回调函数里面交回执行权
+>2. Promise对象:将异步操作包装成Promise对象,用then方法交回执行权
+>
+>co模块其实就是将两种自动执行器(Thunk函数和Promise对象)包装成一个模块.使用co的前提条件是:Generator函数的yield命令后面，只能是Thunk函数或Promise对象
+
+##### a)基于Promise对象的自动执行
+
+>还是沿用上面的例子。首先，把fs模块的readFile方法包装成一个Promise对象。
+>
+>```javascript
+>var fs = require('fs');
+>
+>var readFile = function (fileName){
+>  return new Promise(function (resolve, reject){
+>    fs.readFile(fileName, function(error, data){
+>      if (error) return reject(error);
+>      resolve(data);
+>    });
+>  });
+>};
+>
+>var gen = function* (){
+>  var f1 = yield readFile('/etc/fstab');
+>  var f2 = yield readFile('/etc/shells');
+>  console.log(f1.toString());
+>  console.log(f2.toString());
+>};
+>```
+>
+>然后，手动执行上面的Generator函数。
+>
+>```javascript
+>var g = gen();
+>
+>g.next().value.then(function(data){
+>  g.next(data).value.then(function(data){
+>    g.next(data);
+>  });
+>});
+>```
+>
+>手动执行其实就是用then方法，层层添加回调函数。理解了这一点，就可以写出一个自动执行器。
+>
+>```javascript
+>function run(gen){
+>  var g = gen();
+>
+>  function next(data){
+>    var result = g.next(data);
+>    if (result.done) return result.value;
+>    //将回调传入,实现自动执行  
+>    result.value.then(function(data){
+>      next(data);
+>    });
+>  }
+>
+>  next();
+>}
+>
+>run(gen);
+>```
+>
+>上面代码中，只要Generator函数还没执行到最后一步，next函数就调用自身，以此实现自动执行。
+
+##### b) co模块的源码
+
+>co就是上面那个自动执行器的扩展，它的源码只有几十行，非常简单。
+>
+>首先，co函数接受Generator函数作为参数，返回一个 Promise 对象。
+>
+>```javascript
+>function co(gen) {
+>  var ctx = this;
+>
+>  return new Promise(function(resolve, reject) {
+>  });
+>}
+>```
+>
+>在返回的Promise对象里面，co先检查参数gen是否为Generator函数。如果是，就执行该函数，得到一个内部指针对象；如果不是就返回，并将Promise对象的状态改为resolved。
+>
+>```javascript
+>function co(gen) {
+>  var ctx = this;
+>
+>  return new Promise(function(resolve, reject) {
+>    if (typeof gen === 'function') gen = gen.call(ctx);
+>    //如果下一步已经流程结束或者 非Generator函数,则返回成功状态  
+>    if (!gen || typeof gen.next !== 'function') return resolve(gen);
+>  });
+>}
+>```
+>
+>接着，co将Generator函数的内部指针对象的next方法，包装成onFulfilled函数。这主要是为了能够捕捉抛出的错误。
+>
+>```javascript
+>function co(gen) {
+>  var ctx = this;
+>
+>  return new Promise(function(resolve, reject) {
+>    if (typeof gen === 'function') gen = gen.call(ctx);
+>    if (!gen || typeof gen.next !== 'function') return resolve(gen);
+>
+>    onFulfilled();
+>    function onFulfilled(res) {
+>      var ret;
+>      try {
+>        ret = gen.next(res);
+>      } catch (e) {
+>        return reject(e);
+>      }
+>      next(ret);
+>    }
+>  });
+>}
+>```
+>
+>最后，就是关键的next函数，它会反复调用自身。
+>
+>```javascript
+>function next(ret) {
+>  if (ret.done) return resolve(ret.value);
+>  var value = toPromise.call(ctx, ret.value);
+>  if (value && isPromise(value)) return value.then(onFulfilled, onRejected);
+>  return onRejected(new TypeError('You may only yield a function, promise, generator, array, or object, '
+>    + 'but the following object was passed: "' + String(ret.value) + '"'));
+>}
+>```
+>
+>上面代码中，next 函数的内部代码，一共只有四行命令。
+>
+>第一行，检查当前是否为 Generator 函数的最后一步，如果是就返回。
+>
+>第二行，确保每一步的返回值，是 Promise 对象。
+>
+>第三行，使用 then 方法，为返回值加上回调函数，然后通过 onFulfilled 函数再次调用 next 函数。
+>
+>第四行，在参数不符合要求的情况下（参数非 Thunk 函数和 Promise 对象），将 Promise 对象的状态改为 rejected，从而终止执行。
+
+#### ③ 处理并发的异步操作
+
+>co支持并发的异步操作，即允许某些操作同时进行，等到它们全部完成，才进行下一步。
+>
+>这时，要把并发的操作都放在数组或对象里面，跟在yield语句后面。
+>
+>```javascript
+>// 数组的写法
+>co(function* () {
+>  var res = yield [
+>    Promise.resolve(1),
+>    Promise.resolve(2)
+>  ];
+>  console.log(res);
+>}).catch(onerror);
+>
+>// 对象的写法
+>co(function* () {
+>  var res = yield {
+>    1: Promise.resolve(1),
+>    2: Promise.resolve(2),
+>  };
+>  console.log(res);
+>}).catch(onerror);
+>```
+>
+>下面是另一个例子。
+>
+>```javascript
+>co(function* () {
+>  var values = [n1, n2, n3];
+>  yield values.map(somethingAsync);
+>});
+>
+>function* somethingAsync(x) {
+>  // do something async
+>  return y
+>}
+>```
+>
+>上面的代码允许并发三个`somethingAsync`异步操作，等到它们全部完成，才会进行下一步。
+
+
+
+### Ⅵ - Async函数
+
+####  ①Async是Generator 函数的语法糖
+
+##### a)  两者间区别
 
 >比如我们要实现一个依次读取两个文件的效果
 >
 >1.  Generator 函数实现
 >
->   >```js
->   >const gen = function* () {
->   >  const f1 = yield readFile('/etc/test1');
->   >  const f2 = yield readFile('/etc/test2');
->   >  console.log(f1.toString());
->   >  console.log(f2.toString());
->   >};
->   >```
+>```js
+>const gen = function* () {
+>const f1 = yield readFile('/etc/test1');
+>const f2 = yield readFile('/etc/test2');
+>console.log(f1.toString());
+>console.log(f2.toString());
+>};
+>```
 >
 >2. async实现
 >
->   >```js
->   >const asyncReadFile = async function () {
->   >  const f1 = await readFile('/etc/test1');
->   >  const f2 = await readFile('/etc/test2');
->   >  console.log(f1.toString());
->   >  console.log(f2.toString());
->   >};
->   >```
+>```js
+>const asyncReadFile = async function () {
+>const f1 = await readFile('/etc/test1');
+>const f2 = await readFile('/etc/test2');
+>console.log(f1.toString());
+>console.log(f2.toString());
+>};
+>```
 >
 >###### 一比较我们就能发现,他们存在大量相似的地方:
 >
 >* `async`函数就是将 Generator 函数的星号（`*`）替换成`async`
 >* 将`yield`替换成`await`,仅此而已
 
-#### ②  Async函数对 Generator 函数的改进
+##### b)  Async函数对 Generator 函数的改进
 
-#### a)  内置执行器
+###### (1)  内置执行器
 
 >Generator函数的执行必须靠执行器,所以才有了`co`模块,而`async`函数自带执行器.
 >
 >* 它不用像Generator函数需要调用`next`方法,或者用`co`模块才能真正执行得到结果
 >* 也就是说，`async`函数的执行，与普通函数一模一样，只要一行。
 
-#### b) 更好的语义
+###### (2) 更好的语义
 
 >`async`和`await`,比起`*`和`yield`而言语义更清楚了:
 >
 >**`async`表示函数里有异步操作,`await`表示紧跟在后面的表达式需要等待结果**
 
-#### c) 更广的适用性
+###### (3) 更广的适用性
 
 >* `co`模块约定:`yield`命令后面只能是Thunk函数或Promise对象
 >* `async`与`await`: 命令后面可以是Promise对象和原始类型的值(数值、字符串和布尔值,但这时会自动转成立即`resolved`的Promise对象)
 
-#### d)返回值是Promise
+###### (4)返回值是Promise
 
 >`async`函数的返回值是Promise对象,这比Generator函数的返回值是Iterator对象方便多了
 >
@@ -13387,9 +14061,13 @@ mineReadFile('./resource/content.txt').then(value => {
 >* 进一步说:`async`函数完全可以看作多个异步操作,包装成的一个Promise对象
 >* `await`命令就是内部`then`命令的语法糖
 
-### Ⅲ - 基本用法
+#### ② 语法
 
+>`Async`函数的语法规则总体上比较简单,难点是错误处理机制
 
+##### a) Async函数返回一个Promise对象
+
+>
 
 
 

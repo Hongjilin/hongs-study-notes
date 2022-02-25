@@ -656,6 +656,10 @@
 ##### 	7) `Disable cache`
 
 > Disable cache表示禁止缓存，勾选后，页面将不再从缓存中获取文件。
+>
+> 使用这个实际上是向请求头中设置`Cache-Control: no-cache`: 可以看到Request Headers中有个字段`Cache-Control: no-cache`。
+>
+> ![image-20220225160543826](ChromeDevTools使用详解笔记中的图片/image-20220225160543826.png)
 
 ##### 	8) `模拟网络状况`
 

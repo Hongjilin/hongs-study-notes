@@ -1,6 +1,6 @@
 # #说明
 
->本笔记是本人`ES全系统详细学习笔记`,将ES系列全部梳理一遍,包括新特性等,后续ES系列也会不间断的补充至此笔记中
+>本笔记是本人`ES全系统详细学习笔记`,将ES系列全部梳理一遍,包括新特性等,后续ES系列也会不间断的补充至此笔记中,主要方便本人后续查阅用,如果要专门学习,建议直接看阮一峰的ES6文档学习
 >
 >观阅或查阅的资料:[[阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)]、[[尚硅谷Web前端ES6教程, 涵盖ES6-ES11](https://www.bilibili.com/video/BV1uK411H7on?share_source=copy_web)]、华为云的 [[js高手之路] es6系列教程](https://www.huaweicloud.com/articles/dcc4c743622e8a481b33b65d27990c95.html) ; [[JowayYoung的1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/user/2330620350432110)]、[ES6系列教程第二篇--Iterator 详解](https://daimajiaoliu.com/daima/4ed4f6a37900410);W3Cschool的[ES6 中文教程](https://www.w3cschool.cn/escript6/);博客园的[JavaScript ES6 Symbol.hasInstance的理解. ](https://www.cnblogs.com/waitforyou/p/7080591.html);简书的[JS数组reduce()方法详解及高级技巧](https://www.jianshu.com/p/e375ba1cfc47)
 >
@@ -69,7 +69,7 @@
 
 # 二、ECMASript 系列 新特性
 
-> 想要查看更权威的官方ES6文档,可以看 [阮一峰的ES6文档](https://www.bookstack.cn/read/es6-3rd/sidebar.md)
+> 想要查看更权威的官方ES6文档,可以看 [阮一峰 ECMAScript 6 (ES6) 标准入门教程](https://www.bookstack.cn/books/es6-3rd)
 >
 > 此部分将记录由 **ES6提出以及后续补充的** ,但不仅限于 ES6新增内容, 比如 **Promise**是ES6提出的,但是例如`Promise.allSettled()` 该方法由 [ES2020](https://github.com/tc39/proposal-promise-allSettled) 引入,我仍然会收录在此部分笔记而不是记录在**ES11**新特性中
 

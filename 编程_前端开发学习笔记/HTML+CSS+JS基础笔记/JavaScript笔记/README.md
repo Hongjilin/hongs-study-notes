@@ -259,15 +259,16 @@
 
 >* 理解1: 都是值(基本/地址值)传递
 >
->  * 所以实际上传进function中的参数也是拿着其存着的地址值找内存
+>* 所以实际上传进function中的参数也是拿着其存着的地址值找内存
 >
->    ```js
->    //传进来的obj存储的是a中存的地址值,所以obj==a(因为他们地址值一致,指向一致)
->      let a = {name: 'hong'}
->      const fn2=(obj) => obj = {age: 15}
->      fn2(a)
->      console.log(a.age) //15
->    ```
+>  ```js
+>  //传进来的obj存储的是a中存的地址值,所以obj==a(因为他们地址值一致,指向一致)
+>  //2个引用变量指向同一个对象, 通过一个变量修改对象内部数据, 另一个变量看到的是修改之后的数据  -->所以被进行了修改
+>    let a = {name: 'hong'}
+>    const fn2=(obj) => obj.age= 15
+>    fn2(a)
+>    console.log(a.age) //15
+>  ```
 >
 >* 理解2: 可能是值传递, 也可能是引用传递(地址值)
 
@@ -1544,14 +1545,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                                       
+>                                           
 >       //向外暴露对象(给外部使用的方法)
 >       return {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     }
->                                       
+>                                           
 >     -----------------------------------------------------------------
 >     // myModule2.js   
 >     (function () {
@@ -1564,14 +1565,14 @@
 >       function doOtherthing () {
 >         console.log('doOtherthing() '+msg.toLowerCase())
 >       }
->                                       
+>                                           
 >       //向外暴露对象(给外部使用的方法)
 >       window.myModule2 = {
 >         doSomething: doSomething,
 >         doOtherthing: doOtherthing
 >       }
 >     })()    
->                                           
+>                                               
 >     ```
 >
 >2. 模块调用
@@ -2625,7 +2626,7 @@
 
 
 
-
+# `详细内容需看上方具体笔记,此示例文档存在更新不及时的问题`
 
 
 

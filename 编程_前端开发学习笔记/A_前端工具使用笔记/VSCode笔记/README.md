@@ -6,6 +6,8 @@
 >
 > 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
+
+
 # #说明
 
 > 原本我用的是 WebStrom(写前端代码时) , 但作为前端转投 VSCode 是再正常不过了, 即使当初 WebStrom 用的再久在接触 VSCode 后也不得不说一句真香, 而当初我进入编程, 只能靠自己摸索以及百度上零零散散地拼凑, 回想起来真是非常吃力, 所以此处我将梳理整合网上资料再结合自己理解形成笔记, 分享给大家, 也希望大家能少走弯路
@@ -13,10 +15,8 @@
 > 俗话说, `工欲善其事, 必先利其器`, 当你刚入门编程时第一件要做的就是去了解并学习编辑器的使用
 >
 > 查阅借鉴的资料: 知乎的 [King的VSCode新手入门教程](https://zhuanlan.zhihu.com/p/73577624)  、[韩骏的如何学习 Visual Studio Code？](https://zhuanlan.zhihu.com/p/162544477)、[千古壹号的第一次使用VS Code时你应该知道的一切配置](https://zhuanlan.zhihu.com/p/62913725);CSDN的 [猫科龙的「VS Code」Visual Studio Code 菜鸟教程：从入门到精通](https://blog.csdn.net/maokelong95/article/details/88805589);极客教程的 [VSCode 是什么](https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html) ;思否的 [hyangteng的宇宙最强vscode教程（基础篇）](https://segmentfault.com/a/1190000017949680); [思考问题的熊的VScode入门学习路径](https://kaopubear.top/blog/2019-09-11-howtolearnvscode/); 简书的 [破晓霜林的VsCode使用教程](https://www.jianshu.com/p/11554732b323); [VSCode 插件大全｜ VSCode 高级玩家之第二篇](https://juejin.im/post/5ea40c6751882573b219777d); [VSCode 前端必备插件, 有可能你装了却不知道如何使用？](https://juejin.im/post/5db66672f265da4d0e009aad) ;[如何让 VS Code 更好用 10 倍？这里有一份 VS Code 新手指南](https://zhuanlan.zhihu.com/p/99462672); [使用 VSCode 的一些技巧](https://mp.weixin.qq.com/s?src=11&timestamp=1591581536&ver=2387&signature=i4xLZlLe1Gkl7OiBIhPO*VSeNB5lzFgTY-dgNW9E9ZbtIAv4bnJ1RdAAZdhvDw*cg-DmMcUa-V8NSUdV-tthmXZCq3ht4edCweq6v0QxKjnh8IuAxyyh5qymdRui*8iE&new=1);[能让你开发效率翻倍的 VSCode 插件配置（上）](https://juejin.im/post/5a08d1d6f265da430f31950e);还有一部分因为VSCode在很早之前就已在使用, 当时有做部分笔记但是未注明其中引用出处(小部分), 现在也无法查找, 但本人笔记主要还是为了方便大家学习, 所以仍会把当初笔记并入, 发现出处的小伙伴可以私聊我
-
-------
-
-
+>
+> 除此笔记外大家可以看我其他笔记 :**[全栈笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master)**、**[数据结构与算法](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_算法及课程基础学习笔记/数据结构与算法)**、**[编程_前端开发学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记)**、**[编程_后台服务端学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记)** 、**[Java](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Java)** 、**[Nodejs](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_后台服务端学习笔记/Nodejs)** 、**[JavaScript笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/HTML+CSS+JS基础笔记/JavaScript笔记)**、**[编程工具使用笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/A_前端工具使用笔记)** 、**[ES6及后续版本学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/ES6及后续版本学习笔记)** 、**[Vue笔记整合](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Vue笔记整合)** 、**[React笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/React笔记)**、**[微信小程序学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/微信小程序学习笔记)**、**[Chrome开发使用及学习笔记](https://gitee.com/hongjilin/hongs-study-notes/tree/master/编程_前端开发学习笔记/Chrome开发使用及学习笔记)** 以及许多其他笔记就不一一例举了
 
 # 绪论
 
@@ -406,6 +406,22 @@
 
 >同上 是另一款GUI插件
 
+### 9、代码跳转
+
+> ###### 前端开发必装
+
+#### ① vscode-elm-jump
+
+>常规的代码跳转定义，按ctrl，和webstrom一样
+
+#### ② CSS Peek
+
+>和webstrom一样，按ctrl可以跳转css定义，按ctrl，和webstrom一样
+
+#### ③ vue-helper
+
+>让你在vue单文件里面的变量函数跳转定义
+
 ## Ⅱ - 推荐的插件
 
 ### 1、TODO Highlight
@@ -604,11 +620,11 @@
 >`解决`:
 >
 >>1.新建reg文件.在桌面上新建一个文本文件, 然后将文件后缀改为:*.reg, 文件名任意, 例如:add_shortcut.reg.
->>
+>
 >>2.编写文本文件内容.将下面的内容Copy到刚才新建的*.reg文件中, 文本内容如下:
->>
+>
 >>3.下面代码中的地址表示VSCode在电脑上的安装路径, 如果不是默认安装的或者路径不一样, `需要改成和电脑上实际安装路径一致的`.
->>
+>
 >>4.文件编辑好了之后保存关闭.然后双击运行 add_shortcut.reg , 遇到提示点击 "确定"或"是".不出意外, 便大功告成了!
 >
 >```js

@@ -400,6 +400,22 @@
 
 >同上 是另一款GUI插件
 
+### 9、代码跳转
+
+> ###### 前端开发必装
+
+#### ① vscode-elm-jump
+
+>常规的代码跳转定义，按ctrl，和webstrom一样
+
+#### ② CSS Peek
+
+>和webstrom一样，按ctrl可以跳转css定义，按ctrl，和webstrom一样
+
+#### ③ vue-helper
+
+>让你在vue单文件里面的变量函数跳转定义
+
 ## Ⅱ - 推荐的插件
 
 ### 1、TODO Highlight

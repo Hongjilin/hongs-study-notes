@@ -2,7 +2,7 @@
 
 > #### 本人实战项目源码分享：
 >
-> * **[校园疫情防控管理系统-全栈](https://gitee.com/hongjilin/Campus-epidemic-prevention-and-control-syste)** : 本人毕设项目,附带编写教程视频
+> * **[校园疫情防控管理系统-全栈](https://github.com/Hongjilin/Campus-epidemic-prevention-and-control-syste)** : 本人毕设项目,附带编写教程视频
 > * **[学习游戏平台](https://gitee.com/hongjilin/problem-solving-game)** : 将知识点融入游戏中、以游戏的方式进行考核检测学生知识点掌握情况;本人用来复习Vue框架的项目,目前持续更新中......
 
 #### 笔记介绍

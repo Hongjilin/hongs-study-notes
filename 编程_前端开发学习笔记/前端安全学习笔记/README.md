@@ -47,8 +47,7 @@
 >* 攻击者构造出特殊的URL,其中包含恶意代码
 >* 用户打开带有恶意代码的URL
 >  * 用户浏览器接收到响应后解析执行,前端JS取出URL中的恶意代码并执行
->  * 恶意代码且与用户数据并发送到攻击者的网站,或者冒充用户行为
->
+>  * 恶意代码且与用户数据并发送到攻击者的网站,或者冒充用户行为,调用目标网站接口执行攻击者指定的操作
 >
 
 
@@ -106,9 +105,20 @@
 >* 反射型XSS(非持久性)的恶意代码存储在URL中
 >* 存储型XSS(持久性)的恶意代码存储在数据库中
 
-### Ⅴ - 解决方案
+### Ⅴ - DOM型跟其他两种XSS的区别
 
-#### ① 过滤
+>DOM型XSS攻击中
+>
+>* 取出和执行恶意代码由浏览器端完成,属于前端JavaScript本身的安全漏洞;
+>* 其他两种都属于服务端的安全漏洞
+
+### Ⅵ - 解决方案
+
+#### ①  httpOnly
+
+>在cookie中设置**HttpOnly**属性, 使得JS脚本无法读取到cookie信息
+
+#### ② 输入过滤
 
 >对用户的输入进行过滤,通过将 `<>`、`''`、`""`等字符进行转义,移除用户输入的Style节点、Script节点、iframe节点
 >
@@ -126,16 +136,69 @@
 >}
 >```
 
-#### ② 编码
+#### ③ 转义HTML
 
 >* 根据输出数据所在的上下文来进行相应的编码
 >* 数据放置于HTML元素中,需进行 **HTML编码**
 >* 放置于 URL 中,需要进行 **URL编码**
 >* 还有 **JavaScript编码**、**CSS编码**、**HTML编码**、**JSON编码**等
 
-#### ③ httpOnly
+#### ④  预防 存储型、反射型XSS攻击
 
->在cookie中设置**HttpOnly**属性, 使得JS脚本无法读取到cookie信息
+>> ###### 此方法主要预防 存储型和反射型XSS攻击
+>
+>**纯前端渲染过程**
+>
+>* 浏览器先加载一个静态HTML,此HTML中不包含任何跟业务相关的数据
+>* 然后浏览器执行HTML中的JavaScript
+>* JavaScript 通过 Ajax 加载业务数据,调用 `DOM API` 更新到页面上
+>
+>**在纯前端渲染中,我们会明确告诉浏览器:下面要设置的内容是文本（`.innerText`），还是属性（`.setAttribute`），还是样式（`.style`）等等。浏览器不会被轻易的被欺骗，执行预期外的代码了**
+>
+>* 但纯前端渲染就需要注意避免DOM型的XSS漏洞
+>* 在很多内部、管理系统中,采用纯前端渲染是非常适合的,但对于性能要求高; 
+>* 或有SEO需求的页面,我们仍要面对拼接HTML的问题
+
+#### ⑤ 预防DOM型XSS攻击
+
+>DOM型XSS攻击,实际上就是网站前端JavaScript本身不够严谨,把不可信的数据当代码执行了
+>
+>* 在在使用 `.innerHTML`、`.outerHTML`、`document.write()` 时要特别小心，不要把不可信的数据作为 HTML 插到页面上，而应尽量使用 `.textContent`、`.setAttribute()` 等。
+>* 如果用 Vue/React 技术栈，并且不使用 `v-html`/`dangerouslySetInnerHTML` 功能，就在前端 render 阶段避免 `innerHTML`、`outerHTML` 的 XSS 隐患。
+>* DOM 中的内联事件监听器，如 `location`、`onclick`、`onerror`、`onload`、`onmouseover` 等，`<a>` 标签的 `href` 属性，JavaScript 的 `eval()`、`setTimeout()`、`setInterval()` 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，请务必避免。
+>
+>```html
+><!-- 内联事件监听器中包含恶意代码 -->
+>![](https://awps-assets.meituan.net/mit-x/blog-images-bundle-2018b/3e724ce0.data:image/png,)
+>
+><!-- 链接内包含恶意代码 -->
+><a href="UNTRUSTED">1</a>
+>
+><script>
+>// setTimeout()/setInterval() 中调用恶意代码
+>setTimeout("UNTRUSTED")
+>setInterval("UNTRUSTED")
+>
+>// location 调用恶意代码
+>location.href = 'UNTRUSTED'
+>
+>// eval() 中调用恶意代码
+>eval("UNTRUSTED")
+></script>
+>```
+
+### Ⅶ -  通过一些原则减少漏洞产生
+
+>* **利用模板引擎**:开启模板引起自带的HTML转义功能
+>* **避免内联事件**: 尽量不要使用 `onLoad="onload('{{data}}')"`、`onClick="go('{{action}}')"` 这种拼接内联事件的写法。在 JavaScript 中通过 `.addEventlistener()` 事件绑定会更安全。
+>* **避免拼接HTML**: 前端采用拼接HTML的方法比较危险,如果框架允许，使用 `createElement`、`setAttribute` 之类的方法实现。或者采用比较成熟的渲染框架，如 Vue/React 等。
+>* **时刻保持警惕**: 插入位置为 DOM 属性、链接等位置时，要打起精神，严加防范。
+>* **增加攻击难度，降低攻击后果** 通过 CSP、输入长度配置、接口安全措施等方法，增加攻击的难度，降低攻击的后果。
+>* **主动检测和发现** 可使用 XSS 攻击字符串和自动扫描工具寻找潜在的 XSS 漏洞。
+
+------
+
+
 
 ## 三、CSRF (跨站请求伪造)
 

@@ -2,7 +2,65 @@
 
 # 一、`el-date-picker`时间控件相关
 
-## 1、关于日期控件日期少一天的问题
+## 1、开始实现与结束时间选择关联代码实现
+
+>直接上代码，没啥好说的,方便日后自己写类似代码好复制,后面的一些问题就是针对写出这些代码过程中
+>
+>###### 模板中引用
+>
+>```html
+>             <el-form-item label="登记证有效期起始" prop="validStartDate">
+>                  <el-date-picker
+>                    v-model="form.validStartDate"
+>                    value-format="yyyy-MM-dd [00:00:00]"
+>                    :style="{width:'100% '}"
+>                    type="date"
+>                    placeholder="选择时间"
+>                    :picker-options="pickerOptions.validStartDate"
+>                  ></el-date-picker>
+>                </el-form-item>
+>              </el-col>
+>           <el-col :span="8">
+>                <el-form-item label="登记证有效期截止" prop="validEndDate">
+>                  <el-date-picker
+>                    v-model="form.validEndDate"
+>                    value-format="yyyy-MM-dd [23:59:59]"
+>                    :style="{width:'100% '}"
+>                    type="date"
+>                    placeholder="结束时间"
+>                    :picker-options="pickerOptions.validEndDate"
+>                  ></el-date-picker>
+>                </el-form-item>
+>              </el-col>
+>```
+>
+>###### data中的定义
+>
+>```
+>pickerOptions: {
+>        // 开始时间限制
+>        validStartDate: {
+>          disabledDate: (time) => {
+>             // 修复截止日期选择后删除日期，然后选择起止日期，会显示无法选择日期的问题
+>            if (!this.form.validEndDate) return null
+>            return new Date(this.form.validEndDate) ? new Date(this.form.validEndDate) < new Date(time) : null
+>          }
+>        },
+>        // 结束时间限制
+>        validEndDate: {
+>          disabledDate: (time) => {
+>            // elementui时间默认多了8小时,需要消除这8小时的影响
+>            const tempDate = new Date(time)
+>            const newDate = tempDate.setDate(tempDate.getDate() + 1)
+>            return new Date(this.form.validStartDate) ? new Date(this.form.validStartDate) >= new Date(newDate) : null
+>          }
+>        },
+>      },
+>```
+>
+>
+
+## 2、关于日期控件日期少一天的问题
 
 >在我进行前后端联调时,**发现传给服务端的参数比输入选择的日期少一天**,但代码逻辑并没有什么错误
 >
@@ -59,7 +117,7 @@
 >
 >![image-20211215145041672](.\Readme中的图片\image-20211215145041672.png) 
 
-## 2、关于时间区间选择 查询边界错误的问题
+## 3、关于时间区间选择 查询边界错误的问题
 
 ### Ⅰ - 问题说明
 
@@ -88,7 +146,7 @@
 >></el-date-picker>
 >```
 
-## 3、日期格式转化后限制时间范围picker-options失效的问题
+## 4、日期格式转化后限制时间范围picker-options失效的问题
 
 ### Ⅰ- 问题说明
 
@@ -127,7 +185,7 @@
 >
 >效果图![image-20220113190604745](.\Readme中的图片\image-20220113190604745.png)
 
-## 4、日期选择器设置默认时间 23:59:59 
+## 5、日期选择器设置默认时间 23:59:59 
 
 ### Ⅰ - 问题说明
 
@@ -192,7 +250,7 @@
 ></el-form-item>
 >```
 
-## 5、两个关联时间框无法选择同一天
+## 6、两个关联时间框无法选择同一天
 
 ### Ⅰ- 问题提出
 
@@ -273,7 +331,57 @@
 
 
 
+## 7、关联选择框限制时间后出现**结束日期选择后删除日期，然后选择开始日期，会显示无法选择日期**的问题
 
+### Ⅰ- 问题提出
+
+>![image-20220729162214344](Readme中的图片/image-20220729162214344.png)
+
+### Ⅱ- 问题代码与分析
+
+>可以去问题[1]处看正确的完整代码,此处只截取有问题的代码
+>
+>```js
+> pickerOptions: {
+>        // 开始时间限制
+>        validStartDate: {
+>          disabledDate: (time) => {
+>            return new Date(this.form.validEndDate) ? new Date(this.form.validEndDate) < new Date(time) : null
+>          }
+>        },
+>  }
+>```
+>
+>根据问题截图操作可以推测,当选中后再重新删除,
+>
+>* 这时`this.form.validEndDate`就为null,而`new Date(null)`的结果是 `1970年1月1日`--此处不懂的可以百度,很容易查到此处不做科普
+>* 而`1970年1月1日`隐式会转换为true,`'1970年1月1日'?'1970年1月1日'<1970年1月1日以及之后的某时刻:null`得到的就是 `''1970年1月1日'<1970年1月1日以及之后的某时刻`
+>* 而  `'1970年1月1日'<1970年1月1日以及之后的某时刻`可想而知结果都会是`true`,就导致全部都无法选择了
+>
+>![image-20220729164100155](Readme中的图片/image-20220729164100155.png)
+
+### Ⅲ- 解决
+
+>知道了出现问题的地方,就很好解决了,在开始时间的限制处,判断是否结束时间为`null`,如果是`null`,就直接返回`null`,这样组件就不会进行限制
+>
+>```
+> pickerOptions: {
+>        // 开始时间限制
+>        validStartDate: {
+>          disabledDate: (time) => {
+>           // 修复有效期截止日期选择后删除日期，然后选择有效期起止日期，会显示无法选择日期的问题
+>            if (!this.form.validEndDate) return nu
+>            return new Date(this.form.validEndDate) ? new Date(this.form.validEndDate) < new Date(time) : null
+>          }
+>        },
+>  }
+>```
+>
+>
+
+
+
+------
 
 
 
@@ -529,3 +637,59 @@
 >```
 >
 >
+
+
+
+# 四、输入组件相关
+
+## 1、修改`el-input/el-checkbox/el-radio`等禁用状态下颜色
+
+### Ⅰ - 需求分析
+
+>业务中收到了一个问题反馈![image-20220728112311798](Readme中的图片/image-20220728112311798.png)
+>反馈就是禁用状态下的内容灰色难以看清，要求换一个颜色
+
+
+
+### Ⅱ- 代码实现
+
+>直接上代码
+>
+>```css
+><style scoped lang="scss">  //scoped是防止影响到其他组件样式
+>//checkBox自定义禁用样式
+>/deep/ .el-checkbox__input.is-disabled + .el-checkbox__label {  //deep是穿透，必须加这个才能穿透到样式中
+>  color: #808080 !important;
+>}
+>//radio自定义禁用样式
+>/deep/ .el-radio__input.is-disabled + .el-radio__label{
+>   color: #808080 !important;
+>}
+></style>
+>```
+>
+>###### 其他一些拓展
+>
+>```css
+>//下面是选中状态下的样式改变
+>.el-checkbox__input.is-disabled.is-checked + .el-checkbox__label {
+>  color: #1890ff !important;
+>}
+>
+>.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+>  background-color: #1890ff !important;
+>  border-color: #1890ff !important;
+>}
+>
+>//输入框 还有 textarea 禁用状态下颜色改变
+>.el-input.is-disabled .el-input__inner,textarea:disabled{
+>  color: #606266 !important;
+>}
+>```
+
+### Ⅲ - 实现效果
+
+>这里本人是将其颜色变为更深的灰色
+>
+>![image-20220728112523979](Readme中的图片/image-20220728112523979.png)![image-20220728112821906](Readme中的图片/image-20220728112821906.png)
+

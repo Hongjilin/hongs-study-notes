@@ -456,6 +456,410 @@
 
 
 
+## 3、el-tree放入下拉框中
+
+### Ⅰ - 效果图
+
+>![image-20220803180847029](Readme中的图片/image-20220803180847029.png)
+>
+>如果放到下拉框中，直接将树形结构放到表单中会显得特别占位置。做成这样的效果就会更好
+
+### Ⅱ - 封装的代码
+
+>使用`el-popover`+`el-input`+`el-tree`模拟实现以上效果
+>
+>```vue
+><!-- 树状选择器 -->
+>   <template>
+>  <el-popover ref="popover"
+>              placement="bottom-start"
+>              trigger="click"
+>              :disabled="disabled"
+>              @show="onShowPopover"
+>              @hide="onHidePopover">
+>    <el-tree ref="tree"
+>             class="select-tree"
+>             highlight-current
+>             :style="`min-width: ${treeWidth};height:50vh;overflowY:scroll`"
+>             :data="data"
+>             :props="props"
+>             :expand-on-click-node="false"
+>             :filter-node-method="filterNode"
+>             :default-expand-all="false"
+>             @node-click="onClickNode">
+>    </el-tree>
+>    <el-input slot="reference"
+>              ref="input"
+>              v-model="labelModel"
+>              clearable
+>              :style="`width: ${width}px`"
+>              :class="{ 'rotate': showStatus }"
+>              suffix-icon="el-icon-arrow-down"
+>              :placeholder="placeholder"
+>              :disabled="disabled">
+>    </el-input>
+>  </el-popover>
+></template>
+>  
+>  <script>
+>export default {
+>  name: 'Pagination',
+>  props: {
+>    // 接收绑定参数
+>    value: String,
+>    // 输入框宽度
+>    width: String,
+>    // 选项数据
+>    options: {
+>      type: Array,
+>      required: true,
+>    },
+>    // 是否可选
+>    disabled: {
+>      type: Boolean,
+>      default: false
+>    },
+>    // 输入框占位符
+>    placeholder: {
+>      type: String,
+>      required: false,
+>      default: '请选择',
+>
+>    },
+>    // 树节点配置选项
+>    props: {
+>      type: Object,
+>      required: false,
+>      default: () => ({
+>        parent: 'parentId',
+>        value: 'rowGuid',
+>        label: 'areaName',
+>        children: 'children',
+>      }),
+>
+>    },
+>
+>  },
+>  // 设置绑定参数
+>  model: {
+>    prop: 'value',
+>    event: 'selected',
+>
+>  },
+>  computed: {
+>    // 是否为树状结构数据
+>    dataType () {
+>      const jsonStr = JSON.stringify(this.options);
+>      return jsonStr.indexOf(this.props.children) !== -1;
+>
+>    },
+>    // 若非树状结构，则转化为树状结构数据
+>    data () {
+>      return this.dataType ? this.options : this.switchTree();
+>
+>    },
+>
+>  },
+>  watch: {
+>    labelModel (val) {
+>      if (!val) {
+>        this.valueModel = '';
+>
+>      }
+>      this.$refs.tree.filter(val);
+>
+>    },
+>    value (val) {
+>      this.labelModel = this.queryTree(this.data, val);
+>
+>    },
+>
+>  },
+>  data () {
+>    return {
+>      // 树状菜单显示状态
+>      showStatus: false,
+>      // 菜单宽度
+>      treeWidth: 'auto',
+>      // 输入框显示值
+>      labelModel: '',
+>      // 实际请求传值
+>      valueModel: '0',
+>    };
+>
+>  },
+>  created () {
+>    // 检测输入框原有值并显示对应 label
+>    if (this.value) {
+>      this.labelModel = this.queryTree(this.data, this.value);
+>
+>    }
+>    // 获取输入框宽度同步至树状菜单宽度
+>    this.$nextTick(() => {
+>      this.treeWidth = `${(this.width || this.$refs.input.$refs.input.clientWidth) - 24}px`;
+>
+>    });
+>
+>  },
+>  methods: {
+>    // 单击节点
+>    onClickNode (node) {
+>      this.labelModel = node[this.props.label];
+>      this.valueModel = node[this.props.value];
+>      this.onCloseTree();
+>      this.$emit('treeSelect', this.valueModel)
+>    },
+>    // 偏平数组转化为树状层级结构
+>    switchTree () {
+>      return this.cleanChildren(this.buildTree(this.options, '0'));
+>
+>    },
+>    // 隐藏树状菜单
+>    onCloseTree () {
+>      this.$refs.popover.showPopper = false;
+>    },
+>    // 显示时触发
+>    onShowPopover () {
+>      this.showStatus = true;
+>      this.$refs.tree.filter(false);
+>
+>    },
+>    // 隐藏时触发
+>    onHidePopover () {
+>      this.showStatus = false;
+>      this.$emit('selected', this.valueModel);
+>
+>    },
+>    // 树节点过滤方法
+>    filterNode (query, data) {
+>      if (!query) return true;
+>      return data[this.props.label].indexOf(query) !== -1;
+>
+>    },
+>    // 搜索树状数据中的 ID
+>    queryTree (tree, id) {
+>      let stark = [];
+>      stark = stark.concat(tree);
+>      while (stark.length) {
+>        const temp = stark.shift();
+>        if (temp[this.props.children]) {
+>          stark = stark.concat(temp[this.props.children]);
+>
+>        }
+>        if (temp[this.props.value] === id) {
+>          return temp[this.props.label];
+>
+>        }
+>
+>      }
+>      return '';
+>
+>    },
+>    // 将一维的扁平数组转换为多层级对象
+>    buildTree (data, id = '0') {
+>      const fa = (parentId) => {
+>        const temp = [];
+>        for (let i = 0; i < data.length; i++) {
+>          const n = data[i];
+>          if (n[this.props.parent] === parentId) {
+>            n.children = fa(n.rowGuid);
+>            temp.push(n);
+>
+>          }
+>
+>        }
+>        return temp;
+>
+>      };
+>      return fa(id);
+>
+>    },
+>    // 清除空 children项
+>    cleanChildren (data) {
+>      const fa = (list) => {
+>        list.map((e) => {
+>          if (e.children.length) {
+>            fa(e.children);
+>
+>          } else {
+>            delete e.children;
+>
+>          }
+>          return e;
+>
+>        });
+>        return list;
+>
+>      };
+>      return fa(data);
+>
+>    },
+>
+>  },
+>};
+> </script>
+> 
+> <style lang="scss" scoped>
+>.el-input.el-input--suffix {
+>  cursor: pointer;
+>  overflow: hidden;
+>}
+>.el-input.el-input--suffix.rotate .el-input__suffix {
+>  transform: rotate(180deg);
+>}
+>.select-tree {
+>  max-height: 350px;
+>  overflow-y: scroll;
+>}
+>/* 菜单滚动条 */
+>.select-tree::-webkit-scrollbar {
+>  z-index: 11;
+>  width: 6px;
+>}
+>.select-tree::-webkit-scrollbar-track,
+>.select-tree::-webkit-scrollbar-corner {
+>  background: #fff;
+>}
+>.select-tree::-webkit-scrollbar-thumb {
+>  border-radius: 5px;
+>  width: 6px;
+>  background: #b4bccc;
+>}
+>.select-tree::-webkit-scrollbar-track-piece {
+>  background: #fff;
+>  width: 6px;
+>}
+></style>
+>```
+
+## 4、el-tree可选任意级且单选
+
+### Ⅰ - 需求分析
+
+>我们正常的`el-tree`是可以多选，并且选中父级后会自动选中子级全部数据，而本人需求是可以选中任何一级，并且单选的同时不会全选子级，**下面的代码是在【3、el-tree放入下拉框中】的基础上进行修改的**,效果图如上，就不重复展示了
+
+### Ⅱ - 代码与解析
+
+>这里直接将注释标注上去,需要使用时记得删除
+>
+>```vue
+>
+><template>
+>  <div >
+>            <el-popover
+>              ref="popover"
+>              placement="bottom-start"
+>              trigger="click"
+>              :disabled="disabled"
+>              @show="onShowPopover"
+>              @hide="onHidePopover"
+>            >
+>              <el-tree
+>                :data="treeData"
+>                :check-on-click-node="false"
+>                ref="treeVerNew"
+>                show-checkbox                             
+>                :check-strictly="true"  					//ps:是否严格的遵循父子不互相关联（父级选择不会自动全选子级）--重要
+>                node-key="id"  								//绑定id，后续都用id回填
+>                :props="treeProp"
+>                :options="treeData"
+>                :default-checked-keys="monitorFactor"      //设置默认回填的数据
+>                :default-expanded-keys="monitorFactor"		//设置默认展开的数据
+>                style="height:50vh;overflowY:scroll"
+>                @current-change="handleCheckChange"
+>                @check="handleCheck"
+>                empty-text="暂无数据"
+>              ></el-tree>
+>              <el-input										//输入框是用来模拟显示选中项的
+>                slot="reference"
+>                ref="input"
+>                :value="form.orgName"
+>                suffix-icon="el-icon-arrow-down"
+>              ></el-input>
+>            </el-popover>
+>
+>  </div>
+></template>
+>
+><script>
+>
+>export default {
+>  data () {
+>    return {
+>      //用作临时存储选中项
+>      monitorFactor: [],
+>      orgName: '',//临时存放机构名称，用作显示使用
+>      form: {
+>        orgId: '',
+>        orgName: ''
+>      },
+>      treeData: [],
+>      treeProp: { // 左侧树配置属性
+>        label: 'name',
+>        value: 'id',
+>        children: 'children',
+>        isLeaf: 'leaf',
+>      },
+>     
+>    }
+>  },
+>  watch: {
+>    'form.orgId': {
+>      handler (id) {
+>        // form的机构id发生变化时渲染到页面上  --编辑回填数据的时候会用到
+>        this.monitorFactor = [id]
+>         //本轮组件渲染完成后触发下面的组件回填
+>        this.$nextTick(() => {
+>            //将form表单中的机构名称 ·单向绑定· 给this.orgName 用作展示使用
+>          this.orgName = this.form.orgName
+>            //将获取到的机构id回显到树形选项中
+>          this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>        })
+>      }
+>    }
+>  },
+>
+>  methods: {
+>    /* ******************* S：树形结构相关函数  **************************** */
+>    // 显示时触发
+>    onShowPopover () {
+>      this.showStatus = true
+>      // this.$refs.treeVerNew.filter(false)
+>    },
+>    // 隐藏时触发
+>    onHidePopover () {
+>      this.showStatus = false
+>    },
+>    handleCheck (data) {
+>     // if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
+>        //将当前选中项的id存储起来
+>      this.monitorFactor = [data.id]
+>        //选中数据后将名称存到FORM中
+>      this.$set(this.form, 'orgName', data.name)
+>        //将存储的选中项id,回填到tree组件中
+>      this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>    },
+>      //功能备注如上
+>    handleCheckChange (data) {
+>      // if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
+>      this.monitorFactor = [data.id]
+>      this.$set(this.form, 'orgName', data.name)
+>      this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>    }
+>  }
+>}
+></script>
+>
+>```
+>
+>
+
+
+
+
+
+
+
 # 三、`el-table`相关
 
 ## 1、el-table实现多选变单选

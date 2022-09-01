@@ -745,108 +745,116 @@
 >```vue
 >
 ><template>
->  <div >
->            <el-popover
->              ref="popover"
->              placement="bottom-start"
->              trigger="click"
->              :disabled="disabled"
->              @show="onShowPopover"
->              @hide="onHidePopover"
->            >
->              <el-tree
->                :data="treeData"
->                :check-on-click-node="false"
->                ref="treeVerNew"
->                show-checkbox                             
->                :check-strictly="true"  					//ps:是否严格的遵循父子不互相关联（父级选择不会自动全选子级）--重要
->                node-key="id"  								//绑定id，后续都用id回填
->                :props="treeProp"
->                :options="treeData"
->                :default-checked-keys="monitorFactor"      //设置默认回填的数据
->                :default-expanded-keys="monitorFactor"		//设置默认展开的数据
->                style="height:50vh;overflowY:scroll"
->                @current-change="handleCheckChange"
->                @check="handleCheck"
->                empty-text="暂无数据"
->              ></el-tree>
->              <el-input										//输入框是用来模拟显示选中项的
->                slot="reference"
->                ref="input"
->                :value="form.orgName"
->                suffix-icon="el-icon-arrow-down"
->              ></el-input>
->            </el-popover>
+><div >
+>       <el-popover
+>         ref="popover"
+>         placement="bottom-start"
+>         trigger="click"
+>         :disabled="disabled"
+>         @show="onShowPopover"
+>         @hide="onHidePopover"
+>       >
+>         <el-tree
+>           :data="treeData"
+>           :check-on-click-node="false"
+>           ref="treeVerNew"
+>           show-checkbox                             
+>           :check-strictly="true"  					//ps:是否严格的遵循父子不互相关联（父级选择不会自动全选子级）--重要
+>           node-key="id"  								//绑定id，后续都用id回填
+>           :props="treeProp"
+>           :options="treeData"
+>           :default-checked-keys="monitorFactor"      //设置默认回填的数据
+>           :default-expanded-keys="monitorFactor"		//设置默认展开的数据
+>           style="height:50vh;overflowY:scroll"
+>           @current-change="handleCheckChange"
+>           @check="handleCheck"
+>           empty-text="暂无数据"
+>         ></el-tree>
+>         <el-input										//输入框是用来模拟显示选中项的
+>           slot="reference"
+>           ref="input"
+>           :value="form.orgName"
+>           suffix-icon="el-icon-arrow-down"
+>         ></el-input>
+>       </el-popover>
 >
->  </div>
+></div>
 ></template>
 >
 ><script>
 >
 >export default {
->  data () {
->    return {
->      //用作临时存储选中项
->      monitorFactor: [],
->      orgName: '',//临时存放机构名称，用作显示使用
->      form: {
->        orgId: '',
->        orgName: ''
->      },
->      treeData: [],
->      treeProp: { // 左侧树配置属性
->        label: 'name',
->        value: 'id',
->        children: 'children',
->        isLeaf: 'leaf',
->      },
->     
->    }
->  },
->  watch: {
->    'form.orgId': {
->      handler (id) {
->        // form的机构id发生变化时渲染到页面上  --编辑回填数据的时候会用到
->        this.monitorFactor = [id]
->         //本轮组件渲染完成后触发下面的组件回填
->        this.$nextTick(() => {
->            //将form表单中的机构名称 ·单向绑定· 给this.orgName 用作展示使用
->          this.orgName = this.form.orgName
->            //将获取到的机构id回显到树形选项中
->          this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
->        })
->      }
->    }
->  },
+>data () {
+>return {
+> //用作临时存储选中项
+> monitorFactor: [],
+> orgName: '',//临时存放机构名称，用作显示使用
+> form: {
+>   orgId: '',
+>   orgName: ''
+> },
+> treeData: [],
+> treeProp: { // 左侧树配置属性
+>   label: 'name',
+>   value: 'id',
+>   children: 'children',
+>   isLeaf: 'leaf',
+> },
 >
->  methods: {
->    /* ******************* S：树形结构相关函数  **************************** */
->    // 显示时触发
->    onShowPopover () {
->      this.showStatus = true
->      // this.$refs.treeVerNew.filter(false)
->    },
->    // 隐藏时触发
->    onHidePopover () {
->      this.showStatus = false
->    },
->    handleCheck (data) {
->     // if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
->        //将当前选中项的id存储起来
->      this.monitorFactor = [data.id]
->        //选中数据后将名称存到FORM中
->      this.$set(this.form, 'orgName', data.name)
->        //将存储的选中项id,回填到tree组件中
->      this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
->    },
->      //功能备注如上
->    handleCheckChange (data) {
->      // if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
->      this.monitorFactor = [data.id]
->      this.$set(this.form, 'orgName', data.name)
->      this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
->    }
->  }
+>}
+>},
+>watch: {
+>'form.orgId': {
+> handler (id) {
+>   // form的机构id发生变化时渲染到页面上  --编辑回填数据的时候会用到
+>   this.monitorFactor = [id]
+>    //本轮组件渲染完成后触发下面的组件回填
+>   this.$nextTick(() => {
+>       //将form表单中的机构名称 ·单向绑定· 给this.orgName 用作展示使用
+>     this.orgName = this.form.orgName
+>       //将获取到的机构id回显到树形选项中
+>     this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>   })
+> }
+>}
+>},
+>
+>methods: {
+>/* ******************* S：树形结构相关函数  **************************** */
+>// 显示时触发
+>onShowPopover () {
+> this.showStatus = true
+> // this.$refs.treeVerNew.filter(false)
+>},
+>// 隐藏时触发
+>onHidePopover () {
+> this.showStatus = false
+>},
+>  //重复点击时会触发
+>handleCheck (data) {
+>  // 再次点击清空功能
+>      if (data.id === this.monitorFactor?.[0]) {
+>        this.$refs.treeVerNew.setCheckedKeys([])
+>        this.$set(this.form, 'orgName', '')
+>        this.monitorFactor = []
+>        return
+>      }
+>// if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
+>   //将当前选中项的id存储起来
+> this.monitorFactor = [data.id]
+>   //选中数据后将名称存到FORM中
+> this.$set(this.form, 'orgName', data.name)
+>   //将存储的选中项id,回填到tree组件中
+> this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>},
+> //修改选中项时触发
+>handleCheckChange (data) {
+> // if (!data.children)   this.monitorFactor = [data.id]  --如果要只能选择最后一级，就加这个判断
+> this.monitorFactor = [data.id]
+> this.$set(this.form, 'orgName', data.name)
+> this.$refs.treeVerNew.setCheckedKeys(this.monitorFactor)
+>}
+>}
 >}
 ></script>
 >
